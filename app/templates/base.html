@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% if title %}
+    <title>{{ site_name }} - {{ title }}</title>
+    {% else %}
+    <title>{{ site_name }}</title>
+    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+    </style> 
+  </head>
+  <body>
+    <div>{{ site_name }}: <a href={{ url_for('index') }}>Home</a></div>
+    <hr>
+    {% block content %}{% endblock %}
+  </body>
+</html>
