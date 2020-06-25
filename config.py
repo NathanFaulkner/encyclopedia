@@ -13,3 +13,4 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['squedvo@gmail.com', 'nathanfaulkner@gmail.com']
     POSTS_PER_PAGE = 20
+    SITE_NAME = 'Encyclopedia Omega'
