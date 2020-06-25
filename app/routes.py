@@ -8,3 +8,8 @@ site_name = 'Encyclopedia Omega'
 def index():
     user = {'username': 'August'}
     return render_template('index.html', user=user, title='Home', site_name=site_name)
+
+@app.route('/hello')
+def hello():
+    user = {'username': 'August'}
+    return render_template('hello.html', user=user, title='Home', site_name=site_name)

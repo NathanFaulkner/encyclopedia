@@ -11,12 +11,40 @@
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
-    <style>
-    </style> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   </head>
+  <div class="row">
+    <header>
+      <div class="header">
+        <span id="site_name">{{ site_name }}</span><br>
+      </div>
+    </header>
+    <nav>
+      <div class="nav">
+        <ul>
+          <li><a href={{ url_for('index') }}>Home</a></li>
+          <li><a href="#">Next</a></li>
+          <li><a href="#">Next</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <hr>
+
   <body>
-    <div>{{ site_name }}: <a href={{ url_for('index') }}>Home</a></div>
-    <hr>
-    {% block content %}{% endblock %}
+    <div class="row">
+      <div class="col-25 menu">
+        <ul>
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+        </ul>
+      </div>
+
+      <div class="col-75">
+      {% block frame %}{% endblock %}
+      </div>
+    </div>
   </body>
 </html>

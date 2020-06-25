@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
 
-{% block content %}
-  <h1>Hi, {{ user.username }}</h1>
-
-  <p>Here is some math \(x = 5\)</p>
+{% block frame %}
+  <iframe src="{{ url_for('hello') }}" width="100%" height="500"></iframe>
 {% endblock %}

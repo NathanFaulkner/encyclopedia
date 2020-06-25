@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --logo-background-color: navy;
+  --logo-text-color: #ffff99;
+  --logo-text-hover-color: #aa44dd;
+}
+  /* --logo-background-color: #9933cc; */
+
+html {
+  font-family: "Computer Modern";
+}
+
+#site_name {
+  font-family: sans-serif;
+  font-style: oblique;
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 30px;
+  color: var(--logo-text-color);
+}
+
+.row.after:: {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+}
+
+.col-100 {width: 100%;}
+.col-75 {width: 75%;}
+.col-25 {width: 25%;}
+.col-50 {width: 50%;}
+
+
+.header {
+  background-color: var(--logo-background-color);
+  color: #ffffff;
+  padding: 15px;
+}
+
+/* .nav {
+  clear: right;
+} */
+
+.nav ul {
+  background-color: var(--logo-background-color);
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.nav li {
+  float: left;
+}
+
+.nav li a {
+  color: var(--logo-text-color);
+  display: block;
+  text-align: center;
+  padding: 15px;
+  text-decoration: none;
+  border: 1px;
+}
+
+.nav li a:hover {
+  background-color: var(--logo-text-hover-color)
+}
+
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  padding: 8px;
+  margin-bottom: 7px;
+  background-color: #33b5e5;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.menu li:hover {
+  background-color: #0099cc;
+}
