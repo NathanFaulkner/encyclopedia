@@ -55,6 +55,7 @@ html {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  font-weight: bold;
 }
 
 .nav li {
@@ -80,7 +81,10 @@ html {
   padding: 0;
 }
 
-.menu li {
+.menu li a {
+  display: block;
+  text-align: left;
+  text-decoration: none;
   padding: 8px;
   margin-bottom: 7px;
   background-color: #33b5e5;
@@ -88,6 +92,6 @@ html {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-.menu li:hover {
+.menu li a:hover {
   background-color: #0099cc;
 }
