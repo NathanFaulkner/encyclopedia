@@ -22,8 +22,7 @@
     <nav>
       <div class="nav">
         <ul>
-          <li><a href={{ url_for('index') }}>Home</a></li>
-          <li><a href="#">Next</a></li>
+          <li><a href="{{ url_for('index') }}">Home</a></li>
           <li><a href="#">Next</a></li>
         </ul>
       </div>
@@ -34,17 +33,53 @@
   <body>
     <div class="row">
       <div class="col-25 menu">
+        <!-- <ul>
+          <li>
+            <a href="{{ url_for('book_section', book_name='Algebra2', section_number='1', chapter_number='1') }}">
+            Section 1.1
+            </a>
+          </li>
+          <li><a href="#">Next</a></li>
+          <li><a href="#">Next</a></li>
+          <li><a href="#">Next</a></li>
+        </ul> -->
         <ul>
-          <li><a href="{{ url_for('book_section', chapter_number=1, section_number=1) }}"
-                  target="iframe_content">Section 1.1</a></li>
-          <li>Item 2</li>
-          <li>Item 3</li>
-          <li>Item 4</li>
+        {% for group in toc %}
+          {% set outer_loop = loop %}
+          {% if group.view_name %}
+            {% set url = url_for(group.view_name) %}
+          {% else %}
+            {% set url = '#' %}
+          {% endif %}
+          {% if group is not none %}
+          <li><a href={{ url }}>{{ group.name }}</a>
+          {% endif %}
+          {% if 'subdivisions' in group.__dict__ %}
+            {% set subgroup = group.subdivisions %}
+            <ul>
+            {% for item in subgroup %}
+              {% if item.view_name %}
+                {% if item.category == 'chapter' %}
+                  {% set url = url_for('book_chapter', book_name=book_name, chapter_number=loop.index) %}
+                {% endif %}
+                {% if item.category == 'section' %}
+                  {% set url = url_for('book_section', book_name=book_name,
+                          chapter_number=outer_loop.index, section_number=loop.index) %}
+                {% endif %}
+              {% else %}
+                {% set url = '#' %}
+              {% endif %}
+              <li><a href={{ url }}>{{ item.name }}</a>
+            {% endfor %}
+            </ul>
+          {% endif %}
+          </li>
+        {% endfor %}
         </ul>
       </div>
 
       <div class="col-75">
-      <iframe src="{{ url_for('hello') }}" width="100%" height="475" name="iframe_content"></iframe>
+      <iframe src="{{ src }}" width="100%" height="475" name="iframe_content"></iframe>
       </div>
     </div>
   </body>
