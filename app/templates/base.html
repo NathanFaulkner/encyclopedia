@@ -23,7 +23,7 @@
       <div class="nav">
         <ul>
           <li><a href="{{ url_for('index') }}">Home</a></li>
-          <li><a href="#">Next</a></li>
+          <li><a href="{{ url_for('library') }}">Library</a></li>
         </ul>
       </div>
     </nav>
@@ -32,17 +32,8 @@
 
   <body>
     <div class="row">
-      <div class="col-25 menu">
-        <!-- <ul>
-          <li>
-            <a href="{{ url_for('book_section', book_name='Algebra2', section_number='1', chapter_number='1') }}">
-            Section 1.1
-            </a>
-          </li>
-          <li><a href="#">Next</a></li>
-          <li><a href="#">Next</a></li>
-          <li><a href="#">Next</a></li>
-        </ul> -->
+      {% block menu %}{% endblock %}
+      <!-- <div class="col-25 menu">
         <ul>
         {% for group in toc %}
           {% set outer_loop = loop %}
@@ -52,7 +43,7 @@
             {% set url = '#' %}
           {% endif %}
           {% if group is not none %}
-          <li><a href={{ url }}>{{ group.name }}</a>
+          <li><a href={{ url }}>{{ group.display_name }}</a>
           {% endif %}
           {% if 'subdivisions' in group.__dict__ %}
             {% set subgroup = group.subdivisions %}
@@ -60,7 +51,7 @@
             {% for item in subgroup %}
               {% if item.view_name %}
                 {% if item.category == 'chapter' %}
-                  {% set url = url_for('book_chapter', book_name=book_name, chapter_number=loop.index) %}
+                  {% set url = url_for('book_chapter', book_name='Algebra2', chapter_number=loop.index) %}
                 {% endif %}
                 {% if item.category == 'section' %}
                   {% set url = url_for('book_section', book_name=book_name,
@@ -69,14 +60,15 @@
               {% else %}
                 {% set url = '#' %}
               {% endif %}
-              <li><a href={{ url }}>{{ item.name }}</a>
+              <li><a href={{ url }}>{{ item.display_name }}</a>
             {% endfor %}
             </ul>
           {% endif %}
           </li>
         {% endfor %}
         </ul>
-      </div>
+      </div> -->
+
 
       <div class="col-75">
       <iframe src="{{ src }}" width="100%" height="475" name="iframe_content"></iframe>

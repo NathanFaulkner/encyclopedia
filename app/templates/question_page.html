@@ -1,0 +1,83 @@
+{% extends "book_page.html" %}
+
+{% block content %}
+<h2>Exercise</h2>
+{% if form %}
+<p>
+  {{ question.prompt_single }}
+</p>
+<p>
+  {{ question.given_latex_display }}
+</p>
+
+
+  <!-- <div class="row"> -->
+    <div style="width: 50%; float: left; border: 1px solid red;">
+      <p>
+        <form action="" method="post">
+          {{ form.hidden_tag() }}
+          {{ form.answer.label }}<br>
+          {{ form.answer(size=32) }}<br>
+          {% for error in form.answer.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+          <p>{{ form.submit() }}</p>
+        </form>
+      </p>
+    </div>
+
+    <div style="width: 50%; float: left; border: 1px solid red;">
+      <p id="format_user_answer"></p>
+      <script>
+        document.getElementById('useranswer').addEventListener("keyup", show_answer);
+
+        var input_field = document.getElementById('useranswer');
+
+        function show_answer(){
+        document.getElementById("format_user_answer").innerHTML = input_field.value;
+        }
+      </script>
+    </div>
+  <!-- </div> -->
+{% endif %}
+
+{% if request.method == 'POST' and form.validate_on_submit() %}
+<div style="width: 100%; float: left;  border: 1px solid red; clear: left">
+<table style="border: 1px solid cyan; width: 100%;">
+  <tr>
+    <td style="width: 50%">
+      You answered:  {{ question.useranswer_latex(form.answer.data, display=False) }}
+    </td>
+    <td style="width: 50%">
+      The correct answer is: {{ question.answer_latex }}
+    </td>
+  </tr>
+</table>
+</div>
+{% endif %}
+
+<div style="clear: left">
+<a style="clear: left" href="{{ url_for('question', question_name='quadratic_pattern', new=True) }}">New Problem</a>
+
+<p>
+  {% if tried == True %}
+  I already tried this problem!
+  {% else %}
+  I've never tried this problem!
+  {% endif %}
+</p>
+
+<p>
+  {% for error in form.answer.errors %}
+  <span style="color: red;">[{{ error }}]</span>
+  {% endfor %}
+</p>
+
+<p>
+  {{ message }}
+</p>
+</div>
+
+
+
+{% endblock %}

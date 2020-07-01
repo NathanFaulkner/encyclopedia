@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block menu %}
+      <div class="col-25 menu">
+        <ul>
+            <li><a href='#'>Front Matter</a>
+            {% set front = book.subdivisions.get('front') %}
+            {% if front.subdivisions %}
+              <ul>
+                {% for section in front.subdivisions %}
+                  {% if section.view_name %}
+                    {% set url = url_for('book_chapter', book_name=book_name, chapter_number=section.name_for_path) %}
+                  {% else %}
+                    {% set url = '#' %}
+                  {% endif %}
+                  <li><a href={{ url }}>{{ section.display_name }}</a>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </li>
+            <li><a href='#'>Main Matter</a>
+            {% set main = book.subdivisions.get('main') %}
+            {% if main.subdivisions %}
+              <ul>
+                {% for chapter in main.subdivisions %}
+                  {% set outer_loop = loop %}
+                  {% if chapter.view_name %}
+                    {% set url = url_for('book_chapter', book_name=book_name, chapter_number=loop.index) %}
+                  {% else %}
+                    {% set url = '#' %}
+                  {% endif %}
+                  <li><a href={{ url }}>{{ chapter.display_name }}</a>
+                  {% if chapter.subdivisions %}
+                    <ul>
+                      {% for section in chapter.subdivisions %}
+                        {% if section.view_name %}
+                          {% set url = url_for('book_section',
+                            book_name=book_name, chapter_number=outer_loop.index,
+                            section_number=loop.index) %}
+                        {% else %}
+                          {% set url = '#' %}
+                        {% endif %}
+                        <li><a href={{ url }}>{{ section.display_name }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            </li>
+            <li><a href='#'>End Matter</a>
+            {% set end = book.subdivisions.get('end') %}
+            {% if end.subdivisions %}
+              <ul>
+                {% for section in end.subdivisions %}
+                  {% if section.view_name %}
+                    {% set url = url_for('book_chapter', book_name=book_name, chapter_number=section.name_for_path) %}
+                  {% else %}
+                    {% set url = '#' %}
+                  {% endif %}
+                  <li><a href={{ url }}>{{ section.display_name }}</a>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </li>
+        </ul>
+      </div>
+{% endblock %}

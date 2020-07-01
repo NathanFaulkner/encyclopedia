@@ -1,0 +1,128 @@
+{% extends "book_page.html" %}
+
+{% block content %}
+
+<h1 class="section">Quadratic Pattern</h1>
+<p>
+In this section, we learn that even some of the easier factoring strategies we
+have learned can be extended to cover seemingly more difficult cases.
+For example, can you imagine that you actually already have a trick for
+factoring the following?
+\[
+x^4 - 2x^2 +1
+\]
+Well, you have multiple tricks!  Since there are multiple ways of getting this
+thing factored, I want you to have first crack at it---to see what ways you
+ might tend to favor and which way might make sense to you most readily.
+</p>
+
+<p>
+  <div class="activity">
+    <h2>Activity</h2>
+  Completely factor
+  \[
+  x^4 - 2x^2 +1
+  \]
+  </div>
+</p>
+
+<p>
+Next, I'll work some examples for you that are similar.
+I'll show you three techniques, and you decide whichever one you prefer.
+You can use either one.
+</p>
+
+<p>
+<div class="example">
+  <h2>Example </h2>
+Completely factor the following.
+\[
+x^6 - 10x^3 + 24
+\]
+<div class="answer">
+  <h3>Answer</h3>
+<b>Method 1:</b> Notice that this is <i>like</i>
+\[
+w^2 - 10w +24 = (w-6)(w-4)
+\]
+After all,
+\[
+x^6 - 10x^3 + 24 = (x^3)^2 - 10(x^3) + 24
+\]
+See the similarity?  The point is that, for <i>any</i> real number \(w\)
+\[
+w^2 - 10w +24 = (w-6)(w-4)
+\]
+is true.  Also, \(x^3\) is (the symbol for) a real number.
+So, this \(w\) equation is also true when \(x^3\) is substituted in for \(w\):
+\[
+(x^3)^2 - 10x^3 + 24 = (x^3-6)(x^3-4)
+\]
+Get it?  Since \( (x^3)^2=x^3\cdot x^3 = x^6 \), it's also true that
+\[
+x^6 - 10x^3 + 24 = (x^3-6)(x^3-4)
+\]
+</p>
+
+<p>
+<b>Method 2:</b>
+Use the "\( ac \)" method.  That is, you first find a factorization of
+\( ac = 1\cdot 24 = 24 \) into two numbers that add up to \(-10\).
+Those numbers are \(-4\) and \(-6\). Then, rewrite the middle term according to
+that breakdown and then factor by grouping:
+\begin{align*}
+x^6 - 10x^3 + 24 &= x^6 - 4x^3 - 6x^3 + 24 \\
+&= x^3(x^3 - 4) - 6(x^3 - 4) \\
+& = (x^3-6)(x^3 - 4)
+\end{align*}
+</p>
+
+<p>
+<b>Method 3: Guess and Check.</b>  Guessing-and-checking might look like this:
+\[
+x^6 - 10x^3 + 24 = (x^3 - \quad)(x^3 - \quad)
+\]
+You just sit there and think about how to fill in the blanks:
+You'd need two numbers that multiply together to give you \(24\)
+and add together to give you \(-10\)---which is the
+same thing you had to think about when factoring, say, \(w^2 - 10w + 24\).
+So, yup, \(-4\) and \(-6\) are the numbers:
+\[
+x^6 - 10x^3 + 24 = (x^3 - 4)(x^3 - 6)
+\]
+<b>Last step:</b> Scrutinize the resulting factors, namely \(x^3-4\) and
+\(x^3 - 6\) and see
+if there any factoring methods that will apply.
+Have we learned anything that will apply to those?  Nope!  So, we're done.
+</p>
+</div>
+</div>
+
+<p>
+Would you like to see one more without all the talk?
+  <div class="example">
+    <h2>Example</h2>
+    Completely factor the following.
+    \[
+    x^8 +7x^4 - 8
+    \]
+    <div class="answer">
+      <h3>Answer</h3>
+      \begin{align*}
+      x^8 +7x^4 - 8 & = (x^4 - \quad)(x^4 + \quad)\\
+      & = (x^4 - 1)(x^4 +8) \\
+      & = (x^2 - 1)(x^2+1)(x^4 + 8)\\
+      & = (x-1)(x+1)(x^2 +1)(x^4 + 8)
+      \end{align*}
+    </div>
+  </div>
+</p>
+
+<div class="exercises">
+
+
+<a href="{{ url_for('question', question_name='quadratic_pattern') }}">Click for Exercise</a>
+
+</div>
+
+{% endblock %}
