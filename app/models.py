@@ -14,6 +14,7 @@ class Student(UserMixin, db.Model):
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     answers = db.relationship('StudentAnswer', backref='student', lazy='dynamic')
+    fav_color = db.Column(db.String(30))
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -38,9 +39,9 @@ class StudentAnswer(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('student.id'))
     grade_category = db.Column(db.String(20)) #intended options are 'quiz', 'check', 'test', etc.
-    skillcode = db.Column(db.Integer)
+    skillname = db.Column(db.String)
     seed = db.Column(db.Integer)
 
     def __repr__(self):
         return '<StudentAnswer {}: {} at {}>'.format(self.grade_category,
-                    self.skillcode, self.timestamp)
+                    self.skillname, self.timestamp)

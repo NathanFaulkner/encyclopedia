@@ -22,9 +22,9 @@ class AnswerForm(FlaskForm):
 
     def validate_answer(self, answer):
         try:
-            user_answer = answer.data.replace('^', '**')
-            user_answer = parse_expr(user_answer, transformations=transformations)
-            #self.validator(answer.data)
+            # user_answer = answer.data.replace('^', '**')
+            # user_answer = parse_expr(user_answer, transformations=transformations)
+            self.validator(answer.data)
         except:
             raise ValidationError('You have not used mathematically correct syntax.')
         # if answer.data == ',':

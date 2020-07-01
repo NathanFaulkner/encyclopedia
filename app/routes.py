@@ -69,6 +69,7 @@ def question(question_name):
     if request.method == 'GET':
         session['seed'] = random.random()
         form.seed.data = session['seed']
+        session['tried'] = False
     question = question_module.Question_Class(seed=session['seed'])
     useranswer = form.answer.data
     if form.validate_on_submit():
@@ -78,12 +79,18 @@ def question(question_name):
             if session['tried'] == True:
                 message += ' But you should try a new problem.'
         else:
-            message = 'You can try a new problem <3'
+            message = "If you want credit, you'll have to try a new problem."
+        session['tried'] = True
     else:
-        message = 'Try a new problem'
-    session['tried'] = False
-    if request.method == 'POST':
-         session['tried'] = True
+        if request.method == 'POST':
+            if session['tried'] == False:
+                message = 'You can try again, since you just had a syntax error.'
+            else:
+                message = "You had a syntax error, but you should try a different problem if you want credit."
+        else:
+            message = "It's a brand new problem!!"
+    # if request.method == 'POST':
+    #      session['tried'] = True
     # try:
     #     seed = session['seed']
     # except:

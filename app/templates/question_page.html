@@ -59,13 +59,13 @@
 <div style="clear: left">
 <a style="clear: left" href="{{ url_for('question', question_name='quadratic_pattern', new=True) }}">New Problem</a>
 
-<p>
+<!-- <p>
   {% if tried == True %}
   I already tried this problem!
   {% else %}
   I've never tried this problem!
   {% endif %}
-</p>
+</p> -->
 
 <p>
   {% for error in form.answer.errors %}
