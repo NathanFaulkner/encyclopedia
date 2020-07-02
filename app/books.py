@@ -39,6 +39,7 @@ class Division():
 factoring1 = Section('section', factoring1, numbered=True)
 quadraticpattern = Section('section', quadraticpattern, numbered=True)
 polynomials_intro = Section('intro', polynomials, numbered=False)
+
 polynomials = Division('chapter', 'Polynomials', [factoring1, quadraticpattern])
 #polynomials.intro = polynomials_intro
 polynomials.template_path=polynomials_intro.template_path

@@ -2,14 +2,15 @@
 
 {% block content %}
 
-<h1 class="section">Quadratic Pattern</h1>
-<p>
+<h1 class="section-header">Quadratic Pattern</h1>
+<hr style="color: #e24f1d;">
+<p class="subhead">
 In this section, we learn that even some of the easier factoring strategies we
 have learned can be extended to cover seemingly more difficult cases.
 For example, can you imagine that you actually already have a trick for
 factoring the following?
 \[
-x^4 - 2x^2 +1
+x^{10} - 6x^5 - 16
 \]
 Well, you have multiple tricks!  Since there are multiple ways of getting this
 thing factored, I want you to have first crack at it---to see what ways you
@@ -18,11 +19,41 @@ thing factored, I want you to have first crack at it---to see what ways you
 
 <p>
   <div class="activity">
-    <h2>Activity</h2>
-  Completely factor
-  \[
-  x^4 - 2x^2 +1
-  \]
+    <h2 style="color: var(--theme-color-3)">Activity</h2>
+    <span style="color: var(--theme-color-3)">Goal:</span> Completely factor
+    \[
+    x^{10} - 6x^5 - 16
+    \]
+    Step 1: Build a mental "bridge" between this hard new problem and the
+    old-style problem---which I hope you have mastered---
+    \[
+    x^2 - 6x - 16
+    \]
+    Reflect on how you might solve this.  Using a guess-and-check approach, you
+    set up some "empty parentheses":
+    \[
+    (\quad \quad \quad)(\quad \quad \quad)
+    \]
+    Well, really, you probably already know that you'll need "\(x\) and \(x\)"
+    in there, too:
+    \[
+    (x \quad \quad)(x \quad \quad)
+    \]
+    And, as you may well know, the idea is to fill in those blanks with numbers
+    that make it all work---which you mentally verify by checking to
+    see how they would all multiply together and simplify out.  Now, that
+    may make perfect sense to you already, but, to clarify, one can make up
+    symbols for "this number" and "that number".  For instance, you might write
+    \[
+    (x + {\color{red}A})(x + {\color{blue}B})
+    \]
+    and explain that what you want is a numbers \({\color{red}A}\) and
+    \({\color{blue}B}\) that multiply together to give you \(-16\)
+    and add together to give you \(-6\).  Go ahead and fill in the
+    blanks here to make sure you have the right idea:
+    <!-- <form>
+      <>
+    </form> -->
   </div>
 </p>
 
@@ -34,13 +65,13 @@ You can use either one.
 
 <p>
 <div class="example">
-  <h2>Example </h2>
+  <h2>Example</h2>
 Completely factor the following.
 \[
 x^6 - 10x^3 + 24
 \]
 <div class="answer">
-  <h3>Answer</h3>
+  <h3>Answer: </h3>
 <b>Method 1:</b> Notice that this is <i>like</i>
 \[
 w^2 - 10w +24 = (w-6)(w-4)
@@ -118,7 +149,7 @@ Would you like to see one more without all the talk?
   </div>
 </p>
 
-<div class="exercises">
+<div class="exercise">
 
 
 <a href="{{ url_for('question', question_name='quadratic_pattern') }}">Click for Exercise</a>

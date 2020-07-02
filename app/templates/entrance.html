@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% if title %}
+    <title>{{ site_name }} - {{ title }}</title>
+    {% else %}
+    <title>{{ site_name }}</title>
+    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+    body {
+      padding: 0;
+      margin: 0;
+      background: var(--logo-background-color);
+    }
+    .content {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+
+    a:link, a:visited {
+      background-color: var(--logo-text-color);
+      color: black;
+      padding: 8px 25px;
+      margin: 4px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    a:hover, a:active {
+      background-color: var(--logo-triadic-third);
+    }
+
+    </style>
+  </head>
+
+{% block content %}
+  <body>
+    <div class="content">
+      <div id="site_name">
+        Encyclopedia Omega
+      </div>
+      <hr>
+      <a href="{{ url_for('login') }}">Login</a> <a href="{{ url_for('register') }}">Register</a>
+      <br>
+      <a href="{{ url_for('library') }}">Browse</a>
+    </div>
+  </body>
+{% endblock %}
+
+</html>

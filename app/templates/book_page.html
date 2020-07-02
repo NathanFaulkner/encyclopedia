@@ -5,6 +5,14 @@
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
   </script>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <style>
+  body {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 60px;
+    margin-bottom: 80px;
+  }
+  </style>
   </head>
   <body>
     {% block content %}{% endblock %}

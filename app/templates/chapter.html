@@ -1,8 +1,12 @@
 {% extends "base.html" %}
+
+
+
 {% block menu %}
       <div class="col-25 menu">
         <ul>
-            <li><a href='#'>Front Matter</a>
+            <li><button type="button" class="collapsible">Front Matter</button>
+            <div class="inner">
             {% set front = book.subdivisions.get('front') %}
             {% if front.subdivisions %}
               <ul>
@@ -16,8 +20,10 @@
                 {% endfor %}
               </ul>
               {% endif %}
+            </div>
             </li>
-            <li><a href='#'>Main Matter</a>
+            <li><button type="button" class="collapsible">Main Matter</button>
+            <div>
             {% set main = book.subdivisions.get('main') %}
             {% if main.subdivisions %}
               <ul>
@@ -47,8 +53,10 @@
                 {% endfor %}
               </ul>
             {% endif %}
+            </div>
             </li>
-            <li><a href='#'>End Matter</a>
+            <li><button type="button" class="collapsible">Front Matter</button>
+            <div class="inner">
             {% set end = book.subdivisions.get('end') %}
             {% if end.subdivisions %}
               <ul>
@@ -62,7 +70,32 @@
                 {% endfor %}
               </ul>
               {% endif %}
+            </div>
             </li>
         </ul>
+
+
+
+          <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+
+            for (i = 0; i < coll.length; i++) {
+              coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                  content.style.display = "none";
+                } else {
+                  content.style.display = "block"
+                }
+              });
+            }
+          </script>
+
+
       </div>
+
+
+
 {% endblock %}

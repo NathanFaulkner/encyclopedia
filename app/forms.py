@@ -29,3 +29,39 @@ class AnswerForm(FlaskForm):
             raise ValidationError('You have not used mathematically correct syntax.')
         # if answer.data == ',':
         #     raise ValidationError('Use proper syntax.')
+
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember_me = BooleanField('Remember Me')
+    submit = SubmitField('Sign In')
+
+class RegistrationForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    password2 = PasswordField(
+        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Register')
+
+    def validate_username(self, username):
+        user = Student.query.filter_by(username=username.data).first()
+        if user is not None:
+            raise ValidationError('This user name is already in use. \
+            Please use another name.')
+
+    def validate_email(self, email):
+        user = Student.query.filter_by(email=email.data).first()
+        if user is not None:
+            raise ValidationError('This email is already in use. \
+            Please use another email.')
+
+class ResetPasswordRequestForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Request Password Reset')
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired()])
+    password2 = PasswordField('Repeat Password',
+            validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Request Password Reset')

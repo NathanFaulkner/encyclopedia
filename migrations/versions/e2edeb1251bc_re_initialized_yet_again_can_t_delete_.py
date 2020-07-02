@@ -1,8 +1,8 @@
-"""re-initializing
+"""Re-initialized yet again --  can't delete columns??
 
-Revision ID: 8673213417d2
+Revision ID: e2edeb1251bc
 Revises: 
-Create Date: 2020-07-01 09:57:44.797941
+Create Date: 2020-07-01 11:07:07.770600
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '8673213417d2'
+revision = 'e2edeb1251bc'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -25,6 +25,7 @@ def upgrade():
     sa.Column('password_hash', sa.String(length=128), nullable=True),
     sa.Column('about_me', sa.String(length=140), nullable=True),
     sa.Column('last_seen', sa.DateTime(), nullable=True),
+    sa.Column('fav_color', sa.String(length=30), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_student_email'), 'student', ['email'], unique=True)
@@ -38,7 +39,7 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('grade_category', sa.String(length=20), nullable=True),
     sa.Column('skillname', sa.String(), nullable=True),
-    sa.Column('seed', sa.Integer(), nullable=True),
+    sa.Column('seed', sa.Float(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['student.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
