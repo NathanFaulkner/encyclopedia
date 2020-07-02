@@ -34,9 +34,11 @@
                   {% else %}
                     {% set url = '#' %}
                   {% endif %}
-                  <li><a href={{ url }}>{{ chapter.display_name }}</a>
+                  <li><button type="button" class="collapsible">{{ loop.index }}: {{ chapter.display_name }}</button>
+                  <div class="inner">
                   {% if chapter.subdivisions %}
                     <ul>
+                      <li><a href={{ url }}>Introduction</a>
                       {% for section in chapter.subdivisions %}
                         {% if section.view_name %}
                           {% set url = url_for('book_section',
@@ -45,17 +47,18 @@
                         {% else %}
                           {% set url = '#' %}
                         {% endif %}
-                        <li><a href={{ url }}>{{ section.display_name }}</a></li>
+                        <li><a href={{ url }}>{{ outer_loop.index }}.{{ loop.index }}: {{ section.display_name }}</a></li>
                       {% endfor %}
                     </ul>
                   {% endif %}
+                </div>
                 </li>
                 {% endfor %}
               </ul>
             {% endif %}
             </div>
             </li>
-            <li><button type="button" class="collapsible">Front Matter</button>
+            <li><button type="button" class="collapsible">End Matter</button>
             <div class="inner">
             {% set end = book.subdivisions.get('end') %}
             {% if end.subdivisions %}
@@ -75,8 +78,11 @@
         </ul>
 
 
+        <script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
 
-          <script>
+
+
+          <!-- <script>
             var coll = document.getElementsByClassName("collapsible");
             var i;
 
@@ -91,7 +97,7 @@
                 }
               });
             }
-          </script>
+          </script> -->
 
 
       </div>

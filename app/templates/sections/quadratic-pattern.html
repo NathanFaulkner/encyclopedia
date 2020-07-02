@@ -1,9 +1,9 @@
 {% extends "book_page.html" %}
 
-{% block content %}
+{% block title %}
+{% endblock %}
 
-<h1 class="section-header">Quadratic Pattern</h1>
-<hr style="color: #e24f1d;">
+{% block content %}
 <p class="subhead">
 In this section, we learn that even some of the easier factoring strategies we
 have learned can be extended to cover seemingly more difficult cases.
@@ -19,8 +19,8 @@ thing factored, I want you to have first crack at it---to see what ways you
 
 <p>
   <div class="activity">
-    <h2 style="color: var(--theme-color-3)">Activity</h2>
-    <span style="color: var(--theme-color-3)">Goal:</span> Completely factor
+    <h2>Activity</h2>
+    <span class="inline-header">Goal:</span> Completely factor
     \[
     x^{10} - 6x^5 - 16
     \]
@@ -63,7 +63,7 @@ I'll show you three techniques, and you decide whichever one you prefer.
 You can use either one.
 </p>
 
-<p>
+
 <div class="example">
   <h2>Example</h2>
 Completely factor the following.
@@ -71,7 +71,8 @@ Completely factor the following.
 x^6 - 10x^3 + 24
 \]
 <div class="answer">
-  <h3>Answer: </h3>
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
 <b>Method 1:</b> Notice that this is <i>like</i>
 \[
 w^2 - 10w +24 = (w-6)(w-4)
@@ -93,7 +94,8 @@ Get it?  Since \( (x^3)^2=x^3\cdot x^3 = x^6 \), it's also true that
 \[
 x^6 - 10x^3 + 24 = (x^3-6)(x^3-4)
 \]
-</p>
+</div>
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
 
 <p>
 <b>Method 2:</b>

@@ -15,6 +15,7 @@
   --theme-color-4: #1d1de2;
   --menu-li-li-li-a-bgcolor: #f46f3f;
   --theme-color-5: #1de221;
+  --section-header-color: #e24f1d;
 }
   /* --logo-background-color: #9933cc; */
 
@@ -148,26 +149,69 @@ a {
 }
 
 .collapsible {
+  font-family: "Computer Modern";
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.answer .collapsible {
+  color: red;
+}
+
+.answer .collapsible:before {
+  content: '\25B6'; /* Unicode character for '+' sign */
+  font-size: 13px;
+  font-weight: bold;
+  color: red;
+  float: left;
+  margin-right: 5px;
+  position: absolute;
+  left: 12%;
+}
+
+.answer .active:before {
+  content: '\25BC' /*Unicode character for '-' sign */
+}
+
+
+
+.menu .collapsible {
   background-color: var(--menu-li-a-bgcolor);
   color: #ffffff;
-  cursor: pointer;
   text-align: left;
   padding: 8px;
   width: 100%;
   border: none;
   outline: none;
-  font-family: "Computer Modern";
-  font-size: 16px;
   margin-bottom: 4px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-.active, .collapsible:hover {
+.menu .active, .collapsible:hover {
   background-color: #c02d0b;
 }
 
+.menu .collapsible:after {
+  content: '\002B'; /* Unicode character for '+' sign */
+  font-size: 13px;
+  font-weight: bold;
+  /* color: white; */
+  float: right;
+  margin-right: 5px;
+}
+
+.menu .active:after {
+  content: '\2212' /*Unicode character for '-' sign */
+}
 
 .inner {
+  display: block;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.2s ease-out;
+}
+
+.inner .answer {
   display: none;
   overflow: hidden;
 }
@@ -192,14 +236,27 @@ a {
 }
 
 .section-header {
-  color: #e24f1d;
+  color: var(--section-header-color);
 }
+
+
 
 .activity {
   border: 1px solid rgba(226, 79, 29, 1);
   padding-left: 1%;
-  padding-top: 0;
+  margin-top: 0;
 }
+
+.activity h2 {
+  color: var(--theme-color-3);
+  margin-top: 0;
+}
+
+.activity .inline-header {
+  color: var(--theme-color-3);
+  font-weight: bold;
+}
+
 
 .example {
   border: 1px solid rgba(29, 29, 226, 1);
@@ -207,6 +264,8 @@ a {
 }
 
 .answer {
+  margin-left: 5%;
+  margin-right: 5%;
   color: #e24f1d;
 }
 

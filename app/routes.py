@@ -114,6 +114,14 @@ def quadraticpattern():
     template_path = sections.quadraticpattern.d['template_path']
     return render_template(template_path + '.html')
 
+@app.route('/section/<section_name>')
+def section(section_name):
+    section = getattr(sections, section_name)
+    template_path = section.d['template_path']
+    section_display_name = section.d['name']
+    return render_template(template_path + '.html',
+        section_display_name=section_display_name)
+
 @app.route('/question/<question_name>', methods=['GET', 'POST'])
 def question(question_name):
     # if request.method == 'GET':
@@ -208,10 +216,10 @@ def book_section(book_name, chapter_number, section_number):
     main = book.subdivisions['main']
     chapter = main.subdivisions[int(chapter_number) - 1]
     section = chapter.subdivisions[int(section_number) - 1]
-    path_for_iframe = section.view_name
+    path_for_iframe = url_for('section', section_name=section.view_name)
     toc = main.subdivisions
     return render_template('chapter.html', user=user, title='section.name',
-        site_name=app.config['SITE_NAME'], src=url_for(path_for_iframe), toc=toc,
+        site_name=app.config['SITE_NAME'], src=path_for_iframe, toc=toc,
         book_name=book_name, book=book)
 
 @app.route('/Books/<book_name>')

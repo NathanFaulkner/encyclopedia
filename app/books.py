@@ -26,6 +26,11 @@ class Division():
         self.subdivisions = subdivisions
         self.template_path = template_path
 
+    def set_frontpage(self, frontpage):
+        self.frontpage = frontpage
+        self.view_name = frontpage.view_name
+        self.template_path = frontpage.template_path
+
 
     def get_division_into(self):
         if subdivisions is not None:
@@ -42,9 +47,7 @@ polynomials_intro = Section('intro', polynomials, numbered=False)
 
 polynomials = Division('chapter', 'Polynomials', [factoring1, quadraticpattern])
 #polynomials.intro = polynomials_intro
-polynomials.template_path=polynomials_intro.template_path
-polynomials.view_name = polynomials_intro.view_name
-polynomials.frontpage = polynomials_intro
+polynomials.set_frontpage(polynomials_intro)
 
 main = Division('main', 'Main Matter', [polynomials])
 Algebra2 = Division('book', 'Algebra 2', {'front': None, 'main': main, 'end': None})
