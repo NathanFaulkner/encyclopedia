@@ -5,8 +5,13 @@ import inspect, random
 
 from app import app, db, books, sections, questions
 from app.questions import *
-from app.forms import AnswerForm, LoginForm, RegistrationForm
+from app.forms import (AnswerForm,
+                        LoginForm,
+                        RegistrationForm,
+                        ResetPasswordRequestForm,
+                        ResetPasswordForm)
 from app.models import Student, StudentAnswer
+from app.email import send_password_reset_email
 
 
 
@@ -38,6 +43,7 @@ def login():
     return render_template('login.html', title='Sign In', form=form)
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('entrance'))
@@ -77,7 +83,7 @@ def reset_password_request():
         return redirect(url_for('index'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = Student.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
         flash('Check your email for the instructions to reset your password.')
@@ -116,9 +122,9 @@ def quadraticpattern():
 
 @app.route('/section/<section_name>')
 def section(section_name):
-    section = getattr(sections, section_name)
-    template_path = section.d['template_path']
-    section_display_name = section.d['name']
+    section = getattr(books, section_name)
+    template_path = section.template_path
+    section_display_name = section.display_name
     return render_template(template_path + '.html',
         section_display_name=section_display_name)
 
@@ -203,10 +209,10 @@ def book_chapter(book_name, chapter_number):
     book = getattr(books, book_name)
     main = book.subdivisions['main']
     chapter = main.subdivisions[int(chapter_number) - 1]
-    path_for_iframe = chapter.view_name
+    path_for_iframe = url_for('section', section_name=chapter.view_name)
     toc = main.subdivisions
     return render_template('chapter.html', user=user, title='chapter.name',
-        site_name=app.config['SITE_NAME'], src=url_for(path_for_iframe), toc=toc,
+        site_name=app.config['SITE_NAME'], src=path_for_iframe, toc=toc,
         book_name=book_name, book=book)
 
 @app.route('/Books/<book_name>/<chapter_number>/<section_number>')

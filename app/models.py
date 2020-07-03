@@ -43,7 +43,7 @@ class Student(UserMixin, db.Model):
                     algorithms=['HS256'])['reset_password']
         except:
             return
-        return User.query.get(id)
+        return Student.query.get(id)
 
 
 class StudentAnswer(db.Model):
