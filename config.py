@@ -10,9 +10,8 @@ class Config(object):
     MAIL_PORT = int(os.environ.get('MAIL_PORT') or 587)
     MAIL_USE_TLS = 1 #os.environ.get('MAIL_USE_TLS') is not None
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or 'squedvo@gmail.com'
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') or 'p6WdwKrpT9ufvRw'
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['squedvo@gmail.com', 'nathanfaulkner@gmail.com']
-    POSTS_PER_PAGE = 20
     SITE_NAME = 'Encyclopedia Omega'
 
     # MAIL_SERVER=smtp.googlemail.com
