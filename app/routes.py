@@ -1,9 +1,20 @@
-from flask import render_template, flash, redirect, url_for, request, session
-from flask_login import current_user, login_user, logout_user, login_required
-from werkzeug.urls import url_parse
-import inspect, random
+import inspect, random, datetime, io, json
 
-from app import app, db, books, sections, questions
+from flask import (render_template,
+                    flash,
+                    redirect,
+                    url_for,
+                    request,
+                    session,
+                    make_response)
+from flask_login import (current_user,
+                        login_user,
+                        logout_user,
+                        login_required)
+from werkzeug.urls import url_parse
+
+from app import app, db, books, sections, questions, interpolator
+
 from app.questions import *
 from app.forms import (AnswerForm,
                         LoginForm,
@@ -12,6 +23,15 @@ from app.forms import (AnswerForm,
                         ResetPasswordForm)
 from app.models import Student, StudentAnswer
 from app.email import send_password_reset_email
+
+# from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+# from matplotlib.figure import Figure
+# from matplotlib.dates import DateFormatter
+
+
+
+
+
 
 
 
@@ -246,3 +266,41 @@ def library():
     return render_template('library.html', user=user, title='Library',
         site_name=app.config['SITE_NAME'], src=url_for(path_for_iframe),
         library=library)
+
+
+
+#########################
+# Experiments
+# @app.route("/simple.png")
+# def simple():
+#     fig = Figure()
+#     ax = fig.add_subplot(111)
+#     x = []
+#     y = []
+#     now = datetime.datetime.now()
+#     delta = datetime.timedelta(days=1)
+#     for i in range(10):
+#         x.append(now)
+#         now += delta
+#         y.append(random.randint(0,1000))
+#     ax.plot_date(x, y, '-')
+#     ax.xaxis.set_major_formatter(DateFormatter('%Y-%m-%d'))
+#     fig.autofmt_xdate()
+#     canvas = FigureCanvas(fig)
+#     png_output = io.BytesIO()
+#     canvas.print_png(png_output)
+#     response = make_response(png_output.getvalue())
+#     response.headers['Content-Type'] = 'image/png'
+#     return response
+
+@app.route('/tester', methods=['GET', 'POST'])
+def tester():
+    if 'data' in request.form:
+        data = request.form["data"]
+        data = json.loads(data)
+        print(data)
+        return_data = interpolator.get_dict_for_svg(data)
+        #print(return_data)
+        #return json.dumps(data)
+        return json.dumps(return_data)
+    return render_template('tester.html')

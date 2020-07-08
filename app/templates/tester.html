@@ -1,0 +1,172 @@
+{% extends "book_page.html" %}
+
+{% block content %}
+<div id="tester" style="width:600px; height:250px;"></div>
+
+<!-- <script>
+  TESTER = document.getElementById('tester');
+  Plotly.plot( TESTER, [{
+  x: [1, 2, 3, 4, 5],
+  y: [1, 2, 4, 8, 16] }], {
+  margin: {t: 0}  }, {showSendToCloud:true}  );
+</script> -->
+
+<!-- <canvas id="axes" width="200", height="200"
+  style="border:1px solid #d3d3d3;">
+  Your browser does not support canvas elements.
+</canvas>
+
+<script>
+  var canvas = document.getElementById('axes');
+  var ctx = canvas.getContext("2d");
+  ctx.moveTo(0,0);
+  ctx.lineTo(200,100);
+  ctx.stroke();
+</script> -->
+
+<!-- <svg height="200" width="500">
+  <polyline points="20,20 40,25 60,40 80,120 120,140 200,180"
+  style="fill:none; stroke:black; stroke-width: 3"/>
+  Sorry, your browser does not support inline SVG.
+</svg> -->
+<svg height="500" width="500" id="svg">
+  <rect height="500" width="500"
+    style="fill:none; stroke:black; stroke-width:4;" />
+  <!-- <line x1="-100" y1="200" x2="800" y2="200" style="stroke:purple; stroke-width:4"> -->
+</svg>
+
+<p>
+\(x\) = <span id="x"></span>, \(y\) = <span id="y"></span>
+</p>
+
+<script>
+  var svg = document.querySelector('svg');
+  var pt = svg.createSVGPoint();
+  var data = []
+
+  function cursorPoint(evt) {
+    pt.x = evt.clientX;
+    pt.y = evt.clientY;
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
+  }
+
+  svg.addEventListener('mousemove', function(self) {
+    var loc = cursorPoint(self);
+    var x = loc.x;
+    var y = loc.y;
+    x = Number.parseFloat(x/(500/20) - 10).toFixed(1);
+    y = Number.parseFloat(10 - y/(500/20)).toFixed(1);
+    document.getElementById('x').innerHTML = x;
+    document.getElementById('y').innerHTML = y;
+  }, false);
+
+  svg.addEventListener('click', function(self) {
+    var loc = cursorPoint(self);
+    var newElement = document.createElementNS("http://www.w3.org/2000/svg",
+      'circle');
+    var x = Math.round(loc.x/(500/20));
+    out_x = x - 10;
+    var y = Math.round(loc.y/(500/20));
+    out_y = 10 - y;
+    x = x * 500/20;
+    y = y * 500/20;
+    newElement.setAttribute("cx", x);
+    newElement.setAttribute("cy", y);
+    newElement.setAttribute("r", 3);
+    newElement.style.stroke = "none";
+    newElement.style.fill = "red";
+    svg.appendChild(newElement);
+    data.push([out_x, out_y]);
+    do_ajax();
+  }, false  );
+
+  for (i=1; i < 20; i++) {
+    var vertLine = document.createElementNS("http://www.w3.org/2000/svg",
+      'line');
+    var horizLine = document.createElementNS("http://www.w3.org/2000/svg",
+      'line');
+    vertLine.setAttribute("x1", 500/20*i);
+    vertLine.setAttribute("y1", 0);
+    vertLine.setAttribute("x2", 500/20*i);
+    vertLine.setAttribute("y2", 500);
+    vertLine.style.stroke = "#000";
+    horizLine.setAttribute("x1", 0);
+    horizLine.setAttribute("y1", 500/20*i);
+    horizLine.setAttribute("x2", 500);
+    horizLine.setAttribute("y2", 500/20*i);
+    horizLine.style.stroke = "#000";
+    svg.appendChild(vertLine);
+    svg.appendChild(horizLine);
+  }
+
+  var vAxis = document.createElementNS("http://www.w3.org/2000/svg",
+    'line');
+  var hAxis = document.createElementNS("http://www.w3.org/2000/svg",
+    'line');
+  vAxis.setAttribute("x1", 500/2);
+  vAxis.setAttribute("y1", 0);
+  vAxis.setAttribute("x2", 500/2);
+  vAxis.setAttribute("y2", 500);
+  vAxis.style.stroke = "#000";
+  vAxis.style.opacity = "1";
+  vAxis.style.strokeWidth = "4";
+  svg.appendChild(vAxis);
+  hAxis.setAttribute("x1", 0);
+  hAxis.setAttribute("y1", 500/2);
+  hAxis.setAttribute("x2", 500);
+  hAxis.setAttribute("y2", 500/2);
+  hAxis.style.stroke = "#000";
+  hAxis.style.opacity = "1";
+  hAxis.style.strokeWidth = "4";
+  svg.appendChild(hAxis);
+
+
+
+  // <polyline points="20,20 40,25 60,40"
+  //   style="fill:none; stroke:blue; stroke-width:3; opacity:1.0" />
+
+  function do_ajax() {
+    var req = new XMLHttpRequest();
+    var result = document.getElementById('result');
+    req.onreadystatechange = function()
+    {
+      if(this.readyState == 4 && this.status == 200) {
+        // result.innerHTML = this.responseText;
+        return_data = JSON.parse(this.responseText);
+        result.innerHTML = return_data.shape + return_data.data;
+        var graph = document.createElementNS("http://www.w3.org/2000/svg",
+                  return_data.shape);
+        // console.log('graph: ', graph);
+        var obj = return_data.data;
+        obj = JSON.parse(obj);
+        // console.log('data: ', obj);
+        // var test_obj = {'f': 1, 'g': 2}
+        // console.log('test obj: ', test_obj)
+        // console.log(`type of obj: `, typeof obj);
+        // console.log('x1: ', obj['x1']);
+        Object.keys(obj).forEach( (key) => {
+          graph.setAttribute(key, obj[key]);
+          // console.log(key + obj[key]);
+        });
+        // graph.setAttribute("points", "20,20 40,25 60,40");
+        graph.style.stroke = "blue";
+        graph.style.strokeWidth = "3";
+        graph.style.opacity = "1";
+        graph.style.fill = "none";
+        svg.appendChild(graph);
+        // console.log('graph outside of function: ', graph)
+
+      } else {
+        result.innerHTML = "処理中...";
+      }
+    }
+
+    req.open('POST', '{{ url_for('tester') }}', true);
+    req.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+    req.send("data=" + JSON.stringify(data));
+  }
+</script>
+
+<div id="result"></div>
+
+{% endblock %}

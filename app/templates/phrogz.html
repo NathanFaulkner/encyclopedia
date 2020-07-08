@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 120">
+	<title>Rotate to Point at Cursor</title>
+	<style>
+		* { vector-effect:non-scaling-stroke }
+		circle { fill:yellow; stroke:orange; stroke-width:1px }
+		line   { stroke:black; stroke-width:2px; stroke-linecap:round  }
+	</style>
+	<circle cx="75" cy="60" r="2"   id="origin" />
+	<circle cx="75" cy="60" r="1.5" id="dot"    />
+	<line   x1="75" y1="60" x2="75" y2="0"      />
+	<script>
+		var svg  = document.documentElement,
+		    pt   = svg.createSVGPoint(),
+		    dot  = document.querySelector('#dot'),
+		    line = document.querySelector('line');
+
+		svg.addEventListener('mousemove',function(evt){
+		  var loc = cursorPoint(evt);
+			dot.setAttribute('cx',loc.x);
+			dot.setAttribute('cy',loc.y);
+			rotateElement(line,75,60,loc.x,loc.y);
+		},false);
+
+		function rotateElement(el,originX,originY,towardsX,towardsY){
+			var degrees = Math.atan2(towardsY-originY,towardsX-originX)*180/Math.PI + 90;
+			el.setAttribute(
+				'transform',
+				'translate('+originX+','+originY+') rotate('+degrees+') translate('+(-originX)+','+(-originY)+')'
+			);
+		}
+
+		// Get point in global SVG space
+		function cursorPoint(evt){
+		  pt.x = evt.clientX; pt.y = evt.clientY;
+		  return pt.matrixTransform(svg.getScreenCTM().inverse());
+		}
+	</script>
+</svg>
