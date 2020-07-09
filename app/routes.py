@@ -295,6 +295,13 @@ def library():
 
 @app.route('/tester', methods=['GET', 'POST'])
 def tester():
+    # svg_width = interpolator.svg_x_length
+    # svg_height = interpolator.svg_y_length
+    # cart_width = interpolator.cart_x_length
+    # cart_height = interpolator.cart_y_length
+    help = 3
+    parameters = interpolator.get_parameters()
+    print('parameters: ', parameters, '; type is ', type(parameters))
     if 'data' in request.form:
         data = request.form["data"]
         data = json.loads(data)
@@ -303,4 +310,4 @@ def tester():
         #print(return_data)
         #return json.dumps(data)
         return json.dumps(return_data)
-    return render_template('tester.html')
+    return render_template('tester.html', parameters=parameters, help=help)

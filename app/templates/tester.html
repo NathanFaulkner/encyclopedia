@@ -29,20 +29,31 @@
   style="fill:none; stroke:black; stroke-width: 3"/>
   Sorry, your browser does not support inline SVG.
 </svg> -->
-<svg height="500" width="500" id="svg">
-  <rect height="500" width="500"
+<svg height="{{ parameters['svg_y_length'] }}" width="{{ parameters['svg_x_length'] }}" id="svg">
+  <rect height="{{ parameters['svg_y_length'] }}" width="{{ parameters['svg_x_length'] }}"
     style="fill:none; stroke:black; stroke-width:4;" />
   <!-- <line x1="-100" y1="200" x2="800" y2="200" style="stroke:purple; stroke-width:4"> -->
 </svg>
+
+<p>
+To remove a (<span style="color:red">red</span>) point that you already selected, just click it a second time.
+</p>
 
 <p>
 \(x\) = <span id="x"></span>, \(y\) = <span id="y"></span>
 </p>
 
 <script>
+  var points = [];
+  var parameters = {};
+  {% for key in parameters %}
+  parameters.{{ key }} = {{ parameters[key] }};
+  // console.log(parameters.{{ key }})
+  {% endfor %}
+  // parameters = JSON.parse(parameters);
+
   var svg = document.querySelector('svg');
   var pt = svg.createSVGPoint();
-  var data = []
 
   function cursorPoint(evt) {
     pt.x = evt.clientX;
@@ -50,34 +61,75 @@
     return pt.matrixTransform(svg.getScreenCTM().inverse());
   }
 
+  function svg_coords_to_cart(pair) {
+    var x; var y; var svg_x; var svg_y;
+    [svg_x, svg_y] = pair;
+    x = parameters.cart_x_min + svg_x/parameters.svg_x_length*parameters.cart_x_length;
+    y = parameters.cart_y_min + svg_y/parameters.svg_y_length*parameters.cart_y_length;
+    return [x, y];
+  }
+
+function cart_coords_to_svg(pair) {
+    x = pair[0];
+    y = pair[1];
+    svg_x = (x-parameters.cart_x_min)*(parameters.svg_x_length/parameters.cart_x_length);
+    svg_y = (parameters.cart_y_max - y)*(parameters.svg_y_length/parameters.cart_y_length);
+    return [svg_x, svg_y]
+  }
+
+  function searchForArrayInArray(needle, haystack) {
+    // console.log('search called ', needle, haystack);
+    var i, j, current;
+    for (i=0; i < haystack.length; ++i) {
+      if (needle.length === haystack[i].length) {
+        current = haystack[i];
+        for (j=0; j < needle.length && (needle[j] === current[j]); ++j);
+        if (j ===  needle.length)
+          return i;
+      }
+    }
+    // console.log('came out false');
+    return -1;
+  }
+
   svg.addEventListener('mousemove', function(self) {
     var loc = cursorPoint(self);
     var x = loc.x;
     var y = loc.y;
-    x = Number.parseFloat(x/(500/20) - 10).toFixed(1);
-    y = Number.parseFloat(10 - y/(500/20)).toFixed(1);
+    [x, y] = svg_coords_to_cart([x,y])
+    x = Number.parseFloat(x).toFixed(1);
+    y = Number.parseFloat(y).toFixed(1);
     document.getElementById('x').innerHTML = x;
     document.getElementById('y').innerHTML = y;
   }, false);
 
   svg.addEventListener('click', function(self) {
     var loc = cursorPoint(self);
-    var newElement = document.createElementNS("http://www.w3.org/2000/svg",
-      'circle');
-    var x = Math.round(loc.x/(500/20));
-    out_x = x - 10;
-    var y = Math.round(loc.y/(500/20));
-    out_y = 10 - y;
-    x = x * 500/20;
-    y = y * 500/20;
-    newElement.setAttribute("cx", x);
-    newElement.setAttribute("cy", y);
-    newElement.setAttribute("r", 3);
-    newElement.style.stroke = "none";
-    newElement.style.fill = "red";
-    svg.appendChild(newElement);
-    data.push([out_x, out_y]);
-    do_ajax();
+    var x = Math.round(loc.x/parameters.svg_x_length*parameters.cart_x_length);
+    out_x = x + parameters.cart_x_min;
+    var y = Math.round(loc.y/parameters.svg_y_length*parameters.cart_y_length);
+    out_y = parameters.cart_y_max - y;
+    x = x * parameters.svg_y_length/parameters.cart_y_length;
+    y = y * parameters.svg_y_length/parameters.cart_y_length;
+    var i = searchForArrayInArray([out_x, out_y], points);
+    if (i != -1) {
+      points.splice(i, 1);
+      var circles = svg.getElementsByTagName("circle");
+      var circle = circles[i];
+      circle.parentNode.removeChild(circle);
+      do_ajax();
+    } else {
+      var newElement = document.createElementNS("http://www.w3.org/2000/svg",
+        'circle');
+      newElement.setAttribute("cx", x);
+      newElement.setAttribute("cy", y);
+      newElement.setAttribute("r", 3);
+      newElement.style.stroke = "none";
+      newElement.style.fill = "red";
+      svg.appendChild(newElement);
+      points.push([out_x, out_y]);
+      do_ajax();
+    }
   }, false  );
 
   for (i=1; i < 20; i++) {
@@ -85,15 +137,15 @@
       'line');
     var horizLine = document.createElementNS("http://www.w3.org/2000/svg",
       'line');
-    vertLine.setAttribute("x1", 500/20*i);
+    vertLine.setAttribute("x1", parameters.svg_x_length/parameters.cart_x_length*i);
     vertLine.setAttribute("y1", 0);
-    vertLine.setAttribute("x2", 500/20*i);
-    vertLine.setAttribute("y2", 500);
+    vertLine.setAttribute("x2", parameters.svg_x_length/parameters.cart_x_length*i);
+    vertLine.setAttribute("y2", parameters.svg_y_length);
     vertLine.style.stroke = "#000";
     horizLine.setAttribute("x1", 0);
-    horizLine.setAttribute("y1", 500/20*i);
-    horizLine.setAttribute("x2", 500);
-    horizLine.setAttribute("y2", 500/20*i);
+    horizLine.setAttribute("y1", parameters.svg_y_length/parameters.cart_y_length*i);
+    horizLine.setAttribute("x2", parameters.svg_x_length);
+    horizLine.setAttribute("y2", parameters.svg_y_length/parameters.cart_y_length*i);
     horizLine.style.stroke = "#000";
     svg.appendChild(vertLine);
     svg.appendChild(horizLine);
@@ -150,10 +202,17 @@
         });
         // graph.setAttribute("points", "20,20 40,25 60,40");
         graph.style.stroke = "blue";
-        graph.style.strokeWidth = "3";
-        graph.style.opacity = "1";
+        graph.style.strokeWidth = "4";
+        graph.style.opacity = "0.5";
         graph.style.fill = "none";
+        graph.setAttribute("id", "graph");
+        var old_graph = svg.getElementById("graph");
+        // console.log('graphs ', old_graph);
+        if (old_graph) {
+          old_graph.parentNode.removeChild(old_graph);
+        }
         svg.appendChild(graph);
+        // console.log('graph ', graph);
         // console.log('graph outside of function: ', graph)
 
       } else {
@@ -163,8 +222,10 @@
 
     req.open('POST', '{{ url_for('tester') }}', true);
     req.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-    req.send("data=" + JSON.stringify(data));
+    req.send("data=" + JSON.stringify(points));
   }
+
+  // svg.getElementsByTagName('circle')
 </script>
 
 <div id="result"></div>
