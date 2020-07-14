@@ -299,15 +299,29 @@ def tester():
     # svg_height = interpolator.svg_y_length
     # cart_width = interpolator.cart_x_length
     # cart_height = interpolator.cart_y_length
-    help = 3
     parameters = interpolator.get_parameters()
     print('parameters: ', parameters, '; type is ', type(parameters))
     if 'data' in request.form:
+        return_data = {}
         data = request.form["data"]
+        # print(request.form["anchor"])
+        # try:
+        #     anchor = request.form["anchor"]
+        #     exec(f'anchor={anchor}')
+        #     print('anchor is ', anchor)
+        #     if type(anchor) != tuple:
+        #         del anchor
+        #         warning = """You have not entered a properly
+        #         formatted pair of coordinates.  Enter in "(x,y)" format."""
+        #         return_data["warning"] = warning
+        # except:
+        #     warning = """You have not entered a properly
+        #     formatted pair of coordinates.  Enter in "(x,y)" format."""
+        #     return_data["warning"] = warning
         data = json.loads(data)
         print(data)
-        return_data = interpolator.get_dict_for_svg(data)
+        return_data.update(interpolator.get_dict_for_svg(data))
         #print(return_data)
         #return json.dumps(data)
         return json.dumps(return_data)
-    return render_template('tester.html', parameters=parameters, help=help)
+    return render_template('tester.html', parameters=parameters)
