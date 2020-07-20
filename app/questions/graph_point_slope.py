@@ -1,0 +1,109 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import random
+# from sympy.parsing.sympy_parser import parse_expr
+# from sympy.parsing.sympy_parser import standard_transformations, implicit_multiplication_application
+# transformations = (standard_transformations + (implicit_multiplication_application,))
+from sympy import *
+
+from app.questions import Question, latex_print, random_non_zero_integer
+
+
+# if __name__ == '__main__':
+#     import os
+#     import sys
+#     sys.path.append(os.path.realpath('..'))
+#     import questions.general
+# else:
+#     from .. import general
+
+
+
+prob_type = 'graph'
+
+class GraphPointSlope(Question):
+    """
+    The given is of the form
+
+    \\[
+    y = mx + b
+    \\]
+
+    The student is expected to graph by plotting points.  Two is sufficient.
+    """
+    def __init__(self, **kwargs):
+        if 'seed' in kwargs:
+            self.seed = kwargs['seed']
+        else:
+            self.seed = random.random()
+        random.seed(self.seed)
+        if 'p' in kwargs:
+            self.p = kwargs['p']
+        else:
+            self.p = random.randint(-5,5)
+        if 'q' in kwargs:
+            self.q = kwargs['q']
+        else:
+            self.q = random_non_zero_integer(-5,5)
+        self.m = Rational(self.p, self.q)
+        if 'b' in kwargs:
+            self.b = kwargs['b']
+        else:
+            self.b = random.randint(-7,7)
+        if 'x' in kwargs:
+            self.x = kwargs['x']
+        else:
+            self.x = Symbol('x')
+
+        self.problem = self.genproblem()
+
+        self.given = self.problem['given']
+        self.answer = self.problem['answer']
+
+        self.given_latex = '\\(y = ' + latex(self.given) + '\\)'
+        self.given_latex_display = '\\[y = ' + latex(self.given) + '\\]'
+        # self.answer_latex = latex_print(self.answer)
+        # self.answer_latex_display = latex_print(self.answer, display=True)
+
+    name = 'Graph from Point Slope Form'
+
+    prompt_single = """Graph the given equation by plotting at least two points
+that satisfy the equation."""
+    prompt_multiple = """Graph each of the following equations by plotting at least two points
+that satisfy the equation."""
+
+
+    # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
+
+    def genproblem(self):
+        out = {}
+        x = self.x
+        b = self.b
+        # p = self.p
+        # q = self.q
+        m = self.m
+        expr = m*x + b
+        out['given'] = expr
+        #print('3rd step: So far its ', expr)
+        out['answer'] = expr
+        return out
+
+    def checkanswer(self, user_answer):
+        user_answer = user_answer(self.x)
+        return self.answer.equals(user_answer)
+
+    # def useranswer_latex(self, user_answer, display=False):
+    #     user_answer = user_answer.replace('^', '**')
+    #     user_answer = parse_expr(user_answer, transformations=transformations)
+    #     return latex_print(user_answer, display)
+
+        @classmethod
+        def validator(self, user_answer):
+            try:
+                user_answer = user_answer.replace('^', '**')
+                user_answer = parse_expr(user_answer, transformations=transformations)
+            except:
+                raise SyntaxError
+
+Question_Class = GraphPointSlope

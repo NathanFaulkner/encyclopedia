@@ -30,6 +30,10 @@ class AnswerForm(FlaskForm):
         # if answer.data == ',':
         #     raise ValidationError('Use proper syntax.')
 
+class BlankForm(FlaskForm):
+    seed = HiddenField()
+    submit = SubmitField('Submit', id='submitter')
+
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])

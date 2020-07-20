@@ -20,7 +20,8 @@ from app.forms import (AnswerForm,
                         LoginForm,
                         RegistrationForm,
                         ResetPasswordRequestForm,
-                        ResetPasswordForm)
+                        ResetPasswordForm,
+                        BlankForm)
 from app.models import Student, StudentAnswer
 from app.email import send_password_reset_email
 
@@ -151,17 +152,41 @@ def section(section_name):
 @app.route('/question/<question_name>', methods=['GET', 'POST'])
 def question(question_name):
     # if request.method == 'GET':
+    parameters = None
     question_module = getattr(questions, question_name)
     if current_user.is_authenticated:
         user = current_user
     else:
         user = {'username': 'Anonymous'}
-    validator = question_module.Question_Class.validator
-    form = AnswerForm(validator)
+    # validator = question_module.Question_Class.validator
+    if question_module.prob_type == 'graph':
+        print("Working with a graph here")
+        form = BlankForm()
+        graph = True
+        parameters = interpolator.get_parameters()
+        # print('parameters: ', parameters, '; type is ', type(parameters))
+        print('This is how I view form.validate_on_submit: ', form.validate_on_submit())
+        if 'data' in request.form and not form.validate_on_submit():
+            return_data = {}
+            points = request.form["data"]
+            points = json.loads(points)
+            # print(points)
+            return_data.update(interpolator.get_dict_for_svg(points))
+            # print(return_data)
+            #return json.dumps(data)
+            # graph = interpolator.Graph(points)
+            session['user_points'] = points
+            # print('session says the user answer is:', session['user_answer'])
+            return json.dumps(return_data)
+    else:
+        validator = question_module.Question_Class.validator
+        form = AnswerForm(validator)
+        graph = False
     if request.method == 'GET':
         session['seed'] = random.random()
         form.seed.data = session['seed']
         session['tried'] = False
+        session['points'] = []
     question = question_module.Question_Class(seed=session['seed'])
     # if request.method == 'GET':
     #     answer_event = StudentAnswer(student=student, skillname=question_name,
@@ -170,8 +195,16 @@ def question(question_name):
     #     # db.session.commit()
     # else:
     #     answer_event = StudentAnswer.query.filter_by(seed=session['seed'], student=student).first()
-    useranswer = form.answer.data
+    if graph:
+        points = session.get('user_points')
+        print('These are the points in session: ', points)
+        # print('This is what I think about the form: ', form)
+        graph = interpolator.Graph(points)
+        useranswer = graph.as_lambda
+    else:
+        useranswer = form.answer.data
     if form.validate_on_submit():
+        print('useranswer: ', useranswer)
         correct = question.checkanswer(useranswer)
         if current_user.is_authenticated:
             user = current_user
@@ -203,7 +236,8 @@ but you should try a different problem if you want credit."""
             message = "It's a brand new problem!!"
     return render_template('question_page.html', user=user, title='Question',
         site_name=app.config['SITE_NAME'], form=form, question=question,
-        tried=session['tried'], message=message)
+        tried=session['tried'], message=message, graph=graph,
+        parameters=parameters, question_name=question_name)
 #
 ############################################################################
 
@@ -303,7 +337,7 @@ def tester():
     print('parameters: ', parameters, '; type is ', type(parameters))
     if 'data' in request.form:
         return_data = {}
-        data = request.form["data"]
+        points = request.form["data"]
         # print(request.form["anchor"])
         # try:
         #     anchor = request.form["anchor"]
@@ -318,10 +352,10 @@ def tester():
         #     warning = """You have not entered a properly
         #     formatted pair of coordinates.  Enter in "(x,y)" format."""
         #     return_data["warning"] = warning
-        data = json.loads(data)
-        print(data)
-        return_data.update(interpolator.get_dict_for_svg(data))
-        #print(return_data)
+        points = json.loads(points)
+        # print(points)
+        return_data.update(interpolator.get_dict_for_svg(points))
+        # print(return_data)
         #return json.dumps(data)
         return json.dumps(return_data)
     return render_template('tester.html', parameters=parameters)

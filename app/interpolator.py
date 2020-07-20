@@ -1,6 +1,7 @@
 import numpy as np
 import json
-import sympy
+import random
+#import sympy
 
 svg_x_length = 500
 svg_y_length = 500
@@ -73,18 +74,20 @@ def str_list_to_list_of_floats(str_list):
 def get_dict_for_svg(points):
     print('get_dict_received ', points)
     i = 0
-    while i < len(points):
-        if type(points[i]) == str:
-            points[i] = points[i].replace('(', '[')
-            # print(f'points[{i}]:', points[i])
-            points[i] = points[i].replace(')', ']')
-            points[i] = points[i].replace(' ', '')
-            print(f'points[{i}]:', points[i])
-            # exec(f'points[i]={points[i]}')
-            points[i] = str_list_to_list_of_floats(points[i])
-            print(f'points[{i}]:', points[i])
-        i += 1
-    if len(points) == 1:
+    # while i < len(points):
+    #     if type(points[i]) == str:
+    #         points[i] = points[i].replace('(', '[')
+    #         # print(f'points[{i}]:', points[i])
+    #         points[i] = points[i].replace(')', ']')
+    #         points[i] = points[i].replace(' ', '')
+    #         print(f'points[{i}]:', points[i])
+    #         # exec(f'points[i]={points[i]}')
+    #         points[i] = str_list_to_list_of_floats(points[i])
+    #         print(f'points[{i}]:', points[i])
+    #     i += 1
+    if len(points) == 0:
+        out = {'shape': 'none'}
+    elif len(points) == 1:
         p = points[0]
         out = json.dumps(dict(x1=0,
                         y1=(cart_y_max-p[1])*(svg_x_length/cart_x_length),
@@ -100,9 +103,11 @@ def get_dict_for_svg(points):
         u1 = p + diam*v
         x1, y1 = cart_coords_to_svg(list(u0))
         x2, y2 = cart_coords_to_svg(list(u1))
-        out = json.dumps(dict(x1=x1, y1=y1, x2=x2, y2=y2))
+        data = f"{x1},{y1} {x2},{y2}"
+        data = {"points": data}
+        data = json.dumps(data)
         #print('This is the result of the inner dump: ', out)
-        out = {'shape': 'line', 'data': out}
+        out = {'shape': 'polyline', 'data': data}
     elif len(points) == 3:
         points.sort(key=lambda x: x[0])
         v0 = np.array([ points[0][0] - points[1][0], points[0][1] - points[1][1] ])
@@ -121,17 +126,39 @@ def get_dict_for_svg(points):
     else:
         points.sort(key=lambda x: x[0])
         graph = Graph(points)
-        x_points = graph.x_points
-        y_points = graph.y_points
-        x_points = cart_x_to_svg(x_points)
-        y_points = cart_y_to_svg(y_points)
-        data = ""
-        for i in range(len(x_points)):
-            data += f"{x_points[i]}, {y_points[i]} "
-        data = {"points": data}
-        data = json.dumps(data)
-        out = {"shape": "polyline", "data": data}
+        print('piecewise:', graph.piecewise)
+        if graph.piecewise == True:
+            pieces = []
+            x_pieces = graph.x_pieces
+            y_pieces = graph.y_pieces
+            k = 0
+            while k < len(x_pieces):
+                data = ""
+                x_piece = cart_x_to_svg(x_pieces[k])
+                y_piece = cart_y_to_svg(y_pieces[k])
+                for i in range(len(x_piece)):
+                    data += f"{x_piece[i]}, {y_piece[i]} "
+                pieces.append(json.dumps({"points": data}))
+                k += 1
+            pieces = json.dumps(pieces)
+            out = {"shape": "polyline", "pieces": pieces}
+        else:
+            x_points = graph.x_points
+            y_points = graph.y_points
+            x_points = cart_x_to_svg(x_points)
+            y_points = cart_y_to_svg(y_points)
+            data = ""
+            for i in range(len(x_points)):
+                data += f"{x_points[i]}, {y_points[i]} "
+            data = {"points": data}
+            data = json.dumps(data)
+            out = {"shape": "polyline", "data": data}
     out['return_user_points'] = json.dumps(points)
+    try:
+        graph
+        out['piecewise'] = json.dumps(graph.piecewise)
+    except UnboundLocalError:
+        out['piecewise'] = json.dumps(False)
     return out
 
 
@@ -270,7 +297,7 @@ def try_inverse_x(points):
         f = lambda x: a/(x-x0+1) + y0 - a
         if all_satisfy(f, points):
             x_points = np.linspace(cart_x_min, cart_x_max, 1001)
-            return {"function": f, "x_points": x_points}
+            return {"function": f, "x_points": x_points, "horiz_shift": x0-1}
         i += 1
 
 
@@ -297,8 +324,9 @@ def interpolate(points):
             return try_inverse_x(points)
 
 class Graph():
-    def __init__(self, user_input):
+    def __init__(self, user_input, piecewise=False):
         self.user_input = user_input
+        self.piecewise = piecewise
         self.setup()
 
     def setup(self):
@@ -322,54 +350,35 @@ class Graph():
                             try_inverse_x]
             one_of_the_things_worked_out = False
             for thing_to_try in things_to_try:
-                if thing_to_try(points):
-                    info = thing_to_try(points)
-                    f = info["function"]
-                    self.as_lambda = f
-                    self.x_points = info["x_points"]
-                    self.y_points = f(self.x_points)
-                    one_of_the_things_worked_out = True
-                    break
-            # if try_linear(points):
-            #     info = try_linear(points)
-            #     f = info["function"]
-            #     self.as_lambda = f
-            #     self.x_points = info["x_points"]
-            #     self.y_points = f(self.x_points)
-            # elif try_abs_value(points):
-            #     info = try_abs_value(points)
-            #     f = info["function"]
-            #     self.as_lambda = f
-            #     self.x_points = info["x_points"]
-            #     self.y_points = f(self.x_points)
-            # elif try_quadratic(points):
-            #     info = try_quadratic(points)
-            #     f = info["function"]
-            #     self.as_lambda = f
-            #     self.x_points = info["x_points"]
-            #     self.y_points = f(self.x_points)
-            # elif try_cubic(points):
-            #     info = try_cubic(points)
-            #     f = info["function"]
-            #     self.as_lambda = f
-            #     self.x_points = info["x_points"]
-            #     self.y_points = f(self.x_points)
-            # elif try_square_root(points):
-            #     f = try_square_root(points)
-            #     self.as_lambda = f
-            #     self.x_points = np.linspace(cart_x_min, cart_x_max, 1000)
-            #     self.y_points = f(self.x_points)
-            # elif try_cube_root(points):
-            #     f = try_cube_root(points)
-            #     self.as_lambda = f
-            #     self.x_points = np.linspace(cart_x_min, cart_x_max, 1000)
-            #     self.y_points = f(self.x_points)
-            # elif try_inverse_x(points):
-            #     f = try_inverse_x(points)
-            #     self.as_lambda = f
-            #     self.x_points = np.linspace(cart_x_min, cart_x_max, 1000)
-            #     self.y_points = f(self.x_points)
+                print('I am trying ', thing_to_try)
+                try:
+                    if thing_to_try(points):
+                        info = thing_to_try(points)
+                        f = info["function"]
+                        self.as_lambda = f
+                        if thing_to_try == try_inverse_x:
+                            a = info["horiz_shift"]
+                            self.piecewise = True
+                            self.x_pieces = []
+                            self.y_pieces = []
+                            self.x_pieces.append(np.linspace(cart_x_min, a-0.001, 500))
+                            self.x_pieces.append(np.linspace(a+0.001, cart_x_max, 500))
+                            print(self.x_pieces)
+                            self.y_pieces.append(f(self.x_pieces[0]))
+                            self.y_pieces.append(f(self.x_pieces[1]))
+                            one_of_the_things_worked_out = True
+                            break
+                        self.x_points = info["x_points"]
+                        self.y_points = f(self.x_points)
+                        one_of_the_things_worked_out = True
+                        break
+                except:
+                    pass
             if not one_of_the_things_worked_out:
-                self.as_lambda = None
-                self.x_points = None
-                self.y_points = None
+                deg = 4
+                user_x = [a[0] for a in points]
+                user_y = [a[1] for a in points]
+                p = np.polyfit(user_x, user_y, deg)
+                self.x_points = np.linspace(-10, 10, 1000)
+                self.y_points = np.polyval(p, self.x_points)
+                self.as_lambda = lambda x: np.polyval(p, x)

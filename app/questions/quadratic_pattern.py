@@ -120,3 +120,4 @@ class QuadraticPattern(Question):
 
 
 Question_Class = QuadraticPattern
+prob_type = 'math_blank'

@@ -1,7 +1,7 @@
 from sympy import *
 import random
 
-__all__ = ['quadratic_pattern']
+__all__ = ['quadratic_pattern', 'graph_point_slope']
 
 class Question():
     pass

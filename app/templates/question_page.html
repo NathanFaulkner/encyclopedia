@@ -12,7 +12,17 @@
   {{ question.given_latex_display }}
 </p>
 
-
+{% if graph %}
+{% include "_tester.html"%}
+  <div style="width: 50%; float: left; border: 1px solid red;">
+    <p>
+      <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>{{ form.submit() }}</p>
+      </form>
+    </p>
+  </div>
+{% else %}
   <!-- <div class="row"> -->
     <div style="width: 50%; float: left; border: 1px solid red;">
       <p>
@@ -42,8 +52,9 @@
     </div>
   <!-- </div> -->
 {% endif %}
+{% endif %}
 
-{% if request.method == 'POST' and form.validate_on_submit() %}
+{% if request.method == 'POST' and form.validate_on_submit() and (not graph) %}
 <div style="width: 100%; float: left;  border: 1px solid red; clear: left">
 <table style="border: 1px solid cyan; width: 100%;">
   <tr>
@@ -59,7 +70,7 @@
 {% endif %}
 
 <div style="clear: left">
-<a style="clear: left" href="{{ url_for('question', question_name='quadratic_pattern', new=True) }}">New Problem</a>
+<a style="clear: left" href="{{ url_for('question', question_name=question_name, new=True) }}">New Problem</a>
 
 <!-- <p>
   {% if tried == True %}
@@ -69,11 +80,7 @@
   {% endif %}
 </p> -->
 
-<p>
-  {% for error in form.answer.errors %}
-  <span style="color: red;">[{{ error }}]</span>
-  {% endfor %}
-</p>
+
 
 <p>
   {{ message }}
