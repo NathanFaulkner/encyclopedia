@@ -89,12 +89,15 @@ def get_dict_for_svg(points):
         out = {'shape': 'none'}
     elif len(points) == 1:
         p = points[0]
-        out = json.dumps(dict(x1=0,
-                        y1=(cart_y_max-p[1])*(svg_x_length/cart_x_length),
-                        x2=svg_x_length,
-                        y2=(cart_y_max-p[1])*(svg_y_length/cart_x_length)))
+        x1 = 0
+        y1 = (cart_y_max-p[1])*(svg_x_length/cart_x_length)
+        x2 = svg_x_length
+        y2 = (cart_y_max-p[1])*(svg_y_length/cart_x_length)
         #print('This is the result of the inner dump: ', out)
-        out = {'shape': 'line', 'data': out}
+        data = f"{x1},{y1} {x2},{y2}"
+        data = {"points": data}
+        data = json.dumps(data)
+        out = {'shape': 'polyline', 'data': data}
     elif len(points) == 2:
         v = np.array([ points[1][0] - points[0][0], points[1][1] - points[0][1] ])
         diam = np.sqrt(cart_x_length**2 + cart_y_length**2)
