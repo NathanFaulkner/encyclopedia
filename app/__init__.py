@@ -8,13 +8,16 @@ import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
 
+from .momentjs import momentjs
+
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 mail = Mail(app)
-#login.login_view = 'login'
+login.login_view = 'login'
+app.jinja_env.globals['momentjs'] = momentjs
 
 if not app.debug:
     if app.config['MAIL_SERVER']:

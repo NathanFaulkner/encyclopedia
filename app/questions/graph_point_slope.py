@@ -6,8 +6,11 @@ import random
 # from sympy.parsing.sympy_parser import standard_transformations, implicit_multiplication_application
 # transformations = (standard_transformations + (implicit_multiplication_application,))
 from sympy import *
+import numpy as np
+import json
 
 from app.questions import Question, latex_print, random_non_zero_integer
+from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 
 # if __name__ == '__main__':
@@ -56,10 +59,10 @@ class GraphPointSlope(Question):
         else:
             self.x = Symbol('x')
 
-        self.problem = self.genproblem()
+        self.genproblem()
 
-        self.given = self.problem['given']
-        self.answer = self.problem['answer']
+        # self.given = self.problem['given']
+        # self.answer = self.problem['answer']
 
         self.given_latex = '\\(y = ' + latex(self.given) + '\\)'
         self.given_latex_display = '\\[y = ' + latex(self.given) + '\\]'
@@ -84,10 +87,26 @@ that satisfy the equation."""
         # q = self.q
         m = self.m
         expr = m*x + b
-        out['given'] = expr
+        self.as_lambda = lambda x: m*x + b
+        self.given = expr
         #print('3rd step: So far its ', expr)
-        out['answer'] = expr
-        return out
+        self.answer = expr
+
+    def get_svg_data(self, window):
+        x_min = window[0]
+        x_max = window[1]
+        x_points = np.array([x_min, x_max])
+        y_points = self.as_lambda(x_points)
+        x_points = cart_x_to_svg(x_points)
+        y_points = cart_y_to_svg(y_points)
+        poly_points = ""
+        l = len(x_points)
+        i = 0
+        while i < l:
+            poly_points += f"{x_points[i]},{y_points[i]} "
+            i += 1
+        return poly_points
+
 
     def checkanswer(self, user_answer):
         user_answer = user_answer(self.x)
@@ -98,12 +117,14 @@ that satisfy the equation."""
     #     user_answer = parse_expr(user_answer, transformations=transformations)
     #     return latex_print(user_answer, display)
 
-        @classmethod
-        def validator(self, user_answer):
-            try:
-                user_answer = user_answer.replace('^', '**')
-                user_answer = parse_expr(user_answer, transformations=transformations)
-            except:
-                raise SyntaxError
+    # @classmethod
+    # def validator(self, user_answer):
+    #     try:
+    #         user_answer = user_answer.replace('^', '**')
+    #         user_answer = parse_expr(user_answer, transformations=transformations)
+    #     except:
+    #         raise SyntaxError
+
+
 
 Question_Class = GraphPointSlope

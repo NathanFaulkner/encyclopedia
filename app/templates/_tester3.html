@@ -109,18 +109,18 @@
     'line');
   var hAxis = document.createElementNS("http://www.w3.org/2000/svg",
     'line');
-  vAxis.setAttribute("x1", 500/2);
+  vAxis.setAttribute("x1", parameters.svg_x_length/2);
   vAxis.setAttribute("y1", 0);
-  vAxis.setAttribute("x2", 500/2);
-  vAxis.setAttribute("y2", 500);
+  vAxis.setAttribute("x2", parameters.svg_x_length/2);
+  vAxis.setAttribute("y2", parameters.svg_y_length);
   vAxis.style.stroke = "#000";
   vAxis.style.opacity = "1";
   vAxis.style.strokeWidth = "4";
   svg.appendChild(vAxis);
   hAxis.setAttribute("x1", 0);
-  hAxis.setAttribute("y1", 500/2);
-  hAxis.setAttribute("x2", 500);
-  hAxis.setAttribute("y2", 500/2);
+  hAxis.setAttribute("y1", parameters.svg_y_length/2);
+  hAxis.setAttribute("x2", parameters.svg_x_length);
+  hAxis.setAttribute("y2", parameters.svg_y_length/2);
   hAxis.style.stroke = "#000";
   hAxis.style.opacity = "1";
   hAxis.style.strokeWidth = "4";
@@ -137,6 +137,9 @@
 
   // Responding to user's clicks on graph -- rounded to cartesian grid points
   var points = [];
+
+
+
   var pt = svg.createSVGPoint();
 
   function cursorPoint(evt) {
@@ -228,23 +231,15 @@ function str_list_to_list_of_floats(str_list) {
     document.getElementById('y').innerHTML = y;
   }, false);
 
+
+
 // Draws/deletes grid points created by clicking on graph and passes them to Flask
   svg.addEventListener('click', function(self) {
     var loc = cursorPoint(self);
-    // var x = Math.round(loc.x/parameters.svg_x_length*parameters.cart_x_length);
-    // out_x = x + parameters.cart_x_min;
-    // var y = Math.round(loc.y/parameters.svg_y_length*parameters.cart_y_length);
-    // out_y = parameters.cart_y_max - y;
-    // x = x * parameters.svg_y_length/parameters.cart_y_length;
-    // y = y * parameters.svg_y_length/parameters.cart_y_length;
-    // var i = searchForArrayInArray([out_x, out_y], points);
     var pair = svg_coords_to_cart([loc.x, loc.y]);
     var i = check_for_nearby(pair, points);
     if (i != -1) {
       points.splice(i, 1);
-      // var circles = svg.getElementsByTagName("circle");
-      // var circle = circles[i];
-      // circle.parentNode.removeChild(circle);
       do_ajax();
     } else {
       // var newElement = document.createElementNS("http://www.w3.org/2000/svg",
@@ -351,125 +346,105 @@ function graph_points(cart_pts) {
 
   function clear_points() {
     points = [];
-    do_ajax();
+    // var list_of_graphs = [];
+    // draw_graphs(svg, list_of_graphs);
+    erase_graphs(svg);
+    graph_points(points);
   }
 
-  function draw_graphs(svg_element, list_of_graphs) {
+  function erase_graphs(svg_element) {
     let svg = svg_element;
     var the_old_graphs = svg.getElementsByTagName("polyline");
     // console.log('the_graphs[0]', the_graphs[0]);
     if (the_old_graphs) {
       var k = 0;
       var old_graph;
-      var l = the_graphs.length;
+      var l = the_old_graphs.length;
       for (k=0; k < l; k++) {
-        old_graph = the_graphs[l - 1 - k];
+        old_graph = the_old_graphs[l - 1 - k];
         old_graph.parentNode.removeChild(old_graph);
       }
     }
+  }
+
+  function draw_graph(svg_element, graph_info, color) {
+    let svg = svg_element;
+    var graph, obj;
+    graph = document.createElementNS("http://www.w3.org/2000/svg",
+              graph_info.shape);
+    obj = graph_info.data;
+    Object.keys(obj).forEach( (key) => {
+      graph.setAttribute(key, obj[key]);
+      // console.log(key + obj[key]);
+    });
+    graph.style.stroke = color;
+    graph.style.strokeWidth = "4";
+    graph.style.opacity = "0.5";
+    graph.style.fill = "none";
+    graph.setAttribute("id", "graph" + i);
+    svg.appendChild(graph);
+  }
+
+  function draw_graphs(svg_element, list_of_graphs, color) {
+    let svg = svg_element;
+    // erase_graphs(svg);
     var i, graph_info, graph, obj;
     for (i=0; i < list_of_graphs.length; i++) {
-      graph_info = list_of_graphs[i];
-      graph = document.createElementNS("http://www.w3.org/2000/svg",
-                graph_info.shape);
-      obj = graph_info.attributes;
-      Object.keys(obj).forEach( (key) => {
-        graph.setAttribute(key, obj[key]);
-        // console.log(key + obj[key]);
-      });
-      graph.style.stroke = "blue";
-      graph.style.strokeWidth = "4";
-      graph.style.opacity = "0.5";
-      graph.style.fill = "none";
-      graph.setAttribute("id", "graph" + k);
-      svg.appendChild(graph);
+      draw_graph(svg, list_of_graphs[i], color);
+      // graph_info = list_of_graphs[i];
+      // graph = document.createElementNS("http://www.w3.org/2000/svg",
+      //           graph_info.shape);
+      // obj = graph_info.data;
+      // Object.keys(obj).forEach( (key) => {
+      //   graph.setAttribute(key, obj[key]);
+      //   // console.log(key + obj[key]);
+      // });
+      // graph.style.stroke = color;
+      // graph.style.strokeWidth = "4";
+      // graph.style.opacity = "0.5";
+      // graph.style.fill = "none";
+      // graph.setAttribute("id", "graph" + i);
+      // svg.appendChild(graph);
     }
   }
 
   function do_ajax() {
+    // console.log('ajax thinks points is', points);
     var req = new XMLHttpRequest();
     var result = document.getElementById('result');
     req.onreadystatechange = function()
     {
       if(this.readyState == 4 && this.status == 200) {
-        var old_graph = svg.getElementById("graph");
-        // console.log('graphs ', old_graph);
-        if (old_graph) {
-          old_graph.parentNode.removeChild(old_graph);
-        }
-        var the_graphs = svg.getElementsByTagName("polyline");
-        // console.log('the_graphs[0]', the_graphs[0]);
-        if (the_graphs) {
-          var k = 0;
-          var old_graph;
-          var l = the_graphs.length;
-          for (k=0; k < l; k++) {
-            old_graph = the_graphs[l - 1 - k];
-            old_graph.parentNode.removeChild(old_graph);
-          }
-        }
-        // result.innerHTML = this.responseText;
         return_data = JSON.parse(this.responseText);
         result.innerHTML = return_data.shape + ': ' + return_data.data;
         // result.innerHTML = return_data.return_user_points;
         if (return_data.shape == 'none') {
-          graph_points(JSON.parse(return_data.return_user_points));
+          // graph_points(JSON.parse(return_data.return_user_points));
+          clear_points();
           return
         }
-        // console.log('This is what is thinks return_data.piecewise is', JSON.parse(return_data.piecewise))
+        // console.log('This is what it thinks return_data.piecewise is', JSON.parse(return_data.piecewise))
         if (JSON.parse(return_data.piecewise)) {
-          var k;
-          var pieces = JSON.parse(return_data.pieces)
-          console.log('pieces: ', pieces);
-          var num_pieces = pieces.length;
-          for (k=0; k < num_pieces; k++) {
-            var obj = JSON.parse(pieces[k]);
-            console.log('Here is obj number ', k, ':', obj);
-            var graph = document.createElementNS("http://www.w3.org/2000/svg",
-                      return_data.shape);
-            // var obj = return_data.data;
-            // obj = JSON.parse(obj);
-            Object.keys(obj).forEach( (key) => {
-              graph.setAttribute(key, obj[key]);
-              // console.log(key + obj[key]);
-            });
-            // Example: graph.setAttribute("points", "20,20 40,25 60,40"); .. for a 'polyline' shape
-            graph.style.stroke = "blue";
-            graph.style.strokeWidth = "4";
-            graph.style.opacity = "0.5";
-            graph.style.fill = "none";
-            graph.setAttribute("id", "graph" + k);
-            svg.appendChild(graph);
+          var pieces = JSON.parse(return_data.pieces);
+          // console.log(pieces);
+          var list_of_pieces = [];
+          var piece, obj;
+          for (i=0; i < pieces.length; i++) {
+            obj = JSON.parse(pieces[i]);
+            piece = {"shape": return_data.shape,
+                    "data": obj};
+            list_of_pieces.push(piece);
           }
         } else {
-          var graph = document.createElementNS("http://www.w3.org/2000/svg",
-                    return_data.shape);
-          var obj = return_data.data;
-          obj = JSON.parse(obj);
-          console.log('Here is the obj:', obj);
-          Object.keys(obj).forEach( (key) => {
-            graph.setAttribute(key, obj[key]);
-            // console.log(key + obj[key]);
-          });
-          // Example: graph.setAttribute("points", "20,20 40,25 60,40"); .. for a 'polyline' shape
-          graph.style.stroke = "blue";
-          graph.style.strokeWidth = "4";
-          graph.style.opacity = "0.5";
-          graph.style.fill = "none";
-          graph.setAttribute("id", "graph");
-          // var old_graph = svg.getElementById("graph");
-          // // console.log('graphs ', old_graph);
-          // if (old_graph) {
-          //   old_graph.parentNode.removeChild(old_graph);
-          // }
-          svg.appendChild(graph);
-          // console.log('graph ', graph);
-          // console.log('graph outside of function: ', graph)
+          var list_of_pieces = [{"shape": return_data.shape,
+                                "data": JSON.parse(return_data.data)}]
         }
+        erase_graphs(svg);
+        draw_graphs(svg, list_of_pieces, "blue");
         graph_points(JSON.parse(return_data.return_user_points));
         // console.log('circles', svg.getElementsByTagName("circles"));
       } else {
-        result.innerHTML = "処理中...";
+        result.innerHTML = "Processing... (if this takes more than a few seconds, you can assume an error has occurred.)";
         // "You need to enter coordinates for your anchor for the algorithm to guess what you intend to graph."//"処理中...";
       }
     }
@@ -481,9 +456,78 @@ function graph_points(cart_pts) {
     req.send("data=" + JSON.stringify(points));
   }
 
+  function do_alt_ajax() {
+    // console.log('alt_ajax thinks points is', points);
+    var req = new XMLHttpRequest();
+    // var submit_result = document.getElementById('submit_result');
+    // console.log('alt_ajax thinks submit_result is', submit_result);
+    req.onreadystatechange = function()
+    {
+      if(this.readyState == 4 && this.status == 200) {
+        // console.log('responseText', this.responseText);
+        return_data = JSON.parse(this.responseText);
+        // console.log('return_data', return_data);
+        // result.innerHTML = return_data.shape + ': ' + return_data.data;
+        submit_result.innerHTML = 'Submit points: ' + return_data.return_user_points;
+        if (return_data.shape == 'none') {
+          // graph_points(JSON.parse(return_data.return_user_points));
+          clear_points();
+          return
+        }
+        // console.log('This is what it thinks return_data.piecewise is', JSON.parse(return_data.piecewise))
+        if (JSON.parse(return_data.piecewise)) {
+          var pieces = JSON.parse(return_data.pieces);
+          // console.log(pieces);
+          var list_of_pieces = [];
+          var piece, obj;
+          for (i=0; i < pieces.length; i++) {
+            obj = JSON.parse(pieces[i]);
+            piece = {"shape": return_data.shape,
+                    "data": obj};
+            list_of_pieces.push(piece);
+          }
+        } else {
+          var list_of_pieces = [{"shape": return_data.shape,
+                                "data": JSON.parse(return_data.data)}]
+        }
+        erase_graphs(svg);
+        draw_graphs(svg, list_of_pieces, "blue");
+        graph_points(JSON.parse(return_data.return_user_points));
+        // console.log('circles', svg.getElementsByTagName("circles"));
+      } else {
+        submit_result.innerHTML = "Processing... (if this takes more than a few seconds, you can assume an error has occurred.)";
+        // "You need to enter coordinates for your anchor for the algorithm to guess what you intend to graph."//"処理中...";
+      }
+    }
 
+    // var anchor_field = document.getElementById('anchor');
 
+    req.open('POST', '{{ url_for('handle_graph') }}', true);
+    req.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+    req.send("data=" + JSON.stringify(points));
+  }
+  // do_ajax();
   // svg.getElementsByTagName('circle')
+
+  // console.log('form.validate_on_submit()', {{ form.validate_on_submit() }})
+  {% if form.validate_on_submit() %}
+    // console.log('user_svg_data', user_svg_data);
+    // list_of_graphs = [user_svg_data];
+    // if (user_svg_data !== null) {
+    //   draw_graphs(svg, list_of_graphs);
+    // }
+    points = {{ points }};
+    // do_alt_ajax();
+    graph_info = {"shape": "polyline", "data": {"points" : "{{ user_poly_points }}"}  }
+    draw_graph(svg, graph_info, "blue");
+    graph_info = {"shape": "polyline", "data": {"points" : "{{ correct_answer_poly_points }}"}  }
+    draw_graph(svg, graph_info, "green");
+    graph_points(points);
+  {% endif %}
 </script>
 
 <div id="result"></div>
+
+<div id="submit_result"></div>
+
+<p id="submit_feedback"></p>

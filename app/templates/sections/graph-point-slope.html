@@ -1,0 +1,46 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+In this section,
+</p>
+
+<p>
+  <div class="activity">
+    <h2>Activity</h2>
+    <span class="inline-header">Goal:</span> Completely factor
+
+  </div>
+</p>
+
+<p>
+
+</p>
+
+
+<div class="example">
+  <h2>Example</h2>
+  Do some stuff
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+
+    <script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="exercise">
+
+
+<a href="{{ url_for('question', question_name='graph_point_slope') }}">Click for Exercise</a>
+
+</div>
+
+{% endblock %}

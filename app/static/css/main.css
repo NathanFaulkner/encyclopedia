@@ -5,7 +5,7 @@
 :root {
   --logo-background-color: #000132;
   --logo-text-color: #fcba03;
-  --logo-text-hover-color: #970129;
+  --logo-text-hover-color: #333465;
   --logo-triadic-third: #970129;
   --old-menu-li-a: #e24f1d;
   --old-menu-li-li-a: #33b5e5;
@@ -20,7 +20,7 @@
   /* --logo-background-color: #9933cc; */
 
 html {
-  font-family: "Computer Modern";
+  font-family: "Computer Modern"; //
 }
 
 a {
@@ -89,6 +89,32 @@ a {
 .nav li a:hover {
   background-color: var(--logo-text-hover-color)
 }
+
+.gradebook a {
+  display: block;
+  text-align: left;
+  text-decoration: none;
+  padding: 8px;
+  margin-bottom: 7px;
+  background-color: var(--menu-li-a-bgcolor);
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.gradebook a:hover {
+  background-color: #0082b2;
+}
+
+.gradebook table {
+  padding: 0;
+  border: 1px solid rgba(226, 79, 29, 1);
+  margin: 0;
+}
+
+.gradebook table td{
+  text-align: center;
+}
+
 
 .menu {
   background-color: gray;
@@ -296,4 +322,31 @@ a {
 
 .exercise a:hover, a:active {
   background-color: #0082b2;;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: wheat;
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /*Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }

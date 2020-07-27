@@ -5,8 +5,8 @@
 {% block menu %}
       <div class="col-25 menu">
         <ul>
-            <li><button type="button" class="collapsible">Front Matter</button>
-            <div class="inner">
+            <li><a>Front Matter</a>
+            <div>
             {% set front = book.subdivisions.get('front') %}
             {% if front.subdivisions %}
               <ul>
@@ -22,7 +22,7 @@
               {% endif %}
             </div>
             </li>
-            <li><button type="button" class="collapsible">Main Matter</button>
+            <li><a>Main Matter</a>
             <div>
             {% set main = book.subdivisions.get('main') %}
             {% if main.subdivisions %}
@@ -58,7 +58,7 @@
             {% endif %}
             </div>
             </li>
-            <li><button type="button" class="collapsible">End Matter</button>
+            <li><a>End Matter</a>
             <div class="inner">
             {% set end = book.subdivisions.get('end') %}
             {% if end.subdivisions %}

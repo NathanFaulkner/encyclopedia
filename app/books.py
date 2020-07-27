@@ -1,6 +1,4 @@
-#from app.sections import *
-
-#alphabet = 'abcdefghijklmnopqrstuvwxyz'
+import datetime
 
 
 class Book(): #Not used at this time
@@ -15,6 +13,11 @@ class Section():
         self.view_name = view_name
         self.display_name = display_name
         self.template_path = template_path
+        self.questions = []
+        self.due_date = None
+
+    def add_to_questions(self, question_name):
+        self.questions.append(question_name)
 
 # class Section():
 #     def __init__(self, category, free_section, numbered=True):
@@ -36,6 +39,7 @@ class Division():
         self.frontpage = frontpage
         self.view_name = frontpage.view_name
         self.template_path = frontpage.template_path
+        self.questions = frontpage.questions
 
 
     def get_division_into(self):
@@ -47,19 +51,24 @@ class Division():
 #########################
 # Free Sections -- not "bound" in a book
 algebra2 = Section('algebra2', "Algebra 2", '/sections/algebra2')
+graphpointslope = Section('graphpointslope', "Graph from Point Slope Form", '/sections/graph-point-slope')
+graphpointslope.add_to_questions('graph_point_slope')
 factoring1 = Section('factoring1', "Factoring - Level 1", '/sections/factoring-coeff-of-one')
+factoring1.due_date = datetime.datetime(2020, 7, 28)
 polynomials_intro = Section('polynomials', "Polynomials", '/sections/polynomials-intro')
 quadraticpattern = Section('quadraticpattern', "Quadratic Pattern", '/sections/quadratic-pattern')
+quadraticpattern.add_to_questions('quadratic_pattern')
 #
 #############################
 
 ##############################
-# Construction of book, Algebra 2 -- collecting, "binding" sections, frontpages, etc.
+# Construction of book, Algebra2 -- collecting, "binding" sections, frontpages, etc.
+linear_functions = Division('chapter', 'Linear Functions', [graphpointslope])
 polynomials = Division('chapter', 'Polynomials', [factoring1, quadraticpattern])
 #polynomials.intro = polynomials_intro
 polynomials.set_frontpage(polynomials_intro)
 
-main = Division('main', 'Main Matter', [polynomials])
+main = Division('main', 'Main Matter', [linear_functions, polynomials])
 
 Algebra2 = Division('book', 'Algebra 2', {'front': None, 'main': main, 'end': None})
 Algebra2.name_for_path = 'Algebra2'

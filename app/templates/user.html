@@ -1,0 +1,134 @@
+{% extends "user_page.html" %}
+
+{% block content %}
+<table style="margin-right:10%">
+  <tr valign="top">
+    <!-- <td><img src="{{ user.avatar(128) }}"></td> -->
+    <td><h1>{{ user.username }}</h1>
+        {% if user.about_me %}
+        <p>{{ user.about_me }}</p>
+        {% endif %}
+        <!-- {% if user.last_seen %}
+        <p>Last seen on: {{ user.last_seen }}</p>
+        {%  endif %} -->
+        {#<p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following </p>#}
+        {% if user == current_user %}
+        <p><a>Edit your profile.</a></p>
+      {#  {%  elif not current_user.is_following(user) %}
+        <p>
+          <form action="{{ url_for('follow', username=user.username) }}" method="post">
+            {{ form.hidden_tag() }}
+            {{ form.submit(value='Follow') }}
+          </form>
+        </p>
+
+        {% else %}
+        <p>
+          <form action="{{ url_for('unfollow', username=user.username) }}" method="post">
+            {{ form.hidden_tag() }}
+            {{ form.submit(value='Unfollow') }}
+          </form>
+          #}
+        {% endif %}
+    </td>
+    <td valign="bottom" >
+      <a href="{{ url_for('library') }}">Back to the Library</a>
+    </td>
+</table>
+<hr style="color: var(--section-header-color);">
+{% if user == current_user %}
+<div class="gradebook">
+  <table>
+    {% for book in user_books %}
+    <tr>
+      <td><a href="{{ url_for('book', book_name=book.name_for_path) }}">{{ book.display_name }}</a></td>
+      {% for chapter in book.subdivisions['main'].subdivisions %}
+        {% set outer_loop = loop %}
+        <tr>
+          <td>
+            <a href="{{ url_for('book_chapter', book_name=book.name_for_path, chapter_number=outer_loop.index) }}">
+              {{ outer_loop.index }}: {{ chapter.display_name }}
+            </a>
+          </td>
+        </tr>
+        {% for section in chapter.subdivisions %}
+        <tr>
+          <td valign="top">
+            <a href="{{ url_for('book_section',
+                                book_name=book.name_for_path,
+                                chapter_number=outer_loop.index,
+                                section_number=loop.index) }}">
+            {{ outer_loop.index }}.{{ loop.index }}: {{ section.display_name }}
+            </a>
+          </td>
+          <td valign="top">
+          <table>
+            <tr>
+              <td>Next Due Date</td>
+              <td>Grade</td>
+              {% set answers = grades.get_answers_by_section_desc(book.name_for_path, outer_loop.index, loop.index) %}
+              {% for answer in  answers %}
+              <td>
+                {#{{ answer.timestamp.month }}/{{ answer.timestamp.day }}#}
+                <div class="tooltip">
+                  {{ momentjs(answer.timestamp).format("M/DD") }}
+                  <span class="tooltiptext">{{ momentjs(answer.timestamp).format("hh:mmA") }}</span>
+                </div>
+              </td>
+              {% endfor %}
+            </tr>
+            <tr>
+              {% set section_grades = grades.grade_section(book.name_for_path, outer_loop.index, loop.index) %}
+              {% if section_grades.memory_gradient %}
+                {% if section_grades.memory_gradient < 0.5 %}
+                  {% set bgcolor = 'rgba(0, 255, 0, 0.5)' %}
+                {% elif section_grades.memory_gradient < 1 %}
+                  {% set bgcolor = 'rgba(252, 186, 3, 0.5)' %}
+                {% else %}
+                  {% set bgcolor = 'rgba(255, 0, 0, 0.5)' %}
+                {% endif %}
+              {% else %}
+                {% set bgcolor = 'white' %}
+              {% endif %}
+              <td style="background-color:{{ bgcolor }}">
+                {% if section_grades.next_due_date %}
+                {#{{ section_grades.next_due_date.month }}/{{ section_grades.next_due_date.day }}#}
+                {{ momentjs(section_grades.next_due_date).grade_book() }}
+                {% endif %}
+              </td>
+              {% if section_grades.grade %}
+                {% if section_grades.grade <= 1 %}
+                  {% set bgcolor = 'rgba(0, 0, 255, 0.25)' %}
+                {% elif section_grades.grade <= 2 %}
+                  {% set bgcolor = 'rgba(0, 0, 255, 0.5)' %}
+                {% elif section_grades.grade <= 3 %}
+                  {% set bgcolor = 'rgba(0, 0, 255, 0.75)' %}
+                {% else %}
+                  {% set bgcolor = 'rgba(0, 0, 255, 1)' %}
+                {% endif %}
+              {% else %}
+                {% set bgcolor = 'gray' %}
+              {% endif %}
+              <td style="background-color:{{ bgcolor }}">{{ section_grades.grade }}</td>
+              {% for answer in answers %}
+              {% if answer.correct %}
+              <td style="text-align:center">&#x2714;</td>
+              {% else %}
+              <td style="text-align:center">&#x2716;</td>
+              {% endif %}
+              {% endfor %}
+            </tr>
+          </table>
+          </td>
+        </tr>
+        {% endfor %}
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
+<!-- <script>
+  document.write(moment("2012-12-31T23:55:13Z").format("M/DD hh:mm A"));
+</script> -->
+{% endblock %}

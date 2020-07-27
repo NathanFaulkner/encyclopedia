@@ -12,16 +12,16 @@
   {{ question.given_latex_display }}
 </p>
 
-{% if graph %}
-{% include "_tester.html"%}
-  <div style="width: 50%; float: left; border: 1px solid red;">
+{% if whether_graph %}
+{% include "_tester2.html"%}
+  <!-- <div style="width: 50%; float: left; border: 1px solid red;">
     <p>
       <form action="" method="post">
         {{ form.hidden_tag() }}
         <p>{{ form.submit() }}</p>
       </form>
     </p>
-  </div>
+  </div> -->
 {% else %}
   <!-- <div class="row"> -->
     <div style="width: 50%; float: left; border: 1px solid red;">
@@ -54,7 +54,7 @@
 {% endif %}
 {% endif %}
 
-{% if request.method == 'POST' and form.validate_on_submit() and (not graph) %}
+{% if request.method == 'POST' and form.validate_on_submit() and (not whether_graph) %}
 <div style="width: 100%; float: left;  border: 1px solid red; clear: left">
 <table style="border: 1px solid cyan; width: 100%;">
   <tr>
@@ -67,7 +67,6 @@
   </tr>
 </table>
 </div>
-{% endif %}
 
 <div style="clear: left">
 <a style="clear: left" href="{{ url_for('question', question_name=question_name, new=True) }}">New Problem</a>
@@ -83,10 +82,20 @@
 
 
 <p>
-  {{ message }}
+  {{ message|safe }}
 </p>
 </div>
+{% else %}
+{% endif %}
 
 
 
+<!-- <p id="submit_feedback"><p>
+
+<script>
+var submitter = document.getElementById('submitter');
+submitter.addEventListener('click', function(self) {
+  submit_feedback.innerHTML = "Hello";
+}, false);
+</script> -->
 {% endblock %}
