@@ -40,8 +40,21 @@
 <div class="gradebook">
   <table>
     {% for book in user_books %}
+    {% set whole_book_info = grades.whole_book_info(book) %}
     <tr>
-      <td><a href="{{ url_for('book', book_name=book.name_for_path) }}">{{ book.display_name }}</a></td>
+      <td>
+        <a href="{{ url_for('book', book_name=book.name_for_path) }}">{{ book.display_name }}</a>
+      </td>
+      <td>
+        <table>
+          <tr>
+            <td>Grade</td><td>Pct</td>
+          </tr>
+          <tr>
+            <td>{{ grades.get_whole_book_grade(book) }}</td><td>{{ grades.get_whole_book_grade(book)/4*100 }}%</td>
+          </tr>
+        </table>
+      </td>
       {% for chapter in book.subdivisions['main'].subdivisions %}
         {% set outer_loop = loop %}
         <tr>
@@ -67,7 +80,7 @@
               <td>Next Due Date</td>
               <td>Grade</td>
               {% set answers = grades.get_answers_by_section_desc(book.name_for_path, outer_loop.index, loop.index) %}
-              {% for answer in  answers %}
+              {% for answer in answers %}
               <td>
                 {#{{ answer.timestamp.month }}/{{ answer.timestamp.day }}#}
                 <div class="tooltip">
@@ -78,7 +91,8 @@
               {% endfor %}
             </tr>
             <tr>
-              {% set section_grades = grades.grade_section(book.name_for_path, outer_loop.index, loop.index) %}
+              {#{% set section_grades = grades.grade_section(book.name_for_path, outer_loop.index, loop.index) %}#}
+              {% set section_grades = whole_book_info[outer_loop.index - 1][loop.index - 1] %}
               {% if section_grades.memory_gradient %}
                 {% if section_grades.memory_gradient < 0.5 %}
                   {% set bgcolor = 'rgba(0, 255, 0, 0.5)' %}

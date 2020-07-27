@@ -43,10 +43,32 @@ class Division():
 
 
     def get_division_into(self):
-        if subdivisions is not None:
-            return subdivisions[0].category
+        if self.subdivisions is not None:
+            return self.subdivisions[0].category
         else:
             return None
+
+
+    @staticmethod
+    def list_bottom_elements(subdivisions):
+        bottom = []
+        if type(subdivisions) == dict:
+            subdivisions = [subdivisions[i] for i in subdivisions]
+        for subdivision in subdivisions:
+            try:
+                subdivision.subdivisions
+                bottom += Division.list_bottom_elements(subdivision.subdivisions)
+            except AttributeError:
+                if subdivision is not None:
+                    bottom.append(subdivision)
+        return bottom
+
+    def list_all_sections(self):
+        return Division.list_bottom_elements(self.subdivisions)
+
+
+
+
 
 #########################
 # Free Sections -- not "bound" in a book

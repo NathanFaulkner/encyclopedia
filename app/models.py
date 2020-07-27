@@ -7,6 +7,11 @@ import jwt, math
 
 from app import app, db, login, books
 
+observers = db.Table('observers',
+    db.Column('observer_id', db.Integer, db.ForeignKey('student.id')),
+    db.Column('observed_id', db.Integer, db.ForeignKey('student.id'))
+)
+
 class Student(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
@@ -16,6 +21,12 @@ class Student(UserMixin, db.Model):
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     answers = db.relationship('StudentAnswer', backref='student', lazy='dynamic')
     fav_color = db.Column(db.String(30))
+    observed_students = db.relationship(
+        'Student', secondary=observers,
+        primaryjoin=(observers.c.observer_id == id),
+        secondaryjoin=(observed.c.followed_id == id),
+        backref=db.backref('observers', lazy='dynamic'), lazy='dynamic'
+    )
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -135,7 +146,7 @@ class UserSectionGradeInfo():
                         'section:', self.section,
                         'try number:', i+1,
                         'days since prev:', days_since_previous)
-                new_session = days_since_previous > 1
+                new_session = days_since_previous > 0.5
                 if new_session:
                     if grade == self.max_grade:
                         session_count += 1
@@ -231,21 +242,25 @@ class UserGradeInfo():
         grade_info = UserSectionGradeInfo(self.user, book, chapter, section)
         return grade_info
 
+    def whole_book_info(self, book):
+        info = []
+        main = book.subdivisions['main']
+        chapters = main.subdivisions
+        for i, chapter in enumerate(chapters):
+            chapter_info = []
+            sections = chapter.subdivisions
+            for j in range(len(sections)):
+                chapter_info.append(self.grade_section(book.name_for_path, i+1, j+1))
+            info.append(chapter_info)
+        return info
 
-        #         while same_session:
-        #             if answer.correct:
-        #                 grade = min(max_grade, grade + 1)
-        #             else:
-        #                 grade = max(0, grade - 1)
-        #             i += 1
-        #             answer = answers[i]
-        #             prev_answer = answers[i - 1]
-        #             time_since_previous = answer.timestamp - prev_answer.timestamp
-        #             hours_since_previous = time_since_previous.seconds/60/60
-        #             same_session = hours_since_previous < 1
-        #         i += 1
-        # time_since_previous = datetime.utcnow() - answers[-1].timestamp
-        # days_since_previous = time_since_previous.seconds/60/60
-        # expected_recall_duration = self.base**(session_count - 1)
-        # memory_decay_penalty = days_since_previous/expected_recall_duration
-        # grade = max(0, grade - memory_decay_penalty)
+    def get_whole_book_grade(self, book):
+        whole_book_info = self.whole_book_info(book)
+        grades = []
+        for chapter in whole_book_info:
+            for section_info in chapter:
+                try:
+                    grades.append(section_info.grade)
+                except AttributeError:
+                    pass
+        return sum(grades)/len(grades)
