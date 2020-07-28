@@ -38,7 +38,7 @@
       </p>
     </div>
 
-    <div style="width: 50%; float: left; border: 1px solid red;">
+    <div style="width: 50%; float: left; border: 1px solid red; display:none;">
       <p id="format_user_answer"></p>
       <script>
         document.getElementById('useranswer').addEventListener("keyup", show_answer);
@@ -68,25 +68,28 @@
 </table>
 </div>
 
-<div style="clear: left">
-<a style="clear: left" href="{{ url_for('question', question_name=question_name, new=True) }}">New Problem</a>
-
-<!-- <p>
-  {% if tried == True %}
-  I already tried this problem!
-  {% else %}
-  I've never tried this problem!
-  {% endif %}
-</p> -->
-
-
-
-<p>
+<div style="padding:5px; border: 1px cyan;">
   {{ message|safe }}
-</p>
 </div>
 {% else %}
 {% endif %}
+
+{% if request.method == 'POST' %}
+<div class="exercise" style="clear: left">
+  <a style="clear: left" href="{{ url_for('question', question_name=question_name, new=True) }}">Get New Problem</a>
+{% endif %}
+  <!-- <p>
+    {% if tried == True %}
+    I already tried this problem!
+    {% else %}
+    I've never tried this problem!
+    {% endif %}
+  </p> -->
+
+
+
+
+</div>
 
 
 

@@ -60,9 +60,37 @@ a {
   padding: 15px;
 }
 
+
+
 /* .nav {
   clear: right;
 } */
+
+.user ul {
+  background-color: white;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-weight: bold;
+}
+
+.user li {
+  float: left;
+}
+
+.user li a {
+  color: black;
+  display: block;
+  text-align: center;
+  padding: 15px;
+  text-decoration: none;
+  border: 1px;
+}
+
+.user li a:hover {
+  background-color: var(--logo-text-color)
+}
 
 .nav ul {
   background-color: var(--logo-background-color);
@@ -88,6 +116,11 @@ a {
 
 .nav li a:hover {
   background-color: var(--logo-text-hover-color)
+}
+
+.gradebook {
+  /* width: 200%; */
+  overflow: scroll;
 }
 
 .gradebook a {

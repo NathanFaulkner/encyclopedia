@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block menu %}
-      <div class="col-25 menu">
+      <div class="col-25 menu" id="table_of_contents">
         <ul>
         {% for book in library %}
           {% set url = url_for('book', book_name=book.name_for_path) %}

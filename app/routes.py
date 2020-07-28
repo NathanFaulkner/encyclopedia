@@ -89,10 +89,10 @@ def register():
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('library'))
     user = Student.verify_reset_password_token(token)
     if not user:
-        return redirect(url_for('index'))
+        return redirect(url_for('library'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
         user.set_password(form.password.data)
@@ -104,7 +104,7 @@ def reset_password(token):
 @app.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('library'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
         user = Student.query.filter_by(email=form.email.data).first()
@@ -117,6 +117,7 @@ def reset_password_request():
 
 
 @app.route('/user/<username>')
+@login_required
 def user(username):
     profile_user = Student.query.filter_by(username=username).first_or_404()
     # answers = StudentAnswer.query.filter_by(user_id=profile_user.id).all()
@@ -128,16 +129,79 @@ def user(username):
     #         books.append(book)
     # books = get_user_books(profile_user)
     grades = UserGradeInfo(profile_user)
-    book_names = grades.get_books()
-    print('book_names: ', book_names)
-    user_books = []
-    for book_name in book_names:
-        book = getattr(books, book_name)
-        user_books.append(book)
+    # book_names = grades.get_book_names()
+    # print('book_names: ', book_names)
+    # user_books = []
+    # for book_name in book_names:
+    #     book = getattr(books, book_name)
+    #     user_books.append(book)
+    user_books = grades.get_books()
     form = BlankForm()
+    try:
+        observed = current_user.observed_students.order_by(Student.lastname.asc(),
+                                                            Student.firstname.asc()).all()
+    except AttributeError:
+        observed = None
     return render_template('user.html', user=profile_user, form=form,
-                            grades=grades, user_books=user_books)
+                            grades=grades, user_books=user_books,
+                            observed=observed)
 
+@app.route('/name_as_observer/<username>', methods=['POST'])
+@login_required
+def name_as_observer(username):
+    form = BlankForm()
+    if form.validate_on_submit():
+        user = Student.query.filter_by(username=username).first()
+        if user is None:
+            flash('User {} not found.'.format(username))
+            return redirect(url_for('library'))
+        if user == current_user:
+            flash('You automatically observe yourself.')
+            return redirect(url_for('user', username=username))
+        current_user.name_as_observer(user)
+        db.session.commit()
+        flash('You are now observed by {}!'.format(username))
+        return redirect(url_for('user', username=username))
+    else:
+        return redirect(url_for('library'))
+
+@app.route('/remove_as_observer/<username>', methods=['POST'])
+@login_required
+def remove_as_observer(username):
+    form = BlankForm()
+    if form.validate_on_submit():
+        user = Student.query.filter_by(username=username).first()
+        if user is None:
+            flash('User {} not found.'.format(username))
+            return redirect(url_for('library'))
+        if user == current_user:
+            flash('You cannot un-observe yourself!')
+            return redirect(url_for('user', username=username))
+        current_user.remove_as_observer(user)
+        db.session.commit()
+        flash('You are no longer observed by {}.'.format(username))
+        return redirect(url_for('user', username=username))
+    else:
+        return redirect(url_for('library'))
+
+@app.route('/unobserve/<username>', methods=['POST'])
+@login_required
+def unobserve(username):
+    form = BlankForm()
+    if form.validate_on_submit():
+        user = Student.query.filter_by(username=username).first()
+        if user is None:
+            flash('User {} not found.'.format(username))
+            return redirect(url_for('library'))
+        if user == current_user:
+            flash('You cannot un-observe yourself!')
+            return redirect(url_for('user', username=username))
+        current_user.unobserve(user)
+        db.session.commit()
+        flash('You are no longer observed by {}.'.format(username))
+        return redirect(url_for('user', username=username))
+    else:
+        return redirect(url_for('library'))
 ############################################################################
 # routes for iframe
 @app.route('/hello')
@@ -172,12 +236,12 @@ def section(section_name):
     template_path = section.template_path
     section_display_name = section.display_name
     questions = section.questions
-    print(questions)
+    # print(questions)
     if questions != []:
         question_name = random.choice(questions)
     else:
         question_name = False
-    print(question_name)
+    # print(question_name)
     return render_template(template_path + '.html',
         section_display_name=section_display_name,
         question_name=question_name)
@@ -431,38 +495,38 @@ def library():
 #     response.headers['Content-Type'] = 'image/png'
 #     return response
 
-@app.route('/tester', methods=['GET', 'POST'])
-def tester():
-    # svg_width = interpolator.svg_x_length
-    # svg_height = interpolator.svg_y_length
-    # cart_width = interpolator.cart_x_length
-    # cart_height = interpolator.cart_y_length
-    parameters = interpolator.get_parameters()
-    print('parameters: ', parameters, '; type is ', type(parameters))
-    if 'data' in request.form:
-        return_data = {}
-        points = request.form["data"]
-        # print(request.form["anchor"])
-        # try:
-        #     anchor = request.form["anchor"]
-        #     exec(f'anchor={anchor}')
-        #     print('anchor is ', anchor)
-        #     if type(anchor) != tuple:
-        #         del anchor
-        #         warning = """You have not entered a properly
-        #         formatted pair of coordinates.  Enter in "(x,y)" format."""
-        #         return_data["warning"] = warning
-        # except:
-        #     warning = """You have not entered a properly
-        #     formatted pair of coordinates.  Enter in "(x,y)" format."""
-        #     return_data["warning"] = warning
-        points = json.loads(points)
-        # print(points)
-        return_data.update(interpolator.get_dict_for_svg(points))
-        # print(return_data)
-        #return json.dumps(data)
-        return json.dumps(return_data)
-    return render_template('tester.html', parameters=parameters)
+# @app.route('/tester', methods=['GET', 'POST'])
+# def tester():
+#     # svg_width = interpolator.svg_x_length
+#     # svg_height = interpolator.svg_y_length
+#     # cart_width = interpolator.cart_x_length
+#     # cart_height = interpolator.cart_y_length
+#     parameters = interpolator.get_parameters()
+#     print('parameters: ', parameters, '; type is ', type(parameters))
+#     if 'data' in request.form:
+#         return_data = {}
+#         points = request.form["data"]
+#         # print(request.form["anchor"])
+#         # try:
+#         #     anchor = request.form["anchor"]
+#         #     exec(f'anchor={anchor}')
+#         #     print('anchor is ', anchor)
+#         #     if type(anchor) != tuple:
+#         #         del anchor
+#         #         warning = """You have not entered a properly
+#         #         formatted pair of coordinates.  Enter in "(x,y)" format."""
+#         #         return_data["warning"] = warning
+#         # except:
+#         #     warning = """You have not entered a properly
+#         #     formatted pair of coordinates.  Enter in "(x,y)" format."""
+#         #     return_data["warning"] = warning
+#         points = json.loads(points)
+#         # print(points)
+#         return_data.update(interpolator.get_dict_for_svg(points))
+#         # print(return_data)
+#         #return json.dumps(data)
+#         return json.dumps(return_data)
+#     return render_template('tester.html', parameters=parameters)
 
 @app.route('/handle_graph', methods=['GET', 'POST'])
 def handle_graph():

@@ -15,6 +15,8 @@ observers = db.Table('observers',
 class Student(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
+    firstname = db.Column(db.String(64))
+    lastname = db.Column(db.String(64))
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     about_me = db.Column(db.String(140))
@@ -24,7 +26,7 @@ class Student(UserMixin, db.Model):
     observed_students = db.relationship(
         'Student', secondary=observers,
         primaryjoin=(observers.c.observer_id == id),
-        secondaryjoin=(observed.c.followed_id == id),
+        secondaryjoin=(observers.c.observed_id == id),
         backref=db.backref('observers', lazy='dynamic'), lazy='dynamic'
     )
 
@@ -42,6 +44,26 @@ class Student(UserMixin, db.Model):
         return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
             digest, size)
 
+    def name_as_observer(self, user):
+        if not self.is_observed_by(user):
+            self.observers.append(user)
+
+    def remove_as_observer(self, user):
+        if self.is_observed_by(user):
+            self.observers.remove(user)
+
+    def unobserve(self, user):
+        if self.is_observing(user):
+            self.observed_students.remove(user)
+
+    def is_observing(self, user):
+        return self.observed_students.filter(
+            observers.c.observed_id == user.id).count() > 0
+
+    def is_observed_by(self, user):
+        return self.observers.filter(
+            observers.c.observer_id == user.id).count() > 0
+
     def get_reset_password_token(self, expires_in=600):
         return jwt.encode(
             {'reset_password': self.id, 'exp': time() + expires_in},
@@ -55,6 +77,9 @@ class Student(UserMixin, db.Model):
         except:
             return
         return Student.query.get(id)
+
+    def user_grade_info(self):
+        return UserGradeInfo(self)
 
 
 class StudentAnswer(db.Model):
@@ -185,7 +210,7 @@ class UserGradeInfo():
         self.user = user
         self.answers = StudentAnswer.query.filter_by(user_id=user.id).all()
 
-    def get_books(self):
+    def get_book_names(self):
         answers = self.answers
         books = []
         for answer in answers:
@@ -194,6 +219,13 @@ class UserGradeInfo():
             if book not in books and book is not None:
                 books.append(book)
         return books
+
+    def get_books(self):
+        user_books = []
+        for book_name in self.get_book_names():
+            book = getattr(books, book_name)
+            user_books.append(book)
+        return user_books
 
     def get_chapters(self, book):
         answers_by_book = StudentAnswer.query.filter_by(user_id=self.user.id,

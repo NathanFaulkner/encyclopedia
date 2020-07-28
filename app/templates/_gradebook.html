@@ -1,0 +1,109 @@
+<div class="gradebook">
+  <span style="font-size:18;">Grades for {{ pupil.firstname }}</span>
+  <button class="show_hide_button">Hide Grades</button>
+  <div>
+  <table>
+    {% for book in user_books %}
+    {% set whole_book_info = grades.whole_book_info(book) %}
+    <tr>
+      <td>
+        <a href="{{ url_for('book', book_name=book.name_for_path) }}">{{ book.display_name }}</a>
+      </td>
+      <td>
+        <table>
+          <tr>
+            <td>Grade</td><td>Pct</td>
+          </tr>
+          <tr>
+            <td>{{ "%.3f" % grades.get_whole_book_grade(book) }}</td><td>{{ "%.2f" % (grades.get_whole_book_grade(book)/4*100) }}%</td>
+          </tr>
+        </table>
+      </td>
+      {% for chapter in book.subdivisions['main'].subdivisions %}
+        {% set outer_loop = loop %}
+        <tr>
+          <td>
+            <a href="{{ url_for('book_chapter', book_name=book.name_for_path, chapter_number=outer_loop.index) }}">
+              {{ outer_loop.index }}: {{ chapter.display_name }}
+            </a>
+          </td>
+        </tr>
+        {% for section in chapter.subdivisions %}
+        <tr>
+          <td valign="top">
+            <a href="{{ url_for('book_section',
+                                book_name=book.name_for_path,
+                                chapter_number=outer_loop.index,
+                                section_number=loop.index) }}">
+            {{ outer_loop.index }}.{{ loop.index }}: {{ section.display_name }}
+            </a>
+          </td>
+          <td valign="top">
+          <table>
+            <tr>
+              <td>Next Due Date</td>
+              <td>Grade</td>
+              {% set answers = grades.get_answers_by_section_desc(book.name_for_path, outer_loop.index, loop.index) %}
+              {% for answer in answers %}
+              <td>
+                {#{{ answer.timestamp.month }}/{{ answer.timestamp.day }}#}
+                <div class="tooltip">
+                  {{ momentjs(answer.timestamp).format("M/DD") }}
+                  <!-- {{ momentjs(answer.timestamp).calendar() }} -->
+                  <span class="tooltiptext">{{ momentjs(answer.timestamp).format("hh:mmA") }}</span>
+                </div>
+              </td>
+              {% endfor %}
+            </tr>
+            <tr>
+              {#{% set section_grades = grades.grade_section(book.name_for_path, outer_loop.index, loop.index) %}#}
+              {% set section_grades = whole_book_info[outer_loop.index - 1][loop.index - 1] %}
+              {% if section_grades.memory_gradient %}
+                {% if section_grades.memory_gradient < 0.5 %}
+                  {% set bgcolor = 'rgba(0, 255, 0, 0.5)' %}
+                {% elif section_grades.memory_gradient < 1 %}
+                  {% set bgcolor = 'rgba(252, 186, 3, 0.5)' %}
+                {% else %}
+                  {% set bgcolor = 'rgba(255, 0, 0, 0.5)' %}
+                {% endif %}
+              {% else %}
+                {% set bgcolor = 'white' %}
+              {% endif %}
+              <td style="background-color:{{ bgcolor }}">
+                {% if section_grades.next_due_date %}
+                {#{{ section_grades.next_due_date.month }}/{{ section_grades.next_due_date.day }}#}
+                {{ momentjs(section_grades.next_due_date).grade_book() }}
+                {% endif %}
+              </td>
+              {% if section_grades.grade %}
+                {% if section_grades.grade <= 1 %}
+                  {% set bgcolor = 'rgba(0, 0, 255, 0.25)' %}
+                {% elif section_grades.grade <= 2 %}
+                  {% set bgcolor = 'rgba(0, 0, 255, 0.5)' %}
+                {% elif section_grades.grade <= 3 %}
+                  {% set bgcolor = 'rgba(0, 0, 255, 0.75)' %}
+                {% else %}
+                  {% set bgcolor = 'rgba(0, 0, 255, 1)' %}
+                {% endif %}
+              {% else %}
+                {% set bgcolor = 'gray' %}
+              {% endif %}
+              <td style="background-color:{{ bgcolor }}">{{ section_grades.grade }}</td>
+              {% for answer in answers %}
+              {% if answer.correct %}
+              <td style="text-align:center">&#x2714;</td>
+              {% else %}
+              <td style="text-align:center">&#x2716;</td>
+              {% endif %}
+              {% endfor %}
+            </tr>
+          </table>
+          </td>
+        </tr>
+        {% endfor %}
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+  </div>
+</div>
