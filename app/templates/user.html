@@ -78,7 +78,7 @@
 
 {% if (current_user == user) %}
 <div>
-  {% if current_user.observed_students %}
+  {% if observed %}
     <h2>Observed Grades</h2>
     {% for pupil in observed %}
       {% set grades = pupil.user_grade_info() %}

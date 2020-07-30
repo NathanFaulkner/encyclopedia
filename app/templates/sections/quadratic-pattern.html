@@ -153,9 +153,9 @@ Would you like to see one more without all the talk?
 
 <div class="exercise">
 
-{% if question_name %}
-<a href="{{ url_for('question', question_name='quadratic_pattern') }}">Click for Exercise</a>
-{% endif %}
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
 
 </div>
 

@@ -1,7 +1,8 @@
 {% extends "book_page.html" %}
 
+
 {% block content %}
- Hello, {{ user.username }}!
+
 
 <h2>Exercise</h2>
 {% if form %}
@@ -11,6 +12,7 @@
 <p>
   {{ question.given_latex_display }}
 </p>
+
 
 {% if whether_graph %}
 {% include "_tester2.html"%}
@@ -26,7 +28,7 @@
   <!-- <div class="row"> -->
     <div style="width: 50%; float: left; border: 1px solid red;">
       <p>
-        <form action="" method="post">
+        <form action="?form=form" method="post">
           {{ form.hidden_tag() }}
           {{ form.answer.label }}<br>
           {{ form.answer(size=32) }}<br>
@@ -75,9 +77,17 @@
 {% endif %}
 
 {% if request.method == 'POST' %}
-<div class="exercise" style="clear: left">
-  <a style="clear: left" href="{{ url_for('question', question_name=question_name, new=True) }}">Get New Problem</a>
+<div class="exercise" style="float: left; width: 100%">
+  <table>
+    <tr>
+      <td style="padding-right: 45vw"><a href="{{ url_for('question', question_name=question_name, new=True) }}">Get New Problem</a></td>
+      <!-- <td style="float: right"><a>Report Bug</a></td> -->
+    </tr>
+  </table>
+</div>
 {% endif %}
+
+
   <!-- <p>
     {% if tried == True %}
     I already tried this problem!
@@ -86,10 +96,25 @@
     {% endif %}
   </p> -->
 
-
-
-
+{% if current_user.is_authenticated %}
+<div class="padding-40">
+<div class="progress_container">
+  <div id="progress_bar" style="width: {{ grade_info.grade*25 }}%; font-family: sans-serif">
+  {{ grade_info.grade }}
+  </div>
 </div>
+</div>
+{% endif %}
+
+
+<p>
+  <form action="?form=bug_form" method="post">
+    {{ bug_form.hidden_tag() }}
+    <p>{{ bug_form.submit() }}</p>
+  </form>
+</p>
+
+
 
 
 

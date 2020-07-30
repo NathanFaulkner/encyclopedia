@@ -71,3 +71,9 @@ class ResetPasswordForm(FlaskForm):
     password2 = PasswordField('Repeat Password',
             validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Request Password Reset')
+
+class ReportBugForm(FlaskForm):
+    seed = HiddenField()
+    user_answer = HiddenField()
+    question_name = HiddenField()
+    submit = SubmitField('Report Bug')

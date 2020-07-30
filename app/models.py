@@ -81,6 +81,11 @@ class Student(UserMixin, db.Model):
     def user_grade_info(self):
         return UserGradeInfo(self)
 
+class BugReport(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_answer = db.Column(db.String(200))
+    seed = db.Column(db.Float)
+    question_name = db.Column(db.String)
 
 class StudentAnswer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -90,7 +95,7 @@ class StudentAnswer(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('student.id'))
     grade_category = db.Column(db.String(20)) #intended options are 'quiz', 'check', 'test', etc.
-    skillname = db.Column(db.String)
+    skillname = db.Column(db.String) #aka: question_name
     seed = db.Column(db.Float)
     book = db.Column(db.String)
     chapter = db.Column(db.Integer)
@@ -118,6 +123,9 @@ def get_user_books(user):
 
 class UserSectionGradeInfo():
     def __init__(self, user, book, chapter, section):
+        """book is really the name of the book;
+        section and chapter are numbers from 1 to...
+        """
         self.user = user
         self.book = book
         self.chapter = chapter
@@ -167,10 +175,10 @@ class UserSectionGradeInfo():
                 prev_answer = answers[i - 1]
                 time_since_previous = answer.timestamp - prev_answer.timestamp
                 days_since_previous = time_since_previous.days + time_since_previous.seconds/60/60/24
-                print('chapter:', self.chapter,
-                        'section:', self.section,
-                        'try number:', i+1,
-                        'days since prev:', days_since_previous)
+                # print('chapter:', self.chapter,
+                #         'section:', self.section,
+                #         'try number:', i+1,
+                #         'days since prev:', days_since_previous)
                 new_session = days_since_previous > 0.5
                 if new_session:
                     if grade == self.max_grade:
@@ -187,7 +195,7 @@ class UserSectionGradeInfo():
                     grade = min(self.max_grade, grade + 1)
                 else:
                     grade = max(0, grade - 1)
-                print('chapter:', self.chapter, 'section:', self.section, 'try number:', i+1, 'grade:', grade)
+                # print('chapter:', self.chapter, 'section:', self.section, 'try number:', i+1, 'grade:', grade)
                 i += 1
         time_since_last = datetime.utcnow() - answers[-1].timestamp
         # print(datetime.utcnow())
@@ -195,7 +203,7 @@ class UserSectionGradeInfo():
         days_since_last = time_since_last.days + time_since_last.seconds/60/60/24
         # print('chapter:', self.chapter, 'section:', self.section, 'days since last:', days_since_last)
         expected_recall_duration = int(self.base**(session_count))
-        print('chapter:', self.chapter, 'section:', self.section, 'session count:', session_count)
+        # print('chapter:', self.chapter, 'section:', self.section, 'session count:', session_count)
         self.session_count = session_count
         self.memory_gradient = days_since_last/expected_recall_duration
         self.next_due_date = answers[-1].timestamp + timedelta(days=expected_recall_duration)

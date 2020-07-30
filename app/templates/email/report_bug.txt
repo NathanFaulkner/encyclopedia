@@ -1,0 +1,3 @@
+A bug was reported in the following context:
+
+{{ url_for('question', question_name=question_name, bug_id=bug_id, _external=True) }}

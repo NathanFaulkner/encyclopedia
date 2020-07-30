@@ -62,7 +62,7 @@
 
   <p>
     <div style="width: 50%; float: left; border: 1px solid red;">
-        <form action="" method="post">
+        <form action="?form=form" method="post">
           {{ form.hidden_tag() }}
           <p>{{ form.submit() }}</p>
         </form>
@@ -483,7 +483,8 @@ function graph_points(cart_pts) {
 
     // var anchor_field = document.getElementById('anchor');
 
-    req.open('POST', '{{ url_for('question', question_name=question_name) }}', true);
+    // req.open('POST', '{{ url_for('question', question_name=question_name) }}', true);
+    req.open('POST', '', true);
     req.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
     req.send("data=" + JSON.stringify(points));
   }
@@ -542,7 +543,7 @@ function graph_points(cart_pts) {
   // svg.getElementsByTagName('circle')
 
   // console.log('form.validate_on_submit()', {{ form.validate_on_submit() }})
-  {% if form.validate_on_submit() and not (points == []) %}
+  {% if (form.validate_on_submit() and not (points == [])) %}
     // console.log('user_svg_data', user_svg_data);
     // list_of_graphs = [user_svg_data];
     // if (user_svg_data !== null) {
@@ -554,6 +555,12 @@ function graph_points(cart_pts) {
     draw_graph(svg, graph_info, "blue");
     graph_info = {"shape": "polyline", "data": {"points" : "{{ correct_answer_poly_points }}"}  }
     draw_graph(svg, graph_info, "green");
+    graph_points(points);
+  {% elif points %}
+    points = {{ points }};
+    // do_alt_ajax();
+    graph_info = {"shape": "polyline", "data": {"points" : "{{ user_poly_points }}"}  }
+    draw_graph(svg, graph_info, "blue");
     graph_points(points);
   {% endif %}
 </script>

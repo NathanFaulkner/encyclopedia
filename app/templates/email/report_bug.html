@@ -1,0 +1,9 @@
+<p>
+  A bug was reported in the following context:
+
+  <a href="{{ url_for('question', question_name=question_name, bug_id=bug_id, _external=True) }}">
+    click here
+  </a>
+</p>
+<p>Alternatively, you can paste the following link in your browser's address bar:</p>
+<p>{{ url_for('question', question_name=question_name, bug_id=bug_id, _external=True) }}</p>

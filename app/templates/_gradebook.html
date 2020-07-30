@@ -6,7 +6,7 @@
     {% for book in user_books %}
     {% set whole_book_info = grades.whole_book_info(book) %}
     <tr>
-      <td>
+      <td class="gradebook-section">
         <a href="{{ url_for('book', book_name=book.name_for_path) }}">{{ book.display_name }}</a>
       </td>
       <td>
@@ -22,15 +22,15 @@
       {% for chapter in book.subdivisions['main'].subdivisions %}
         {% set outer_loop = loop %}
         <tr>
-          <td>
-            <a href="{{ url_for('book_chapter', book_name=book.name_for_path, chapter_number=outer_loop.index) }}">
+          <td class="gradebook-section">
+            <a style="min-width:250px" href="{{ url_for('book_chapter', book_name=book.name_for_path, chapter_number=outer_loop.index) }}">
               {{ outer_loop.index }}: {{ chapter.display_name }}
             </a>
           </td>
         </tr>
         {% for section in chapter.subdivisions %}
         <tr>
-          <td valign="top">
+          <td class="gradebook-section" valign="top">
             <a href="{{ url_for('book_section',
                                 book_name=book.name_for_path,
                                 chapter_number=outer_loop.index,
@@ -41,7 +41,7 @@
           <td valign="top">
           <table>
             <tr>
-              <td>Next Due Date</td>
+              <td style="min-width:150px">Next Due Date</td>
               <td>Grade</td>
               {% set answers = grades.get_answers_by_section_desc(book.name_for_path, outer_loop.index, loop.index) %}
               {% for answer in answers %}
@@ -91,9 +91,31 @@
               <td style="background-color:{{ bgcolor }}">{{ section_grades.grade }}</td>
               {% for answer in answers %}
               {% if answer.correct %}
-              <td style="text-align:center">&#x2714;</td>
+              <td>
+                <a style="text-align:center; color:green;"
+                  href="{{ url_for('book_section',
+                                      book_name=book.name_for_path,
+                                      chapter_number=outer_loop.index,
+                                      section_number=answer.section,
+                                      skip_to_exercises='True',
+                                      question_name=answer.skillname,
+                                      ans_id=answer.id) }}">
+                  &#x2714;
+                </a>
+              </td>
               {% else %}
-              <td style="text-align:center">&#x2716;</td>
+              <td>
+                <a style="text-align:center; color:red;"
+                  href="{{ url_for('book_section',
+                                      book_name=book.name_for_path,
+                                      chapter_number=outer_loop.index,
+                                      section_number=answer.section,
+                                      skip_to_exercises='True',
+                                      question_name=answer.skillname,
+                                      ans_id=answer.id) }}">
+                  &#x2716;
+                </a>
+              </td>
               {% endif %}
               {% endfor %}
             </tr>

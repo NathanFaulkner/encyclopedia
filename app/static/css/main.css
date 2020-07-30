@@ -16,6 +16,7 @@
   --menu-li-li-li-a-bgcolor: #f46f3f;
   --theme-color-5: #1de221;
   --section-header-color: #e24f1d;
+  --menu-blue-hover-color: #0082b2;
 }
   /* --logo-background-color: #9933cc; */
 
@@ -43,9 +44,16 @@ a {
   display: table;
 }
 
+.padding-40 {
+  padding: 40px;
+  margin: auto;
+  clear: left;
+}
+
 [class*="col-"] {
   float: left;
   padding: 15px;
+  /* border: 1px solid blue; */
 }
 
 .col-100 {width: 100%;}
@@ -121,9 +129,10 @@ a {
 .gradebook {
   /* width: 200%; */
   overflow: scroll;
+  /* min-width:100%; */
 }
 
-.gradebook a {
+.gradebook-section a {
   display: block;
   text-align: left;
   text-decoration: none;
@@ -134,7 +143,7 @@ a {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-.gradebook a:hover {
+.gradebook-section a:hover {
   background-color: #0082b2;
 }
 
@@ -149,8 +158,11 @@ a {
 }
 
 
+
+
 .menu {
   background-color: gray;
+  overflow: scroll;
 }
 
 .menu ul {
@@ -382,4 +394,19 @@ a {
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+.progress_container {
+  width: 20vw;
+  clear: left;
+  text-align: center;
+  margin: auto;
+  padding: 0;
+  background-color: gray;
+  border: 1px solid gray;
+}
+
+#progress_bar {
+  background-color: var(--logo-background-color);
+  color: white;
 }

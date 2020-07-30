@@ -21,12 +21,16 @@ from app.forms import (AnswerForm,
                         RegistrationForm,
                         ResetPasswordRequestForm,
                         ResetPasswordForm,
-                        BlankForm)
+                        BlankForm,
+                        ReportBugForm)
 from app.models import (Student,
                         StudentAnswer,
+                        BugReport,
                         get_user_books,
-                        UserGradeInfo)
-from app.email import send_password_reset_email
+                        UserGradeInfo,
+                        UserSectionGradeInfo)
+from app.email import (send_password_reset_email,
+                        send_report_bug_email)
 
 # from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 # from matplotlib.figure import Figure
@@ -57,20 +61,35 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('library'))
     form = LoginForm()
+    if request.method == 'GET':
+        session['prev_page'] = request.referrer
+    # print('referrer', request.referrer)
+    # print('request.args at GET login', request.args)
     if form.validate_on_submit():
         user = Student.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
-        return redirect(url_for('library'))
+        # print('referrer', request.referrer)
+        # next_page = request.args.get('next')
+        next_page = session['prev_page']
+        # print('next_page', next_page)
+        if not next_page: # or url_parse(next_page).netloc != '':
+            next_page = url_for('library')
+        return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('entrance'))
+    print('logout referrer', request.referrer)
+    next_page = request.referrer
+    if not next_page: # or url_parse(next_page).netloc != '':
+        next_page = url_for('entrance')
+    return redirect(next_page)
+    # return redirect(url_for('entrance'))
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -115,6 +134,15 @@ def reset_password_request():
     return render_template('reset_password_request.html',
                             title='Reset Password', form=form)
 
+@app.route('/report_bug', methods=['POST'])
+def report_bug():
+    form = BlankForm()
+    seed = session.get('seed')
+    user_answer = session.get('user_answer')
+    question_name = session.get('question_name')
+    if form.validate_on_submit():
+        return send_report_bug_email(question_name, seed, user_answer)
+    return redirect(url_for('library'))
 
 @app.route('/user/<username>')
 @login_required
@@ -248,7 +276,14 @@ def section(section_name):
 
 @app.route('/question/<question_name>', methods=['GET', 'POST'])
 def question(question_name):
+    # print('session at first', session)
+    # if request.args.get('bug_id'):
+    #     answer_id = request.args.get('bug_id')
+    #     bug_answer = StudentAnswer.query.filter_by(id=answer_id).first()
+        # print('bug_answer.seed', bug_answer.seed)
+    bug_form = ReportBugForm()
     book_info = {}
+    session['question_name'] = question_name
     if session.get('section'):
         book_name = session.get('book')
         book = getattr(books, book_name)
@@ -261,7 +296,7 @@ def question(question_name):
                     'chapter': chapter_number,
                     'section': section_number}
         # print('section: ', section)
-        print('book info: ', book_info)
+        # print('book info: ', book_info)
     user_poly_points = ''
     correct_answer_poly_points = ''
     # if request.method == 'GET':
@@ -282,6 +317,7 @@ def question(question_name):
         if 'data' in request.form and not form.validate_on_submit():
             return_data = {}
             points = request.form["data"]
+            # session['user_answer'] = points # for bug reporting
             # print('points straight from page: ', type(points))
             points = json.loads(points)
             # print(points)
@@ -298,12 +334,42 @@ def question(question_name):
     else:
         validator = question_module.Question_Class.validator
         form = AnswerForm(validator)
+        # print('form.answer.data just after (re)instantiation', form.answer.data)
         whether_graph = False
     if request.method == 'GET':
-        session['seed'] = random.random()
+        try:
+            bug_id = request.args.get('bug_id')
+            bug_answer = BugReport.query.filter_by(id=bug_id).first()
+            session['tried'] = True
+            session['seed'] = bug_answer.seed
+            if whether_graph:
+                try:
+                    session['user_points'] = json.loads(bug_answer.user_answer)
+                except (json.decoder.JSONDecodeError, TypeError) as e:
+                    session['user_points'] = []
+            else:
+                form.answer.data = bug_answer.user_answer
+        except AttributeError:
+            session['tried'] = False
+            session['seed'] = random.random()
+            session['user_points'] = []
+        try:
+            ans_id = request.args.get('ans_id')
+            answer = StudentAnswer.query.filter_by(id=ans_id).first()
+            session['tried'] = True
+            session['seed'] = answer.seed
+            if whether_graph:
+                try:
+                    session['user_points'] = json.loads(answer.user_answer)
+                except (json.decoder.JSONDecodeError, TypeError) as e:
+                    session['user_points'] = []
+            else:
+                form.answer.data = answer.user_answer
+        except AttributeError:
+            session['tried'] = False
+            session['seed'] = random.random()
+            session['user_points'] = []
         form.seed.data = session['seed']
-        session['tried'] = False
-        session['user_points'] = []
     question = question_module.Question_Class(seed=session['seed'])
     # if request.method == 'GET':
     #     answer_event = StudentAnswer(student=student, skillname=question_name,
@@ -314,7 +380,7 @@ def question(question_name):
     #     answer_event = StudentAnswer.query.filter_by(seed=session['seed'], student=student).first()
     if whether_graph:
         points = session.get('user_points')
-        print('These are the points in session: ', points)
+        # print('These are the points in session: ', points)
         # print('This is what I think about the form: ', form)
         graph = interpolator.Graph(points)
         if points != []:
@@ -322,21 +388,27 @@ def question(question_name):
                 useranswer = graph.as_lambda
             graph.gen_dict_for_svg()
             user_poly_points = graph.poly_points
+            user_answer_for_db = json.dumps(points)
         else:
             useranswer = None
+            user_answer_for_db = json.dumps([])
         x_min = parameters['cart_x_min']
         x_max = parameters['cart_x_max']
         correct_answer_poly_points = question.get_svg_data([x_min, x_max])
+        session['user_answer'] = user_answer_for_db
+        print("session['useranswer']", session['user_answer'])
     else:
         useranswer = form.answer.data
-        correct_answer_svg_data = ''
-    if form.validate_on_submit() and not (whether_graph and points == []):
-        # print('useranswer: ', useranswer)
+        session['user_answer'] = form.answer.data or session['user_answer'] #for bug report
+        user_answer_for_db = useranswer
+        correct_answer_poly_points = ''
+    print("request.args.get('form')", request.args.get('form'))
+    if form.validate_on_submit() and request.args.get('form') == 'form' and not (whether_graph and points == []):
         if whether_graph and graph.vert:
             correct = False
         else:
             correct = question.checkanswer(useranswer)
-        if current_user.is_authenticated:
+        if current_user.is_authenticated and not session['tried']:
             user = current_user
             answer_event = StudentAnswer(student=user,
                                         skillname=question_name,
@@ -344,7 +416,8 @@ def question(question_name):
                                         seed=session['seed'],
                                         book=book_info.get('book'),
                                         chapter=book_info.get('chapter'),
-                                        section=book_info.get('section'))
+                                        section=book_info.get('section'),
+                                        user_answer=user_answer_for_db)
             db.session.add(answer_event)
         if correct:
             message = 'You got it right!!'
@@ -359,8 +432,9 @@ def question(question_name):
             if whether_graph:
                 message = 'The correct answer is in <span style="color:green">green</span>.'
             if current_user.is_authenticated:
-                answer_event.correct = False
-                db.session.commit()
+                if not session['tried']:
+                    answer_event.correct = False
+                    db.session.commit()
         session['tried'] = True
     else:
         if request.method == 'POST':
@@ -371,6 +445,25 @@ def question(question_name):
             else:
                 message = """You had a syntax error,
 but you should try a different problem if you want credit."""
+            if bug_form.validate_on_submit() and request.args.get('form') == 'bug_form':
+                # print('bug_form_validated')
+                flash('A bug report email was just sent to your friendly Ency-O Admin!')
+                # print('form.answer.data', form.answer.data)
+                # try:
+                #     bug_answer = form.answer.data
+                # except:
+                #     bug_answer = json.dumps(session.get('user_points'))
+                bug_report = BugReport(user_answer=session['user_answer'],
+                                        seed=session['seed'],
+                                        question_name=question_name)
+                db.session.add(bug_report)
+                db.session.commit()
+                bug_report = BugReport.query.filter_by(user_answer=session['user_answer'],
+                                        seed=session['seed'],
+                                        question_name=question_name).all()[-1]
+                report_id = bug_report.id
+                # print('report_id', report_id)
+                send_report_bug_email(report_id)
         else:
             message = "It's a brand new problem!!"
     # print('session user_points just before rendering', session.get('user_points'))
@@ -380,13 +473,22 @@ but you should try a different problem if you want credit."""
         # print('new_question_name: ', new_question_name)
     else:
         new_question_name = question_name
+    if current_user.is_authenticated: #This was for adding a progress bar.
+        grade_info = UserSectionGradeInfo(user,
+                                        book_info['book'],
+                                        book_info['chapter'],
+                                        book_info['section'])
+        # print('grade is:', grade_info.grade)
+    else:
+        grade_info = None
     return render_template('question_page.html', user=user, title='Question',
         site_name=app.config['SITE_NAME'], form=form, question=question,
         tried=session['tried'], message=message, whether_graph=whether_graph,
         parameters=parameters, question_name=new_question_name,
         points=session.get('user_points'),
         correct_answer_poly_points=correct_answer_poly_points,
-        user_poly_points=user_poly_points)
+        user_poly_points=user_poly_points, grade_info=grade_info,
+        bug_form=bug_form)
 #
 ############################################################################
 
@@ -436,7 +538,19 @@ def book_section(book_name, chapter_number, section_number):
     main = book.subdivisions['main']
     chapter = main.subdivisions[int(chapter_number) - 1]
     section = chapter.subdivisions[int(section_number) - 1]
-    path_for_iframe = url_for('section', section_name=section.view_name)
+    skip_to_exercises = request.args.get('skip_to_exercises')
+    # print('section query...', skip_to_exercises, type(skip_to_exercises))
+    if request.args.get('skip_to_exercises') == 'True':
+        # print('section query...', skip_to_exercises, type(skip_to_exercises))
+        if request.args.get('question_name'):
+            question_name = request.args.get('question_name')
+            ans_id = request.args.get('ans_id')
+            path_for_iframe = url_for('question', question_name=question_name, ans_id=ans_id)
+        else:
+            question_name = random.choice(section.questions)
+            path_for_iframe = url_for('question', question_name=question_name)
+    else:
+        path_for_iframe = url_for('section', section_name=section.view_name)
     toc = main.subdivisions
     # print(session['book'])
     return render_template('chapter.html', user=user, title=section.display_name,
@@ -468,6 +582,157 @@ def library():
     return render_template('library.html', user=user, title='Library',
         site_name=app.config['SITE_NAME'], src=url_for(path_for_iframe),
         library=library)
+
+
+# @app.route('/Books/<book_name>/<chapter_number>/<section_number>/Exercises', methods=['GET', 'POST'])
+# def new_question(book_name, chapter_number, section_number):
+#     book = getattr(books, book_name)
+#     main = book.subdivisions['main']
+#     chapter = main.subdivisions[int(chapter_number) - 1]
+#     section = chapter.subdivisions[int(section_number) - 1]
+#     book_info = {}
+#     if session.get('section'):
+#         book_info = {'book': book.name_for_path,
+#                     'chapter': chapter_number,
+#                     'section': section_number}
+#         # print('section: ', section)
+#         # print('book info: ', book_info)
+#     question_name = random.choice(section.questions)
+#     user_poly_points = ''
+#     correct_answer_poly_points = ''
+#     # if request.method == 'GET':
+#     parameters = None
+#     question_module = getattr(questions, question_name)
+#     if current_user.is_authenticated:
+#         user = current_user
+#     else:
+#         user = {'username': 'Anonymous'}
+#     # validator = question_module.Question_Class.validator
+#     if question_module.prob_type == 'graph':
+#         print("Working with a graph here")
+#         form = BlankForm()
+#         whether_graph = True
+#         parameters = interpolator.get_parameters()
+#         # print('parameters: ', parameters, '; type is ', type(parameters))
+#         print('This is how I view form.validate_on_submit: ', form.validate_on_submit())
+#         if 'data' in request.form and not form.validate_on_submit():
+#             return_data = {}
+#             points = request.form["data"]
+#             # print('points straight from page: ', type(points))
+#             points = json.loads(points)
+#             # print(points)
+#             return_data = interpolator.get_dict_for_svg(points)
+#             # graph = interpolator.Graph(points)
+#             # graph.gen_dict_for_svg()
+#             # return_data = graph.svg_data
+#             # print(return_data)
+#             #return json.dumps(data)
+#             # graph = interpolator.Graph(points)
+#             session['user_points'] = points
+#             # print('session says the user answer is:', session['user_answer'])
+#             return json.dumps(return_data)
+#     else:
+#         validator = question_module.Question_Class.validator
+#         form = AnswerForm(validator)
+#         whether_graph = False
+#     if request.method == 'GET':
+#         session['seed'] = random.random()
+#         form.seed.data = session['seed']
+#         session['tried'] = False
+#         session['user_points'] = []
+#     question = question_module.Question_Class(seed=session['seed'])
+#     # if request.method == 'GET':
+#     #     answer_event = StudentAnswer(student=student, skillname=question_name,
+#     #                     grade_category='check', seed=session['seed'])
+#     #     db.session.add(answer_event)
+#     #     # db.session.commit()
+#     # else:
+#     #     answer_event = StudentAnswer.query.filter_by(seed=session['seed'], student=student).first()
+#     if whether_graph:
+#         points = session.get('user_points')
+#         print('These are the points in session: ', points)
+#         # print('This is what I think about the form: ', form)
+#         graph = interpolator.Graph(points)
+#         if points != []:
+#             if not graph.vert:
+#                 useranswer = graph.as_lambda
+#             graph.gen_dict_for_svg()
+#             user_poly_points = graph.poly_points
+#         else:
+#             useranswer = None
+#         x_min = parameters['cart_x_min']
+#         x_max = parameters['cart_x_max']
+#         correct_answer_poly_points = question.get_svg_data([x_min, x_max])
+#     else:
+#         useranswer = form.answer.data
+#         correct_answer_svg_data = ''
+#     if form.validate_on_submit() and not (whether_graph and points == []):
+#         # print('useranswer: ', useranswer)
+#         if whether_graph and graph.vert:
+#             correct = False
+#         else:
+#             correct = question.checkanswer(useranswer)
+#         if current_user.is_authenticated:
+#             user = current_user
+#             answer_event = StudentAnswer(student=user,
+#                                         skillname=question_name,
+#                                         grade_category='check',
+#                                         seed=session['seed'],
+#                                         book=book_info.get('book'),
+#                                         chapter=book_info.get('chapter'),
+#                                         section=book_info.get('section'))
+#             db.session.add(answer_event)
+#         if correct:
+#             message = 'You got it right!!'
+#             if session['tried'] == True:
+#                 message += " But you'll have to try a new problem to earn credit."
+#             else:
+#                 if current_user.is_authenticated:
+#                     answer_event.correct = True
+#                     db.session.commit()
+#         else:
+#             message = "If you want credit, you'll have to try a new problem."
+#             if whether_graph:
+#                 message = 'The correct answer is in <span style="color:green">green</span>.'
+#             if current_user.is_authenticated:
+#                 answer_event.correct = False
+#                 db.session.commit()
+#         session['tried'] = True
+#     else:
+#         if request.method == 'POST':
+#             if session['tried'] == False:
+#                 message = 'You can try again, since you just had a syntax error.'
+#                 if (whether_graph and points == []):
+#                     message = "You left it blank!  You may try again."
+#             else:
+#                 message = """You had a syntax error,
+# but you should try a different problem if you want credit."""
+#         else:
+#             message = "It's a brand new problem!!"
+#     # print('session user_points just before rendering', session.get('user_points'))
+#     # print('current book: ', session.get('book'))
+#     if session.get('section'):
+#         new_question_name = random.choice(section.questions)
+#         # print('new_question_name: ', new_question_name)
+#     else:
+#         new_question_name = question_name
+#     if current_user.is_authenticated:
+#         grade_info = UserSectionGradeInfo(user,
+#                                         book.name_for_path,
+#                                         int(chapter_number),
+#                                         int(section_number))
+#         # print('grade is:', grade_info.grade)
+#     else:
+#         grade_info = None
+#     return render_template('question_page.html', user=user, title='Question',
+#         site_name=app.config['SITE_NAME'], form=form, question=question,
+#         tried=session['tried'], message=message, whether_graph=whether_graph,
+#         parameters=parameters, question_name=new_question_name,
+#         points=session.get('user_points'),
+#         correct_answer_poly_points=correct_answer_poly_points,
+#         user_poly_points=user_poly_points, grade_info=grade_info,
+#         book_name=book_name, section_number=section_number,
+#         chapter_number=chapter_number)
 
 
 

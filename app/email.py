@@ -3,6 +3,8 @@ from flask_mail import Message
 from app import app, mail
 from threading import Thread
 
+from app.models import BugReport
+
 def send_async_email(app, msg):
     with app.app_context():
         mail.send(msg)
@@ -22,3 +24,16 @@ def send_password_reset_email(user):
                                     user=user, token=token),
                 html_body=render_template('email/reset_password.html',
                                     user=user, token=token))
+
+def send_report_bug_email(report_id):
+    bug_report = BugReport.query.filter_by(id=report_id).first()
+    question_name = bug_report.question_name
+    send_email('[Encyclopedia Omega] Bug Reported by User',
+                sender=app.config['ADMINS'][0],
+                recipients=app.config['ADMINS'],
+                text_body=render_template('email/report_bug.txt',
+                                        question_name=question_name,
+                                        bug_id=report_id),
+                html_body=render_template('email/report_bug.html',
+                                        question_name=question_name,
+                                        bug_id=report_id))
