@@ -29,6 +29,10 @@ class Student(UserMixin, db.Model):
         secondaryjoin=(observers.c.observed_id == id),
         backref=db.backref('observers', lazy='dynamic'), lazy='dynamic'
     )
+    # Could add "super_user"
+    # Could add "classcode" ... make view/function to generate unique class codes
+    # on request, then view to add observer priviliges for each student
+    # who adds the class code
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -131,6 +135,7 @@ class UserSectionGradeInfo():
         self.chapter = chapter
         self.section = section
         self.set_initial_due_date()
+        self.grade = 0
         self.set_grade()
 
 

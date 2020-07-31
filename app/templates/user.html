@@ -40,7 +40,7 @@
 </table> -->
 
 <div class="user">
-  <span style="font-size:32"><b>{{ user.username }}</b></span>
+  <span style="font-size:32"><b>{{ user.firstname or user.username }}</b></span>
   {% if current_user != user %}
     {% if not current_user.is_observed_by(user)%}
     <span style="float:right">

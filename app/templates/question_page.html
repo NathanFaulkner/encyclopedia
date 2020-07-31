@@ -1,4 +1,4 @@
-{% extends "book_page.html" %}
+{% extends "exercise_page.html" %}
 
 
 {% block content %}
@@ -35,7 +35,9 @@
           {% for error in form.answer.errors %}
           <span style="color: red;">[{{ error }}]</span>
           {% endfor %}
-          <p>{{ form.submit() }}</p>
+          <table>
+            <tr><td>{{ form.submit() }}</td><td><button>Preview</button></td></tr>
+          </table>
         </form>
       </p>
     </div>
@@ -57,6 +59,14 @@
 {% endif %}
 
 {% if request.method == 'POST' and form.validate_on_submit() and (not whether_graph) %}
+<div style="padding:5px; border: 1px solid cyan; margin-left:50%;">
+  <p>
+    {{ message|safe }}
+  </p>
+</div>
+
+
+
 <div style="width: 100%; float: left;  border: 1px solid red; clear: left">
 <table style="border: 1px solid cyan; width: 100%;">
   <tr>
@@ -70,11 +80,126 @@
 </table>
 </div>
 
-<div style="padding:5px; border: 1px cyan;">
-  {{ message|safe }}
-</div>
+
 {% else %}
 {% endif %}
+
+<!-- Trigger/Open The Modal -->
+<div style="float:left; width: 100%">
+  <a id="myBtn">Click for help with syntax</a>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Syntax Help</h3>
+    <p>
+      This answer field on this page has a
+      <a target="_blank" href="https://en.wikipedia.org/wiki/Computer_algebra_system">
+        "CAS" (Computer Algebra System)</a>
+      behind it called
+      <a target="_blank" href="https://www.sympy.org/en/index.html">SymPy</a>,
+      which is a package available in the
+      programming language Python.  That means that it can do calculations
+      for you---but also so much more!  Really, what its being a "CAS" means is
+      that it understands a lot about functions and about variables.
+    </p>
+
+    <p>
+      For starters, you can enter variables, like '\(x\)'.  (All you have
+      to do is type 'x'---without the quotes!---of course.)  But, be warned, I
+      have chosen to leave it case-sensitive, which means that if you write a
+      capital '\(X\)' instead of a lower case, you will get the answer wrong!
+      Sorry, but that was my choice, and I hope you don't mind too much.
+    </p>
+
+    <p>
+      As for your basic arithmetic, the answer field knows what '+' and '-'
+      mean.  For times, though, since 'x' will always be understood as a
+      variable, you might want to use '*'.  For instance, if you type
+      '5*6', Sympy will calculate this for you.  (You don't need to simplify
+      arithmetic.  Isn't that nice?)  However, if you wanted to type something
+      like "3 times x", then you would just type '3x'.  After all, that's
+      what '3x' means, no?
+    </p>
+
+    <p>
+      Here are some further details as well as a little recap:
+      <table class="syntax-table">
+        <tr>
+          <th>Entering this...</th><th>...gets interpreted as this!</th>
+        </tr>
+        <tr>
+          <td>2+2</td><td>4</td>
+        </tr>
+        <tr>
+          <td>x+2</td><td>\(x+2\)</td>
+        </tr>
+        <tr>
+          <td>2*2</td><td>4</td>
+        </tr>
+        <tr>
+          <td>2x</td><td>\(2x\)</td>
+        </tr>
+        <tr>
+          <td>2*x</td><td>\(2x\)</td>
+        </tr>
+        <tr>
+          <td>1/2</td><td>\(\frac{1}{2}\)</td>
+        </tr>
+        <tr>
+          <td>1/2x</td><td>\(\frac{x}{2}\)</td>
+        </tr>
+        <tr>
+          <td>8/2</td><td>\(4\)</td>
+        </tr>
+        <tr>
+          <td>2^3</td><td>\(2^3 = 8\)</td>
+        </tr>
+        <tr>
+          <td>x^2</td><td>\(x^2\)</td>
+        </tr>
+        <tr>
+          <td>3*4x^2y</td><td>\(12x^2y\)</td>
+        </tr>
+        <tr>
+          <td>3*4yx^2</td><td>\(12x^2y\)</td>
+        </tr>
+        <tr>
+          <td>(x-1)(x+3)</td><td>\((x-1)(x+3)\)</td>
+        </tr>
+        <tr>
+          <td>(x-1)(x-1)</td><td>\((x-1)^2\)</td>
+        </tr>
+        <tr>
+          <td>hello</td><td>\(ehl^2o\)</td>
+        </tr>
+        <tr>
+          <td>sqrt(2)</td><td>\(\sqrt{2}\)</td>
+        </tr>
+        <tr>
+          <td>sqrt(x+1)</td><td>\(\sqrt{x+1}\)</td>
+        </tr>
+        <tr>
+          <td>pi</td><td>\(\pi\)</td>
+        </tr>
+        <tr>
+          <td>sin(pi)</td><td>\(-1\)</td>
+        </tr>
+        <tr>
+          <td>sin(pi x)</td><td>\(\sin(\pi x)\)</td>
+        </tr>
+        <tr>
+          <td>And so much more!</td><td><-- Well, entering that will result in an error.  Try it!</td>
+        </tr>
+      </table>
+    </p>
+  </div>
+
+</div>
 
 {% if request.method == 'POST' %}
 <div class="exercise" style="float: left; width: 100%">
@@ -98,6 +223,7 @@
 
 {% if current_user.is_authenticated %}
 <div class="padding-40">
+    Your score:
 <div class="progress_container">
   <div id="progress_bar" style="width: {{ grade_info.grade*25 }}%; font-family: sans-serif">
   {{ grade_info.grade }}
@@ -126,4 +252,32 @@ submitter.addEventListener('click', function(self) {
   submit_feedback.innerHTML = "Hello";
 }, false);
 </script> -->
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
 {% endblock %}

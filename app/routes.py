@@ -97,9 +97,16 @@ def register():
         return redirect(url_for('library'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = Student(username=form.username.data, email=form.email.data)
+        user = Student(username=form.username.data,
+                        email=form.email.data,
+                        firstname=form.firstname.data,
+                        lastname=form.lastname.data)
         user.set_password(form.password.data)
         db.session.add(user)
+        db.session.commit()
+        super_user = Student.query.filter_by(username='Nathan').first()
+        user = Student.query.filter_by(username=form.username.data, email=form.email.data).first()
+        user.name_as_observer(super_user)
         db.session.commit()
         flash('You are now a registered user.')
         return redirect(url_for('login'))
