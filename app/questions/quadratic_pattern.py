@@ -65,6 +65,7 @@ class QuadraticPattern(Question):
         self.given_latex = latex_print(self.given)
         self.given_latex_display = latex_print(self.given, display=True)
         self.answer_latex = latex_print(self.answer)
+        self.format_answer = self.answer_latex
         self.answer_latex_display = latex_print(self.answer, display=True)
 
     name = 'Quadratic Pattern'
@@ -105,7 +106,7 @@ class QuadraticPattern(Question):
         user_answer = parse_expr(user_answer, transformations=transformations)
         return self.answer == user_answer
 
-    def useranswer_latex(self, user_answer, display=False):
+    def format_useranswer(self, user_answer, display=False):
         user_answer = user_answer.replace('^', '**')
         user_answer = parse_expr(user_answer, transformations=transformations)
         return latex_print(user_answer, display)

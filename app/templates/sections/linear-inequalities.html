@@ -1,0 +1,392 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section, we solve basic inequalities.  You will see in the title
+  of this section that these can be classified as "linear" inequalities.
+  What does that mean?  It isn't terribly important to discuss here, but
+  we will in a later section.
+</p>
+
+<p>
+  So, how does one go about solving these?  You may already know, and you
+  may be a in a rush to just jump into the exercises.  But let me warn you---naively
+  approaching inequalities will quickly (in subsequent sections) lead you to
+  a misconception and to a struggle to master these topics.  It can be hard
+  to unlearn mistaken ideas, sometimes!  The key here (and to all of math)
+  is <em>to think about the meaning of each statement.</em>
+</p>
+
+<p>
+  So, consider with me the "meaning of it all"!
+<div class="example">
+  <h2></h2>
+  Imagine now you are on problem #1, section #2 of your math textbook
+  and it says this:
+  <blockquote>
+    Solve for \(x\):
+    \[
+      3x - 7 \lt 8
+    \]
+  </blockquote>
+
+  <ol type="a">
+    <li> What does this mean?
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          As we learned in
+          <a href="{{ url_for('section', section_name='solveforx') }}">
+            the section on linear inequalities
+          </a>
+          there is a "secret narrative" behind such deceptively brief prompts as
+          "Solve."  The narrative ought to be expressed thusly:
+
+          <blockquote>
+            Suppose that \(x\) is a real number (so, could be plotted
+            on the real line) with the property that if you subtract
+            7 from 3 times that number it comes out to be less than 8.
+            This is properly regarded as an indirect description of
+            a <em>set</em> of numbers.  Your job when told to "solve"
+            is to find a clear, direct description of this set.
+          </blockquote>
+
+          Put another way, we are looking for the set of all real numbers
+          that makes the inequality true---or, as mathematicians would put it,
+          that <em>satisfy</em> the inequality.  (By the way, you might
+          wonder whether there is a word that encompasses both equations
+          and inequalities; an appropriate word is "relation.")  The set
+          of solutions is, of course, called the "solution set".
+        </div>
+      </div>
+    </li>
+    <li>
+      Does 4 satisfy the inequality?
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Yes, it does!  After all, if \(x = 4\), then
+          \[
+            \textrm{LHS} = 3x - 7 = 3 \cdot 4 - 7 = 12 - 7 = 5 \lt 8 = \textrm{RHS},
+          \]
+          where, again, I am using "LHS" to represent the left-hand side
+          and "RHS" to represent the right-hand side.
+        </div>
+      </div>
+    </li>
+    <li>
+      Does 5 satisfy the inequality?
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          No, it doesn't.  After all, if \(x = 5\), then
+          \[
+            \textrm{LHS} = 3x - 7 = 3 \cdot 5 - 7 = 15 - 7 = 8 \not\lt 8 = \textrm{RHS}.
+          \]
+          So, as you can see, there are some real numbers that are part of the
+          solution set and some that are not!
+        </div>
+      </div>
+    </li>
+    <li>
+      Go ahead and solve for \(x\).  That is, find a clear, direct description
+      of the solution set.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \begin{align*}
+          & 3x-7 \lt 8 & \textrm{Given}\\
+          \Rightarrow \quad & 3x \lt 15 & \textrm{I added 7 to both sides.}\\
+          \Rightarrow \quad & x \lt 5 & \textrm{I divided both sides by 3.}\\
+          \end{align*}
+
+          Again, there is a narrative behind all of this:
+
+          <blockquote>
+            The narrative begins by supposing that \(x\) is a real number.
+            If that's the case, then \(3x-7\) is a real number, too.  Indeed,
+            we are given that \(3x-7\) is less than 8.
+            What real number it is, we do not know.  All we know
+            is that it is less than 8!  The number symbolized as
+            \(3x-7\) might be 5 or might be \(-1,000\).
+            But no matter what it is, we know that if we add 7 to it, then
+            its value will not exceed what we'd get if we added 7 to 8, no?
+            In math symbols:
+            \begin{align*}
+            & 3x-7 \lt 8 \\
+            \Rightarrow \quad & 3x - 7 + 7 \lt 8 + 7\\
+            \Rightarrow \quad & 3x \lt 15\\
+            \end{align*}
+            (Picturing all of this on the real line is key!  Sorry that
+            I don't yet have some handy visuals on this page!)
+            Similarly, we next reason that if \(3x\) is some number less than
+            (to the left of) \(15\) on the number line, then dividing this
+            number by 3 will result in a number that is to the left of 15 divided
+            by 3.  Thus, we learn that---whatever the real number \(x\) is, which
+            we really cannot know---it is less than 5.  Since \(x\) was arbitrary
+            to begin with, we thus reason that <em>any</em> real number \(x\)
+            that satisfies this inequality must be less than 5.  Since, too,
+            we can "run these steps backwards", we also know that any
+            real number \(x\) that is less than 5 will also have the given
+            property.  That means that the solution set is
+            "the set of all real numbers that are less than 5."
+          </blockquote>
+          Of course, you aren't expected to give such extensive narratives
+          (though it might be good for you).  Instead, you are invited
+          to communicate your answer by printing the symbols "\(x \lt 5\)".
+          This is your description of the solution set.  In subsequent
+          sections, though, we will use other ways of representing this set.
+        </div>
+      </div>
+    </li>
+  </ol>
+
+
+</div>
+</p>
+
+<p>
+  Of course, you might be saying to yourself right now that I am making out of
+  something very easy something now overly complicated.  On the other hand,
+  you might also be aware of the fact that there is a subtle change
+  in "the rules" when you go from solving equations to inequalities: there is
+  something about "dividing by a negative", you might recall.  So, we need
+  to consider an example.
+</p>
+
+
+<div class="example">
+  <h2></h2>
+  <p>
+    Solve the inequality.  That is, give a clear, direct description of its solution set.
+    \[
+      - 12 x - 6 \lt - 8 x
+    \]
+  </p>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      \begin{align*}
+      & - 12 x - 6 \lt - 8 x & \textrm{Given}\\
+      \Rightarrow \quad & - 4 x - 6 \lt 0 & \textrm{I added \(8x\) to both sides.}\\
+      \Rightarrow \quad & -4x \lt 6 & \textrm{I added 6 to both sides.}\\
+      \Rightarrow \quad & x \gt \frac{6}{-4} & \textrm{I divided both sides by -4.}\\
+      \Rightarrow \quad & x \gt -\frac{3}{2} & \textrm{I simplified.}\\
+      \end{align*}
+
+      <p>
+        Look out!  Do you see what "happened" at that last step where I "divided by -4"?
+        The inequality sign "reversed"---from "less than" to "greater than".
+        Now, let's get away from this passive talk
+        and get right to the meat of it: why did I do that?  What is the logic here?
+        What is the meaning of it all?  (The alternative is to just passively accept
+        that "that's just the way things are."  There is much to say about this attitude
+        toward math, and I'm very sorry if your past experience in the subject
+        has led you to its temptations!  I promise a much richer life if you reject
+        that stance on things as soon as possible!)
+      </p>
+
+      <p>
+        To find out why "the inequality reversed", we go through the narrative step-by-step.
+        It begins with the
+        assumption that \(x\) is a real number---so, it can be located
+        on the real line somewhere!  For that matter, \(-12x  - 6\) and
+        \(-8x\) are thus also real numbers located somewhere on the real line
+        (The positions of \(-12x  - 6\) and \(-8x\), you will do well to conceptualize,
+        are determined by wherever \(x\) is and the actions of, for instance,
+        multiplying by 12, changing to negative, and then subtracting 6. You will do
+        very well for yourself if you imagine what all of those actions do to a number!
+        For instance, you might pick some random number for \(x\), like 5, plotting it
+        on the real line, and then perform all those actions to it.  If you can
+        do that, you have a good understanding of everything.  If you can't, you don't.
+        Again, accept my apologies for the lack of visuals or interactives
+        on this page at present!)
+        So, aside from the fact that everything in sight is a number, the
+        other thing we know (are given) is that the number \(-12x - 6\)
+        is less than---that is, <em>to the left of</em>---the number \(-8x\).
+
+        But we can also reason about what happens when we do various things to these
+        numbers.  Imagine some number \({\color{red}A}\) and some number
+        \({\color{blue}B}\) with
+        \[
+          {\color{red}A} \lt {\color{blue}B}
+        \]
+        That is, imagine that \({\color{red}A}\) is to the left of
+        \({\color{blue}B}\) somewhere.  (You will do very well to sketch
+        this on paper or at least---or maybe veen better!---sketch it
+        in your mind!)  Of course, that is the very situation we are considering
+        here.  You can regard \({\color{red}A} = {\color{red}-12x  - 6}\) and
+        \({\color{blue}B} = {\color{blue}-8x}\).  Now, what happens
+        when you <em>add</em> any number to both these numbers?  Well, if you add
+        a positive number \({\color{orange}C}\) to a number \({\color{red}A}\),
+        then you get a new number \({\color{red}A} + {\color{orange}C}\)---which is
+        \({\color{red}A}\)
+        <em>shifted \({\color{orange}C}\) units to the right</em>.
+        Of course, when you add \({\color{orange}C}\) to \({\color{blue}B}\) it
+        too shifts to the right \({\color{orange}C}\) units.  So, since
+        adding \({\color{orange}C}\) to both \({\color{red}A}\) and \({\color{blue}B}\)
+        shifts them the same amount---"in formation"---you know that
+        if \({\color{red}A}\) is to the left of \({\color{blue}B}\)
+        before adding \({\color{orange}C}\) then that order
+        won't change after adding \({\color{orange}C}\).  In math symbols,
+        \begin{align*}
+          {\color{red}A} & \lt {\color{blue}B} \\
+          \Rightarrow \quad {\color{red}A} + {\color{orange}C} &\lt
+           {\color{blue}B} + {\color{orange}C}
+        \end{align*}
+        Now \({\color{red}A}\), \({\color{blue}B}\), and \({\color{orange}C}\)
+        were completely arbitrary---except that we said we'd imagine \({\color{orange}C}\)
+        to be positive---so we can see that this will be true no matter what!
+        What id \({\color{orange}C}\) is negative?  Well, adding a negative number
+        (AKA, subtracting) to \({\color{red}A}\) shifts it to the left
+        on the real line, does it not?  So, that doesn't make a big
+        difference in everything we just considered.  Thus, we an conclude
+        that it is "adding a number to both sides of an inequality
+        does not change the direction of the inequality".  Do you see what
+        I mean?  In particular, even though we don't know what the number
+        \({\color{orange}C} = {\color{orange}8x}\) is, we know that if we add it both
+        \({\color{red}A} = {\color{red}-12x  - 6}\) and
+        \({\color{blue}B} = {\color{blue}-8x}\)
+        the "direction" of the inequality does not change:
+        \begin{align*}
+          {\color{red}-12x - 6} & \lt {\color{blue}-8x} \\
+          \Rightarrow \quad {\color{red}-12x - 6} + {\color{orange}8x}
+          & \lt {\color{blue}-8x} + {\color{orange}8x}\\
+          \Rightarrow \quad -4x - 6 & \lt 0 \
+        \end{align*}
+      </p>
+
+      <p>
+        Of course, next we can add 6 to both sides without switching the
+        inequality, deducing that
+        \[
+          -4x \lt 6
+        \]
+        And next comes the subtle part.
+      </p>
+
+      <p>
+        Instead of speaking of "dividing by a negative number", I am going
+        to narrate this differently.  You see, we are in the business
+        here of giving meaning to math---and, you may be pleased to find
+        that I regard "dividing by a negative number" as without meaning
+        on its own; rather, it is better to conceive it---in this discussion
+        of taking actions on points on the real line---as <em>two separate</em>
+        actions: the act of negation (of taking the negative of both sides)
+        and then the act of dividing by plain, old 4.
+      </p>
+
+      <p>
+        So, what happens when you have real numbers
+        \[
+          {\color{red}A} \lt {\color{blue}B}
+        \]
+        and you take the negative of both sides?  All you have to
+        do is to draw a picture!  Pick two "random" points on the real line
+        \({\color{red}A}\) and \({\color{blue}B}\) on the real line
+        with \({\color{red}A}\) to the left of \({\color{blue}B}\).  It
+        doesn't matter where these are, and, really, it is better if
+        you don't bother with adding a bunch of tick marks---except those for
+        \({\color{red}A}\), for \({\color{blue}B}\), and fpr one more point
+        which is relevant to the concept of negation, 0.  What
+        happens (on the real line) when you take the negative of a number like
+        \({\color{red}A}\)?  What if \({\color{red}A}\) is positive; what if
+        \({\color{red}A}\) is negative?  As you may know, "the negative
+        of a negative is a positive" and "the negative of a positive is negative".
+        On the real line, we see the whole point of this: negation is
+        just about <em>swithing the direction of travel</em>.  After all,
+        if you can travel to the east (to the righ on the real line), then
+        sometimes you might want to travel west instead, no?  The real number
+        system is one that <em>has been devised</em> to represent and
+        manage traveling in two different directions in one-dimensional space
+        like a line---or a road, for that matter!
+      </p>
+
+      <p>
+        After consulting your picture, hopefully, you will see that after
+        taking the negatives of \({\color{red}A}\) and \({\color{blue}B}\)
+        <em>their order reverses</em>.  You might even try this experiment
+        again, starting with \({\color{red}A}\) and \({\color{blue}B}\)
+        in different positions relative to 0 (what happens if both
+        \({\color{red}A}\) and \({\color{blue}B}\) are positive? what
+        happens if \({\color{red}A}\)is negative and \({\color{blue}B}\) is positive?
+        what happens if \({\color{red}A}\) and \({\color{blue}B}\) are both negative?)
+        Thus,
+        \begin{align*}
+           {\color{red}A} & \lt {\color{blue}B} \\
+          \Rightarrow \quad  -{\color{red}A} & \gt
+           -{\color{blue}B}
+        \end{align*}
+        In particular,
+        \begin{align*}
+           {\color{red}-4x} & \lt {\color{blue}6} \\
+          \Rightarrow \quad  -({\color{red}-4x}) & \gt
+           -{\color{blue}6} \\
+          \Rightarrow \quad 4x & \gt -6
+        \end{align*}
+      </p>
+
+      <p>
+        The final step isn't so complicated.  We divide both sides by 4.
+        What happens to two numbers \({\color{red}A} < {\color{blue}B}\)
+        when we divide both by 4?  Well, again, you should try drawing
+        a picture of this: they both are pushed 75% closer to 0, you could say.
+        That is, the distance of the new numbers is one quarter
+        to 0 of the distance of \({\color{red}A}\) and \({\color{blue}B} \),
+        respectively.  In particular, the order of these two new
+        numbers doesn't change.  Thus (we don't switch the inequality
+        because of dividing by 4), we get
+        \[
+          x \gt \frac{-6}{4} = -\frac{3}{2}
+        \]
+      </p>
+    </div>
+  </div>
+</div>
+
+<p>
+  Now, you might not need any more instruction on this, but it won't hurt
+  for me to demo one more problem---one that is a little harder---while
+  also skipping most of the narrative.
+</p>
+
+<div class="example">
+  <h2></h2>
+  <p>
+    Solve the inequality.  That is, give a clear, direct description of its solution set.
+    \[
+      - 7 \left(x - 1\right) - 35 \gt - x - 35
+    \]
+  </p>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      \begin{align*}
+      & - 7 \left(x - 1\right) - 35 \gt - x - 35\\
+      \Rightarrow \quad & - 7x + 7 - 35 \gt - x - 35 & \textrm{Distributed.}\\
+      \Rightarrow \quad & - 7x -28 \gt - x - 35 & \textrm{Simplified.}\\
+      \Rightarrow \quad & - 7x  \gt - x - 7 & \textrm{Added 7 to both sides.}\\
+      \Rightarrow \quad & - 6x  \gt - 7 & \textrm{Added \(x\) to both sides.}\\
+      \Rightarrow \quad &  6x  \lt 7 & \textrm{Negated both sides}\\
+      \Rightarrow \quad &  x  \lt \frac{7}{6} & \textrm{Divided both sides by 6}\\
+      \end{align*}
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

@@ -24,6 +24,10 @@ html {
   font-family: "Computer Modern"; //
 }
 
+body {
+  height: 100%;
+}
+
 a {
   color: blue;
   text-decoration: none;
@@ -226,7 +230,7 @@ a {
 }
 
 .answer .collapsible {
-  color: red;
+  color: var(--section-header-color);
 }
 
 .answer .collapsible:before {
@@ -273,6 +277,13 @@ a {
 
 .menu .active:after {
   content: '\2212' /*Unicode character for '-' sign */
+}
+
+.show_help {
+  display: block;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.2s ease-out;
 }
 
 .inner {
@@ -337,6 +348,7 @@ a {
 .answer {
   margin-left: 5%;
   margin-right: 5%;
+  margin-bottom: 12px;
   color: #e24f1d;
 }
 
@@ -462,4 +474,8 @@ a {
 
 .syntax-table tr:nth-child(even) {
   background-color: #eeeeee
+}
+
+.typewriter {
+  font-family: 'Courier New';
 }

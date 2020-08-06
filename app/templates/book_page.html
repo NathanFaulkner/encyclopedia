@@ -12,7 +12,14 @@
     margin-right: 10%;
     margin-top: 80px;
     margin-bottom: 100px;
+    counter-reset: example;
   }
+
+  .example h2::before {
+    counter-increment: example;
+    content: "Example " counter(example) "."
+  }
+
   </style>
   </head>
   <body>
@@ -25,7 +32,7 @@
     </ul>
     {% endif %}
     {% endwith %}
-    <h1 class="section-header">{{ section_display_name }}</h1>
+    <h1 class="section-header">{{ section_display_name|safe }}</h1>
     <hr style="color: var(--section-header-color);">
     {% block content %}{% endblock %}
   </body>

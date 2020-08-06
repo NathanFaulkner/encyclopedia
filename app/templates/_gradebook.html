@@ -29,6 +29,7 @@
           </td>
         </tr>
         {% for section in chapter.subdivisions %}
+        {% set section_loop = loop %}
         <tr>
           <td class="gradebook-section" valign="top">
             <a href="{{ url_for('book_section',
@@ -96,7 +97,7 @@
                   href="{{ url_for('book_section',
                                       book_name=book.name_for_path,
                                       chapter_number=outer_loop.index,
-                                      section_number=answer.section,
+                                      section_number=section_loop.index,
                                       skip_to_exercises='True',
                                       question_name=answer.skillname,
                                       ans_id=answer.id) }}">
@@ -109,7 +110,7 @@
                   href="{{ url_for('book_section',
                                       book_name=book.name_for_path,
                                       chapter_number=outer_loop.index,
-                                      section_number=answer.section,
+                                      section_number=section_loop.index,
                                       skip_to_exercises='True',
                                       question_name=answer.skillname,
                                       ans_id=answer.id) }}">

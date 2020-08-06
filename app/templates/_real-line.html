@@ -1,0 +1,714 @@
+<div id="tester" style="width:100%; border: 1px solid red; text-align:center; padding:30px">
+
+<svg xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 1100 60"
+    id="svg"
+    style="border:1px solid black">
+  <!-- <defs>
+    <marker id="rightarrowhead" viewBox="0 0 10 10"
+      refX="0" refY="3.5"
+      markerUnits="strokeWidth"
+      markerWidth="10" markerHeight="10"
+      orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7"/>
+    </marker>
+    <marker id="leftarrowhead" viewBox="0 0 10 10"
+      refX="10" refY="3.5"
+      markerUnits="strokeWidth"
+      markerWidth="10" markerHeight="10"
+      orient="auto">
+      <polygon points="10 0, 10 7, 0 3.5"/>
+    </marker>
+  </defs> -->
+  <line fill="none"
+          stroke="black"
+          points="50,25 1050,25"
+          x1="50"
+          y1="25"
+          x2="1050"
+          y2="25"
+          stroke-width="3"/>
+  <polygon id="leftarrowhead"
+            fill="black"
+            stroke="none"
+            points="50,25 55,20 30,25 55,30"/>
+  <polygon id="rightarrowhead"
+            fill="black"
+            stroke="none"
+            points="1050,25 1045,20 1070,25 1045,30"/>
+</svg>
+</div>
+
+<p>
+  <div display="block" style="float:left; valign:bottom; min-width=200px; border: 1px solid red">
+    \(x\) = <span id="x">&nbsp; &nbsp; &nbsp; &nbsp;</span>
+  </div>
+  <div display="block" style="float:right;">
+    <button type="button" onclick="manual_add_point()" id="special_point_submitter">Plot Point</button>
+    <input type="text" id="special_point" style="width: 100px"></input>
+  </div>
+  <div display="block" style="float:right; text-align:bottom">
+    <button type="button" onclick="toggle_shade_mode()" id="toggle_shade_mode">Toggle Shade Mode</button>
+  </div>
+  <div display="block" style="float:right; text-align:bottom">
+    <button type="button" onclick="clear_all()" id="point_clearer">Clear All</button>
+  </div>
+</p>
+
+<!-- <p>
+  <table style="padding: 5px">
+    <tr>
+      <td width="65%" text-align="left">\(x\) = <span id="x">&nbsp; &nbsp; </span></td>
+      <td><button type="button" onclick="toggle_shade_mode()" id="toggle_shade_mode">Toggle Shade Mode</button></td>
+      <td width="100px"><button type="button" onclick="clear_points()" id="point_clearer">Clear All</button></td>
+    </tr>
+  </table>
+</p> -->
+<div style="clear:right; margin-top:50px">
+  <a class="collapsible" style="cursor: pointer; background-color: white;">Real Line Graph Help</a>
+  <div class="show_help">
+  <ul>
+    <li>
+      When in "Point Mode" Click the real line to plot a (<span style="color:blue">blue</span>)
+       point.  Click it a second time to make
+      it "empty".  Click it a third time to remove it.
+    </li>
+
+    <li>
+      When in "Shade Mode" click the real line in to shade as indicated.  Click it a second time to remove
+      shading.
+    </li>
+
+    <li>
+      You can also add/make empty/remove points manually (with greater precision) by entering them here:
+      <p>
+        You can even enter fractions, for example, "1/2".
+      </p>
+      <!-- </form> -->
+    </li>
+  </ul>
+  </div>
+  <script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+</div>
+
+
+
+
+<script>
+  var mode = 'point';
+  function toggle_shade_mode() {
+    if (mode == 'point') {
+     mode = 'shade';
+     document.getElementById('toggle_shade_mode').innerHTML = "Toggle Point Mode";
+   } else {
+     mode = 'point';
+     document.getElementById('toggle_shade_mode').innerHTML = "Toggle Shade Mode";
+   }
+  }
+
+  var svg = document.querySelector('svg');
+
+  // Get parameters of graph from flask route (height and width in terms of cartesian and svg, etc.)
+{#
+  var parameters = {};
+  {% for key in parameters %}
+  parameters.{{ key }} = {{ parameters[key] }};
+  // console.log(parameters.{{ key }})
+  {% endfor %}
+  // parameters = JSON.parse(parameters);
+  #}
+
+
+  // Drawing the markers
+  for (i=1; i < 40; i++) {
+    var vertLine = document.createElementNS("http://www.w3.org/2000/svg",
+      'line');
+    var label = document.createElementNS("http://www.w3.org/2000/svg",
+      'text');
+    vertLine.setAttribute("x1", 50 + i*25);
+    vertLine.setAttribute("x2", 50 + i*25);
+    var label_position;
+    if (i % 2 == 0) {
+      vertLine.setAttribute("y1", 15);
+      vertLine.setAttribute("y2", 35);
+      // vertLineMarker.style.stroke = "#000";
+      vertLine.style.strokeWidth = "2";
+      label.setAttribute("y", 55);
+      label.textContent = -20 + i;
+      // console.log(label);
+      label.setAttribute("x", 0);
+      svg.appendChild(label);
+      label = svg.lastChild;
+      var width = label.getComputedTextLength();
+      // console.log('width', width);
+      label_position = vertLine.getAttribute("x1") - 0.5*width;
+      label.setAttribute("x", label_position);
+      // console.log(label);
+    } else {
+      vertLine.setAttribute("y1", 20);
+      vertLine.setAttribute("y2", 30);
+      vertLine.style.strokeWidth = "1";
+    }
+    vertLine.style.stroke = "#000";
+    svg.appendChild(vertLine);
+  }
+
+  // Darken Zero Marker
+  var zeroMarker = document.createElementNS("http://www.w3.org/2000/svg",
+    'line');
+    zeroMarker.setAttribute("x1", 550);
+    zeroMarker.setAttribute("y1", 10);
+    zeroMarker.setAttribute("x2", 550);
+    zeroMarker.setAttribute("y2", 40);
+    zeroMarker.style.stroke = "#000";
+    zeroMarker.style.strokeWidth = "3";
+    svg.appendChild(zeroMarker);
+
+  // Responding to user's clicks on graph -- rounded to cartesian grid points
+  var points = [];
+  {% if question.points %}
+  points = {{ question.points|safe }};
+  // console.log(points);
+  graph_points(points, "blue", false);
+  {% endif %}
+
+  var pt = svg.createSVGPoint();
+
+  function cursorPoint(evt) {
+    pt.x = evt.clientX;
+    pt.y = evt.clientY;
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
+  }
+
+  function svg_to_cart(svg_x) {
+    x = -20 + (svg_x - 50)/25;
+    return x;
+  }
+
+function cart_to_svg(x) {
+    svg_x = 50 + (x+20)*25;
+    return svg_x
+  }
+
+// function extract_points(info_list) {
+//   var i, l;
+//   l = info_list.length;
+//   just_pts = [];
+//   for (i=0; i<l; i++) {
+//     if (info_list[i].type != 'shade') {
+//       just_pts.push(info_list.x);
+//     }
+//   }
+//   return just_pts;
+// }
+
+function frac_str_to_float(frac_str) {
+  var numer, denom;
+  var splat = frac_str.split('/');
+  if (splat.length == 1) {
+    numer = splat[0];
+    denom = 1;
+  } else {
+  [numer, denom] = splat;
+  }
+  return numer / denom;
+}
+
+function str_list_to_list_of_floats(str_list) {
+    a = str_list.replace('[', '');
+    a = a.replace(']', '');
+    a = str_list.replace('(', '');
+    a = a.replace(')', '');
+    a = a.split(',');
+    var i;
+    for (i=0; i < a.length; i++) {
+      a[i] = frac_str_to_float(a[i]);
+    }
+    return a
+  }
+
+  // Totally auxiliary -- sad necessity!
+  function searchForArrayInArray(needle, haystack) {
+    // console.log('search called ', needle, haystack);
+    var i, j, current;
+    for (i=0; i < haystack.length; ++i) {
+      if (needle.length === haystack[i].length) {
+        current = haystack[i];
+        for (j=0; j < needle.length && (needle[j] === current[j]); ++j);
+        if (j ===  needle.length)
+          return i;
+      }
+    }
+    // console.log('came out false');
+    return -1;
+  }
+
+  var tolerance = 0.2;
+
+  function check_for_nearby(pt, pts, tolerance) {
+    var i, current;
+    for (i=0; i < pts.length; i++) {
+      current = pts[i];
+      dist_to_current = Math.abs(pt - current.x)
+      if (dist_to_current < tolerance) {
+        return {i: i, type: current.type};
+      }
+    }
+    return {i:-1, type: null};
+  }
+
+  function get_interval(left, right, list_of_intervals) {
+    var i, current;
+    for (i=0; i < list_of_intervals.length; i++) {
+      current = list_of_intervals[i];
+      if (current[0] == left && current[1] == right) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  function get_left_x(pt, pts) {
+    var i;
+    var left_x = {x:-20, type: 'empty'};
+    for (i=0; i < pts.length; i++) {
+      if (pts[i].x < pt && left_x.x < pts[i].x && pts[i].type != 'shade') {
+        left_x = pts[i];
+      }
+    }
+    return left_x;
+  }
+
+  function get_right_x(pt, pts) {
+    var i;
+    var right_x = {x: 20, type: 'empty'};
+    for (i=0; i < pts.length; i++) {
+      if (pts[i].x > pt && right_x.x > pts[i].x && pts[i].type != 'shade') {
+        right_x = pts[i];
+      }
+    }
+    return right_x;
+  }
+
+var left_endpoint = {x:-20, type:'empty'};
+var right_endpoint = {x: 20, type:'empty'};
+
+// Potentiometer + looking for shading intention
+  svg.addEventListener('mousemove', function(self) {
+    var loc = cursorPoint(self);
+    var leftarrow = svg.getElementById("leftarrowhead");
+    var rightarrow = svg.getElementById("rightarrowhead");
+    var x = loc.x;
+    var y = loc.y;
+    x = svg_to_cart(x);
+    x = Number.parseFloat(x).toFixed(1);
+    document.getElementById('x').innerHTML = x;
+    if (mode == 'shade') {
+      var left_x = get_left_x(x, points);
+      var right_x = get_right_x(x, points);
+      if (y < 35 && y > 15) {
+        if (left_x.x != left_endpoint.x || right_x.x != right_endpoint.x) {
+          left_endpoint = left_x;
+          right_endpoint = right_x;
+        }
+        shading = svg.getElementById("shading");
+        if (shading !== null) {
+          shading.parentNode.removeChild(shading);
+        }
+        if (left_x.x == -20) {
+          // console.log('minus infinity!');
+          // console.log(leftarrow)
+          leftarrow.setAttribute('fill', 'blue');
+        } else {
+          leftarrow.setAttribute('fill', 'black');
+        }
+        if (right_x.x == 20) {
+          // console.log('minus infinity!');
+          // console.log(leftarrow)
+          rightarrow.setAttribute('fill', 'blue');
+        } else {
+          rightarrow.setAttribute('fill', 'black');
+        }
+        left_x = cart_to_svg(left_x.x);
+        right_x = cart_to_svg(right_x.x);
+        newElement = document.createElementNS("http://www.w3.org/2000/svg",
+          'line');
+        newElement.setAttribute("x1", left_x);
+        newElement.setAttribute("y1", 25);
+        newElement.setAttribute("x2", right_x);
+        newElement.setAttribute("y2", 25);
+        newElement.setAttribute("id", "shading")
+        newElement.style.stroke = "blue";
+        newElement.style.strokeWidth = "3";
+        svg.appendChild(newElement);
+      } else {
+        leftarrow.setAttribute('fill', 'black');
+        rightarrow.setAttribute('fill', 'black');
+        shading = svg.getElementById("shading");
+        if (shading !== null) {
+          shading.parentNode.removeChild(shading);
+        }
+      }
+    }
+  }, false);
+
+var intervals = [];
+{% if question.intervals %}
+intervals = {{ question.intervals|safe }};
+graph_intervals(intervals, "blue", false);
+{% endif %}
+
+// Draws/deletes grid points created by clicking on graph and passes them to Flask
+  svg.addEventListener('click', function(self) {
+    // console.log('click registered');
+    var loc = cursorPoint(self);
+    var x = svg_to_cart(loc.x);
+    // console.log('x', x);
+    if (mode == 'point') {
+      var pt_info = check_for_nearby(x, points, 0.5);
+      var i = pt_info.i;
+      // console.log('i', i);
+      if (i != -1) {
+        if (pt_info.type == 'filled') {
+          points[i] = {x: points[i].x, type: 'empty'}
+        } else if (pt_info.type == 'empty') {
+          points.splice(i, 1);
+        }
+        // do_ajax();
+        erase_circles();
+        graph_points(points, "blue", false);
+      } else {
+        var x = Math.round((loc.x-50)/25);
+        out_x = -20 + x;
+        var point = {x: out_x, type: 'filled'}
+        points.push(point);
+        // console.log('points', points);
+        // do_ajax();
+        erase_circles();
+        graph_points(points, "blue", false);
+      }
+    } else { //mode is 'shade'
+      var i = get_interval(left_endpoint.x, right_endpoint.x, intervals);
+      // console.log(i);
+      if (i != -1) {
+        intervals.splice(i, 1);
+        erase_graphs(svg);
+        graph_intervals(intervals, "blue", false);
+      }
+      else {
+        intervals.push([left_endpoint.x, right_endpoint.x]);
+        erase_graphs(svg);
+        graph_intervals(intervals, "blue", false);
+      }
+      // console.log(left_endpoint, right_endpoint, intervals);
+    }
+    var points_field = document.getElementById('points_field');
+    var intervals_field = document.getElementById('intervals_field');
+    points_field.value = JSON.stringify(points);
+    intervals_field.value = JSON.stringify(intervals);
+    // console.log('intervals_field.value', intervals_field.value);
+    {% if bug_form %}
+    console.log('bug_form detected')
+    var bug_answer = document.getElementById('bug_answer');
+    var value = {'user_points': points, 'user_intervals': intervals}
+    value = JSON.stringify(value);
+    bug_answer.value = value;
+    {% endif %}
+  }, false  );
+
+// manual_points = []
+
+// var repetition_warning = ""
+
+function manual_add_point() {
+    var text = document.getElementById("special_point").value;
+    var point = frac_str_to_float(text);
+    // console.log('Need to look at the point:', point);
+    var pt_info = check_for_nearby(point, points, 0.01);
+    var i = pt_info.i;
+    // console.log('i', i);
+    if (i != -1) {
+      if (pt_info.type == 'filled') {
+        points[i] = {x: points[i].x, type: 'empty'}
+      } else if (pt_info.type == 'empty') {
+        points.splice(i, 1);
+      }
+      // do_ajax();
+      erase_circles();
+      graph_points(points, "blue", false);
+    } else {
+      var point = {x: point, type: 'filled'}
+      points.push(point);
+      // console.log('points', points);
+      // do_ajax();
+      erase_circles();
+      graph_points(points, "blue", false);
+    }
+    var points_field = document.getElementById('points_field');
+    points_field.value = JSON.stringify(points);
+  };
+
+function graph_intervals(intervals, color, hover) {
+  // var graphs = svg.getElementsByClassName("graph");
+  // var i;
+  // for (i = graphs.length - 1; i > -1; i--) {
+  //   var graph = graphs[i];
+  //   graph.parentNode.removeChild(graph);
+  //   // console.log('Cycle sweeper loop:', i, graph);
+  // }
+
+  var left, right;
+  for (i=0; i < intervals.length; i++) {
+    left = intervals[i][0];
+    right = intervals[i][1];
+    if (left == -20) {
+      // console.log('minus infinity!');
+      // console.log(leftarrow)
+      var perm_leftarrow = document.createElementNS("http://www.w3.org/2000/svg",
+          "polygon");
+      perm_leftarrow.setAttribute("class", "graph");
+      perm_leftarrow.setAttribute("fill", color);
+      perm_leftarrow.setAttribute("stroke", "none");
+      if (hover) {
+        perm_leftarrow.setAttribute("points", "50,15 55,10 30,15 55,20");
+      } else {
+        perm_leftarrow.setAttribute("points", "50,25 55,20 30,25 55,30");
+      }
+      svg.appendChild(perm_leftarrow);
+    }
+    if (right == 20) {
+      // console.log('minus infinity!');
+      // console.log(leftarrow)
+      var perm_rightarrow = document.createElementNS("http://www.w3.org/2000/svg",
+          "polygon");
+      perm_rightarrow.setAttribute("class", "graph");
+      perm_rightarrow.setAttribute("fill", color);
+      perm_rightarrow.setAttribute("stroke", "none");
+      if (hover) {
+        perm_rightarrow.setAttribute("points", "1050,15 1045,10 1070,15 1045,20");
+      } else {
+        perm_rightarrow.setAttribute("points", "1050,25 1045,20 1070,25 1045,30");
+      }
+      svg.appendChild(perm_rightarrow);
+    }
+    var left_x = cart_to_svg(left);
+    var right_x = cart_to_svg(right);
+    newElement = document.createElementNS("http://www.w3.org/2000/svg",
+      'line');
+    newElement.setAttribute("x1", left_x);
+    if (hover) {
+      newElement.setAttribute("y1", 15);
+    } else{
+      newElement.setAttribute("y1", 25);
+    }
+    newElement.setAttribute("x2", right_x);
+    if (hover) {
+      newElement.setAttribute("y2", 15);
+    } else {
+      newElement.setAttribute("y2", 25);
+    }
+    newElement.setAttribute("class", "graph")
+    newElement.style.stroke = color;
+    newElement.style.strokeWidth = "3";
+    svg.appendChild(newElement);
+  }
+}
+
+// Graphs all the points in the points array
+function graph_points(info_list, color, hover) {
+  // console.log("graph_points called with inputs", info_list, color);
+  // erase_circles();
+  for (i=0; i < info_list.length; i++) {
+    var x = cart_to_svg(info_list[i].x);
+    // console.log('svg_x', x)
+    var y = 25;
+    if (hover) {
+      y = 15;
+    }
+    var newElement = document.createElementNS("http://www.w3.org/2000/svg",
+      'circle');
+    newElement.setAttribute("cx", x);
+    newElement.setAttribute("cy", y);
+    newElement.setAttribute("r", 5);
+    if (info_list[i].type == 'filled') {
+      newElement.style.stroke = color;
+      newElement.style.fill = color;
+      svg.appendChild(newElement);
+    } else if (info_list[i].type == 'empty') {
+      newElement.style.stroke = color;
+      newElement.style.strokeWidth = "3";
+      newElement.style.fill = "none";
+      svg.appendChild(newElement);
+    }
+  }
+};
+// var hello = 'hi';
+// var message = `Why, ${hello}, Bob!`;
+// console.log(`Why, ${hello}, Snob!`);
+
+
+
+  // <polyline points="20,20 40,25 60,40"
+  //   style="fill:none; stroke:blue; stroke-width:3; opacity:1.0" />
+
+  function clear_all() {
+    points = [];
+    intervals = [];
+    var points_field = document.getElementById('points_field');
+    points_field.value = JSON.stringify(points);
+    var intervals_field = document.getElementById('intervals_field');
+    intervals_field.value = JSON.stringify(intervals);
+    // var list_of_graphs = [];
+    // draw_graphs(svg, list_of_graphs);
+    erase_graphs(svg);
+    erase_circles();
+  }
+
+  function erase_graphs(svg_element) {
+    let svg = svg_element;
+    var the_old_graphs = svg.getElementsByClassName("graph");
+    // console.log('the_graphs[0]', the_graphs[0]);
+    if (the_old_graphs) {
+      var k = 0;
+      var old_graph;
+      var l = the_old_graphs.length;
+      for (k=0; k < l; k++) {
+        old_graph = the_old_graphs[l - 1 - k];
+        old_graph.parentNode.removeChild(old_graph);
+      }
+    }
+  }
+
+  function erase_circles() {
+    var circles = svg.getElementsByTagName("circle");
+    // console.log('This is what it thinks the circles are before clean sweep: ', circles)
+    var i;
+    for (i = circles.length - 1; i > -1; i--) {
+      var circle = circles[i];
+      circle.parentNode.removeChild(circle);
+      // console.log('Cycle sweeper loop:', i, circle)
+    }
+  }
+
+
+  function draw_graph(svg_element, graph_info, color) {
+    let svg = svg_element;
+    var graph, obj;
+    graph = document.createElementNS("http://www.w3.org/2000/svg",
+              graph_info.shape);
+    obj = graph_info.data;
+    Object.keys(obj).forEach( (key) => {
+      graph.setAttribute(key, obj[key]);
+      // console.log(key + obj[key]);
+    });
+    graph.style.stroke = color;
+    graph.style.strokeWidth = "4";
+    graph.style.opacity = "0.5";
+    graph.style.fill = "none";
+    graph.setAttribute("id", "graph" + i);
+    svg.appendChild(graph);
+  }
+
+  function draw_graphs(svg_element, list_of_graphs, color) {
+    let svg = svg_element;
+    // erase_graphs(svg);
+    var i, graph_info, graph, obj;
+    for (i=0; i < list_of_graphs.length; i++) {
+      draw_graph(svg, list_of_graphs[i], color);
+      // graph_info = list_of_graphs[i];
+      // graph = document.createElementNS("http://www.w3.org/2000/svg",
+      //           graph_info.shape);
+      // obj = graph_info.data;
+      // Object.keys(obj).forEach( (key) => {
+      //   graph.setAttribute(key, obj[key]);
+      //   // console.log(key + obj[key]);
+      // });
+      // graph.style.stroke = color;
+      // graph.style.strokeWidth = "4";
+      // graph.style.opacity = "0.5";
+      // graph.style.fill = "none";
+      // graph.setAttribute("id", "graph" + i);
+      // svg.appendChild(graph);
+    }
+  }
+
+  function do_ajax() {
+    // console.log('ajax thinks points is', points);
+    var req = new XMLHttpRequest();
+    var result = document.getElementById('result');
+    req.onreadystatechange = function()
+    {
+      if(this.readyState == 4 && this.status == 200) {
+        // return_data = JSON.parse(this.responseText);
+        // result.innerHTML = return_data.shape + ': ' + return_data.data;
+        // result.innerHTML = return_data.return_user_points;
+        if (return_data.shape == 'none') {
+          // graph_points(JSON.parse(return_data.return_user_points));
+          clear_all();
+          return
+        }
+        // console.log('This is what it thinks return_data.piecewise is', JSON.parse(return_data.piecewise))
+        if (JSON.parse(return_data.piecewise)) {
+          var pieces = JSON.parse(return_data.pieces);
+          // console.log(pieces);
+          var list_of_pieces = [];
+          var piece, obj;
+          for (i=0; i < pieces.length; i++) {
+            obj = JSON.parse(pieces[i]);
+            piece = {"shape": return_data.shape,
+                    "data": obj};
+            list_of_pieces.push(piece);
+          }
+        } else {
+          var list_of_pieces = [{"shape": return_data.shape,
+                                "data": JSON.parse(return_data.data)}]
+        }
+        erase_graphs(svg);
+        draw_graphs(svg, list_of_pieces, "blue");
+        graph_points(JSON.parse(return_data.return_user_points), "blue", false);
+        // console.log('circles', svg.getElementsByTagName("circles"));
+      } else {
+        result.innerHTML = "Processing... (if this takes more than a few seconds, you can assume an error has occurred.)";
+        // "You need to enter coordinates for your anchor for the algorithm to guess what you intend to graph."//"処理中...";
+      }
+    }
+
+    // var anchor_field = document.getElementById('anchor');
+
+    req.open('POST', '{{ url_for('question', question_name=question_name) }}', true);
+    req.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+    req.send("data=" + JSON.stringify(points));
+  }
+
+
+{% if question and form.validate_on_submit() %}
+  {% if question.points %}
+    points = {{ question.points|safe }};
+    graph_points(points, "blue", false);
+    // console.log('points', points)
+  {% endif %}
+  {% if question.intervals %}
+    intervals = {{ question.intervals|safe }};
+    // console.log('intervals', intervals)
+    graph_intervals(intervals, "blue", false);
+  {% endif %}
+  {% if question.answer_points %}
+    correct_answer_points = {{ question.answer_points|safe }};
+    graph_points(correct_answer_points, "green", true);
+    // console.log('answer_points', points)
+  {% endif %}
+  {% if question.answer_intervals %}
+    correct_answer_intervals = {{ question.answer_intervals|safe }};
+    // console.log('answer_intervals', intervals)
+    hover = true;
+    graph_intervals(correct_answer_intervals, "green", true);
+  {% endif %}
+{% endif %}
+
+</script>
+
+<div id="result"></div>
+
+<div id="submit_result"></div>
+
+<p id="submit_feedback"></p>

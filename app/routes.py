@@ -97,6 +97,7 @@ def register():
         return redirect(url_for('library'))
     form = RegistrationForm()
     if form.validate_on_submit():
+        username = form.username.data.strip()
         user = Student(username=form.username.data,
                         email=form.email.data,
                         firstname=form.firstname.data,
@@ -105,7 +106,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         super_user = Student.query.filter_by(username='Nathan').first()
-        user = Student.query.filter_by(username=form.username.data, email=form.email.data).first()
+        user = Student.query.filter_by(username=username, email=form.email.data).first()
         user.name_as_observer(super_user)
         db.session.commit()
         flash('You are now a registered user.')
@@ -233,7 +234,7 @@ def unobserve(username):
             return redirect(url_for('user', username=username))
         current_user.unobserve(user)
         db.session.commit()
-        flash('You are no longer observed by {}.'.format(username))
+        flash('You are no longer an observer of {}.'.format(username))
         return redirect(url_for('user', username=username))
     else:
         return redirect(url_for('library'))
@@ -241,7 +242,10 @@ def unobserve(username):
 # routes for iframe
 @app.route('/hello')
 def hello():
-    user = {'username': 'August'}
+    if current_user.is_authenticated:
+        user = current_user
+    else:
+        user = {'username': 'Anonymous'}
     return render_template('hello.html', user=user, title='Home',
         site_name=app.config['SITE_NAME'])
 
@@ -281,8 +285,26 @@ def section(section_name):
         section_display_name=section_display_name,
         question_name=question_name)
 
+# Avert your eyes from this monster!!  This is what happens
+# when you learn as you build and don't have time for a re-write!!
 @app.route('/question/<question_name>', methods=['GET', 'POST'])
 def question(question_name):
+    """
+    A rewrite could
+    include using only one 'form' of the type AnswerForm, but
+    deciding whether to display an answer field or instead
+    write to it secretly based on either multiple
+    answer fields or based on interaction with a graph, etc.  ...
+    An arbitrary page should also be used in place of
+    question_page.html---that is, the template to be rendered
+    should be a variable that is determined by the attribute
+    question.template.  Of course, many of these templates
+    could inherit from a common template, too!  Many other
+    functions should be tossed to methods of the
+    question = QuestionClass() object.  For instance, ajax
+    handling could happen there.  Interpolator should be moved
+    to the questions module...
+    """
     # print('session at first', session)
     # if request.args.get('bug_id'):
     #     answer_id = request.args.get('bug_id')
@@ -291,6 +313,17 @@ def question(question_name):
     bug_form = ReportBugForm()
     book_info = {}
     session['question_name'] = question_name
+    if current_user.is_authenticated:
+        user_book_names = json.loads(current_user.books)
+        # user_books = [getattr(books, book_name) for book_name in user_book_names]
+        books_info = []
+        for book_name in user_book_names:
+            book = getattr(books, book_name)
+            info = book.get_skill_info(question_name)
+            for occurrence in info:
+                books_info.append({'book': book.name_for_path,
+                                'chapter': occurrence[0],
+                                'section': occurrence[1]})
     if session.get('section'):
         book_name = session.get('book')
         book = getattr(books, book_name)
@@ -315,14 +348,13 @@ def question(question_name):
         user = {'username': 'Anonymous'}
     # validator = question_module.Question_Class.validator
     if question_module.prob_type == 'graph':
-        print("Working with a graph here")
+        # print("Working with a graph here")
         form = BlankForm()
         whether_graph = True
         parameters = interpolator.get_parameters()
         # print('parameters: ', parameters, '; type is ', type(parameters))
-        print('This is how I view form.validate_on_submit: ', form.validate_on_submit())
+        # print('This is how I view form.validate_on_submit: ', form.validate_on_submit())
         if 'data' in request.form and not form.validate_on_submit():
-            return_data = {}
             points = request.form["data"]
             # session['user_answer'] = points # for bug reporting
             # print('points straight from page: ', type(points))
@@ -338,53 +370,71 @@ def question(question_name):
             session['user_points'] = points
             # print('session says the user answer is:', session['user_answer'])
             return json.dumps(return_data)
+    elif question_module.prob_type == 'real_line_graph':
+        form = question_module.form()
+        real_line = True
+        whether_graph = False
     else:
         validator = question_module.Question_Class.validator
         form = AnswerForm(validator)
         # print('form.answer.data just after (re)instantiation', form.answer.data)
         whether_graph = False
+        real_line = False
     if request.method == 'GET':
-        try:
+        session['user_answer'] = json.dumps(None)
+        if request.args.get('bug_id'):
             bug_id = request.args.get('bug_id')
             bug_answer = BugReport.query.filter_by(id=bug_id).first()
             session['tried'] = True
             session['seed'] = bug_answer.seed
+            # print('session seed after bug assignment', session['seed'])
             if whether_graph:
                 try:
                     session['user_points'] = json.loads(bug_answer.user_answer)
                 except (json.decoder.JSONDecodeError, TypeError) as e:
                     session['user_points'] = []
+            elif question_module.prob_type == 'real_line_graph':
+                # print('Not my fault!')
+                try:
+                    user_answer = json.loads(bug_answer.user_answer)
+                    user_points = user_answer['user_points']
+                    user_intervals = user_answer['user_intervals']
+                except:
+                    return f'bug_id: {bug_id}, seed: {bug_answer.seed}, question_name: {bug_answer.question_name}'
             else:
                 form.answer.data = bug_answer.user_answer
-        except AttributeError:
-            session['tried'] = False
-            session['seed'] = random.random()
-            session['user_points'] = []
-        try:
+        elif request.args.get('ans_id'):
             ans_id = request.args.get('ans_id')
             answer = StudentAnswer.query.filter_by(id=ans_id).first()
             session['tried'] = True
             session['seed'] = answer.seed
+            flash('This is your original submission, but the problem is just for practice now.')
             if whether_graph:
                 try:
                     session['user_points'] = json.loads(answer.user_answer)
                 except (json.decoder.JSONDecodeError, TypeError) as e:
                     session['user_points'] = []
+            elif question_module.prob_type == 'real_line_graph':
+                question = question_module.Question_Class(seed=session['seed'])
+                answer = json.loads(answer.user_answer)
+                user_points = answer['user_points']
+                user_intervals = answer['user_intervals']
+                question.points = user_points
+                question.intervals = user_intervals
             else:
                 form.answer.data = answer.user_answer
-        except AttributeError:
+        else: # AttributeError:
             session['tried'] = False
             session['seed'] = random.random()
             session['user_points'] = []
-        form.seed.data = session['seed']
-    question = question_module.Question_Class(seed=session['seed'])
-    # if request.method == 'GET':
-    #     answer_event = StudentAnswer(student=student, skillname=question_name,
-    #                     grade_category='check', seed=session['seed'])
-    #     db.session.add(answer_event)
-    #     # db.session.commit()
-    # else:
-    #     answer_event = StudentAnswer.query.filter_by(seed=session['seed'], student=student).first()
+        # form.seed.data = session['seed']
+
+    try:
+        question
+    except NameError:
+        question = question_module.Question_Class(seed=session['seed'])
+    # print('session seed', session['seed'])
+
     if whether_graph:
         points = session.get('user_points')
         # print('These are the points in session: ', points)
@@ -403,13 +453,40 @@ def question(question_name):
         x_max = parameters['cart_x_max']
         correct_answer_poly_points = question.get_svg_data([x_min, x_max])
         session['user_answer'] = user_answer_for_db
-        print("session['useranswer']", session['user_answer'])
+        # print("session['useranswer']", session['user_answer'])
+    elif question_module.prob_type == 'real_line_graph':
+        if form.points.data:
+            user_points = json.loads(form.points.data)
+            question.points = user_points
+        elif request.args.get('bug_id'):
+            question.points = user_points
+        else:
+            user_points = []
+        # for item in user_points:
+        #     print('point:', item)
+        #     print('type:', type(item))
+        # print(user_points)
+        if form.intervals.data:
+            user_intervals = json.loads(form.intervals.data)
+            question.intervals = user_intervals
+        elif request.args.get('bug_id'):
+            question.intervals = user_intervals
+        else:
+            user_intervals = []
+        # for item in user_intervals:
+        #     print('interval:', item)
+        #     print('type:', type(item))
+        useranswer = {'user_points': user_points, 'user_intervals': user_intervals}
+        user_answer_for_db = json.dumps(useranswer)
     else:
         useranswer = form.answer.data
-        session['user_answer'] = form.answer.data or session['user_answer'] #for bug report
+        session['user_answer'] = form.answer.data or session.get('user_answer') #for bug report
         user_answer_for_db = useranswer
         correct_answer_poly_points = ''
-    print("request.args.get('form')", request.args.get('form'))
+    # print("request.args.get('form')", request.args.get('form'))
+    # Added the request.args.get('form') == 'form' requirement in the process
+    # of figuring out if I could have a second submit button---for submitting
+    # requests for a preview of the math AnswerForm
     if form.validate_on_submit() and request.args.get('form') == 'form' and not (whether_graph and points == []):
         if whether_graph and graph.vert:
             correct = False
@@ -417,7 +494,8 @@ def question(question_name):
             correct = question.checkanswer(useranswer)
         if current_user.is_authenticated and not session['tried']:
             user = current_user
-            answer_event = StudentAnswer(student=user,
+            for book_info in books_info:
+                answer_event = StudentAnswer(student=user,
                                         skillname=question_name,
                                         grade_category='check',
                                         seed=session['seed'],
@@ -435,9 +513,11 @@ def question(question_name):
                     answer_event.correct = True
                     db.session.commit()
         else:
-            message = "If you want credit, you'll have to try a new problem."
+            message = "Incorrect. You'll have to try a new problem."
             if whether_graph:
                 message = 'The correct answer is in <span style="color:green">green</span>.'
+            if question_module.prob_type == 'real_line_graph':
+                message = 'The correct answer is in <span style="color:green">green</span>'
             if current_user.is_authenticated:
                 if not session['tried']:
                     answer_event.correct = False
@@ -460,12 +540,14 @@ but you should try a different problem if you want credit."""
                 #     bug_answer = form.answer.data
                 # except:
                 #     bug_answer = json.dumps(session.get('user_points'))
-                bug_report = BugReport(user_answer=session['user_answer'],
+                # print('bug_form.user_answer.data:', bug_form.user_answer.data)
+                answer = bug_form.user_answer.data or session['user_answer']
+                bug_report = BugReport(user_answer=answer,
                                         seed=session['seed'],
                                         question_name=question_name)
                 db.session.add(bug_report)
                 db.session.commit()
-                bug_report = BugReport.query.filter_by(user_answer=session['user_answer'],
+                bug_report = BugReport.query.filter_by(user_answer=answer,
                                         seed=session['seed'],
                                         question_name=question_name).all()[-1]
                 report_id = bug_report.id
@@ -475,16 +557,17 @@ but you should try a different problem if you want credit."""
             message = "It's a brand new problem!!"
     # print('session user_points just before rendering', session.get('user_points'))
     # print('current book: ', session.get('book'))
-    if session.get('section'):
+    if session.get('section'): # This can result in jumping to an unintended question if the page is accessed directly.
         new_question_name = random.choice(section.questions)
         # print('new_question_name: ', new_question_name)
     else:
         new_question_name = question_name
-    if current_user.is_authenticated: #This was for adding a progress bar.
+    if current_user.is_authenticated: #This is for adding a progress bar.
+        book_info = books_info[0]
         grade_info = UserSectionGradeInfo(user,
-                                        book_info['book'],
-                                        book_info['chapter'],
-                                        book_info['section'])
+                                        book_info.get('book'),
+                                        book_info.get('chapter'),
+                                        book_info.get('section')) #This should be changed to access question info directly.
         # print('grade is:', grade_info.grade)
     else:
         grade_info = None
@@ -519,8 +602,10 @@ but you should try a different problem if you want credit."""
 def book_chapter(book_name, chapter_number):
     if current_user.is_authenticated:
         user = current_user
-        session['book'] = book_name
-        session['chapter'] = chapter_number
+        session['book'] = book_name # I'm moving away from that...
+        session['chapter'] = chapter_number # I'm moving away from that...
+        current_user.add_to_books(book_name) # This will be the better way!
+        db.session.commit()
     else:
         user = {'username': 'Anonymous'}
     book = getattr(books, book_name)
@@ -536,9 +621,11 @@ def book_chapter(book_name, chapter_number):
 def book_section(book_name, chapter_number, section_number):
     if current_user.is_authenticated:
         user = current_user
-        session['book'] = book_name
-        session['chapter'] = chapter_number
+        session['book'] = book_name # I'm moving away from that...
+        session['chapter'] = chapter_number # I'm moving away from that...
         session['section'] = section_number
+        current_user.add_to_books(book_name) # This will be the better way!
+        db.session.commit()
     else:
         user = {'username': 'Anonymous'}
     book = getattr(books, book_name)
@@ -548,14 +635,16 @@ def book_section(book_name, chapter_number, section_number):
     skip_to_exercises = request.args.get('skip_to_exercises')
     # print('section query...', skip_to_exercises, type(skip_to_exercises))
     if request.args.get('skip_to_exercises') == 'True':
-        # print('section query...', skip_to_exercises, type(skip_to_exercises))
         if request.args.get('question_name'):
             question_name = request.args.get('question_name')
             ans_id = request.args.get('ans_id')
             path_for_iframe = url_for('question', question_name=question_name, ans_id=ans_id)
         else:
-            question_name = random.choice(section.questions)
-            path_for_iframe = url_for('question', question_name=question_name)
+            try:
+                question_name = random.choice(section.questions)
+                path_for_iframe = url_for('question', question_name=question_name)
+            except IndexError:
+                path_for_iframe = ''
     else:
         path_for_iframe = url_for('section', section_name=section.view_name)
     toc = main.subdivisions
@@ -568,14 +657,16 @@ def book_section(book_name, chapter_number, section_number):
 def book(book_name):
     if current_user.is_authenticated:
         user = current_user
-        session['book'] = book_name
+        session['book'] = book_name # I'm moving away from that...
+        current_user.add_to_books(book_name) # This will be the better way!
+        db.session.commit()
     else:
         user = {'username': 'Anonymous'}
     book = getattr(books, book_name)
-    path_for_iframe = 'hello'
+    path_for_iframe = url_for('section', section_name=book.view_name)
     toc = book.subdivisions
     return render_template('chapter.html', user=user, title=book_name,
-        site_name=app.config['SITE_NAME'], src=url_for(path_for_iframe), toc=toc,
+        site_name=app.config['SITE_NAME'], src=path_for_iframe, toc=toc,
         book=book, book_name=book_name)
 
 @app.route('/Books')
@@ -584,11 +675,12 @@ def library():
         user = current_user
     else:
         user = {'username': 'Anonymous'}
-    path_for_iframe = 'hello'
+    path_for_iframe = url_for('hello')
     library = books.Library.subdivisions
     return render_template('library.html', user=user, title='Library',
-        site_name=app.config['SITE_NAME'], src=url_for(path_for_iframe),
+        site_name=app.config['SITE_NAME'], src=path_for_iframe,
         library=library)
+
 
 
 # @app.route('/Books/<book_name>/<chapter_number>/<section_number>/Exercises', methods=['GET', 'POST'])
@@ -800,7 +892,7 @@ def library():
 #         return json.dumps(return_data)
 #     return render_template('tester.html', parameters=parameters)
 
-@app.route('/handle_graph', methods=['GET', 'POST'])
+# @app.route('/handle_graph', methods=['GET', 'POST'])
 def handle_graph():
     parameters = interpolator.get_parameters()
     # print('parameters: ', parameters, '; type is ', type(parameters))
@@ -813,3 +905,7 @@ def handle_graph():
     return_data.update(interpolator.get_dict_for_svg(points))
     print('handle_graph is getting ready to return ', return_data)
     return json.dumps(return_data)
+
+@app.route('/real_line_tester')
+def real_line_tester():
+    return render_template('real_line_tester.html')

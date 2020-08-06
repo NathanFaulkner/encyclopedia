@@ -1,0 +1,84 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+Let's develop some equations that are relevant at the gas station.
+Our equations will involve some variables.
+Our variables will represent numbers or measured quantities.
+</p>
+
+<p>
+  <div class="activity">
+    <h2>Activity</h2>
+    <span class="inline-header">Goal:</span>
+    Completely factor
+  </div>
+</p>
+
+<p>
+Stuff
+</p>
+
+
+<div class="example">
+  <h2>Example</h2>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      <b>Method 1:</b> Notice that this is <i>like</i>
+
+    </div>
+    <script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+    <p>
+      <b>Method 2:</b>
+      Use the "\( ac \)" method.  That is, you first find a factorization of
+      \( ac = 1\cdot 24 = 24 \) into two numbers that add up to \(-10\).
+      Those numbers are \(-4\) and \(-6\). Then, rewrite the middle term according to
+      that breakdown and then factor by grouping:
+      \begin{align*}
+      x^6 - 10x^3 + 24 &= x^6 - 4x^3 - 6x^3 + 24 \\
+      &= x^3(x^3 - 4) - 6(x^3 - 4) \\
+      & = (x^3-6)(x^3 - 4)
+      \end{align*}
+    </p>
+
+    <p>
+      <b>Method 3: Guess and Check.</b>
+    </p>
+  </div>
+</div>
+
+<p>
+Would you like to see one more without all the talk?
+  <div class="example">
+    <h2>Example</h2>
+    Completely factor the following.
+    \[
+    x^8 +7x^4 - 8
+    \]
+    <div class="answer">
+      <h3>Answer</h3>
+      \begin{align*}
+      x^8 +7x^4 - 8 & = (x^4 - \quad)(x^4 + \quad)\\
+      & = (x^4 - 1)(x^4 +8) \\
+      & = (x^2 - 1)(x^2+1)(x^4 + 8)\\
+      & = (x-1)(x+1)(x^2 +1)(x^4 + 8)
+      \end{align*}
+    </div>
+  </div>
+</p>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

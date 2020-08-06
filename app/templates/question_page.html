@@ -12,10 +12,15 @@
 <p>
   {{ question.given_latex_display }}
 </p>
+{% if question.further_instruction %}
+<p>
+  {{ question.further_instruction }}
+</p>
+{% endif %}
 
 
 {% if whether_graph %}
-{% include "_tester2.html"%}
+{% include "_tester2.html" %}
   <!-- <div style="width: 50%; float: left; border: 1px solid red;">
     <p>
       <form action="" method="post">
@@ -24,6 +29,18 @@
       </form>
     </p>
   </div> -->
+{% elif question.prob_type == 'real_line_graph' %}
+{% include "_real-line.html" %}
+<div style="width: 50%; float: left; border: 1px solid red;">
+  <p>
+    <form action="?form=form" method="post">
+      {{ form.hidden_tag() }}
+      <table>
+        <tr><td>{{ form.submit() }}</td><!--<td><button>Preview</button></td>--></tr>
+      </table>
+    </form>
+  </p>
+</div>
 {% else %}
   <!-- <div class="row"> -->
     <div style="width: 50%; float: left; border: 1px solid red;">
@@ -36,7 +53,7 @@
           <span style="color: red;">[{{ error }}]</span>
           {% endfor %}
           <table>
-            <tr><td>{{ form.submit() }}</td><td><button>Preview</button></td></tr>
+            <tr><td>{{ form.submit() }}</td><!--<td><button>Preview</button></td>--></tr>
           </table>
         </form>
       </p>
@@ -66,28 +83,32 @@
 </div>
 
 
-
+{% if not question.prob_type == 'real_line_graph' %}
 <div style="width: 100%; float: left;  border: 1px solid red; clear: left">
 <table style="border: 1px solid cyan; width: 100%;">
   <tr>
     <td style="width: 50%">
-      You answered:  {{ question.useranswer_latex(form.answer.data, display=False) }}
+      You answered:  {{ question.format_useranswer(form.answer.data, display=False) }}
     </td>
     <td style="width: 50%">
-      The correct answer is: {{ question.answer_latex }}
+      The correct answer is: {{ question.format_answer }}
     </td>
   </tr>
 </table>
 </div>
+{% endif %}
 
 
 {% else %}
 {% endif %}
 
-<!-- Trigger/Open The Modal -->
+{% if not question.prob_type == 'real_line_graph' %}
 <div style="float:left; width: 100%">
-  <a id="myBtn">Click for help with syntax</a>
+  <a id="myBtn" style="cursor: pointer">Click for help with syntax</a>
 </div>
+
+<!-- Trigger/Open The Modal -->
+
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -97,7 +118,7 @@
     <span class="close">&times;</span>
     <h3>Syntax Help</h3>
     <p>
-      This answer field on this page has a
+      The answer field on this page has a
       <a target="_blank" href="https://en.wikipedia.org/wiki/Computer_algebra_system">
         "CAS" (Computer Algebra System)</a>
       behind it called
@@ -139,7 +160,7 @@
           <td>x+2</td><td>\(x+2\)</td>
         </tr>
         <tr>
-          <td>2*2</td><td>4</td>
+          <td>2*3</td><td>6</td>
         </tr>
         <tr>
           <td>2x</td><td>\(2x\)</td>
@@ -155,6 +176,12 @@
         </tr>
         <tr>
           <td>8/2</td><td>\(4\)</td>
+        </tr>
+        <tr>
+          <td>x < 4</td><td>\(x \lt 4\)</td>
+        </tr>
+        <tr>
+          <td>x <= 4</td><td>\(x \leq 4 \)</td>
         </tr>
         <tr>
           <td>2^3</td><td>\(2^3 = 8\)</td>
@@ -193,13 +220,14 @@
           <td>sin(pi x)</td><td>\(\sin(\pi x)\)</td>
         </tr>
         <tr>
-          <td>And so much more!</td><td><-- Well, entering that will result in an error.  Try it!</td>
+          <td>And so much more!</td><td>&larr; Well, entering that will result in an error.  Try it!</td>
         </tr>
       </table>
     </p>
   </div>
 
 </div>
+{% endif %}
 
 {% if request.method == 'POST' %}
 <div class="exercise" style="float: left; width: 100%">
@@ -224,12 +252,19 @@
 {% if current_user.is_authenticated %}
 <div class="padding-40">
     Your score:
-<div class="progress_container">
-  <div id="progress_bar" style="width: {{ grade_info.grade*25 }}%; font-family: sans-serif">
-  {{ grade_info.grade }}
+  <div class="progress_container">
+    <div id="progress_bar" style="width: {{ grade_info.grade*25 }}%; font-family: sans-serif">
+    {{ grade_info.grade }}
+    </div>
   </div>
+  <p>
+    If you just want to practice the problems, then log-out.
+  </p>
 </div>
-</div>
+{% else %}
+  <div style="color:red">
+    If you want credit, you should log-in.
+  </div>
 {% endif %}
 
 

@@ -51,7 +51,7 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
 
     def validate_username(self, username):
-        user = Student.query.filter_by(username=username.data).first()
+        user = Student.query.filter_by(username=username.data.strip()).first()
         if user is not None:
             raise ValidationError('This user name is already in use. \
             Please use another name.')
@@ -74,6 +74,11 @@ class ResetPasswordForm(FlaskForm):
 
 class ReportBugForm(FlaskForm):
     seed = HiddenField()
-    user_answer = HiddenField()
+    user_answer = HiddenField(id="bug_answer")
     question_name = HiddenField()
     submit = SubmitField('Report Bug')
+
+class RealLineForm(FlaskForm):
+    points = HiddenField(id="points_field")
+    intervals = HiddenField(id="intervals_field")
+    submit = SubmitField('Submit')

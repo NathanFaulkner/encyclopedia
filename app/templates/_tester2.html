@@ -489,6 +489,7 @@ function graph_points(cart_pts) {
     req.send("data=" + JSON.stringify(points));
   }
 
+{#
   function do_alt_ajax() {
     // console.log('alt_ajax thinks points is', points);
     var req = new XMLHttpRequest();
@@ -539,6 +540,7 @@ function graph_points(cart_pts) {
     req.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
     req.send("data=" + JSON.stringify(points));
   }
+#}
   // do_ajax();
   // svg.getElementsByTagName('circle')
 

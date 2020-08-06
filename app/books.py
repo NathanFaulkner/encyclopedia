@@ -66,6 +66,28 @@ class Division():
     def list_all_sections(self):
         return Division.list_bottom_elements(self.subdivisions)
 
+    def get_skill_info(self, question_name):
+        """One could generalize this, but this is written only with
+        a book --> chapters --> sections --> questions in mind.... come
+        to think of it, I should have made questions the lowest level
+        elements of these trees. ... then a recursive function
+        could be built that ends with questions in the use case...
+        """
+        if self.category != 'book':
+            return None
+        info = []
+        main = self.subdivisions['main']
+        chapters = main.subdivisions
+        for i, chapter in enumerate(chapters):
+            section = chapter.subdivisions
+            for j, section in enumerate(section):
+                if question_name in section.questions:
+                    info.append([i+1,j+1])
+        return info
+
+
+
+
 
 
 
@@ -73,6 +95,17 @@ class Division():
 #########################
 # Free Sections -- not "bound" in a book
 algebra2 = Section('algebra2', "Algebra 2", '/sections/algebra2')
+nutsandboltsofalgebra = Section('nutsandboltsofalgebra', "Nuts and Bolts of Algebra", '/sections/nuts-and-bolts-of-algebra')
+equationsatthegasstation = Section('equationsatthegasstation', "Equations at the Gas Station", '/sections/equations-at-the-gas-station')
+literalequations = Section('literalequations', "Literal Equations", '/sections/literal-equations')
+solveforx = Section('solveforx', "Solve for x", '/sections/solve-for-x')
+solveforx.add_to_questions('solve_for_x')
+relationshipsinatable = Section('relationshipsinatable', "Relationships in a Table", '/sections/relationships-in-a-table')
+linearinequalities = Section('linearinequalities', "Linear Inequalities", '/sections/linear-inequalities')
+linearinequalities.add_to_questions('linear_inequality')
+graphsoflinearinequalities = Section('graphsoflinearinequalities', "Graphs of Linear Inequalities", '/sections/graphs-of-linear-inequalities')
+graphsoflinearinequalities.add_to_questions('graph_of_linear_inequality')
+linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 graphpointslope = Section('graphpointslope', "Graph from Point Slope Form", '/sections/graph-point-slope')
 graphpointslope.add_to_questions('graph_point_slope')
 factoring1 = Section('factoring1', "Factoring - Level 1", '/sections/factoring-coeff-of-one')
@@ -85,12 +118,18 @@ quadraticpattern.add_to_questions('quadratic_pattern')
 
 ##############################
 # Construction of book, Algebra2 -- collecting, "binding" sections, frontpages, etc.
+nuts_and_bolts_of_algebra = Division('chapter', 'Nuts and Bolts of Algebra',
+                                [solveforx,
+                                linearinequalities,
+                                graphsoflinearinequalities])
+nuts_and_bolts_of_algebra.set_frontpage(nutsandboltsofalgebra)
 linear_functions = Division('chapter', 'Linear Functions', [graphpointslope])
+linear_functions.set_frontpage(linearfunctions_intro)
 polynomials = Division('chapter', 'Polynomials', [factoring1, quadraticpattern])
 #polynomials.intro = polynomials_intro
 polynomials.set_frontpage(polynomials_intro)
 
-main = Division('main', 'Main Matter', [linear_functions, polynomials])
+main = Division('main', 'Main Matter', [nuts_and_bolts_of_algebra, linear_functions, polynomials])
 
 Algebra2 = Division('book', 'Algebra 2', {'front': None, 'main': main, 'end': None})
 Algebra2.name_for_path = 'Algebra2'

@@ -78,7 +78,7 @@ def poly_points_from_numpy(x_points, y_points):
     return poly_points
 
 def get_dict_for_svg(points):
-    print('get_dict_received ', points)
+    # print('get_dict_received ', points)
     i = 0
     # while i < len(points):
     #     if type(points[i]) == str:
@@ -340,7 +340,7 @@ class Graph():
     def setup(self):
         self.vert = False
         points = list(set(tuple(point) for point in self.user_input))
-        print('user points in cartesian', points)
+        # print('user points in cartesian', points)
         if (repeat_in_x(points) and len(points) == 2):
             self.vert = True
             self.as_lambda = None

@@ -1,0 +1,322 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+We start off with a brief review of something that should be well within your comfort
+zone: "solving for \(x\)".  But, don't worry, we'll be heading to some new items soon!
+</p>
+
+<p>
+You may not need to hear much instruction about this topic matter, but I think
+it's a great opportunity to talk about something which is essential in math---even
+if it is a harder thing to "test" or grade: the meaning of it all.  I would love
+to hear from you in response to such questions as "What does \(x\) represent?" and
+"What are you actually doing---in the sense of what does it mean or represent---when
+you are solving for \(x\)?"  Of course, you might try to describe the process
+or procedures you undertake when you solve.  That might be very helpful, too, but
+it isn't actually what I mean here.  I mean to contemplate the meaning.  Think of
+this way: Math consists foremost in a bunch of symbols, strung together according
+to certain rules.  But, as always, symbols have a meaning.  The letters on this
+page are symbols, and strung together according to certain rules (and
+just what are the rules of language??) they have a meaning.  They give rise
+to a meaning in your mind as you read them.  That meaning might be a little different
+for each person and is dependent on so many different, complicated things, such as
+how exactly you view me, the writer, even while you may have just only barely
+gotten to know me.  In the same way, mathematical symbols are intended to have
+a certain meaning.  Actually, the meaning of the symbols is a much stricter
+thing than the meaning of words, but, nevertheless, the way those meanings manifest
+themselves in a different peoples' minds can vary considerably.  They may evoke
+different images and different associations for each person.
+</p>
+
+<p>
+  Allow me to continue this discussion as I demo a (probably easy) problem.
+<div class="example">
+  <h2></h2>
+  Imagine that you are cracking open your math textbook for the first time.
+  Here goes problem #1:
+  <blockquote>
+    Solve for \(x\):
+    \[
+      3x - 7 = 8
+    \]
+  </blockquote>
+
+  <ol type="a">
+    <li> What does this all mean?
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          The math textbook prompt is actually---let's be critical here!---a
+          shorthand for something that might be more clearly understood if it
+          were just spelled out for the reader---something that would go like
+          this:
+
+          <blockquote>
+            Suppose that \(x\) is a real number (so, could be plotted
+            on the real line) with the property that if you subtract
+            7 from 3 times that number it comes out to be 8.  Your job
+            is to find the identity of that number---if it even exists!
+          </blockquote>
+
+          Of course, the number does exist in this case, and it isn't hard
+          to find.  Still, let's go ahead and do so.
+        </div>
+      </div>
+    </li>
+    <li>
+      Go ahead and solve for \(x\).
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          I'm still in the mood for talking a lot, so, in this case, I
+          am going to include descriptions of what I am doing at each step.
+
+          <!-- <table class="answer_steps">
+            <tr><td>\(3x-7= 8\)</td><td width="50%">Given</td></tr>
+            <tr><td>\(3x = 15\)</td><td width="50%">I added 7 to both sides.</td></tr>
+            <tr><td>\(x = 5\)</td><td width="50%">I divided both sides by 3.</td></tr>
+          </table> -->
+
+          \begin{align*}
+          & 3x-7= 8 & \textrm{Given}\\
+          \Rightarrow \quad & 3x = 15 & \textrm{I added 7 to both sides.}\\
+          \Rightarrow \quad & x = 5 & \textrm{I divided both sides by 3.}\\
+          \end{align*}
+
+          Now, to be clear, I don't plan on asking you to narrate your
+          problems in this way (at least not for a grade).  On the other
+          hand, I'm not entirely satisfied with the partial narration
+          that I just gave!  If our task is to contemplate the meaning of
+          it all (and that is indeed my primary motive with this easy
+          problem), then I'll have to be even wordier.  It goes like this:
+
+          <blockquote>
+            If \(x\) is a real number, then \(3x-7\) is too.  Indeed,
+            we are given that \(3x-7\) is 8.  Now, we note that \(8+7=15\)
+            but also that adding 7 to \(3x-7\) takes you back to just
+            \(3x\).  That means that \(3x=15\).  Of course, since
+            3 times 5 is 15 it must be that  \(x\) is 5.  Looking back,
+            we see that the substitution of 5 in for \(x\) does indeed satisfy
+            the original equation (it makes it true!)---that is, when
+            \(x = 5\):
+            \[
+              \textrm{LHS} = 3x - 7 = 3 \cdot 5 - 7 = 15 - 7 = 8 = \textrm{RHS},
+            \]
+            where I have used the abbreviations "LHS" and "RHS"
+            for the original left- and right-hand sides, respectively.
+          </blockquote>
+        </div>
+      </div>
+    </li>
+  </ol>
+
+
+</div>
+</p>
+
+<p>
+  Now, before you jump to the exercises, you should know that I do expect
+  you to do harder problems at this point.  In fact, we'll have to look
+  at 3 more examples to see three interesting cases in which this narrative can
+  take us---and you really have to look at these more complicated examples to
+  see the special cases emerge.
+</p>
+
+<p>
+  <div class="example">
+    <h2></h2>
+    Solve for \(x\).
+    \[
+      9(x - 9) = 9x + 6(x-4)
+    \]
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+      Now, I talk "strategy" or "procedure" a little bit.  I know (and you know)
+      from past experience and learning that the game to play here is
+      to try to "isolate \(x\)".  Note that that may also include "combining"
+      like terms to try to get the number of occurrences of \(x\).  Down to
+      just one.  For instance, the following equation would not
+      quite be considered "solved" wven though, in one sense, it is "solved for
+      \(x\)":
+      \[
+        x = 3x - 12
+      \]
+      The problem with this "solution" is that it has not served to answer
+      the true goal, which, as we noted in the previous example, is really
+      not explicity explained in the brief prompt "solve for \(x\)": the goal
+      is to find the identity of the real number \(x\) that satisfies
+      the given equation (that makes it true)---if that number
+      actually even exists.  We shall have more to say about this goal in the next
+      couple examples, too!
+
+      So, on this one, I am going to "collect like terms" and then "isolate \(x\)."
+      To that end, the first step I'll undertake is to distribute all the places
+      where a number is multiplied onto a binomial.
+      \begin{align*}
+      & 9(x - 9) = 9x + 6(x-4) & \textrm{Given}\\
+      \Rightarrow \quad & 9x - 81 = 9x + 6x - 24 & \textrm{Distributed}\\
+      \Rightarrow \quad & 9x - 81 = 15x - 24 & \textrm{Simplified a little}\\
+      \Rightarrow \quad & 9x = 15x + 57 & \textrm{Added 81 to both sides}\\
+      \Rightarrow \quad & -6x = 57 & \textrm{Subtracted \(15x\) from both sides}\\
+      \Rightarrow \quad & x = \frac{57}{-6} = -\frac{57}{6} & \textrm{Divided both sides by \(-6\)}
+      \end{align*}
+
+      Now, it is also prudent to check your answer.  You could even use a calculator
+      to do this.  You would type
+      <blockquote class="typewriter">
+        9(-57/6 - 9)
+      </blockquote>
+      which yields <span class="typewriter">-166.5</span>.  That's the value of the left-hand side
+      when our answer is substituted in.  Next, we plug in the
+      right-hand side and hope it comes out the same:
+      <blockquote class="typewriter">
+        9*-57/6 + 6(-57/6 - 4))
+      </blockquote>
+      which yields <span class="typewriter">-166.5</span>!  So, we found the solution.
+      </div>
+    </div>
+  </div>
+</p>
+
+<p>
+  <div class="example">
+    <h2></h2>
+    Solve for \(x\). (Find the solution set.)
+    \[
+      9(x - 9) = 3x + 6(x-4)
+    \]
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+      Something different happens on this one!!  It provides a good
+      chance to go back and contemplate the secret "narrative"
+      that lies behind your typical textbook problems and their
+      procedural solution.
+      \begin{align*}
+      & 9(x - 9) = 3x + 6(x-4) & \textrm{Given}\\
+      \Rightarrow \quad & 9x - 81 = 3x + 6x - 24 & \textrm{Distributed}\\
+      \Rightarrow \quad & 9x - 81 = 9x - 24 & \textrm{Simplified a little}\\
+      \Rightarrow \quad & 9x = 9x + 57 & \textrm{Added 81 to both sides}\\
+      \Rightarrow \quad & 0 = 57 & \textrm{Subtracted \(9x\) from both sides}\\
+      \end{align*}
+
+      Now what?  Well, you might already know the answer to this as well: It
+      means that there is not solution; there is no real number with that
+      satisfies the original equation.
+
+      So, what happens from the point-of-view of "narrative" or "meaning"?
+      The narration would go something like this:
+      <blockquote>
+        Suppose that \(x\) is a real number (you can plot it on the real line)
+        with the property that
+        \[
+          9(x - 9) = 3x + 6(x-4).
+        \]
+        (In English, this means that 9 times 9 less than the number is the
+        same as 3 times the number added to the result of 6 times 4 less than
+        the number.)  From there, step-by-step (see the steps above, which
+        are little painful to reproduce in English), we learn that "\(0 = 57\)".
+        Of course, 0 doesn't equal 57, so, assuming we didn't make a mistake
+        along the way, that means our original assumption was untenable: that is,
+        there is no real number with property just described.
+      </blockquote>
+      When this sort of thing happens, you can just record it as "no solution".
+      Note the directions I put in parentheses in the prompt!  Do you
+      know what a "solution set" is?  It is the set of all real
+      numbers that satisfies a given statement (equation, inequality,
+      or what-have-you).  In this case, the solution is set is "empty".
+      For completeness, mathematicians declare that there is such a
+      thing as an "empty set".  So, you could still say there is a solution (set)
+      in this case: the solution set is the empty set.
+
+      You are probably also familiar with the fact that mathematicians
+      use the symbol &empty; for the empty set.  This is actually
+      a version of a letter from Danish and Norwegian alphabets,
+      chosen by
+      <a href="https://en.wikipedia.org/wiki/Empty_set#Notation" target="_blank">Andr&eacute; Weil in 1939</a>
+        for this purpose!  (So, it isn't
+      a very old symbol.  For that matter, few of our math symbols are.)
+      </div>
+    </div>
+  </div>
+</p>
+
+<p>
+  <div class="example">
+    <h2></h2>
+    Solve for \(x\). (Find the solution set.)
+    \[
+      18 \left(x + 3\right)=3 \left(x + 3\right) + 15 x + 45
+    \]
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+      We get some more variety on this one.
+      \begin{align*}
+      & 18 \left(x + 3\right)=3 \left(x + 3\right) + 15 x + 45 & \textrm{Given}\\
+      \Rightarrow \quad & 18x + 54 = 3x + 9 +15x + 45 & \textrm{Distributed}\\
+      \Rightarrow \quad & 18x + 54 = 18x + 54 & \textrm{Simplified a little}\\
+      \end{align*}
+
+      Now we could continue at this point, but what's point?  Look at it this way,
+      strictly speaking, we haven't learned anything from this result---I mean,
+      I could have told you before we did anything that \(18x + 54\) equals
+      \(18x + 54\).  In fact, that's true no matter what \(x\) is.  And, herein lies
+      the central point.  You may realize with me here that the solution set
+      is "all real numbers"; that is, plugging in <em>any</em> real number
+      for \(x\) will satisfy the equation (make it true). (Try it!)  But,
+      to really <em>prove</em> that that is the case, the thing to do is certainly
+      not keep plugging in real numbers until you give up.  Rather, the key
+      to the logic here is that you can run those steps <em>in reverse</em>.
+      The narrative goes like this:
+      <blockquote>
+        Let \(x\) be any real number you like!  Now, agree with me that
+        \[
+          18x + 54 = 18x + 54
+        \]
+        From this (and sort of "desimplifying", if you like), you can deduce
+        that
+        \[
+          18x + 54 = 3x + 9 +15x + 45
+        \]
+        and finally that
+        \[
+          18 \left(x + 3\right)=3 \left(x + 3\right) + 15 x + 45
+        \]
+        Since \(x\) was arbitrary at the first, we see that any \(x\)
+        will do.  Any real number "makes this equation true".
+      </blockquote>
+
+      You can just report this as "all real numbers" or "all reals"
+      and I will accept that you were talking about the solution
+      set but didn't feel like using a lot of words.  Of course,
+      you might also be familiar with the mathematician's symbol
+      for this, which is just an 'R', but written in a special
+      font called "blackboard bold", which should be self-explanatory.
+      Here it is:
+      <!-- rendered by the gold-standard math-typesetting
+      language (which I am using) called
+      <a href="https://en.wikipedia.org/wiki/LaTeX" target="_blank">\(\LaTeX\)</a>:  -->
+      <a href="https://en.wikipedia.org/wiki/Real_number#Vocabulary_and_notation" target="_blank">
+        &#8477;
+      </a>.
+      </div>
+    </div>
+  </div>
+</p>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+{% endblock %}

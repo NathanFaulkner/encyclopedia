@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
 from time import time
-import jwt, math
+import jwt, math, json
 
 from app import app, db, login, books
 
@@ -29,6 +29,7 @@ class Student(UserMixin, db.Model):
         secondaryjoin=(observers.c.observed_id == id),
         backref=db.backref('observers', lazy='dynamic'), lazy='dynamic'
     )
+    books = db.Column(db.String(), default=json.dumps([]))
     # Could add "super_user"
     # Could add "classcode" ... make view/function to generate unique class codes
     # on request, then view to add observer priviliges for each student
@@ -72,6 +73,13 @@ class Student(UserMixin, db.Model):
         return jwt.encode(
             {'reset_password': self.id, 'exp': time() + expires_in},
             app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+
+    def add_to_books(self, book):
+        books = json.loads(self.books)
+        if book not in books:
+            books.append(book)
+        self.books = json.dumps(books)
+        # need to do db.session.commit(), too...
 
     @staticmethod
     def verify_reset_password_token(token):
@@ -131,20 +139,31 @@ class UserSectionGradeInfo():
         section and chapter are numbers from 1 to...
         """
         self.user = user
-        self.book = book
-        self.chapter = chapter
-        self.section = section
+        self.book_name = book
+        self.set_book()
+        self.chapter_number = chapter
+        self.set_chapter()
+        self.section_number = section
+        self.set_section()
         self.set_initial_due_date()
         self.grade = 0
-        self.set_grade()
+        self.set_grade_info()
 
+    def set_book(self):
+        self.book = getattr(books, self.book_name)
+
+    def set_chapter(self):
+        main = self.book.subdivisions['main']
+        self.chapter = main.subdivisions[self.chapter_number - 1]
+
+    def set_section(self):
+        self.section = self.chapter.subdivisions[self.section_number - 1]
+
+    def get_answers(self):
+        return self.__dict__.get('answers')
 
     def set_initial_due_date(self):
-        book = getattr(books, self.book)
-        main = book.subdivisions['main']
-        chapter = main.subdivisions[self.chapter - 1]
-        section = chapter.subdivisions[self.section - 1]
-        self.initial_due_date = section.due_date
+        self.initial_due_date = self.section.due_date
         if self.initial_due_date is not None:
             time_until_due_date = self.initial_due_date - datetime.utcnow()
             days_until_due_date = time_until_due_date.days + time_until_due_date.seconds/60/60/24
@@ -157,13 +176,23 @@ class UserSectionGradeInfo():
     base = 2#math.sqrt(7) # This is supposed to model duration of memory factoring in past repetitions
     session_duration = 24
 
-    def set_grade(self):
+    def set_grade_info(self):
         self.next_due_date = self.initial_due_date
-        answers_by_section = StudentAnswer.query.filter_by(user_id=self.user.id,
-                                                            book=self.book,
-                                                            chapter=self.chapter,
-                                                            section=self.section)
-        answers = answers_by_section.order_by(StudentAnswer.timestamp.asc()).all()
+        question_names = self.section.questions
+        # print('section:', self.chapter_number, ':', self.section_number, ':', question_names)
+        if question_names != []:
+            answers_by_section = StudentAnswer.query.filter_by(user_id=self.user.id,
+                                                            skillname=question_names[0])
+            i = 1
+            while i < len(question_names):
+                query = answers_by_section = StudentAnswer.query.filter_by(user_id=self.user.id,
+                                                                skillname=question_names[i])
+                answers_by_section = answers_by_section.union(query)
+                i += 1
+            self.answers = answers_by_section
+            answers = answers_by_section.order_by(StudentAnswer.timestamp.asc()).all()
+        else:
+            answers = []
         if answers == []:
             return None
         grade = 0
@@ -219,6 +248,10 @@ class UserSectionGradeInfo():
 
 
 class UserGradeInfo():
+    """This should be cleaned up to create tree of info for section grades
+    just once rather than finding this info in multiple different methods.
+    all_info should be {'book_name': [[1.1 grade_info, 1.2 grade_info], [etc]]}
+    """
     def __init__(self, user):
         self.user = user
         self.answers = StudentAnswer.query.filter_by(user_id=user.id).all()
@@ -264,12 +297,10 @@ class UserGradeInfo():
         return sections
 
     def get_answers_by_section_desc(self, book, chapter, section):
-        answers_by_section = StudentAnswer.query.filter_by(user_id=self.user.id,
-                                                            book=book,
-                                                            chapter=chapter,
-                                                            section=section)
-        answers = answers_by_section.order_by(StudentAnswer.timestamp.desc()).all()
-        return answers
+        answers_by_section = UserSectionGradeInfo(self.user, book, chapter, section).get_answers()
+        if answers_by_section is not None:
+            return answers_by_section.order_by(StudentAnswer.timestamp.desc()).all()
+        return []
 
     def get_answers_by_section_asc(self, book, chapter, section):
         answers_by_section = StudentAnswer.query.filter_by(user_id=self.user.id,

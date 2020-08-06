@@ -52,9 +52,15 @@
         Encyclopedia Omega
       </div>
       <hr>
-      <a href="{{ url_for('login') }}">Login</a> <a href="{{ url_for('register') }}">Register</a>
+      {% if current_user.is_authenticated %}
+      <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
+      <a href="{{ url_for('library') }}">Browse</a>
+      {% else %}
+      <a href="{{ url_for('login') }}">Login</a>
+      <a href="{{ url_for('register') }}">Register</a>
       <br>
       <a href="{{ url_for('library') }}">Browse</a>
+      {% endif %}
     </div>
   </body>
 {% endblock %}
