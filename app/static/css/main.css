@@ -352,16 +352,18 @@ a {
   color: #e24f1d;
 }
 
-.first-letter{
+/* .first-letter{
   font-size: 35px;
   line-height: 70px;
-}
+} */
 
-.subhead:first-letter {
+.subhead::first-letter {
   float: left;
   font-size: 45px;
+  font-weight: bold;
   line-height: 2;
   margin-right: 4px;
+  /* color: var(--section-header-color); */
 }
 
 
