@@ -13,9 +13,3 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['squedvo@gmail.com', 'nathanfaulkner@gmail.com']
     SITE_NAME = 'Encyclopedia Omega'
-
-    # MAIL_SERVER=smtp.googlemail.com
-    # MAIL_PORT=587
-    # MAIL_USE_TLS=1
-    # MAIL_USERNAME=squedvo@gmail.com
-    # MAIL_PASSWORD=p6WdwKrpT9ufvRw

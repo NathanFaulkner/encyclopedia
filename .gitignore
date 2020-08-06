@@ -8,3 +8,4 @@ pip-log.text
 venv
 app.db
 encyclopedia.log*
+mail_to_gmail_config.sh
