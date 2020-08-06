@@ -357,12 +357,13 @@ a {
   line-height: 70px;
 } */
 
-.subhead::first-letter {
-  float: left;
+.subhead { /*::first-letter{ */
+  initial-letter: 3;
+  /* float: left;
   font-size: 45px;
   font-weight: bold;
   line-height: 2;
-  margin-right: 4px;
+  margin-right: 4px; */
   /* color: var(--section-header-color); */
 }
 

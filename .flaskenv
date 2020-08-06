@@ -1,2 +1,3 @@
 FLASK_APP=encyclopedia.py
 FLASK_DEBUG=1
+MAIL_PASSWORD=p6WdwKrpT9ufvRw
