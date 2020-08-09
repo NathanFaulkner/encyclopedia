@@ -146,7 +146,6 @@ class UserSectionGradeInfo():
         self.section_number = section
         self.set_section()
         self.set_initial_due_date()
-        self.grade = 0
         self.set_grade_info()
 
     def set_book(self):
@@ -200,6 +199,8 @@ class UserSectionGradeInfo():
         i = 0
         # mastery_session = True
         while i < len(answers):
+            expected_recall_duration = int(self.base**(session_count))
+            # print('section:', self.chapter_number, ':', self.section_number, ':', question_names, 'session_count', session_count)
             answer = answers[i]
             if i == 0:
                 if answer.correct:
@@ -213,13 +214,13 @@ class UserSectionGradeInfo():
                 #         'section:', self.section,
                 #         'try number:', i+1,
                 #         'days since prev:', days_since_previous)
-                new_session = days_since_previous > 0.5
+                new_session = days_since_previous > 0.75*expected_recall_duration
                 if new_session:
                     if grade == self.max_grade:
                         session_count += 1
                     expected_recall_duration = int(self.base**(session_count))
                     memory_decay_penalty = int(days_since_previous/expected_recall_duration)
-                    grade = max(0, grade - memory_decay_penalty)
+                    grade = max(0, int(grade*0.5**memory_decay_penalty))
                 #     if answer.correct:
                 #         grade = min(self.max_grade, grade + 1)
                 #     else:
@@ -242,7 +243,7 @@ class UserSectionGradeInfo():
         self.memory_gradient = days_since_last/expected_recall_duration
         self.next_due_date = answers[-1].timestamp + timedelta(days=expected_recall_duration)
         memory_decay_penalty = int(days_since_last/expected_recall_duration)
-        grade = max(0, grade - memory_decay_penalty)
+        grade = max(0, int(grade*0.5**memory_decay_penalty))
 
         self.grade = grade
 

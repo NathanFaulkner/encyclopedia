@@ -1,8 +1,191 @@
-This site is a work in progress.  I am full-time
-teacher, which means that most of the technical work on this site
-gets done during the summer and content gets added during the school
-year.  I hope you enjoy it, but if you have suggestions
-for improving it, please email me at
-<span style="font-weight: bold">
-  nathan dot faulkner at gmail dot com
-</span>.
+<p class="subhead">
+And welcome to Encyclopedia Omega!
+</p>
+
+<h2>For Students</h2>
+<p>
+  At left, you will find a "library" of books.
+  A book is like a course and a course is like a book.
+  When you work on material that you find within
+  this book, you will (if you log in) receive
+  grades on your work.  But, don't worry,
+  you can try as many times as you like to get the
+  grade that you are happy with.
+</p>
+
+<p>
+  That said,
+  the only way to really advance your grade in this book
+  (long-term)
+  is to get a "4" on each section's worth of work.  You will
+  see a progress bar with your grade below
+  the questions from that section.  Once you
+  earn a 4 on that section, you will earn a new "due date".
+  At the very first, your due date will be 1 day after you first
+  earned the 4.  Your new due date will be established
+  in a similar way each time you earn a 4&mdash;but the
+  good part is that each new time you earn a 4, your new date
+  will be double the time away as the previous due date was from
+  the original!  On the other hand, you have to put
+  some time in between each time you earn that next 4 to actually
+  get the extended grading period.  (See some details on this below.)
+  For instance, your 2nd due date will be 2 days away, then
+  4 days and so on.  Take a look at the following table
+  for more detail.
+
+  <table>
+    <tr>
+      <th>Number of "4"s earned</th>
+      <th>Grade Extension Period in More Days Out</th>
+      <th>Number of Days to Wait to Earn Next Extension</th>
+    </tr>
+    {% set range = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] %}
+    {% set base = 2 %}
+    {% for i in range %}
+    <tr><td>{{ i }}</td><td>{{ base**(i-1) }}</td><td>{{ 0.75*base**(i-1)}}</td></tr>
+    {% endfor %}
+  </table>
+</p>
+
+<p>
+    What happens when you miss a due date?  Well, really what I am doing
+    with this "Grade Extension Period" is taking away points for every
+    period of this duration that passes after your last earning a 4.
+    Let's run through a basic scenario to make this more clear.  Say
+    that you get your very first 4 on a section.  (By the way,
+    each time you get a problem right, your score will go up by one point, whereas
+    if you get a problem wrong, your score goes down by one point.)
+    Your next due date will be the very next day.
+    After all, ask yourself how often
+    you have learned some math only to forget it the next day!  So,
+    you need to revisit it again the next day.
+    But what happens if you don't get to it that next day?  Well, if 24 hours
+    pass without you revisiting the problems, then your score
+    will go down to a 2.  That may seem harsh if you're stuck thinking
+    in terms of percentages, and A's, B's, and C's.  Instead, look at this way: all
+    it means is that you will need to get two more problems right (assuming
+    you don't get any wrong that you'll have to compensate for by doing more
+    problems) to bring
+    your grade back up to a 4.  So, say you do a five or six more problems (getting some
+    right and some wrong) and bring that score
+    back up to a 4.  Great!  Then you won't have to worry about
+    that section for another 2 days.  So, let's say that 2 days go by. (Precisely
+    48 hours is what the algorithm is looking at, if you want to get into
+    the details).  Then you score goes down to 2 again.  If 4 days go by (so,
+    two periods of duration 2 days each), then your score goes down to 1.  If
+    6 days go by, your score goes down to 0.  But you can bring
+    your score up at any time, so, in a way, it doesn't really
+    matter!  It's only a question of how many problems
+    you have to get right in order to earn that next, longer grade extension.
+    After you get a 4 for the third time, you won't have to try those
+    problems again for 4 days.
+    <!-- Confusing?  Not really&mdash;if we consider some concrete scenarios.
+    Say that you get your very first "4" on a section.  Well, your next
+    due date is the next day.  After all, ask yourself how often
+    you have learned some math only to forget it the next day!  So,
+    you need to revisit it again the next day.  Why? Because your grade will
+    get cut in half per day (at this point) that you take to come back to it.
+    But, now, say that you come back to it the next day (or at least 0.5 days, according
+    to the third column in the chart) and do another problem,
+    thus either keeping your grade at or raising it back to a 4.  Great!
+    Then you won't have to revisit this thing for another <em>2</em> days! (If
+    you wanted to earn the doubled grading period earlier, the earliest
+    you could do so is 1 day out, as per the third column in the chart.)
+    Get it?  And what's the penalty if you don't?&mdash;your grade will fall by a point for every
+    2-day period after your 2nd 4.  So, say, after 3 days you do another problem and maintain your 4.
+    <em>Then</em> you won't have to worry about it again for another 4 days.   -->
+    And then 8 days,
+    then 16 days, then over a month (32 days), then over two months, four months,
+    8 months,...and, eventually, of course, your grade is locked in for the
+    duration of a normal semester, school year, or lifetime.  And, hopefully,
+    at that point, your knowledge is locked in for a lifetime, too!  That, anyway,
+    has been how learning has worked for me.  Some repetition has been needed,
+    but, with each repetition, I seem to recall things for longer.  (Of
+    course, cognitive scientists have researched this sort of phenomenon, too,
+    but I leave those details to others.)
+</p>
+
+<p>
+    One aspect of this repetition, though,
+    for me, is that it needs to be spaced out.  The sweet spot is to return
+    to something you have learned
+    <em>just before</em> you forget it.  Now, I don't know when that will be for
+    every individual, but one thing I don't really think would be useful
+    is for you to get on every day at 3:30 for 9 days straight and do another problem and
+    then, just like that, have the section knocked out for most of a year.
+    While that wouldn't be completely useless to your long-term learning by any means,
+    I'm not sure you'd
+    really retain the knowledge for that long after just those 9 (straight)
+    days of repetition.  So, that's
+    where that third column in the chart comes in: you can't actually earn the new
+    grade extension (by earning your next 4) until you have waited
+    until 75% of the grade extension period.  So, after earning
+    your first top grade of 4,
+    you can't get the
+    2-day extension without waiting 0.75 days or 18 hours (seems natural, right?)
+    Then, after earning your second 4, you have that 2-day extension, but you can't earn
+    a 4-day extension until \(1.5 = 0.75 \cdot 2\) days later
+    (literally, 36 hours from the timestamp on
+    your previous 4). So, you wait a day and a half, get a 4 and how have a 4-day extension.
+    Well, now you have to wait 3 days to earn an 8-day extension.  All that seems
+    like a lot to keep track of&mdash;which is not my intention here at all.  All I'm after
+    is that you return to things that you learned in the past to help
+    retain that knowledge longer&mdash;not to make you some paranoid watcher
+    of the calendar.  So, here is all you actually need to do: Go to your profile.
+    Look at your grades.  Of course, if there is a grade that is below
+    a 4, then you need to try more of those problems.  Aside from that, all you
+    have to do is to look at the <b>color</b> highlighting your due date.
+    If the due date is highlighted
+    <span style="background-color: rgba(0, 255, 0, 0.5)">green,</span>
+    ignore it!  On the other hand, if it is
+    <span style="background-color: rgba(252, 186, 3, 0.5)">yellow,</span>,
+    then the calendar has fallen into that window where you can earn a new
+    grade extension but before you lost any points!  Finally, if
+    the due date is highlighted <span style="background-color: rgba(255, 0, 0, 0.5)">red,</span>,
+    it means the due date passed, so you have already started to lose points.
+    Again, what happens if you lost points?  Does that mean
+    your soul has been scrutinized and found lacking?  Does it mean
+    your future is now irretrievably in doubt?  Have you brought
+    dishonor and shame on your family for 7 generations?  No, it just
+    means you'll have to get more than one question right in order
+    to go back to a 4, in order to earn that next, sweet grade extenstion.
+    That's all!
+</p>
+
+<h2>For Helpers</h2>
+<h3>(And for students being helped)</h3>
+<p>
+Are you a teacher, tutor, parent, or other benevolent force in the life
+of a student using this site?  Would you like to see their
+grades&mdash;and, not only that&mdash;see precisely what your fine, learning
+friend entered for each and every one of their attemps on
+these questions?  Well, you can do that!  All you have to do is, first of all,
+register for the site.  Then, <em>ask your learning friend</em> to
+go to <em>your</em> (the helper's) profile.  A student can do that by entering
+{{ url_for('entrance', _external=True, _scheme='https') }}/user/&lt;yourusername&gt;.  To be clear,
+don't enter the '&lt;' and '&gt;' signs. Just enter your username
+after the slash there&mdash;meaning the username of the teacher, tutor,
+parent, benelovent force.  When the student arrives at the
+benelovent helper's profile, they will click a button (over
+on the right side of the page at the top) that says
+"Name as Observer".  You (the student) will be granting
+your helper access to all of your grades and even to all of your responses.
+You (the helper) can see these grades by going either to your own profile
+or to the student's profile.  Simple as that!
+</p>
+
+<h2>For Everybody!</h2>
+<p>
+  I hope you enjoy this website, but I welcome your suggestions
+  for improving it.  Please email me at
+  <span style="font-weight: bold">
+    nathan dot faulkner at gmail dot com
+  </span>.
+  But be gentle, because this project is a learning experience for me as well!
+
+  By the way, if you would like to see how I created this site
+  (not to say it is any act of genius), then you can
+  view <em>all</em> of the source code (and copy it, steal it,
+  dedistribute it in whatever way you choose)
+  on <a href="">GitHub</a>.
+</p>

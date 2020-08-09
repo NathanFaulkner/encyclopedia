@@ -10,7 +10,11 @@
   {{ question.prompt_single }}
 </p>
 <p>
+  {% if question.given_latex_display %}
   {{ question.given_latex_display }}
+  {% else %}
+  {{ question.format_given }}
+  {% endif %}
 </p>
 {% if question.further_instruction %}
 <p>
@@ -253,9 +257,11 @@
 <div class="padding-40">
     Your score:
   <div class="progress_container">
+    {% if grade_info.grade or grade_info.grade == 0 %}
     <div id="progress_bar" style="width: {{ grade_info.grade*25 }}%; font-family: sans-serif">
     {{ grade_info.grade }}
     </div>
+    {% endif %}
   </div>
   <p>
     If you just want to practice the problems, then log-out.

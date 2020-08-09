@@ -1,0 +1,335 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  Have you studied compound inequalities before?  Here are two examples:
+  \[
+  -3\leq 4x + 5 \lt 17
+  \]
+  and
+  \[
+  -3 \leq 4x+5 \quad \textrm{or} \quad 4x+5 \lt 17
+  \]
+  Have you seen something like these before?  What do they mean?  Of course,
+  these are getting
+  a bit more complicated to write, so it is not surprising that they should
+  have a more complicated meaning.  We need to get clear on that meaning before
+  we get too much further!
+</p>
+
+<p>
+  It makes sense to start with a very basic one,
+  so we can discuss the underlying meaning, before we start adding in the
+  task of solving, don't you think?
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  Consider this very basic compound inequality:
+  \[
+  -3 \lt x \lt 4
+  \]
+
+  <ol class="multi-part" style="list-style-type: lower-alpha;">
+    <li>
+      What does it mean?
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          This is shorthand for the narrative "\(x\) is a real
+          number that is greater than \(-3\)
+          (to the right of \(-3\), on a horizontal real line)
+          <em>and</em> less than 4".  In fact, there is another
+          important way that you can represent this statement
+          (which you will have to use when answering the
+          exercises, because of the way I programmed
+          the answer-checking algorithm).  This inequality
+          can also be written
+          \[
+            x \gt -3 \quad \textrm{and} \quad x \lt 4
+          \]
+
+          <p>
+            The use of the word "and" is critical here.
+            Actually, let me tell you that the most important
+            concepts in this section are those represented by
+            the words "and" and "or".  The meaning and concept behind these
+            words is a fundamental aspect of logic, which pervades not only
+            mathematics but computer programming and philosophy and
+            other systems of logic.  We need to contemplate their meaning.
+          </p>
+
+          <p>
+            Now, while you are, of course, familiar with the English words "and"
+            and "or", this is math (and computer science and philosophy at the
+            same time).  You might think that's a bad thing&mdash;but I know
+            you are also familiar with one of the strengths of math expression
+            over-and-above common English.  Or, maybe you are just beginning to
+            understand the key strength (and, at the same time, limitation)
+            of math: everything in math has a very precise, defined meaning (and
+            anything not expressible in such terms is not amenable to mathematical
+            reasoning.)  In point of fact, the English words "and" and "or"
+            carry some ambiguity in this and other contexts&mdash;an ambiguity which
+            must be allayed by our careful definition of these words.
+          </p>
+
+          <p>
+            Let me define the logical connector 'and' first by talking about
+            in the context of the compound inequality above.  The inequality
+            \[
+              x \gt -3 \quad \textrm{and} \quad x \lt 4
+            \]
+            should really be understood as describing or defining a set
+            of real numbers&mdash;the set of real numbers that satisfies
+            it (that make it a true statement when plugged in for \(x\)).
+            Think of this set as a "club" and this expression as the
+            means by which you decide whether a number is member or not;
+            it is a <em>test</em> of membership.  So, take some random
+            real number, like 5.  So, you test it against the
+            criteria (with that special logical connector): you first observe
+            that *yes* \(5 \gt -3\).  However, it must have both that
+            property <em>and</em> the next; it must also be less than 4.
+            It isn't, so it is not a member of this set.  This is pretty
+            easy stuff, but you will want to compare this to
+            what I say about the connector 'or' n the next example!
+          </p>
+
+          <p>
+            Maybe the best way to realize the meaning is to shade on a real line
+            where \(x\) could possibly be, as in the next question.
+          </p>
+        </div>
+      </div>
+    </li>
+    <li>
+      On a number line, graph the set of all real numbers with the given property.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          We need to shade all \(x\)-values between \(-3\) and \(4\),
+          also using empty circles for those endpoints.
+          {% set svg = 'svg1' %}
+          {% set points = [{'x': -3, 'type': 'empty'},
+                            {'x': 4, 'type': 'empty'}] %}
+          {% set intervals = [[-3,4]] %}
+          {% include "_static-real-line.html" %}
+        </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  Consider this very basic compound inequality:
+  \[
+    x \lt -3 \quad \textrm{or} \quad x \gt 4
+  \]
+
+  <ol class="multi-part" style="list-style-type: lower-alpha;">
+    <li>
+      What does it mean?
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          This is shorthand for the narrative "\(x\) is a real
+          number that is (either) less than \(-3\)
+          (to the left of \(-3\), on a horizontal real line)
+          <em>or</em> greater than 4". It is critical that we contemplate what this means.
+
+          <p>
+            Again, you ought to look at this inequality as a
+            "test of membership" in a club.  So, take some
+            random real number, like 5.  We test it for membership
+            by considering each of the inequalities in the compound
+            expression but <em>also</em> carefully processing
+            the meaning of the logical connector.  So, is \(x\)
+            less than -3? *No*, of course not.  Does that
+            mean that \(x\) is out of the club?  No!  That's because
+            of the 'or': to be in this "club", 5 only needs to
+            meet <em>one</em> of the conditions in the compound
+            expression---not both!  So, "and" means "has to satisfy
+            both" whereas "or" means "only needs to satisfy
+            one of the conditions".  Indeed, as \(5 \gt 4\), 5
+            is indeed in the club; it is part of the set defined
+            by this compound expression.
+          </p>
+
+          <p>
+            We'll graph this thing on the real line in a moment&mdash;which
+            may be of some help to you, but another good visual
+            comes in the form of a Venn diagram. Just take a look at
+            <a href="https://en.wikipedia.org/wiki/Logical_conjunction">
+               this link for 'and'
+            </a>
+            and
+            <a href="https://en.wikipedia.org/wiki/Logical_disjunction">
+              this link for 'or'
+            </a>.
+          </p>
+        </div>
+      </div>
+    </li>
+    <li>
+      On a number line, graph the set of all real numbers with the given property.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          We need to shade all \(x\)-values to the left of \(-3\) and
+          to the right of \(4\),
+          also using empty circles for those endpoints.
+          {% set svg = 'svg2' %}
+          {% set points = [{'x': -3, 'type': 'empty'},
+                            {'x': 4, 'type': 'empty'}] %}
+          {% set intervals = [[-20,-3], [4,20]] %}
+          {% include "_static-real-line.html" %}
+        </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+    Solve the inequality.  Give your answer both in inequality notation
+    and by graphing the solution on a number line.
+    \[
+      -3 \lt 3x - 12 \leq 18
+    \]
+  </p>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      It's time to take a step back and consider the underlying narrative
+      of the solving process; this is just something we need to do each
+      time something new is introduced&mdash;to carefully consider the
+      question, "What does it mean?"
+
+      <p>
+        In solving, we are first saying, "Suppose there is a real number
+        \(x\) with the given property."  In this case, we are imagining
+        that if you take 12 away from the product of 3 times \(x\),
+        you get something that falls between -3 and 18 but possibly equal to 18.
+        Let me point out that the inequalities we are studying in this
+        section are called "compound".  That really means that
+        they include more than one statement about \(x\)&mdash;added information,
+        if you will!&mdash;which are joined together by "logical connectors",
+        'and' or 'or'.  See the first two examples for a definition of these.
+      </p>
+
+      <p>
+        In the context of this problem, the 'and' connector (which is always
+        implied when only a single \(x\) is used&mdash;\(x\) must satisfy
+        both statements!) means that <em>both</em>, whatever \(x\)
+        ends up being, it the value of \(3x - 12\) must be greater
+        than \(-3\) but <em>also</em> less than or equal to \(18\).  So,
+        we have two separate inequalities that we can solve in turn:
+        \begin{align*}
+        &  3x - 12 \gt -3 \quad \textrm{and} \quad 3x-12 \leq 18 & \textrm{Given}\\
+        \Rightarrow \quad &  3x \gt 9 \quad \textrm{and} \quad 3x \leq 30 & \textrm{For each, add 12 to both sides.}\\
+        \Rightarrow \quad &  x \gt 3 \quad \textrm{and} \quad x \leq 10 & \textrm{For each, divide both sides by 3.}\\
+        \end{align*}
+      </p>
+
+      <p>
+        Of course, there is a certain amount of redundancy in this process&mdash;in
+        that we end up doing the same thing to both sides of <em>each</em>
+        inequality at each step.  So, there is a more streamlined way
+        of writing this:
+      </p>
+      \begin{align*}
+      & -3 \lt 3x - 12 \leq 18 & \textrm{Given}\\
+      \Rightarrow \quad & 9 \lt 3x \leq 30 & \textrm{I added 12 to all three columns.}\\
+      \Rightarrow \quad & 3 \lt x \leq 10 & \textrm{I divided all three columns by 3.}\\
+      \end{align*}
+
+      <p>
+        Now, we graph it.
+
+        {% set svg = 'svg3' %}
+        {% set points = [{'x': 3, 'type': 'empty'},
+                          {'x': 10, 'type': 'filled'}] %}
+        {% set intervals = [[3,10]] %}
+        {% include "_static-real-line.html" %}
+      </p>
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+    Solve the inequality.  Give your answer both in inequality notation
+    and by graphing the solution on a number line.
+    \[
+       3x - 12 \lt -3 \quad \textrm{or} \quad 3x - 12 \geq 18
+    \]
+  </p>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Of course, this one isn't very different.  I have switched
+      the inequalities and changed it to an "or".  (I changed
+      it to an "or", so that you get to compare it to
+      the previous one; I switched the inequalities
+      because otherwise the answer would be rather confusing!
+      See future examples for an explanation of what I mean here!)
+
+      <p>
+        In the context of this problem, the 'or' connector (which will
+        always be explicitly given) means, whatever \(x\)
+        ends up being, it will (either) be true that the value of \(3x - 12\)
+        will be less
+        than \(-3\) <em>or</em> that the value of \(3x - 12\)
+        will be greater than or equal to \(18\).  So, again,
+        we have two separate inequalities that we can solve in turn:
+        \begin{align*}
+        &  3x - 12 \lt -3 \quad \textrm{or} \quad 3x - 12 \geq 18 & \textrm{Given}\\
+        \Rightarrow \quad &  3x \lt 9 \quad \textrm{or} \quad 3x \geq 30 & \textrm{For each, add 12 to both sides.}\\
+        \Rightarrow \quad &  x \lt 3 \quad \textrm{or} \quad x \geq 10 & \textrm{For each, divide both sides by 3.}\\
+        \end{align*}
+      </p>
+
+      <p>
+        In this case, there isn't a ready-made way to streamline this process.
+        But maybe you can make one up, if you feel so bold.
+      </p>
+
+
+      <p>
+        Now, we graph it.
+
+        {% set svg = 'svg4' %}
+        {% set points = [{'x': 3, 'type': 'empty'},
+                          {'x': 10, 'type': 'filled'}] %}
+        {% set intervals = [[-20,3], [10,20]] %}
+        {% include "_static-real-line.html" %}
+      </p>
+    </div>
+  </div>
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

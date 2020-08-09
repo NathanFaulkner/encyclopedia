@@ -7,5 +7,5 @@ pip-log.text
 
 venv
 app.db
-encyclopedia.log*
+logs
 mail_to_gmail_config.sh

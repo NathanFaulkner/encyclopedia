@@ -95,24 +95,40 @@ class Division():
 #########################
 # Free Sections -- not "bound" in a book
 algebra2 = Section('algebra2', "Algebra 2", '/sections/algebra2')
+
 nutsandboltsofalgebra = Section('nutsandboltsofalgebra', "Nuts and Bolts of Algebra", '/sections/nuts-and-bolts-of-algebra')
+
 equationsatthegasstation = Section('equationsatthegasstation', "Equations at the Gas Station", '/sections/equations-at-the-gas-station')
+
 literalequations = Section('literalequations', "Literal Equations", '/sections/literal-equations')
+
 solveforx = Section('solveforx', "Solve for x", '/sections/solve-for-x')
 solveforx.add_to_questions('solve_for_x')
+
 relationshipsinatable = Section('relationshipsinatable', "Relationships in a Table", '/sections/relationships-in-a-table')
+
 linearinequalities = Section('linearinequalities', "Linear Inequalities", '/sections/linear-inequalities')
 linearinequalities.add_to_questions('linear_inequality')
+
 graphsoflinearinequalities = Section('graphsoflinearinequalities', "Graphs of Linear Inequalities", '/sections/graphs-of-linear-inequalities')
 graphsoflinearinequalities.add_to_questions('graph_of_linear_inequality')
+
+solvingcompoundinequalities = Section('solvingcompoundinequalities', "Solving Compound Inequalities", '/sections/solving-compound-inequalities')
+solvingcompoundinequalities.add_to_questions('compound_linear_inequality')
+
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
+
 graphpointslope = Section('graphpointslope', "Graph from Point Slope Form", '/sections/graph-point-slope')
 graphpointslope.add_to_questions('graph_point_slope')
+
 factoring1 = Section('factoring1', "Factoring - Level 1", '/sections/factoring-coeff-of-one')
-factoring1.due_date = datetime.datetime(2020, 7, 28)
+factoring1.due_date = datetime.datetime(2020, 8, 28)
+
 polynomials_intro = Section('polynomials', "Polynomials", '/sections/polynomials-intro')
+
 quadraticpattern = Section('quadraticpattern', "Quadratic Pattern", '/sections/quadratic-pattern')
 quadraticpattern.add_to_questions('quadratic_pattern')
+quadraticpattern.due_date = datetime.datetime(2020, 12, 2)
 #
 #############################
 
@@ -121,7 +137,8 @@ quadraticpattern.add_to_questions('quadratic_pattern')
 nuts_and_bolts_of_algebra = Division('chapter', 'Nuts and Bolts of Algebra',
                                 [solveforx,
                                 linearinequalities,
-                                graphsoflinearinequalities])
+                                graphsoflinearinequalities,
+                                solvingcompoundinequalities])
 nuts_and_bolts_of_algebra.set_frontpage(nutsandboltsofalgebra)
 linear_functions = Division('chapter', 'Linear Functions', [graphpointslope])
 linear_functions.set_frontpage(linearfunctions_intro)

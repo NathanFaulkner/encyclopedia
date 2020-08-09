@@ -144,6 +144,8 @@ Otherwise, enter an English description of the solution set.
 
     def format_useranswer(self, user_answer, display=False):
         if self.num_solutions == 1:
+            user_answer = user_answer.replace('x', ' ')
+            user_answer = user_answer.replace('=', ' ')
             user_answer = user_answer.replace('^', '**')
             user_answer = parse_expr(user_answer, transformations=transformations)
             return latex_print(user_answer, display)

@@ -562,12 +562,17 @@ but you should try a different problem if you want credit."""
         # print('new_question_name: ', new_question_name)
     else:
         new_question_name = question_name
-    if current_user.is_authenticated: #This is for adding a progress bar.
+
+    ###############################
+    #This is for the progress bar.
+    ###############################
+    if current_user.is_authenticated:
         book_info = books_info[0]
+        # grades = UserGradeInfo(current_user)
         grade_info = UserSectionGradeInfo(user,
                                         book_info.get('book'),
                                         book_info.get('chapter'),
-                                        book_info.get('section')) #This should be changed to access question info directly.
+                                        book_info.get('section'))
         # print('grade is:', grade_info.grade)
     else:
         grade_info = None

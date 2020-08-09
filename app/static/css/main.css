@@ -234,10 +234,10 @@ a {
 }
 
 .answer .collapsible:before {
-  content: '\25B6'; /* Unicode character for '+' sign */
+  content: '\25B6'; /* Unicode character for right-point triangle */
   font-size: 13px;
   font-weight: bold;
-  color: red;
+  color: var(--section-header-color);
   float: left;
   margin-right: 5px;
   position: absolute;
@@ -245,7 +245,7 @@ a {
 }
 
 .answer .active:before {
-  content: '\25BC' /*Unicode character for '-' sign */
+  content: '\25BC' /*Unicode character for down-point triangle */
 }
 
 
@@ -341,7 +341,7 @@ a {
 
 
 .example {
-  border: 1px solid rgba(29, 29, 226, 1);
+  border: 1px solid var(--logo-background-color);
   padding-left: 1%;
 }
 
@@ -357,7 +357,7 @@ a {
   line-height: 70px;
 } */
 
-.subhead { /*::first-letter{ */
+.subhead {
   initial-letter: 3;
   /* float: left;
   font-size: 45px;

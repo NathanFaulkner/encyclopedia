@@ -60,7 +60,7 @@
               {#{% set section_grades = grades.grade_section(book.name_for_path, outer_loop.index, loop.index) %}#}
               {% set section_grades = whole_book_info[outer_loop.index - 1][loop.index - 1] %}
               {% if section_grades.memory_gradient %}
-                {% if section_grades.memory_gradient < 0.5 %}
+                {% if section_grades.memory_gradient < 0.75 %}
                   {% set bgcolor = 'rgba(0, 255, 0, 0.5)' %}
                 {% elif section_grades.memory_gradient < 1 %}
                   {% set bgcolor = 'rgba(252, 186, 3, 0.5)' %}

@@ -5,71 +5,115 @@
 
 {% block content %}
 <p class="subhead">
-In this section, we graph linear inequalities.
+  In this section, we continue to solve linear inequalities.
+  But, now, we graph our solution set on the real line.  There
+  will be less to say in this section, compared to previous.  Our
+  task will include the minor one of pointing of some graphical
+  notation and also to practice.
 </p>
+
+
 
 <p>
-  <div class="activity">
-    <h2>Activity</h2>
-    <span class="inline-header">Goal:</span>
-    Completely factor
-  </div>
-</p>
+<div class="example">
+  <h2></h2>
+  Back to the same problem we started with in the section on
+  <a href="{{ url_for('section', section_name='linearinequalities') }}">
+    the section on solving linear inequalities
+  </a>.
+  <blockquote>
+    For each of the following parts, consider this inequality.
+    \[
+      3x - 7 \lt 8
+    \]
+  </blockquote>
 
-<p>
-Stuff
-</p>
+  <ol class="multi-part" style="list-style-type: lower-alpha;">
+    <li>
+      Solve the inequality.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          As completed in
+          <a href="{{ url_for('section', section_name='linearinequalities') }}">
+            solving linear inequalities
+          </a>,
+          we can solve as follows:
+          \begin{align*}
+          & 3x-7 \lt 8 & \textrm{Given}\\
+          \Rightarrow \quad & 3x \lt 15 & \textrm{I added 7 to both sides.}\\
+          \Rightarrow \quad & x \lt 5 & \textrm{I divided both sides by 3.}\\
+          \end{align*}
+        </div>
+      </div>
+    </li>
+    <li>
+      Graph this solution on the real line.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Now for the new part!  The first thing to observe is
+          that you are shading (in this case in <span color="blue">blue</span>)
+          to indicate what \(x\)-values are part of the solution set.
+          But since all values up to but not including \(x=5\) are
+          part of the solution set, we need a marker at that point&mdash;but
+          a special marker to communicate to your reader that that
+          point is not actually part of the solution set.
+          An "empty circle" is that symbol.  In the next example,
+          you will see that a "filled circle" when this boundary point
+          is actually part of the solution set (which, I hope you will
+          realize, happens when an "or equal" inequality is employed.)
 
+          {% set svg = 'svg1' %}
+          {% set points = [{'x': 5, 'type': 'empty'}] %}
+          {% set intervals = [[-20,5]] %}
+          {% include "_static-real-line.html" %}
+        </div>
+    </li>
+  </ol>
+</div>
+</p>
 
 <div class="example">
   <h2></h2>
+  <p>
+    Solve the inequality.  Graph the solution.
+    \[
+      - 12 x - 6 \leq - 8 x
+    \]
+  </p>
 
   <div class="answer">
-    <a class="collapsible">
-      <h3>Answer: </h3></a>
+    <a class="collapsible"><h3>Answer: </h3></a>
     <div class='inner'>
-      <b>Method 1:</b> Notice that this is <i>like</i>
-    </div>
-    <script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
-
-    <p>
-      <b>Method 2:</b>
-      Use the "\( ac \)" method.  That is, you first find a factorization of
-      \( ac = 1\cdot 24 = 24 \) into two numbers that add up to \(-10\).
-      Those numbers are \(-4\) and \(-6\). Then, rewrite the middle term according to
-      that breakdown and then factor by grouping:
       \begin{align*}
-      x^6 - 10x^3 + 24 &= x^6 - 4x^3 - 6x^3 + 24 \\
-      &= x^3(x^3 - 4) - 6(x^3 - 4) \\
-      & = (x^3-6)(x^3 - 4)
+      & - 12 x - 6 \leq - 8 x & \textrm{Given}\\
+      \Rightarrow \quad & - 4 x - 6 \leq 0 & \textrm{I added \(8x\) to both sides.}\\
+      \Rightarrow \quad & -4x \leq 6 & \textrm{I added 6 to both sides.}\\
+      \Rightarrow \quad & 4x \geq -6 & \textrm{I negated both sides. (Reverse the inequality!}\\
+      \Rightarrow \quad & x \geq \frac{-6}{4} & \textrm{I divided by 4.}\\
+      \Rightarrow \quad & x \geq -\frac{3}{2} & \textrm{I simplified.}\\
       \end{align*}
-    </p>
 
-    <p>
-      <b>Method 3: Guess and Check.</b>
-    </p>
+      <p>
+        Now, we graph it.  This time, I will use a "filled" point since
+        \(-\frac{3}{2}\) is part of the solution set (since \(x\)
+        is allowed to equal it as per the "or equal to" part of the
+        greater-than-or-equal-to sign).  Also, because the solution set
+        includes points <em>greater than</em> the boundary value of
+        \(-\frac{3}{2}\), I will shade to the right:
+
+        {% set svg = 'svg2' %}
+        {% set points = [{'x': -3/2, 'type': 'filled'}] %}
+        {% set intervals = [[-3/2,20]] %}
+        {% include "_static-real-line.html" %}
+      </p>
+    </div>
   </div>
 </div>
 
-<p>
-Would you like to see one more without all the talk?
-  <div class="example">
-    <h2></h2>
-    Completely factor the following.
-    \[
-    x^8 +7x^4 - 8
-    \]
-    <div class="answer">
-      <h3>Answer</h3>
-      \begin{align*}
-      x^8 +7x^4 - 8 & = (x^4 - \quad)(x^4 + \quad)\\
-      & = (x^4 - 1)(x^4 +8) \\
-      & = (x^2 - 1)(x^2+1)(x^4 + 8)\\
-      & = (x-1)(x+1)(x^2 +1)(x^4 + 8)
-      \end{align*}
-    </div>
-  </div>
-</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
 
 <div class="exercise">
 

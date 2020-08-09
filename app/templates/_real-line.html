@@ -166,10 +166,12 @@
 
   // Responding to user's clicks on graph -- rounded to cartesian grid points
   var points = [];
+  {% if question %}
   {% if question.points %}
   points = {{ question.points|safe }};
   // console.log(points);
   graph_points(points, "blue", false);
+  {% endif %}
   {% endif %}
 
   var pt = svg.createSVGPoint();
@@ -353,9 +355,11 @@ var right_endpoint = {x: 20, type:'empty'};
   }, false);
 
 var intervals = [];
+{% if question %}
 {% if question.intervals %}
 intervals = {{ question.intervals|safe }};
 graph_intervals(intervals, "blue", false);
+{% endif %}
 {% endif %}
 
 // Draws/deletes grid points created by clicking on graph and passes them to Flask
@@ -402,10 +406,12 @@ graph_intervals(intervals, "blue", false);
       }
       // console.log(left_endpoint, right_endpoint, intervals);
     }
+    {% if form %}
     var points_field = document.getElementById('points_field');
     var intervals_field = document.getElementById('intervals_field');
     points_field.value = JSON.stringify(points);
     intervals_field.value = JSON.stringify(intervals);
+    {% endif %}
     // console.log('intervals_field.value', intervals_field.value);
     {% if bug_form %}
     console.log('bug_form detected')
@@ -444,8 +450,10 @@ function manual_add_point() {
       erase_circles();
       graph_points(points, "blue", false);
     }
+    {% if form %}
     var points_field = document.getElementById('points_field');
     points_field.value = JSON.stringify(points);
+    {% endif %}
   };
 
 function graph_intervals(intervals, color, hover) {
@@ -554,10 +562,12 @@ function graph_points(info_list, color, hover) {
   function clear_all() {
     points = [];
     intervals = [];
+    {% if form %}
     var points_field = document.getElementById('points_field');
     points_field.value = JSON.stringify(points);
     var intervals_field = document.getElementById('intervals_field');
     intervals_field.value = JSON.stringify(intervals);
+    {% endif %}
     // var list_of_graphs = [];
     // draw_graphs(svg, list_of_graphs);
     erase_graphs(svg);
