@@ -20,6 +20,13 @@
     content: "Example " counter(example) "."
   }
 
+  h1 + p::first-letter {
+    /* color: var(--section-header-color); */
+    font-size: 250%;
+    float: left;
+    padding: 3px;
+  }
+
   </style>
   </head>
   <body>
@@ -32,8 +39,11 @@
     </ul>
     {% endif %}
     {% endwith %}
-    <h1 class="section-header">{{ section_display_name|safe }}</h1>
-    <hr style="color: var(--section-header-color);">
+    <h1 class="section-header">
+      {{ section_display_name|safe }}
+      <hr style="color: var(--section-header-color);">
+    </h1>
+
     {% block content %}{% endblock %}
   </body>
 </html>

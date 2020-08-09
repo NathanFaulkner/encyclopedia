@@ -352,19 +352,19 @@ a {
   color: #e24f1d;
 }
 
-/* .first-letter{
+/* .first-letter {
   font-size: 35px;
   line-height: 70px;
 } */
 
-.subhead {
-  initial-letter: 3;
-  /* float: left;
+.subhead p::first-letter {
+  /* initial-letter: 3; */
+  /* float: left; */
   font-size: 45px;
-  font-weight: bold;
+  /* font-weight: bold;
   line-height: 2;
-  margin-right: 4px; */
-  /* color: var(--section-header-color); */
+  margin-right: 4px;
+  color: var(--section-header-color); */
 }
 
 

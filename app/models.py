@@ -210,17 +210,19 @@ class UserSectionGradeInfo():
                 prev_answer = answers[i - 1]
                 time_since_previous = answer.timestamp - prev_answer.timestamp
                 days_since_previous = time_since_previous.days + time_since_previous.seconds/60/60/24
-                # print('chapter:', self.chapter,
-                #         'section:', self.section,
-                #         'try number:', i+1,
-                #         'days since prev:', days_since_previous)
                 new_session = days_since_previous > 0.75*expected_recall_duration
                 if new_session:
-                    if grade == self.max_grade:
-                        session_count += 1
                     expected_recall_duration = int(self.base**(session_count))
                     memory_decay_penalty = int(days_since_previous/expected_recall_duration)
+                    if grade == self.max_grade:
+                        session_count += 1
                     grade = max(0, int(grade*0.5**memory_decay_penalty))
+                    print('chapter:', self.chapter_number,
+                            'section:', self.section_number,
+                            'try number:', i+1,
+                            'days since prev:', days_since_previous,
+                            'expected_recall_duration:', expected_recall_duration,
+                            'grade', grade)
                 #     if answer.correct:
                 #         grade = min(self.max_grade, grade + 1)
                 #     else:
@@ -231,6 +233,11 @@ class UserSectionGradeInfo():
                 else:
                     grade = max(0, grade - 1)
                 # print('chapter:', self.chapter, 'section:', self.section, 'try number:', i+1, 'grade:', grade)
+                print('chapter:', self.chapter_number,
+                        'section:', self.section_number,
+                        'try number:', i+1,
+                        'days since prev:', days_since_previous,
+                        'grade', grade)
                 i += 1
         time_since_last = datetime.utcnow() - answers[-1].timestamp
         # print(datetime.utcnow())
