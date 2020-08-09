@@ -1,3 +1,0 @@
-FLASK_APP=encyclopedia.py
-FLASK_DEBUG=1
-MAIL_PASSWORD=fighter_marigold_narwhal
