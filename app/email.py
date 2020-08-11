@@ -29,7 +29,7 @@ def send_report_bug_email(report_id):
     bug_report = BugReport.query.filter_by(id=report_id).first()
     question_name = bug_report.question_name
     send_email('[Encyclopedia Omega] Bug Reported by User',
-                sender=app.config['ADMINS'][0],
+                sender=app.config['MAIL_USERNAME'],
                 recipients=app.config['ADMINS'],
                 text_body=render_template('email/report_bug.txt',
                                         question_name=question_name,
@@ -37,3 +37,5 @@ def send_report_bug_email(report_id):
                 html_body=render_template('email/report_bug.html',
                                         question_name=question_name,
                                         bug_id=report_id))
+
+# sender=app.config['ADMINS'][0],
