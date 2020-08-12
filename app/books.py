@@ -104,6 +104,7 @@ literalequations = Section('literalequations', "Literal Equations", '/sections/l
 
 solveforx = Section('solveforx', "Solve for x", '/sections/solve-for-x')
 solveforx.add_to_questions('solve_for_x')
+solveforx.due_date = datetime.datetime(2020, 8, 25)
 
 relationshipsinatable = Section('relationshipsinatable', "Relationships in a Table", '/sections/relationships-in-a-table')
 

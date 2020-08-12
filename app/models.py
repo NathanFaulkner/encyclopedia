@@ -162,6 +162,10 @@ class UserSectionGradeInfo():
         return self.__dict__.get('answers')
 
     def set_initial_due_date(self):
+        """
+        Note: This handles the memory gradient, too, in cases where the
+        initial due date is in the future, etc.
+        """
         self.initial_due_date = self.section.due_date
         if self.initial_due_date is not None:
             time_until_due_date = self.initial_due_date - datetime.utcnow()
@@ -176,7 +180,8 @@ class UserSectionGradeInfo():
     session_duration = 24
 
     def set_grade_info(self):
-        self.next_due_date = self.initial_due_date
+        self.due_date = self.initial_due_date
+        self.mastery_date = None
         question_names = self.section.questions
         # print('section:', self.chapter_number, ':', self.section_number, ':', question_names)
         if question_names != []:
@@ -195,11 +200,11 @@ class UserSectionGradeInfo():
         if answers == []:
             return None
         grade = 0
-        session_count = 0
+        mastery_count = 0
         i = 0
         # mastery_session = True
         while i < len(answers):
-            expected_recall_duration = int(self.base**(session_count))
+            expected_recall_duration = int(self.base**(mastery_count))
             # print('section:', self.chapter_number, ':', self.section_number, ':', question_names, 'session_count', session_count)
             answer = answers[i]
             if i == 0:
@@ -207,15 +212,56 @@ class UserSectionGradeInfo():
                     grade += 1
                 i += 1
             else:
+                # This should probably be rewritten since the natural meaning of
+                # "mastery count" doesn't quite agree with its usage here.
+                # Also, it might be annoying not to lock in a mastery when
+                # going up and then down in a session.
+                # Hence Version 2:
+                # mastered_this_session = False
+                # prev_answer = answers[i - 1]
+                # time_since_previous = answer.timestamp - prev_answer.timestamp
+                # days_since_previous = time_since_previous.days + time_since_previous.seconds/60/60/24
+                # same_session = days_since_previous <= 0.75*expected_recall_duration
+                # while same_session and i < len(answers):
+                #     if answer.correct:
+                #         grade = min(self.max_grade, grade + 1)
+                #     else:
+                #         grade = max(0, grade - 1)
+                #     if grade == self.max_grade
+                #         mastered_this_session = True
+                #         self.mastery_date = answer.timestamp
+                #     i += 1
+                #     answer = answers[i]
+                #     prev_answer = answers[i - 1]
+                #     time_since_previous = answer.timestamp - prev_answer.timestamp
+                #     days_since_previous = time_since_previous.days + time_since_previous.seconds/60/60/24
+                #     same_session = days_since_previous <= 0.75*expected_recall_duration
+                # mastered_past_session = mastered_this_session
+                # if mastered_past_session:
+                #     mastery_count += 1
+                #     expected_recall_duration = int(self.base**(mastery_count - 1))
+                #     time_since_last_mastery = answer.timestamp - self.mastery_date
+                #     days_since_last_mastery = time_since_last_mastery.days + time_since_last_mastery.seconds/60/60/24
+                #     memory_decay_penalty = int(days_since_last_mastery/expected_recall_duration)
+                #     grade = int(grade*0.5**memory_decay_penalty)
+                #     self.due_date = self.mastery_date + timedelta(days=expected_recall_duration)
+                #     if answer.correct:
+                #         grade = min(self.max_grade, grade + 1)
+                #     else:
+                #         grade = max(0, grade - 1)
+                #     i += 1
+        # Version 1.
                 prev_answer = answers[i - 1]
                 time_since_previous = answer.timestamp - prev_answer.timestamp
                 days_since_previous = time_since_previous.days + time_since_previous.seconds/60/60/24
                 new_session = days_since_previous > 0.75*expected_recall_duration
                 if new_session:
-                    expected_recall_duration = int(self.base**(session_count))
                     memory_decay_penalty = int(days_since_previous/expected_recall_duration)
                     if grade == self.max_grade:
-                        session_count += 1
+                        mastery_count += 1
+                        self.mastery_date = prev_answer.timestamp
+                        # self.memory_gradient = days_since_previous_mastery/expected_recall_duration
+                        self.due_date = answers[i-1].timestamp + timedelta(days=expected_recall_duration)
                     grade = max(0, int(grade*0.5**memory_decay_penalty))
                     print('chapter:', self.chapter_number,
                             'section:', self.section_number,
@@ -239,19 +285,25 @@ class UserSectionGradeInfo():
                         'days since prev:', days_since_previous,
                         'grade', grade)
                 i += 1
-        time_since_last = datetime.utcnow() - answers[-1].timestamp
-        # print(datetime.utcnow())
-        # print(answers[-1].timestamp)
-        days_since_last = time_since_last.days + time_since_last.seconds/60/60/24
-        # print('chapter:', self.chapter, 'section:', self.section, 'days since last:', days_since_last)
-        expected_recall_duration = int(self.base**(session_count))
-        # print('chapter:', self.chapter, 'section:', self.section, 'session count:', session_count)
-        self.session_count = session_count
-        self.memory_gradient = days_since_last/expected_recall_duration
-        self.next_due_date = answers[-1].timestamp + timedelta(days=expected_recall_duration)
-        memory_decay_penalty = int(days_since_last/expected_recall_duration)
-        grade = max(0, int(grade*0.5**memory_decay_penalty))
-
+        if grade == 4:
+            self.mastery_date = answers[-1].timestamp
+            expected_recall_duration = int(self.base**(mastery_count))
+        if self.mastery_date is not None:
+            time_since_last_mastery = datetime.utcnow() - self.mastery_date #answers[-1].timestamp
+            # # print(datetime.utcnow())
+            # # print(answers[-1].timestamp)
+            days_since_last_mastery = time_since_last_mastery.days + time_since_last_mastery.seconds/60/60/24
+            # # print('chapter:', self.chapter, 'section:', self.section, 'days since last:', days_since_last)
+            # expected_recall_duration = max(int(self.base**(session_count-1)),1)
+            # # print('chapter:', self.chapter, 'section:', self.section, 'session count:', session_count)
+            # self.session_count = session_count
+            # self.memory_gradient = days_since_last/expected_recall_duration
+            # self.due_date = answers[-1].timestamp + timedelta(days=expected_recall_duration)
+            self.memory_gradient = days_since_last_mastery/expected_recall_duration
+            memory_decay_penalty = int(days_since_last_mastery/expected_recall_duration)
+            grade = max(0, int(grade*0.5**memory_decay_penalty))
+            self.due_date = self.mastery_date + timedelta(days=expected_recall_duration)
+        self.next_due_date = self.due_date
         self.grade = grade
 
 
