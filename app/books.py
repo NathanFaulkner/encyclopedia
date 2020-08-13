@@ -1,4 +1,8 @@
 import datetime
+import os
+import random
+
+from app import questions
 
 
 class Book(): #Not used at this time
@@ -85,6 +89,153 @@ class Division():
                     info.append([i+1,j+1])
         return info
 
+
+class SevenTest():
+    def __init__(self, book, which_test, *kwargs):
+        if 'seed' in kwargs:
+            self.seed = kwargs['seed']
+        else:
+            self.seed = random.random()
+        random.seed(self.seed)
+        self.which_test = which_test
+        self.book = book
+        all_sections = book.list_all_sections()
+        l = len(all_sections)
+        num_sevens = int(l/7)
+        start = num_sevens * (which_test - 1)
+        if which_test <= num_sevens:
+            test_sections = all_sections[start: start + 7]
+            prev_sections = all_sections[0:start]
+            random.shuffle(prev_sections)
+            test_sections += prev_sections[0:3]
+        else:
+            num_left = l - start
+            test_sections = all_sections[-num_left: -1]
+            prev_sections = all_sections[0:start]
+            random.shuffle(prev_sections)
+            test_sections += prev_sections[0:10 - num_left]
+        self.sections = test_sections
+
+    preamble = r"""
+\documentclass[12pt]{article}
+\usepackage{amsmath}% http://ctan.org/pkg/amsmath
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\newcounter{prob}
+\stepcounter{prob}
+\usepackage{fancyhdr}
+
+\pagestyle{empty}
+\fancyhf{}
+
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{pythontex}
+
+\usepackage{xcolor}
+
+\definecolor{epsilon-blue}{RGB}{0,0,155}
+
+
+\newcommand{\lt}{<}
+\newcommand{\gt}{>}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Toggle between key and blank
+%
+\newtoggle{filledout}
+
+% set status globally in the preamble -- Pick one! Comment out other!
+\togglefalse{filledout}
+%\toggletrue{filledout}
+
+\newcommand{\key}[1]{%
+\iftoggle{filledout}{%
+#1
+}
+% else
+{}
+}
+
+\newcommand{\blank}[1]{%
+\iftoggle{filledout}{%
+
+}
+% else
+{
+#1
+}
+}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{fancyhdr}
+
+\pagestyle{empty}
+\fancyhf{}
+\rhead{\bf Name: \hspace{1.5in}}
+"""
+    def make_tex(self):
+        title = 'hello'
+        file_name_with_path = os.path.join('app', 'for_printing', title, '{a}.tex'.format(a=title))
+        # print(os.getcwd())
+        try:
+            os.chdir('app')
+            os.chdir('for_printing')
+            # print(os.getcwd())
+            os.mkdir(title)
+            os.chdir(title)
+            f = open('{a}.tex'.format(a=title), 'w+')
+        except:
+            os.chdir(title)
+            # print(os.getcwd())
+            f = open('{a}.tex'.format(a=title), 'w+')
+        out = self.preamble
+        title_head = f"\\lhead{{\\textbf{{{self.book.display_name} - Test {self.which_test}\\\\Printed on \\today}}}}"
+        out += title_head + '\n\n'
+        out += '\\begin{document}\n\n'
+        out += '\\thispagestyle{fancy}\n\n'
+        out += '\\begin{enumerate}\n'
+        seed = self.seed
+        question_sets = []
+        for i, section in enumerate(self.sections):
+            if section.questions != []:
+                question_name = random.choice(section.questions)
+                section_info = self.book.get_skill_info(question_name)[0]
+                question_module = getattr(questions, question_name)
+                question = question_module.Question_Class(seed=random.random())
+                question_set = [question]
+                out += f'\\item {{\color{{gray}}({section_info[0]}.{section_info[1]})}} \n'
+                out += '\\begin{enumerate}\n'
+                out += f'\\item {question.format_given_for_tex}\n'
+                out += '\\vspace{12\\baselineskip}\n'
+                question_name = random.choice(section.questions)
+                question_module = getattr(questions, question_name)
+                question = question_module.Question_Class(seed=random.random())
+                question_set.append(question)
+                out += f'\\item {question.format_given_for_tex}\n'
+                out += '\\vspace{12\\baselineskip}\n'
+                out += '\\end{enumerate}\n'
+                question_sets.append(question_set)
+            else:
+                out += f'\\item {section.display_name}'
+                question_sets.append([])
+        out += '\\end{enumerate}\n'
+        out += '\\newpage'
+        out += '\\textbf{Answers:}\n'
+        out += '\\begin{enumerate}\n'
+        for question_set in question_sets:
+            out += '\\item\n'
+            if question_set != []:
+                out += '\\begin{enumerate}\n'
+                out += f'\\item {question_set[0].format_answer}\n'
+                out += f'\\item {question_set[1].format_answer}\n'
+                out += '\\end{enumerate}\n'
+        out += '\\end{enumerate}\n'
+        out += '\\end{document}'
+
+        f.write(out)
+        f.close()
 
 
 

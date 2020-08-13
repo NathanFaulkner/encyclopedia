@@ -66,6 +66,12 @@ class GraphPointSlope(Question):
 
         self.given_latex = '\\(y = ' + latex(self.given) + '\\)'
         self.given_latex_display = '\\[y = ' + latex(self.given) + '\\]'
+        self.format_given_for_tex = f"""
+        {self.prompt_single}
+
+        {self.given_latex_display}
+        """
+        self.format_answer = 'To be coded'
         # self.answer_latex = latex_print(self.answer)
         # self.answer_latex_display = latex_print(self.answer, display=True)
 

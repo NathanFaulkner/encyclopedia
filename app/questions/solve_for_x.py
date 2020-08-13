@@ -95,6 +95,11 @@ class SolveForX(Question):
         else:
             self.format_answer = self.answer
 
+        self.format_given_for_tex = f"""
+        {self.prompt_single} \n
+        {self.given_latex_display}
+        """
+
     name = 'Quadratic Pattern'
 
     prompt_single = 'Solve for \\(x\\).  (Find the solution set.) '

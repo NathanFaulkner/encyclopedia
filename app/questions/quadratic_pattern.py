@@ -68,6 +68,12 @@ class QuadraticPattern(Question):
         self.format_answer = self.answer_latex
         self.answer_latex_display = latex_print(self.answer, display=True)
 
+        self.format_given_for_tex = f"""
+        {self.prompt_single}
+
+        {self.given_latex_display}
+        """
+
     name = 'Quadratic Pattern'
 
     prompt_single = 'Completely factor the following: '

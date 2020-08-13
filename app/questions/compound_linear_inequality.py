@@ -246,8 +246,20 @@ class CompoundLinearInequality(Question):
             self.given_latex_display = f"""
             \\[ {l1} {given_Q1} {latex(term1 + c)} {given_Q2} {r1} \\]
             """
+            self.format_given_for_tex = f"""
+            {self.prompt_single}
+
+            \\[ {l1} {given_Q1} {latex(term1 + c)} {given_Q2} {r1} \\]
+            """
         else:
             self.given_latex_display = f"""
+            \\[ {latex(term1 + c)} {given_Q1} {l1} \\quad
+                \\textrm{{or}} \\quad
+               {latex(term2 + g)} {given_Q2} {r1}\\]
+            """
+            self.format_given_for_tex = f"""
+            {self.prompt_single}
+
             \\[ {latex(term1 + c)} {given_Q1} {l1} \\quad
                 \\textrm{{or}} \\quad
                {latex(term2 + g)} {given_Q2} {r1}\\]

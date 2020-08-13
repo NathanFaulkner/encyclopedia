@@ -136,6 +136,11 @@ class LinearInequality(Question):
         Q = self.Q
         self.given_latex_display = f'\\[ \n \t {latex(LHS)} {Q} {latex(RHS)} \n \\]'
         self.format_given = self.given_latex_display
+        self.format_given_for_tex = f"""
+        {self.prompt_single}
+
+        \\[ \n \t {latex(LHS)} {Q} {latex(RHS)} \n \\]
+        """
         self.given = [LHS, RHS]
         #print('3rd step: So far its ', expr)
         bdry = Rational(-(a*b+c*d+f), a+c+e)
