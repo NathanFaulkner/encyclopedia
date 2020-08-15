@@ -101,6 +101,7 @@ class SolveForX(Question):
         """
 
     name = 'Quadratic Pattern'
+    module_name = 'solve_for_x'
 
     prompt_single = 'Solve for \\(x\\).  (Find the solution set.) '
     prompt_multiple = 'For each of the following, solve for \\(x\\).  (Find the solution set.)'

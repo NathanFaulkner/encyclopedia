@@ -75,6 +75,7 @@ class QuadraticPattern(Question):
         """
 
     name = 'Quadratic Pattern'
+    module_name = 'quadratic_pattern'
 
     prompt_single = 'Completely factor the following: '
     prompt_multiple = 'Completely factor each of the following.'

@@ -569,7 +569,11 @@ but you should try a different problem if you want credit."""
     if current_user.is_authenticated:
         book_info = books_info[0]
         # grades = UserGradeInfo(current_user)
-        grade_info = UserSectionGradeInfo(user,
+        # print(current_user.username)
+        # print('book', book_info.get('book'))
+        # print('chapter', book_info.get('chapter'))
+        # print('section', book_info.get('section'))
+        grade_info = UserSectionGradeInfo(current_user,
                                         book_info.get('book'),
                                         book_info.get('chapter'),
                                         book_info.get('section'))
@@ -605,10 +609,10 @@ but you should try a different problem if you want credit."""
 
 @app.route('/Books/<book_name>/<chapter_number>')
 def book_chapter(book_name, chapter_number):
+    session['book'] = book_name # I'm moving away from that...
+    session['chapter'] = chapter_number # I'm moving away from that...
     if current_user.is_authenticated:
         user = current_user
-        session['book'] = book_name # I'm moving away from that...
-        session['chapter'] = chapter_number # I'm moving away from that...
         current_user.add_to_books(book_name) # This will be the better way!
         db.session.commit()
     else:
@@ -624,11 +628,11 @@ def book_chapter(book_name, chapter_number):
 
 @app.route('/Books/<book_name>/<chapter_number>/<section_number>')
 def book_section(book_name, chapter_number, section_number):
+    session['book'] = book_name # I'm moving away from that...
+    session['chapter'] = chapter_number # I'm moving away from that...
+    session['section'] = section_number
     if current_user.is_authenticated:
         user = current_user
-        session['book'] = book_name # I'm moving away from that...
-        session['chapter'] = chapter_number # I'm moving away from that...
-        session['section'] = section_number
         current_user.add_to_books(book_name) # This will be the better way!
         db.session.commit()
     else:
@@ -660,9 +664,9 @@ def book_section(book_name, chapter_number, section_number):
 
 @app.route('/Books/<book_name>')
 def book(book_name):
+    session['book'] = book_name # I'm moving away from that...
     if current_user.is_authenticated:
         user = current_user
-        session['book'] = book_name # I'm moving away from that...
         current_user.add_to_books(book_name) # This will be the better way!
         db.session.commit()
     else:

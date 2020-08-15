@@ -110,6 +110,7 @@ class GraphOfLinearInequality(Question):
     prob_type = prob_type
 
     name = 'Linear Inequality'
+    module_name = 'graph_of_linear_inequality'
 
     prompt_single = """Solve the linear inequality."""
     prompt_multiple = """Solve each of the following linear inequalities."""

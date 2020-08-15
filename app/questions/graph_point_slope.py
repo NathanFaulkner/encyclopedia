@@ -76,6 +76,7 @@ class GraphPointSlope(Question):
         # self.answer_latex_display = latex_print(self.answer, display=True)
 
     name = 'Graph from Point Slope Form'
+    module_name = 'graph_point_slope'
 
     prompt_single = """Graph the given equation by plotting at least two points
 that satisfy the equation."""

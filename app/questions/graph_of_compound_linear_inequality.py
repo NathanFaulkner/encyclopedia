@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# from flask_wtf import FlaskForm
-# from wtforms import SubmitField, StringField, HiddenField
-# from wtforms.validators import DataRequired, ValidationError, Email, \
-#                 EqualTo, Length, InputRequired
+from flask_wtf import FlaskForm
+from wtforms import SubmitField, StringField, HiddenField
+from wtforms.validators import DataRequired, ValidationError, Email, \
+                EqualTo, Length, InputRequired
 
 import random
-from sympy.parsing.sympy_parser import parse_expr
-from sympy.parsing.sympy_parser import standard_transformations, implicit_multiplication_application
-transformations = (standard_transformations + (implicit_multiplication_application,))
+# from sympy.parsing.sympy_parser import parse_expr
+# from sympy.parsing.sympy_parser import standard_transformations, implicit_multiplication_application
+# transformations = (standard_transformations + (implicit_multiplication_application,))
 from sympy import *
 import numpy as np
 import json
@@ -29,16 +29,16 @@ from app.questions import (Question,
 # else:
 #     from .. import general
 
-# class RealLineForm(FlaskForm):
-#     points = HiddenField(id="points_field")
-#     intervals = HiddenField(id="intervals_field")
-#     submit = SubmitField('Submit')
+class RealLineForm(FlaskForm):
+    points = HiddenField(id="points_field")
+    intervals = HiddenField(id="intervals_field")
+    submit = SubmitField('Submit')
 
-# form = RealLineForm
+form = RealLineForm
 
-prob_type = 'math_blank'
+prob_type = 'real_line_graph'
 
-class CompoundLinearInequality(Question):
+class GraphOfCompoundLinearInequality(Question):
     """
     The given is
     \\[
@@ -151,26 +151,19 @@ class CompoundLinearInequality(Question):
             self.r1 = self.e*(self.r+self.f)+self.g
 
         self.genproblem()
-
         # self.given_latex = latex_print(self.given)
         # self.answer_latex = latex_print(self.answer)
         # self.answer_latex_display = latex_print(self.answer, display=True)
 
         # self.format_answer = self.answer
-    prob_type = 'math_blank'
+    prob_type = prob_type
 
-    name = 'Compound Linear Inequality'
-    module_name = 'compound_linear_inequality'
+    name = 'Graph of Compound Linear Inequality'
+    module_name = 'graph_of_compound_linear_inequality' #added in the course of creating test generator
 
     prompt_single = """Solve the compound linear inequality."""
     prompt_multiple = """Solve each of the following compound linear inequalities."""
-    further_instruction = """Enter \\(\\leq\\) as "<=" and \\(\\geq\\)
-    as ">=".  For instance, a possible answer might be "x <= -9/5".
-    Enter logical connectors as "and" or "or", as in
-    "-4 < x and x <= 5" or "x < -4 or x >= 5".  In particular,
-    the answer-checking algorithm has NOT been programmed
-    to understand the expression "-4 < x <= 5"---where no logical
-    connecter has been supplied.  (Use "and"!)  You were warned!
+    further_instruction = """Give your answer by graphing on the real line.
     """
 
 
@@ -200,16 +193,32 @@ class CompoundLinearInequality(Question):
                 if Q2 == '\\lt':
                     self.answer = Interval.open(self.l, self.r)
                     self.ineq_answers = set([x > self.l, x < self.r])
+                    points_info = [{'x': self.l, 'type': 'empty'}, {'x': self.r, 'type': 'empty'}]
+                    self.answer_points = json.dumps(points_info)
+                    intervals_info = [[self.l, self.r]]
+                    self.answer_intervals = json.dumps(intervals_info)
                 else:
                     self.answer = Interval.Lopen(self.l, self.r)
                     self.ineq_answers = set([x > self.l, x <= self.r])
+                    points_info = [{'x': self.l, 'type': 'empty'}, {'x': self.r, 'type': 'filled'}]
+                    self.answer_points = json.dumps(points_info)
+                    intervals_info = [[self.l, self.r]]
+                    self.answer_intervals = json.dumps(intervals_info)
             else: # Q1 == '\\leq'
                 if Q2 == '\\lt':
                     self.answer = Interval.Ropen(self.l, self.r)
                     self.ineq_answers = set([x >= self.l, x < self.r])
+                    points_info = [{'x': self.l, 'type': 'filled'}, {'x': self.r, 'type': 'empty'}]
+                    self.answer_points = json.dumps(points_info)
+                    intervals_info = [[self.l, self.r]]
+                    self.answer_intervals = json.dumps(intervals_info)
                 else:
                     self.answer = Interval(self.l, self.r)
                     self.ineq_answers = set([x >= self.l, x <= self.r])
+                    points_info = [{'x': self.l, 'type': 'filled'}, {'x': self.r, 'type': 'filled'}]
+                    self.answer_points = json.dumps(points_info)
+                    intervals_info = [[self.l, self.r]]
+                    self.answer_intervals = json.dumps(intervals_info)
             self.format_answer = f'\\( {self.l} {self.Q1} x \\; \\textrm{{and}} \\; x {self.Q2} {self.r} \\)'
         else:
             if Q1 == '\\lt':
@@ -218,29 +227,45 @@ class CompoundLinearInequality(Question):
                     self.answer_right = Interval.open(self.r, oo)
                     self.answer = self.answer_left.union(self.answer_right)
                     self.ineq_answers = set([x < self.l, x > self.r])
+                    points_info = [{'x': self.l, 'type': 'empty'}, {'x': self.r, 'type': 'empty'}]
+                    self.answer_points = json.dumps(points_info)
+                    intervals_info = [[-20, self.l], [self.r, 20]]
+                    self.answer_intervals = json.dumps(intervals_info)
                 else:
                     self.answer_left = Interval.open(-oo, self.l)
                     self.answer_right = Interval(self.r, oo)
                     self.answer = self.answer_left.union(self.answer_right)
                     self.ineq_answers = set([x < self.l, x >= self.r])
+                    points_info = [{'x': self.l, 'type': 'empty'}, {'x': self.r, 'type': 'filled'}]
+                    self.answer_points = json.dumps(points_info)
+                    intervals_info = [[-20, self.l], [self.r, 20]]
+                    self.answer_intervals = json.dumps(intervals_info)
             else: # Q1 == '\\leq'
                 if Q2 == '\\gt':
                     self.answer_left = Interval(-oo, self.l)
                     self.answer_right = Interval.open(self.r, oo)
                     self.answer = self.answer_left.union(self.answer_right)
                     self.ineq_answers = set([x <= self.l, x > self.r])
+                    points_info = [{'x': self.l, 'type': 'filled'}, {'x': self.r, 'type': 'empty'}]
+                    self.answer_points = json.dumps(points_info)
+                    intervals_info = [[-20, self.l], [self.r, 20]]
+                    self.answer_intervals = json.dumps(intervals_info)
                 else:
                     self.answer_left = Interval(-oo, self.l)
                     self.answer_right = Interval(self.r, oo)
-                    self.answer = self.answer_left.union(self.answer_right)
+                    self.answeGraphOfr = self.answer_left.union(self.answer_right)
                     self.ineq_answers = set([x <= self.l, x >= self.r])
-            self.format_answer = f'\\( x {self.Q1} {self.l}  \\; \\textrm{{or}} \\; {self.r}  {CompoundLinearInequality.switchQ(Q2)} x \\)'
+                    points_info = [{'x': self.l, 'type': 'filled'}, {'x': self.r, 'type': 'filled'}]
+                    self.answer_points = json.dumps(points_info)
+                    intervals_info = [[-20, self.l], [self.r, 20]]
+                    self.answer_intervals = json.dumps(intervals_info)
+            self.format_answer = f'\\( x {self.Q1} {self.l}  \\; \\textrm{{or}} \\; {self.r}  {GraphOfCompoundLinearInequality.switchQ(Q2)} x \\)'
         if a < 0:
-            given_Q1 = CompoundLinearInequality.switchQ(Q1)
+            given_Q1 = GraphOfCompoundLinearInequality.switchQ(Q1)
         else:
             given_Q1 = Q1
         if e < 0:
-            given_Q2 = CompoundLinearInequality.switchQ(Q2)
+            given_Q2 = GraphOfCompoundLinearInequality.switchQ(Q2)
         else:
             given_Q2 = Q2
         if self.logical_connector == 'and':
@@ -266,7 +291,6 @@ class CompoundLinearInequality(Question):
                {latex(term2 + g)} {given_Q2} {r1}\\]
             """
 
-
     # def get_svg_data(self, window):
     #     x_min = window[0]
     #     x_max = window[1]
@@ -284,48 +308,49 @@ class CompoundLinearInequality(Question):
 
 
     def checkanswer(self, user_answer):
-        if 'and' in user_answer:
-            if self.logical_connector == 'or':
-                return False
-            user_answer = user_answer.split('and')
-        elif 'or' in user_answer:
-            if self.logical_connector == 'and':
-                return False
-            user_answer = user_answer.split('or')
-        else:
-            return False
-        if len(user_answer) != 2:
-            return False
-        user_answer[0] = user_answer[0].replace('^', '**')
-        user_answer[0] = parse_expr(user_answer[0], transformations=transformations)
-        user_answer[1] = user_answer[1].replace('^', '**')
-        user_answer[1] = parse_expr(user_answer[1], transformations=transformations)
-        user_answer = set(user_answer)
-        print('correct', self.ineq_answers, type(list(self.ineq_answers)[0]), 'user', user_answer, type(list(user_answer)[0]))
-        print('union', self.ineq_answers.union(user_answer))
-        # return self.ineq_answers == user_answer
-        cong = CompoundLinearInequality.congruent
-        user_answer = list(user_answer)
-        answers = list(self.ineq_answers)
-        one_way = cong(user_answer[0], answers[0]) and cong(user_answer[1], answers[1])
-        the_other = cong(user_answer[0], answers[1]) and cong(user_answer[1], answers[0])
-        return one_way or the_other
+        user_intervals = user_answer['user_intervals']
+        user_points = user_answer['user_points']
+        # user_points.sort(key=lambda point: point["x"])
+        # print(user_points)
+        sympy_intervals = []
+        for interval in user_intervals:
+            left, right = interval
+            print(left, right)
+            if left <= -20:
+                left = -oo
+                type_of_left = 'empty'
+            else:
+                type_of_left = GraphOfCompoundLinearInequality.get_point(left, user_points)['type']
+            if right >= 20:
+                right = oo
+                type_of_right = 'empty'
+            else:
+                type_of_right = GraphOfCompoundLinearInequality.get_point(right, user_points)['type']
+            if type_of_left == 'filled':
+                if type_of_right == 'filled':
+                    sympy_interval = Interval(left, right)
+                else:
+                    sympy_interval = Interval.Ropen(left, right)
+            else:
+                if type_of_right == 'filled':
+                    sympy_interval = Interval.Lopen(left, right)
+                else:
+                    sympy_interval = Interval.open(left, right)
+            sympy_intervals.append(sympy_interval)
+        sympy_answer = Union(*sympy_intervals)
+        print(self.answer, sympy_answer)
+        # difference = sympy_answer.symmetric_difference(self.answer)
+        # measure_difference = difference.measure
+        # return measure_difference < 0.001
+        return self.answer == sympy_answer
 
     @staticmethod
-    def congruent(ineq1, ineq2):
-        return ineq1.equals(ineq2)
-
-
-    # @staticmethod
-    # def set_congruence(set1, set2, congr_rel):
-    #     for elem in set1:
-    #         while len(set2) > 0:
-    #             list_set2 = list(set2)
-    #             for comp_elem in list_set2:
-    #                 if congruent(elem, comp_elem):
-    #                     set2.remove(comp_elem)
-    #                     break
-
+    def get_point(value, list_of_dictionaries, key='x'):
+        """The value of the key searched on is assumed unique for
+        the dictionaries on this list"""
+        for d in list_of_dictionaries:
+            if d[key] == value:
+                return d
 
     @staticmethod
     def switchQ(Q):
@@ -339,40 +364,18 @@ class CompoundLinearInequality(Question):
             return '\\geq'
 
     def format_useranswer(self, user_answer, display=False):
-        if 'and' in user_answer:
-            user_answer = user_answer.split('and')
-        elif 'or' in user_answer:
-            user_answer = user_answer.split('or')
-        else:
-            return "Your answer wasn't intellible"
-        if len(user_answer) != 2:
-            return "Your answer wasn't intellible"
-        user_answer[0] = user_answer[0].replace('^', '**')
-        user_answer[0] = parse_expr(user_answer[0], transformations=transformations)
-        user_answer[1] = user_answer[1].replace('^', '**')
-        user_answer[1] = parse_expr(user_answer[1], transformations=transformations)
-        if self.logical_connector == 'and':
-            return f'\\( {latex(user_answer[0])} \\; \\textrm{{and}} \\; {latex(user_answer[1])} \\)'
-        else:
-            return f'\\( {latex(user_answer[0])} \\; \\textrm{{or}} \\; {latex(user_answer[1])} \\)'
+        user_answer = user_answer.replace('^', '**')
+        user_answer = parse_expr(user_answer, transformations=transformations)
+        return latex_print(user_answer, display)
 
     @classmethod
     def validator(self, user_answer):
         try:
-            if 'and' in user_answer:
-                user_answer = user_answer.split('and')
-            elif 'or' in user_answer:
-                user_answer = user_answer.split('or')
-            else:
-                raise SyntaxError
-            user_answer[0] = user_answer[0].replace('^', '**')
-            user_answer[0] = parse_expr(user_answer[0], transformations=transformations)
-            user_answer[1] = user_answer[1].replace('^', '**')
-            user_answer[1] = parse_expr(user_answer[1], transformations=transformations)
-            user_answer = set(user_answer)
+            user_answer = user_answer.replace('^', '**')
+            user_answer = parse_expr(user_answer, transformations=transformations)
         except:
             raise SyntaxError
 
 
 
-Question_Class = CompoundLinearInequality
+Question_Class = GraphOfCompoundLinearInequality

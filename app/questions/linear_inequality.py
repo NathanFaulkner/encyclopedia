@@ -104,6 +104,7 @@ class LinearInequality(Question):
     prob_type = 'math_blank'
 
     name = 'Linear Inequality'
+    module_name = 'linear_inequality'
 
     prompt_single = """Solve the linear inequality."""
     prompt_multiple = """Solve each of the following linear inequalities."""

@@ -6,7 +6,8 @@ __all__ = ['quadratic_pattern',
             'solve_for_x',
             'linear_inequality',
             'graph_of_linear_inequality',
-            'compound_linear_inequality']
+            'compound_linear_inequality',
+            'graph_of_compound_linear_inequality']
 
 class Question():
     pass

@@ -91,7 +91,7 @@ class Division():
 
 
 class SevenTest():
-    def __init__(self, book, which_test, *kwargs):
+    def __init__(self, book, which_test, **kwargs):
         if 'seed' in kwargs:
             self.seed = kwargs['seed']
         else:
@@ -115,6 +115,22 @@ class SevenTest():
             random.shuffle(prev_sections)
             test_sections += prev_sections[0:10 - num_left]
         self.sections = test_sections
+        question_sets = []
+        for i, section in enumerate(self.sections):
+            if section.questions != []:
+                question_name = random.choice(section.questions)
+                section_info = self.book.get_skill_info(question_name)[0]
+                question_module = getattr(questions, question_name)
+                question = question_module.Question_Class(seed=self.seed)
+                question_set = [question]
+                question_name = random.choice(section.questions)
+                question_module = getattr(questions, question_name)
+                question = question_module.Question_Class(seed=abs(1-self.seed))
+                question_set.append(question)
+                question_sets.append(question_set)
+            else:
+                question_sets.append([])
+        self.question_sets = question_sets
 
     preamble = r"""
 \documentclass[12pt]{article}
@@ -129,7 +145,7 @@ class SevenTest():
 
 \usepackage{hyperref}
 \usepackage{graphicx}
-\usepackage{pythontex}
+
 
 \usepackage{xcolor}
 
@@ -175,8 +191,10 @@ class SevenTest():
 \fancyhf{}
 \rhead{\bf Name: \hspace{1.5in}}
 """
-    def make_tex(self):
-        title = 'hello'
+    def make_tex(self, key=False):
+        title = f'{self.book.name_for_path}_{self.which_test}_v{self.seed}'
+        if key:
+            title += '_key'
         file_name_with_path = os.path.join('app', 'for_printing', title, '{a}.tex'.format(a=title))
         # print(os.getcwd())
         try:
@@ -191,53 +209,50 @@ class SevenTest():
             # print(os.getcwd())
             f = open('{a}.tex'.format(a=title), 'w+')
         out = self.preamble
-        title_head = f"\\lhead{{\\textbf{{{self.book.display_name} - Test {self.which_test}\\\\Printed on \\today}}}}"
+        title_head = f"\\lhead{{\\textbf{{{self.book.display_name} - Test {self.which_test} v. {self.seed} \\\\Printed on \\today}}}}"
         out += title_head + '\n\n'
         out += '\\begin{document}\n\n'
         out += '\\thispagestyle{fancy}\n\n'
         out += '\\begin{enumerate}\n'
-        seed = self.seed
-        question_sets = []
-        for i, section in enumerate(self.sections):
-            if section.questions != []:
-                question_name = random.choice(section.questions)
-                section_info = self.book.get_skill_info(question_name)[0]
-                question_module = getattr(questions, question_name)
-                question = question_module.Question_Class(seed=random.random())
-                question_set = [question]
+        for question_set in self.question_sets:
+            if question_set != []:
+                question = question_set[0]
+                section_info = self.book.get_skill_info(question.module_name)[0]
                 out += f'\\item {{\color{{gray}}({section_info[0]}.{section_info[1]})}} \n'
                 out += '\\begin{enumerate}\n'
                 out += f'\\item {question.format_given_for_tex}\n'
                 out += '\\vspace{12\\baselineskip}\n'
-                question_name = random.choice(section.questions)
-                question_module = getattr(questions, question_name)
-                question = question_module.Question_Class(seed=random.random())
-                question_set.append(question)
+                question = question_set[1]
                 out += f'\\item {question.format_given_for_tex}\n'
                 out += '\\vspace{12\\baselineskip}\n'
                 out += '\\end{enumerate}\n'
-                question_sets.append(question_set)
             else:
-                out += f'\\item {section.display_name}'
-                question_sets.append([])
+                out += f'\\item No questions have been constructed for this section.'
         out += '\\end{enumerate}\n'
-        out += '\\newpage'
-        out += '\\textbf{Answers:}\n'
-        out += '\\begin{enumerate}\n'
-        for question_set in question_sets:
-            out += '\\item\n'
-            if question_set != []:
-                out += '\\begin{enumerate}\n'
-                out += f'\\item {question_set[0].format_answer}\n'
-                out += f'\\item {question_set[1].format_answer}\n'
-                out += '\\end{enumerate}\n'
-        out += '\\end{enumerate}\n'
+        if key:
+            out += '\\newpage'
+            out += '\\textbf{Answers:}\n'
+            out += '\\begin{enumerate}\n'
+            for question_set in self.question_sets:
+                out += '\\item\n'
+                if question_set != []:
+                    out += '\\begin{enumerate}\n'
+                    out += f'\\item {question_set[0].format_answer}\n'
+                    out += f'\\item {question_set[1].format_answer}\n'
+                    out += '\\end{enumerate}\n'
+            out += '\\end{enumerate}\n'
         out += '\\end{document}'
 
         f.write(out)
         f.close()
 
+        status = os.system('pdflatex {title}'.format(title=title))
 
+        os.chdir('..')
+        os.chdir('..')
+        os.chdir('..')
+
+        return status
 
 
 
@@ -267,6 +282,10 @@ graphsoflinearinequalities.add_to_questions('graph_of_linear_inequality')
 
 solvingcompoundinequalities = Section('solvingcompoundinequalities', "Solving Compound Inequalities", '/sections/solving-compound-inequalities')
 solvingcompoundinequalities.add_to_questions('compound_linear_inequality')
+solvingcompoundinequalities.add_to_questions('graph_of_compound_linear_inequality')
+solvingcompoundinequalities.due_date = datetime.datetime(2020, 8, 28)
+
+# graphsofcompoundinequalities = Section('graphsofcompoundinequalities', "Graphs of Compound Inequalities", '/sections/graphs-of-compound-linear-inequalities')
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -298,7 +317,7 @@ polynomials = Division('chapter', 'Polynomials', [factoring1, quadraticpattern])
 #polynomials.intro = polynomials_intro
 polynomials.set_frontpage(polynomials_intro)
 
-main = Division('main', 'Main Matter', [nuts_and_bolts_of_algebra, linear_functions, polynomials])
+main = Division('main', 'Main Matter', [nuts_and_bolts_of_algebra])
 
 Algebra2 = Division('book', 'Algebra 2', {'front': None, 'main': main, 'end': None})
 Algebra2.name_for_path = 'Algebra2'
