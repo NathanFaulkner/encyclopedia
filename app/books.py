@@ -286,6 +286,7 @@ solvingcompoundinequalities.add_to_questions('graph_of_compound_linear_inequalit
 solvingcompoundinequalities.due_date = datetime.datetime(2020, 8, 28)
 
 # graphsofcompoundinequalities = Section('graphsofcompoundinequalities', "Graphs of Compound Inequalities", '/sections/graphs-of-compound-linear-inequalities')
+intervalnotation = Section('intervalnotation', "Interval Notation", '/sections/interval_notation')
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -309,7 +310,8 @@ nuts_and_bolts_of_algebra = Division('chapter', 'Nuts and Bolts of Algebra',
                                 [solveforx,
                                 linearinequalities,
                                 graphsoflinearinequalities,
-                                solvingcompoundinequalities])
+                                solvingcompoundinequalities,
+                                intervalnotation])
 nuts_and_bolts_of_algebra.set_frontpage(nutsandboltsofalgebra)
 linear_functions = Division('chapter', 'Linear Functions', [graphpointslope])
 linear_functions.set_frontpage(linearfunctions_intro)

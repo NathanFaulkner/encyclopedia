@@ -205,7 +205,7 @@ class UserSectionGradeInfo():
         i = 0
         # mastery_session = True
         # print(len(answers))
-        while i < len(answers) - 1:
+        while i < len(answers):
             # print(f'{self.chapter_number}.{self.section_number}: Round {i}, grade: {grade}')
             expected_recall_duration = max(1, int(self.base**(mastery_count-1)))
             # print('section:', self.chapter_number, ':', self.section_number, ':', question_names, 'session_count', session_count)
@@ -416,4 +416,7 @@ class UserGradeInfo():
                     grades.append(section_info.grade)
                 except AttributeError:
                     pass
-        return sum(grades)/len(grades)
+        if len(grades) > 0:
+            return sum(grades)/len(grades)
+        else:
+            return 0
