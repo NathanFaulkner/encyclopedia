@@ -26,7 +26,7 @@ class AnswerForm(FlaskForm):
             # user_answer = parse_expr(user_answer, transformations=transformations)
             self.validator(answer.data)
         except:
-            raise ValidationError('You have not used mathematically correct syntax.')
+            raise ValidationError('You have not used intelligible syntax.')
         # if answer.data == ',':
         #     raise ValidationError('Use proper syntax.')
 

@@ -276,17 +276,20 @@ relationshipsinatable = Section('relationshipsinatable', "Relationships in a Tab
 
 linearinequalities = Section('linearinequalities', "Linear Inequalities", '/sections/linear-inequalities')
 linearinequalities.add_to_questions('linear_inequality')
+linearinequalities.due_date = datetime.datetime(2020, 8, 27)
 
 graphsoflinearinequalities = Section('graphsoflinearinequalities', "Graphs of Linear Inequalities", '/sections/graphs-of-linear-inequalities')
 graphsoflinearinequalities.add_to_questions('graph_of_linear_inequality')
+graphsoflinearinequalities.due_date = datetime.datetime(2020, 8, 29)
 
 solvingcompoundinequalities = Section('solvingcompoundinequalities', "Solving Compound Inequalities", '/sections/solving-compound-inequalities')
 solvingcompoundinequalities.add_to_questions('compound_linear_inequality')
 solvingcompoundinequalities.add_to_questions('graph_of_compound_linear_inequality')
-solvingcompoundinequalities.due_date = datetime.datetime(2020, 8, 28)
+solvingcompoundinequalities.due_date = datetime.datetime(2020, 9, 1)
 
 # graphsofcompoundinequalities = Section('graphsofcompoundinequalities', "Graphs of Compound Inequalities", '/sections/graphs-of-compound-linear-inequalities')
 intervalnotation = Section('intervalnotation', "Interval Notation", '/sections/interval_notation')
+intervalnotation.add_to_questions('inequality_to_interval_notation')
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -294,13 +297,13 @@ graphpointslope = Section('graphpointslope', "Graph from Point Slope Form", '/se
 graphpointslope.add_to_questions('graph_point_slope')
 
 factoring1 = Section('factoring1', "Factoring - Level 1", '/sections/factoring-coeff-of-one')
-factoring1.due_date = datetime.datetime(2020, 8, 28)
+# factoring1.due_date = datetime.datetime(2020, 8, 28)
 
 polynomials_intro = Section('polynomials', "Polynomials", '/sections/polynomials-intro')
 
 quadraticpattern = Section('quadraticpattern', "Quadratic Pattern", '/sections/quadratic-pattern')
 quadraticpattern.add_to_questions('quadratic_pattern')
-quadraticpattern.due_date = datetime.datetime(2020, 12, 2)
+# quadraticpattern.due_date = datetime.datetime(2020, 12, 2)
 #
 #############################
 

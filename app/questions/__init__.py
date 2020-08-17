@@ -7,7 +7,8 @@ __all__ = ['quadratic_pattern',
             'linear_inequality',
             'graph_of_linear_inequality',
             'compound_linear_inequality',
-            'graph_of_compound_linear_inequality']
+            'graph_of_compound_linear_inequality',
+            'inequality_to_interval_notation']
 
 class Question():
     pass

@@ -18,7 +18,7 @@
 </p>
 {% if question.further_instruction %}
 <p>
-  {{ question.further_instruction }}
+  {{ question.further_instruction|safe }}
 </p>
 {% endif %}
 
