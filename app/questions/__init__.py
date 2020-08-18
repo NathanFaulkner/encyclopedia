@@ -8,7 +8,9 @@ __all__ = ['quadratic_pattern',
             'graph_of_linear_inequality',
             'compound_linear_inequality',
             'graph_of_compound_linear_inequality',
-            'inequality_to_interval_notation']
+            'inequality_to_interval_notation',
+            'interval_to_inequality_notation',
+            'interval_notation_to_graph']
 
 class Question():
     pass

@@ -281,6 +281,12 @@
   </form>
 </p>
 
+{% if question.loom_link %}
+<p>
+  <a href="{{ question.loom_link }}" target="blank">Click for a video demonstrating some problems.</a>
+</p>
+{% endif %}
+
 
 
 

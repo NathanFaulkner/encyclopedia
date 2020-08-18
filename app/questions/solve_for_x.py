@@ -109,6 +109,8 @@ class SolveForX(Question):
 Otherwise, enter an English description of the solution set.
     """
 
+    loom_link = "https://www.loom.com/share/331e43b308a64cefbafdb1ac3211c9ac"
+
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 

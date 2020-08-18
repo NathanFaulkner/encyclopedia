@@ -112,6 +112,7 @@ class LinearInequality(Question):
     as ">=".  For instance, a possible answer might be "x <= -9/5".
     """
 
+    loom_link = "https://www.loom.com/share/196746219d3e4b0d857098470398046e"
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 

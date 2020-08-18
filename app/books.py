@@ -20,8 +20,10 @@ class Section():
         self.questions = []
         self.due_date = None
 
-    def add_to_questions(self, question_name):
+    def add_to_questions(self, question_name, *args):
         self.questions.append(question_name)
+        for question in args:
+            self.questions.append(question)
 
 # class Section():
 #     def __init__(self, category, free_section, numbered=True):
@@ -289,7 +291,9 @@ solvingcompoundinequalities.due_date = datetime.datetime(2020, 9, 1)
 
 # graphsofcompoundinequalities = Section('graphsofcompoundinequalities', "Graphs of Compound Inequalities", '/sections/graphs-of-compound-linear-inequalities')
 intervalnotation = Section('intervalnotation', "Interval Notation", '/sections/interval_notation')
-intervalnotation.add_to_questions('inequality_to_interval_notation')
+intervalnotation.add_to_questions('inequality_to_interval_notation',
+                                    'interval_to_inequality_notation',
+                                    'interval_notation_to_graph')
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
