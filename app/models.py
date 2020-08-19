@@ -318,6 +318,8 @@ class UserSectionGradeInfo():
             if self.initial_due_date != None:
                 time_since_last = datetime.utcnow() - self.initial_due_date
                 days_since_last = time_since_last.days + time_since_last.seconds/60/60/24
+                memory_decay_penalty = int(days_since_last/expected_recall_duration)
+                grade = max(0, int(grade*0.5**memory_decay_penalty))
                 self.memory_gradient = days_since_last
                 self.next_due_date = self.initial_due_date
             else:
