@@ -117,6 +117,8 @@ class GraphOfLinearInequality(Question):
     further_instruction = """Give your answer by graphing on the real line.
     """
 
+    loom_link = """https://www.loom.com/share/018b59d2e8074858b9379b736377bf4d"""
+
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
