@@ -228,7 +228,7 @@ class UserSectionGradeInfo():
                         grade = min(self.max_grade, grade + 1)
                     else:
                         grade = max(0, grade - 1)
-                    print(f'in session: {self.chapter_number}.{self.section_number}: Round {i} at {answer.timestamp}, grade: {grade}')
+                    # print(f'in session: {self.chapter_number}.{self.section_number}: Round {i} at {answer.timestamp}, grade: {grade}')
                     if grade == self.max_grade:
                         mastered_this_session = True
                         self.mastery_date = answer.timestamp
@@ -252,7 +252,7 @@ class UserSectionGradeInfo():
                         grade = min(self.max_grade, grade + 1)
                     else:
                         grade = max(0, grade - 1)
-                print(f'{self.chapter_number}.{self.section_number}: Round {i} at {answer.timestamp}, grade: {grade}')
+                # print(f'{self.chapter_number}.{self.section_number}: Round {i} at {answer.timestamp}, grade: {grade}')
                 i += 1
 
 
@@ -311,7 +311,7 @@ class UserSectionGradeInfo():
             # print(message)
             memory_decay_penalty = int(days_since_last/expected_recall_duration)
             grade = max(0, int(grade*0.5**memory_decay_penalty))
-            print(f'{self.chapter_number}.{self.section_number}: Round - exit, grade: {grade}')
+            # print(f'{self.chapter_number}.{self.section_number}: Round - exit, grade: {grade}')
             # self.due_date = self.mastery_date + timedelta(days=expected_recall_duration)
             self.next_due_date = self.due_date
         else:

@@ -11,7 +11,10 @@ __all__ = ['quadratic_pattern',
             'inequality_to_interval_notation',
             'interval_to_inequality_notation',
             'interval_notation_to_graph',
-            'absolute_value_equation']
+            'absolute_value_equation',
+            'absolute_value_inequality',
+            'absolute_value_inequality_to_interval_notation',
+            'absolute_value_inequality_to_graph']
 
 class Question():
     pass

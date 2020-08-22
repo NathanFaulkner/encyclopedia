@@ -38,35 +38,16 @@ from app.questions import (Question,
 
 prob_type = 'math_blank'
 
-class CompoundLinearInequality(Question):
+class AbsoluteValueInequality(Question):
     """
     The given is
     \\[
-        l1 Q1 a(x + b) + c Q2 r1 ,
+        |a(x - mid)| Q a(r - mid),
     \\]
-    where QX is \\lt or \\leq
-    or
-    \\[
-        a(x + b) + c Q1 l1 \\quad \\textrm{or} \\quad e(x+f) + g Q2 r1,
-    \\]
-    where Q1 is \\lt or \\leq and Q2 is \\gt or \\geq.
-    All the values are actually generated from the answer, which
-    is either of the form
-    \\[
-        l Q1 x Q2 r
-    \\]
-    or
-    \\[
-        x Q1 l \\quad \\textrm{or} \\quad x Q2 r
-    \\]
+    where Q is any inequality and mid = (l + r)/2.
+    (The answer involves just l and r.)
 
-    Which is returned is determined by self.logical_connector,
-    which is either 'and' or 'or'.
-
-    Terms are randomly allowed to collapse depending on difficulty.
-
-    e(x+f) + g can be forced same as a(x+b) + c using
-    self.force_same = True, provided the logical connector is 'or'.
+    For difficulty == 1, a == 1.
     """
     def __init__(self, **kwargs):
         if 'seed' in kwargs:
@@ -74,24 +55,15 @@ class CompoundLinearInequality(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        if 'logical_connector' in kwargs:
-            self.logical_connector = kwargs['logical_connector']
+        if 'Q' in kwargs:
+            self.Q = kwargs['Q']
         else:
-            self.logical_connector = random.choice(['and', 'or'])
-        if 'Q1' in kwargs:
-            self.Q1 = kwargs['Q1']
+            signs = ['\\leq', '\\lt', '\\geq', '\\gt']
+            self.Q = random.choice(signs)
+        if self.Q in ['\\leq', '\\lt']:
+            self.logical_connector = 'and'
         else:
-            signs = ['\\leq', '\\lt']
-            self.Q1 = random.choice(signs)
-        if 'Q2' in kwargs:
-            self.Q2 = kwargs['Q2']
-        else:
-            if self.logical_connector == 'and':
-                signs = ['\\leq', '\\lt']
-                self.Q2 = random.choice(signs)
-            else:
-                signs = ['\\geq', '\\gt']
-                self.Q2 = random.choice(signs)
+            self.logical_connector = 'or'
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:
@@ -105,50 +77,21 @@ class CompoundLinearInequality(Question):
         else:
             offset_max = abs((20-self.l)) - 2
             self.r = self.l + random.randint(1, offset_max)
+        self.mid = Rational(self.l + self.r, 2)
         if 'difficulty' in kwargs:
             self.difficulty = kwargs['difficulty']
         else:
             self.difficulty = random.choice([1, 1, 2])
-        if self.difficulty == '1':
-            self.force_same = True
-        else:
-            self.force_same = random.choice([True, False])
-        if self.logical_connector == 'and':
-            self.force_same = True
         if 'a' in kwargs:
             self.a = kwargs['a']
         else:
-            self.a = random_non_zero_integer(-9,9)
-        if 'b' in kwargs:
-            self.b = kwargs['b']
-        else:
-            self.b = random.randint(-9,9)
-        if 'c' in kwargs:
-            self.c = kwargs['c']
-        else:
-            self.c = random.randint(-9,9)
-        if self.force_same:
-            self.e = self.a
-            self.f = self.b
-            self.g = self.c
-        else:
-            if 'e' in kwargs:
-                self.e = kwargs['e']
+            if self.difficulty == '1':
+                self.a = 1
             else:
-                self.e = random_non_zero_integer(-9,9)
-            if 'f' in kwargs:
-                self.f = kwargs['f']
-            else:
-                self.f = random.randint(-9,9)
-            if 'g' in kwargs:
-                self.g = kwargs['g']
-            else:
-                self.g = random.randint(-9,9)
-        self.l1 = self.a*(self.l+self.b)+self.c
-        if self.logical_connector == 'and':
-            self.r1 = self.a*(self.r+self.b)+self.c
-        else:
-            self.r1 = self.e*(self.r+self.f)+self.g
+                if (self.r - self.l) % 2 == 1:
+                    self.a = random.choice([2, 4, 6])
+                else:
+                    self.a = random.randint(2,5)
 
         self.genproblem()
 
@@ -159,11 +102,11 @@ class CompoundLinearInequality(Question):
         # self.format_answer = self.answer
     prob_type = 'math_blank'
 
-    name = 'Compound Linear Inequality'
-    module_name = 'compound_linear_inequality'
+    name = 'Absolute Value Inequality'
+    module_name = 'absolute_value_inequality'
 
-    prompt_single = """Solve the compound linear inequality."""
-    prompt_multiple = """Solve each of the following compound linear inequalities."""
+    prompt_single = """Solve the absolute value inequality."""
+    prompt_multiple = """Solve each of the following absolute value inequalities."""
     further_instruction = """Enter \\(\\leq\\) as "<=" and \\(\\geq\\)
     as ">=".  For instance, a possible answer might be "x <= -9/5".
     Enter logical connectors as "and" or "or", as in
@@ -173,7 +116,7 @@ class CompoundLinearInequality(Question):
     connecter has been supplied.  (Use "and"!)  You were warned!
     """
 
-    loom_link = """https://www.loom.com/share/533779725fae4424b50e71c8f51bd888"""
+    # loom_link = """https://www.loom.com/share/533779725fae4424b50e71c8f51bd888"""
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
@@ -181,91 +124,40 @@ class CompoundLinearInequality(Question):
         out = {}
         x = self.x
         a = self.a
-        b = self.b
-        c = self.c
-        e = self.e
-        f = self.f
-        g = self.g
-        l1 = self.l1
-        r1 = self.r1
-        if self.difficulty == 1:
-            term1 = a*(x+b)
-            term2 = e*(x+f)
-        else:
-            term1 = factor(a*(x+b))
-            term2 = factor(e*(x+f))
-        Q1 = self.Q1
-        Q2 = self.Q2
+        l = self.l
+        r = self.r
+        Q = self.Q
+        mid = self.mid
         if self.logical_connector == 'and':
-            if Q1 == '\\lt':
-                if Q2 == '\\lt':
-                    self.answer = Interval.open(self.l, self.r)
-                    self.ineq_answers = set([x > self.l, x < self.r])
-                else:
-                    self.answer = Interval.Lopen(self.l, self.r)
-                    self.ineq_answers = set([x > self.l, x <= self.r])
-            else: # Q1 == '\\leq'
-                if Q2 == '\\lt':
-                    self.answer = Interval.Ropen(self.l, self.r)
-                    self.ineq_answers = set([x >= self.l, x < self.r])
-                else:
-                    self.answer = Interval(self.l, self.r)
-                    self.ineq_answers = set([x >= self.l, x <= self.r])
-            self.format_answer = f'\\( {self.l} {self.Q1} x \\; \\textrm{{and}} \\; x {self.Q2} {self.r} \\)'
+            if Q == '\\lt':
+                self.answer = Interval.open(self.l, self.r)
+                self.ineq_answers = set([x > self.l, x < self.r])
+            else: # Q == '\\leq'
+                self.answer = Interval(self.l, self.r)
+                self.ineq_answers = set([x >= self.l, x <= self.r])
+            self.format_answer = f'\\( {self.l} {Q} x \\; \\textrm{{and}} \\; x {Q} {self.r} \\)'
         else:
-            if Q1 == '\\lt':
-                if Q2 == '\\gt':
-                    self.answer_left = Interval.open(-oo, self.l)
-                    self.answer_right = Interval.open(self.r, oo)
-                    self.answer = self.answer_left.union(self.answer_right)
-                    self.ineq_answers = set([x < self.l, x > self.r])
-                else:
-                    self.answer_left = Interval.open(-oo, self.l)
-                    self.answer_right = Interval(self.r, oo)
-                    self.answer = self.answer_left.union(self.answer_right)
-                    self.ineq_answers = set([x < self.l, x >= self.r])
-            else: # Q1 == '\\leq'
-                if Q2 == '\\gt':
-                    self.answer_left = Interval(-oo, self.l)
-                    self.answer_right = Interval.open(self.r, oo)
-                    self.answer = self.answer_left.union(self.answer_right)
-                    self.ineq_answers = set([x <= self.l, x > self.r])
-                else:
-                    self.answer_left = Interval(-oo, self.l)
-                    self.answer_right = Interval(self.r, oo)
-                    self.answer = self.answer_left.union(self.answer_right)
-                    self.ineq_answers = set([x <= self.l, x >= self.r])
-            self.format_answer = f'\\( x {self.Q1} {self.l}  \\; \\textrm{{or}} \\; {self.r}  {CompoundLinearInequality.switchQ(Q2)} x \\)'
-        if a < 0:
-            given_Q1 = CompoundLinearInequality.switchQ(Q1)
-        else:
-            given_Q1 = Q1
-        if e < 0:
-            given_Q2 = CompoundLinearInequality.switchQ(Q2)
-        else:
-            given_Q2 = Q2
-        if self.logical_connector == 'and':
-            self.given_latex_display = f"""
-            \\[ {l1} {given_Q1} {latex(term1 + c)} {given_Q2} {r1} \\]
-            """
-            self.format_given_for_tex = f"""
-            {self.prompt_single}
+            if Q == '\\gt':
+                self.answer_left = Interval.open(-oo, self.l)
+                self.answer_right = Interval.open(self.r, oo)
+                self.answer = self.answer_left.union(self.answer_right)
+                self.ineq_answers = set([x < self.l, x > self.r])
+            else: # Q == '\\geq'
+                self.answer_left = Interval(-oo, self.l)
+                self.answer_right = Interval(self.r, oo)
+                self.answer = self.answer_left.union(self.answer_right)
+                self.ineq_answers = set([x <= self.l, x >= self.r])
+            self.format_answer = f'\\( x {AbsoluteValueInequality.switchQ(Q)} {self.l}  \\; \\textrm{{or}} \\; {self.r}  {AbsoluteValueInequality.switchQ(Q)} x \\)'
 
-            \\[ {l1} {given_Q1} {latex(term1 + c)} {given_Q2} {r1} \\]
-            """
-        else:
-            self.given_latex_display = f"""
-            \\[ {latex(term1 + c)} {given_Q1} {l1} \\quad
-                \\textrm{{or}} \\quad
-               {latex(term2 + g)} {given_Q2} {r1}\\]
-            """
-            self.format_given_for_tex = f"""
-            {self.prompt_single}
+        self.given_latex_display = f"""
+        \\[ {latex(abs(a*(x-mid)))} {Q} {latex(a*(r-mid))} \\]
+        """
+        self.format_given_for_tex = f"""
+        {self.prompt_single}
 
-            \\[ {latex(term1 + c)} {given_Q1} {l1} \\quad
-                \\textrm{{or}} \\quad
-               {latex(term2 + g)} {given_Q2} {r1}\\]
-            """
+        \\[ {latex(abs(a*(x-mid)))} {Q} {latex(a*(r-mid))} \\]
+        """
+
 
 
     # def get_svg_data(self, window):
@@ -305,7 +197,7 @@ class CompoundLinearInequality(Question):
         print('correct', self.ineq_answers, type(list(self.ineq_answers)[0]), 'user', user_answer, type(list(user_answer)[0]))
         print('union', self.ineq_answers.union(user_answer))
         # return self.ineq_answers == user_answer
-        cong = CompoundLinearInequality.congruent
+        cong = AbsoluteValueInequality.congruent
         user_answer = list(user_answer)
         answers = list(self.ineq_answers)
         one_way = cong(user_answer[0], answers[0]) and cong(user_answer[1], answers[1])
@@ -314,7 +206,10 @@ class CompoundLinearInequality(Question):
 
     @staticmethod
     def congruent(ineq1, ineq2):
-        return ineq1.equals(ineq2)
+        try:
+            return ineq1.equals(ineq2)
+        except TypeError:
+            return false
 
 
     # @staticmethod
@@ -355,7 +250,7 @@ class CompoundLinearInequality(Question):
         user_answer[1] = user_answer[1].replace('^', '**')
         user_answer[1] = parse_expr(user_answer[1], transformations=transformations)
         return f'\\( {latex(user_answer[0])} \\; \\textrm{{ {user_splitter} }} \\; {latex(user_answer[1])} \\)'
-        
+
 
     @classmethod
     def validator(self, user_answer):
@@ -376,4 +271,4 @@ class CompoundLinearInequality(Question):
 
 
 
-Question_Class = CompoundLinearInequality
+Question_Class = AbsoluteValueInequality

@@ -358,7 +358,14 @@ function graph_points(info_list, color, hover) {
 
 var points = {{ points|safe }};
 var intervals = {{ intervals|safe }};
+{% if color %}
+// console.log("{{color|safe}}")
+var color = "{{color|safe}}"
+graph_intervals(intervals, color, false);
+graph_points(points, color, false);
+{% else %}
 graph_intervals(intervals, "blue", false);
 graph_points(points, "blue", false);
+{% endif %}
 
 </script>

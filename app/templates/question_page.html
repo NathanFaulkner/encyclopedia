@@ -233,7 +233,7 @@
 </div>
 {% endif %}
 
-{% if request.method == 'POST' %}
+{% if request.method == 'POST' and form.validate_on_submit() %}
 <div class="exercise" style="float: left; width: 100%">
   <table>
     <tr>

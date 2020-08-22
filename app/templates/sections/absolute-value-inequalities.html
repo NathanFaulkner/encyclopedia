@@ -1,0 +1,596 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  We now combine working with absolute value and variables with inequalities.
+  That is, we will solve inequalities that involve absolute value.
+
+  I have seen many students who thought this material was hard&mdash;and who
+  never really got it.  I have also seen students who thought this material
+  was hard, but soon decided it was kind of cool.  The difference between
+  those two classes of students is whether or not they have taken my advice
+  and chosen to adopt the only true strategy for learning math: to <em>think
+  about the meaning of all the symbols</em> rather than to try to memorize
+  a bunch of procedures.  Thinking is hard, but it can be much more fun
+  than suffering through the life of an automaton that just does what they are
+  told!
+
+  To get warmed-up, we'll start with some very simple ones.
+  It is vital to think about the meaning of mathematical statements before
+  trying to do anything with them!  Simple examples are often the best for that.
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  Consider the inequality:
+  \[
+    |x| \lt 5
+  \]
+
+  <ol class="multi-part" style="list-style-type: lower-alpha;">
+    <li>
+      We will be concerned with "solving" inequalities in this section&mdash;that is,
+      with finding their <em>solution sets</em> or the set of all \(x\)-values
+      that would make the inequality true when substituted in.  As you may
+      very well know, mathematicians say it this way: we want to know about
+      the set of \(x\)-values that <em>satisfy</em> the given inequality (or
+      equation or relation or what-have-you).
+
+      <p>
+        So, answer this: Does \(3\) satisfy the inequality?
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Yes, it does.  After all, when making the substitution \(x = 3\)
+          we get
+          \[
+            \textrm{LHS} = |x| = |3| = 3 \lt 5 = \textrm{RHS}
+          \]
+          where \(\textrm{LHS}\) means "left-hand side of our original equation"
+          and \(\textrm{RHS}\) means "right-hand side of our original equation".
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        Does \(-3\) satisfy the inequality?
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Yes, it does.  When making the substitution \(x = -3\)
+          we get
+          \[
+            \textrm{LHS} = |x| = |-3| = 3 \lt 5 = \textrm{RHS}
+          \]
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        Does \(5\) satisfy the inequality?
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Nope!  When making the substitution \(x = 5\)
+          we get
+          \[
+            \textrm{LHS} = |x| = |5| = 5 \not\lt 5 = \textrm{RHS}
+          \]
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        Does \(-10\) satisfy the inequality?
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          No.  When making the substitution \(x = -10\)
+          we get
+          \[
+            \textrm{LHS} = |x| = |-10| = 10 \not\lt 5 = \textrm{RHS}
+          \]
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        Shade the solution set to the inequality
+        \[
+          |x| \lt 5
+        \]
+        on the real line.
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          I hope you can guess my mind by now!  I am going to say, "The
+          key is to understand the meaning", to think about it.  Our task
+          here is to shade the set of \(x\)-values that have the property
+          that "their absolute value is less than 5".  Absolute value, in a way,
+          is utterly simple: it just means we are looking for the true "bigness",
+          magnitude, or "the distance from 0".  So,
+          \[
+            |x| \lt 5
+          \]
+          really just means that we shade \(x\)-values that aren't a distance
+          farther than (or equal to) 5; they have to be closer to 0 than \(5\) is.
+          {% set svg = 'svg1' %}
+          {% set points = [{'x': -5, 'type': 'empty'}, {'x': 5, 'type': 'empty'}] %}
+          {% set intervals = [[-5,5]] %}
+          {% include "_static-real-line.html" %}
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        Express the graph above (and hence the relation \(|x| \lt 5\)), too!)
+        in inequality notation.
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Just look where we shaded in the previous problem!  This is equivalent
+          to the compound inequality
+          \[
+            -5 \lt x \lt 5
+          \]
+          Since I haven't programmed my answer-checker on the exercise
+          page to understand that, though, you will also need to note
+          that this is the same as saying
+          \[
+            -5 \lt x \; \textrm{and} \; x \lt 5
+          \]
+          Literally, it means "\(x\) has to be above \(-5\) but below \(5\)".
+          In conclusion, note that what we are really saying (having used
+          the graph as a visual intermediary to help us <em>think</em>)
+          that the two formulas
+          \[
+            |x| \lt 5
+          \]
+          and
+          \[
+            -5 \lt x \lt 5
+          \]
+          <em>mean the very same thing</em>.  Remember!  Your job
+          as a math student should relaly be understood as
+          contemplating the meaning of all these symbols&mdash; to phrase
+          it in a slogan, it is the business of "putting math into meaning
+          and meaning into math".  So that
+          two different formulas would have the very same meaning is
+          something you should be interested by!
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        Express the previous answer in interval notation.
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          We use (round) parentheses for the case of "not equal to"
+          (which, by the way, mathematicians describe as
+          being a "strict" inequality.)  Here it is:
+          \[
+            (-5,5)
+          \]
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<p>
+  Now, we just alter the problem in one little way, visually-speaking&mdash;but which
+  has a big effect on the meaning!
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  Consider the inequality:
+  \[
+    |x| \gt 5
+  \]
+
+  <ol class="multi-part" style="list-style-type: lower-alpha;">
+    <li>
+      <p>
+        Does \(3\) satisfy the inequality?
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          No.  After all, when making the substitution \(x = 3\)
+          we get
+          \[
+            \textrm{LHS} = |x| = |3| = 3 \not \gt 5 = \textrm{RHS}
+          \]
+          where \(\textrm{LHS}\) means "left-hand side of our original equation"
+          and \(\textrm{RHS}\) means "right-hand side of our original equation".
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        Does \(-3\) satisfy the inequality?
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          No. When making the substitution \(x = -3\)
+          we get
+          \[
+            \textrm{LHS} = |x| = |-3| = 3 \not\gt 5 = \textrm{RHS}
+          \]
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        Does \(7\) satisfy the inequality?
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Yes!  When making the substitution \(x = 7\)
+          we get
+          \[
+            \textrm{LHS} = |x| = |7| = 7 \gt 5 = \textrm{RHS}
+          \]
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        Does \(-7\) satisfy the inequality?
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Yes, again!  When making the substitution \(x = -7\)
+          we get
+          \[
+            \textrm{LHS} = |x| = |-7| = 7 \gt 5 = \textrm{RHS}
+          \]
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        Shade the solution set to the inequality
+        \[
+          |x| \gt 5
+        \]
+        on the real line.
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          So, what is this saying about the (hypothetical) unknown
+          number \(x\)?  It is saying, quite clearly, that the absolute
+          value of this number is greater than 5.  So, it is our
+          job to shade all numbers whose absolute value is greater
+          than 5.  Absolute value, as you well know by now, I suppose, is
+          just the "bigness" or distance from 0, so we make sure
+          to shade those points that are farther from 0 than 5 is; this
+          includes numbers like 6, 7, 8, 9, 10, but also numbers like
+          -6, -7, -8, -9, -10, and so on&mdash;as well as all the fractions
+          in between!  An "empty" circle is used at the points -5 and 5
+          since they are <em>not</em> not included in the solution set (but everything
+          up to them is.)
+          {% set svg = 'svg2' %}
+          {% set points = [{'x': -5, 'type': 'empty'}, {'x': 5, 'type': 'empty'}] %}
+          {% set intervals = [[-20, -5], [5, 20]] %}
+          {% include "_static-real-line.html" %}
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        Express the graph above (and hence the relation \(|x| \gt 5\)), too!)
+        in inequality notation.
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Just look where we shaded in the previous problem!  This is equivalent
+          to the compound inequality
+          \[
+            x \lt -5 \; \textrm{or} x \; \gt 5
+          \]
+          You could also write this, like so:
+          \[
+            x \lt -5 \; \textrm{or} \; 5 \lt x
+          \]
+          So, look: Do you see how the \(x\)'s are on the outside?
+          Do you see how that coincides with the shading in the picture?
+          Neat right?  That's what happens when you only ever use the
+          symbol "\(\lt\)" when writing your compound (linear)
+          inequalities: everything gets ordered <em>from left to right</em>.
+          (You don't have to write it on one way or the other; I just wanted
+          to point that out.)  Go back and look at the inequality answer
+          from the previous problem to see a further illustration of what
+          I am talking about there!
+
+          <p>
+            So, note that the formulas
+          \[
+            |x| \gt 5
+          \]
+          and
+          \[
+            x \lt -5 \; \textrm{or} 5 \lt x
+          \]
+          mean the <em>exact same thing</em>.
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        Express the previous answer in interval notation.
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          We use (round) parentheses for the case of "not equal to"
+          (which, by the way, mathematicians describe as
+          being a "strict" inequality.)  Also, we need
+          the union symbol, \(\cup\), to join
+          together the separate pieces as "one single solution set",
+          albeit, yes, with two disconnected pieces.  Here it is:
+          \[
+            (-\infty,-5) \cup (5, \infty)
+          \]
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<p>
+  Now, we just make it a <em>little</em> harder, by tweaking it just a little bit.
+</p>
+
+<p>
+  So, the next step after contemplating very easy things
+  like the absolute value of a number is to contemplate
+  the <em>meaning</em> of the absolute value
+  of a number in disguise&mdash;a variable.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  Solve.  (Find the solution set.)  Express your answer in three ways:
+  in inequality notation, on a real-line graph, and in interval notation.
+  \[
+    |x - 7| \gt 5
+  \]
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          This is kind of like when we went from solving something like
+          \[
+            |x| = 5
+          \]
+          to solving
+          \[
+            |x - 7|  = 5
+          \]
+          The only change is that we are not told directly about
+          the number \(x\) but are instead told about the number
+          \(x - 7\).  Remember that when going through a solving
+          algorithm, what you should really be thinking is
+          the following narrative:
+          <blockquote>
+            Assume that \(x\) is a real number with the given property...
+          </blockquote>
+          So, \(x\) is a real number; it exists somewhere along
+          the real line.  Therefore, \(x-7\) is a number, too: just
+          7 units to the left of wherever \(x\) is.  One thing
+          that can actually help your brain is to <span style="color:purple">color</span>
+          <em>this symbol</em>
+          for whatever number \({\color{purple}x-7}\) represents,
+          and then continue to use that color as you refer to it.
+          Like this:
+          \[
+            |{\color{purple}x-7}| \gt 5
+          \]
+          Now, I'm going to think about <span style="color:purple">that number</span>
+          by graphing in <span style="color:purple">purple</span> where that
+          number can be.  That is no harder than graphing \(|x| \gt 5\)&mdash;which
+          means that "the number \(x\) has absoluate value bigger than 5".
+          All I have to think to myself is "the <span style="color:purple">purple number</span>"
+          has an absolute value bigger than 5.  So, of course, I will shade in
+          <span style="color:purple">purple</span>:
+          {% set svg = 'svg3' %}
+          {% set color = 'purple' %}
+          {% set points = [{'x': -5, 'type': 'empty'}, {'x': 5, 'type': 'empty'}] %}
+          {% set intervals = [[-20, -5], [5, 20]] %}
+          {% include "_static-real-line.html" %}
+
+          <p>
+            Next, I translate this picture into math symbols.  Actually, I don't
+            really recommend drawing a picture at this point in the process
+            when you carry it out; instead, this picture should live
+            in <em>your mind</em>.  I am using this picture with the purple
+            shading to illustrate what I am <em>thinking</em>.  Instead,
+            the inequality translation is really what I <em>write</em>:
+            \[
+              {\color{purple}x - 7} \lt -5 \; \textrm{or} \; {\color{purple}x-7} \gt 5
+            \]
+            From there, I solve the compound inequality in the usual way.  In this case,
+            I added 7 to both sides of each inequality:
+            \[
+              x \lt 2 \; \textrm{or} \; x \gt 12
+            \]
+            Here is its graph:
+            {% set svg = 'svg4' %}
+            {% set color = "blue" %}
+            {% set points = [{'x': 2, 'type': 'empty'}, {'x': 12, 'type': 'empty'}] %}
+            {% set intervals = [[-20, 2], [12, 20]] %}
+            {% include "_static-real-line.html" %}
+            And here it is interval notation:
+            \[
+              (-\infty, 2) \cup (12, \infty)
+            \]
+          </p>
+
+
+        </div>
+      </div>
+</div>
+</p>
+
+<p>
+  Next, we see what happens when the inequality is reversed.  We
+   solve by the same "purple number" method (which, again,
+   you should really regard as just an illustration of a process
+   that should take place in your mind; I don't encourage you to
+   actually draw a graph until the final answer).
+</p>
+
+<div class="example">
+  <h2></h2>
+  Solve.  (Find the solution set.)  Express your answer in three ways:
+  in inequality notation, on a real-line graph, and in interval notation.
+  \[
+    |x - 7| \lt 5
+  \]
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Again, I am not told directly about the number \(x\) but rather
+          the number \(x - 7\).  But it, too, is a number!  I color
+          it <span style="color:purple">purple</span>, just to visually emphasize how it lives in my mind
+          as a three-part symbol for a single number.
+          \[
+            |{\color{purple}x-7}| \lt 5
+          \]
+          Now, I reason that, by the given, the number \({\color{purple}x-7}\)
+          has an absolute value that is less than 5.  In my mind, I know
+          it means that this number could be in the places shaded in
+          <span style="color:purple">purple</span>,
+          {% set svg = 'svg5' %}
+          {% set color = 'purple' %}
+          {% set points = [{'x': -5, 'type': 'empty'}, {'x': 5, 'type': 'empty'}] %}
+          {% set intervals = [[-5,5]] %}
+          {% include "_static-real-line.html" %}
+
+          <p>
+            I translate this mental image into an inequality:
+            \[
+              -5 \lt {\color{purple}x - 7} \lt 5
+            \]
+            Next, I just add 7 to all three "columns":
+            \[
+              2 \lt x \lt 12
+            \]
+            Here is the graph of the final answer (the solution set):
+            {% set svg = 'svg6' %}
+            {% set color = "blue" %}
+            {% set points = [{'x': 2, 'type': 'empty'}, {'x': 12, 'type': 'empty'}] %}
+            {% set intervals = [[2,12]] %}
+            {% include "_static-real-line.html" %}
+            Notice that the solution set is just the
+            <span style="color:purple">purple</span> shifted to the right 7 units
+            (because we added 7 to all three numbers in the inequality).
+            And here it is interval notation:
+            \[
+              (2, 12)
+            \]
+          </p>
+        </div>
+      </div>
+</div>
+</p>
+
+
+
+<p>
+  All the principles have been explained.  However, you may find that
+  the <em>numbers</em> involved in the exercises are a little disconcerting.
+  Just take heart, and have faith that the math works the same even when
+  less everyday numbers are involved.  Take a look at the following as an example.
+</p>
+
+<div class="example">
+  <h2></h2>
+  Solve.  (Find the solution set.)  Express your answer in three ways:
+  in inequality notation, on a real-line graph, and in interval notation.
+  \[
+    |8x - 108| \leq 12
+  \]
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          As in the above, I am not told directly about the number \(x\) but rather
+          the number \(8x - 108\).  But it, too, is a number!  I color
+          it <span style="color:purple">purple</span>, just to visually emphasize how it lives in my mind
+          as a multi-part symbol for a single number.
+          \[
+            |{\color{purple}8x - 108}| \leq 12
+          \]
+          Now, I reason that, by the given, the number \({\color{purple}8x-108}\)
+          has an absolute value that is less than or equal to 12.  I know
+          this means that this number could be in the places shaded in
+          <span style="color:purple">purple</span>,
+          {% set svg = 'svg7' %}
+          {% set color = 'purple' %}
+          {% set points = [{'x': -12, 'type': 'filled'}, {'x': 12, 'type': 'filled'}] %}
+          {% set intervals = [[-12,12]] %}
+          {% include "_static-real-line.html" %}
+
+          <p>
+            I translate this mental image into an inequality:
+            \[
+              -12 \leq {\color{purple}8x - 108} \leq 12
+            \]
+            Next, I just add \(108\) to all three "columns":
+            \[
+              96 \leq 8x \leq 120
+            \]
+            and then divide all sides by 8:
+            \[
+              12 \leq x \leq 15
+            \]
+            Here is the graph of the final answer (the solution set):
+            {% set svg = 'svg8' %}
+            {% set color = "blue" %}
+            {% set points = [{'x': 12, 'type': 'filled'}, {'x': 15, 'type': 'filled'}] %}
+            {% set intervals = [[12,15]] %}
+            {% include "_static-real-line.html" %}
+            And here it is interval notation:
+            \[
+              [12, 15]
+            \]
+          </p>
+        </div>
+      </div>
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}
