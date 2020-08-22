@@ -314,7 +314,7 @@ var right_endpoint = {x: 20, type:'empty'};
     var x = loc.x;
     var y = loc.y;
     x = svg_to_cart(x);
-    x = Number.parseFloat(x).toFixed(1);
+    x = Number.parseFloat(x).toFixed(0);
     document.getElementById('x').innerHTML = x;
     if (mode == 'shade') {
       var left_x = get_left_x(x, points);

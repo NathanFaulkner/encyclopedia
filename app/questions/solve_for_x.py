@@ -100,7 +100,7 @@ class SolveForX(Question):
         {self.given_latex_display}
         """
 
-    name = 'Quadratic Pattern'
+    name = 'Solve for x'
     module_name = 'solve_for_x'
 
     prompt_single = 'Solve for \\(x\\).  (Find the solution set.) '

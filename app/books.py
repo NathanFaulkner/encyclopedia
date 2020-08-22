@@ -295,6 +295,9 @@ intervalnotation.add_to_questions('inequality_to_interval_notation',
                                     'interval_to_inequality_notation',
                                     'interval_notation_to_graph')
 
+absolutevalueequations = Section('absolutevalueequations', "Absolute Value Equations", '/sections/absolute-value-equations')
+absolutevalueequations.add_to_questions('absolute_value_equation')
+
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
 graphpointslope = Section('graphpointslope', "Graph from Point Slope Form", '/sections/graph-point-slope')
@@ -318,7 +321,8 @@ nuts_and_bolts_of_algebra = Division('chapter', 'Nuts and Bolts of Algebra',
                                 linearinequalities,
                                 graphsoflinearinequalities,
                                 solvingcompoundinequalities,
-                                intervalnotation])
+                                intervalnotation,
+                                absolutevalueequations])
 nuts_and_bolts_of_algebra.set_frontpage(nutsandboltsofalgebra)
 linear_functions = Division('chapter', 'Linear Functions', [graphpointslope])
 linear_functions.set_frontpage(linearfunctions_intro)

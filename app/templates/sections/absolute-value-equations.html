@@ -1,0 +1,511 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  We now turn to another pretty basic concept of algebra: absolute value.
+  You probably already know what absolute value is.  But let's practice the very basics:
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  Compute the value of each of the following:
+
+  <ol class="multi-part" style="list-style-type: lower-alpha;">
+    <li>
+      \(|-6|\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          As you may know,
+          \[
+            |-6| = 6
+          \]
+          Simple as that!
+        </div>
+      </div>
+    </li>
+    <li>
+      \(|6|\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \[
+            |6| = 6
+          \]
+        </div>
+      </div>
+    </li>
+    <li>
+      Now, describe how absolute value works.
+      As I have said elsewhere, the real line is our go-to mental model for explaining
+       the meaning of many algebraic concepts.  Explain what absolute value
+       means on the real line.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          All that the absolute value of the number is is its distance
+          from 0.  You could also say that absolute value gives
+          the magnitude or "bigness" of the number.  This comment
+          must be understood carefully, though---in a sense to
+          a point when I made in the discussion of inequalities.  A fact that
+          is well known to you is that, by golly, numbers get <em>bigger</em>
+          as you go deeper into the negatives.  That is, in a sense, even though
+          it's true that \(-100\) is "less than" \(-50\)&mdash;if we understand
+          that phrase in the sense of a less than inequality, like so:
+          \[
+              -100 \lt -50
+          \]
+          But, in still another sense, \(-100\) is <em>bigger than</em>
+          -50&mdash;in the sense that 100 is a bigger number than 50.  <em>This</em>
+          latter sense of bigness&mdash;looking at the bigness of the number
+          while ignoring the negative sign attached&mdash;is what absolute value is about.
+
+          <p>
+            Let me put it in more concrete terms by first reminding you why
+            negative numbers even exist.  Think of the real line as the ability
+            to travel infinitely far away in "one dimension".  That means
+            that you can't go "East/West" and "North/South" but only one or the other&mdash;but you
+            do still have the two directions to choose from.  On the
+            (horizontally-oriented) real line, you can go as far as you
+            like to the East&mdash;which would be the positive direction&mdash;but
+            what's the good in that if you couldn't also go to the West!  Sometimes
+            you need to change directions or backtrack, no?  So, negative
+            numbers are really just a way of saying "go to the west".  Of course,
+            if you want to go "negative West", then what you mean is East; if going
+            "reverse East" or backtracking after going East is really "West", then,
+            clearly, going "reverse West" is East.  Hence, "the negative of a
+            negative is positive."  Here, I invite you to imagine a world
+            in which the negative sign doesn't exist and where we write something
+            like "W5" for \(-5\) and "E5" for \(5\).  You might not
+            <em>prefer</em>to live in a world like that, but I assure you
+            that it would be a perfectly valid world with the same mathematics
+            as us&mdash;only <em>written</em> differently.  (Same in what sense, then?)
+          </p>
+
+          <p>
+            Now, going back to absolute value, you can say that absolute value
+            doesn't care whether you went East or West&mdash;it only cares about
+            how far you went.  There is some more nice vocab that you can
+            inject into this conversation.  Have you ever learned the
+            concept of a <em>vector</em> as information about "distance
+            and direction"?  Well, that's what the word means!  So,
+            in fact, while people have the habit of referring to negative numbers
+            as numbers, this is just a choice that people made in how to use language.
+            In a way, they are not numbers at all but <em></em> because
+            they tell you both about distance from 0 (the <em>number</em> part
+            of absolute value) <em>and</em> direction (whether it is negative
+            or positive).  Actually, it could prevent a lot of pain and confusion
+            on the part of young students if no one ever insisted that negative
+            numbers are numbers at all&mdash;and instead learned that
+            helpful word <em>vector</em> that helps clarify the new distinction
+            being created at a younger age.
+          </p>
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<p>
+  The above problems were really much to easy.  Maybe you'd like
+  to be tested on something like that, but that's not the
+  wort of thing I'll be asking in the exercises.  For a lot of people,
+  absolute value gets harder pretty quick.  But why should it?  Why
+  should we start with such super-easy beginnings and then
+  suddenly find ourselves in something hard?  What if we took
+  it slow, step-by-step&mdash;could we figure out the point at which it
+  becomes difficult?  (Or maybe, if we take it slow enough,
+  making each step carefully, putting one foot in front of the other&mdash;but
+  only after making sure the previous one was planted firmly&mdash;it
+  will never become hard at all!)
+</p>
+
+<p>
+  So, the next step after contemplating very easy things
+  like the absolute value of a number is to contemplate
+  the <em>meaning</em> of the absolute value
+  of a number in disguise&mdash;a variable.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  What can we say about the absolute value of an unknown number?
+  Take any unknown real number \(x\).
+  That is, you take one number, but I might take another; a third
+  person may choose yet another.
+  What can you say about the value of \(|x|\)?
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Has it gotten hard yet?  Nah&mdash;not <em>too</em> hard, anyway!
+          Here's what you can say about \(x\): <em>if</em>
+          \(x\) was a negative, then \(|x|\) will be what you
+          get when you throw the negative sign away.  And if
+          \(x\) is positive, then \(|x|\) will just be itself.
+          One could say more about this&mdash;but not much!
+        </div>
+      </div>
+</div>
+</p>
+
+<p>
+  Not hard yet, so let's take one more baby step:
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  What we are warming up to is to solve equations involving absolute value.
+  Here's one that isn't too hard to start with.
+  <ol class="multi-part" style="list-style-type: lower-alpha;">
+    <li>
+      Solve. (Identify the solution set.):
+        \[
+          |x| = 3
+        \]
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Let's talk it out.  What the meager prompt "solve" means
+          (in this context)
+          is this:
+          <blockquote>
+            Suppose that \(x\) is a real number&mdash;so, it's
+            sitting somewhere on the real line, and that all we
+            know about it is this:
+            \[
+              |x| = 3
+            \]
+            It's absolute value is 3!  So, what is the number?
+            Can you guess it?  Well,maybe&mdash;but you'd have a 50/50 chance!
+            After all, there are <em>two</em> numbers on the real line that
+            have an absolute value of 3&mdash;both \(3\) and \(-3\).
+            That's it!  Simple as that.  Absolute value is just "how far
+            is the number from 0?"  So, literally, when you say
+            \(|x| = 3\), you are saying that \(x\) is a number
+            that is at a distance of 3 from 0.  'Nuff said!
+          </blockquote>
+        </div>
+      </div>
+    </li>
+    <li>
+      Solve. (Identify the solution set.):
+        \[
+          |x| = -3
+        \]
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Hmm... so, \(x\) is a real number&mdash;something
+          we could plot on the real line&mdash;and we know
+          that its aboslute value is \(-3\).  Looks like math, right?
+          Well, be sure and think about the <em>meaning</em> of the
+          math.  I'm taking for granted that above, in Example 1,
+          for example, you agreed that absolute value is
+          just about the easiest thing in the world.  You wish
+          all math could be that easy.  So, what about this problem?
+          Just think about the meaning!  You also agreed above
+          that absolute value is just "the <em>distance</em> from 0"
+          of the number: no funny business, just the honest-to-goodness
+          distance.  So, let me ask you, can distance be negative?  Don't
+          answer me like a poor young person who has been cowed
+          by the mathematical powers-that-be into thinking that you don't
+          know nothing and the teacher has to tell it to you.  You
+          know very well what distance is---"how far?"  Negatives
+          don't enter in there.  (Where <em>do</em> they enter in?
+          Answer: only when you care about <em>direction</em>, rather
+          than just "how far?")  So, distance can't be negative.
+          Absolute value is just distance from 0.  So, this
+          problem is one of those trick problems&mdash;or, rather,
+          its a statement which can <em>never</em> be true no matter
+          what you plug in for \(x\).  That is, it the equation has
+          no solution.
+        </div>
+      </div>
+    </li>
+    <li>
+      Previously, you have probably adopted the following mental "scheme"
+      when solving equations: "In order to solve equations, you do something to
+      both sides...""  Is that what is happening here?
+      What is a new mental scheme that will help here?
+      By the way, if you have no idea what I am talking about with the phrase
+      "mental scheme," take a look at the following
+      <a href="https://en.wikipedia.org/wiki/Schema_(psychology)" target="_blank">Wikipedia article.</a>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          No, we're not "doing something to both sides".  So, that point of
+          view or mindset is not universally applicable to when it comes
+          to solving equations.  So, what <em>is</em> a universally
+          applicable scheme or strategy to solving any and all equations?
+          Well, you may be both pleased and disappointed by my truly honest
+          and definitive answer: what you do is you <em>think about
+          the meaning of the symbols</em>.  That's all we did to solve the
+          equation!  <em>And</em>, I promise, this is what you'll have to
+          continue to do to have continued success with solving
+          absolute value equations&mdash;and in math in general.  You
+          have to know and think about the meanings of the symbols (and
+          what they mean when strung together in particular ways.)
+
+          <p>
+            Thnking is hard!  That's why a lot of people tend to avoid it
+            much of the time! As you may know, too, math is hard.  Why?&mdash;because
+            it requires thinking.  That's the bad news.  The good news is
+            that that is <em>all</em> it requires. So, yes, you <em>have</em>
+            to think about the meaning of the absolute value equations
+            below (remember&mdash;we are making them a little harder as we proceed)&mdash;but
+            that is <em>all</em> you have to do to succeed.  Nothing more and nothing
+            less.  Do you have to memorize a bunch of rules?  No, you don't
+            have to do that.  (Could you?  Maybe, but I don't recommend it;
+            I have seen how students fair who pursue that strategy.)  But
+            maybe, first, you have to <em>commit</em> yourself to the strategy
+            of thinking as a strategy <em>and</em> to give up on other strategies
+            like memorization.  The sooner you do, the better and more happier
+            you will be&mdash;even though (or maybe even because) it will
+            take hard work&mdash;but hopefully less anxiety.
+          </p>
+
+          <p>
+            As a bit of encouragement, were these problems hard to think about?
+            Was it hard to think about the question of
+            \[
+              |x| = 3
+            \]
+            or
+            \[
+              |x| = -3
+            \]
+            I hope you will agree that it wasn't very hard to think about those.
+            And, I promise, it really isn't that much harder to think about the
+            "harder" problems below.  But it <em>is</em> hard or at least
+            painful to sit there and try to cram in a bunch of rules into
+            your memory bank (because you have chosen to just follow rules
+            and stop thinking).
+          </p>
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<p>
+  So, now we make the problems harder by one more little step.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+    Solve.  (Identify the solution set.)
+    \[
+      |x - 5| = 3
+    \]
+  </p>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Note, of course, that this is not so different
+      from an example above.  This is awfully similar to
+      \[
+        |x| = 3
+      \]
+      For that one, we started&mdash;in the way that we always should&mdash;by
+      reminding ourselves that "Solve  such-and-such-an-equation-with-\(x\)"
+      means first of all that we are entertaining this narrative:
+      <blockquote>
+        Suppose that \(x\) is a real number with the given property.
+      </blockquote>
+      Given that the absolute value of \(x\) is 3, it was pretty simple to deduce
+      what \(x\) might be&mdash;one of two possibilities.  This time, the
+      only difference is that we aren't told about \(x\) directly, in a way.
+      We are told about \(x - 5\) instead.  But, look, \(x\) is a real number&mdash;meaning,
+      very concretely, that \(x\) exists somewhere along the real line.
+      Therefore, \(x-5\) is <em>also</em> a number&mdash;or, you could say,
+      \(x-5\) is <em>also</em> the <em>symbol for</em> a number.  Indeed,
+      \(x-5\) is the number that lies precisely 5 units to the left
+      of wherever \(x\) is on the real line.
+
+      <p>
+        So, we are told <em>this time</em> about the number \(x-5\): we
+        are told that <em>its</em> absolute value is 3.  And that is not
+        a mysterious statement.  That means that this number
+        represented by "\(x-5\)" is either \(3\) or \(-3\).  Writing this
+        in math symbols provides a further insight (in case the solution
+        is not already clear):
+        \[
+          x - 5 = 3 \quad \textrm{or} \quad x - 5 = -3
+        \]
+        From there, it is easy to deduce the answer&mdash;or, if you prefer&mdash;the
+        two solutions in the solution set:
+        \[
+          x = 8 \quad \textrm{or} \quad x = 2
+        \]
+      </p>
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  That's pretty much it!!  You might be getting the hang of it if you understand
+  the next problem.  But you should probably check out the next three examples
+  just to be safe.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+    Solve.  (Identify the solution set.)
+    \[
+      |2x - 5| = 3
+    \]
+  </p>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      The logic goes like this:
+      <ol>
+        <li>Assume that \(x\) is a real number (so could be plotted on the real line).</li>
+        <li>Therefore, \(2x - 5\) is also a number (you could literally
+          take the number that is twice as far from 0 as \(x\)&mdash;but in the
+          same direction, whether negative or positive&mdash;and then
+          scoot that number to the left 5).</li>
+        <li>We are given that the absolute value of \(2x - 5\) is \(3\).
+          Therefore,
+          \[
+            2x - 5 = 3 \quad \textrm{or} \quad 2x - 5 = -3
+          \]
+        </li>
+        <li>
+          From there, we deduce that
+          \[
+            2x = 8 \quad \textrm{or} \quad 2x = 2
+          \]
+          and then that
+          \[
+            x = 4 \quad \textrm{or} \quad x = 1
+          \]
+        </li>
+        <li>
+          As a final step, it is quite prudent to check your answers.
+          Observe that if we take \(x\) to equal 4 we find that
+          \[
+            \textrm{LHS} = |2x - 5| = |2\cdot 4 - 5| = |8 - 5| = |3| = 3 = \textrm{RHS}
+          \]
+          (\(\textrm{LHS}\) means "left-hand side of our original equation"
+          and \(\textrm{RHS}\) means "right-hand side of our original equation").
+          Likewise, if we substitute in \(1\) for \(x\), we get
+          \[
+            \textrm{LHS} = |2x - 5| = |2\cdot 1 - 5| = |2 - 5| = |-3| = 3 = \textrm{RHS}
+          \]
+          So, both answers work.  Further, by the logic of the previous steps,
+          we know that they are the <em>only possible</em> solutions.
+        </li>
+      </ol>
+
+      <p>
+        So, we are told <em>this time</em> about the number \(x-5\): we
+        are told that <em>its</em> absolute value is 3.  And that is not
+        a mysterious statement.  That means that this number
+        represented by "\(x-5\)" is either \(3\) or \(-3\).  Writing this
+        in math symbols provides a further insight (in case the solution
+        is not already clear):
+        \[
+          x - 5 = 3 \quad \textrm{or} \quad x - 5 = -3
+        \]
+        From there, it is easy to deduce the answer&mdash;or, if you prefer&mdash;the
+        two solutions in the solution set:
+        \[
+          x = 8 \quad \textrm{or} \quad x = 2
+        \]
+      </p>
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+    Solve.  (Identify the solution set.)
+    \[
+      |2x - 5| + 7 = 10
+    \]
+  </p>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      You can probably do with less narrative on this one.  As a matter of fact,
+      it is hardly different from the previous problem&mdash;except that
+      you ought to subtract \(7\) from both sides to take it to the situation
+      we have been studying in this section, namely, where you have
+      "the absolute value of some unknown is a given number".  So, solving
+      might look like this:
+      \begin{align*}
+        & |2x - 5| + 7 = 10 & \textrm{Given}\\
+        \Rightarrow \quad & |2x - 5| = 3 & \textrm{Subtracted 7 from both sides}\\
+        \Rightarrow \quad & 2x - 5 = 3 \quad \textrm{or} \quad 2x - 5 = -3 & \textrm{Thought about the meaning}\\
+        \Rightarrow \quad & 2x = 8 \quad \textrm{or} \quad 2x = 2 & \textrm{Added 5 to both sides of each}\\
+        \Rightarrow \quad & x = 4 \quad \textrm{or} \quad x = 1 & \textrm{Divided both sides of each by 2}\\
+      \end{align*}
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+    Solve.  (Identify the solution set.)
+    \[
+      |2x - 5| + 10 = 7
+    \]
+  </p>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Don't forget.  The key thing to do&mdash;the only true strategy to
+      pursue&mdash;is to <em>think about the meaning</em> of what you are
+      looking at.  Here is my process and thoughts:
+      \begin{align*}
+        & |2x - 5| + 10 = 7 & \textrm{Given}\\
+        \Rightarrow \quad & |2x - 5| = -3 & \textrm{Subtracted 10 from both sides}\\
+        \Rightarrow \quad & \textrm{No solution} & \textrm{Thought about the meaning}\\
+      \end{align*}
+      What happened there?  I deduce that, if \(x\) is a real number
+      with the given property, then \(2x-5\) is a number whose
+      absolute value is \(-3\).  Absolute value is about distance, which
+      cannot be 0, so this is nonsense.  There is no such \(x\).
+    </div>
+  </div>
+</div>
+</p>
+
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

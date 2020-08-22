@@ -166,6 +166,7 @@ class GraphOfCompoundLinearInequality(Question):
     further_instruction = """Give your answer by graphing on the real line.
     """
 
+    loom_link = """https://www.loom.com/share/533779725fae4424b50e71c8f51bd888"""
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
