@@ -256,6 +256,19 @@ function str_list_to_list_of_floats(str_list) {
     return -1;
   }
 
+  function deleteIntervalByEndpoint(endpoint, list_of_intervals) {
+    var i, j, current;
+    var l = list_of_intervals.length;
+    for (i=l-1; i >= 0; i--) {
+      current = list_of_intervals[i];
+      for (j=0; j < current.length; j++) {
+        if (endpoint == current[j])
+          list_of_intervals.splice(i, 1);
+          break;
+      }
+    }
+  }
+
   var tolerance = 0.2;
 
   function check_for_nearby(pt, pts, tolerance) {
@@ -387,6 +400,9 @@ graph_intervals(intervals, "blue", false);
         if (pt_info.type == 'filled') {
           points[i] = {x: points[i].x, type: 'empty'}
         } else if (pt_info.type == 'empty') {
+          deleteIntervalByEndpoint(points[i].x, intervals);
+          erase_graphs(svg);
+          graph_intervals(intervals, "blue", false);
           points.splice(i, 1);
         }
         // do_ajax();
@@ -425,7 +441,7 @@ graph_intervals(intervals, "blue", false);
     {% endif %}
     // console.log('intervals_field.value', intervals_field.value);
     {% if bug_form %}
-    console.log('bug_form detected')
+    // console.log('bug_form detected')
     var bug_answer = document.getElementById('bug_answer');
     var value = {'user_points': points, 'user_intervals': intervals}
     value = JSON.stringify(value);
@@ -548,7 +564,7 @@ function graph_points(info_list, color, hover) {
       'circle');
     newElement.setAttribute("cx", x);
     newElement.setAttribute("cy", y);
-    newElement.setAttribute("r", 5);
+    newElement.setAttribute("r", 7);
     if (info_list[i].type == 'filled') {
       newElement.style.stroke = color;
       newElement.style.fill = color;
