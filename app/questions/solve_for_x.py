@@ -87,6 +87,7 @@ class SolveForX(Question):
 
         self.given_latex = latex_print(self.given)
         self.given_latex_display = latex_print(self.given, display=True)
+        self.format_given = self.given_latex_display
         self.answer_latex = latex_print(self.answer)
         self.answer_latex_display = latex_print(self.answer, display=True)
 

@@ -137,15 +137,22 @@ class SevenTest():
     preamble = r"""
 \documentclass[12pt]{article}
 \usepackage{amsmath}% http://ctan.org/pkg/amsmath
-\usepackage[a4paper, total={6in, 8in}]{geometry}
-\newcounter{prob}
-\stepcounter{prob}
-\usepackage{fancyhdr}
+\usepackage[
+  height=10in,      % height of the text block
+  width=7in,       % width of the text block
+  top=0.5in,        % distance of the text block from the top of the page
+  headheight=48pt, % height for the header block
+  headsep=12pt,    % distance from the header block to the text block
+  heightrounded,   % ensure an integer number of lines
+  %showframe,       % show the main blocks
+  verbose,         % show the values of the parameters in the log file
+]{geometry}
+
 
 \pagestyle{empty}
-\fancyhf{}
 
-\usepackage{hyperref}
+
+
 \usepackage{graphicx}
 
 
@@ -157,42 +164,15 @@ class SevenTest():
 \newcommand{\lt}{<}
 \newcommand{\gt}{>}
 
-%%%%%%%%%%%%%%%%%%%%%%
-% Toggle between key and blank
-%
-\newtoggle{filledout}
 
-% set status globally in the preamble -- Pick one! Comment out other!
-\togglefalse{filledout}
-%\toggletrue{filledout}
 
-\newcommand{\key}[1]{%
-\iftoggle{filledout}{%
-#1
-}
-% else
-{}
-}
 
-\newcommand{\blank}[1]{%
-\iftoggle{filledout}{%
-
-}
-% else
-{
-#1
-}
-}
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage{fancyhdr}
 
 \pagestyle{empty}
-\fancyhf{}
-\rhead{\bf Name: \hspace{1.5in}}
+
 """
+
+
     def make_tex(self, key=False):
         title = f'{self.book.name_for_path}_{self.which_test}_v{self.seed}'
         if key:
@@ -211,10 +191,18 @@ class SevenTest():
             # print(os.getcwd())
             f = open('{a}.tex'.format(a=title), 'w+')
         out = self.preamble
-        title_head = f"\\lhead{{\\textbf{{{self.book.display_name} - Test {self.which_test} v. {self.seed} \\\\Printed on \\today}}}}"
-        out += title_head + '\n\n'
+        # title_head = f"\\lhead{{\\textbf{{{self.book.display_name} - Test {self.which_test} v. {self.seed} \\\\Printed on \\today}}}}"
+        # out += title_head + '\n\n'
         out += '\\begin{document}\n\n'
-        out += '\\thispagestyle{fancy}\n\n'
+        # out += '\\thispagestyle{fancy}\n\n'
+        header = f"""\\noindent
+        \\begin{{tabular}}{{ p{{3.5in}} p{{3.2in}} }}
+        \\hspace{{-1ex}}\\textbf{{{self.book.display_name} - Test {self.which_test} }} & \\textbf{{Name: \\underline{{\\hspace{{2.65in}} }}}}\\\\
+        \\hspace{{-1ex}}\\textbf{{Version - {self.seed} }} &   \\textbf{{Date: \\hspace{{2in}} }}\\
+        \\end{{tabular}}
+        \\hrule
+        """
+        out += header
         out += '\\begin{enumerate}\n'
         for question_set in self.question_sets:
             if question_set != []:
