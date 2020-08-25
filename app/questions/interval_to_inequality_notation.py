@@ -134,26 +134,26 @@ class IntervalToInequalityNotation(Question):
                 if Q2 == '\\lt':
                     self.answer = Interval.open(self.l, self.r)
                     self.ineq_answers = set([x > self.l, x < self.r])
-                    self.format_answer = f"""\\( {x} \\lt {l}\\;
+                    self.format_answer = f"""\\( {l} \\lt {x}\\;
                     \\textrm{{and}} \\; {x} \\lt {r} \\)
                     """
                 else:
                     self.answer = Interval.Lopen(self.l, self.r)
                     self.ineq_answers = set([x > self.l, x <= self.r])
-                    self.format_answer = f"""\\( {x} \\lt {l}\\;
+                    self.format_answer = f"""\\( {l} \\lt {x}\\;
                     \\textrm{{and}} \\; {x} \\leq {r} \\)
                     """
             else: # Q1 == '\\leq'
                 if Q2 == '\\lt':
                     self.answer = Interval.Ropen(self.l, self.r)
                     self.ineq_answers = set([x >= self.l, x < self.r])
-                    self.format_answer = f"""\\( {x} \\leq {l}\\;
+                    self.format_answer = f"""\\( {l} \\leq {x}\\;
                     \\textrm{{and}} \\; {x} \\lt {r} \\)
                     """
                 else:
                     self.answer = Interval(self.l, self.r)
                     self.ineq_answers = set([x >= self.l, x <= self.r])
-                    self.format_answer = f"""\\( {x} \\leq {l}\\;
+                    self.format_answer = f"""\\( {l} \\leq {x}\\;
                     \\textrm{{and}} \\; {x} \\leq {r} \\)
                     """
             self.given_latex_display = f"""\\[
