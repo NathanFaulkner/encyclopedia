@@ -185,7 +185,7 @@ class IntervalNotationToGraph(Question):
                 else:
                     self.answer_left = Interval(-oo, self.l)
                     self.answer_right = Interval(self.r, oo)
-                    self.answeGraphOfr = self.answer_left.union(self.answer_right)
+                    self.answer = self.answer_left.union(self.answer_right)
                     self.ineq_answers = set([x <= self.l, x >= self.r])
                     points_info = [{'x': self.l, 'type': 'filled'}, {'x': self.r, 'type': 'filled'}]
                     self.answer_points = json.dumps(points_info)
