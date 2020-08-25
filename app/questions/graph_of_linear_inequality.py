@@ -207,6 +207,7 @@ class GraphOfLinearInequality(Question):
         # print(user_points)
         sympy_intervals = []
         for interval in user_intervals:
+            # print('interval', interval)
             left, right = interval
             # print(left, right)
             if left <= -20:

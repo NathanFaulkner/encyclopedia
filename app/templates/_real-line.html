@@ -262,9 +262,11 @@ function str_list_to_list_of_floats(str_list) {
     for (i=l-1; i >= 0; i--) {
       current = list_of_intervals[i];
       for (j=0; j < current.length; j++) {
-        if (endpoint == current[j])
+        console.log(endpoint, current, endpoint == current[j])
+        if (endpoint == current[j]) {
           list_of_intervals.splice(i, 1);
           break;
+        }
       }
     }
   }
@@ -327,8 +329,9 @@ var right_endpoint = {x: 20, type:'empty'};
     var x = loc.x;
     var y = loc.y;
     x = svg_to_cart(x);
-    x = Number.parseFloat(x).toFixed(0);
-    document.getElementById('x').innerHTML = x;
+    x = Number.parseFloat(x).toFixed(2);
+    var disp_x = Number.parseFloat(x).toFixed(0);
+    document.getElementById('x').innerHTML = disp_x;
     if (mode == 'shade') {
       var left_x = get_left_x(x, points);
       var right_x = get_right_x(x, points);
@@ -464,6 +467,11 @@ function manual_add_point() {
       if (pt_info.type == 'filled') {
         points[i] = {x: points[i].x, type: 'empty'}
       } else if (pt_info.type == 'empty') {
+        // console.log('before delete', points[i].x, intervals);
+        deleteIntervalByEndpoint(points[i].x, intervals);
+        // console.log('before delete', points[i].x, intervals);
+        erase_graphs(svg);
+        graph_intervals(intervals, "blue", false);
         points.splice(i, 1);
       }
       // do_ajax();
@@ -479,7 +487,17 @@ function manual_add_point() {
     }
     {% if form %}
     var points_field = document.getElementById('points_field');
+    var intervals_field = document.getElementById('intervals_field');
     points_field.value = JSON.stringify(points);
+    intervals_field.value = JSON.stringify(intervals);
+    {% endif %}
+    // console.log('intervals_field.value', intervals_field.value);
+    {% if bug_form %}
+    // console.log('bug_form detected')
+    var bug_answer = document.getElementById('bug_answer');
+    var value = {'user_points': points, 'user_intervals': intervals}
+    value = JSON.stringify(value);
+    bug_answer.value = value;
     {% endif %}
   };
 
