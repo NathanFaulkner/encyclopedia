@@ -247,7 +247,7 @@ class UserSectionGradeInfo():
                 memory_decay_penalty = int(days_since_previous/expected_recall_duration)
                 grade = int(grade*0.5**memory_decay_penalty)
                 self.due_date = answer.timestamp + timedelta(days=expected_recall_duration)
-                if i < len(answers):
+                if i < len(answers): #This really just covers the first of a new session
                     if answer.correct:
                         grade = min(self.max_grade, grade + 1)
                     else:
@@ -255,6 +255,8 @@ class UserSectionGradeInfo():
                     if grade == self.max_grade:
                         mastered_this_session = True
                         self.mastery_date = answer.timestamp
+                        mastery_count += 1
+                        expected_recall_duration = max(1, int(self.base**(mastery_count - 1)))
                 # print(f'{self.chapter_number}.{self.section_number}: Round {i} at {answer.timestamp}, grade: {grade}')
                 i += 1
 
