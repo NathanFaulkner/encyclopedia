@@ -252,6 +252,9 @@ class UserSectionGradeInfo():
                         grade = min(self.max_grade, grade + 1)
                     else:
                         grade = max(0, grade - 1)
+                    if grade == self.max_grade:
+                        mastered_this_session = True
+                        self.mastery_date = answer.timestamp
                 # print(f'{self.chapter_number}.{self.section_number}: Round {i} at {answer.timestamp}, grade: {grade}')
                 i += 1
 
