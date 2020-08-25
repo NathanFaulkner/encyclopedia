@@ -108,6 +108,8 @@ class IntervalNotationToGraph(Question):
     further_instruction = """Give your answer by graphing on the real line.
     """
 
+    loom_link = "https://www.loom.com/share/5028da702f8143568d2762e7a47d64db"
+
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 

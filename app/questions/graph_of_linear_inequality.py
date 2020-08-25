@@ -208,7 +208,7 @@ class GraphOfLinearInequality(Question):
         sympy_intervals = []
         for interval in user_intervals:
             left, right = interval
-            print(left, right)
+            # print(left, right)
             if left <= -20:
                 left = -oo
                 type_of_left = 'empty'

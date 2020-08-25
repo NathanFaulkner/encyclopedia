@@ -117,6 +117,8 @@ class IntervalToInequalityNotation(Question):
     connecter has been supplied.  (Use "and"!)  You were warned!
     """
 
+    loom_link = "https://www.loom.com/share/5028da702f8143568d2762e7a47d64db"
+
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
