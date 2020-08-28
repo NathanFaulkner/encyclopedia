@@ -233,10 +233,10 @@ class UserSectionGradeInfo():
                         mastered_this_session = True
                         self.mastery_date = answer.timestamp
                     # print(f'{self.chapter_number}.{self.section_number}:',
-                            i,
-                            answer.timestamp,
-                            grade,
-                            'mastery count:', mastery_count)
+                    #         i,
+                    #         answer.timestamp,
+                    #         grade,
+                    #         'mastery count:', mastery_count)
                     if i == len(answers) - 1:
                         break
                     i += 1
