@@ -215,9 +215,9 @@ class UserSectionGradeInfo():
                     grade += 1
                 # print(f'{self.chapter_number}.{self.section_number}: Round {i} at {answer.timestamp}, grade: {grade}')
                 i += 1
+                mastered_this_session = False
             else:
                 # Version 2:
-                mastered_this_session = False
                 prev_answer = answers[i - 1]
                 time_since_previous = answer.timestamp - prev_answer.timestamp
                 days_since_previous = time_since_previous.days + time_since_previous.seconds/60/60/24
@@ -232,9 +232,14 @@ class UserSectionGradeInfo():
                     if grade == self.max_grade:
                         mastered_this_session = True
                         self.mastery_date = answer.timestamp
-                    i += 1
-                    if i == len(answers):
+                    # print(f'{self.chapter_number}.{self.section_number}:',
+                            i,
+                            answer.timestamp,
+                            grade,
+                            'mastery count:', mastery_count)
+                    if i == len(answers) - 1:
                         break
+                    i += 1
                     answer = answers[i]
                     prev_answer = answers[i - 1]
                     time_since_previous = answer.timestamp - prev_answer.timestamp
@@ -257,8 +262,11 @@ class UserSectionGradeInfo():
                         if i == len(answers) - 1:
                             mastery_count += 1
                             expected_recall_duration = max(1, int(self.base**(mastery_count - 1)))
+                    else:
+                        mastered_this_session = False
                 # print(f'{self.chapter_number}.{self.section_number}: Round {i} at {answer.timestamp}, grade: {grade}')
                 self.due_date = answer.timestamp + timedelta(days=expected_recall_duration)
+                # print(i, answer.timestamp, grade, 'mastery count:', mastery_count)
                 i += 1
 
 

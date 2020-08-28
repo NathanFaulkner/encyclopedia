@@ -1,0 +1,524 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  What is a function?  In the section on
+  <a href="{{ url_for('section', section_name='basicfunctionsinatableandwords') }}">
+  Basic Functions in Tables and Words
+  </a>
+  we encountered some functions&mdash;so you could start to have
+  some examples of what this is supposed to mean&mdash;but we need
+  to make it more explicit.
+</p>
+
+<p>
+  As mentioned in the section on
+  <a href="{{ url_for('section', section_name='basicfunctionsinatableandwords') }}">
+  Basic Functions in Tables and Words,
+  </a>
+  a function is not a number nor even a set of numbers.
+  But functions are <em>about</em> both of those things.
+  Indeed, <em>functions are relationships between sets of numbers</em>.
+  In a word, functions are about <em>relationships</em>.
+  How is the price of pizza related to the number of toppings
+  you buy?  How is the height of a corn plant related to the number
+  of days its been growing?  There are a number of ways you might answer
+  those questions in English.  But, in terms of math, the answer is a whole
+  raft of information packaged in&mdash;a function.
+</p>
+
+<p>
+  So, functions are relationships.  Or they are the way we mathematically
+  encode and work with relationships between variables.  But <em>what are
+  they, really?</em>.  We can and should get more precise about the concept.
+  First of all, note that we are talking about relating one variable to another
+  or even one data set to another&mdash;just as we did in the section
+  <a href="{{ url_for('section', section_name='basicfunctionsinatableandwords') }}">
+  Basic Functions in Tables and Words.
+  </a>
+  There is a simple way to capture a relationship between two sets of numbers,
+  and that is to set up a <em>pairing</em>between numbers in the two sets.
+  If you think about it, that's really what's happening in data tables,
+  like the following:
+
+  <table border="1">
+    <tr><th>Number of Toppings</th>
+      {% for i in range(0,5) %}
+      <td style="text-align: center;">{{ i }}</td>
+      {% endfor %}
+    </tr>
+    <tr><th>Price of Pizza (in $)</th>
+      {% for i in range(0,5) %}
+      <td>{{ 12 + 1.5*i }}</td>
+      {% endfor %}
+    </tr>
+  </table>
+
+  This table, as discussed elsewhere, pairs the number of toppings
+  you order with the resulting price of a pizza.  The two
+  numbers (one, a number of toppings and, the other, the price)
+  that share a column are paired up.  A mathematician would
+  describe this as a <em>set of ordered pairs</em>.
+</p>
+
+<p>
+  Now, I bet you're familiar with the concept of an ordered pair in math.  This
+  is your \((x, y)\)-pair&mdash;which can be plotted on the \((x, y)\)-plane.
+  (We'll do that in later sections, as should come as no surprise.)  We just
+  write them with parentheses, with the different positions of the numbers
+  having a special significance.  (Later, when we graph them, we use
+  the first coordinate or number to tell us how far and in what
+  direction to travel horizontally and we use the second number to tell us
+  how far and in what direction to travel vertically from the origin
+  on the \((x, y)\)-plane.)  For example,
+  \[
+    (2, 3)
+  \]
+  is an ordered pair, but because of its "orderedness" (if that's a word)
+  we have that
+  \[
+    (2, 3) \not = (3, 2)
+  \]
+  Those are distinct mathematical objects.
+</p>
+
+<p>
+  So, back to functions: Functions are about defining or denoting a
+  <em>pairing</em> of numbers between two sets (as is achieved in a
+  data table).  So, it should come as no surprise that
+  functions have something to do with ordered pairs.  In fact,
+  they are (special kinds of) <em>sets</em> of ordered pairs.
+  <em></em>
+</p>
+
+<p>
+  Next question:
+  Have you ever studied "set notation"?  Well, since
+  functions are sets, set <em>notation</em> (a way of writing down sets) can be useful
+  to convey the true, mathematical meaning of what the word "function" is.
+  So, let's review it here.  First of all, set notation uses
+  "curly braces", as in '\(\{\.\)' and '\(\.\}\)'.  Whatever
+  gets enclosed within these curly braces is called a "set".
+  For instance, you can have a set of numbers (if you like), like so:
+  \[
+    \{1, 2, 3, 4\}
+  \]
+  That's a set! Pretty boring so far.  Now, you can also make up symbols
+  to represent these sets.  Why not?  (So, variables don't have
+  to always represent numbers but any object in the mathematical
+  universe of concepts.)
+  So, I could write
+  \[
+    S = \{1, 2, 3, 4\}
+  \]
+  and I'd just be saying that I want to use the letter \(S\) to represent
+  that set.
+  Now, functions are sets of <em>ordered pairs</em>.  No problem!  Just
+  as a letter (variable) cannot represent any mathematical object
+  you want, you can also have a set of any sorts of mathematical
+  objects you want.  You could have a set of numbers, a set of ordered
+  pairs, a set of triangles (e.g.: the set of all triangles congruent
+  to a prticular one), or even a set of sets!  Actually, there are some
+  pretty interesting things to think about when you start going down
+  the road of "full mathematical generality", but 
+</p>
+
+<p>
+
+</p>
+
+<p>
+  So, data tables are a way of presenting functions!  In fact,
+  they work quite nicely for scenarios like the pizza example&mdash;where
+  there is really only a limited number of values that you need to consider.
+  But sometimes what you are interested in is really an <em>infinite</em>
+  set of values.  For instance, what if we want to figure out
+  how the pressure exerted on a diver increases as he or she dives deeper
+  and deeper in the ocean.  Theoretically, there could be a different
+  pressure at every conceivable depth, even down to fractions.  In this
+  case a data table isn't going to cut it.
+</p>
+
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+  Consider the very basic relationship between the price of a pizza
+  and the number of toppings you order.  Actually, this could be
+  a fairly complicated thing!&mdash;depending if the pizza place
+  prices different toppings differently (e.g.: standard
+  toppings versus premium, etc.) or if they start offering deals
+  when you order more toppings ("buy two toppings at regular
+  price, get the third one free!").  But our purpose here is just
+  to get a basic mental scheme of "what a function is", so
+  we can just start with your basic scenario of pricing.
+  Therefore, below, I give you a hypothetical pricing structure
+  for a kind of a gourmet-ish, sit-down pizza place (brand name
+  withheld!)
+  </p>
+
+
+
+  <ol class="multi-part" style="list-style-type: lower-alpha;">
+    <li>
+      To start off, I often like to ask "What does this mean?"  In this case,
+      the meaning is obvious.  Instead, our task is to attach a new word
+      to a familiar concept.  Here is the concept: The price of your
+      pizza is <em>determined by</em> the number of toppings you order.
+      The new word we attach here&mdash;which is thus given at least
+      tentative meaning through this example&mdash;is "function".
+      A function relationship is what you have whenever you have
+      the generic situation
+      <blockquote>
+        [One variable] is determined by [some other variable].
+      </blockquote>
+      In this case, we say that
+      <blockquote>
+        The [one variable] <em>is a function of</em> [the other variable].
+      </blockquote>
+      In other words, the word function works (so far) on only in the
+      phrase "is a function of"; and all that it does is to provide
+      another kind of fancy-sounding way of saying "is determined by".
+
+      <p>
+        So, as an initial test of your understanding here, practice
+        the phrase "is a function of" by correctly applying it to
+        the situation of pricing pizza.  Express the variables
+        in your answers in the same way thay they are expressed
+        in the chart.
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          The price of the pizza is a function of the number of toppings you buy.
+        </div>
+      </div>
+    </li>
+    <li>
+      Construct an English sentence (or two) that fully captures the relationship
+      between the price of a pizza and the number of toppings you buy.  What
+      I'm looking for is a sentence (or two) that is so detailed, someone
+      could use just your information and reconstrut that table&mdash;that is,
+      out simply, they would completely know how much they are going to
+      pay for a pizza no matter how many toppings they are going to buy.
+      For instance, just imagine that you work at this nameless
+      downtown pizza place and you are taking an order over the phone
+      from someone who doesn't have Internet and just really doesn't
+      have any information about the price except what you tell them.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          A plain, cheese pizza costs $12 and each additional topping is $1.50.
+        </div>
+      </div>
+    </li>
+    <li>
+      Now, hopefully, that previous exercise wasn't very hard.  But, would you
+      believe me if I told you that if you can construct an English
+      description that captures the price, then you can just
+      as easily construct a mathematical formula (or equation) that will do the same
+      thing?  Sure you can!  You see, an equation is also just a <em>sentence</em>.
+      It's just a sentence constructed from mathematical symbols.  For instance,
+      when I say
+      \[
+          x = 3
+      \]
+      I have just uttered a sentence with a subject, a verb, and an object.
+      The sentence (as you well know) is just "(The number) \(x\) equals 3."
+      So, the subject of the sentence is \(x\), the verb is "equals", and
+      the object is 3.
+
+      <p>
+        So, your job is to construct a math sentence that does the same
+        thing as the English sentence you already developed.  Use the letter
+        \(P\) to represent the price of the pizza and use \(n\) to represent
+        the number of toppings.
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Your equation is going to proceed in the order "subject, verb, object".
+          So, the question is, what is the subject of your math sentence going to be?
+          Well, there are only two nouns that are relevant to the situation: the price
+          \(P\) of the pizza and the number \(n\) of toppings.  So, which is
+          the subject of the sentence?  Maybe this one is easy.  But the answer
+          to this question in other situations can always be answered in the same way.
+          Think about the phrases
+          <blockquote>
+            [one variable] is determined by [some other]
+          </blockquote>
+          which we just learned can also be phrased
+          <blockquote>
+            [one variable] is a function of [the other].
+          </blockquote>
+          The way the "[one variable]" gets determined by the other usual
+          involves some details, so you can always start with the "[variable]"
+          as your subject and leave the details for later.  So, I start this way:
+          \[
+            P =
+          \]
+          Next, I take a deep breath and start rewriting my English formula
+          as a math formula, translating each detail faithfully one-by-one.
+          For example, I know that a plain, cheese costs $12, so I start with
+          that.  I also know more will have to be added to it, so I get
+          ready for that at the same time.  So, I write this next:
+          \[
+            P = 12 +
+          \]
+          Feeling pretty good!  Now, I just have to figure out how to
+          incorporate the idea that "for every additional topping
+          (besides cheese) that I order, it will cost $1.50 more".
+          For example, if I order one topping, I would need to add just
+          1.5, but if I ordered two toppings, I would add 3.  We're talking
+          repeated addition of 1.5&mdash;and "repeated addition" is a way
+          of understanding what multiplication about, no?  So, yep, I just multiply.
+          "For every additional topping, add another 1.5" gets faithfully
+          incorporated into our formula in this final step:
+          \[
+             P = 12 + 1.5 n
+          \]
+        </div>
+      </div>
+    </li>
+    <li>
+      As a follow-up to the previous question, compute the price of a
+      pizza that has (hypothetically-speaking) 10 toppings on it.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          The nice thing about a formula like the one we just developed is
+          that you can just "plug in" to find whatever value you want.
+          So, for instance, when \(n = 10\), we find
+          \[
+            P = 12 + 1.5 \cdot 10 = 12 + 15 = 27
+          \]
+          So, the pizza would cost $27.
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+    In the table below, you will find hypothetical data representing
+    the height in feet of fast-growing bamboo corresponding to the
+    number of days that have gone by.
+  </p>
+
+  <table border="1">
+    <tr><th>Day</th>
+      {% for i in range(0,4) %}
+      <td style="text-align: center;">{{ i }}</td>
+      {% endfor %}
+    </tr>
+    <tr><th>Height of Bamboo (in ft.)</th>
+      {% for i in range(0,4) %}
+      <td>{{ 15 + i*1.1 }}</td>
+      {% endfor %}
+    </tr>
+  </table>
+
+  <ol class="multi-part" style="list-style-type: lower-alpha;">
+    <li>
+      Write an English sentence that perfectly captures the relationship between
+      the height of a bamboo stalk and the number of days since "Day 0."
+      Someone else should be able to reconstruct your table using just your English sentence.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          The bamboo starts out at height 15 ft on "Day 0", and then grows
+          by 1.1 ft everyday after that.
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        Develop a "math sentence"&mdash;that is, an equation&mdash;that
+        captures the relationship between the height of the bamboo
+        on any given day after "Day 0".  Use the letter \(h\) for
+        the height of the bamboo and the letter \(x\) for the number
+        of days that have passed since Day 0.
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Once again, I ask myself, "What shall be the <em>subject</em>
+          of my math sentence?"  The answer to that will always be
+          "the variable that is being <em>determined by</em>
+          (or, that is a <em>function of</em>) the other."
+          One can readily think of the height as being determined
+          by the number of days it spends growing.  The height
+          is <em>a function of</em> the time spent growing.  Thus, I
+          have identified that it convenient way to begin my equation
+          is to write
+          \[
+           h =
+          \]
+
+          <p>
+            And, again, I can construct the equation bit saying in my head
+            a sentence describing the situation and, bit by bit, transcribing
+            the different elements of the sentence.  I know the height starts
+            out at 15 ft on Day 0&mdash;and then grows from there&mdash;so I
+            continue by writing:
+            \[
+              h = 15 +
+            \]
+            Next, I observe in the table that the bamboo grows 1.1 ft in the first
+            day and continues that pattern from there on.  So, it adds 1.1 ft
+            to its height for each additional day.  That's repeated
+            addition&mdash;that is, multiplication&mdash;so I know how to finish
+            it off:
+            \[
+              h = 15 + 1.1 x
+            \]
+            Note that you can also check this answer by plugging in different
+            values for \(d\) and see if the formula generates the correct
+            height as given in the table.  Indeed, when you substitute
+            \(d = 0\), you get
+            \[h = 15 + 1.1 \cdot 0 = 15 + 0 = 15\]
+            Similarly, when \(d = 1\), you get
+            \[
+              h = 15 + 1.1 \cdot 1 = 15 + 1.1 = 16.1
+            \]
+            Hopefully, it's easy to see that the entire table
+            could be generated in this manner.  Our formula is correct!
+          </p>
+        </div>
+      </div>
+    </li>
+    <li>
+      Compute the height of the bamboo after 14 days.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          We plug in \(x = 14\):
+          \[
+            h = 15 + 1.1 \cdot 14 = 15 + 15.4 = 30.4
+          \]
+          So, the bamboo would be 30.4 ft tall.
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<p>
+  We'll do one more example: a "generic" one, with no context attached.
+  Note that for a "generic" situation, you are limited to what numbers
+  would make sense for a physical scenario.  So, expect to (sometimes)
+  encounter negative numbers here.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+    Consider the data below in answering the questions that follow.
+  </p>
+
+  <table border="1">
+    <tr><th>\(x\)</th>
+      {% for i in range(0,4) %}
+      <td style="text-align: center;">{{ i }}</td>
+      {% endfor %}
+    </tr>
+    <tr><th>\(y\)</th>
+      {% for i in range(0,4) %}
+      {% set disp = -3.4 + i*1.6 %}
+      <td>{{ '%0.1f' % disp|float }}</td>
+      {% endfor %}
+    </tr>
+  </table>
+
+  <ol class="multi-part" style="list-style-type: lower-alpha;">
+    <li>
+      Write an English sentence that perfectly captures the relationship between
+      \(x\) and \(y\).
+      Someone else should be able to reconstruct your table using just your English sentence.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          When \(x = 0\), you have \(y = -3.4\), and for each additional
+          unit of increase in \(x\), \(y\) increases by 1.6.
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        Develop a "math sentence"&mdash;that is, an equation&mdash;that
+        captures the relationship between \(y\) and \(x\).
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Paralleling my sentence above exactly, I start off with
+          what is really the subject of my sentence, \(y\).
+          \[
+            y =
+          \]
+          Next up, I know \(y\) starts out at \(-3.4\) and grows from
+          there, so I write:
+          \[
+            y = -3.4 +
+          \]
+          How does it grow?  (Note here that I might also ask
+          you a question where \(y\) decreases with increasing
+          \(x\) instead of increases!)  For every increase
+          of one unit in \(x\), \(y\) increases by 1.6.
+          That's repeated addition, AKA, multiplication:
+          \[
+            y = -3.4 + 1.6 x
+          \]
+        </div>
+      </div>
+    </li>
+    <li>
+      Compute the value of \(y\) for where \(x = 9\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          We plug in \(x = 9\):
+          \[
+            h = -3.4 + 1.6 \cdot 9 = 15 + {{ 1.6*9 }} = {{ 15 + 1.6*9 }}
+          \]
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}
