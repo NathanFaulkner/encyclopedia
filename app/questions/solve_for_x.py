@@ -145,7 +145,7 @@ Otherwise, enter an English description of the solution set.
             user_answer = user_answer.replace('=', ' ')
             user_answer = user_answer.replace('^', '**')
             user_answer = parse_expr(user_answer, transformations=transformations)
-            return self.answer == user_answer
+            return float(self.answer) == float(user_answer)
         elif self.num_solutions == 0:
             return 'no' in user_answer.lower()
         else:

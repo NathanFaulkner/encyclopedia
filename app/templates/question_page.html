@@ -7,13 +7,13 @@
 <h2>Exercise</h2>
 {% if form %}
 <p>
-  {{ question.prompt_single }}
+  {{ question.prompt_single|safe }}
 </p>
 <p>
   {% if question.given_latex_display %}
   {{ question.given_latex_display }}
   {% else %}
-  {{ question.format_given }}
+  {{ question.format_given|safe }}
   {% endif %}
 </p>
 {% if question.further_instruction %}

@@ -292,6 +292,15 @@ absolutevalueinequalities.add_to_questions('absolute_value_inequality',
                             'absolute_value_inequality_to_graph',
                             )
 
+functionsandthecoordinateplane_intro = Section('functionsandthecoordinateplane_intro', "Functions and the Coordinate Plane", '/sections/functions-and-the-coordinate-plane')
+basicfunctionsinatableandwords = Section('basicfunctionsinatableandwords', "Basic Functions in a Table and Words", '/sections/basic_functions_in_a_table_and_words')
+basicfunctionsinatableandwords.add_to_questions('generic_table_computation',
+                                                'pizza_problem_computation',
+                                                'plant_problem_computation',
+                                                'plant_problem',
+                                                'generic_table',
+                                                'pizza_problem')
+
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
 graphpointslope = Section('graphpointslope', "Graph from Point Slope Form", '/sections/graph-point-slope')
@@ -319,13 +328,19 @@ nuts_and_bolts_of_algebra = Division('chapter', 'Nuts and Bolts of Algebra',
                                 absolutevalueequations,
                                 absolutevalueinequalities])
 nuts_and_bolts_of_algebra.set_frontpage(nutsandboltsofalgebra)
+
+functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coordinate Plane",
+                                    [basicfunctionsinatableandwords])
+functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
+
 linear_functions = Division('chapter', 'Linear Functions', [graphpointslope])
 linear_functions.set_frontpage(linearfunctions_intro)
 polynomials = Division('chapter', 'Polynomials', [factoring1, quadraticpattern])
 #polynomials.intro = polynomials_intro
 polynomials.set_frontpage(polynomials_intro)
 
-main = Division('main', 'Main Matter', [nuts_and_bolts_of_algebra])
+main = Division('main', 'Main Matter', [nuts_and_bolts_of_algebra,
+                                        functions_and_the_coordinate_plane])
 
 Algebra2 = Division('book', 'Algebra 2', {'front': None, 'main': main, 'end': None})
 Algebra2.name_for_path = 'Algebra2'

@@ -14,7 +14,10 @@ __all__ = ['quadratic_pattern',
             'absolute_value_equation',
             'absolute_value_inequality',
             'absolute_value_inequality_to_interval_notation',
-            'absolute_value_inequality_to_graph']
+            'absolute_value_inequality_to_graph',
+            'pizza_problem', 'pizza_problem_computation',
+            'plant_problem', 'plant_problem_computation',
+            'generic_table', 'generic_table_computation']
 
 class Question():
     pass
