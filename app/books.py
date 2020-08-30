@@ -293,6 +293,7 @@ absolutevalueinequalities.add_to_questions('absolute_value_inequality',
                             )
 
 functionsandthecoordinateplane_intro = Section('functionsandthecoordinateplane_intro', "Functions and the Coordinate Plane", '/sections/functions-and-the-coordinate-plane')
+
 basicfunctionsinatableandwords = Section('basicfunctionsinatableandwords', "Basic Functions in a Table and Words", '/sections/basic_functions_in_a_table_and_words')
 basicfunctionsinatableandwords.add_to_questions('generic_table_computation',
                                                 'pizza_problem_computation',
@@ -300,6 +301,13 @@ basicfunctionsinatableandwords.add_to_questions('generic_table_computation',
                                                 'plant_problem',
                                                 'generic_table',
                                                 'pizza_problem')
+
+functionnotation = Section('functionnotation', "Function Notation", '/sections/function_notation')
+functionnotation.add_to_questions('function_notation',
+                                    'function_from_set_notation')
+
+functioncomposition = Section('functioncomposition', "Composition of Functions", '/sections/function_composition')
+functioncomposition.add_to_questions('function_composition')
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -330,7 +338,9 @@ nuts_and_bolts_of_algebra = Division('chapter', 'Nuts and Bolts of Algebra',
 nuts_and_bolts_of_algebra.set_frontpage(nutsandboltsofalgebra)
 
 functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coordinate Plane",
-                                    [basicfunctionsinatableandwords])
+                                    [basicfunctionsinatableandwords,
+                                    functionnotation,
+                                    functioncomposition])
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
 
 linear_functions = Division('chapter', 'Linear Functions', [graphpointslope])

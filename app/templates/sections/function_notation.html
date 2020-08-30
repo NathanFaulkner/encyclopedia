@@ -33,30 +33,33 @@
 <p>
   So, functions are relationships.  Or they are the way we mathematically
   encode and work with relationships between variables.  But <em>what are
-  they, really?</em>.  We can and should get more precise about the concept.
+  they, really?</em>  We can and should get more precise about the concept.
   First of all, note that we are talking about relating one variable to another
   or even one data set to another&mdash;just as we did in the section
   <a href="{{ url_for('section', section_name='basicfunctionsinatableandwords') }}">
   Basic Functions in Tables and Words.
   </a>
   There is a simple way to capture a relationship between two sets of numbers,
-  and that is to set up a <em>pairing</em>between numbers in the two sets.
+  and that is to set up a <em>pairing</em> between numbers in the two sets.
   If you think about it, that's really what's happening in data tables,
   like the following:
 
-  <table border="1">
-    <tr><th>Number of Toppings</th>
-      {% for i in range(0,5) %}
-      <td style="text-align: center;">{{ i }}</td>
-      {% endfor %}
-    </tr>
-    <tr><th>Price of Pizza (in $)</th>
-      {% for i in range(0,5) %}
-      <td>{{ 12 + 1.5*i }}</td>
-      {% endfor %}
-    </tr>
-  </table>
+  <div style="text-align:center">
+    <table border="1">
+      <tr><th>Number of Toppings</th>
+        {% for i in range(0,5) %}
+        <td style="text-align: center;">{{ i }}</td>
+        {% endfor %}
+      </tr>
+      <tr><th>Price of Pizza (in $)</th>
+        {% for i in range(0,5) %}
+        <td>{{ 12 + 1.5*i }}</td>
+        {% endfor %}
+      </tr>
+    </table>
+  </div>
 
+  <br>
   This table, as discussed elsewhere, pairs the number of toppings
   you order with the resulting price of a pizza.  The two
   numbers (one, a number of toppings and, the other, the price)
@@ -100,15 +103,16 @@
   functions are sets, set <em>notation</em> (a way of writing down sets) can be useful
   to convey the true, mathematical meaning of what the word "function" is.
   So, let's review it here.  First of all, set notation uses
-  "curly braces", as in '\(\{\.\)' and '\(\.\}\)'.  Whatever
-  gets enclosed within these curly braces is called a "set".
+  "curly braces", as in '\(\{\)' and '\(\}\)'.  The set of objects that gets
+  enclosed within these curly braces is called, well, a "set".
   For instance, you can have a set of numbers (if you like), like so:
   \[
     \{1, 2, 3, 4\}
   \]
-  That's a set! Pretty boring so far.  Now, you can also make up symbols
+  That's a set! Pretty boring so far.  Now, you can also choose symbols
   to represent these sets.  Why not?  (So, variables don't have
-  to always represent numbers but any object in the mathematical
+  to always represent numbers; they can be used to symbolize
+  any object in the mathematical
   universe of concepts.)
   So, I could write
   \[
@@ -117,31 +121,379 @@
   and I'd just be saying that I want to use the letter \(S\) to represent
   that set.
   Now, functions are sets of <em>ordered pairs</em>.  No problem!  Just
-  as a letter (variable) cannot represent any mathematical object
+  as a letter (variable) can represent any mathematical object
   you want, you can also have a set of any sorts of mathematical
   objects you want.  You could have a set of numbers, a set of ordered
   pairs, a set of triangles (e.g.: the set of all triangles congruent
-  to a prticular one), or even a set of sets!  Actually, there are some
+  to a particular one), or even a set of sets!  Actually, there are some
   pretty interesting things to think about when you start going down
-  the road of "full mathematical generality", but 
+  the road of "full mathematical generality", but all we need to look
+  at are some sets of ordered pairs.  Like this one:
+  \[
+    \{(3, 12),(-4, 6),(7, 3),(4, 0)\}
+  \]
+  Is there any significance to the numbers I just chose?  No.
+  Is there any significance to the order in which I listed the different
+  pairs?  No, again: while there is any order to, well, <em>ordered</em>
+  pairs, there is no order to sets.  In fact,
+  \[
+    \{1, 2, 3, 4\} = \{1, 3, 4, 2\}
+  \]
+  The two sets are equal!  They refer to the same object.
 </p>
 
 <p>
-
+  There is one more thing worth mentioning here about how sets work: repeated
+  elements in a set are redundant.  This makes mathematical sets a little
+  different from sets in the real world.  For instance, you might have
+  "duplicate" Mike Trout cards in your set of baseball cards, and you might
+  feel pretty good about it.  But there aren't multiple copies of mathematical
+  objects floating around, in a sense.  When we say "\(1=1\)" we mean
+  that there is only one number 1!  Thus, this is the kind of thing that
+  happens when you try to put duplicates in a set:
+  \[
+    \{1, 1, 1, 1, 1\} = \{1\}
+  \]
+  and
+  \[
+    \{1, 1, 2, 3, 4, 4, 4\} = \{1, 2, 3, 4\}
+  \]
 </p>
 
 <p>
-  So, data tables are a way of presenting functions!  In fact,
-  they work quite nicely for scenarios like the pizza example&mdash;where
-  there is really only a limited number of values that you need to consider.
-  But sometimes what you are interested in is really an <em>infinite</em>
-  set of values.  For instance, what if we want to figure out
-  how the pressure exerted on a diver increases as he or she dives deeper
-  and deeper in the ocean.  Theoretically, there could be a different
-  pressure at every conceivable depth, even down to fractions.  In this
-  case a data table isn't going to cut it.
+  That's enough said about sets as a general concept.  But we need to say a
+  few more words about sets of ordered pairs.  Sets of ordered pairs are
+  called <em>relations</em>.  So, since a function is a set of ordered
+  pairs, a function is a relation.  So, what?  We're just playing with words so
+  far.  Now for the important part: a function is a <em>special</em>
+  set of ordered pairs&mdash;a special type of relation.  The key is to realize
+  the true purpose of functions.
 </p>
 
+<h3>The True Purpose of Functions</h3>
+<p>
+  Functions as we have said too many times already are to capture
+  or define a relationship between two variables or two data sets.  But
+  they are really for only one special type of relationship: "input/output
+  relationships".  For instance, your input could be "We want a 5-topping,
+  medium pizza."  Your output would be <em>the price</em>.  Or, your input
+  could be "I'm going to wait 2 months for my corn to grow."  Your output
+  might then be, "My corn is now 5 feet tall."  Perhaps more interestingly,
+  your input might be "We are going to buy 10,000 pounds of concrete;
+  1,000 yards of rebar; 5,000 man-hours; etc."&mdash;all at particular prices
+  (the prices would also part of the input) and your output might be the profit you
+  hope to make on a construction venture.  That's the basic idea.
+  On the other hand, there is something troubling about the real-world
+  and these scenarios that we have considered here coming from it: the real
+  world is kind
+  of unpredictable.  While it is certainly a worthy thing to try to contend
+  with uncertainty&mdash;and there is certainly some mathematics out there
+  that can help you to do that (take a course in probability or statistics
+  if you want to know more in that direction)&mdash;at this stage, we are
+  only going to consider a much "cleaner" or narrower point of view.  Namely,
+  the "input/output" relationships we are going to consider come with
+  a special stipulation: for any given input, there shall be only one
+  possible output&mdash;not two or three or more.  For instance,
+  if your order 5 toppings for your (medium) pizza, you will know
+  full well what your bill will be.  So far so good!  On the other hand,
+  it will be more a bit of <em>pretend</em> (word problems are good at
+  pretending) to say that just because 2 months have gone by,
+  we know that our corn will be exactly 5 feet tall.  We don't know that at all!
+  The problem with the corn (and with so many things) is that there are
+  just <em>too many variables</em>.  You see, that's actually the conceit
+  of many when in comes to mathematics: If only we knew the values of
+  <em>all</em> the variables that could come into play, then maybe we
+  could make a better prediction?  But enough about that.  The point is
+  that you have to start somewhere, so we start with the following very simple
+  concept.  I give you the official definition of <em>function</em>.
+</p>
+
+<h3>The official definition of <em>function</em></h3>
+<blockquote>
+  A function in mathematics is a set of ordered pairs in which any first
+  coordinate appears only once.
+</blockquote>
+
+<p>
+  That may seem very abstract&mdash;and so it is!  But here is the point: with
+  a set set of ordered pairs that we are calling a "function", we regard
+  the first coordinate as the <em>input</em>.  We regard the second
+  coordinate as the corresponding <em>output</em>.  So the definition above
+  really says that "for any given input, there will always be just one
+  output, not many."  In other words, when it comes to functions, there is
+  no <em>uncertainty</em>.  To use a 75-cent word: functions are
+  <em>deterministic</em>: the input <em>determines</em> the output.
+</p>
+
+<p>
+  For this reason, a good metaphor&mdash;or mental image, really&mdash;for
+  functions is as <em>machines</em>&mdash;but idealized machines that never
+  break down or err.  Here is a hand-drawn picture of what I mean:
+
+  <div style="text-align:center">
+    <img src="{{ url_for('static', filename='images/hand-drawn-function-machine.png') }}">
+  </div>
+<p>
+
+<p>
+  Another good mental scheme to help you understand functions
+  is to realize that the buttons on your calculator are functions!
+  (Functions are very relevant to the subject of computer programming!)
+  For instance, do you want to calculate the square of 423?  Well, you'd start
+  by typing your <em>input</em>, 423.  Next&mdash;because you might
+  do any number of things with this input&mdash;you next have to tell
+  the calculator what your intent is: so you hit the button marked, say,
+  "\(x^2\)".  So, you have selected the "square it!" function.  The
+  calculator, as you well know, returns the input.  (And won't it return
+  the same input everytime?  It won't say one thing on Tuesday and another
+  on Wednesday.  No!  The square of 423 is the same thing no matter what.)
+</p>
+
+<p>
+  Now, just as the calculator labels its functions&mdash;so you know
+  which ones it will execute when you tap the button with that symbol&mdash;we
+  weill also label our functions with symbols.  We will use variables
+  (by which I just mean, <em>letters</em>) to label them.  Well, actually,
+  at a later stage, we will even use a series of letters to represent
+  a function.  Some common letters use to represent functions are
+  \[
+    f, g, h
+  \]
+  However, some other import symbols (names) for functions that have
+  more than one letter in them&mdash;which we will learn about in this
+  and future courses and which are marked on your calculator!&mdash;are
+  \[
+    \log, \ln, \sin, \cos, \tan
+  \]
+  So, it is by no means a rule that only one letter can be used as a symbol.
+</p>
+
+<p>
+  Let me give you one more example of a function that is relevant to computer
+  programming!  Your <em>grade</em> on any given section as displayed on your
+  profile is <em>a function of</em> all your submissions to the different questions
+  that appear in that section.  The inputs in this case are:
+  <ul>
+    <li>Whether each submission resulted in "correct" or "incorrect" </li>
+    <li>The timestamp of the submission</li>
+  </ul>
+  That's all!  Then a complicated formula designed
+  by me to implement my plan of how to set the due dates and so on
+  works on that data to produce the
+  grade.  (It also does things like compute your next due date.  So, really
+  the output is a multi-faceted thing.)
+  <a href="https://github.com/NathanFaulkner/encyclopedia/blob/master/app/models.py" target="_blank">
+  Here is a link to the function.
+  </a>
+  Scroll until you see "UserSectionGradeInfo"
+  and look for "def set_grade_info".  The key word "def"
+  is the way to tell Python you want to define a function ("def"
+  stands for "define".)
+  So, an interesting thing to note is: if I change that function, everybodys'
+  grades change.
+</p>
+
+<p>
+  Now, as I have already said (repetition can be reassuring sometimes?)
+  functions are sets of ordered pairs.  This allows us to provide
+  a meaning for the symbols we will use to represent functions.
+  For instance, the following is a function:
+  \[
+    f = \{(1, 12), (-1, 4), (3, 7)\}
+  \]
+  Now, there is no rhyme or reason to this function.  It was invented
+  just as I typed it.  It is wholly arbitrary.  But I am going to use
+  it to introduce another key concept from this section, that of
+  <em>function notation</em>.
+</p>
+
+<h3>Function Notation</h3>
+<p>
+  The purpose of functions is to help write down ideas about
+  input/output relationships.  Function notation is one of the key ways we do it.
+  Here is how it works.  It starts with a symbol or name for a function, like so:
+  \[
+    f
+  \]
+  Next, what follows are a pair of parentheses:
+  \[
+    f()
+  \]
+  Now, in your mathematical past, parentheses may have been used to represent
+  multiplication, no?  I mean, in the expression
+  \[
+    x(y + 2)
+  \]
+  the parentheses are somehow connected with multiplication&mdash;or, at
+  least we know that an equivalent expression can be obtained by distributing
+  or "multiplying the expression all out".  But this is NOT what parentheses
+  mean in the present scenario.  It may seem annoying that mathematicians
+  recycle symbols like that: they use the same symbols in different
+  contexts to mean different things.  Actually, without commenting on it,
+  we also used parentheses in the section on interval notation to symbolize
+  something totally different!  Remember that there we might have written
+  something like "\( (3, 5) \)" and what we meant was "the interval of \(x\)-values"
+  that includes everything from 3 to 5 but not those endpoints"?  How
+  annoying is that when in still another context, the symbol \( (3, 5) \)
+  might instead represent an ordered pair&mdash;which one might
+  intend to graph on the \((x,y)\)-plane? So, you see, math symbols really
+  do not have any meaning on their own.  They must be given meaning by a wider
+  discussion and context.  So, we proceed with function notation.
+  As I was saying, we have 1) the name of a function, say "\(f\)".
+  Then 2) we write parentheses.  Then, we place something inside
+  the parentheses, like so:
+  \[
+    f(3)
+  \]
+  <em>and whatever goes inside the parentheses is the input</em>.
+  Indeed, these symbols <em>must</em> be accompanied
+  by some clarification or context that communicates
+  the fact that \(f\) is a function and that, therefore, whatever
+  goes in the parentheses that follows the symbol \(f\) can be
+  identified as the input.  Now&mdash;we have to ask&mdash;what does the symbol,
+  \(f(3)\) <em>mean</em>.  It, too, has a meaning; everything
+  in math has a very precise meaning!  The symbol "\(f(3)\)"
+  represents
+  <blockquote>
+    The output you get from the function \(f\) when the input is 3.
+  </blockquote>
+  For instance, if "\(f\)" is really our own private symbol for
+  what the calculator labels "\(x^2\)"&mdash;and which we could also call
+  "the squaring function"&mdash;then \(f(3) = 9\).
+  On the other hand (recall that functions are sets of ordered
+  pairs, where the first coordinate is input and the second
+  coordinate is the output) if \(f\) represented my arbitrary function
+  from above,
+  \[
+    f = \{(1, 12), (-1, 4), (3, 7)\}
+  \]
+  then
+  \[
+    f(3) = 7
+  \]
+  Do you see how I came up with that?  I simply looked up in a list of
+  ordered pairs that defines \(f\), found
+  the first coordinate (the input) 3 and then consulted the second
+  coordinate to discover that the output is 7.
+</p>
+
+<p>
+  Now, math would be pretty limited if we could only consider
+  input/output relations with only a finite number of possible
+  inputs&mdash;or at least ones that we could eaily write down or
+  list like this one:
+  \[
+    f = \{(1, 12), (-1, 4), (3, 7)\}
+  \]
+  So, really, we won't be in the habit of doing that beyond this section&mdash;which
+  we do here only for the purpose of illustrating the precise definition
+  of function.  Instead, if we are dealing with a really unlimited function&mdash;one
+  which can take any number of inputs&mdash;then we have to use another way to define
+  it.  But we still use function notation to do it.  Why? Because this notation
+  (eventually) provides a handy way of writing down various ideas to be
+  introduced in this&mdash;and, really&mdash;later math courses.  So, to
+  communicate that we intend to use the symbol "\(f\)" for the "square it"
+  function, we write
+  \[
+    f(x) = x^2
+  \]
+  Of course, we will recycle the symbol \(f\) (sometimes resorting
+  to \(g\) and \(h\) as symbols as needed) many times over in defining
+  functions such as
+  \[
+    f(x) = 6 - x^2
+  \]
+  and
+  \[
+    f(x) = \frac{x^2 - 2x + 1}{x + 1}
+  \]
+  The thing to conteplate in this section is just <em>what do we
+    mean by these expressions</em>.  What does the symbol
+    "\(f(x)\)" mean in these expressions?  Well, as I have said,
+    \(f\) represents the name or symbol for a function&mdash;a
+    set of ordered pairs.  What set of ordered pairs does
+    \[
+      f(x) = x^2
+    \]
+    represent?  It
+    Well, functions are sets of "(input, output)" pairs.  And,
+    as I mentioned, when I write "\(f(\textrm{something})\)"
+    you can be pretty darn sure that that "something"
+    inside the parentheses is a symbol for an <em>input</em>
+    for the function.  Also, to reiterate, the whole symbol
+    \[
+      f(\textrm{thing})
+    \]
+    represents "the output from the function \(f\) when the
+    input is 'thing'".  So, what does it mean when I place
+    a <em>variable</em> in as my input?  Well, just
+    as in other sections in which we discussed the variable
+    \(x\), there is actually a <em>secret narrative</em>
+    behind this that gives it meaning.  What is really being conveyed
+    goes something like this:
+    <blockquote>
+      Let \(f\) be a function that takes any real number \(x\)
+      as its input and whose output is found by doing the computation
+      of \(x^2\) or "input-squared".
+    </blockquote>
+    Since nobody wants to be that wordy (except me and a certain
+    minority of mathematicians), we just write
+    \[
+      f(x) = x^2
+    \]
+    Put simply, this defines <em>a rule</em> by which we can compute
+    the outputs of the function \(f\) for any given input.  And
+    this is really handier than having to consult a list of
+    input/output pairs like we have to do with the definition
+    \[
+      f = \{(1, 12), (-1, 4), (3, 7)\}
+    \]
+</p>
+
+<h3>Domain and Range</h3>
+<p>
+  There is just a tad more vocab we should introduce while we are
+  on the subject of definitions and generality: those of domain and range.
+  Every function has a domain (what is it?).  Every function has a range.
+  What do these words mean?  Well, functions are about "input/output"
+  relationships, as I hope you are beginning to know.  Domain and range just
+  have to do with them.
+
+  <blockquote>
+    <h4>Definition:</h4> The <b>domain of a function</b> is the set of all
+    first coordinates in the function.  Put another way, it is
+    the "set of all allowable inputs."
+  </blockquote>
+
+  <blockquote>
+    <h4>Definition:</h4> The <b>range of a function</b> is the set of all
+    second coordinates in the function.  Put another way, it is
+    the "set of all outputs" that result from its inputs.
+  </blockquote>
+</p>
+
+<!-- <p>
+  It's just about time to give you more examples.  But you might like
+  to see just one more mathematical definition here.  I have already
+  defined what a function is in a precise mathematical way: They are
+  sets of ordered pairs in which any given input is only used once.
+  But you can also say this using just symbols.  I think it's rather
+  neat, and perhaps you will too.
+
+  <h4>Definition of Function, using mathematical notation</h4>:
+  A <b>function</b> \(f\) is a set of ordered pairs such that for any
+  first coordinate \(x\) (that is, for any element in its domain)
+  we have that if
+  \[
+    (x, y_1) \; \textrm{and} \; (x, y_2)
+  \]
+  are elements of \(f\), then, in fact, \(y_1 = y_2\).
+</p> -->
+
+<p>
+  Our task now is just to practice all these fundamental definitions,
+  and to practice function notation.
+</p>
 
 
 <p>
@@ -152,156 +504,71 @@
   </p>
 
   <p>
-  Consider the very basic relationship between the price of a pizza
-  and the number of toppings you order.  Actually, this could be
-  a fairly complicated thing!&mdash;depending if the pizza place
-  prices different toppings differently (e.g.: standard
-  toppings versus premium, etc.) or if they start offering deals
-  when you order more toppings ("buy two toppings at regular
-  price, get the third one free!").  But our purpose here is just
-  to get a basic mental scheme of "what a function is", so
-  we can just start with your basic scenario of pricing.
-  Therefore, below, I give you a hypothetical pricing structure
-  for a kind of a gourmet-ish, sit-down pizza place (brand name
-  withheld!)
+  Recall that mathematicians call sets of ordered pairs "relations".
+  Consider this (arbitrary) relation in answering the questions that follow:
+  \[
+    f = \{(-5, 6), (3, 9), (-2, -8), (9, 6)\}
+  \]
   </p>
 
 
 
   <ol class="multi-part" style="list-style-type: lower-alpha;">
     <li>
-      To start off, I often like to ask "What does this mean?"  In this case,
-      the meaning is obvious.  Instead, our task is to attach a new word
-      to a familiar concept.  Here is the concept: The price of your
-      pizza is <em>determined by</em> the number of toppings you order.
-      The new word we attach here&mdash;which is thus given at least
-      tentative meaning through this example&mdash;is "function".
-      A function relationship is what you have whenever you have
-      the generic situation
-      <blockquote>
-        [One variable] is determined by [some other variable].
-      </blockquote>
-      In this case, we say that
-      <blockquote>
-        The [one variable] <em>is a function of</em> [the other variable].
-      </blockquote>
-      In other words, the word function works (so far) on only in the
-      phrase "is a function of"; and all that it does is to provide
-      another kind of fancy-sounding way of saying "is determined by".
-
-      <p>
-        So, as an initial test of your understanding here, practice
-        the phrase "is a function of" by correctly applying it to
-        the situation of pricing pizza.  Express the variables
-        in your answers in the same way thay they are expressed
-        in the chart.
-      </p>
+      Is \(f\) a function?
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          The price of the pizza is a function of the number of toppings you buy.
+          Yes, \(f\) is a function.  I know this because functions are
+          sets of ordered pairs (relations) in which no first coordinate
+          appears more than once.
         </div>
       </div>
     </li>
     <li>
-      Construct an English sentence (or two) that fully captures the relationship
-      between the price of a pizza and the number of toppings you buy.  What
-      I'm looking for is a sentence (or two) that is so detailed, someone
-      could use just your information and reconstrut that table&mdash;that is,
-      out simply, they would completely know how much they are going to
-      pay for a pizza no matter how many toppings they are going to buy.
-      For instance, just imagine that you work at this nameless
-      downtown pizza place and you are taking an order over the phone
-      from someone who doesn't have Internet and just really doesn't
-      have any information about the price except what you tell them.
+      Identify the value of \(f(3)\).
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          A plain, cheese pizza costs $12 and each additional topping is $1.50.
-        </div>
-      </div>
-    </li>
-    <li>
-      Now, hopefully, that previous exercise wasn't very hard.  But, would you
-      believe me if I told you that if you can construct an English
-      description that captures the price, then you can just
-      as easily construct a mathematical formula (or equation) that will do the same
-      thing?  Sure you can!  You see, an equation is also just a <em>sentence</em>.
-      It's just a sentence constructed from mathematical symbols.  For instance,
-      when I say
-      \[
-          x = 3
-      \]
-      I have just uttered a sentence with a subject, a verb, and an object.
-      The sentence (as you well know) is just "(The number) \(x\) equals 3."
-      So, the subject of the sentence is \(x\), the verb is "equals", and
-      the object is 3.
-
-      <p>
-        So, your job is to construct a math sentence that does the same
-        thing as the English sentence you already developed.  Use the letter
-        \(P\) to represent the price of the pizza and use \(n\) to represent
-        the number of toppings.
-      </p>
-      <div class="answer">
-        <a class="collapsible"><h3>Answer: </h3></a>
-        <div class='inner'>
-          Your equation is going to proceed in the order "subject, verb, object".
-          So, the question is, what is the subject of your math sentence going to be?
-          Well, there are only two nouns that are relevant to the situation: the price
-          \(P\) of the pizza and the number \(n\) of toppings.  So, which is
-          the subject of the sentence?  Maybe this one is easy.  But the answer
-          to this question in other situations can always be answered in the same way.
-          Think about the phrases
-          <blockquote>
-            [one variable] is determined by [some other]
-          </blockquote>
-          which we just learned can also be phrased
-          <blockquote>
-            [one variable] is a function of [the other].
-          </blockquote>
-          The way the "[one variable]" gets determined by the other usual
-          involves some details, so you can always start with the "[variable]"
-          as your subject and leave the details for later.  So, I start this way:
+          What goes inside the parentheses that follows the name of a function
+          is the intended "input".  In a function, the first coordinates
+          are the inputs, and the second coordinates are the outputs.
+          The symbol "\(f(3)\)" represents "the output from the function
+          \(f\)" when the input is 3.  Therefore, the answer is 9:
           \[
-            P =
-          \]
-          Next, I take a deep breath and start rewriting my English formula
-          as a math formula, translating each detail faithfully one-by-one.
-          For example, I know that a plain, cheese costs $12, so I start with
-          that.  I also know more will have to be added to it, so I get
-          ready for that at the same time.  So, I write this next:
-          \[
-            P = 12 +
-          \]
-          Feeling pretty good!  Now, I just have to figure out how to
-          incorporate the idea that "for every additional topping
-          (besides cheese) that I order, it will cost $1.50 more".
-          For example, if I order one topping, I would need to add just
-          1.5, but if I ordered two toppings, I would add 3.  We're talking
-          repeated addition of 1.5&mdash;and "repeated addition" is a way
-          of understanding what multiplication about, no?  So, yep, I just multiply.
-          "For every additional topping, add another 1.5" gets faithfully
-          incorporated into our formula in this final step:
-          \[
-             P = 12 + 1.5 n
+            f(3) = 9
           \]
         </div>
       </div>
     </li>
     <li>
-      As a follow-up to the previous question, compute the price of a
-      pizza that has (hypothetically-speaking) 10 toppings on it.
+      What is the domain of this function?  Answer using set notation.
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          The nice thing about a formula like the one we just developed is
-          that you can just "plug in" to find whatever value you want.
-          So, for instance, when \(n = 10\), we find
+          The domain of a function is its set of inputs.  So,
+          the domain of \(f\) is
           \[
-            P = 12 + 1.5 \cdot 10 = 12 + 15 = 27
+            \{-5, -2, 3, 9\}
           \]
-          So, the pizza would cost $27.
+          I have listed from least to greatest here, but the order in which
+          you list elements in a set doesn't matter.
+        </div>
+      </div>
+    </li>
+    <li>
+      What is the range of this function?  Use set notation for your answer.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          The range of a function is its set of outputs.  So, the thing to
+          do here is just to list the outputs (the second coordinates):
+          \[
+            \{6, 9, -8\}
+          \]
+          Notice that I didn't list 6 twice!  There's no need as 6 was already
+          in "the set of outputs"; after all, 6 is 6, no?  Put another way,
+          repeating elements in a set is redundant.
         </div>
       </div>
     </li>
@@ -317,115 +584,21 @@
   </p>
 
   <p>
-    In the table below, you will find hypothetical data representing
-    the height in feet of fast-growing bamboo corresponding to the
-    number of days that have gone by.
+    Recall that mathematicians call sets of ordered pairs "relations".
+    Consider this (arbitrary) relation in answering the questions that follow:
+    \[
+      f = \{(-3, 6), (9, -1), (-2, -8), (9, 6)\}
+    \]
+    Is this relation a function?
   </p>
-
-  <table border="1">
-    <tr><th>Day</th>
-      {% for i in range(0,4) %}
-      <td style="text-align: center;">{{ i }}</td>
-      {% endfor %}
-    </tr>
-    <tr><th>Height of Bamboo (in ft.)</th>
-      {% for i in range(0,4) %}
-      <td>{{ 15 + i*1.1 }}</td>
-      {% endfor %}
-    </tr>
-  </table>
-
-  <ol class="multi-part" style="list-style-type: lower-alpha;">
-    <li>
-      Write an English sentence that perfectly captures the relationship between
-      the height of a bamboo stalk and the number of days since "Day 0."
-      Someone else should be able to reconstruct your table using just your English sentence.
-      <div class="answer">
-        <a class="collapsible"><h3>Answer: </h3></a>
-        <div class='inner'>
-          The bamboo starts out at height 15 ft on "Day 0", and then grows
-          by 1.1 ft everyday after that.
-        </div>
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        Nope!  Notice that the first coordinate 9 is used twice.
+        Therefore, this relation is not a function.
       </div>
-    </li>
-    <li>
-      <p>
-        Develop a "math sentence"&mdash;that is, an equation&mdash;that
-        captures the relationship between the height of the bamboo
-        on any given day after "Day 0".  Use the letter \(h\) for
-        the height of the bamboo and the letter \(x\) for the number
-        of days that have passed since Day 0.
-      </p>
-      <div class="answer">
-        <a class="collapsible"><h3>Answer: </h3></a>
-        <div class='inner'>
-          Once again, I ask myself, "What shall be the <em>subject</em>
-          of my math sentence?"  The answer to that will always be
-          "the variable that is being <em>determined by</em>
-          (or, that is a <em>function of</em>) the other."
-          One can readily think of the height as being determined
-          by the number of days it spends growing.  The height
-          is <em>a function of</em> the time spent growing.  Thus, I
-          have identified that it convenient way to begin my equation
-          is to write
-          \[
-           h =
-          \]
-
-          <p>
-            And, again, I can construct the equation bit saying in my head
-            a sentence describing the situation and, bit by bit, transcribing
-            the different elements of the sentence.  I know the height starts
-            out at 15 ft on Day 0&mdash;and then grows from there&mdash;so I
-            continue by writing:
-            \[
-              h = 15 +
-            \]
-            Next, I observe in the table that the bamboo grows 1.1 ft in the first
-            day and continues that pattern from there on.  So, it adds 1.1 ft
-            to its height for each additional day.  That's repeated
-            addition&mdash;that is, multiplication&mdash;so I know how to finish
-            it off:
-            \[
-              h = 15 + 1.1 x
-            \]
-            Note that you can also check this answer by plugging in different
-            values for \(d\) and see if the formula generates the correct
-            height as given in the table.  Indeed, when you substitute
-            \(d = 0\), you get
-            \[h = 15 + 1.1 \cdot 0 = 15 + 0 = 15\]
-            Similarly, when \(d = 1\), you get
-            \[
-              h = 15 + 1.1 \cdot 1 = 15 + 1.1 = 16.1
-            \]
-            Hopefully, it's easy to see that the entire table
-            could be generated in this manner.  Our formula is correct!
-          </p>
-        </div>
-      </div>
-    </li>
-    <li>
-      Compute the height of the bamboo after 14 days.
-      <div class="answer">
-        <a class="collapsible"><h3>Answer: </h3></a>
-        <div class='inner'>
-          We plug in \(x = 14\):
-          \[
-            h = 15 + 1.1 \cdot 14 = 15 + 15.4 = 30.4
-          \]
-          So, the bamboo would be 30.4 ft tall.
-        </div>
-      </div>
-    </li>
-  </ol>
+    </div>
 </div>
-</p>
-
-<p>
-  We'll do one more example: a "generic" one, with no context attached.
-  Note that for a "generic" situation, you are limited to what numbers
-  would make sense for a physical scenario.  So, expect to (sometimes)
-  encounter negative numbers here.
 </p>
 
 <p>
@@ -436,73 +609,115 @@
   </p>
 
   <p>
-    Consider the data below in answering the questions that follow.
+    Let the function \(f\) be defined by the rule:
+    \[
+      f(x) = 7 - x^2
+    \]
+    Compute the indicated values.
   </p>
-
-  <table border="1">
-    <tr><th>\(x\)</th>
-      {% for i in range(0,4) %}
-      <td style="text-align: center;">{{ i }}</td>
-      {% endfor %}
-    </tr>
-    <tr><th>\(y\)</th>
-      {% for i in range(0,4) %}
-      {% set disp = -3.4 + i*1.6 %}
-      <td>{{ '%0.1f' % disp|float }}</td>
-      {% endfor %}
-    </tr>
-  </table>
 
   <ol class="multi-part" style="list-style-type: lower-alpha;">
     <li>
-      Write an English sentence that perfectly captures the relationship between
-      \(x\) and \(y\).
-      Someone else should be able to reconstruct your table using just your English sentence.
+      Find \(f(0)\)
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          When \(x = 0\), you have \(y = -3.4\), and for each additional
-          unit of increase in \(x\), \(y\) increases by 1.6.
+          The symbol "\(f(0)\)" represents "the output
+          from the function \(f\) when the input is \(x = 0\)".
+          Put another way, all we have to do is "plug in" 0 for \(x\)
+          in the formula that determines the outputs.
+          \[
+            f(0) = 7 - 0^2 = 7 - 0 = 7
+          \]
+          Simple as that!  (These aren't meant to be hard, just to clarify
+          the meaning of the notation and the concepts before
+          we do more difficult things with them.)
         </div>
       </div>
     </li>
     <li>
-      <p>
-        Develop a "math sentence"&mdash;that is, an equation&mdash;that
-        captures the relationship between \(y\) and \(x\).
-      </p>
+      Find \(f(3)\)
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          Paralleling my sentence above exactly, I start off with
-          what is really the subject of my sentence, \(y\).
           \[
-            y =
-          \]
-          Next up, I know \(y\) starts out at \(-3.4\) and grows from
-          there, so I write:
-          \[
-            y = -3.4 +
-          \]
-          How does it grow?  (Note here that I might also ask
-          you a question where \(y\) decreases with increasing
-          \(x\) instead of increases!)  For every increase
-          of one unit in \(x\), \(y\) increases by 1.6.
-          That's repeated addition, AKA, multiplication:
-          \[
-            y = -3.4 + 1.6 x
+            f(3) = 7 - 3^2 = 7 - 9 = -2
           \]
         </div>
       </div>
     </li>
     <li>
-      Compute the value of \(y\) for where \(x = 9\)
+      Find \(f(-3)\)
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          We plug in \(x = 9\):
           \[
-            h = -3.4 + 1.6 \cdot 9 = 15 + {{ 1.6*9 }} = {{ 15 + 1.6*9 }}
+            f(-3) = 7 - (-3)^2 = 7 - 9 = -2
+          \]
+          You have to mind your order of operations
+          when you do these problems!
+          Note that I first squared \(-3\), i.e., I did
+          \[
+            (-3)^2 = (-3)(-3) = 9
+          \]
+          Then I did the subtraction.
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+    Let the function \(f\) be defined by the rule:
+    \[
+      f(x) = 3x^2 + x - 2
+    \]
+    Compute the indicated values.
+  </p>
+
+  <ol class="multi-part" style="list-style-type: lower-alpha;">
+    <li>
+      Find \(f(0)\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          The symbol "\(f(0)\)" represents "the output
+          from the function \(f\) when the input is \(x = 0\)".
+          Put another way, all we have to do is "plug in" 0 for \(x\)
+          in the formula that determines the outputs.
+          \[
+            f(0) = 3\cdot 0^2 + 0 - 2 = 3 \cdot 0 - 2 = 0 - 2 = -2
+          \]
+        </div>
+      </div>
+    </li>
+    <li>
+      Find \(f(2)\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \[
+            f(2) = 3\cdot 2^2 + 2 - 2 = 3 \cdot 4 + 0 = 12
+          \]
+          Mind your order of operations!
+        </div>
+      </div>
+    </li>
+    <li>
+      Find \(f(-2)\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \[
+            f(-2) = 3\cdot (-2)^2 + (-2) - 2 = 3 \cdot 4 - 2 - 2 = 12 - 4 = 8
           \]
         </div>
       </div>
