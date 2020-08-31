@@ -1,0 +1,419 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section, we turn to a concept that we will use again and again.
+  We can represent a set of ordered pair&mdash;what a mathematician
+  would call a <em>relation</em>as a graph on the \((x,y)\)-plane.
+  It's a pretty simple concept&mdash;but one that provides a remarkably
+  helpful perspective on equations and functions.  (Recall that a function
+  is a special kind of a set of ordered pairs&mdash;a
+  special type of relation.)
+<p>
+
+<p>
+  This may be something you have studied before, but, as it is pretty simple
+  to explain, I'll give a full treatment here.  The context is the concept
+  of an ordered pair of real numbers, such as
+  \[
+    (2, -1)
+  \]
+  But the further context is that these ordered pairs might either represent
+  the input/output pairs associated with a function (which, as discussed
+  in the section on
+  <a href="{{ url_for('section', section_name='function_notation') }}">
+    Function Notation
+  </a> is a set of ordered pairs).
+  Or they might be members of the set of all pairs that satisfy (make true)
+  and equation that involve \(x\) and \(y\).
+  For instance, consider the equation
+  \[
+    x^2 + y^2 = 1
+  \]
+  Imagine the set of all \((x,y)\)-pairs that make this equation true.
+  For instance, the pair \((x,y) = (1,0)\) is in this set, since, when
+  you let \(x = 1\) and \(y = 0\), you get
+  \[
+    \textrm{LHS} = x^2 + y^2 = 1^2 + 0^2 = 1 + 0 = 1 = \textrm{RHS}
+  \]
+  They make the equation true; they "satisfy" the equation!  So, imagine
+  the set of <em>all</em> pairs that makes this equation true.  What we consider
+  here is what the set "looks" like.  Do you have any idea what I mean by that?
+  If you do, imagine what it would be like to be asked that question and
+  to have never before learned the concept of a graph.  And if you have no
+  idea, just read to the next paragraph.
+</p>
+
+<p>
+  Having gotten slightly ahead of the discussion, we now need to pase
+  and say just exactly how we might visualize a set of ordered pairs&mdash;or,
+  for starters, even just a single ordered pair.  The method is basically
+  just form of "charting."  It is something that will be utterly unsurprising
+  to you if you have ever done anything related to maps with longitude
+  and latitude or even used a table with rows and columns or have every
+  played a game of battleship.  Graphing of ordered pairs happens
+  on a chart or playing field that looks like this, but is imagined
+  to extend out infinitely:
+
+  <div style="text-align:center">
+    <img src="{{ url_for('static', filename='images/blank.png') }}"
+      width="40%">
+  </div>
+</p>
+
+<p>
+  First of all, to understand what you are looking at, what you have here
+  is two real lines, one oriented horizontally and the other vertically.
+  Where they cross forms the point 0 on <em>both</em> lines.  The grid
+  lines are just sort of decorative&mdash;there to help you visuallize&mdash;but
+  they really don't need to be drawn at all or could be drawn differently.
+  Now, when we plot an ordered pair, like
+  \[
+    (2,-1)
+  \]
+  we are just going to view it as "instructions" about how far to move from
+  0 <em>on both lines</em>.  The first coordinate tells us how from from 0 and
+  in what direction we are to move on the <em>horizontal</em> line.  The second coordinate
+  tells us how from from 0 and
+  in what direction we are to move on the <em>vertical</em> line
+  We plot the unique "point" that coincides with <em>both</em> of these
+  instructions.  So, since the first coordinate is \(2\), we imagine moving
+  from the 0-point (by the way, it is called <em>the origin</em>
+  because that is where you imagine you start) 2 units to the right,
+  and because the second coordinate is \(-1\), we imagine
+  travelling (additionally) one unit <em>down</em>.  (If the
+  first coordinate is negative, you move left, whereas if it is positive,
+  you move right.  If the second coordinate is negative, you move down,
+  whereas if it is positive you move up.)  Thus, at the end we plot a point&mdash;coinciding
+  with both instructions&mdash;like so:
+
+  <div style="text-align:center">
+    <img src="{{ url_for('static', filename='images/just_points1.png') }}"
+      width="40%">
+  </div>
+</p>
+
+
+
+
+
+
+
+
+
+  <p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      Here's another three, just to quiz yourself.  I will plot the points
+      \[
+        (-7, 3), \, (0, 5), \, (3, -6), \, (-2, 0)
+      \]
+    </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          <div style="text-align:center">
+            <img src="{{ url_for('static', filename='images/just_points2.png') }}"
+              width="40%">
+          </div>
+        </div>
+      </div>
+  </div>
+  </p>
+
+
+
+
+<p>
+  Let's practice.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+  Let \(f(x) = x - 1\) and \(g(x) = 6x\).  Compute the indicated values.
+  </p>
+
+
+
+  <ol class="multi-part" style="list-style-type: lower-alpha;">
+    <li>
+      \(f(g(2))\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          First I compute the value of \(g(2)\):
+          \[
+            g(2) = 6\cdot 2 = 12
+          \]
+          Then I substitute this value in for the symbol \(g(2)\)
+          in the expression \(f(g(2))\):
+          \[
+            f(g(2)) = f(12) = 12 - 1 = 11
+          \]
+          That's all there is to it!
+        </div>
+      </div>
+    </li>
+    <li>
+      \(f(g(-1))\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          First I compute the value of \(g(-1)\):
+          \[
+            g(-1) = 6\cdot (-1) = -6
+          \]
+          Then I substitute this value in for the symbol \(g(-1)\)
+          in the expression \(f(g(-1))\):
+          \[
+            f(g(-1)) = f(-6) = -6 - 1 = -7
+          \]
+        </div>
+      </div>
+    </li>
+    <li>
+      \(g(f(-1))\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          This time, I first compute the value of \(f(-1)\):
+          \[
+            f(-1) =  -1 - 1 = -2
+          \]
+          Then I substitute this value in for the symbol \(f(-1)\)
+          in the expression \(g(f(-1))\):
+          \[
+            g(f(-1)) = g(-2) = 6(-2) = -12
+          \]
+        </div>
+      </div>
+    </li>
+    <li>
+      \(g(g(2))\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          You can also compose a function with itself!  First,
+          I compute the value of \(g(2)\):
+          \[
+            g(2) = 6\cdot 2 = 12
+          \]
+          Then I substitute this value in for the symbol \(g(2)\)
+          in the expression \(g(g(2))\):
+          \[
+            g(g(2)) = g(12) = 6 \cdot 12 = 72
+          \]
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<p>
+  That's pretty much it!  Except there is a just a litle more we could remark on
+  here.  Though we don't have much use for it in this class, there is a
+  symbol for composition.  You see, composition involves a combination
+  of functions.  In this way it is like addition or multiplication&mdash;which
+  involve a combination of numbers.  So, just as the addition and
+  multiplication <em>operations</em> have symbols, the operation of
+  composition also gets a symbol.  Here it is: \(\circ\).  So, the expression
+  \(f \circ g\) is given meaning by the following rule:
+  \[
+    (f \circ g) (x) = f(g(x))
+  \]
+  The one reason I point this out is that&mdash;once you have this analogy
+  drawn from composition to addition and multiplication&mdash;it leads you to
+  ask the natural question: is function composition <em>commutative</em>
+  like addition and multiplication are?  That is, as you know, for any real
+  numbers \(a\) and \(b\), you have
+  \begin{align*}
+    a + b &= b + a & \textrm{(Commutativity of Addition)}
+  \end{align*}
+  So, is it true that for all functions \(f\) and \(g\), \(f\circ g = g \circ f\)?
+  The answer is "no", as you can see from the example we just did!  You
+  see, we computed both the values of \((f \circ g)(-1)\) and \((g \circ f) (-1) \),
+  and they came out different.  Therefore \(f \circ g\) and \(g \circ f\)
+  are different functions:
+  \[
+    f \circ g \not = g \circ f
+  \]
+</p>
+
+<p>
+  One of the challenges you will face in these exercises is to mind your order
+  of operations.  I am assuming a familiarity with these.  But
+  let's do one more example for some practice in that direction.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+  Let \(f(x) = 1 - (x -2)^2 \) and \(g(x) = 6|x|\).  Compute the indicated values.
+  </p>
+
+
+
+  <ol class="multi-part" style="list-style-type: lower-alpha;">
+    <li>
+      \(f(g(2))\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          First I compute the value of \(g(2)\):
+          \[
+            g(2) = 6\cdot |2| = 6 \cdot 2 = 12
+          \]
+          Then I substitute this value in for the symbol \(g(2)\)
+          in the expression \(f(g(2))\):
+          \[
+            f(g(2)) = f(12) = 1 - (12 - 2)^2 = 1 - 10^2 = 1 - 100 = -99
+          \]
+          Note how I carry out these operations in a particular order!
+          You may be familiar with the mnemonic PEMDAS to help you
+          remember this "order of operations".  You carry out the operations
+          in the following order:
+          <ol>
+            <li>First, those inside <b>p</b>arentheses.</li>
+            <li>Then, apply <b>e</b>xponents.</li>
+            <li>Up next, you carry out <b>m</b>ultiplication/<b>d</b>ivision operations.</li>
+            <li>Lastly, you carry out <b>a</b>ddition/<b>s</b>ubtraction.</li>
+          </ol>
+          One thing this mnemonic omits is how to treat "negation".  For the
+          purposes of applying the mnemonic, you can pretend that
+          negation is "multiplying by \(-1\)".  However, it is much more correct
+          to say that the reverse is true: multiplication by \(-1\) really
+          just means negation.  The point concerning order of operations and
+          negation, though, is that negation fits into the order
+          with multiplication/division.  So, you could adopt the
+          adjusted mnemonic "PENDMAS" or "PEMNDAS" or "PEMDNAS"&mdash;whichever
+          suits you best&mdash;in case it helps you realize how negation fits in.
+
+          <p>
+            You might have some additional questions about whether multiplication
+            and division are interchangeable or, similarly, whether addition
+            and subtraction are interchangeable in terms of the order of
+            operations.  The answer is "yes" provided you understand
+            division as "multiplying by a fraction" and subtraction as "adding
+            a negative".  But if you view division or subtraction as independent
+            operations with independent symbols, then it is possible to run
+            into trouble.  Specifically, neither division nor subtraction
+            as "associative" which means they cannot be treated as
+            freely as multiplication and addition can be.  To see what I mean,
+            note that
+            \[
+              3 \cdot (4 \cdot 5) = 3 \cdot 20 = 60 = 12 \cdot 5 = (3 \cdot 4) \cdot 5
+            \]
+            This is an illustration of the associativity of multiplication, which,
+            together with the commutativity of multiplication, means that
+            "you can carry out a product in any order you want".  For instance,
+            I could have also done the above product by computing:
+            \[
+              (3 \cdot 5) \cdot 4 = 15 \cdot 4 = 60
+            \]
+            Same thing no matter what!
+            But this does not work out with division.  Just look here to see
+            what I mean:
+            \[
+              (60 \div 3) \div 2 = 20 \div 2 = 10
+            \]
+            while
+            \[
+              60 \div (3 \div 2) = 60 \div 1.5 = 40
+            \]
+            So, division is not associative!  Subtraction isn't either,
+            but I'll leave that to you to prove to yourself.  Moral: PEMDAS
+            works, but you may have more thinking to do about it.  Never
+            shut off yoru brain in math!  (Don't just naively
+            "follow the rules.")
+          </p>
+        </div>
+      </div>
+    </li>
+    <li>
+      \(f(g(-1))\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          First I compute the value of \(g(-1)\):
+          \[
+            g(-1) = 6\cdot |-1| = 6 \cdot 1 = 6
+          \]
+          Then I substitute this value in for the symbol \(g(-1)\)
+          in the expression \(f(g(-1))\):
+          \[
+            f(g(-1)) = f(6) = 1 - (6 - 2)^2 = 1 - 4^2 = 1 - 16 = -15
+          \]
+        </div>
+      </div>
+    </li>
+    <li>
+      \(g(f(-1))\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          This time, I first compute the value of \(f(-1)\):
+          \[
+            f(-1) =  1 - (-1 - 2)^2 = 1 - (-3)^2 = 1 - 9 = -8
+          \]
+          Then I substitute this value in for the symbol \(f(-1)\)
+          in the expression \(g(f(-1))\):
+          \[
+            g(f(-1)) = g(-8) = 6 \cdot |-8| = 6 \cdot 8 = 48
+          \]
+        </div>
+      </div>
+    </li>
+    <li>
+      \(g(g(2))\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          First,
+          I compute the value of \(g(2)\):
+          \[
+            g(2) = 6\cdot |2| = 6 \cdot 2 = 12
+          \]
+          Then I substitute this value in for the symbol \(g(2)\)
+          in the expression \(g(g(2))\):
+          \[
+            g(g(2)) = g(12) = 6 \cdot |12| = 6 \cdot 12 = 72
+          \]
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

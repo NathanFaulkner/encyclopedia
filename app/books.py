@@ -309,6 +309,8 @@ functionnotation.add_to_questions('function_notation',
 functioncomposition = Section('functioncomposition', "Composition of Functions", '/sections/function_composition')
 functioncomposition.add_to_questions('function_composition')
 
+simplegraphing = Section('simplegraphing', "Simple Graphing", '/sections/simple_graphing')
+
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
 graphpointslope = Section('graphpointslope', "Graph from Point Slope Form", '/sections/graph-point-slope')
@@ -340,7 +342,8 @@ nuts_and_bolts_of_algebra.set_frontpage(nutsandboltsofalgebra)
 functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coordinate Plane",
                                     [basicfunctionsinatableandwords,
                                     functionnotation,
-                                    functioncomposition])
+                                    functioncomposition,
+                                    simplegraphing])
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
 
 linear_functions = Division('chapter', 'Linear Functions', [graphpointslope])

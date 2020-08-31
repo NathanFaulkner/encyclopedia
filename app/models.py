@@ -232,11 +232,11 @@ class UserSectionGradeInfo():
                     if grade == self.max_grade:
                         mastered_this_session = True
                         self.mastery_date = answer.timestamp
-                    # print(f'{self.chapter_number}.{self.section_number}:',
-                    #         i,
-                    #         answer.timestamp,
-                    #         grade,
-                    #         'mastery count:', mastery_count)
+                    print(f'{self.chapter_number}.{self.section_number}:',
+                            i,
+                            answer.timestamp,
+                            grade,
+                            'mastery count:', mastery_count)
                     if i == len(answers) - 1:
                         break
                     i += 1
@@ -249,6 +249,13 @@ class UserSectionGradeInfo():
                 if mastered_past_session:
                     mastery_count += 1
                     expected_recall_duration = max(1, int(self.base**(mastery_count - 1)))
+                    print(f'mastered last session!', f'{self.chapter_number}.{self.section_number}:',
+                            i,
+                            answer.timestamp,
+                            grade,
+                            'mastery count:', mastery_count)
+                print('days since previous', days_since_previous)
+                print('expected_recall_duration', expected_recall_duration)
                 memory_decay_penalty = int(days_since_previous/expected_recall_duration)
                 grade = int(grade*0.5**memory_decay_penalty)
                 if i < len(answers): #This really just covers the first of a new session
@@ -259,14 +266,15 @@ class UserSectionGradeInfo():
                     if grade == self.max_grade:
                         mastered_this_session = True
                         self.mastery_date = answer.timestamp
-                        if i == len(answers) - 1:
+                        if i == len(answers) - 1 and not same_session:
                             mastery_count += 1
                             expected_recall_duration = max(1, int(self.base**(mastery_count - 1)))
+                            print('my fault!')
                     else:
                         mastered_this_session = False
                 # print(f'{self.chapter_number}.{self.section_number}: Round {i} at {answer.timestamp}, grade: {grade}')
                 self.due_date = answer.timestamp + timedelta(days=expected_recall_duration)
-                # print(i, answer.timestamp, grade, 'mastery count:', mastery_count)
+                print(i, answer.timestamp, grade, 'mastery count:', mastery_count)
                 i += 1
 
 
