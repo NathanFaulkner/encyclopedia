@@ -258,7 +258,7 @@ class UserSectionGradeInfo():
                 # print('expected_recall_duration', expected_recall_duration)
                 memory_decay_penalty = int(days_since_previous/expected_recall_duration)
                 grade = int(grade*0.5**memory_decay_penalty)
-                if i < len(answers): #This really just covers the first of a new session
+                if i < len(answers) and not same_session: #This really just covers the first of a new session
                     if answer.correct:
                         grade = min(self.max_grade, grade + 1)
                     else:
