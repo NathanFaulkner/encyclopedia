@@ -342,8 +342,8 @@ nuts_and_bolts_of_algebra.set_frontpage(nutsandboltsofalgebra)
 functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coordinate Plane",
                                     [basicfunctionsinatableandwords,
                                     functionnotation,
-                                    functioncomposition])
-                                    # simplegraphing])
+                                    functioncomposition,
+                                    simplegraphing])
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
 
 linear_functions = Division('chapter', 'Linear Functions', [graphpointslope])

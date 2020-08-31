@@ -6,8 +6,8 @@
 {% block content %}
 <p class="subhead">
   In this section, we turn to a concept that we will use again and again.
-  We can represent a set of ordered pair&mdash;what a mathematician
-  would call a <em>relation</em>as a graph on the \((x,y)\)-plane.
+  We can represent a set of ordered pairs&mdash;what a mathematician
+  would call a <em>relation</em> as a graph on the \((x,y)\)-plane.
   It's a pretty simple concept&mdash;but one that provides a remarkably
   helpful perspective on equations and functions.  (Recall that a function
   is a special kind of a set of ordered pairs&mdash;a
@@ -48,13 +48,13 @@
 </p>
 
 <p>
-  Having gotten slightly ahead of the discussion, we now need to pase
+  Having gotten slightly ahead of the discussion, we now need to pause
   and say just exactly how we might visualize a set of ordered pairs&mdash;or,
   for starters, even just a single ordered pair.  The method is basically
-  just form of "charting."  It is something that will be utterly unsurprising
+  just a form of "charting."  It is something that will be utterly unsurprising
   to you if you have ever done anything related to maps with longitude
   and latitude or even used a table with rows and columns or have every
-  played a game of battleship.  Graphing of ordered pairs happens
+  played a game of Battleship.  Graphing of ordered pairs happens
   on a chart or playing field that looks like this, but is imagined
   to extend out infinitely:
 
@@ -68,17 +68,17 @@
   First of all, to understand what you are looking at, what you have here
   is two real lines, one oriented horizontally and the other vertically.
   Where they cross forms the point 0 on <em>both</em> lines.  The grid
-  lines are just sort of decorative&mdash;there to help you visuallize&mdash;but
+  lines are just sort of decorative&mdash;they are there to help you visuallize&mdash;but
   they really don't need to be drawn at all or could be drawn differently.
   Now, when we plot an ordered pair, like
   \[
     (2,-1)
   \]
   we are just going to view it as "instructions" about how far to move from
-  0 <em>on both lines</em>.  The first coordinate tells us how from from 0 and
+  0 <em>on both lines</em>.  The first coordinate tells us how far from 0 and
   in what direction we are to move on the <em>horizontal</em> line.  The second coordinate
-  tells us how from from 0 and
-  in what direction we are to move on the <em>vertical</em> line
+  tells us how far from 0 and
+  in what direction we are to move on the <em>vertical</em> line.
   We plot the unique "point" that coincides with <em>both</em> of these
   instructions.  So, since the first coordinate is \(2\), we imagine moving
   from the 0-point (by the way, it is called <em>the origin</em>
@@ -96,13 +96,30 @@
   </div>
 </p>
 
-
-
-
-
-
-
-
+<p>
+  Now, as mentioned above, we will be mainly concerned with the graph of
+  a (given) <em>equation</em>.  What does that mean?  For instance, taking
+  again the same example as above, you might consider the equation
+  \[
+    x^2 + y^2 = 1
+  \]
+  Its graph is <em>the set of all \((x,y)\) pairs that make the equation true.</em>
+  Of, you might say, it is a visualization of that set.  So, in other words,
+  it is just <em>the solution set</em> of that equation&mdash;or, again,
+  really a visualization of it.  So, in that sense, it is "the same" as what
+  we did in the section on
+  <a href="{{ url_for('section', 'sections/graphsoflinearinequalities') }}">
+    real line graphs
+  </a>: you shade or draw the points that make the relation true.  One difference
+  here is that it takes <em>two</em> values (one for \(x\) and one for \(y\))
+  to make the equation true, while when you are graphing on the real line, you
+  are only concerned with a single variable, say \(x\).  To elaborate a little further,
+  you could also graph the solution to inequalities that involve two variables,
+  and you could graph the solution to equations that involve only a single one.
+  In the next example, we are just going to explore the basic, fundamental
+  concept of a "graph of an equation".  Then, soon enough, we'll start trying
+  to figure out to draw the whole graph of certain simple equations.
+</p>
 
   <p>
   <div class="example">
@@ -112,28 +129,77 @@
     </p>
 
     <p>
-      Here's another three, just to quiz yourself.  I will plot the points
-      \[
-        (-7, 3), \, (0, 5), \, (3, -6), \, (-2, 0)
-      \]
+      Without graphing (by doing an algebraic check),
+      tell me whether the following points lie on the graph of the given equation.
     </p>
-      <div class="answer">
-        <a class="collapsible"><h3>Answer: </h3></a>
-        <div class='inner'>
-          <div style="text-align:center">
-            <img src="{{ url_for('static', filename='images/just_points2.png') }}"
-              width="40%">
+    <ol class="multi-part" style="list-style-type: lower-alpha;">
+      <li>
+        \((-1, 2)\)
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            When you make the substitutions \)x= -1\) and \(y=2\)
+            you get that
+              \[
+              \textrm{LHS} = (x+2)^2 + 1 =  (-1+2)^2 +1 = 1^2 + 1 = 1+1 = 2 = y = \textrm{RHS}
+              \]
+            So, yes the pair \((-1, 2)\) lies on the graph of the equation.
           </div>
         </div>
-      </div>
+      </li>
+      <li>
+        \((1, 0)\)
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            When you make the substitutions $x= 1$ and $y=0$
+            you get that
+              \[
+              \textrm{LHS} =  (x+2)^2 +1  = (1+2)^2 +1 = 3^2 + 1 = 9 + 1 = 10 \neq 0 = y = \textrm{RHS}
+              \]
+            So, no, the pair \((-1, 2)\) does not lie on the graph of the equation.
+          </div>
+        </div>
+      </li>
+      <li>
+        \((1, 0)\)
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            When you make the substitutions $x= 1$ and $y=0$
+            you get that
+              \[
+              \textrm{LHS} =  (x+2)^2 +1  = (1+2)^2 +1 = 3^2 + 1 = 9 + 1 = 10 \neq 0 = y = \textrm{RHS}
+              \]
+            So, no, the pair \((-1, 2)\) does not lie on the graph of the equation.
+          </div>
+        </div>
+      </li>
+    </ol>
   </div>
-  </p>
-
-
+</p>
 
 
 <p>
-  Let's practice.
+  We now turn to question that will address again and again as we encounter
+  new and different equations: How do you know that the graph of an equation is?
+  As a warning up front, I want you to know that there is <em>no uniform
+    way to figure out what the graph of an equation looks like</em>.  Instead,
+    I will advocate different methods depending on the nature of the equation.
+    However, what I am saying here isn't totally true  in the sense that
+    there is a method that you can always apply and will always help out,
+    even if it doesn't efficiently lead you to knowledge of what the graph looks
+    like.  I am speaking here of "trial and error".  One thing you can
+    always try is to plug in different values for, say, \(x\) and then
+    figure out what \(y\) would have to be.  You can then plot the resulting
+    value.  I will tend to refer this approach as "just plotting points".
+    The only problem with it is that there (typically) an infinite number
+    of points to try&mdash;so you really need some other appraoch to know
+    <em>for sure</em> what a given graph looks like.  Time to get going on it!
+</p>
+
+<p>
+  We'll start with one of the easiest ones of all:
 </p>
 
 <p>
@@ -144,79 +210,36 @@
   </p>
 
   <p>
-  Let \(f(x) = x - 1\) and \(g(x) = 6x\).  Compute the indicated values.
+    We will graph this equation:
+    \[
+      y = x
+    \]
   </p>
-
-
-
-  <ol class="multi-part" style="list-style-type: lower-alpha;">
+  <ol>
     <li>
-      \(f(g(2))\)
+      We want to draw a picture of the graph of this equation.  But, first
+      of all, what does it even mean for a particular graph
+      to be <em>the</em> graph of a given equation?
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          First I compute the value of \(g(2)\):
+          The graph of an equation is the set of all \((x, y)\) pairs that makes the
+          equation true.  This is example is quite simple, so it is easy
+          to see what pairs make it true: every pair like these:
           \[
-            g(2) = 6\cdot 2 = 12
-          \]
-          Then I substitute this value in for the symbol \(g(2)\)
-          in the expression \(f(g(2))\):
-          \[
-            f(g(2)) = f(12) = 12 - 1 = 11
-          \]
-          That's all there is to it!
-        </div>
-      </div>
-    </li>
-    <li>
-      \(f(g(-1))\)
-      <div class="answer">
-        <a class="collapsible"><h3>Answer: </h3></a>
-        <div class='inner'>
-          First I compute the value of \(g(-1)\):
-          \[
-            g(-1) = 6\cdot (-1) = -6
-          \]
-          Then I substitute this value in for the symbol \(g(-1)\)
-          in the expression \(f(g(-1))\):
-          \[
-            f(g(-1)) = f(-6) = -6 - 1 = -7
+            (1, 1), (2, 2), (3, 3), (-1, -1), (-2, -2), \left(\frac{1}{2}, \frac{1}{2}\right)\ldots
           \]
         </div>
       </div>
     </li>
     <li>
-      \(g(f(-1))\)
+      Graph the equation.
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          This time, I first compute the value of \(f(-1)\):
-          \[
-            f(-1) =  -1 - 1 = -2
-          \]
-          Then I substitute this value in for the symbol \(f(-1)\)
-          in the expression \(g(f(-1))\):
-          \[
-            g(f(-1)) = g(-2) = 6(-2) = -12
-          \]
-        </div>
-      </div>
-    </li>
-    <li>
-      \(g(g(2))\)
-      <div class="answer">
-        <a class="collapsible"><h3>Answer: </h3></a>
-        <div class='inner'>
-          You can also compose a function with itself!  First,
-          I compute the value of \(g(2)\):
-          \[
-            g(2) = 6\cdot 2 = 12
-          \]
-          Then I substitute this value in for the symbol \(g(2)\)
-          in the expression \(g(g(2))\):
-          \[
-            g(g(2)) = g(12) = 6 \cdot 12 = 72
-          \]
+            Given our observation about what pairs satisfy this equation&mdash;literally,
+            every \(x, y\)-pair where the \(x\) is the same as the \(y\)&mdash;it
+            hopefully makes sense that it would like like so:
         </div>
       </div>
     </li>
