@@ -432,7 +432,10 @@ def question(question_name):
     try:
         question
     except NameError:
-        question = question_module.Question_Class(seed=session['seed'])
+        try:
+            question = question_module.Question_Class(seed=session['seed'])
+        except:
+            question = question_module.Question_Class()
     # print('session seed', session['seed'])
 
     if whether_graph:

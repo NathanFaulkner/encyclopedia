@@ -310,6 +310,7 @@ functioncomposition = Section('functioncomposition', "Composition of Functions",
 functioncomposition.add_to_questions('function_composition')
 
 simplegraphing = Section('simplegraphing', "Simple Graphing", '/sections/simple_graphing')
+simplegraphing.add_to_questions('graph_point_slope')
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 

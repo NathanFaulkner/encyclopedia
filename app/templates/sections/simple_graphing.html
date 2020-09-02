@@ -91,7 +91,7 @@
   with both instructions&mdash;like so:
 
   <div style="text-align:center">
-    <img src="{{ url_for('static', filename='images/just_points1.png') }}"
+    <img src="{{ url_for('static', filename='images/simple_graphing/just_points1.png') }}"
       width="40%">
   </div>
 </p>
@@ -108,7 +108,7 @@
   it is just <em>the solution set</em> of that equation&mdash;or, again,
   really a visualization of it.  So, in that sense, it is "the same" as what
   we did in the section on
-  <a href="{{ url_for('section', 'sections/graphsoflinearinequalities') }}">
+  <a href="{{ url_for('section', section_name='graphsoflinearinequalities') }}">
     real line graphs
   </a>: you shade or draw the points that make the relation true.  One difference
   here is that it takes <em>two</em> values (one for \(x\) and one for \(y\))
@@ -240,6 +240,11 @@
             Given our observation about what pairs satisfy this equation&mdash;literally,
             every \(x, y\)-pair where the \(x\) is the same as the \(y\)&mdash;it
             hopefully makes sense that it would like like so:
+
+            <div style="text-align:center">
+              <img src="{{ url_for('static', filename='images/simple_graphing/line1.png') }}"
+                width="40%">
+            </div>
         </div>
       </div>
     </li>
@@ -248,39 +253,8 @@
 </p>
 
 <p>
-  That's pretty much it!  Except there is a just a litle more we could remark on
-  here.  Though we don't have much use for it in this class, there is a
-  symbol for composition.  You see, composition involves a combination
-  of functions.  In this way it is like addition or multiplication&mdash;which
-  involve a combination of numbers.  So, just as the addition and
-  multiplication <em>operations</em> have symbols, the operation of
-  composition also gets a symbol.  Here it is: \(\circ\).  So, the expression
-  \(f \circ g\) is given meaning by the following rule:
-  \[
-    (f \circ g) (x) = f(g(x))
-  \]
-  The one reason I point this out is that&mdash;once you have this analogy
-  drawn from composition to addition and multiplication&mdash;it leads you to
-  ask the natural question: is function composition <em>commutative</em>
-  like addition and multiplication are?  That is, as you know, for any real
-  numbers \(a\) and \(b\), you have
-  \begin{align*}
-    a + b &= b + a & \textrm{(Commutativity of Addition)}
-  \end{align*}
-  So, is it true that for all functions \(f\) and \(g\), \(f\circ g = g \circ f\)?
-  The answer is "no", as you can see from the example we just did!  You
-  see, we computed both the values of \((f \circ g)(-1)\) and \((g \circ f) (-1) \),
-  and they came out different.  Therefore \(f \circ g\) and \(g \circ f\)
-  are different functions:
-  \[
-    f \circ g \not = g \circ f
-  \]
-</p>
-
-<p>
-  One of the challenges you will face in these exercises is to mind your order
-  of operations.  I am assuming a familiarity with these.  But
-  let's do one more example for some practice in that direction.
+  Now, we just alter this equation bit by bit, seeing each change in
+  the formula changes the resulting graph.
 </p>
 
 <p>
@@ -291,136 +265,55 @@
   </p>
 
   <p>
-  Let \(f(x) = 1 - (x -2)^2 \) and \(g(x) = 6|x|\).  Compute the indicated values.
+    We will graph this equation:
+    \[
+      y = x + 1
+    \]
   </p>
-
-
-
-  <ol class="multi-part" style="list-style-type: lower-alpha;">
+  <ol>
     <li>
-      \(f(g(2))\)
+      Think about the English descriptions for a relationship between variables
+      like those we gave in the section on developing
+      <a href="{{ url_for('section', section_name='basicfunctionsinatableandwords') }}">
+        formulas from tables.
+      </a>
+      Give an English description for how \(y\) is related to \(x\)&mdash;being
+      sure to give enough detail that someone could reconstruct this
+      equation based only your description.  And think
+      about how your description will be reflected in the graph!
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          First I compute the value of \(g(2)\):
-          \[
-            g(2) = 6\cdot |2| = 6 \cdot 2 = 12
-          \]
-          Then I substitute this value in for the symbol \(g(2)\)
-          in the expression \(f(g(2))\):
-          \[
-            f(g(2)) = f(12) = 1 - (12 - 2)^2 = 1 - 10^2 = 1 - 100 = -99
-          \]
-          Note how I carry out these operations in a particular order!
-          You may be familiar with the mnemonic PEMDAS to help you
-          remember this "order of operations".  You carry out the operations
-          in the following order:
-          <ol>
-            <li>First, those inside <b>p</b>arentheses.</li>
-            <li>Then, apply <b>e</b>xponents.</li>
-            <li>Up next, you carry out <b>m</b>ultiplication/<b>d</b>ivision operations.</li>
-            <li>Lastly, you carry out <b>a</b>ddition/<b>s</b>ubtraction.</li>
-          </ol>
-          One thing this mnemonic omits is how to treat "negation".  For the
-          purposes of applying the mnemonic, you can pretend that
-          negation is "multiplying by \(-1\)".  However, it is much more correct
-          to say that the reverse is true: multiplication by \(-1\) really
-          just means negation.  The point concerning order of operations and
-          negation, though, is that negation fits into the order
-          with multiplication/division.  So, you could adopt the
-          adjusted mnemonic "PENDMAS" or "PEMNDAS" or "PEMDNAS"&mdash;whichever
-          suits you best&mdash;in case it helps you realize how negation fits in.
-
-          <p>
-            You might have some additional questions about whether multiplication
-            and division are interchangeable or, similarly, whether addition
-            and subtraction are interchangeable in terms of the order of
-            operations.  The answer is "yes" provided you understand
-            division as "multiplying by a fraction" and subtraction as "adding
-            a negative".  But if you view division or subtraction as independent
-            operations with independent symbols, then it is possible to run
-            into trouble.  Specifically, neither division nor subtraction
-            as "associative" which means they cannot be treated as
-            freely as multiplication and addition can be.  To see what I mean,
-            note that
-            \[
-              3 \cdot (4 \cdot 5) = 3 \cdot 20 = 60 = 12 \cdot 5 = (3 \cdot 4) \cdot 5
-            \]
-            This is an illustration of the associativity of multiplication, which,
-            together with the commutativity of multiplication, means that
-            "you can carry out a product in any order you want".  For instance,
-            I could have also done the above product by computing:
-            \[
-              (3 \cdot 5) \cdot 4 = 15 \cdot 4 = 60
-            \]
-            Same thing no matter what!
-            But this does not work out with division.  Just look here to see
-            what I mean:
-            \[
-              (60 \div 3) \div 2 = 20 \div 2 = 10
-            \]
-            while
-            \[
-              60 \div (3 \div 2) = 60 \div 1.5 = 40
-            \]
-            So, division is not associative!  Subtraction isn't either,
-            but I'll leave that to you to prove to yourself.  Moral: PEMDAS
-            works, but you may have more thinking to do about it.  Never
-            shut off yoru brain in math!  (Don't just naively
-            "follow the rules.")
-          </p>
+          When \(x=0\), \(\y = 0 + 1 = 1\).  Also, for each increase in \(x\),
+          \(y\) will increase by the same amount.
         </div>
       </div>
     </li>
     <li>
-      \(f(g(-1))\)
+      Graph the equation.
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          First I compute the value of \(g(-1)\):
-          \[
-            g(-1) = 6\cdot |-1| = 6 \cdot 1 = 6
-          \]
-          Then I substitute this value in for the symbol \(g(-1)\)
-          in the expression \(f(g(-1))\):
-          \[
-            f(g(-1)) = f(6) = 1 - (6 - 2)^2 = 1 - 4^2 = 1 - 16 = -15
-          \]
-        </div>
-      </div>
-    </li>
-    <li>
-      \(g(f(-1))\)
-      <div class="answer">
-        <a class="collapsible"><h3>Answer: </h3></a>
-        <div class='inner'>
-          This time, I first compute the value of \(f(-1)\):
-          \[
-            f(-1) =  1 - (-1 - 2)^2 = 1 - (-3)^2 = 1 - 9 = -8
-          \]
-          Then I substitute this value in for the symbol \(f(-1)\)
-          in the expression \(g(f(-1))\):
-          \[
-            g(f(-1)) = g(-8) = 6 \cdot |-8| = 6 \cdot 8 = 48
-          \]
-        </div>
-      </div>
-    </li>
-    <li>
-      \(g(g(2))\)
-      <div class="answer">
-        <a class="collapsible"><h3>Answer: </h3></a>
-        <div class='inner'>
-          First,
-          I compute the value of \(g(2)\):
-          \[
-            g(2) = 6\cdot |2| = 6 \cdot 2 = 12
-          \]
-          Then I substitute this value in for the symbol \(g(2)\)
-          in the expression \(g(g(2))\):
-          \[
-            g(g(2)) = g(12) = 6 \cdot |12| = 6 \cdot 12 = 72
-          \]
+          In terms of the visual,
+          our description means that the graph will be a straight line.
+          The fact that "for each increase in \(x\),
+          \(y\) will increase by the same amount" means that
+          proportional
+          changes in \(x\) lead to proportional changes in \(y\), which
+          makes it a straight line.  Since any two points serve to
+          determine a line, we can plot the pair \((0,1)\) and then
+          just one more to be certain of getting the correct line.
+          Plugging
+          in \(x=1\) yields \(y = 1 + 1 = 2\). So,
+          you could plot \((1, 2)\), and then trace the straight line
+
+          <div style="text-align:center">
+            <img src="{{ url_for('static', filename='images/simple_graphing/line2.png') }}"
+              width="40%">
+          </div>
+
+          A good observation to make here is that the graph looks the same
+          as that of \(y = x\) only "shifted up one unit."
         </div>
       </div>
     </li>
@@ -428,6 +321,87 @@
 </div>
 </p>
 
+<p>
+  Note that there was nothing special about the adding 1 in the previous example.
+  We could have added 3 or 5 or any number whatsoever.  We also could
+  have subtracted any number, for that matter.
+  So, the general take-away there is that an equation of the form
+  \[
+    y = x + b
+  \]
+  will run through the point \((0, b)\) and will then "go up 1 for every
+  1 you run to the right in the \(x\)-direction", following a straight-line course.
+  Since the point \((0,b)\) lies on the \(y\)-axis, it is called the
+  <em>\(y\)-intercept</em>.  That is, it represents where the line
+  "intercepts" or intersects the \(y\)-axis.
+</p>
+
+<p>
+  Now, we change the equation \(y = x\) in a slightly different way.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+    We will graph this equation:
+    \[
+      y = 2x
+    \]
+  </p>
+  <ol>
+    <li>
+      Think about the English descriptions for a relationship between variables
+      like those we gave in the section on developing
+      <a href="{{ url_for('section', section_name='basicfunctionsinatableandwords') }}">
+        formulas from tables.
+      </a>
+      Give an English description for how \(y\) is related to \(x\)&mdash;being
+      sure to give enough detail that someone could reconstruct this
+      equation based only your description.  And think
+      about how your description will be reflected in the graph!
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          When \(x=0\), \(\y = 2 \cdot 0 = 0\).  Also, for each increase in \(x\),
+          \(y\) will increase by <em>twice</em> as much.
+        </div>
+      </div>
+    </li>
+    <li>
+      Graph the equation.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          In terms of the visual,
+          our description means that the graph will be a straight line.
+          The fact that "for each increase in \(x\),
+          \(y\) will increase by <em>twice</em> as much" means that
+          proportional
+          changes in \(x\) lead to proportional changes in \(y\), which
+          makes it a straight line.  Since any two points serve to
+          determine a line, we can plot the pair \((0,0)\) and then
+          just one more to be certain of getting the correct line.  Plugging
+          in \(x=1\) yields \(y = 2\cdot 1 = 2\).  So,
+          you could plot \((1, 2)\), and then trace the straight line
+
+          <div style="text-align:center">
+            <img src="{{ url_for('static', filename='images/simple_graphing/line3.png') }}"
+              width="40%">
+          </div>
+
+          A good observation to make here is that the graph looks the same
+          as that of \(y = x\) only "shifted up one unit."
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
 
 <script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
 
