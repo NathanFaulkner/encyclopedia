@@ -2,15 +2,17 @@
   {% set svg_id = 'svg_id' %}
 {% endif %}
 
-<svg id="{{ svg_id }}"" height="{{ parameters['svg_y_length'] }}" width="{{ parameters['svg_x_length'] }}" id="svg">
+<svg id="{{ svg_id }}"
+  height="{{ parameters['svg_y_length'] }}"
+  width="{{ parameters['svg_x_length'] }}">
   <rect height="{{ parameters['svg_y_length'] }}" width="{{ parameters['svg_x_length'] }}"
     style="fill:none; stroke:black; stroke-width:4;" />
   <!-- <line x1="-100" y1="200" x2="800" y2="200" style="stroke:purple; stroke-width:4"> -->
 </svg>
 
-<p>
+<!-- <p>
 \(x\) = <span id="{{ svg_id }}_x"></span>, \(y\) = <span id="{{ svg_id }}_y"></span>
-</p>
+</p> -->
 
 
 <script>
