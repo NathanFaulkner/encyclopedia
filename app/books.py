@@ -313,14 +313,21 @@ functioncomposition = Section('functioncomposition', "Composition of Functions",
 functioncomposition.add_to_questions('function_composition')
 
 simplegraphing = Section('simplegraphing', "Simple Graphing", '/sections/simple_graphing')
-simplegraphing.add_to_questions('graph_to_slope_intercept_form',
+simplegraphing.add_to_questions('graph_slope_intercept_from_english',
+'                                   graph_to_slope_intercept_form',
                                     'graph_slope_intercept')
+
+pointslopeform = Section('pointslopeform', "Graph from Point Slope Form", '/sections/point-slope-form')
+pointslopeform.add_to_questions('graph_point_slope_from_english',
+                                'graph_point_slope',
+                                'description_to_point_slope_form',
+                                'graph_to_point_slope_form')
+
+#########
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
-graphpointslope = Section('graphpointslope', "Graph from Point Slope Form", '/sections/graph-point-slope')
-graphpointslope.add_to_questions('graph_slope_intercept',
-                                    'graph_to_slope_intercept_form')
+
 
 factoring1 = Section('factoring1', "Factoring - Level 1", '/sections/factoring-coeff-of-one')
 # factoring1.due_date = datetime.datetime(2020, 8, 28)
@@ -349,11 +356,11 @@ functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coor
                                     [basicfunctionsinatableandwords,
                                     functionnotation,
                                     functioncomposition,
-                                    simplegraphing])
+                                    simplegraphing,
+                                    pointslopeform])
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
 
-linear_functions = Division('chapter', 'Linear Functions', [graphpointslope])
-linear_functions.set_frontpage(linearfunctions_intro)
+
 polynomials = Division('chapter', 'Polynomials', [factoring1, quadraticpattern])
 #polynomials.intro = polynomials_intro
 polynomials.set_frontpage(polynomials_intro)

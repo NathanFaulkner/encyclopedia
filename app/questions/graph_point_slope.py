@@ -9,7 +9,9 @@ from sympy import *
 import numpy as np
 import json
 
-from app.questions import Question, latex_print, random_non_zero_integer
+from app.questions import (Question,
+                            latex_print,
+                            random_non_zero_integer,)
 from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 
@@ -25,12 +27,12 @@ from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 prob_type = 'graph'
 
-class GraphSlopeIntercept(Question):
+class GraphPointSlope(Question):
     """
     The given is of the form
 
     \\[
-    y = Rational(p,q)x + b
+    y = Rational(p,q)(x - x0) + y0
     \\]
 
     The student is expected to graph by plotting points.  Two is sufficient.
@@ -44,16 +46,23 @@ class GraphSlopeIntercept(Question):
         if 'p' in kwargs:
             self.p = kwargs['p']
         else:
-            self.p = random.randint(-5,5)
+            self.p = random_non_zero_integer(-5,5)
         if 'q' in kwargs:
             self.q = kwargs['q']
         else:
             self.q = random_non_zero_integer(-5,5)
+        while abs(self.p/self.q) == 1:
+            self.p = random.randint(-5,5)
+            self.q = random_non_zero_integer(-5,5)
         self.m = Rational(self.p, self.q)
-        if 'b' in kwargs:
-            self.b = kwargs['b']
+        if 'x0' in kwargs:
+            self.x0 = kwargs['x0']
         else:
-            self.b = random.randint(-7,7)
+            self.x0 = random_non_zero_integer(-5,5)
+        if 'y0' in kwargs:
+            self.y0 = kwargs['y0']
+        else:
+            self.y0 = random.randint(-5,5)
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:
@@ -63,20 +72,38 @@ class GraphSlopeIntercept(Question):
 
         # self.given = self.problem['given']
         # self.answer = self.problem['answer']
+        term = factor(self.m*(self.x - self.x0))
+        if self.y0 > 0:
+            fmt_y0 = latex(self.y0)
+            sign = '+'
+        elif self.y0 == 0:
+            fmt_y0 = ''
+            sign = ''
+        else:
+            fmt_y0 = latex(abs(self.y0))
+            sign = '-'
+        # print(term)
+        try:
+            self.format_given = f"""
+            \\[
+             y = {latex(term.args[0])} ({latex(term.args[1])}) {sign} {fmt_y0}
+            \\]
+            """
+        except IndexError:
+            self.format_given = f"""
+            \\[
+             y = ({latex(term)}) {sign} {fmt_y0}
+            \\]
+            """
 
-        self.given_latex = '\\(y = ' + latex(self.given) + '\\)'
-        self.given_latex_display = '\\[y = ' + latex(self.given) + '\\]'
-        self.format_given_for_tex = f"""
-        {self.prompt_single}
 
-        {self.given_latex_display}
-        """
+
         self.format_answer = 'To be coded'
         # self.answer_latex = latex_print(self.answer)
         # self.answer_latex_display = latex_print(self.answer, display=True)
 
         self.format_given_for_tex = f"""{self.prompt_single}
-            {self.given_latex}
+            {self.format_given}
 
         \\begin{{flishright}}
         \\includegraphics[scale=0.6]{{blank}}
@@ -84,8 +111,8 @@ class GraphSlopeIntercept(Question):
 
         """
 
-    name = 'Graph from Slope Intercept Form'
-    module_name = 'graph_slope_intercept'
+    name = 'Graph from Point Slope Form'
+    module_name = 'graph_point_slope'
 
     prompt_single = """Graph the given equation by plotting at least two points
 that satisfy the equation."""
@@ -98,17 +125,18 @@ that satisfy the equation."""
     def genproblem(self):
         out = {}
         x = self.x
-        b = self.b
+        b = self.y0
+        h = self.x0
         # p = self.p
         # q = self.q
         m = self.m
-        expr = m*x + b
-        self.as_lambda = lambda x: m*x + b
-        self.given = expr
+        self.as_lambda = lambda x: m*(x - h) + b
+        f = self.as_lambda
+        self.given = factor(m*(x-h)) + b
         #print('3rd step: So far its ', expr)
-        self.answer = expr
+        self.answer = f(x)
 
-    def get_svg_data(self, window):
+    def get_svg_data(self, window=[-10,10]):
         x_min = window[0]
         x_max = window[1]
         x_points = np.array([x_min, x_max])
@@ -143,4 +171,4 @@ that satisfy the equation."""
 
 
 
-Question_Class = GraphSlopeIntercept
+Question_Class = GraphPointSlope

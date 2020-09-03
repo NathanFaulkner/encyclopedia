@@ -25,9 +25,9 @@ from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 prob_type = 'graph'
 
-class GraphSlopeIntercept(Question):
+class GraphSlopeInterceptFromEnglish(Question):
     """
-    The given is of the form
+    The given is slope and y-intercept of
 
     \\[
     y = Rational(p,q)x + b
@@ -61,36 +61,38 @@ class GraphSlopeIntercept(Question):
 
         self.genproblem()
 
-        # self.given = self.problem['given']
-        # self.answer = self.problem['answer']
+        self.format_given = """
+        <blockquote>
+            The line that has \\(y\\)-intercept of {b}
+            and has slope of \\( m = {m} \\)
+        </blockquote>
+        """.format(b=latex(self.b),
+                    m=latex(self.m))
 
-        self.given_latex = '\\(y = ' + latex(self.given) + '\\)'
-        self.given_latex_display = '\\[y = ' + latex(self.given) + '\\]'
-        self.format_given_for_tex = f"""
-        {self.prompt_single}
 
-        {self.given_latex_display}
-        """
         self.format_answer = 'To be coded'
         # self.answer_latex = latex_print(self.answer)
         # self.answer_latex_display = latex_print(self.answer, display=True)
 
-        self.format_given_for_tex = f"""{self.prompt_single}
-            {self.given_latex}
 
-        \\begin{{flishright}}
+        self.prompt_single = """Graph the line described by plotting at least
+        two points."""
+        self.prompt_multiple = """This needs to be rethought."""
+
+        self.format_given_for_tex = f"""{self.prompt_single}
+            {self.format_given}
+
+        \\begin{{flushright}}
         \\includegraphics[scale=0.6]{{blank}}
         \\end{{flushright}}
 
         """
 
-    name = 'Graph from Slope Intercept Form'
-    module_name = 'graph_slope_intercept'
 
-    prompt_single = """Graph the given equation by plotting at least two points
-that satisfy the equation."""
-    prompt_multiple = """Graph each of the following equations by plotting at least two points
-that satisfy the equation."""
+    name = 'Graph from Slope and Intercept'
+    module_name = 'graph_slope_intercept_from_english'
+
+
 
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
@@ -143,4 +145,4 @@ that satisfy the equation."""
 
 
 
-Question_Class = GraphSlopeIntercept
+Question_Class = GraphSlopeInterceptFromEnglish

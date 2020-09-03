@@ -173,7 +173,7 @@ class PlantProblemComputation(Question):
 
     def format_useranswer(self, user_answer, display=False):
         if len(user_answer.split(' ')) == 1:
-            return false
+            return user_answer
         else:
             user_answer, user_units = user_answer.split(' ')
         user_answer = user_answer.replace('^', '**')
@@ -184,7 +184,9 @@ class PlantProblemComputation(Question):
     def validator(self, user_answer):
         try:
             if len(user_answer.split(' ')) == 1:
-                user_units = None
+                user_answer = user_answer.replace('^', '**')
+                user_answer = parse_expr(user_answer, transformations=transformations)
+                float(user_answer)
             else:
                 user_answer, user_units = user_answer.split(' ')
             user_answer = user_answer.replace('^', '**')

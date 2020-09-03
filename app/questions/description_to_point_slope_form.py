@@ -27,7 +27,7 @@ from flask import render_template
 
 prob_type = 'math_blank'
 
-class GraphToSlopeIntercept(Question):
+class DescriptionToPointSlope(Question):
     """
     The given is a graph of
 
@@ -46,16 +46,23 @@ class GraphToSlopeIntercept(Question):
         if 'p' in kwargs:
             self.p = kwargs['p']
         else:
-            self.p = random.randint(-5,5)
+            self.p = random_non_zero_integer(-5,5)
         if 'q' in kwargs:
             self.q = kwargs['q']
         else:
-            self.q = random.randint(1,5)
+            self.q = random_non_zero_integer(-5,5)
+        while abs(self.p/self.q) == 1:
+            self.p = random.randint(-5,5)
+            self.q = random_non_zero_integer(-5,5)
         self.m = Rational(self.p, self.q)
-        if 'b' in kwargs:
-            self.b = kwargs['b']
+        if 'x0' in kwargs:
+            self.x0 = kwargs['x0']
         else:
-            self.b = random.randint(-5,5)
+            self.x0 = random_non_zero_integer(-5,5)
+        if 'y0' in kwargs:
+            self.y0 = kwargs['y0']
+        else:
+            self.y0 = random.randint(-5,5)
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:
@@ -63,51 +70,53 @@ class GraphToSlopeIntercept(Question):
 
         self.genproblem()
 
-        # self.given = self.problem['given']
-        # self.answer = self.problem['answer']
+        self.format_given = """
+        <blockquote>
+            The line that passes through the point \\( ({x0}, {y0}) \\)
+            and has slope of \\( m = {m} \\)
+        </blockquote>
+        """.format(x0=latex(self.x0),
+                    y0=latex(self.y0),
+                    m=latex(self.m))
 
-        points = [[0, self.as_lambda(0)], [self.q, self.as_lambda(self.q)]]
-        poly_points = self.get_svg_data([-10,10])
 
-        self.format_given = f"""
-        <div style="text-align:center">
-            {render_template('_static_graph.html',
-                            poly_points=poly_points,
-                            parameters=get_parameters(),
-                            points=points)}
-        </div>
-        """
-
-        self.format_given_for_tex = f"""To be coded
-        """
-        
         self.format_answer = f'\( y = {latex(self.answer)}\)'
         # self.answer_latex = latex_print(self.answer)
         # self.answer_latex_display = latex_print(self.answer, display=True)
 
-    name = 'Graph from Point Slope Form'
-    module_name = 'graph_point_slope'
 
-    prompt_single = """Graph the given equation by plotting at least two points
-that satisfy the equation."""
-    prompt_multiple = """Graph each of the following equations by plotting at least two points
-that satisfy the equation."""
+        self.prompt_single =  """Give an equation for the line described as follows."""
+        self.prompt_multiple = """Give an equation for each of the lines described below."""
+
+        self.format_given_for_tex = """{prompt}
+            \\begin{{center}}
+                The line that passes through the point \\( ({x0}, {y0}) \\)
+                and has slope of \\( m = {m} \\)
+            \\end{{center}}
+            """.format(prompt=self.prompt_single,
+                        x0=latex(self.x0),
+                        y0=latex(self.y0),
+                        m=latex(self.m))
+
+    name = 'Point Slope Form from Description'
+    module_name = 'description_to_point_slope_form'
+
 
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
     def genproblem(self):
-        out = {}
         x = self.x
-        b = self.b
+        b = self.y0
+        h = self.x0
         # p = self.p
         # q = self.q
         m = self.m
-        expr = m*x + b
-        self.as_lambda = lambda x: m*x + b
-        self.given = expr
+        self.as_lambda = lambda x: m*(x - h) + b
+        f = self.as_lambda
+        self.given = factor(m*(x-h)) + b
         #print('3rd step: So far its ', expr)
-        self.answer = expr
+        self.answer = f(x)
 
     def get_svg_data(self, window):
         x_min = window[0]
@@ -164,4 +173,4 @@ that satisfy the equation."""
 
 
 
-Question_Class = GraphToSlopeIntercept
+Question_Class = DescriptionToPointSlope

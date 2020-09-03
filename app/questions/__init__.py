@@ -4,7 +4,6 @@ import random
 from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 __all__ = ['quadratic_pattern',
-            'graph_slope_intercept',
             'solve_for_x',
             'linear_inequality',
             'graph_of_linear_inequality',
@@ -23,7 +22,13 @@ __all__ = ['quadratic_pattern',
             'function_from_set_notation',
             'function_notation',
             'function_composition',
-            'graph_to_slope_intercept_form']
+            'graph_slope_intercept',
+            'graph_to_slope_intercept_form',
+            'graph_slope_intercept_from_english',
+            'graph_point_slope',
+            'graph_point_slope_from_english',
+            'description_to_point_slope_form',
+            'graph_to_point_slope_form']
 
 class Question():
     pass
