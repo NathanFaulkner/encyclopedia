@@ -1,8 +1,10 @@
 from sympy import *
 import random
 
+from app.interpolator import cart_x_to_svg, cart_y_to_svg
+
 __all__ = ['quadratic_pattern',
-            'graph_point_slope',
+            'graph_slope_intercept',
             'solve_for_x',
             'linear_inequality',
             'graph_of_linear_inequality',
@@ -20,7 +22,8 @@ __all__ = ['quadratic_pattern',
             'generic_table', 'generic_table_computation',
             'function_from_set_notation',
             'function_notation',
-            'function_composition']
+            'function_composition',
+            'graph_to_slope_intercept_form']
 
 class Question():
     pass
@@ -130,3 +133,13 @@ class RandomAbsValueFunction():
             self.k = random.randint(-5,5)
 
         self.f = lambda x: self.a*abs(x - self.h) + self.k
+
+def poly_points_from_nparrays(x, y):
+    x_points = cart_x_to_svg(x)
+    y_points = cart_y_to_svg(y)
+    i = 0
+    out = ""
+    while i < len(x_points):
+        out += f"{x_points[i]}, {y_points[i]} "
+        i += 1
+    return out

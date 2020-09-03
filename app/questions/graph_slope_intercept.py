@@ -30,7 +30,7 @@ class GraphPointSlope(Question):
     The given is of the form
 
     \\[
-    y = mx + b
+    y = Rational(p,q)x + b
     \\]
 
     The student is expected to graph by plotting points.  Two is sufficient.
@@ -74,6 +74,15 @@ class GraphPointSlope(Question):
         self.format_answer = 'To be coded'
         # self.answer_latex = latex_print(self.answer)
         # self.answer_latex_display = latex_print(self.answer, display=True)
+
+        self.format_given_for_tex = f"""{self.prompt_single}
+            {self.given_latex}
+
+        \\begin{{flishright}}
+        \\includegraphics[scale=0.6]{{blank}}
+        \\end{{flushright}}
+
+        """
 
     name = 'Graph from Point Slope Form'
     module_name = 'graph_point_slope'

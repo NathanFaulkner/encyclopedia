@@ -233,7 +233,7 @@
 </div>
 {% endif %}
 
-{% if request.method == 'POST' and form.validate_on_submit() %}
+{% if request.method == 'POST' and form.validate_on_submit() and (not (whether_graph and points == []))%}
 <div class="exercise" style="float: left; width: 100%">
   <table>
     <tr>

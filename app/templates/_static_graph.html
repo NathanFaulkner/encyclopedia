@@ -1,0 +1,266 @@
+{% if not svg_id %}
+  {% set svg_id = 'svg_id' %}
+{% endif %}
+
+<svg id="{{ svg_id }}"" height="{{ parameters['svg_y_length'] }}" width="{{ parameters['svg_x_length'] }}" id="svg">
+  <rect height="{{ parameters['svg_y_length'] }}" width="{{ parameters['svg_x_length'] }}"
+    style="fill:none; stroke:black; stroke-width:4;" />
+  <!-- <line x1="-100" y1="200" x2="800" y2="200" style="stroke:purple; stroke-width:4"> -->
+</svg>
+
+<p>
+\(x\) = <span id="{{ svg_id }}_x"></span>, \(y\) = <span id="{{ svg_id }}_y"></span>
+</p>
+
+
+<script>
+  var svg = document.getElementById("{{ svg_id }}");
+
+  // Get parameters of graph from flask route (height and width in terms of cartesian and svg, etc.)
+  {% if parameters %}
+    var parameters = {};
+    {% for key in parameters %}
+    parameters.{{ key }} = {{ parameters[key] }};
+    // console.log(parameters.{{ key }})
+    {% endfor %}
+  {% endif %}
+  // parameters = JSON.parse(parameters);
+
+
+  // Drawing the gridlines
+  for (i=1; i < 20; i++) {
+    var vertLine = document.createElementNS("http://www.w3.org/2000/svg",
+      'line');
+    var horizLine = document.createElementNS("http://www.w3.org/2000/svg",
+      'line');
+    vertLine.setAttribute("x1", parameters.svg_x_length/parameters.cart_x_length*i);
+    vertLine.setAttribute("y1", 0);
+    vertLine.setAttribute("x2", parameters.svg_x_length/parameters.cart_x_length*i);
+    vertLine.setAttribute("y2", parameters.svg_y_length);
+    vertLine.style.stroke = "#000";
+    horizLine.setAttribute("x1", 0);
+    horizLine.setAttribute("y1", parameters.svg_y_length/parameters.cart_y_length*i);
+    horizLine.setAttribute("x2", parameters.svg_x_length);
+    horizLine.setAttribute("y2", parameters.svg_y_length/parameters.cart_y_length*i);
+    horizLine.style.stroke = "#000";
+    svg.appendChild(vertLine);
+    svg.appendChild(horizLine);
+  }
+
+  // Drawing the axes
+  var vAxis = document.createElementNS("http://www.w3.org/2000/svg",
+    'line');
+  var hAxis = document.createElementNS("http://www.w3.org/2000/svg",
+    'line');
+  vAxis.setAttribute("x1", parameters.svg_x_length/2);
+  vAxis.setAttribute("y1", 0);
+  vAxis.setAttribute("x2", parameters.svg_x_length/2);
+  vAxis.setAttribute("y2", parameters.svg_y_length);
+  vAxis.style.stroke = "#000";
+  vAxis.style.opacity = "1";
+  vAxis.style.strokeWidth = "4";
+  svg.appendChild(vAxis);
+  hAxis.setAttribute("x1", 0);
+  hAxis.setAttribute("y1", parameters.svg_y_length/2);
+  hAxis.setAttribute("x2", parameters.svg_x_length);
+  hAxis.setAttribute("y2", parameters.svg_y_length/2);
+  hAxis.style.stroke = "#000";
+  hAxis.style.opacity = "1";
+  hAxis.style.strokeWidth = "4";
+  svg.appendChild(hAxis);
+
+  // var testPoint = document.createElementNS("http://www.w3.org/2000/svg",
+  //   'circle');
+  // testPoint.setAttribute("cx", 50/3);
+  // testPoint.setAttribute("cy", 50/3);
+  // testPoint.setAttribute("r", 3);
+  // testPoint.style.stroke = "none";
+  // testPoint.style.fill = "red";
+  // svg.appendChild(testPoint);
+
+  // Responding to user's clicks on graph -- rounded to cartesian grid points
+  var points = [];
+
+
+
+  var pt = svg.createSVGPoint();
+
+  function cursorPoint(evt) {
+    pt.x = evt.clientX;
+    pt.y = evt.clientY;
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
+  }
+
+  function svg_coords_to_cart(pair) {
+    var x; var y; var svg_x; var svg_y;
+    [svg_x, svg_y] = pair;
+    x = parameters.cart_x_min + svg_x/parameters.svg_x_length*parameters.cart_x_length;
+    y = parameters.cart_y_max - svg_y/parameters.svg_y_length*parameters.cart_y_length;
+    return [x, y];
+  }
+
+function cart_coords_to_svg(pair) {
+    x = pair[0];
+    y = pair[1];
+    svg_x = (x-parameters.cart_x_min)*(parameters.svg_x_length/parameters.cart_x_length);
+    svg_y = (parameters.cart_y_max - y)*(parameters.svg_y_length/parameters.cart_y_length);
+    return [svg_x, svg_y]
+  }
+
+function frac_str_to_float(frac_str) {
+  var numer, denom;
+  var splat = frac_str.split('/');
+  if (splat.length == 1) {
+    numer = splat[0];
+    denom = 1;
+  } else {
+  [numer, denom] = splat;
+  }
+  return numer / denom;
+}
+
+function str_list_to_list_of_floats(str_list) {
+    a = str_list.replace('[', '');
+    a = a.replace(']', '');
+    a = str_list.replace('(', '');
+    a = a.replace(')', '');
+    a = a.split(',');
+    var i;
+    for (i=0; i < a.length; i++) {
+      a[i] = frac_str_to_float(a[i]);
+    }
+    return a
+  }
+
+  // Totally auxiliary -- sad necessity!
+  function searchForArrayInArray(needle, haystack) {
+    // console.log('search called ', needle, haystack);
+    var i, j, current;
+    for (i=0; i < haystack.length; ++i) {
+      if (needle.length === haystack[i].length) {
+        current = haystack[i];
+        for (j=0; j < needle.length && (needle[j] === current[j]); ++j);
+        if (j ===  needle.length)
+          return i;
+      }
+    }
+    // console.log('came out false');
+    return -1;
+  }
+
+  // Potentiometer
+    svg.addEventListener('mousemove', function(self) {
+      var loc = cursorPoint(self);
+      var x = loc.x;
+      var y = loc.y;
+      [x, y] = svg_coords_to_cart([x,y])
+      x = Number.parseFloat(x).toFixed(0);
+      y = Number.parseFloat(y).toFixed(0);
+      document.getElementById('{{ svg_id }}_x').innerHTML = x;
+      document.getElementById('{{ svg_id }}_y').innerHTML = y;
+    }, false);
+
+function graph_points(cart_pts) {
+  // console.log("this is what it thinks cart_pts is:", cart_pts);
+  var circles = svg.getElementsByTagName("circle");;
+  // console.log('This is what it thinks the circles are before clean sweep: ', circles)
+  var i;
+  for (i = circles.length - 1; i > -1; i--) {
+    var circle = circles[i];
+    circle.parentNode.removeChild(circle);
+    // console.log('Cycle sweeper loop:', i, circle)
+  }
+
+  for (i=0; i < cart_pts.length; i++) {
+    point = cart_coords_to_svg(cart_pts[i]);
+    var x = point[0];
+    var y = point[1];
+    var newElement = document.createElementNS("http://www.w3.org/2000/svg",
+      'circle');
+    newElement.setAttribute("cx", x);
+    newElement.setAttribute("cy", y);
+    newElement.setAttribute("r", 3);
+    newElement.style.stroke = "none";
+    newElement.style.fill = "red";
+    svg.appendChild(newElement);
+  }
+};
+
+  function clear_points() {
+    points = [];
+    // var list_of_graphs = [];
+    // draw_graphs(svg, list_of_graphs);
+    erase_graphs(svg);
+    graph_points(points);
+  }
+
+  function erase_graphs(svg_element) {
+    let svg = svg_element;
+    var the_old_graphs = svg.getElementsByTagName("polyline");
+    // console.log('the_graphs[0]', the_graphs[0]);
+    if (the_old_graphs) {
+      var k = 0;
+      var old_graph;
+      var l = the_old_graphs.length;
+      for (k=0; k < l; k++) {
+        old_graph = the_old_graphs[l - 1 - k];
+        old_graph.parentNode.removeChild(old_graph);
+      }
+    }
+  }
+
+  function draw_graph(svg_element, graph_info, color) {
+    let svg = svg_element;
+    var graph, obj;
+    graph = document.createElementNS("http://www.w3.org/2000/svg",
+              graph_info.shape);
+    obj = graph_info.data;
+    Object.keys(obj).forEach( (key) => {
+      graph.setAttribute(key, obj[key]);
+      // console.log(key + obj[key]);
+    });
+    graph.style.stroke = color;
+    graph.style.strokeWidth = "4";
+    graph.style.opacity = "0.5";
+    graph.style.fill = "none";
+    graph.setAttribute("id", "graph" + i);
+    svg.appendChild(graph);
+  }
+
+  function draw_graphs(svg_element, list_of_graphs, color) {
+    let svg = svg_element;
+    // erase_graphs(svg);
+    var i, graph_info, graph, obj;
+    for (i=0; i < list_of_graphs.length; i++) {
+      draw_graph(svg, list_of_graphs[i], color);
+      // graph_info = list_of_graphs[i];
+      // graph = document.createElementNS("http://www.w3.org/2000/svg",
+      //           graph_info.shape);
+      // obj = graph_info.data;
+      // Object.keys(obj).forEach( (key) => {
+      //   graph.setAttribute(key, obj[key]);
+      //   // console.log(key + obj[key]);
+      // });
+      // graph.style.stroke = color;
+      // graph.style.strokeWidth = "4";
+      // graph.style.opacity = "0.5";
+      // graph.style.fill = "none";
+      // graph.setAttribute("id", "graph" + i);
+      // svg.appendChild(graph);
+    }
+  }
+
+
+
+
+  graph_info = {"shape": "polyline", "data": {"points" : "{{ poly_points|safe }}"}  }
+  draw_graph(svg, graph_info, "blue");
+  points = {{ points|safe }}
+  graph_points(points);
+</script>
+
+<div id="result"></div>
+
+<div id="submit_result"></div>
+
+<p id="submit_feedback"></p>

@@ -284,7 +284,7 @@
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          When \(x=0\), \(\y = 0 + 1 = 1\).  Also, for each increase in \(x\),
+          When \(x=0\), \(y = 0 + 1 = 1\).  Also, for each increase in \(x\),
           \(y\) will increase by the same amount.
         </div>
       </div>
@@ -305,7 +305,8 @@
           just one more to be certain of getting the correct line.
           Plugging
           in \(x=1\) yields \(y = 1 + 1 = 2\). So,
-          you could plot \((1, 2)\), and then trace the straight line
+          you could plot \((1, 2)\), and then trace the straight line that
+          passes through those points:
 
           <div style="text-align:center">
             <img src="{{ url_for('static', filename='images/simple_graphing/line2.png') }}"
@@ -367,7 +368,7 @@
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          When \(x=0\), \(\y = 2 \cdot 0 = 0\).  Also, for each increase in \(x\),
+          When \(x=0\), \(y = 2 \cdot 0 = 0\).  Also, for each increase in \(x\),
           \(y\) will increase by <em>twice</em> as much.
         </div>
       </div>
@@ -387,21 +388,534 @@
           determine a line, we can plot the pair \((0,0)\) and then
           just one more to be certain of getting the correct line.  Plugging
           in \(x=1\) yields \(y = 2\cdot 1 = 2\).  So,
-          you could plot \((1, 2)\), and then trace the straight line
+          you could plot \((1, 2)\), and then trace the straight line that
+          passes through those points:
 
           <div style="text-align:center">
             <img src="{{ url_for('static', filename='images/simple_graphing/line3.png') }}"
               width="40%">
           </div>
-
-          A good observation to make here is that the graph looks the same
-          as that of \(y = x\) only "shifted up one unit."
         </div>
       </div>
     </li>
   </ol>
 </div>
 </p>
+
+<p>
+  There is some vocabulary commonly associated with lines that is starting to be
+  of use.  It has to do describing how \(y\) changes as \(x\) increases.
+  In the last example, we noted that "for every increase of 1 in \(x\),
+  there is an increase of 2 in \(y\)".  On the graph, this resulted in
+  a "steeper" graph, did it not?  Thinking of the "steepness"&mdash;imagining
+  that one is climbing the graph like a hiker&mdash;these degree of steepness
+  is often called "slope".  Specifically, we describe the slope with a numerical&mdash;2
+  in the last case!  In short, whatever you say the \(y\) increases by when
+  \(x\) increases by 1 is the slope.  When you are looking at the graph, the
+  slope is therefore how far the graph "rises" when you "run" (to the <em>right</em>)
+  one unit in the \(x\) direction.  Let's come back to that thought after the
+  next example.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+    We will graph this equation:
+    \[
+      y = \frac{3}{2}x
+    \]
+  </p>
+  <ol>
+    <li>
+      Think about the English descriptions for a relationship between variables
+      like those we gave in the section on developing
+      <a href="{{ url_for('section', section_name='basicfunctionsinatableandwords') }}">
+        formulas from tables.
+      </a>
+      Give an English description for how \(y\) is related to \(x\)&mdash;being
+      sure to give enough detail that someone could reconstruct this
+      equation based only your description.  And think
+      about how your description will be reflected in the graph!
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          When \(x=0\), \(y = \frac{3}{2} \cdot 0 = 0\).  Also, for each increase in \(x\),
+          \(y\) will increase by \(\frac{3}{2} = 1.5\).  Since that's a little awkward,
+          note that it is equivalent to say that for every increase of 2 in \(x\), \(y\)
+          will increase by 3.  (After all, if you increase by 1.5 twice, then you end
+          up increasing by 3.)
+        </div>
+      </div>
+    </li>
+    <li>
+      Graph the equation.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          In terms of the visual,
+          our description means that the graph will be a straight line.
+          The fact that "for each increase in \(x\),
+          \(y\) will increase by <em>1.5</em> as much" means that
+          proportional
+          changes in \(x\) lead to proportional changes in \(y\), which
+          makes it a straight line.  Since any two points serve to
+          determine a line, we can plot the pair \((0,0)\) and then
+          just one more to be certain of getting the correct line.  Plugging
+          in \(x=1\) yields \(y = \frac{3}{2}\cdot 1 = \frac{3}{2}\),
+          which isn't so convenient to plot.  I'd prefer not
+          to deal with a fraction when I go to draw on a graph (but
+          rather to hit points that lie exactly on "grid lines"),
+          so I can choose to try another value for
+          \(x\).  The trick is to pick an \(x\) that will "knock
+          out" the fraction.  Put another way, what \(x\) will kill off
+          the denominator?  How about \(x = 2\)!.  Indeed, when
+          \(x = 2\),
+          \[
+            y = \frac{3}{2} \cdot 2 = 3
+          \]
+          So,
+          you could plot \((2, 3)\), and then trace the straight line that
+          passes through those points:
+
+          <div style="text-align:center">
+            <img src="{{ url_for('static', filename='images/simple_graphing/line4.png') }}"
+              width="40%">
+          </div>
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<p>
+  Now, back to the concept of "slope".  We discussed above the fact that
+  the "slope of a line" can be understood as the amount that \(y\)
+  increases by for each increase of 1 in \(x\).  In the past example,
+  we had that the slope was \(\frac{3}{2}\).  We also realized
+  that we could instead express this (constant) slope in a different fashion:
+  instead of saying that \(y\) increases by \(\frac{3}{2} = 1.5\) for every increase of 1 in
+  \(x\), it is equivalent to say that \(y\) increases by 3 for every increase
+  of 2 in  \(x\).  Therefore, we can also remark that the numerator
+  of the slope tells you what \(y\) "rises" by while \(x\) "runs"
+  (specifically, to the right) by 2, which appears in the denominator.
+  For that reason, slope is often referred to (by math teachers)
+  as "rise over run".  I will warn you, though, that you must
+  independently remember that that "run" is "to the right".
+</p>
+
+<p>
+  Now, the astute reader might have a follow-up question in regard to my
+  previous paragraph.  What about the example of
+  \[
+    y = 2x
+  \]
+  We discussed above that slope of the line with this equation is 2.
+  That is, for every increase of 1 in \(x\), \(y\) increases by 2.
+  But in what sense is the number 2 like "rise over run"?  Where
+  is the numerator and denominator there?  To see that the "rise
+  over run" slogan still works, you would just need to rewrite
+  2 as a fraction:
+  \[
+    2 = \frac{2}{1}
+  \]
+  So, yes, it still is "rise over run".
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+    We will graph this equation:
+    \[
+      y = -\frac{3}{2}x
+    \]
+  </p>
+  <ol>
+    <li>
+      Think about the English descriptions for a relationship between variables
+      like those we gave in the section on developing
+      <a href="{{ url_for('section', section_name='basicfunctionsinatableandwords') }}">
+        formulas from tables.
+      </a>
+      Give an English description for how \(y\) is related to \(x\)&mdash;being
+      sure to give enough detail that someone could reconstruct this
+      equation based only your description.  And think
+      about how your description will be reflected in the graph!
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          When \(x=0\), \(y = -\frac{3}{2} \cdot 0 = 0\).  Also, for each increase in \(x\),
+          \(y\) will <em>decrease</em> by \(\frac{3}{2} = 1.5\).  Since that's a little awkward,
+          note that it is equivalent to say that for every decrease of 2 in \(x\), \(y\)
+          will decrease by 3.  (After all, if you decrease by 1.5 twice, then you end
+          up decreasing by 3.)
+        </div>
+      </div>
+    </li>
+    <li>
+      Graph the equation.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          In terms of the visual,
+          our description means that the graph will be a straight line.
+          The fact that "for each increase in \(x\),
+          \(y\) will decrease by <em>1.5</em> as much" means that
+          proportional
+          changes in \(x\) lead to proportional changes in \(y\), which
+          makes it a straight line.  Since any two points serve to
+          determine a line, we can plot the pair \((0,0)\) and then
+          just one more to be certain of getting the correct line.  Plugging
+          in \(x=1\) yields \(y = -\frac{3}{2}\cdot 1 = -\frac{3}{2}\),
+          which isn't so convenient to plot.  I'd prefer not
+          to deal with a fraction when I go to draw on a graph (but
+          rather to hit points that lie exactly on "grid lines"),
+          so I can choose to try another value for
+          \(x\).  The trick is to pick an \(x\) that will "knock
+          out" the fraction.  Put another way, what \(x\) will kill off
+          the denominator?  How about \(x = 2\)!.  Indeed, when
+          \(x = 2\),
+          \[
+            y = -\frac{3}{2} \cdot 2 = -3
+          \]
+          So,
+          you could plot \((2, -3)\), and then trace the straight line that
+          passes through those points:
+
+          <div style="text-align:center">
+            <img src="{{ url_for('static', filename='images/simple_graphing/line5.png') }}"
+              width="40%">
+          </div>
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<p>
+  We now tweak the problems a little further, by combining two ideas seen above.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+  <p>
+    We will graph this equation:
+    \[
+      y = -\frac{3}{2}x + 1
+    \]
+  </p>
+  <ol>
+    <li>
+      Think about the English descriptions for a relationship between variables
+      like those we gave in the section on developing
+      <a href="{{ url_for('section', section_name='basicfunctionsinatableandwords') }}">
+        formulas from tables.
+      </a>
+      Give an English description for how \(y\) is related to \(x\)&mdash;being
+      sure to give enough detail that someone could reconstruct this
+      equation based only your description.  And think
+      about how your description will be reflected in the graph!
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          When \(x=0\),
+          \[
+            y = -\frac{3}{2} \cdot 0 + 1 = 0 + 1 = 1
+          \]
+          Also, for each increase in \(x\),
+          \(y\) will decrease by \(\frac{3}{2} = 1.5\).  Since that's a little awkward,
+          note that it is equivalent to say that for every decrease of 2 in \(x\), \(y\)
+          will decrease by 3.  (After all, if you decrease by 1.5 twice, then you end
+          up decreasing by 3.)
+        </div>
+      </div>
+    </li>
+    <li>
+      Graph the equation.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          In terms of the visual,
+          our description means that the graph will be a straight line.
+          The fact that "for each increase in \(x\),
+          \(y\) will decrease by <em>1.5</em> as much" means that
+          proportional
+          changes in \(x\) lead to proportional changes in \(y\), which
+          makes it a straight line.  Since any two points serve to
+          determine a line, we can plot the pair \((0,1)\) and then
+          just one more to be certain of getting the correct line.  Plugging
+          in \(x=1\) yields
+          \[
+            y = -\frac{3}{2}\cdot 1 + 1 = -\frac{3}{2} + 1 = -\frac{1}{2}
+          \]
+          which isn't so convenient to plot.  I'd prefer not
+          to deal with a fraction when I go to draw on a graph (but
+          rather to hit points that lie exactly on "grid lines"),
+          so I can choose to try another value for
+          \(x\).  The trick is to pick an \(x\) that will "knock
+          out" the fraction.  Put another way, what \(x\) will kill off
+          the denominator?  How about \(x = 2\)?  Indeed, when
+          \(x = 2\),
+          \[
+            y = -\frac{3}{2} \cdot 2 + 1 = -3 + 1 = -2
+          \]
+          So,
+          you could plot \((2, -2)\), and then trace the straight line that
+          passes through those points:
+
+          <div style="text-align:center">
+            <img src="{{ url_for('static', filename='images/simple_graphing/line6.png') }}"
+              width="40%">
+          </div>
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<p>
+  We have now seen a pretty full variety of examples.  We can now generalize on
+  what we are seeing, and make a final remark on the vocabulary.
+  In the exercises, you will be asked to graph equations&mdash;like those you
+  have just encountered&mdash;that are of the form
+  \[
+    y = mx + b
+  \]
+  You could also write these as
+  \[
+    y = b + mx
+  \]
+  if you so chose.  Since when \(x = 0\) you have
+  \[
+    y = b + m\cdot 0 = b + 0 = b
+  \]
+  you have that the graph passes through the point \((0, b)\).  Since
+  the \(y\)-axis is placed where \(x = 0\), you have that this point
+  represents the unique point at which the graph crosses the \(y\)-axis.
+  Thus, \(b\) is called the \(y\)-intercept.  Further, if you increase
+  \(x\) by 1, you will get that
+  \[
+    y = b + m \cdot 1 = b + m
+  \]
+  Thus, we see that, after starting at \(y = b\), \(y\) increases
+  by \(m\) as \(x\) increases by 1.  With just a little more thought,
+  one can argue that the change in \(y\) is always proportional to
+  the corresponding change in \(x\) and thus we are looking at
+  the equation for a straight line.  The value \(m\) is thus called
+  its "slope".  As mentioned above it is called slope because
+  it measures the steepness of the increase.  Spefically, it tells
+  you how much \(y\) increases (or, decreases, if \(m\) is negative)
+  for each increase of 1 in the \(x\).
+</p>
+
+<p>
+  There is one type of example that we haven't seen yet.  It is actually
+  easier, but it can be confusing if it comes up unexpectedly.  We turn to
+  one now.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+  <p>
+    We will graph this equation:
+    \[
+      y = 5
+    \]
+  </p>
+  <ol>
+    <li>
+      Think about the English descriptions for a relationship between variables
+      like those we gave in the section on developing
+      <a href="{{ url_for('section', section_name='basicfunctionsinatableandwords') }}">
+        formulas from tables.
+      </a>
+      Give an English description for how \(y\) is related to \(x\)&mdash;being
+      sure to give enough detail that someone could reconstruct this
+      equation based only your description.  And think
+      about how your description will be reflected in the graph!
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          When \(x=0\),
+          \[
+            y = 5
+          \]
+          When \(x = 1\),
+          \[
+            y = 5
+          \]
+          And when \(x = 10\),
+          \[
+            y = 5
+          \]
+          Yes, the point is: \(y = 5\) regardless of what \(x\) equals.
+          So, what does this look like?
+        </div>
+      </div>
+    </li>
+    <li>
+      Graph the equation.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          We just need to draw the set of pairs all of whose
+          \(y\)-values are 5.  Or, at least, we need to draw those
+          pairs of that type that actually fall within the viewing window.  Like so:
+
+          <div style="text-align:center">
+            <img src="{{ url_for('static', filename='images/simple_graphing/line7.png') }}"
+              width="40%">
+          </div>
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<p>
+  Now, so far we have seen how to come up with the graph of a certain class of
+  equations.  Now we practice the reverse.  In the next two examples, I give
+  you the graph, and you come up with the equation.
+</p>
+
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+  <p>
+    Find an equation for the given graph:
+
+    <div style="text-align:center">
+    {% set svg_id = 'svg1' %}
+    {% set points = [[0,3], [4, -2]]%}
+    {% set poly_points = '0.0,-96.25 350.0,341.25' %}
+    {% set parameters = {
+        'svg_x_length': 350,
+        'svg_y_length': 350,
+        'cart_x_min': -10,
+        'cart_x_max': 10,
+        'cart_x_length': 20,
+        'cart_y_min': -10,
+        'cart_y_max': 10,
+        'cart_y_length': 20
+      }
+    %}
+    {% include "_static_graph.html" %}
+    </div>
+
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        We can describe this line as follows:
+        <blockquote>
+          When \(x = 0\), \(y = 3\), and for every 4 that \(x\) increases,
+          we see that \(y\) drops by 5.
+        </blockquote>
+       We can get capture
+       the first part of this statement by writing
+       \[
+         y = 3 - \phantom{x}
+       \]
+       and then we can work in the fact that "\(y\) decreases by
+       5 as \(x\) increases by 4" by continuing:
+       \[
+         y = 3 - \frac{5}{4}x
+       \]
+       Have I gone too fast?  To verify what I have written down, note
+       that if you plug in \(x = 0\), you get \(y = 3\), which
+       agrees with the graph.  And if you plug in \(x = 4\), you
+       get
+       \[
+          y = 3 - \frac{5}{4} \cdot 4 = 3 - 5 = -2
+      \]
+      which means the other point on the graph also satisfies our equation.
+      We can reason that the graph our equation must be straight line, so
+      our answer must be correct.
+      </div>
+    </div>
+  </p>
+</div>
+
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+  <p>
+    Find an equation for the given graph:
+
+    <div style="text-align:center">
+      {% set svg_id = 'svg2' %}
+      {% set points = [[0,-2], [1, 0]]%}
+      {% set poly_points = '0.0,560.000000000000 350.0,-140.000000000000 ' %}
+      {% set parameters = {
+          'svg_x_length': 350,
+          'svg_y_length': 350,
+          'cart_x_min': -10,
+          'cart_x_max': 10,
+          'cart_x_length': 20,
+          'cart_y_min': -10,
+          'cart_y_max': 10,
+          'cart_y_length': 20
+        }
+      %}
+      {% include "_static_graph.html" %}
+    </div>
+
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        We can describe this line as follows:
+        <blockquote>
+          When \(x = 0\), \(y = -2\), and for every 1 that \(x\) increases,
+          we see that \(y\) increases by 2.
+        </blockquote>
+       We can get capture
+       the first part of this statement by writing
+       \[
+         y = -2 + \phantom{x}
+       \]
+       and then we can work in the fact that "\(y\) increases by
+       2 as \(x\) increases by 1" by continuing:
+       \[
+         y = -2 + 2x
+       \]
+       To verify what I have written down, note
+       that if you plug in \(x = 0\), you get \(y = -2\), which
+       agrees with the graph.  And if you plug in \(x = 1\), you
+       get
+       \[
+          y = -2 + 2 \cdot 1 = -2 + 2 = 0
+      \]
+      which means the other point on the graph also satisfies our equation.
+      We can reason that the graph our equation must be straight line, so
+      our answer must be correct.
+      </div>
+    </div>
+  </p>
+</div>
 
 <script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
 

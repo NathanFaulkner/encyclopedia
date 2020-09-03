@@ -275,22 +275,25 @@ graphsoflinearinequalities.due_date = datetime.datetime(2020, 8, 29)
 solvingcompoundinequalities = Section('solvingcompoundinequalities', "Solving Compound Inequalities", '/sections/solving-compound-inequalities')
 solvingcompoundinequalities.add_to_questions('compound_linear_inequality')
 solvingcompoundinequalities.add_to_questions('graph_of_compound_linear_inequality')
-solvingcompoundinequalities.due_date = datetime.datetime(2020, 9, 1)
+solvingcompoundinequalities.due_date = datetime.datetime(2020, 9, 2)
 
 # graphsofcompoundinequalities = Section('graphsofcompoundinequalities', "Graphs of Compound Inequalities", '/sections/graphs-of-compound-linear-inequalities')
 intervalnotation = Section('intervalnotation', "Interval Notation", '/sections/interval_notation')
 intervalnotation.add_to_questions('inequality_to_interval_notation',
                                     'interval_to_inequality_notation',
                                     'interval_notation_to_graph')
+intervalnotation.due_date = datetime.datetime(2020, 9, 8)
 
 absolutevalueequations = Section('absolutevalueequations', "Absolute Value Equations", '/sections/absolute-value-equations')
 absolutevalueequations.add_to_questions('absolute_value_equation')
+absolutevalueequations.due_date = datetime.datetime(2020, 9, 10)
 
 absolutevalueinequalities = Section('absolutevalueinequalities', "Absolute Value Inequalities", '/sections/absolute-value-inequalities')
 absolutevalueinequalities.add_to_questions('absolute_value_inequality',
                             'absolute_value_inequality_to_interval_notation',
                             'absolute_value_inequality_to_graph',
                             )
+absolutevalueinequalities.due_date = datetime.datetime(2020, 9, 14)
 
 functionsandthecoordinateplane_intro = Section('functionsandthecoordinateplane_intro', "Functions and the Coordinate Plane", '/sections/functions-and-the-coordinate-plane')
 
@@ -310,12 +313,14 @@ functioncomposition = Section('functioncomposition', "Composition of Functions",
 functioncomposition.add_to_questions('function_composition')
 
 simplegraphing = Section('simplegraphing', "Simple Graphing", '/sections/simple_graphing')
-simplegraphing.add_to_questions('graph_point_slope')
+simplegraphing.add_to_questions('graph_to_slope_intercept_form',
+                                    'graph_slope_intercept')
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
 graphpointslope = Section('graphpointslope', "Graph from Point Slope Form", '/sections/graph-point-slope')
-graphpointslope.add_to_questions('graph_point_slope')
+graphpointslope.add_to_questions('graph_slope_intercept',
+                                    'graph_to_slope_intercept_form')
 
 factoring1 = Section('factoring1', "Factoring - Level 1", '/sections/factoring-coeff-of-one')
 # factoring1.due_date = datetime.datetime(2020, 8, 28)
