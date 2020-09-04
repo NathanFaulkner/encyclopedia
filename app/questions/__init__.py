@@ -28,7 +28,8 @@ __all__ = ['quadratic_pattern',
             'graph_point_slope',
             'graph_point_slope_from_english',
             'description_to_point_slope_form',
-            'graph_to_point_slope_form']
+            'graph_to_point_slope_form',
+            'two_points_to_equation']
 
 class Question():
     pass

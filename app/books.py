@@ -320,8 +320,10 @@ simplegraphing.add_to_questions('graph_slope_intercept_from_english',
 pointslopeform = Section('pointslopeform', "Graph from Point Slope Form", '/sections/point-slope-form')
 pointslopeform.add_to_questions('graph_point_slope_from_english',
                                 'graph_point_slope',
-                                'description_to_point_slope_form',
-                                'graph_to_point_slope_form')
+                                'description_to_point_slope_form')
+graphfromtwopoints = Section('graphfromtwopoints', "Graph from Two Points", '/sections/graph-from-two-points')
+graphfromtwopoints.add_to_questions('graph_to_point_slope_form',
+                                    'two_points_to_equation')
 
 #########
 
@@ -357,7 +359,8 @@ functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coor
                                     functionnotation,
                                     functioncomposition,
                                     simplegraphing,
-                                    pointslopeform])
+                                    pointslopeform,
+                                    graphfromtwopoints])
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
 
 

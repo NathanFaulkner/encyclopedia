@@ -27,7 +27,7 @@ from flask import render_template
 
 prob_type = 'math_blank'
 
-class GraphToPointSlope(Question):
+class TwoPointsToEquation(Question):
     """
     The given is a graph of
 
@@ -43,26 +43,24 @@ class GraphToPointSlope(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        if 'p' in kwargs:
-            self.p = kwargs['p']
-        else:
-            self.p = random_non_zero_integer(-5,5)
-        if 'q' in kwargs:
-            self.q = kwargs['q']
-        else:
-            self.q = random_non_zero_integer(-5,5)
-        while abs(self.p/self.q) == 1:
-            self.p = random.randint(-5,5)
-            self.q = random_non_zero_integer(-5,5)
-        self.m = Rational(self.p, self.q)
         if 'x0' in kwargs:
             self.x0 = kwargs['x0']
         else:
-            self.x0 = random_non_zero_integer(-5,5)
+            self.x0 = random_non_zero_integer(-8,8)
         if 'y0' in kwargs:
             self.y0 = kwargs['y0']
         else:
-            self.y0 = random.randint(-5,5)
+            self.y0 = random.randint(-8, 8)
+        if 'x1' in kwargs:
+            self.x1 = kwargs['x1']
+        else:
+            self.x1 = random_non_zero_integer(-8,8)
+            while self.x1 == self.x0:
+                self.x1 = random_non_zero_integer(-8,8)
+        if 'y1' in kwargs:
+            self.y1 = kwargs['y1']
+        else:
+            self.y1 = random.randint(-8,8)
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:
@@ -70,17 +68,14 @@ class GraphToPointSlope(Question):
 
         self.genproblem()
 
-        points = [[self.x0, self.y0], [self.x0 + self.q, self.as_lambda(self.x0 + self.q)]]
+        points = [[self.x0, self.y0], [self.x1, self.y1]]
         poly_points = self.get_svg_data([-10,10])
 
-        self.format_given = f"""
-        <div style="text-align:center">
-            {render_template('_static_graph.html',
-                            poly_points=poly_points,
-                            parameters=get_parameters(),
-                            points=points)}
-        </div>
-        """
+        self.format_given = """
+        \\[
+            ({x0}, {y0}), ({x1}, {y1})
+        \\]
+        """.format(x0=self.x0, y0=self.y0, x1=self.x1, y1=self.y1)
 
 
         self.format_answer = f'\( y = {latex(self.answer)}\)'
@@ -88,17 +83,20 @@ class GraphToPointSlope(Question):
         # self.answer_latex_display = latex_print(self.answer, display=True)
 
 
-        self.prompt_single =  """Develop an equation for the graphed line."""
-        self.prompt_multiple = """Develop an equation for each of the graphed lines."""
+        self.prompt_single =  """Develop an equation for the line
+        that passes through the given points.
+        """
+        self.prompt_multiple = """For each of the following,
+        develop an equation for the line
+        that passes through the given points."""
 
-        self.format_given_for_tex = """To be coded
-            """.format(prompt=self.prompt_single,
-                        x0=latex(self.x0),
-                        y0=latex(self.y0),
-                        m=latex(self.m))
+        self.format_given_for_tex = f"""
+        {self.prompt_single}
+        {self.format_given}
+        """
 
-    name = 'Point Slope Form from Description'
-    module_name = 'description_to_point_slope_form'
+    name = 'Equation from Two Points'
+    module_name = 'two_points_to_equation'
 
 
 
@@ -110,7 +108,7 @@ class GraphToPointSlope(Question):
         h = self.x0
         # p = self.p
         # q = self.q
-        m = self.m
+        m = Rational(self.y1 - self.y0, self.x1 - self.x0)
         self.as_lambda = lambda x: m*(x - h) + b
         f = self.as_lambda
         self.given = factor(m*(x-h)) + b
@@ -172,4 +170,4 @@ class GraphToPointSlope(Question):
 
 
 
-Question_Class = GraphToPointSlope
+Question_Class = TwoPointsToEquation

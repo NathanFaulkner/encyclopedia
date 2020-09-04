@@ -1,0 +1,258 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  This section is really a direct continuation of the section on
+  <a href="{{ url_for('section', section_name='pointslopeform') }}">
+    point-slope form.
+  </a>
+  Take a look at the following examples.
+</p>
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      Develop an equation for the line graphed below.
+
+      <div style="text-align:center">
+      {% set svg_id = 'svg1' %}
+      {% set points = [[1,5], [3, 2]] %}
+      {% set poly_points = '0.0,-201.250000000000 350.0,323.750000000000 ' %}
+      {% set parameters = {
+          'svg_x_length': 350,
+          'svg_y_length': 350,
+          'cart_x_min': -10,
+          'cart_x_max': 10,
+          'cart_x_length': 20,
+          'cart_y_min': -10,
+          'cart_y_max': 10,
+          'cart_y_length': 20
+        }
+      %}
+      {% include "_static_graph.html" %}
+      </div>
+    </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          One thing we'll need here is the slope.  You can determine that by
+          looking at the "rise over run" from one point to the next.
+          In going from \( (1, 5) \) to \( (3, 2) \) the graph
+          "runs" (to the right!&mdash;always ask what happens
+          to \(y\) as \(x\) moves to the right) 2 units while
+          \(y\) falls 3 units.  You can look at a fall of 3 units
+          as a rise of \(-3\) units.  Thus, the "rise over run"
+          for this case is \( \frac{-3}{2} \).  Next, we can use
+          "point-slope form" to get an equation&mdash;making use
+          of either of the indicated points.  For instance,
+          since the graph passes through \((1, 5)\), I know
+          that an equation of the form
+          \[
+            y = m(x - 1) + 5
+          \]
+          will work.  After all, no matter what \(m\) is, I know
+          that plugging in 1 for \(x\) will yield \(y=5\), which
+          means the pair \((1, 5)\) satisfies the equation.
+          We already found the slope, so we can conclude that
+          a correct equation is
+          \[
+            y = -\frac{3}{2}(x - 1) + 5
+          \]
+          As I already mentioned, the pair \((1, 5)\) clearly satisfy
+          this equation; so the graph of this equation has to pass through
+          \( (1, 5) \).  (Recall that a graph of an equation
+          is just the set of pairs that make the equation true.)
+          But, we can also verify that the graph of our answer also
+          passes through the other given point by plugging in \(x=3\)
+          and verifying that \(y\) comes out to equal 2.  Indeed,
+          when \(x = 3\),
+          \begin{align*}
+            y &= -\frac{3}{2}(x - 1) + 5 \\
+              &= -\frac{3}{2}(3 - 1) + 5 \\
+              &= -\frac{3}{2} \cdot 2 + 5 \\
+              &= -3 + 5 \\
+              &= 2
+          \end{align*}
+          As long as you are convinced (rightly) that the graph
+          of our equation is a line, you see that it must also be
+          the correct answer: because its graph passes through the points
+          indicated in red, and there is only one line that passes through
+          any pair of points.
+        </div>
+      </div>
+  </div>
+</p>
+
+<p>
+  Now, we just consider the same type of question delivered in a slightly
+  different way.
+</p>
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      Develop an equation for the line that passes through the given points:
+      \[
+        (-3, 4), (6, -5)
+      \]
+    </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          A good strategy to pursue is to go for "point-slope form", i.e.,
+          an equation of the form
+          \[
+            y = m(x - x_0) + y_0
+          \]
+          We have not one but <em>two</em> points to choose from to use
+          as \((x_0, y_0)\).  The question is, how to find slope?
+          My personal favorite way is to just draw a sketch of where
+          these points are on the \((x, y)\)-plane and think about
+          "rise over run."
+          <div style="text-align:center">
+          {% set svg_id = 'svg2' %}
+          {% set points = [[-3,4], [6, -5]]%}
+          {% set poly_points = '0.0,-17.5000000000000 350.0,332.500000000000 ' %}
+          {% set parameters = {
+              'svg_x_length': 350,
+              'svg_y_length': 350,
+              'cart_x_min': -10,
+              'cart_x_max': 10,
+              'cart_x_length': 20,
+              'cart_y_min': -10,
+              'cart_y_max': 10,
+              'cart_y_length': 20
+            }
+          %}
+          {% include "_static_graph.html" %}
+          </div>
+          I can now see pretty easily that while \(x\) "runs"
+          9 units from \(-3\) to \(6\), \(y\) falls from \(4\) to \(-5\).
+          That's a fall of 9 units, of course.  So, my "rise over run"
+          is
+          \[
+            \frac{-9}{9} = -1
+          \]
+          That is, my slope is \(m = -1\).
+
+          <p>
+            Now, if you are someone that likes to memorize formulas,
+            you could also make note of the fact that, if you are given
+            two points (with different \(x\) coordinates),
+            \[
+              (x_0, y_0), (x_1, y_1)
+            \]
+            then the slope between them will always be
+            \[
+              \frac{y_1 - y_0}{x_1 - x_0}
+            \]
+            For example, taking \((-3, 4)\)to be \((x0, y0)\)
+            and \((6, -5)\)to be \((x1, y1)\), you get
+            \[
+              \frac{y_1 - y_0}{x_1 - x_0} = \frac{-5 - 4}{6 - (-3)} = \frac{-9}{9} = -1
+            \]
+            But, take my advice and draw a quick sketch, even if you
+            decide to try to memorize that formula.  (Or at least
+            visualize in your mind where the points are in relation
+            to each other!)
+          </p>
+        </div>
+      </div>
+  </div>
+</p>
+
+<p>
+  Let's check out one more, just in case.
+</p>
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      Develop an equation for the line that passes through the given points:
+      \[
+        (-8, -7), (-2, 6)
+      \]
+    </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          A good strategy to pursue is to go for "point-slope form", i.e.,
+          an equation of the form
+          \[
+            y = m(x - x_0) + y_0
+          \]
+          We have not one but <em>two</em> points to choose from to use
+          as \((x_0, y_0)\).  The question is, how to find slope?
+          My personal favorite way is to just draw a sketch of where
+          these points are on the \((x, y)\)-plane and think about
+          "rise over run."
+          <div style="text-align:center">
+          {% set svg_id = 'svg3' %}
+          {% set points = [[-8,-7], [-2, 6]]%}
+          {% set poly_points = '0.0,373.333333333333 350.0,-385.000000000000 ' %}
+          {% set parameters = {
+              'svg_x_length': 350,
+              'svg_y_length': 350,
+              'cart_x_min': -10,
+              'cart_x_max': 10,
+              'cart_x_length': 20,
+              'cart_y_min': -10,
+              'cart_y_max': 10,
+              'cart_y_length': 20
+            }
+          %}
+          {% include "_static_graph.html" %}
+          </div>
+          I can now see pretty easily that while \(x\) "runs"
+          \(6\) units from \(-8\) to \(-2\), \(y\) rises from \(-7\) to \(6\).
+          That's a rise of \(13\) units, of course.  So, my "rise over run"
+          is
+          \[
+            \frac{13}{6}
+          \]
+          That is, my slope is \(m = \frac{13}{6}\).
+
+          <p>
+            If you want to see the formula introduced in the answer to
+            the previous example in action once again, just take a look:
+            \[
+              \frac{y_1 - y_0}{x_1 - x_0} = \frac{6 - (-7)}{-2 - (-8)} = \frac{13}{6}
+            \]
+            Or just draw a picture!!
+          </p>
+        </div>
+      </div>
+  </div>
+</p>
+
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

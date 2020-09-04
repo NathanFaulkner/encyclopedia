@@ -80,7 +80,7 @@ class GraphToSlopeIntercept(Question):
 
         self.format_given_for_tex = f"""To be coded
         """
-        
+
         self.format_answer = f'\( y = {latex(self.answer)}\)'
         # self.answer_latex = latex_print(self.answer)
         # self.answer_latex_display = latex_print(self.answer, display=True)

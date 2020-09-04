@@ -12,12 +12,17 @@
     margin-right: 10%;
     margin-top: 80px;
     margin-bottom: 100px;
-    counter-reset: example;
+    counter-reset: example 0 definition 0;
   }
 
   .example h2::before {
     counter-increment: example;
     content: "Example " counter(example) "."
+  }
+
+  .definition h2::before {
+    counter-increment: definition;
+    content: "Definition " counter(definition) "."
   }
 
   h1 + p::first-letter {
