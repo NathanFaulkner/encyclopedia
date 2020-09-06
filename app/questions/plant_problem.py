@@ -188,7 +188,7 @@ class PlantProblem(Question):
         elif 'T' in user_answer:
             user_x = 'T'
         else:
-            user_n = None
+            user_x = None
         user_answer = user_answer.lower()
         user_answer = user_answer.replace('y', 'h')
         user_answer = user_answer.replace('t', 'x')

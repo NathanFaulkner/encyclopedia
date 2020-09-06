@@ -1,0 +1,424 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  Here is a quick bit of vocab:
+
+<div class="definition">
+  <h2></h2>
+A function \(f\) is said to be a <b>linear function</b> provided its outputs
+can be obtained via a rule of the form
+\[
+f(x) = mx+ b
+\]
+</div>
+
+We have remarked elsewhere that number \(m\) is often called "slope"
+and the number \(b\) is called the \(y\)-intercept.
+</p>
+
+<p>
+  What we are going to do in this section is find formulas for some real-world linear functions
+  based on some data presented in a narrative or in a table.
+  Actually, this is something you may have already done in
+  the section on
+  <a href="{{ url_for('section', section_name='basicfunctionsinatableandwords') }}">
+    basic functions from a table and words
+  </a>
+  It's just that, now&mdash;after having practiced the various skills
+  for developing the equation for a line based on some information
+  about its graph&mdash;we can tackle problems that we might have
+   previously found to be difficult.
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+  What we're looking at in this table is the pressure experienced by an object
+  found at different depths under the ocean.
+  And, by the way, these numbers are basically accurate!
+  That is, this is actually how the numbers would go if you were to take
+  pressure measurements at different depths.
+  </p>
+
+  <table border="1">
+    <tr><th>Depth in ft</th>
+      {% for i in range(0,5) %}
+      <td style="text-align: center;">{{ 10*i }}</td>
+      {% endfor %}
+    </tr>
+    <tr><th>Pressure (in lbs per sq in)</th>
+      {% for i in range(0,5) %}
+      {% set disp = 14.7 + 4.5*i %}
+      <td>{{ '%0.1f' % disp|float }}</td>
+      {% endfor %}
+    </tr>
+  </table>
+
+  <ol class="multi-part" style="list-style-type: lower-alpha;">
+    <li>
+      Give an English description of how pressure is related to depth.
+      Be detailed enough so that someone could reconstruct all the data
+      in this table without having seen it using just your description.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          The pressure at the surface is already pounds per square inch (air
+          pressure, apparently).  And for every additional 10 feet you dive down,
+          you will experience an increase of pressure of 4.5 pounds per square inch.
+        </div>
+      </div>
+    </li>
+    <li>
+      To start getting a handle on a complicated relationship, it might
+      help to sketch a graph of it.  Do so now. Hint: since we are viewing
+      pressure as determined by depth (pressure is a function of depth),
+      we are thinking of pressure as the "output" variable and
+      depth as the input variable.  When discussing functions as
+      ordered pairs, the first coordinate in each pair is always the input
+      and the second is the output.  Also, on graphs the first coordinate
+      gives the position left to right relative to the origin and
+      the second coordinate gives the position up and down relative
+      to the origin.  So, use the vertical axis for pressure and
+      the horizontal axis for depth.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          <div style="text-align:center">
+            <img src="{{ url_for('static', filename='images/depth_and_pressure.png') }}">
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      Develop an equation that relates pressure to depth.  Use \(p\) for pressure
+      and \(d\) for depth.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Look at your sketch!  Do you see that straight-line relationship
+          coming together?  The graph helps the concept of "slope" kind of
+          click into place in our minds.  Recall that slope is
+          "rise over run"&mdash;or, the amount that \(y\) increases by
+          when \(x\) increases by 1 unit.  Recall, too, that, in such
+          a situation, you get a change in \(y\) that is proportional
+          to how much \(x\) changes.  That means that, even if you
+          don't know how much \(y\) changes when when \(x\)\increases
+          by 1 unit, as long as you know how \(y\) changes across
+          some corresponding change in \(x\) you can use that instead.
+          What I am talking about here is this: Note that pressure increases
+          by 4.5 pounds per square inch when depth increases by 10 feet.
+          Thus, the slope of our linear function will be
+          \[
+            m = \frac{4.5}{10} = 0.45
+          \]
+          We also know the \(y\)-intercept is \(b = 14.7\) pounds per square inch.
+          Thus, using the fact that an equation of the form
+          \[
+            y = mx + b
+          \]
+          will have  a straight line graph, we get our formula:
+          \[
+            p = 0.45 d + 14.7
+          \]
+        </div>
+      </div>
+    </li>
+    <li>
+      As a follow-up to the previous question, compute the pressure
+      at the deepest recorded point in the ocean: the Mariana Trench
+      which sits at 36,070 ft below the surface.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          The nice thing about a formula like the one we just developed is
+          that you can just "plug in" to find whatever value you want.
+          So, for instance, when \(d = 36,070\), we find
+          \[
+            p = 14.7 + 0.45 d = 14.7 + 0.45 \cdot 36,070 = {{ 14.7 + 0.45*36070 }}
+          \]
+          So, the pressure at the bottom of the Mariana Trench will
+          be around 16,242.2 pounds per square inch.  (You can look up online
+          what actual recorded pressures have been at that depth.
+          You see that our estimate is close, but a little off.  Why is that?
+          One reason is that I have used rounded figures in constructing
+          the table and hence our model.  If one used more decimal places in
+          the recorded data, one would get better accuracy.)
+          By the way, how do you suppose they obtain the
+          depth of the water at such a deep place, anyway?
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+    Here is somewhat accurate but partially contrived average low temperatures
+    for December as you pass in altitude from Winston-Salem up to Boone in North
+    Carolina.
+    Temperatures are measured in Fahrenheit and altitude is measured in feet.
+  </p>
+
+  <table border="1">
+    <tr><th>Altitude (in ft)</th>
+      {% for i in range(0,9) %}
+      <td style="text-align: center;">{{ 960 + 300*i }}</td>
+      {% endfor %}
+    </tr>
+    <tr><th>Temperature (in F)</th>
+      {% for i in range(0,9) %}
+      <td>{{ 34 - 1.25*i }}</td>
+      {% endfor %}
+    </tr>
+  </table>
+
+  <ol class="multi-part" style="list-style-type: lower-alpha;">
+    <li>
+      Write an English sentence that perfectly captures the relationship between
+      the average December low temperatures and the altitude.
+      Someone else should be able to reconstruct the
+      table using just your English sentence.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          The average December low is 34 F at 960 ft (which is
+          an approximate altitude for places in Lewisville), and it decreases
+          by 1.25 F for every 300 feet in altitude you climb on the way to Boone.
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        Develop an equation that captures the relationship between
+        average monthly lows and temperature.  Use \(y\) for the
+        temperature and \(x\) for the altitude.
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          My strategy will be to use "point-slope form",
+          which is discussed in
+          <a href="{{ url_for('section', section_name='pointslopeform') }}">
+            this section of the same name:
+          </a>
+          \[
+            y = m(x-x_0) + y_0
+          \]
+          I have plenty of pairs to choose from in my table to use as
+          \( (x_0, y_0) \), so all I need to figure out is the slope, \(m\).
+          As we have discussed, slope is "the change in \(y\) when
+          \(x\) increases by 1 unit".  We have also remarked on the
+          fact that, with these straight line (constant rate of change)
+          relationships, whenever \(x\) changes by some given amount
+          other than 1, \(y\) will change by a proportional amount.
+          So, we can figure out that constant rate of change by
+          doing "rise over run" for any run (it doesn't have to be 1).
+          We can see that, as altitude increases by 300 ft, we get
+          a <em>constant</em> drop of 1.25 F for that average December low.
+          So, the slope is
+          \[
+            m = \frac{-1.25}{300}
+          \]
+          You could simplifiy this (like we did in the depth and
+          pressure example just above), but it really isn't necessary to.
+          In all, our equation is
+          \[
+            y = -\frac{1.25}{300}(x - 960) + 34
+          \]
+        </div>
+      </div>
+    </li>
+    <li>
+      Mt. Mitchell is the highest point in North Carolina, sitting proudly
+      at 6,684.  Assuming
+      this model of average December low temperature related to
+      altitude also holds as we walk from Lewisville, N.C., (a big "if") to
+      Mt. Mitchell, compute the average December low there.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          We plug in \(x = 6684\):
+          \begin{align*}
+            y &= -\frac{1.25}{300}(x - 960) + 34\\
+            &= -\frac{1.25}{300}(6684 - 960) + 34\\
+            &= 10.15
+          \end{align*}
+          So, we predict the average December low at Mt. Mitchell to be
+          about 10.15 F.  (According to
+          <a href="https://en.wikipedia.org/wiki/Mount_Mitchell#Climate">
+            my favorite website, Wikipedia,
+          </a>
+          the average December low is 20.6 F, so there is a problem with the accuracy
+          of the model&mdash;even if our "math" was without blemish!)
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<p>
+  We'll do one more example: a "generic" one, with no context attached.
+  Note that for a "generic" situation, you are not limited to what numbers
+  would make sense for a physical scenario.  So, expect to (sometimes)
+  encounter negative numbers here.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+    Consider the data below in answering the questions that follow.
+  </p>
+
+  <table border="1">
+    <tr><th>\(x\)</th>
+      {% for i in range(0,4) %}
+      {% set disp = -4.6 + 9.8*i %}
+      <td style="text-align: center;">{{ '%0.1f' % disp|float }}</td>
+      {% endfor %}
+    </tr>
+    <tr><th>\(y\)</th>
+      {% for i in range(0,4) %}
+      {% set disp = -16.8 + i*7.3 %}
+      <td>{{ '%0.1f' % disp|float }}</td>
+      {% endfor %}
+    </tr>
+  </table>
+
+  <ol class="multi-part" style="list-style-type: lower-alpha;">
+    <li>
+      Write an English sentence that perfectly captures the relationship between
+      \(x\) and \(y\).
+      Someone else should be able to reconstruct your table using just your English sentence.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          When \(x = -4.6\), you have \(y = -16.8\), and for every
+          increase of 9.8 in \(x\), \(y\) increases by 7.3.
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        Develop a "math sentence"&mdash;that is, an equation&mdash;that
+        captures the relationship between \(y\) and \(x\).
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Paralleling my sentence above exactly, I start off with
+          what is really the subject of my sentence, \(y\).
+          \[
+            y =
+          \]
+          Next up, I know \(y\) starts out at \(-16.8\) and grows from
+          there, so I write:
+          \[
+            y = -16.8 + \phantom{x}
+          \]
+          How does it grow?  (Note here that I might also ask
+          you a question where \(y\) decreases with increasing
+          \(x\) instead of increases!)  Each time \(x\) increases by
+          of 9.8, \(y\) increases by 7.3.
+          To get how far (and in what direction) from the reference point of \(x_0 = -4.6\)
+          any arbitrary \(x\) is, you subtract:
+          \[
+            y = -16.8 + \frac{?}{?} (x - (-4.6))
+          \]
+          I have also left a blank (fraction) to prepare for the next step:
+          Because I know \(y\) will have to increase by 7.3 for every increase
+          of 9.8 in \(x\),
+          I need to see how many units of length 9.8 the value of \(x - (-4.6) = x + 4.6\)
+          represents.  That is, I need to see how many times 9.8 goes into
+          that value.  That's division!  So, I divide by 9.8:
+          \[
+            y = -16.8 + \frac{?}{9.8} (x  + 4.6)
+          \]
+          Now, I need \(y\) to increase by 7.3 for every 9.8 that increases by,
+          so, my plus sign is correct, and I just need to work in that
+          concept of repeated addition&mdash;by multiplying:
+          \[
+            y = -16.8 + \frac{7.3}{9.8} (x + 4.6)
+          \]
+
+          <p>
+            The foregoing is how I like to narrate such problems to myself&mdash;to
+            make sure it all makes sense and that I have processed the information
+            faithfully&mdash;but you can also just use "point-slope form":
+            \[
+              y = m(x - x_0) + y_0
+            \]
+            For \(x_0, y_0\), I can just choose the initial pair, \((-4.6, -16.8)\).
+            For the slope, \(m\), I can just do "rise over run" as I go from
+            the point \((-4.6, -16.8)\) to the next one of
+            \((5.2, -9.5)\).
+            \begin{align*}
+              m &= \frac{-9.5 - (-16.8)}{5.2 - (-4.6)}\\
+              &= \frac{7.3}{9.8}
+            \end{align*}
+            On the other hand, it may be easier to compute the "rise" and "run"
+            using some later pair of points.  The same values should come
+            from any comparison of adjacent points&mdash;or else the data
+            cannot be modeled by a linear function at all!
+          </p>
+        </div>
+      </div>
+    </li>
+    <li>
+      Compute the value of \(y\) for where \(x = -20.3\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          We plug in \(x = -20.3\):
+          \begin{align*}
+            y &= -16.8 + \frac{7.3}{9.8} (x + 4.6) \\
+            & = -16.8 + \frac{7.3}{9.8} (-20.3 + 4.6)\\
+            & \approx {{ -16.8 + 7.3/9.8*(-20.3 + 4.6) }}
+          \end{align*}
+          On that last step, you could use a calculator&mdash;or, you will
+          find&mdash;the "answer checker" on the exercises page
+          doesn't mind if you enter things unsimplified.  It has
+          a calculator (and more!) backing up the answer-checking
+          algorithm, so just treat it like your calculator command line&mdash;where
+          you are having to learn a few keyboard buttons that replace
+          those on your hand-held calculator.
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

@@ -29,7 +29,11 @@ __all__ = ['quadratic_pattern',
             'graph_point_slope_from_english',
             'description_to_point_slope_form',
             'graph_to_point_slope_form',
-            'two_points_to_equation']
+            'two_points_to_equation',
+            'altitude_temperature_problem',
+            'altitude_temperature_problem_computation',
+            'generic_table_hard',
+            'generic_table_hard_computation']
 
 class Question():
     pass
