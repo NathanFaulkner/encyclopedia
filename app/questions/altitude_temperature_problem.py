@@ -32,7 +32,7 @@ from sqlalchemy import (MetaData,
 
 engine = create_engine('sqlite:///app/questions/climate.db', echo = None)
 conn = engine.connect()
-print('table_names', engine.table_names())
+# print('table_names', engine.table_names())
 metadata = MetaData()
 ws_climate = Table('climate_of_winston_salem', metadata, autoload=True,
                    autoload_with=engine)

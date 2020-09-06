@@ -153,6 +153,8 @@ class PlantProblemComputation(Question):
         self.table_html = table_html
         self.format_given = self.table_html
 
+        self.format_given_for_tex = 'Under construction'
+
     def checkunits(self, user_units):
         user_units = user_units.replace('.', ' ')
         user_units = user_units.lower()

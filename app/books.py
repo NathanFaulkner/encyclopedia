@@ -102,9 +102,12 @@ class SevenTest():
         self.which_test = which_test
         self.book = book
         all_sections = book.list_all_sections()
+        # for section in all_sections:
+        #     print(section.display_name)
         l = len(all_sections)
         num_sevens = int(l/7)
-        start = num_sevens * (which_test - 1)
+        # print(num_sevens)
+        start = 7 * (which_test - 1)
         if which_test <= num_sevens:
             test_sections = all_sections[start: start + 7]
             prev_sections = all_sections[0:start]
@@ -314,7 +317,7 @@ functioncomposition.add_to_questions('function_composition')
 
 simplegraphing = Section('simplegraphing', "Simple Graphing", '/sections/simple_graphing')
 simplegraphing.add_to_questions('graph_slope_intercept_from_english',
-'                                   graph_to_slope_intercept_form',
+                                'graph_to_slope_intercept_form',
                                     'graph_slope_intercept')
 
 pointslopeform = Section('pointslopeform', "Graph from Point Slope Form", '/sections/point-slope-form')

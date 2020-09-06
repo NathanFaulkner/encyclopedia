@@ -121,6 +121,8 @@ class PizzaProblem(Question):
         self.table_html = table_html
         self.format_given = self.table_html
 
+        self.format_given_for_tex = 'Under construction'
+
     def checkanswer(self, user_answer):
         user_answer = user_answer.lower()
         user_answer = user_answer.replace('y', 'p')
