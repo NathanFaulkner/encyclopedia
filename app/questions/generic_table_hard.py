@@ -102,9 +102,8 @@ class GenericTableHard(Question):
 
 
         self.prompt_single = f"""
-        Develop an equation that captures the relationship between the variables
-        \(x\) and \(y\) represented in the following table.
-        ."""
+Consider the following table, depciting a relationship between \(x\) and \(y\).
+"""
 
         prompt_multiple = f"""To be coded."""
 
@@ -129,7 +128,32 @@ class GenericTableHard(Question):
         self.table_html = table_html
         self.format_given = self.table_html
 
-        self.format_given_for_tex = 'Under construction'
+        tabular = "\\begin{tabular}{|l||"
+        for i in range(self.l + 1):
+            tabular += 'c|'
+        tabular += '}\n\\hline\n'
+        tabular += f' \\(x\\) & '
+        for i in range(self.l + 1):
+            tabular += f'{round(self.x0 + i*self.delta_x,1)} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n'
+        tabular += f'\\(y\\) & '
+        for i in range(self.l + 1):
+            tabular += f'{round(self.m * (self.delta_x * i) + self.y0, 1)} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n\\end{tabular}'
+
+
+        self.format_given_for_tex = f"""
+{self.prompt_single}
+\\smallskip
+
+\\begin{{center}}
+{tabular}
+\\end{{center}}
+\\smallskip
+
+"""
 
     prob_type = 'math_blank'
 
