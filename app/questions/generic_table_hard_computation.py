@@ -135,6 +135,8 @@ class GenericTableHardComputation(Question):
         when \(x = {self.input} \).
         """
 
+        self.format_given_for_tex = 'Under construction'
+
     prob_type = 'math_blank'
 
     name = 'Harder Generic Table Computation'

@@ -1,4 +1,7 @@
 from sympy import *
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.ticker import MultipleLocator
 import random
 
 from app.interpolator import cart_x_to_svg, cart_y_to_svg
@@ -153,3 +156,79 @@ def poly_points_from_nparrays(x, y):
         out += f"{x_points[i]}, {y_points[i]} "
         i += 1
     return out
+
+
+
+class GraphFromLambda():
+    def __init__(self,
+                    f,
+                    color="blue",
+                    res=0.001,
+                    xwindow=[-10,10],
+                    ywindow=[-10,10],
+                    xmarker_delta=1,
+                    ymarker_delta=1):
+        self.f = f
+        x_min = xwindow[0]
+        x_max = xwindow[1]
+        y_min = ywindow[0]
+        y_max = ywindow[1]
+
+        x = np.arange(x_min,x_max + xmarker_delta,res)
+
+        y = self.f(x)
+
+        if type(y) == int:
+            x = np.array([x_min, x_max])
+            y = np.array([f(x), f(x)])
+
+        spacing = 1
+        minorLocator = MultipleLocator(spacing)
+
+        fig, ax = plt.subplots()
+
+        ax.plot(x, y, color=color)
+
+        fig.set_size_inches(6, 6)
+
+        ax.axhline(y=0, color='k')
+        ax.axvline(x=0, color='k')
+
+        #ax.set_aspect('equal')
+        ax.set_xticks(np.arange(x_min, x_max + xmarker_delta, xmarker_delta))
+        ax.set_yticks(np.arange(y_min, y_max + ymarker_delta, ymarker_delta))
+
+        # Turn on the minor TICKS, which are required for the minor GRID
+        ax.minorticks_on()
+
+        ax.yaxis.set_minor_locator(minorLocator)
+        ax.xaxis.set_minor_locator(minorLocator)
+
+        ax.grid(True, which='major')
+
+
+        plt.axis([x_min,x_max,y_min, y_max])
+
+        self.fig = fig
+        # plt.show()
+
+    def save_fig(self, file_name):
+        self.fig.savefig(f'{file_name}.png', bbox_inches='tight')
+
+
+def html_to_tex(html):
+    out = fix_quotes_for_tex(html)
+    return out
+
+def fix_quotes_for_tex(string):
+    count = 0
+    i = 0
+    while i < len(string):
+        if string[i] == '"':
+            if count % 2 == 0:
+                string = string[:i] + '``' + string[i+1:]
+            else:
+                string = string[:i] + "''" + string[i+1:]
+            count += 1
+        i += 1
+    return string

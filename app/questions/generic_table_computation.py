@@ -69,7 +69,7 @@ class GenericTableComputation(Question):
         self.format_answer = '\({}\)'.format(self.answer)
 
         self.prompt_single = f"""
-        Compute the value of \(y\) when \(x = {self.input}\)
+Compute the value of \(y\) when \(x = {self.input}\)
         """
 
         prompt_multiple = f"""This needs some thinking...
@@ -109,6 +109,33 @@ class GenericTableComputation(Question):
         """
         self.table_html = table_html
         self.format_given = self.table_html
+
+        tabular = "\\begin{tabular}{|l||"
+        for i in range(5):
+            tabular += 'c|'
+        tabular += '}\n\\hline\n'
+        tabular += f' \\(x\\) & '
+        for i in range(5):
+            tabular += f'{i} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n'
+        tabular += f'\\(y\\) & '
+        for i in range(5):
+            tabular += f'{round(self.m * i + self.b, 1)} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n\\end{tabular}'
+
+
+        self.format_given_for_tex = f"""
+{self.prompt_single}
+\\smallskip
+
+\\begin{{center}}
+{tabular}
+\\end{{center}}
+\\smallskip
+
+"""
 
     def checkanswer(self, user_answer):
         user_answer = user_answer.replace('y', ' ')

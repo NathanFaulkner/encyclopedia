@@ -150,7 +150,39 @@ class PlantProblem(Question):
         self.table_html = table_html
         self.format_given = self.table_html
 
-        self.format_given_for_tex = 'Under construction'
+        tabular = "\\begin{tabular}{|l||"
+        for i in range(5):
+            tabular += 'c|'
+        tabular += '}\n\\hline\n'
+        tabular += f' {str(self.time_unit).title()} Number & '
+        for i in range(5):
+            tabular += f'{i} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n'
+        tabular += f'Height of {self.plant.name} (in {inflector.plural(str(self.height_unit))}) & '
+        for i in range(5):
+            tabular += f'{round(self.m * i + self.b, 1)} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n\\end{tabular}'
+
+
+        self.format_given_for_tex = f"""
+The following table depicts the height of a {self.plant.name} plant
+depending on the number of {inflector.plural(str(self.time_unit))} that it has
+grown.
+Develop an equation that relates the height of the plant
+to the time that it has grown.  Use the letter \(h\) for
+the height of the plant.  Use the letter \(x\) for the number
+of {inflector.plural(str(self.time_unit))} that have gone by
+since ``{str(self.time_unit).title()} 0''.
+\\smallskip
+
+\\begin{{center}}
+{tabular}
+\\end{{center}}
+\\smallskip
+
+"""
 
     def checkanswer(self, user_answer):
         user_answer = user_answer.lower()

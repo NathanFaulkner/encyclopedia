@@ -30,7 +30,7 @@ from sqlalchemy import (MetaData,
                         create_engine,
                         select)
 
-engine = create_engine('sqlite:///app/questions/climate.db', echo = None)
+engine = create_engine('sqlite:///app/questions/climate.db', echo = None, connect_args={'check_same_thread': False})
 conn = engine.connect()
 # print('table_names', engine.table_names())
 metadata = MetaData()
@@ -117,7 +117,7 @@ class AltitudeTemperatureProblem(Question):
         upper = round(self.upper_locale.altitude.to(self.alt_unit).magnitude, -1)
         self.upper_alt = upper
         diff = upper - lower
-        self.l = random.randint(6,10)
+        self.l = random.randint(6,8)
         alt_delta = int(diff/(self.l-1)/10)*10
         self.alt_delta = alt_delta
         upper_latitude = lower + self.l * alt_delta
@@ -186,13 +186,43 @@ class AltitudeTemperatureProblem(Question):
         self.table_html = table_html
         self.format_given = self.table_html
 
+        tabular = "\\begin{tabular}{|l||"
+        for i in range(self.l):
+            tabular += 'c|'
+        tabular += '}\n\\hline\n'
+        tabular += f'Altitude (in {inflector.plural(str(self.alt_unit))}) & '
+        for i in range(self.l):
+            tabular += f'{lower + i*alt_delta} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n'
+        tabular += f'Temperature (in {temp_abbrev[self.temp_unit]}) & '
+        for i in range(self.l):
+            tabular += f'{round(self.m * (alt_delta *i) + self.lower_temp.magnitude, 1)} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n\\end{tabular}'
+
+
+        self.format_given_for_tex = f"""
+{self.prompt_single}
+\\smallskip
+
+{tabular}
+\\smallskip
+
+Develop an equation that models the data
+in the table, using
+\(T\) for the temperature and
+\(A\) for the altitude.
+"""
+
     prob_type = 'math_blank'
 
     name = 'Altitude vs. Temperature Growth Problem'
     module_name = 'altitude_temperature_problem'
 
 
-    further_instruction = """Enter an equation that uses
+    further_instruction = """Enter an equation that models the data
+    in the table, using
     \(T\) for the temperature and
     \(A\) for the altitude.  Also, the coefficients (numbers) in your equation
     have to be accurate to 4 decimal places.  Use exact figures
@@ -314,3 +344,5 @@ class AltitudeTemperatureProblem(Question):
 
 
 Question_Class = AltitudeTemperatureProblem
+
+conn.close()

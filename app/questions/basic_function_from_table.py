@@ -116,6 +116,37 @@ class PizzaProblem(Question):
         self.table_html = table_html
         self.format_given = self.table_html
 
+        tabular = "\\begin{tabular}{|l||"
+        for i in range(self.l):
+            tabular += 'c|'
+        tabular += '}\n\\hline\n'
+        tabular += f' \(y\) & '
+        for i in range(self.l):
+            tabular += f'{self.m * i + self.b} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n'
+        tabular += f'Temperature (in {temp_abbrev[self.temp_unit]}) & '
+        for i in range(self.l):
+            tabular += f'{round(self.m * (alt_delta *i) + self.lower_temp.magnitude, 1)} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n\\end{tabular}'
+
+
+        self.format_given_for_tex = f"""
+{self.prompt_single}
+\\smallskip
+
+{tabular}
+\\smallskip
+
+Using a linear model based on this data,
+predict the temperature at an altitude of {self.input}
+{inflector.plural(str(self.alt_unit))}.  Include units in the following way:
+Enter the numerical part of your answer, then a space, and then
+`F' for Fahrenheit, `C' for Celsius, `m' for meters, or `ft' for feet,
+whichever is applicable.
+"""
+
     def checkanswer(self, user_answer):
         user_answer = user_answer.lower()
         user_answer.replace('y', 'p')
@@ -201,7 +232,7 @@ class BasicFunctionFromTable(Question):
             self.seed = random.random()
         random.seed(self.seed)
         Q = random.choice([PizzaProblem])
-        
+
 
         self.genproblem()
 

@@ -9,7 +9,11 @@ from sympy import *
 import numpy as np
 import json
 
-from app.questions import Question, latex_print, random_non_zero_integer, poly_points_from_nparrays
+from app.questions import (Question,
+                        latex_print,
+                        random_non_zero_integer,
+                        poly_points_from_nparrays,
+                        GraphFromLambda)
 from app.interpolator import cart_x_to_svg, cart_y_to_svg, get_parameters
 
 from flask import render_template
@@ -91,14 +95,11 @@ class GraphToPointSlope(Question):
         self.prompt_single =  """Develop an equation for the graphed line."""
         self.prompt_multiple = """Develop an equation for each of the graphed lines."""
 
-        self.format_given_for_tex = """To be coded
-            """.format(prompt=self.prompt_single,
-                        x0=latex(self.x0),
-                        y0=latex(self.y0),
-                        m=latex(self.m))
+        self.format_given_for_tex = f"""{self.prompt_single}
+            """
 
-    name = 'Point Slope Form from Description'
-    module_name = 'description_to_point_slope_form'
+    name = 'Point-Slope Form from Graph'
+    module_name = 'graph_to_point_slope_form'
 
 
 
@@ -116,6 +117,12 @@ class GraphToPointSlope(Question):
         self.given = factor(m*(x-h)) + b
         #print('3rd step: So far its ', expr)
         self.answer = f(x)
+
+    has_img = True
+
+    def save_img(self, filename):
+        graph = GraphFromLambda(self.as_lambda)
+        graph.save_fig(filename)
 
     def get_svg_data(self, window=[-10,10]):
         x_min = window[0]

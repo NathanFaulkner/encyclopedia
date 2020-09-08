@@ -193,6 +193,28 @@ class SevenTest():
             os.chdir(title)
             # print(os.getcwd())
             f = open('{a}.tex'.format(a=title), 'w+')
+        # all_img_names = []
+        for question_set in self.question_sets:
+            i = 0
+            # img_names = []
+            for question in question_set:
+                try:
+                    if question.has_img:
+                        img_name = '{qname}{i}'.format(qname=question.module_name, i=i)
+                        question.save_img(img_name)
+                    # img_names.append(img_name)
+                except AttributeError:
+                    pass
+                if key:
+                    try:
+                        if question.has_img_in_key:
+                            img_name = 'ans_for_{qname}{i}'.format(qname=question.module_name, i=i)
+                            question.save_img(img_name)
+                        # img_names.append(img_name)
+                    except AttributeError:
+                        pass
+                i += 1
+                # all_img_names.append(img_names)
         out = self.preamble
         # title_head = f"\\lhead{{\\textbf{{{self.book.display_name} - Test {self.which_test} v. {self.seed} \\\\Printed on \\today}}}}"
         # out += title_head + '\n\n'
@@ -214,13 +236,34 @@ class SevenTest():
                 out += f'\\item {{\color{{gray}}({section_info[0]}.{section_info[1]})}} \n'
                 out += '\\begin{enumerate}\n'
                 out += f'\\item {question.format_given_for_tex}\n'
+                try:
+                    question.has_img
+                    out += """
+                    \\begin{{flushright}}
+                        \\includegraphics[scale=0.6]{{{img_name}}}
+                    \\end{{flushright}}
+                    \\vspace{{-9\\baselineskip}}
+                    """.format(img_name=question.module_name + '0')
+                except AttributeError:
+                    pass
                 out += '\\vspace{12\\baselineskip}\n'
                 question = question_set[1]
                 out += f'\\item {question.format_given_for_tex}\n'
+                try:
+                    question.has_img
+                    out += """
+                    \\begin{{flushright}}
+                        \\includegraphics[scale=0.6]{{{img_name}}}
+                    \\end{{flushright}}
+                    \\vspace{{-9\\baselineskip}}
+                    """.format(img_name=question.module_name + '1')
+                except AttributeError:
+                    pass
                 out += '\\vspace{12\\baselineskip}\n'
                 out += '\\end{enumerate}\n'
             else:
-                out += f'\\item No questions have been constructed for this section.'
+                out += f'\\item No questions have been constructed for this section.\n'
+            out += '\\newpage\n'
         out += '\\end{enumerate}\n'
         if key:
             out += '\\newpage'
@@ -231,7 +274,17 @@ class SevenTest():
                 if question_set != []:
                     out += '\\begin{enumerate}\n'
                     out += f'\\item {question_set[0].format_answer}\n'
+                    try:
+                        if question_set[0].has_img_in_key:
+                            out += """\\includegraphics[scale=0.6]{{{img_name}}}""".format(img_name='ans_for_' + question_set[0].module_name + '0')
+                    except AttributeError:
+                        pass
                     out += f'\\item {question_set[1].format_answer}\n'
+                    try:
+                        if question_set[1].has_img_in_key:
+                            out += """\\includegraphics[scale=0.6]{{{img_name}}}""".format(img_name='ans_for_' + question_set[1].module_name + '1')
+                    except AttributeError:
+                        pass
                     out += '\\end{enumerate}\n'
             out += '\\end{enumerate}\n'
         out += '\\end{document}'
@@ -298,14 +351,17 @@ absolutevalueinequalities.add_to_questions('absolute_value_inequality',
                             )
 absolutevalueinequalities.due_date = datetime.datetime(2020, 9, 14)
 
+
+#########################
+
 functionsandthecoordinateplane_intro = Section('functionsandthecoordinateplane_intro', "Functions and the Coordinate Plane", '/sections/functions-and-the-coordinate-plane')
 
 basicfunctionsinatableandwords = Section('basicfunctionsinatableandwords', "Basic Functions in a Table and Words", '/sections/basic_functions_in_a_table_and_words')
 basicfunctionsinatableandwords.add_to_questions('generic_table_computation',
-                                                'pizza_problem_computation',
+                                                 'pizza_problem_computation',
                                                 'plant_problem_computation',
-                                                'plant_problem',
-                                                'generic_table',
+                                                 'plant_problem',
+                                                 'generic_table',
                                                 'pizza_problem')
 
 functionnotation = Section('functionnotation', "Function Notation", '/sections/function_notation')
@@ -324,6 +380,7 @@ pointslopeform = Section('pointslopeform', "Graph from Point Slope Form", '/sect
 pointslopeform.add_to_questions('graph_point_slope_from_english',
                                 'graph_point_slope',
                                 'description_to_point_slope_form')
+
 graphfromtwopoints = Section('graphfromtwopoints', "Graph from Two Points", '/sections/graph-from-two-points')
 graphfromtwopoints.add_to_questions('graph_to_point_slope_form',
                                     'two_points_to_equation')

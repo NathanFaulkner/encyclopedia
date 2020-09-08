@@ -121,7 +121,29 @@ class PizzaProblem(Question):
         self.table_html = table_html
         self.format_given = self.table_html
 
-        self.format_given_for_tex = 'Under construction'
+        tabular = "\\begin{tabular}{|l||"
+        for i in range(5):
+            tabular += 'c|'
+        tabular += '}\n\\hline\n'
+        tabular += f' Number of toppings & '
+        for i in range(5):
+            tabular += f'{i} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n'
+        tabular += f'Price of Pizza (in \\$) & '
+        for i in range(5):
+            tabular += f'{self.m * i + self.b} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n\\end{tabular}'
+
+
+        self.format_given_for_tex = f"""
+{self.prompt_single}
+\\smallskip
+
+{tabular}
+\\smallskip
+"""
 
     def checkanswer(self, user_answer):
         user_answer = user_answer.lower()

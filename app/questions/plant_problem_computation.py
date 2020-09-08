@@ -153,7 +153,39 @@ class PlantProblemComputation(Question):
         self.table_html = table_html
         self.format_given = self.table_html
 
-        self.format_given_for_tex = 'Under construction'
+        tabular = "\\begin{tabular}{|l||"
+        for i in range(5):
+            tabular += 'c|'
+        tabular += '}\n\\hline\n'
+        tabular += f' {str(self.time_unit).title()} Number & '
+        for i in range(5):
+            tabular += f'{i} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n'
+        tabular += f'Height of {self.plant.name} (in {inflector.plural(str(self.height_unit))}) & '
+        for i in range(5):
+            tabular += f'{round(self.m * i + self.b, 1)} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n\\end{tabular}'
+
+
+        self.format_given_for_tex = f"""
+The following table depicts the height of a {self.plant.name} plant
+depending on the number of {inflector.plural(str(self.time_unit))} that it has
+grown.
+Compute the height of the plant after
+{{\\color{{red}}
+{self.input} {inflector.plural(str(self.time_unit))}.
+}}
+You must include units in your answer!
+\\smallskip
+
+\\begin{{center}}
+{tabular}
+\\end{{center}}
+\\smallskip
+
+"""
 
     def checkunits(self, user_units):
         user_units = user_units.replace('.', ' ')

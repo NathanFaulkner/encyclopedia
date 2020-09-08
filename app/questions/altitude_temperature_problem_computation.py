@@ -30,7 +30,7 @@ from sqlalchemy import (MetaData,
                         create_engine,
                         select)
 
-engine = create_engine('sqlite:///app/questions/climate.db', echo = None)
+engine = create_engine('sqlite:///app/questions/climate.db', echo = None, connect_args={'check_same_thread': False})
 conn = engine.connect()
 # print('table_names', engine.table_names())
 metadata = MetaData()
@@ -38,6 +38,12 @@ ws_climate = Table('climate_of_winston_salem', metadata, autoload=True,
                    autoload_with=engine)
 boone_climate = Table('climate_of_boone', metadata, autoload=True,
                    autoload_with=engine)
+
+
+
+#Just inserting an arbitrary change to see if debugger is happy now that I
+# have closed the connection.
+message = 'Still testing: here is an arbitrary change'
 
 class Locale():
     def __init__(self, name, table):
@@ -119,7 +125,7 @@ class AltitudeTemperatureComputation(Question):
         upper = round(self.upper_locale.altitude.to(self.alt_unit).magnitude, -1)
         self.upper_alt = upper
         diff = upper - lower
-        self.l = random.randint(6,10)
+        self.l = random.randint(6,8)
         alt_delta = int(diff/(self.l-1)/10)*10
         self.alt_delta = alt_delta
         upper_latitude = lower + self.l * alt_delta
@@ -193,6 +199,37 @@ class AltitudeTemperatureComputation(Question):
         whichever is applicable.
         """
 
+        tabular = "\\begin{tabular}{|l||"
+        for i in range(self.l):
+            tabular += 'c|'
+        tabular += '}\n\\hline\n'
+        tabular += f'Altitude (in {inflector.plural(str(self.alt_unit))}) & '
+        for i in range(self.l):
+            tabular += f'{lower + i*alt_delta} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n'
+        tabular += f'Temperature (in {temp_abbrev[self.temp_unit]}) & '
+        for i in range(self.l):
+            tabular += f'{round(self.m * (alt_delta *i) + self.lower_temp.magnitude, 1)} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n\\end{tabular}'
+
+
+        self.format_given_for_tex = f"""
+{self.prompt_single}
+\\smallskip
+
+{tabular}
+\\smallskip
+
+Using a linear model based on this data,
+predict the temperature at an altitude of {self.input}
+{inflector.plural(str(self.alt_unit))}.  Include units in the following way:
+Enter the numerical part of your answer, then a space, and then
+`F' for Fahrenheit, `C' for Celsius, `m' for meters, or `ft' for feet,
+whichever is applicable.
+"""
+
     prob_type = 'math_blank'
 
     name = 'Altitude vs. Temperature Growth Computation'
@@ -213,14 +250,14 @@ class AltitudeTemperatureComputation(Question):
         peculiar = str(self.temp_unit)
         more = [self.disp_unit, self.disp_unit.lower()]
         accepted = [long_format, abbrev, peculiar] + more
-        print(user_units, accepted)
+        # print(user_units, accepted)
         return user_units in accepted
 
     def checkanswer(self, user_answer):
-        if len(user_answer.split(' ')) == 1:
-            return false
-        else:
-            user_answer, user_units = user_answer.split(' ')
+        split_index = user_answer.rfind(' ')
+        if split_index == -1:
+            return False
+        user_answer, user_units = user_answer[:split_index], user_answer[split_index:].replace(' ', '')
         user_answer = user_answer.replace('^', '**')
         user_answer = parse_expr(user_answer, transformations=transformations)
         # print(abs(user_answer - self.float_answer) < 0.0005, self.checkunits(user_units))
@@ -229,10 +266,13 @@ class AltitudeTemperatureComputation(Question):
 
 
     def format_useranswer(self, user_answer, display=False):
-        if len(user_answer.split(' ')) == 1:
-            return user_answer
+        # print(user_answer)
+        split_index = user_answer.rfind(' ')
+        # print(split_index)
+        if split_index == -1:
+            user_units = ''
         else:
-            user_answer, user_units = user_answer.split(' ')
+            user_answer, user_units = user_answer[:split_index], user_answer[split_index:].replace(' ', '')
         user_answer = user_answer.replace('^', '**')
         user_answer = parse_expr(user_answer, transformations=transformations)
         return f'\({latex(user_answer)}\) {user_units}'
@@ -240,14 +280,17 @@ class AltitudeTemperatureComputation(Question):
     @classmethod
     def validator(self, user_answer):
         try:
-            if len(user_answer.split(' ')) == 1:
+            split_index = user_answer.rfind(' ')
+            if split_index == -1:
                 user_answer = user_answer.replace('^', '**')
                 user_answer = parse_expr(user_answer, transformations=transformations)
                 float(user_answer)
             else:
-                user_answer, user_units = user_answer.split(' ')
+                split_index = user_answer.rfind(' ')
+                user_answer, user_units = user_answer[:split_index], user_answer[split_index:].replace(' ', '')
             user_answer = user_answer.replace('^', '**')
             user_answer = parse_expr(user_answer, transformations=transformations)
+            float(user_answer)
         except:
             raise SyntaxError
 
@@ -258,3 +301,5 @@ class AltitudeTemperatureComputation(Question):
 
 
 Question_Class = AltitudeTemperatureComputation
+
+conn.close()

@@ -9,7 +9,11 @@ from sympy import *
 import numpy as np
 import json
 
-from app.questions import Question, latex_print, random_non_zero_integer, poly_points_from_nparrays
+from app.questions import (Question,
+                            latex_print,
+                            random_non_zero_integer,
+                            poly_points_from_nparrays,
+                            GraphFromLambda)
 from app.interpolator import cart_x_to_svg, cart_y_to_svg, get_parameters
 
 from flask import render_template
@@ -78,20 +82,18 @@ class GraphToSlopeIntercept(Question):
         </div>
         """
 
-        self.format_given_for_tex = f"""To be coded
+        self.format_given_for_tex = f"""{self.prompt_single}
         """
 
         self.format_answer = f'\( y = {latex(self.answer)}\)'
         # self.answer_latex = latex_print(self.answer)
         # self.answer_latex_display = latex_print(self.answer, display=True)
 
-    name = 'Graph from Point Slope Form'
-    module_name = 'graph_point_slope'
+    name = 'Slope Intercept Form from Graph'
+    module_name = 'graph_to_slope_intercept_form'
 
-    prompt_single = """Graph the given equation by plotting at least two points
-that satisfy the equation."""
-    prompt_multiple = """Graph each of the following equations by plotting at least two points
-that satisfy the equation."""
+    prompt_single = """Develop an equation for the given graph."""
+    prompt_multiple = """Needs rethinking + arbitrary change"""
 
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
@@ -108,6 +110,12 @@ that satisfy the equation."""
         self.given = expr
         #print('3rd step: So far its ', expr)
         self.answer = expr
+
+    has_img = True
+
+    def save_img(self, filename):
+        graph = GraphFromLambda(self.as_lambda)
+        graph.save_fig(filename)
 
     def get_svg_data(self, window):
         x_min = window[0]

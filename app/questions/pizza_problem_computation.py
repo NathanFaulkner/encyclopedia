@@ -89,9 +89,7 @@ class PizzaProblemComputation(Question):
     module_name = 'pizza_problem_computation'
 
 
-    prompt_multiple = """For each of the following tables,
-    compute the price of a pizza with
-    <span style="color: red">{self.input}</span> toppings.
+    prompt_multiple = f"""Needs rethinking.
     """
     # further_instruction = """Just enter the equation in a natural way.
     # """
@@ -120,8 +118,32 @@ class PizzaProblemComputation(Question):
         self.table_html = table_html
         self.format_given = self.table_html
 
-        table_for_tex = '\\begin{tabular}\n'
-        self.format_given_for_tex = 'Under construction'
+        tabular = "\\begin{tabular}{|l||"
+        for i in range(5):
+            tabular += 'c|'
+        tabular += '}\n\\hline\n'
+        tabular += f' Number of toppings & '
+        for i in range(5):
+            tabular += f'{i} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n'
+        tabular += f'Price of Pizza (in \\$) & '
+        for i in range(5):
+            tabular += f'{self.m * i + self.b} & '
+        tabular = tabular[:-2]
+        tabular += '\\\\\n\\hline\n\\end{tabular}'
+
+
+        self.format_given_for_tex = f"""
+The following table depicts the price of a {self.size_display} pizza
+depending on the number of toppings you order.
+Compute the price of a pizza with
+{{\\color{{red}}{self.input}}} toppings.
+\\smallskip
+
+{tabular}
+\\smallskip
+"""
 
     def checkanswer(self, user_answer):
         user_answer = user_answer.replace('$', ' ')

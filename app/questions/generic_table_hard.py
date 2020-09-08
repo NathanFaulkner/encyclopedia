@@ -129,6 +129,8 @@ class GenericTableHard(Question):
         self.table_html = table_html
         self.format_given = self.table_html
 
+        self.format_given_for_tex = 'Under construction'
+
     prob_type = 'math_blank'
 
     name = 'Harder Generic Table Problem'

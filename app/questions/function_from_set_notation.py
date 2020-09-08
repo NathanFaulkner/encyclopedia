@@ -17,7 +17,8 @@ import json
 from app.questions import (Question,
                             latex_print,
                             random_non_zero_integer,
-                            permute_equation)
+                            permute_equation,
+                            fix_quotes_for_tex)
 # from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 
@@ -161,12 +162,10 @@ class FunctionFromSetNotation(Question):
 
         self.prompt_multiple = """This would need to be rethought."""
 
+        tex_prompt = fix_quotes_for_tex(self.prompt_single)
         self.format_given_for_tex = f"""
-            {self.prompt_single}
-
-            \\[
-                {self.format_given}
-            \\]
+{tex_prompt}
+{self.format_given}
             """
 
 

@@ -9,7 +9,10 @@ from sympy import *
 import numpy as np
 import json
 
-from app.questions import Question, latex_print, random_non_zero_integer
+from app.questions import (Question,
+                            latex_print,
+                            random_non_zero_integer,
+                            GraphFromLambda)
 from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 
@@ -70,7 +73,7 @@ class GraphSlopeInterceptFromEnglish(Question):
                     m=latex(self.m))
 
 
-        self.format_answer = 'To be coded'
+        self.format_answer = '\\quad\n'
         # self.answer_latex = latex_print(self.answer)
         # self.answer_latex_display = latex_print(self.answer, display=True)
 
@@ -79,14 +82,21 @@ class GraphSlopeInterceptFromEnglish(Question):
         two points."""
         self.prompt_multiple = """This needs to be rethought."""
 
-        self.format_given_for_tex = f"""{self.prompt_single}
-            {self.format_given}
+        self.format_given_for_tex = f"""
+Graph the line described.  Make sure your graph is accurate throughout
+the window and has at least two points clearly marked.
 
-        \\begin{{flushright}}
-        \\includegraphics[scale=0.6]{{blank}}
-        \\end{{flushright}}
+\\begin{{center}}
+The line that has \\(y\\)-intercept of {self.b}
+and has slope of \\( m = {self.m} \\)
+\\end{{center}}
 
-        """
+\\begin{{flushright}}
+    \\includegraphics[scale=0.6]{{../common_imgs/blank}}
+\\end{{flushright}}
+\\vspace{{-9\\baselineskip}}
+
+"""
 
 
     name = 'Graph from Slope and Intercept'
@@ -109,6 +119,12 @@ class GraphSlopeInterceptFromEnglish(Question):
         self.given = expr
         #print('3rd step: So far its ', expr)
         self.answer = expr
+
+    has_img_in_key = True
+
+    def save_img(self, filename):
+        graph = GraphFromLambda(self.as_lambda)
+        graph.save_fig(filename)
 
     def get_svg_data(self, window):
         x_min = window[0]
