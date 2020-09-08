@@ -386,10 +386,12 @@ graphfromtwopoints.add_to_questions('graph_to_point_slope_form',
                                     'two_points_to_equation')
 
 linearfunctionsfromatable = Section('linearfunctionsfromatable', "Linear Functions From a Table", '/sections/linear_functions_from_a_table')
-linearfunctionsfromatable.add_to_questions(#'altitude_temperature_problem',
-                                            # 'altitude_temperature_problem_computation',
-                                            # 'generic_table_hard',
+linearfunctionsfromatable.add_to_questions('altitude_temperature_problem',
+                                            'altitude_temperature_problem_computation',
+                                            'generic_table_hard',
                                             'generic_table_hard_computation')
+
+
 #########
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
