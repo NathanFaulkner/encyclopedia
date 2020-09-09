@@ -446,6 +446,8 @@ def question(question_name):
         if points != []:
             if not graph.vert:
                 useranswer = graph.as_lambda
+            else:
+                useranswer = points[0][0]
             graph.gen_dict_for_svg()
             user_poly_points = graph.poly_points
             user_answer_for_db = json.dumps(points)

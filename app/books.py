@@ -390,7 +390,8 @@ linearfunctionsfromatable.add_to_questions('altitude_temperature_problem',
                                             'altitude_temperature_problem_computation',
                                             'generic_table_hard',
                                             'generic_table_hard_computation')
-
+standardformlines = Section('standardformlines', "Lines in Standard Form", '/sections/standard-form-lines')
+standardformlines.add_to_questions('graph_standard_form_line')
 
 #########
 
@@ -428,7 +429,8 @@ functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coor
                                     simplegraphing,
                                     pointslopeform,
                                     graphfromtwopoints,
-                                    linearfunctionsfromatable])
+                                    linearfunctionsfromatable,
+                                    standardformlines])
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
 
 

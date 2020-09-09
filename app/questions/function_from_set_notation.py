@@ -182,7 +182,8 @@ class FunctionFromSetNotation(Question):
                     user_answer = user_answer.replace(' ', '')
                     user_answer = user_answer.replace(f'f({str(self.input)})', '')
                     user_answer = user_answer.replace('=','')
-                    user_answer = int(user_answer)
+                    if user_answer.isnumeric():
+                        user_answer = int(user_answer)
                     return user_answer == self.answer
                 elif self.mode == 'domain':
                     if 'range' in user_answer:

@@ -36,7 +36,8 @@ __all__ = ['quadratic_pattern',
             'altitude_temperature_problem',
             'altitude_temperature_problem_computation',
             'generic_table_hard',
-            'generic_table_hard_computation']
+            'generic_table_hard_computation',
+            'graph_standard_form_line']
 
 class Question():
     pass
