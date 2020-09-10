@@ -493,10 +493,7 @@ def question(question_name):
     # of figuring out if I could have a second submit button---for submitting
     # requests for a preview of the math AnswerForm
     if form.validate_on_submit() and request.args.get('form') == 'form' and not (whether_graph and points == []):
-        if whether_graph and graph.vert:
-            correct = False
-        else:
-            correct = question.checkanswer(useranswer)
+        correct = question.checkanswer(useranswer)
         if current_user.is_authenticated and not session['tried']:
             user = current_user
             for book_info in books_info:

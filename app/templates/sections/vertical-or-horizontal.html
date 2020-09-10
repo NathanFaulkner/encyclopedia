@@ -1,0 +1,171 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  There are two "special cases" of standard form that are worth treating
+  separately.  Recall that standard form is:
+
+  \begin{equation}\tag{Standard Form}
+  ax + by = c
+  \end{equation}
+
+  The two special cases are (i) where \(a=0\) but \(b\neq 0\) and (
+  ii) where \(b=0\) but \(a\neq 0\).
+  For instance, \(y= 5\) and \(x=-1\) are examples of the special cases I am talking about.
+</p>
+
+<p>
+  How do you graph the equation when it is given in standard form?
+</p>
+
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      Consider the equation \(y=5\).
+
+
+    </p>
+    <ol class="multi-part" type="a">
+      <li>
+        List some pairs that satisfy this equation.  Graph them on the
+        \((x,y)\)-plane.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            Just to pick a random few: \((-3,5)\), \((0,5)\), and \((7, 5)\)
+            all satisfy the equation.
+            Why?&mdash;because for each of those pairs \(y\) equals 5!
+
+            <div style="text-align:center">
+              {% set svg_id = 'svg1' %}
+              {% set points = [[-3,5], [0, 5], [7,5]] %}
+              {% set poly_points = '' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        Graph the equation \(y = 5\) on the \((x,y)\)-plane.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+              Recall that the the graph of an equation&mdash;in the context
+              of the \((x,y)\)-plane!&mdash;is the set of all pairs that
+              satisfy the equation.
+              As seen in the previous part of the problem, the set of all pairs
+              that satisfy the equation is just the set of pairs
+              in which the second coordinate (the \(y\)-coordinate) is 5!
+              That includes all the inifinitely many points that lie
+              on the horizontal strip or line running through the "\(y=5\)"
+              point on the \(y\)-axis:
+
+              <div style="text-align:center">
+              {% set svg_id = 'svg2' %}
+              {% set points = [] %}
+              {% set poly_points = '0.0,87.5000000000000 350.0,87.5000000000000 ' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+              </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</p>
+
+<p>
+  As you'll see in the next example, we can represent vertical lines this way, too.
+</p>
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      Graph the equation on the \((x,y)\)-plane:
+        \[
+          x = -2
+        \]
+
+    </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Again, the graph of an equation (on the \((x, y)\)-plane)
+          is (a picture of) the set of all pairs that satisfy the equation
+          (that make it true).  What pairs satisfy this equation?  Well&mdash;all
+          the pairs that have a first coordinate (\(x\)-coordinate) of -2!
+          Where are those pairs located?&mdash;all along a vertical strip
+          that runs through the point marked \(-2\) on the \(x\)-axis:
+
+          <div style="text-align:center">
+            {% set svg_id = 'svg3' %}
+            {% set points = [] %}
+            {% set poly_points = '140, 0 140, 350' %}
+            {% set parameters = {
+                'svg_x_length': 350,
+                'svg_y_length': 350,
+                'cart_x_min': -10,
+                'cart_x_max': 10,
+                'cart_x_length': 20,
+                'cart_y_min': -10,
+                'cart_y_max': 10,
+                'cart_y_length': 20
+              }
+            %}
+            {% include "_static_graph.html" %}
+          </div>
+        </div>
+      </div>
+  </div>
+</p>
+
+<p>
+  That's all there is to it!
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

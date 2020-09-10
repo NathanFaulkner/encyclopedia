@@ -57,7 +57,10 @@ class PizzaProblem(Question):
         if 'm' in 'kwargs':
             self.m = kwargs['m']
         else:
-            self.m = round(self.size/10, 1) + random.choice([-0.5, -0.25, 0, 0.25, 0.5])
+            m = 0
+            while m == 0:
+                m = round(self.size/10, 1) + random.choice([-0.5, -0.25, 0, 0.25, 0.5])
+            self.m = m
         if self.size == 8:
             self.size_display = random.choice(['8"', 'small'])
         elif self.size == 12:

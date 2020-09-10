@@ -33,11 +33,14 @@ class VerticalOrHorizontal(Question):
     The given is of the form
 
     \\[
-     bdx + ady = abd
+        y  = value
+    \\]
+    or
+    \\[
+        x = value
     \\]
 
-
-    Intercepts are a and b.
+    kwarg orientation is either vert or horiz
 
     The student is expected to graph by plotting points.  Two is sufficient.
     """
@@ -47,36 +50,26 @@ class VerticalOrHorizontal(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        if 'a' in kwargs:
-            self.a = kwargs['a']
+        if 'orientation' in kwargs:
+            self.orientation = kwargs['orientation']
         else:
-            self.a = random_non_zero_integer(-8,8)
-        if 'b' in kwargs:
-            self.b = kwargs['b']
+            self.orientation = random.choice(['vert', 'horiz'])
+        if 'value' in kwargs:
+            self.value = kwargs['value']
         else:
-            self.b = random_non_zero_integer(-8,8)
-        if 'd' in kwargs:
-            self.d = kwargs['d']
+            self.value = random.randint(-8,8)
+        if self.orientation == 'vert':
+            self.symb = Symbol('x')
         else:
-            self.d = random_non_zero_integer(-8,8)
-        self.m = -Rational(self.b, self.a)
-        if 'x' in kwargs:
-            self.x = kwargs['x']
-        else:
-            self.x = Symbol('x')
-        if 'y' in kwargs:
-            self.y = kwargs['y']
-        else:
-            self.y = Symbol('y')
+            self.symb = Symbol('y')
 
-        self.genproblem()
-        self.lhs = self.b*self.d*self.x + self.a*self.d*self.y
-        self.rhs = self.a*self.b*self.d
+        self.lhs = self.symb
+        self.rhs = self.value
         self.given = Eq(self.lhs, self.rhs)
 
         self.format_given = f"\\[ {latex(self.lhs)} = {latex(self.rhs)} \\]"
 
-
+        self.answer = self.value
 
         self.format_answer = '\\quad\n'
         # self.answer_latex = latex_print(self.answer)
@@ -94,8 +87,8 @@ the window and has at least two points clearly marked.
 
 """
 
-    name = 'Graph Line from Standard Form'
-    module_name = 'graph_standard_form_line'
+    name = 'Vertical or Horizontal Lines'
+    module_name = 'vertical_or_horizontal'
 
     prompt_single = """Graph the given equation by plotting at least two points
 that satisfy the equation."""
@@ -105,14 +98,7 @@ that satisfy the equation."""
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
-    def genproblem(self):
-        out = {}
-        x = self.x
-        b = self.b
-        m = self.m
-        self.as_lambda = lambda x: m*x + b
-        f = self.as_lambda
-        self.answer = f(x)
+
 
     has_img_in_key = True
 
@@ -120,11 +106,15 @@ that satisfy the equation."""
         graph = GraphFromLambda(self.as_lambda)
         graph.save_fig(filename)
 
-    def get_svg_data(self, window=[-10,10]):
-        x_min = window[0]
-        x_max = window[1]
-        x_points = np.array([x_min, x_max])
-        y_points = self.as_lambda(x_points)
+    def get_svg_data(self, xwindow=[-10,10], ywindow=[-10,10]):
+        x_min, x_max = xwindow
+        y_min, y_max = ywindow
+        if self.orientation == 'vert':
+            x_points = np.array([self.value, self.value])
+            y_points = np.array([y_min, y_max])
+        else:
+            x_points = np.array([x_min, x_max])
+            y_points = np.array([self.value, self.value])
         x_points = cart_x_to_svg(x_points)
         y_points = cart_y_to_svg(y_points)
         poly_points = ""
@@ -137,8 +127,17 @@ that satisfy the equation."""
 
 
     def checkanswer(self, user_answer):
-        user_answer = user_answer(self.x)
-        return self.answer.equals(user_answer)
+        if self.orientation == 'vert':
+            return user_answer == self.value
+        else:
+            # print(type(user_answer))
+            if type(user_answer) == type(5):
+                return False
+        x = Symbol('x')
+        user_answer = user_answer(x)
+        answer = self.value
+        print(answer, user_answer)
+        return answer == user_answer
 
     # def useranswer_latex(self, user_answer, display=False):
     #     user_answer = user_answer.replace('^', '**')
@@ -155,4 +154,4 @@ that satisfy the equation."""
 
 
 
-Question_Class = GraphStandardFormLine
+Question_Class = VerticalOrHorizontal

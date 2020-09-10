@@ -7,6 +7,7 @@ from flask_mail import Mail
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
+from flask_wtf.csrf import CSRFProtect
 
 from .momentjs import momentjs
 
@@ -18,6 +19,8 @@ login = LoginManager(app)
 mail = Mail(app)
 login.login_view = 'login'
 app.jinja_env.globals['momentjs'] = momentjs
+csrf = CSRFProtect()
+# csrf.init_app(app)
 
 if not app.debug:
     if app.config['MAIL_SERVER']:

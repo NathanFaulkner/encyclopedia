@@ -37,7 +37,8 @@ __all__ = ['quadratic_pattern',
             'altitude_temperature_problem_computation',
             'generic_table_hard',
             'generic_table_hard_computation',
-            'graph_standard_form_line']
+            'graph_standard_form_line',
+            'vertical_or_horizontal']
 
 class Question():
     pass
@@ -233,3 +234,9 @@ def fix_quotes_for_tex(string):
             count += 1
         i += 1
     return string
+
+def has_letters(s):
+    for char in s:
+        if char.isalpha():
+            return True
+    return False

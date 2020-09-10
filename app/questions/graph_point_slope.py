@@ -163,6 +163,8 @@ that satisfy the equation."""
 
 
     def checkanswer(self, user_answer):
+        if type(user_answer) == type(5):
+            return False
         user_answer = user_answer(self.x)
         return self.answer.equals(user_answer)
 

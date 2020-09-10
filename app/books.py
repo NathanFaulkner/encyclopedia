@@ -393,6 +393,9 @@ linearfunctionsfromatable.add_to_questions('altitude_temperature_problem',
 standardformlines = Section('standardformlines', "Lines in Standard Form", '/sections/standard-form-lines')
 standardformlines.add_to_questions('graph_standard_form_line')
 
+verticalorhorizontal = Section('verticalorhorizontal', "Horizontal and Vertical Lines", '/sections/vertical-or-horizontal')
+verticalorhorizontal.add_to_questions('vertical_or_horizontal')
+
 #########
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
@@ -430,7 +433,8 @@ functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coor
                                     pointslopeform,
                                     graphfromtwopoints,
                                     linearfunctionsfromatable,
-                                    standardformlines])
+                                    standardformlines,
+                                    verticalorhorizontal])
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
 
 

@@ -10,7 +10,8 @@ from sympy import *
 from app.questions import (Question,
                             latex_print,
                             random_non_zero_integer,
-                            permute_equation)
+                            permute_equation,
+                            has_letters)
 
 
 # if __name__ == '__main__':
@@ -176,6 +177,8 @@ class AbsoluteValueEquation(Question):
             user_answer = user_answer.replace('=', ' ')
             user_answer = user_answer.replace('^', '**')
             user_answer = user_answer.replace('or', ',')
+            if has_letters(user_answer):
+                raise SyntaxError
             user_answers = user_answer.split(',')
             i = 0
             while i < len(user_answers):
