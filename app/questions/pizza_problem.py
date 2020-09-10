@@ -173,7 +173,7 @@ class PizzaProblem(Question):
         elif 'Y' in user_answer:
             user_p = 'Y'
         else:
-            user_p = None
+            user_p = ''
         if 'n' in user_answer:
             user_n = 'n'
         elif 'N' in user_answer:
@@ -183,7 +183,7 @@ class PizzaProblem(Question):
         elif 'X' in user_answer:
             user_n = 'X'
         else:
-            user_n = None
+            user_n = ''
         user_answer = user_answer.lower()
         user_answer = user_answer.replace('y', 'p')
         user_answer = user_answer.replace('x', 'n')

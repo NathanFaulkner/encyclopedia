@@ -78,7 +78,7 @@ class FunctionFromSetNotation(Question):
             self.force_function = kwargs['force_function']
         else:
             self.force_function = random.choice([True, False])
-        if 'force_function' in kwargs:
+        if 'force_not_function' in kwargs:
             self.force_not_function = kwargs['force_not_function']
         else:
             self.force_not_function = random.choice([True, False])
@@ -117,13 +117,20 @@ class FunctionFromSetNotation(Question):
                 while x in domain:
                     x = random.randint(-10,10)
             f.append((x, random.randint(-10,10)))
+        if self.force_not_function:
+            repeat = random.choice(domain)
+            y = random.randint(-10,10)
+            frange = [p[1] for p in f]
+            while y in frange:
+                y = random.randint(-10,10)
+            f.append((repeat, y))
         self.f = set(f)
+        domain = [p[0] for p in f]
+        self.domain = set(domain)
         self.is_function = len(domain) == len(set(domain))
         prompt_single = """Consider the relation (set of ordered pairs)
         defined here.  If it is not a function, answer "not a function".
         Otherwise, """
-        domain = [p[0] for p in f]
-        self.domain = set(domain)
         f_range = [p[1] for p in f]
         self.range = set(f_range)
         format_given = f'\\[ {self.symbol} = \\{{ '
