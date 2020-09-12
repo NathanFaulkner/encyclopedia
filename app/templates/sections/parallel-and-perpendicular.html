@@ -1,0 +1,563 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  Our basic goal in this section will be similar to previous sections:
+  to come up with the equation
+  for a line given some information about its graph.
+  The difference in this section will be that you will be told that the
+  line is either (i) parallel to or (ii) perpendicular to another line.
+</p>
+
+<p>
+  Here is one basic fact that you'll need to keep in mind:
+
+  <div class="fact">
+    <h2></h2>
+    Lines which are parallel have the same slope.
+  </div>
+</p>
+
+<p>
+  You have to earn the next fact:
+</p>
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      The slopes of perpendicular lines are related, but how?
+      To answer this, carry out the following steps:
+
+
+    </p>
+    <ol class="multi-part" type="a">
+      <li>
+        Draw a "generic" line.  You'll want to just "free-hand" this;
+        it will work better than using graphing paper.
+        You might as well make it have a positive slope.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            Here is what I drew:
+
+            <div style="text-align:center">
+              <iframe src="{{ url_for('static', filename='images/standalone_lines0.pdf') }}"
+              width="325" height="350">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        Next, draw a line perpendicular to your original line.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            <div style="text-align:center">
+              <iframe src="{{ url_for('static', filename='images/standalone_lines1.pdf') }}"
+              width="325" height="350">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        Then draw a "rise over run" triangle extending from your original line,
+        with one corner at the intersection of your two lines.
+        This will help you reason about the slopes.
+        Say that the slope of your "generic" line is \(m\).
+        So, label the rise of your triangle \(m\) and the run \(1\).
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            <div style="text-align:center">
+              <iframe src="{{ url_for('static', filename='images/standalone_lines2.pdf') }}"
+              width="325" height="350">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        Next, think about how the perpendicular line is just your original
+        line rotated \(90^\circ\), say, clockwise, about that point of
+        intersection.  A key insight is got by actually drawing a
+        rotated version of your "slope triangle."" This rotated slope-triangle
+        will give you information about the slope of the perpendicular line.
+        So&mdash;what is the slope of the new line; what is its "rise over run"?
+        Draw the rotated "slope triangle" to figure it out.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            <div style="text-align:center">
+              <iframe src="{{ url_for('static', filename='images/standalone_lines3.pdf') }}"
+              width="325" height="350">
+              </iframe>
+            </div>
+            Note that the new slope is negative.  Furthermore, whereas the original
+            "slope triangle" had a run of 1, the rotated slope triangle
+            has a fall of 1 (or a rise of \(-1\)).  And, while the original
+            slope triangle had a rise of \(m\), the new slope triangle
+            has a run of \(m\).  In all, the slope of the perpendicular line is:
+            \[
+              \textrm{rotated slope} = \frac{\textrm{rise}}{\textrm{run}} = \frac{-1}{m}
+            \]
+            Since the act of taking a number and doing "1 over that number"
+            is equivalent to "taking a reciprocal", the perpendicular
+            slope is often referred to as "the negative reciprocal".  What
+            does "reciprocal" mean?  It means "to flip a fraction upside down".
+            For instance, the reciprocal of \(\frac{1}{2}\) is \(\frac{2}{1} = 2\),
+            and the reciprocal of \(\frac{3}{5}\) is \(\frac{5}{3}\).
+            Of course, if you take a reciprocal of a reciprocal, you end
+            up where you started.
+            Note, in particular, that since \(2 = \frac{2}{1}\), the reciprocal
+            of \(2\) is \(\frac{1}{2}\).
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</p>
+
+<p>
+  Let's collect or summarize the work we did in the last example in the
+  following:
+
+  <div class="fact"  id="Fact2">
+    <h2></h2>
+    The slope of a line perpendicular to a given line will be the
+    "negative reciprocal" of the slope of the given line.
+    Or, in math symbols, if you start with a line with slope \(m\),
+    then the slope of any line perpendicular to it will be \(\frac{-1}{m}\).
+    Actually, there is a little fine print here: this fact is not
+    true if you start with a horizontal line&mdash;one with slope of 0.
+    After all, what happens when you divide by 0?  Nothing?  Is it undefined?
+    Well, yes and no: because <em>something</em> definitely happens
+    from a geometric point of view!  What happens when you rotate a
+    horizontal line \(90^\circ\)?  You get a vertical line of course!
+    So, just keep your wits about you and you'll be fine.
+  </div>
+</p>
+
+
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      Find an equation for the line that
+      passes through \((-1,7)\) and is parallel to the line with equation
+      \[
+        y = -\frac{2}{5}x + 0.7734
+      \]
+    </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Since the line described is parallel to the one with the given
+          equation and parallel lines have the same slope, we know the
+          slope of the described line is \(m = -\frac{2}{5}\).  We
+          can use point-slope to develop an equation.
+          As a reminder, point-slope form is
+          \[
+            y = m(x - x_0) + y_0
+          \]
+          Thus, an equation that will work is
+          \[
+            y = -\frac{2}{5}(x - (-1)) + 7
+          \]
+          You could also have written this:
+          \[
+            y = -\frac{2}{5}(x + 1) + 7
+          \]
+          You could also put the equation in slope-intercept form
+          (or "\(y = mx + b\)" form), but it isn't necessary.
+          Notice that if you <em>did</em> put your equation
+          in slope-intercept form (by distributing out
+          the \(-\frac{2}{5}\)), it would have the desired slope
+          of \(-\frac{2}{5}\).  But the nice thing about point-slope
+          form (as a review) is that it is easy to see from it that
+          the graph of our equation will have to pass through the
+          point \((-1, 7)\).  After all, the graph of an equation
+          is the set of \((x, y)\)-pairs that satisfy the equation,
+          and you can do some easy mental math to verify that if
+          you plug in \(x = -1\), you'll get \(y = 7\).
+        </div>
+      </div>
+  </div>
+</p>
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      Find an equation for the line passes through
+      \((6, -3)\) and is perpendicular to the line
+      with equation
+      \[
+        y = 2x - 1000
+      \]
+    </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          We will again use point-slope form:
+          \[
+            y = m(x - x_0) + y_0
+          \]
+          This time, since the line we want an equation for is
+          perpendicular to the line with the given equation, we take
+          the negative reciprocal of the slope of the given line.
+          The slope oour line will be \(x = -\frac{1}{2}\).
+          Of course, we're also given a point the requested line
+          passes through, so just plugging in the particulars
+          to point-slope form completes the task:
+          \[
+            y = -\frac{1}{2}(x - 6) - 3
+          \]
+          Note that, if we plug \(x = 6\) into our equation, then
+          we get \(y = -3\), which means our line definitely passes through
+          the point \((6, -3)\).  By the reasoning in example
+          1, we also know it has the desired slope.  We're done!
+          Was this suprisingly easy?  Well, that's just what it is!
+        </div>
+      </div>
+  </div>
+</p>
+
+<p>
+  Do any of these get harder?  Well, I don't know about "harder",
+  but there are a couple different cases to consider, as warned about
+  in
+  <a href="{{ url_for('section', section_name='parallelorperpendicular') }}#Fact2">
+    Fact 2.
+  </a>
+  We'll check these out in the remaining examples.
+</p>
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      The line passes through \((-1,3)\) and is parallel to the \(x\)-axis.
+    </p>
+    <ol class="multi-part" style="list-style-type: lower-alpha;">
+      <li>
+        Sketch a graph of the line described.
+        <div class="answer">
+          Of course, you want to begin by plotting the given point.
+          Next, just ask yourself what the \(x\)-axis is&mdash;the
+          horizontal axis&mdash;and what it means to be parallel
+          to it: it means the described line is horizontal!
+
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            <div style="text-align:center">
+              {% set svg_id = 'svg1' %}
+              {% set points = [[-1, 3]] %}
+              {% set poly_points = '0.0,122.5 350.0,122.5 ' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        Develop an equation for the line described.
+        <div class="answer">
+          It may help to review the examples in the section on
+          <a href="{{ url_for('section', section_name='verticalorhorizontal') }}">
+          horizontal
+          and vertical lines.
+          </a>
+          An equation of a graph is an equation that has only those
+          those points that lie on the graph that "make the equation true"&mdash;that
+          satisfy the equation.  In that way, it captures something
+          special about the graph.  So, what is special about a horizontal line?
+          What could you say about it that could be written down in the
+          format of an equation?  Well, the only thing you can say about it
+          is that, in being horizontal, all the points lying on it
+          have the same \(y\)-coordinate; after all, to figure out
+          the \(y\)-coordinate of a point, you just trace over
+          horizontally until you hit the \(y\)-axis.  So, how about this
+          equation:
+          \[
+            y = 3
+          \]
+          You can see that every \((x, y)\)-pair that satisfies this
+          equation will certainly have a \(y\)-coordinate of 3 and
+          will hence lie along the graphed line.  Likewise, every point
+          on the line will satisfy the equation.  So, that's it!
+
+          <p>
+            Notice, of course, that \(x\) doesn't even appear in the equation.
+            That means that the equation puts no restriction on \(x\).
+            Put another way, \(x\) can just be whatever it wants.  Mathematicians
+            have a particular wasy of saying that; they would say that
+            \(x\) is <em>free</em>.  It's very much like considering
+            the set of all real numbers \(x\) that satisfy such equations as
+            \[
+              0 = 0
+            \]
+            This equation makes restriction on \(x\); it leaves \(x\)
+            free to be whatever it wants&mdash;any real number&mdash;so
+            its solution is "all reals".
+          </p>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</p>
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      The line passes through \((-1,3)\) and is perpendicular to the \(y\)-axis.
+    </p>
+    <ol class="multi-part" style="list-style-type: lower-alpha;">
+      <li>
+        Sketch a graph of the line described.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            Of course, you want to begin by plotting the given point.
+            The \(y\)-axis is vertical.  To be perpendicular to it, therefore,
+            means to be horizontal, does it not?  So, this problem
+            ends up having the same solution as the previous example.
+
+            <div style="text-align:center">
+              {% set svg_id = 'svg2' %}
+              {% set points = [[-1, 3]] %}
+              {% set poly_points = '0.0,122.5 350.0,122.5 ' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        Develop an equation for the line described.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+            <div class='inner'>
+                \[
+                  y = 3
+                \]
+            </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</p>
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      The line passes through \((-1,3)\) and is perpendicular to the \(x\)-axis.
+    </p>
+    <ol class="multi-part" style="list-style-type: lower-alpha;">
+      <li>
+        Sketch a graph of the line described.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            Of course, you want to begin by plotting the given point.
+            The \(x\)-axis is horizontal.  To be perpendicular to it, therefore,
+            means to be vertical.  Like so:
+
+            <div style="text-align:center">
+              {% set svg_id = 'svg3' %}
+              {% set points = [[-1, 3]] %}
+              {% set poly_points = '157.5,0 157.5,350 ' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        Develop an equation for the line described.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+            <div class='inner'>
+              Again, you might want to take a look back at
+              the section on
+              <a href="{{ url_for('section', section_name='verticalorhorizontal') }}">
+              horizontal
+              and vertical lines.
+              </a>
+              Recall that the graph of an equation is (a picture of) the set
+              of all pairs that make the equation true.  So, in that
+              sense, an equation must say something very special and
+              specific about the graph to capture it in that way.  So, what
+              can we say about a veritical line&mdash;answer: all of
+              its \(x\)-coordinates are the same.  After all, to find
+              the \(x\)-coordinate of a point, you'd just trace up or
+              down until you hit the \(x\)-axis and observe what
+              tick marks you are on or within.  The \(x\)-coordinates
+              along this line are all \(-1\), so there you have it:
+                \[
+                  x = -1
+                \]
+              That says, "all the \(x\)-coordinates of points that
+              satisfy this equation have to be \(-1\)."
+              That's exactly the same thing as what we can say about
+              our vertical line, so we've got it (and no one can
+              take it away from us!)
+            </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</p>
+
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      The line passes through \((6,-7)\) and is perpendicular to the line
+      with equation
+      \[
+        y = 3
+      \]
+    </p>
+    <ol class="multi-part" style="list-style-type: lower-alpha;">
+      <li>
+        Sketch a graph of the line described.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            Plot the given point.  Then, visualize what the other instructions
+            tell you.  First of all, what does the line with
+            equation \(y = 3\) look like?  That's the set of pairs whose
+            \(y\)-coordinates are all 3, so that's a horizontal line.
+            To be perpendicular to it means to be vertical, so we
+            are after this vertical line:
+
+            <div style="text-align:center">
+              {% set svg_id = 'svg4' %}
+              {% set points = [[6, -7]] %}
+              {% set poly_points = '105,0 105,350 ' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        Develop an equation for the line described.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+            <div class='inner'>
+              Any vertical line has the form
+              \[
+                x = a
+              \]
+              where \(a\) is the \(x\)-coordinate of any point
+              it passes through (all the \(x\)-coordinates
+              are the same on a vertical line.)
+              So, this equation will work:
+                \[
+                  x = 6
+                \]
+            </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</p>
+
+<p>
+  Of course, there are different variations of these types of equations
+  that we might consider as well.  But they all ened up being about the
+  same as the ones we've already looked at, so why don't you try some
+  exercises now.
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

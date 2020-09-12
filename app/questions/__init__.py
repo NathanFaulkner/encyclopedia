@@ -38,7 +38,10 @@ __all__ = ['quadratic_pattern',
             'generic_table_hard',
             'generic_table_hard_computation',
             'graph_standard_form_line',
-            'vertical_or_horizontal']
+            'vertical_or_horizontal', 'vertical_or_horizontal_graph_to_equation',
+            'parallel_perpendicular_to_point_slope_form',
+            'vertical_or_horizontal_info_to_equation',
+            'vertical_or_horizontal_graph_from_description']
 
 class Question():
     pass
@@ -217,6 +220,105 @@ class GraphFromLambda():
     def save_fig(self, file_name):
         self.fig.savefig(f'{file_name}.png', bbox_inches='tight')
 
+class GraphVert():
+    def __init__(self,
+                    value,
+                    color="blue",
+                    res=0.001,
+                    xwindow=[-10,10],
+                    ywindow=[-10,10],
+                    xmarker_delta=1,
+                    ymarker_delta=1):
+        self.value = value
+        x_min = xwindow[0]
+        x_max = xwindow[1]
+        y_min = ywindow[0]
+        y_max = ywindow[1]
+
+
+        spacing = 1
+        minorLocator = MultipleLocator(spacing)
+
+        fig, ax = plt.subplots()
+
+        ax.plot(x, y, color=color)
+
+        fig.set_size_inches(6, 6)
+
+        ax.axhline(y=0, color='k')
+        ax.axvline(x=0, color='k')
+        ax.axvline(x=value, color=color)
+
+        #ax.set_aspect('equal')
+        ax.set_xticks(np.arange(x_min, x_max + xmarker_delta, xmarker_delta))
+        ax.set_yticks(np.arange(y_min, y_max + ymarker_delta, ymarker_delta))
+
+        # Turn on the minor TICKS, which are required for the minor GRID
+        ax.minorticks_on()
+
+        ax.yaxis.set_minor_locator(minorLocator)
+        ax.xaxis.set_minor_locator(minorLocator)
+
+        ax.grid(True, which='major')
+
+
+        plt.axis([x_min,x_max,y_min, y_max])
+
+        self.fig = fig
+        # plt.show()
+
+    def save_fig(self, file_name):
+        self.fig.savefig(f'{file_name}.png', bbox_inches='tight')
+
+class GraphHoriz():
+    def __init__(self,
+                    value,
+                    color="blue",
+                    res=0.001,
+                    xwindow=[-10,10],
+                    ywindow=[-10,10],
+                    xmarker_delta=1,
+                    ymarker_delta=1):
+        self.value = value
+        x_min = xwindow[0]
+        x_max = xwindow[1]
+        y_min = ywindow[0]
+        y_max = ywindow[1]
+
+
+        spacing = 1
+        minorLocator = MultipleLocator(spacing)
+
+        fig, ax = plt.subplots()
+
+        ax.plot(x, y, color=color)
+
+        fig.set_size_inches(6, 6)
+
+        ax.axhline(y=0, color='k')
+        ax.axvline(x=0, color='k')
+        ax.axhline(y=value, color=color)
+
+        #ax.set_aspect('equal')
+        ax.set_xticks(np.arange(x_min, x_max + xmarker_delta, xmarker_delta))
+        ax.set_yticks(np.arange(y_min, y_max + ymarker_delta, ymarker_delta))
+
+        # Turn on the minor TICKS, which are required for the minor GRID
+        ax.minorticks_on()
+
+        ax.yaxis.set_minor_locator(minorLocator)
+        ax.xaxis.set_minor_locator(minorLocator)
+
+        ax.grid(True, which='major')
+
+
+        plt.axis([x_min,x_max,y_min, y_max])
+
+        self.fig = fig
+        # plt.show()
+
+    def save_fig(self, file_name):
+        self.fig.savefig(f'{file_name}.png', bbox_inches='tight')
 
 def html_to_tex(html):
     out = fix_quotes_for_tex(html)
@@ -240,3 +342,54 @@ def has_letters(s):
         if char.isalpha():
             return True
     return False
+
+def fmt_slope_style_leading(term):
+    try:
+        if term.args[0] == 1:
+            coeff = ''
+        else:
+            coeff = latex(term.args[0])
+        terms = term.args[1:]
+    except IndexError:
+        coeff = latex(term)
+        terms = []
+    variable_part = ''
+    for term in terms:
+        variable_part += ' ' + latex(term)
+    return f'{coeff} {variable_part} '
+
+def fmt_slope_style_trailing(term):
+    try:
+        coeff = term.args[0]
+        terms = term.args[1:]
+    except IndexError:
+        coeff = term
+        terms = []
+    if coeff > 0:
+        if coeff == 1:
+            coeff = ''
+        else:
+            coeff = latex(coeff)
+        sign = '+'
+    elif coeff == 0:
+        coeff = ''
+        sign = ''
+    else:
+        if coeff == -1:
+            coeff = ''
+        else:
+            coeff = latex(abs(coeff))
+        sign = '-'
+    variable_part = ''
+    for term in terms:
+        variable_part += ' ' + latex(term)
+    return f'{sign} {coeff} {variable_part} '
+
+def fmt_slope_style(sum):
+    x = Symbol('x')
+    out = fmt_slope_style_leading(sum.args[0])
+    i = 1
+    while i < len(sum.args):
+        out += fmt_slope_style_trailing(sum.args[i])
+        i += 1
+    return out

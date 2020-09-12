@@ -12,7 +12,7 @@
     margin-right: 10%;
     margin-top: 80px;
     margin-bottom: 100px;
-    counter-reset: example 0 definition 0;
+    counter-reset: example 0 definition 0 fact 0;
   }
 
   .example h2::before {
@@ -23,6 +23,11 @@
   .definition h2::before {
     counter-increment: definition;
     content: "Definition " counter(definition) "."
+  }
+
+  .fact h2::before {
+    counter-increment: fact;
+    content: "Fact " counter(fact) "."
   }
 
   h1 + p::first-letter {

@@ -394,7 +394,13 @@ standardformlines = Section('standardformlines', "Lines in Standard Form", '/sec
 standardformlines.add_to_questions('graph_standard_form_line')
 
 verticalorhorizontal = Section('verticalorhorizontal', "Horizontal and Vertical Lines", '/sections/vertical-or-horizontal')
-verticalorhorizontal.add_to_questions('vertical_or_horizontal')
+verticalorhorizontal.add_to_questions('vertical_or_horizontal_graph_to_equation',
+                                    'vertical_or_horizontal')
+
+parallelorperpendicular = Section('parallelorperpendicular', "Parallel and Perpendicular Lines", '/sections/parallel-and-perpendicular')
+parallelorperpendicular.add_to_questions('parallel_perpendicular_to_point_slope_form',
+                                         'vertical_or_horizontal_info_to_equation',
+                                        'vertical_or_horizontal_graph_from_description')
 
 #########
 
@@ -434,7 +440,8 @@ functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coor
                                     graphfromtwopoints,
                                     linearfunctionsfromatable,
                                     standardformlines,
-                                    verticalorhorizontal])
+                                    verticalorhorizontal,
+                                    parallelorperpendicular])
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
 
 

@@ -490,3 +490,11 @@ a {
   margin-bottom: 4px;
   padding: 8px;
 }
+
+.fact {
+  border: 1px solid var(--logo-background-color);
+  background-color: rgba(255,165,0, 0.45);
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 8px;
+}
