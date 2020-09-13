@@ -92,7 +92,10 @@ class PlantProblem(Question):
             error = random.randint(0, error*10)/10
             # print(error)
             m = self.growth_rate + error
-            self.m = round(m, 1)
+            if round(m, 1) == 0:
+                self.m = 0.1
+            else:
+                self.m = round(m, 1)
             # print(self.m)
         x = Symbol('x')
         self.answer = self.m * x + self.b

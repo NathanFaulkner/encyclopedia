@@ -145,7 +145,9 @@ Consider the following table, depciting a relationship between \(x\) and \(y\).
 
 
         self.format_given_for_tex = f"""
-{self.prompt_single}
+Develop an equation that captures the relationship
+between \(x\) and \(y\) that is represented
+in this table.
 \\smallskip
 
 \\begin{{center}}

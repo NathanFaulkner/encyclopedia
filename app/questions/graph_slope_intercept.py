@@ -12,7 +12,8 @@ import json
 from app.questions import (Question,
                         latex_print,
                         random_non_zero_integer,
-                        GraphFromLambda)
+                        GraphFromLambda,
+                        fmt_slope_style)
 from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 
@@ -79,9 +80,9 @@ class GraphSlopeIntercept(Question):
         # self.answer_latex_display = latex_print(self.answer, display=True)
 
         self.format_given_for_tex = f"""
-Graph the line described.  Make sure your graph is accurate throughout
+Sketch a graph of the given equation.  Make sure your graph is accurate throughout
 the window and has at least two points clearly marked.
-{self.given_latex}
+{self.given_latex_display}
 
 \\begin{{flushright}}
 \\includegraphics[scale=0.6]{{../common_imgs/blank}}
