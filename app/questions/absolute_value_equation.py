@@ -102,7 +102,7 @@ class AbsoluteValueEquation(Question):
     enter "-1, 3" as the answer to some problem (possibly but not likely this one!)
     """
 
-    # loom_link = "https://www.loom.com/share/331e43b308a64cefbafdb1ac3211c9ac"
+    loom_link = "https://www.loom.com/share/4408bcd698d041e9917ba44ed17fbb2e"
 
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
@@ -151,7 +151,10 @@ class AbsoluteValueEquation(Question):
             return self.answer == user_answers
 
     def format_useranswer(self, user_answer, display=False):
+        user_answer = user_answer.lower()
         if self.no_solution:
+            return user_answer
+        elif 'no' in user_answer or 'null' in user_answer or 'empty' in user_answer:
             return user_answer
         else:
             user_answer = user_answer.replace('x', ' ')
