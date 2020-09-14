@@ -112,7 +112,7 @@ the window and has at least two points clearly marked.
 
 \\begin{{center}}
 The line that passes through the point \\( ({self.x0}, {self.y0}) \\)
-and has slope of \\( m = {self.m} \\)
+and has slope of \\( m = {latex(self.m)} \\)
 \\end{{center}}
 
 \\begin{{flushright}}

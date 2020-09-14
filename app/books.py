@@ -126,11 +126,12 @@ class SevenTest():
                 question_name = random.choice(section.questions)
                 section_info = self.book.get_skill_info(question_name)[0]
                 question_module = getattr(questions, question_name)
-                question = question_module.Question_Class(seed=self.seed)
+                seed = (self.seed * i) % 1
+                question = question_module.Question_Class(seed=seed)
                 question_set = [question]
                 question_name = random.choice(section.questions)
                 question_module = getattr(questions, question_name)
-                question = question_module.Question_Class(seed=abs(1-self.seed))
+                question = question_module.Question_Class(seed=abs(1-seed))
                 question_set.append(question)
                 question_sets.append(question_set)
             else:

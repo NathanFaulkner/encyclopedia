@@ -110,6 +110,7 @@ class ParallelPerpendicularToPointSlope(Question):
         self.prompt_multiple = """Give an equation for each of the lines described below."""
 
         self.format_given_for_tex = """{prompt}
+        
             \\begin{{center}}
                 The line that passes through the point \\( ({x0}, {y0}) \\)
                 and has slope of \\( m = {m} \\)

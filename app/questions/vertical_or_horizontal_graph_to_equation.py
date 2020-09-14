@@ -68,8 +68,6 @@ class VerticalOrHorizontalGraphToEquation(Question):
         self.rhs = self.value
         self.given = Eq(self.lhs, self.rhs)
 
-        self.format_given = f"\\[ {latex(self.lhs)} = {latex(self.rhs)} \\]"
-
         self.answer = self.value
 
         poly_points = self.get_svg_data([-10,10])
@@ -90,19 +88,12 @@ class VerticalOrHorizontalGraphToEquation(Question):
 
         self.format_given_for_tex = f"""
 Develop an equation for the given graph.
-{self.format_given}
-
-\\begin{{flushright}}
-\\includegraphics[scale=0.6]{{../common_imgs/blank}}
-\\end{{flushright}}
-\\vspace{{-12\\baselineskip}}
-
 """
 
     name = 'Equation for Vertical or Horizontal Line'
     module_name = 'vertical_or_horizontal_graph_to_equation'
 
-    prompt_single = """Develop an equation for the given graph"""
+    prompt_single = """Develop an equation for the given graph."""
     prompt_multiple = """TBA"""
 
 
@@ -168,6 +159,8 @@ Develop an equation for the given graph.
     def validator(self, user_answer):
         try:
             user_answer = user_answer.lower()
+            if 'x' not in user_answer and 'y' not in user_answer:
+                raise SyntaxError
             user_answer = user_answer.replace('^', '**')
             lhs, rhs = user_answer.split('=')
             lhs = parse_expr(lhs, transformations=transformations)

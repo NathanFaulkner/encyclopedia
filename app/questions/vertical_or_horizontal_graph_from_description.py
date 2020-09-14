@@ -110,9 +110,12 @@ class VerticalOrHorizontalGraphFromDescription(Question):
         # self.answer_latex_display = latex_print(self.answer, display=True)
 
         self.format_given_for_tex = f"""
-Graph the line with the given equation.  Make sure your graph is accurate throughout
-the window and has at least two points clearly marked.
-{self.format_given}
+{self.prompt_single}
+
+\\begin{{center}}
+The line is {self.parallel_or_perp} to {self.given_line}
+and passes through \(({self.x0}, {self.y0})\).
+\\end{{center}}
 
 \\begin{{flushright}}
 \\includegraphics[scale=0.6]{{../common_imgs/blank}}
@@ -124,7 +127,7 @@ the window and has at least two points clearly marked.
     name = 'Vertical or Horizontal Lines'
     module_name = 'vertical_or_horizontal_graph_from_description'
 
-    prompt_single = """Graph the given equation by plotting at least two points
+    prompt_single = """Graph the line described by plotting at least two points
 that satisfy the equation."""
     prompt_multiple = """Graph each of the following equations by plotting at least two points
 that satisfy the equation."""

@@ -118,13 +118,12 @@ The line is {self.parallel_or_perp} to {self.given_line}
 and passes through \(({self.x0}, {self.y0})\).
 \\end{{center}}
 
-
 """
 
     name = 'Equation for Vertical or Horizontal Line from Information'
     module_name = 'vertical_or_horizontal_info_to_equation'
 
-    prompt_single = """Develop an equation for the given graph"""
+    prompt_single = """Develop an equation for the line described here."""
     prompt_multiple = """TBA"""
 
 
@@ -190,6 +189,8 @@ and passes through \(({self.x0}, {self.y0})\).
     def validator(self, user_answer):
         try:
             user_answer = user_answer.lower()
+            if 'x' not in user_answer and 'y' not in user_answer:
+                raise SyntaxError
             user_answer = user_answer.replace('^', '**')
             lhs, rhs = user_answer.split('=')
             lhs = parse_expr(lhs, transformations=transformations)
