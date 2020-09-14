@@ -136,7 +136,7 @@ class AbsoluteValueEquation(Question):
 
     def checkanswer(self, user_answer):
         if self.no_solution:
-            return 'no' in user_answer.lower()
+            return 'no' in user_answer.lower() or 'null' in user_answer.lower() or 'empty' in user_answer.lower()
         else:
             user_answer = user_answer.replace('x', ' ')
             user_answer = user_answer.replace('=', ' ')
@@ -173,12 +173,14 @@ class AbsoluteValueEquation(Question):
     @classmethod
     def validator(self, user_answer):
         try:
+            user_answer = user_answer.lower()
             user_answer = user_answer.replace('x', ' ')
             user_answer = user_answer.replace('=', ' ')
             user_answer = user_answer.replace('^', '**')
             user_answer = user_answer.replace('or', ',')
             if has_letters(user_answer):
-                raise SyntaxError
+                if 'no' not in user_answer and 'null' not in user_answer and 'empty' not in user_answer:
+                    raise SyntaxError
             user_answers = user_answer.split(',')
             i = 0
             while i < len(user_answers):
