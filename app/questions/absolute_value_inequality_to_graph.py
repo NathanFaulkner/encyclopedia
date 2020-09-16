@@ -110,6 +110,7 @@ class AbsoluteValueInequalityToGraph(Question):
     further_instruction = """Give your answer by graphing on the real line.
     """
 
+    loom_link = """https://www.loom.com/share/61ff8ffe777b480c97625562f3ad5475"""
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 

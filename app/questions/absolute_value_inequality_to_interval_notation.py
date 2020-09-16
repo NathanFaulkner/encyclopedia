@@ -115,6 +115,8 @@ class AbsoluteValueInequalityToIntervalNotation(Question):
     </ul>
     """
 
+    loom_link = """https://www.loom.com/share/c4df440b24104dddbcb3360063721607"""
+
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 

@@ -41,7 +41,8 @@ __all__ = ['quadratic_pattern',
             'vertical_or_horizontal', 'vertical_or_horizontal_graph_to_equation',
             'parallel_perpendicular_to_point_slope_form',
             'vertical_or_horizontal_info_to_equation',
-            'vertical_or_horizontal_graph_from_description']
+            'vertical_or_horizontal_graph_from_description',
+            'how_many_solutions_to_system']
 
 class Question():
     pass

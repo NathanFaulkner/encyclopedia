@@ -403,6 +403,8 @@ parallelorperpendicular.add_to_questions('parallel_perpendicular_to_point_slope_
                                          'vertical_or_horizontal_info_to_equation',
                                         'vertical_or_horizontal_graph_from_description')
 
+systemsofequations = Section('systemsofequations', "Systems of Equations", '/sections/systems-of-equations')
+systemsofequations.add_to_questions('how_many_solutions_to_system')
 #########
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
@@ -442,7 +444,8 @@ functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coor
                                     linearfunctionsfromatable,
                                     standardformlines,
                                     verticalorhorizontal,
-                                    parallelorperpendicular])
+                                    parallelorperpendicular,
+                                    systemsofequations])
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
 
 

@@ -116,7 +116,7 @@ class AbsoluteValueInequality(Question):
     connecter has been supplied.  (Use "and"!)  You were warned!
     """
 
-    # loom_link = """https://www.loom.com/share/533779725fae4424b50e71c8f51bd888"""
+    loom_link = """https://www.loom.com/share/094b113d2d28457fbed0398171325949"""
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 

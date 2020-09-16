@@ -1,0 +1,411 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  We now turn to the concept of "systems of equations" and solving them.
+  These involve two (or, theoretically, more!) variables at once.
+
+It's good to start off with a concrete example before we jump into the
+"abstract" examples (where we just look at equations).
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Suppose that Enzo had a stellar basketball game the other day,
+  but a complete record of his performance wasn't recorded.
+  Instead, all that anyone remembers is that he totaled 37 points,
+  making 15 out of 21 attempts, and that he did not shoot a single free throw.
+  (So, his point total came from a combination of two-point goals and
+  three-point goals).
+  Can you figure out how many of each, two-pointers vs. three-pointers, he made?
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Well, let's write down what we know and see what we can figure out.
+      Let \(x\) represent the number of two-pointers he made,
+      and let \(y\) represent the number of three-pointers he made.
+      Then, since he scored 37 points, we know that
+      \[
+        2x + 3y = 37
+      \]
+      Also, he made 15 total shots, so it is also true that
+        \[
+          x + y = 15
+        \]
+    <p>
+      A key thing to realize is that <em>\(x\) and \(y\) both represent numbers
+      and that they represent the same numbers in each equation!</em>
+      So, for instance, it must be that
+        \[
+          y = 15 - x
+        \]
+      But, then, by substitution,
+        \[
+          2x + 3(15-x) = 37
+        \]
+      And this is just an everyday sort of equation that you are good at solving:
+        \begin{align*}
+          &2x + 3(15-x)   = 37 \\
+          \Rightarrow \quad & 2x + 45 - 3x = 37 \\
+          \Rightarrow \quad & -x + 45 = 37 \\
+          \Rightarrow \quad & -x = -8 \\
+          \Rightarrow \quad & x = 8
+        \end{align*}
+      From \(y = 15 - x\) we thus also know that \(y = 15 - 8 = 7\).
+      That is, he made 8 two-pointers and 7 three-pointers.
+    </p>
+    </div>
+  </div>
+</div>
+</p>
+
+<div class="definition">
+  <h2></h2>
+    We will learn how to solve <b>systems of linear equations</b>,
+    which are also sometimes called <b>linear systems</b>.
+    This is systems (collections) of equations of the form
+      \[
+        \begin{cases}
+          ax + by = c \\
+          dx + ey = f
+        \end{cases}
+      \]
+    where \(a\), \(b\), \(c\), \(d\), \(e\), and \(f\) will be (filled in) numbers,
+    and \(x\) and \(y\) will be the variables (unknown numbers) we are solving for.
+
+    A <b>solution</b> to the system is an \((x,y)\)-pair that satisfies
+    both equations when substituted in.  The <b>solution set</b>
+    is a nice description of the <em>set of all \((x,y)\)-pairs
+    that satisfies the system</em>&mdash;which is to say,
+    makes both equations true at the same time.
+</div>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/e7a746462c284a1e91b7326e6c78fdd5" target="_blank">Click for video.</a>
+  </p> -->
+
+  Figure out whether each given point is a solution to the given system:
+
+    \[
+      \begin{cases}
+      x - 4y = 14 \\
+      2x - 3y = 13
+      \end{cases}
+    \]
+
+  <ol class="multi-part" style="list-style-type: lower-alpha;">
+    <li>
+      <p>
+        <b>Point:</b> \((1,1)\)
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Substitute in \(x = 1\) and \(y=1\) and see if the equations are satisfied:
+            \[
+              1 - 4\cdot 1 = 1 - 4 = -3 \neq 14,
+            \]
+          so the first equation is not satisfied.  So, \((1,1)\) does not solve the system.
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        <b>Point:</b> \((18,1)\)
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Substitute in \(x = 18\) and \(y=1\) and see if the equations are satisfied:
+            \[
+              18 - 4 \cdot 1 = 18 - 4 = 14,
+            \]
+          so the first equation is satisfied.  But
+            \[
+            2\cdot 18 - 3 \cdot 1 = 36 - 3 = 33,
+            \]
+          so the second equation is not satisfied.
+          A solution to a system is an \((x,y)\) pair that satisfies
+          <em>both</em>, so \((18,1)\) is not a solution to the system.
+        </div>
+      </div>
+    </li>
+    <li>
+      <p>
+        <b>Point:</b> \((2,-3)\)
+      </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Substitute in \(x = 2\) and \(y=-3\) and see if the equations are satisfied:
+            \[
+            2 - 4\cdot (-3) = 2 + 12 = 14
+            \]
+          and
+            \[
+            2\cdot 2 - 3\cdot (-3) = 4 + 9 = 13,
+            \]
+          so both equations are satisfied.  So, \((2,-3)\) is a solution to the
+          system.  Does it represent the only solution?
+          We'll have to do some other activities to get a notion of whether
+          is or not.
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+<div class="definition">
+  <h2></h2>
+  An equation (in one variable) is said to be <b>linear</b>
+  provided each side of the equation is equivalent to an expression of the form
+    \(
+    mx + b
+    \).
+</div>
+
+<p>
+  In the section,
+  <a href="{{ url_for('section', section_name='solveforx') }}">
+  "Solve for \(x\)",
+  </a>
+  we solved lots of equations of this type, such as
+  \[
+    3(x-4) + 4(x-1) = 7(x+5) - 40
+  \]
+  We observed that there were three types of results we could get:
+  <ol>
+    <li> There could be zero solutions. (0)</li>
+    <li> There could be one, unique solution. (1)</li>
+    <li> The solution set could be "all reals"&mdash;an infinite set of solutions!(\(\infty\))</li>
+  </ol>
+  What do you anticipate are some different possibilities
+  for the solution set of a system of linear equations?
+  Keep in mind that the solution set to a system (with two variables)
+  is a set of \((x,y)\)-pairs.  What do you anticipate
+  we can say about those sets?
+
+  Actually, even though this question seems wildly open and uncertain, we
+  will soon see that it has a very similar answer to that for
+  equations of one variable!  (Actually, we could study systems
+  of many variables and see what can be said about all such problems.)
+  To get an intuitive grasph of the answer, we turn now to studying
+  the graphs of systems of equations.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/dbf0dd8785a54f9f80d58bf735672e0f" target="_blank">Click for video.</a>
+  </p> -->
+  Consider the system:
+    \[
+      \begin{cases}
+      3x + 2y = 10\\
+      -x + 3y = -18
+      \end{cases}
+    \]
+    How many solutions does this system have?
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            To find out, we are
+            going to <em>graph the system</em>.  All that really means
+            is to graph both lines and then think about what the visual
+            means in terms of the goal of solving the solution.
+
+            <p>
+              In order to plot, it may be more convenient to first put
+              the equations into slope-intercept ("\(y=mx+b\)") form.
+              I will do that for both simultaneously:
+
+              \begin{align*}
+              &
+                    \begin{cases}
+                    3x + 2y = 10\\
+                    -x + 3y = -18
+                    \end{cases} \\
+              \Rightarrow \quad &
+                    \begin{cases}
+                    2y = -3 x + 10\\
+                    3y = x - 18
+                    \end{cases} \\
+              \Rightarrow \quad &
+                    \begin{cases}
+                    y = -\frac{3}{2} x + 5\\
+                    y = \frac{1}{3}x - 6
+                    \end{cases} \\
+              \end{align*}
+              Now, I can just start at the \(y\)-intercept of each line,
+              and then proceed outward, following the slope.
+            </p>
+
+            <p>
+              Here is what I got:
+
+              <div style="text-align:center">
+                <img src="{{ url_for('static', filename='images/graph-of-system.png') }}">
+              </div>
+
+              The dots are on there to suggest the method I used for plotting.
+            </p>
+
+            <p>
+              Now, what does this graph tell us about the solution set?
+              Well, recall from above that a solution to a system of
+              equations is an \((x, y)\)-pair that satisfies both equations.
+              Recall, too, that the graph of an equation is (a picture of)
+              the set of all pairs that satisfy that equation.  So, the
+              solution&mdash;the pair that satisfies <em>both</em>&mdash;will
+              have to lie on both equations.  As you can see from the picture,
+              there is only one point that does so: the intersection of
+              the two lines.  A bit of reflection will tell you that you will
+              have this situation&mdash;a single solution&mdash;whenever you
+              have two lines with different slopes.  If they have
+              different slopes, they will always intersect a single point!
+              Now, what can happen if they have the same slope? We'll see
+              that in the next examples.
+            </p>
+          </div>
+        </div>
+</div>
+</p>
+
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/58635914aa6c4b2aa4fee004bf032da5" target="_blank">Click for video.</a>
+  </p> -->
+
+  Consider the system:
+    \[
+      \begin{cases}
+      x + 2y = -1\\
+      -2x - 4y = -12
+      \end{cases}
+    \]
+    How many solutions does it have?
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        Again, we can graph it to figure it out.  Again, you might
+        find it convenient to first put each equation into slope-intercept
+        form:
+        \begin{align*}
+          &       \begin{cases}
+                x + 2y = -1\\
+                -2x - 4y = -12
+                \end{cases} \\
+          \Rightarrow \quad &
+                \begin{cases}
+                2y = -x - 1\\
+                - 4y = 2x -12
+                \end{cases} \\
+          \Rightarrow \quad &
+                \begin{cases}
+                y = -\frac{1}{2}x - \frac{1}{2}\\
+                y = -\frac{1}{2}x + 3
+                \end{cases} \\
+        \end{align*}
+        Here are the graphs:
+        <div style="text-align:center">
+          <img src="{{ url_for('static', filename='images/graph-of-system-2.png') }}">
+        </div>
+       <p>
+         So, as it turned out, the two lines had the same slope, which
+         means they're parallel.  That means they never interect!  Again,
+         as we noted in the previous example, a solution to a system
+         of equations is an \((x, y)\)-pair that satisfies both equations.
+         And a graph of an equation is (a picture of) the set of all
+         of pairs that satisfies an equation.  So, the solution to a system
+         must lie on both graphs.  Since they graphs do not intersection,
+         there can be no solution to the system.  (It has 0 solutions.)
+       </p>
+      </div>
+    </div>
+</div>
+</p>
+
+
+
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/58635914aa6c4b2aa4fee004bf032da5" target="_blank">Click for video.</a>
+  </p> -->
+
+  Consider the system:
+    \[
+      \begin{cases}
+      x + 2y = -1\\
+      -2x - 4y = 2
+      \end{cases}
+    \]
+    How many solutions does it have?
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        Again, we can graph it to figure it out.  Again, you might
+        find it convenient to first put each equation into slope-intercept
+        form:
+        \begin{align*}
+          &     \begin{cases}
+          x + 2y = -1\\
+          -2x - 4y = 2
+          \end{cases}
+          \Rightarrow \quad &
+            \begin{cases}
+            2y = -x -1\\
+            - 4y = 2x + 2
+            \end{cases}
+          \Rightarrow \quad &
+                \begin{cases}
+                y = -\frac{1}{2}x - \frac{1}{2}\\
+                y = -\frac{1}{2}x - \frac{1}{2}
+                \end{cases} \\
+        \end{align*}
+        Oh, look!&mdash;You get the same equation in both cases!
+        <p>
+          The graph is a bit redundant in this case, but here it is anyway:
+          <div style="text-align:center">
+            <img src="{{ url_for('static', filename='images/graph-of-system-1.png') }}">
+          </div>
+        </p>
+
+       <p>
+         So, how many pairs satisfy this system?  Well,the solution set is
+         "all \((x,y)\)-pairs that lie on the graphed line, i.e,
+         that satisfy \(y = -\frac{1}{2}x-\frac{1}{2}\)."
+         So, how many pairs is that?  How many pairs lie along this line?
+         An infinite set of course!
+       </p>
+      </div>
+    </div>
+</div>
+</p>
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}
