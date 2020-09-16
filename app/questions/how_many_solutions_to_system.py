@@ -89,8 +89,8 @@ class HowManySolutionsToSystem(Question):
                 self.d2 = random.choice([1, -1]) * int(random.triangular(1, 3, 1))
 
         x, y = symbols('x y')
-        self.eq1 = Eq(-self.p1*self.d1*x + self.q1*self.d1*y,self.b1*self.q1)
-        self.eq2 = Eq(-self.p2*self.d2*x + self.q2*self.d2*y,self.b2*self.q2)
+        self.eq1 = Eq(-self.p1*self.d1*x + self.q1*self.d1*y,self.b1*self.q1*self.d1)
+        self.eq2 = Eq(-self.p2*self.d2*x + self.q2*self.d2*y,self.b2*self.q2*self.d2)
 
 
         self.format_given = f"""
