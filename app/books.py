@@ -405,6 +405,9 @@ parallelorperpendicular.add_to_questions('parallel_perpendicular_to_point_slope_
 
 systemsofequations = Section('systemsofequations', "Systems of Equations", '/sections/systems-of-equations')
 systemsofequations.add_to_questions('how_many_solutions_to_system')
+
+solvingbyelimination = Section('solvingbyelimination', "Solving by Elimination", '/sections/solving-by-elimination')
+solvingbyelimination.add_to_questions('solve_by_elimination')
 #########
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
@@ -445,7 +448,8 @@ functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coor
                                     standardformlines,
                                     verticalorhorizontal,
                                     parallelorperpendicular,
-                                    systemsofequations])
+                                    systemsofequations,
+                                    solvingbyelimination])
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
 
 

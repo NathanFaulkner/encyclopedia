@@ -111,8 +111,8 @@ class HowManySolutionsToSystem(Question):
 {self.format_given}
 """
 
-    name = 'Equation for Vertical or Horizontal Line'
-    module_name = 'vertical_or_horizontal_graph_to_equation'
+    name = 'How many solutions are there to the system?'
+    module_name = 'how_many_solutions_to_system'
 
     prompt_single = """How many solutions does the following system have?
     The possibilities are \(0\), \(1\), or \(\infty\)."""
