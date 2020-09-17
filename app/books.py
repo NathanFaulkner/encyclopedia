@@ -408,6 +408,9 @@ systemsofequations.add_to_questions('how_many_solutions_to_system')
 
 solvingbyelimination = Section('solvingbyelimination', "Solving by Elimination", '/sections/solving-by-elimination')
 solvingbyelimination.add_to_questions('solve_by_elimination')
+
+solvebysubstitution = Section('solvebysubstitution', 'Solving by Substitution', '/sections/solving-by-substitution')
+solvebysubstitution.add_to_questions('solve_by_substitution')
 #########
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
@@ -449,7 +452,8 @@ functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coor
                                     verticalorhorizontal,
                                     parallelorperpendicular,
                                     systemsofequations,
-                                    solvingbyelimination])
+                                    solvingbyelimination,
+                                    solvebysubstitution])
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
 
 

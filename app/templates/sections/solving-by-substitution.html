@@ -1,0 +1,195 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In the section entitled
+  <a href="{{ url_for('section', section_name='solvingbyelimination') }}">
+    Solving by Elimination
+  </a>
+  we learned an algebraic process for solving a system of two linear equations in
+  two unknowns&mdash;elimination.
+  The good news is that elimination always works!
+  In fact, elimination can be applied to solving a system of as many
+  linear equations as you want in as many variables as you want.
+  Of course, when the systems get large, it is much preferable to let a computer
+  solve it for you.  (Oh, yes&mdash;there are indeed
+  computer programs for performing elimination!)
+
+  The bad news is that elimination doesn't always work&mdash;if what you are
+  talking about is solving systems of more arbitrary equations,
+  not necessarily linear ones.  So, in preparation for such things,
+  we are going to practice another method of solving which also always works
+  for linear systems but which works on more general systems as well.
+
+  More good news: Substitution can be easier on some systems,
+  though not all.  Just because I am nice, I will be giving you systems to
+  solve via substitution which are actually (in a sense) easier to solve
+  that way compared to using elimination.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve the following system using the method of substitution.
+  \[
+    \begin{cases}
+    x - 3y = 9 \\
+    4x - 7y = 26
+    \end{cases}
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      The substitution method works via some of the same observations we made to
+      justify elimination: \(x\) and \(y\) are honest,
+      real numbers, and we are assuming that they represent the
+      very same numbers in both equations.  The method is to use one of the
+      equations to solve for one of the variables (whichever one is convenient).
+      I find it convenient to solve the first equation for \(x\)&mdash;do
+      you see why?
+      Of course, I get
+        \[
+          x = 3y +9
+        \]
+      So, we have a formula for \(x\) in terms of \(y\).
+      To put this into words, what this means that, even though we don't yet
+      know what \(x\) and \(y\) are, we know that, whatever \(y\) turns out
+      to be, \(x\) has to be 9 more thatn 3 times that as-yet-unknown \(y\).
+      Now, we just <em>substitute</em> this formula for \(x\) into the other
+      equation and then solve:
+        \begin{align*}
+          & 4\left(3y + 9\right) - 7y = 26 \\
+          \Rightarrow \quad & 12y + 36 - 7y = 26 \\
+          \Rightarrow \quad& 5y  = -10 \\
+          \Rightarrow \quad& y  = -2 \\
+        \end{align*}
+      Finally, sub-in this value for \(y\) into your formula for \(x\) to get
+      the value of \(x\):
+        \[
+          x = 3\cdot (-2) + 9 = -6 + 9 = 3
+        \]
+      So, our final answer is \((x,y) = (3, -2)\).
+
+      Checking is always a good idea:
+        \[
+          3 - 3(-2) = 3 + 6 = 9
+        \]
+      and
+        \[
+          4\cdot 3 - 7(-2) = 12 + 14 = 26
+        \]
+      So, yes, the answer is correct.
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  Next, we look at two examples that illustrate what happens in the substitution process when
+  the system has no solution or infinite solutions lying along a single line.
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/e7a746462c284a1e91b7326e6c78fdd5" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve the following system using the method of substitution.
+  \[
+    \begin{cases}
+    -6x + 3y = 9\\
+    2x - y = -3
+    \end{cases}
+  \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      This time, I find it convenient to solve the second equation for \(y\).  I get
+        \[
+          y = 2x +3
+        \]
+      Now, I sub that in for \(y\) in the first equation and solve for \(x\):
+        \begin{align*}
+          & -6x + 3(2x+3) =9\\
+          \Rightarrow \quad & -6x + 6x + 9 = 9 \\
+          \Rightarrow \quad & 9 = 9
+        \end{align*}
+      What does that mean?  Well (making a similar comment to an
+      example in the section on solving by elimination),
+      strictly speaking, that 9 equals 9 isn't any kind of news:
+      you already knew that was true before doing any of that work.
+      But we can still take it as a reliable indicator that
+      the solution set of this system consists in an infinite set of pairs
+      lying along the line with equation \(2x - y = 3\).
+      After all, in hindsight, we can observe that the first equation is just
+      the second with both sides multiplied by \(-3\).
+      So, they have the same graph.  The solution set is all \((x, y)\)-pairs
+      lying along the graph of either of the equations (same graph either way).
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  Next, we look at an example that results in an answer of "no solution."
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/dbf0dd8785a54f9f80d58bf735672e0f" target="_blank">Click for video.</a>
+  </p> -->
+  Solve the following system using the method of substitution.
+    \[
+      \begin{cases}
+      -6x + 3y = 9\\
+      2x - y = -12
+      \end{cases}
+    \]
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        Again, solve the second equation for \(y\):
+          \[
+            y = 2x +12
+          \]
+        Sub that in for \(y\) in the first equation and solve for \(x\):
+          \begin{align*}
+            & -6x + 3(2x+12) =9\\
+            \Rightarrow \quad & -6x + 6x + 36 = 9 \\
+            \Rightarrow \quad & 36 = 9
+          \end{align*}
+        That's a false statement, so there is no \((x,y)\)-pair that
+        could make both equations true
+        at the same time: "No solution."
+      </div>
+    </div>
+</div>
+</p>
+
+
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

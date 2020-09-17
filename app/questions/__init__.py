@@ -43,7 +43,8 @@ __all__ = ['quadratic_pattern',
             'vertical_or_horizontal_info_to_equation',
             'vertical_or_horizontal_graph_from_description',
             'how_many_solutions_to_system',
-            'solve_by_elimination']
+            'solve_by_elimination',
+            'solve_by_substitution']
 
 class Question():
     pass
