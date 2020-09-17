@@ -149,6 +149,7 @@ class FunctionFromSetNotation(Question):
             in your answer.
             """
             if self.is_function:
+                # print(input, dict(f)[input])
                 self.answer = dict(f)[input]
                 self.format_answer = f'\({self.answer}\)'
         elif mode == 'domain':
@@ -182,15 +183,19 @@ class FunctionFromSetNotation(Question):
     def checkanswer(self, user_answer):
         user_answer = user_answer.lower()
         if self.is_function:
-            if 'not' in user_answer:
+            if 'not ' in user_answer:
                 return False
             else:
                 if self.mode == 'compute':
                     user_answer = user_answer.replace(' ', '')
                     user_answer = user_answer.replace(f'f({str(self.input)})', '')
                     user_answer = user_answer.replace('=','')
-                    if user_answer.isnumeric():
+                    # print(user_answer, self.answer)
+                    try:
                         user_answer = int(user_answer)
+                    except:
+                        pass
+                    # print(user_answer, type(user_answer))
                     return user_answer == self.answer
                 elif self.mode == 'domain':
                     if 'range' in user_answer:
