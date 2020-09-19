@@ -44,7 +44,8 @@ __all__ = ['quadratic_pattern',
             'vertical_or_horizontal_graph_from_description',
             'how_many_solutions_to_system',
             'solve_by_elimination',
-            'solve_by_substitution']
+            'solve_by_substitution',
+            'we_lost_the_receipts', 'air_travel', 'gold_alloy']
 
 class Question():
     pass
@@ -345,6 +346,28 @@ def has_letters(s):
         if char.isalpha():
             return True
     return False
+
+def find_numbers(string):
+    """Finds numbers in a string and returns a list of them
+    in the order in which they appear."""
+    numbers = []
+    for s in string.split():
+        if ',' in s:
+            try:
+                s = s.replace(',', '')
+                numbers.append(float(s))
+            except:
+                pass
+        else:
+            try:
+                numbers.append(float(s))
+            except:
+                pass
+    if len(numbers) == 1:
+        return numbers[0]
+    else:
+        return numbers
+
 
 def fmt_slope_style_leading(term):
     try:

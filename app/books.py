@@ -411,6 +411,11 @@ solvingbyelimination.add_to_questions('solve_by_elimination')
 
 solvebysubstitution = Section('solvebysubstitution', 'Solving by Substitution', '/sections/solving-by-substitution')
 solvebysubstitution.add_to_questions('solve_by_substitution')
+
+applicationsoflinearsystems = Section('applicationsoflinearsystems', "Applications of Linear Systems", '/sections/applications-of-linear-systems')
+applicationsoflinearsystems.add_to_questions('we_lost_the_receipts',
+                                                'air_travel',
+                                                'gold_alloy')
 #########
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
@@ -453,7 +458,8 @@ functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coor
                                     parallelorperpendicular,
                                     systemsofequations,
                                     solvingbyelimination,
-                                    solvebysubstitution])
+                                    solvebysubstitution,
+                                    applicationsoflinearsystems])
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
 
 

@@ -1,0 +1,314 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  We now to turn to some applications of linear systems.
+  I hope you will find at least some of these examples very striking&mdash;we are
+  solving some pretty legit problems here!  I have about 4 different types of
+  problems in mind (but there are oh-so-many more applications of linear systems).
+  I have provided examples for 3 of them here.
+
+  Good news!  we can use our TI's to solve these!
+  Your job in each problem will be to set up the system that you want to solve,
+  and then turn the solution over to the TI&mdash;which can perform elimination
+  for us!!  I will show you how.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Say that we have a quantity of 96% gold alloy
+  (the rest is silver), and we want to mix it with a
+  50% gold alloy to create a portion of
+  70% gold alloy.  If we want
+  4 ounces of the 70%
+  gold alloy, how much of each of the original alloys should we combine?
+  You may round your answer to two decimal places, as long as you don't
+  round until the very last step.  (Use exact fractions until the last step.)
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Let \(x\) represent the number of ounces of the
+      96% gold alloy that we will need, and let \(y\)
+      represent the number of ounces of the
+      50% gold alloy that we will need.
+      Since we want to combine the old alloys to form
+      4 ounces of the 70%%
+      gold alloy, we know that
+        \[
+          x + y = 4
+        \]
+      Also, we know that the quantity of gold in the final
+      mixture will be the gold from the 96%
+      alloy plus the gold from the  50% alloy, we have that
+        \[
+          0.96 x + 0.5y = 0.7\cdot 4 = 2.8
+        \]
+      So, we need to find the solution to the system
+        \[
+          \begin{cases}
+            x + y = 4\\
+            0.96 x + 0.5 y  = 2.8
+          \end{cases}
+        \]
+
+      Here is the cool part:  On your TI graphign calculator, find the button marked
+      \(x^{-1}\).  The "2nd" option on that button is called MATRX
+      for `"matrix.''  Hit that button to open the MATRX menu.
+      Next, use the arrow keys to toggle to the \texttt{EDIT} tab.
+      Select matrix <span class="typewriter">[A]</span>.
+      Enter the dimensions as <span class="typewriter">2 x 3</span>.
+      Then enter the coefficients of your matrix like so:
+
+      <div class="typewriter">
+        <table width="300px" style="margin-left:auto;margin-right:auto;">
+          <tr>
+            <td width="50px">[ 1 </td><td width="50px"> 1 </td><td width="50px"> 4 &nbsp; ]</td>
+          </tr>
+          <tr>
+            <td width="50px">[ 0.96</td><td width="50px">0.5</td><td> 2.8 ]</td>
+          </tr>
+        </table>
+      </div>
+
+      Next, you go back to the MATRX menu (hit "[2nd] [\(x^{-1}\)]" again)
+      and toggle to the <span class="typewriter">MATH</span> tab.
+      Here, you will scroll down until you find
+      <span class="typewriter">rref(</span>.
+      (FYI: "rref" stands for "reduced row echeleon form," not that it matters.)
+      Now, hit [2nd] [\(x^{-1}\)] (MATRX) again, and, under
+      <span class="typewriter">NAMES</span>, select
+      <span class="typewriter">[A]</span>. Hit [ENTER] twice.
+      You will see something like the following displayed:
+
+      <div class="typewriter">
+        <table min-width="300px" style="margin-left:auto;margin-right:auto;">
+          <tr>
+            <td width="50px">[ 1 </td><td width="50px"> 0  </td><td> 1.7391304348 ]</td>
+          </tr>
+          <tr>
+            <td width="50px">[ 0 </td><td width="50px"> 1 </td><td> 2.2608695652 ]</td>
+          </tr>
+        </table>
+      </div>
+
+      The top number in the far right column reveals the value of \(x\), and
+      the bottom number
+      in the far right column reveals the value of \(y\).
+      That is, rounded, the final answer is that
+      we would need about 2.26 ounces
+      of the 50% alloy and about 1.74 ounces
+      of the 96% alloy.
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  I won't give quite as much explanation in the next example:
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/e7a746462c284a1e91b7326e6c78fdd5" target="_blank">Click for video.</a>
+  </p> -->
+
+  "We lost the receipts": For the opening day of the fair,
+  (let's say that) 10,892
+  admission tickets were sold.  The receipts totaled
+  $99,516.
+  Tickets for children cost $7
+  each and adults' cost $15 each.
+  How many of each type of ticket were sold?
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Let \(x\) represent he number of child's tickets that were sold and \(y\)
+      represent the number of
+      adult's tickets that were sold.
+      Since the total number of tickets sold was
+      10,892, you have that
+      \[
+        x + y =  10892
+      \]
+      Next, using the prices of each and the total revenue of
+      $99,516, you get that
+      \[
+        7 x + 15 y = 99516
+      \]
+      Then your system is
+      \[
+        \begin{cases}
+          x + y =  10892\\
+          7 x + 15 y = 99516
+        \end{cases}
+      \]
+
+      Put into your TI's MATRX editor the following:
+
+      <div class="typewriter">
+        <table width="300px" style="margin-left:auto;margin-right:auto;">
+          <tr>
+            <td width="50px">[ 1 </td><td width="50px"> 1 </td><td width="50px"> 10892 ]</td>
+          </tr>
+          <tr>
+            <td width="50px">[ 7</td><td width="50px">15</td><td> 99516 ]</td>
+          </tr>
+        </table>
+      </div>
+
+      Do <span class="typewriter">rref(</span>, and you get:
+
+      <div class="typewriter">
+        <table width="300px" style="margin-left:auto;margin-right:auto;">
+          <tr>
+            <td width="50px">[ 1 </td><td width="50px"> 0 </td><td width="50px"> 7983 ]</td>
+          </tr>
+          <tr>
+            <td width="50px">[ 0</td><td width="50px">1</td><td> 2909 ]</td>
+          </tr>
+        </table>
+      </div>
+
+      Interpret this to get your final answer:
+      7983 child tickets were sold, and
+      2909 adult tickets were sold.
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  Next, we look at an example that results in an answer of "no solution."
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/dbf0dd8785a54f9f80d58bf735672e0f" target="_blank">Click for video.</a>
+  </p> -->
+  A typical direct flight from Raleigh to San Francisco
+  takes 5 hours and
+  48.5 minutes.
+  However, the return flight from
+  San Francisco to
+  Raleigh takes 4
+  hours and 58 minutes.
+  The difference between the two can be accounted for
+  by the wind blowing against the plane as it flies west
+  (the prevailing winds blow east) but actually
+  adding to the plane's speed as it travels back east!
+  We are assuming an "average"
+  wind speed, which means we regard the wind speeds
+  coming and going as the same
+  (Indeed, I noted on a flight from Seattle to Atlanta in 2019
+  that the plane was flying about 40 mph <em>over</em> its top speed!
+  That was because the wind was helping it.)
+  The distance between these two cities is about
+  2410 miles.
+  We are going to find the average wind speed and the average "apparent"
+  speed of the plane (relative to the air around it&mdash;which
+  you can think of as a measure of how hard the plane's engines are
+  having to work
+  to push through the air) across a two-way trip.
+  The key here is to realize that you can add the wind speed to the
+  plane's speed for the return (west to east trip) to get
+  the plane's "actual" speed (relative to the ground),
+  but you must subtract the wind speed from
+  the plane's apparent speed on the trip from east to west
+  (as the wind is working against the plane's direction of travel).
+  You can round your final answer to two decimal places.
+  However, you MUST include four decimal places for intermediate steps.
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        You will need to use the basic fact that the rate of
+        travel in miles per hour times the number of hours traveled gives
+        you the distance traveled in miles.
+        Note that the time in hours for the east to west trip took (in hours)
+          \[
+             5 + \frac{48.5}{60} \approx 5.8083
+          \]
+        and the trip from west to east took (in hours)
+          \[
+             4 + \frac{58}{60} \approx 4.9667
+          \]
+        Let \(v\) represent the (average) apparent speed of the plane
+        (relative to the air around it), and
+        let \(w\) represent the (average) wind speed.
+        So, we get two equations&mdash;one for the trip from east to west:
+          \[
+            5.8083\left(v-w\right) = 2410
+          \]
+        &mdash;and one for the trip from west to east:
+          \[
+            4.9667\left(v+w\right) = 2410
+          \]
+        You can distribute these values out to obtain the system
+        \[
+          \begin{cases}
+            5.8083 v - 5.8083 w = 2410 \\
+            4.9667 v + 4.9667 w = 2410
+          \end{cases}
+        \]
+        You could do elimination&mdash;or just let the calculator handle it!
+        I entered:
+
+        <div class="typewriter">
+          <table width="300px" style="margin-left:auto;margin-right:auto;">
+            <tr>
+              <td width="50px">[ 5.8083 </td><td width="50px"> -5.8083 </td><td width="50px"> 2410 ]</td>
+            </tr>
+            <tr>
+              <td width="50px">[ 4.9667 </td><td width="50px">4.9667</td><td> 2410 ]</td>
+            </tr>
+          </table>
+        </div>
+
+        Performing <span class="typewriter">rref(</span> on the TI, I got
+
+        <div class="typewriter">
+          <table width="300px" style="margin-left:auto;margin-right:auto;">
+            <tr>
+              <td width="50px">[ 1 </td><td width="50px"> 0 </td><td width="50px"> 450.08 ]</td>
+            </tr>
+            <tr>
+              <td width="50px">[ 0</td><td width="50px">1</td><td> 35.15 ]</td>
+            </tr>
+          </table>
+        </div>
+
+        Therefore, the average speed of the plane was
+        450.08 mph,
+        and the average wind speed was 35.15 mph.
+      </div>
+    </div>
+</div>
+</p>
+
+
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}
