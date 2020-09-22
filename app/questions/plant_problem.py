@@ -129,7 +129,7 @@ class PlantProblem(Question):
     further_instruction = """Just enter the equation in a natural way.
     """
 
-    # loom_link = ""
+    loom_link = "https://www.loom.com/share/8ff321d4b7434dc5b42f2536a9129132"
 
     def genproblem(self):
         table_html = f"""
