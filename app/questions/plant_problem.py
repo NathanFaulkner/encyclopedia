@@ -215,7 +215,7 @@ since ``{str(self.time_unit).title()} 0''.
         elif 'Y' in user_answer:
             user_y = 'Y'
         else:
-            user_y = None
+            user_y = ''
         if 'x' in user_answer:
             user_x = 'x'
         elif 'X' in user_answer:
@@ -225,7 +225,7 @@ since ``{str(self.time_unit).title()} 0''.
         elif 'T' in user_answer:
             user_x = 'T'
         else:
-            user_x = None
+            user_x = ''
         user_answer = user_answer.lower()
         user_answer = user_answer.replace('y', 'h')
         user_answer = user_answer.replace('t', 'x')
