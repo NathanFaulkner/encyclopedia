@@ -196,7 +196,7 @@ class AltitudeTemperatureComputation(Question):
         {inflector.plural(str(self.alt_unit))}.  Include units in the following way:
         Enter the numerical part of your answer, then a space, and then
         'F' for Fahrenheit, 'C' for Celsius, 'm' for meters, or 'ft' for feet,
-        whichever is applicable.
+        whichever is applicable.  Your answer must be accurate to 3 decimal places.
         """
 
         tabular = "\\begin{tabular}{|l||"

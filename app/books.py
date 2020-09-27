@@ -380,7 +380,7 @@ simplegraphing.add_to_questions('graph_slope_intercept_from_english',
 pointslopeform = Section('pointslopeform', "Graph from Point Slope Form", '/sections/point-slope-form')
 pointslopeform.add_to_questions('graph_point_slope_from_english',
                                 'graph_point_slope',
-                                'description_to_point_slope_form')
+                                 'description_to_point_slope_form')
 
 graphfromtwopoints = Section('graphfromtwopoints', "Graph from Two Points", '/sections/graph-from-two-points')
 graphfromtwopoints.add_to_questions('graph_to_point_slope_form',
@@ -416,6 +416,10 @@ applicationsoflinearsystems = Section('applicationsoflinearsystems', "Applicatio
 applicationsoflinearsystems.add_to_questions('we_lost_the_receipts',
                                                 'air_travel',
                                                 'gold_alloy')
+
+graphofabsolutevaluebasic = Section('graphofabsolutevaluebasic', "Graphs of Absolute Value Functions: Basic Transformations", '/sections/graph-of-absolute-value')
+graphofabsolutevaluebasic.add_to_questions('graph_absolute_value_basic',
+                                    'graph_absolute_value_basic_to_equation')
 #########
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
@@ -459,7 +463,8 @@ functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coor
                                     systemsofequations,
                                     solvingbyelimination,
                                     solvebysubstitution,
-                                    applicationsoflinearsystems])
+                                    applicationsoflinearsystems,
+                                    graphofabsolutevaluebasic])
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
 
 

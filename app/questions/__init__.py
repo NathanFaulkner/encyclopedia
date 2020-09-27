@@ -4,6 +4,10 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
 import random
 
+from sympy.parsing.sympy_parser import parse_expr
+from sympy.parsing.sympy_parser import standard_transformations, implicit_multiplication_application
+transformations = (standard_transformations + (implicit_multiplication_application,))
+
 from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 __all__ = ['quadratic_pattern',
@@ -45,7 +49,10 @@ __all__ = ['quadratic_pattern',
             'how_many_solutions_to_system',
             'solve_by_elimination',
             'solve_by_substitution',
-            'we_lost_the_receipts', 'air_travel', 'gold_alloy']
+            'we_lost_the_receipts', 'air_travel', 'gold_alloy',
+            'graph_absolute_value',
+            'graph_absolute_value_basic',
+            'graph_absolute_value_basic_to_equation']
 
 class Question():
     pass
@@ -370,42 +377,53 @@ def find_numbers(string):
 
 
 def fmt_slope_style_leading(term):
-    try:
+    if len(term.args) > 1:
         if term.args[0] == 1:
             coeff = ''
+        elif term.args[0] == -1:
+            coeff = '-'
         else:
             coeff = latex(term.args[0])
         terms = term.args[1:]
-    except IndexError:
-        coeff = latex(term)
-        terms = []
-    variable_part = ''
-    for term in terms:
-        variable_part += ' ' + latex(term)
-    return f'{coeff} {variable_part} '
+        variable_part = ''
+        for term in terms:
+            variable_part += ' ' + latex(term)
+        return f'{coeff} {variable_part} '
+    else:
+        return latex(term)
+
 
 def fmt_slope_style_trailing(term):
-    try:
+    x = Symbol('x')
+    if type(term) == type(5*x):
         coeff = term.args[0]
         terms = term.args[1:]
-    except IndexError:
+        if coeff > 0:
+            if coeff == 1:
+                coeff = ''
+            else:
+                coeff = latex(coeff)
+            sign = '+'
+        elif coeff == 0:
+            coeff = ''
+            sign = ''
+        else:
+            if coeff == -1:
+                coeff = ''
+            else:
+                coeff = latex(abs(coeff))
+            sign = '-'
+    elif sympify(term).is_number:
+        if term > 0:
+            return '+ ' + latex(term)
+        elif term == 0:
+            return ''
+        else:
+            return '- ' + latex(abs(term))
+    else:
         coeff = term
         terms = []
-    if coeff > 0:
-        if coeff == 1:
-            coeff = ''
-        else:
-            coeff = latex(coeff)
         sign = '+'
-    elif coeff == 0:
-        coeff = ''
-        sign = ''
-    else:
-        if coeff == -1:
-            coeff = ''
-        else:
-            coeff = latex(abs(coeff))
-        sign = '-'
     variable_part = ''
     for term in terms:
         variable_part += ' ' + latex(term)
@@ -413,9 +431,38 @@ def fmt_slope_style_trailing(term):
 
 def fmt_slope_style(sum):
     x = Symbol('x')
-    out = fmt_slope_style_leading(sum.args[0])
-    i = 1
-    while i < len(sum.args):
-        out += fmt_slope_style_trailing(sum.args[i])
-        i += 1
+    if type(sum) == type(x + 1):
+        out = fmt_slope_style_leading(sum.args[0])
+        i = 1
+        while i < len(sum.args):
+            out += fmt_slope_style_trailing(sum.args[i])
+            i += 1
+    else:
+        out = fmt_slope_style_leading(sum)
     return out
+
+def commute_sum(sum):
+    x = Symbol('x')
+    if type(sum) == type(x + 1):
+        first = sum.args[0]
+        second = 0
+        i = 1
+        while i < len(sum.args):
+            second += sum.args[i]
+            i += 1
+        return fmt_slope_style(second) + fmt_slope_style_trailing(first)
+    else:
+        return latex(sum)
+
+def fmt_abs_value(string):
+    count = 0
+    i = 0
+    while i < len(string):
+        if string[i] == '|':
+            if count % 2 == 0:
+                string = string[:i] + 'Abs(' + string[i+1:]
+            else:
+                string = string[:i] + ")" + string[i+1:]
+            count += 1
+        i += 1
+    return string

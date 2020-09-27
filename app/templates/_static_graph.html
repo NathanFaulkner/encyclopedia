@@ -150,17 +150,17 @@ function str_list_to_list_of_floats(str_list) {
     return -1;
   }
 
-  // Potentiometer
-    svg.addEventListener('mousemove', function(self) {
-      var loc = cursorPoint(self);
-      var x = loc.x;
-      var y = loc.y;
-      [x, y] = svg_coords_to_cart([x,y])
-      x = Number.parseFloat(x).toFixed(0);
-      y = Number.parseFloat(y).toFixed(0);
-      document.getElementById('{{ svg_id }}_x').innerHTML = x;
-      document.getElementById('{{ svg_id }}_y').innerHTML = y;
-    }, false);
+  // // Potentiometer
+  //   svg.addEventListener('mousemove', function(self) {
+  //     var loc = cursorPoint(self);
+  //     var x = loc.x;
+  //     var y = loc.y;
+  //     [x, y] = svg_coords_to_cart([x,y])
+  //     x = Number.parseFloat(x).toFixed(0);
+  //     y = Number.parseFloat(y).toFixed(0);
+  //     document.getElementById('{{ svg_id }}_x').innerHTML = x;
+  //     document.getElementById('{{ svg_id }}_y').innerHTML = y;
+  //   }, false);
 
 function graph_points(cart_pts) {
   // console.log("this is what it thinks cart_pts is:", cart_pts);
@@ -252,11 +252,13 @@ function graph_points(cart_pts) {
     }
   }
 
-
-
-
+  {% if color %}
+  var color = "{{ color }}";
+  {% else %}
+  var color = "blue";
+  {% endif %}
   graph_info = {"shape": "polyline", "data": {"points" : "{{ poly_points|safe }}"}  }
-  draw_graph(svg, graph_info, "blue");
+  draw_graph(svg, graph_info, color);
   points = {{ points|safe }}
   graph_points(points);
 </script>
