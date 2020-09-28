@@ -60,6 +60,9 @@ class GraphAbsoluteValueBasic(Question):
                 self.transformations = random.sample(transformation_options, 2)
             else:
                 self.transformations = transformation_options
+        if self.transformations == ['refl']:
+            addendum = random.choice(['vert', 'horiz'])
+            self.transformations.append(addendum)
         if 'refl' in self.transformations:
             self.m = -1
         else:
