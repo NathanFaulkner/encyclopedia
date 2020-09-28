@@ -58,6 +58,9 @@ class AbsoluteValueBasicGraphToEquation(Question):
             self.transformations = kwargs['transformations']
         else:
             self.transformations = random.sample(transformation_options, self.num_transformations)
+        if self.transformations == ['refl']:
+            addendum = random.choice(['vert', 'horiz'])
+            self.transformations.append(addendum)
         if 'refl' in self.transformations:
             self.m = -1
         else:

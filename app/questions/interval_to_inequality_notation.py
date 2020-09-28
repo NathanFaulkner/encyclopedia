@@ -292,8 +292,10 @@ class IntervalToInequalityNotation(Question):
     def format_useranswer(self, user_answer, display=False):
         if 'and' in user_answer:
             user_answer = user_answer.split('and')
+            user_connector = 'and'
         elif 'or' in user_answer:
             user_answer = user_answer.split('or')
+            user_connector = 'or'
         else:
             return "Your answer wasn't intellible"
         if len(user_answer) != 2:
@@ -302,10 +304,7 @@ class IntervalToInequalityNotation(Question):
         user_answer[0] = parse_expr(user_answer[0], transformations=transformations)
         user_answer[1] = user_answer[1].replace('^', '**')
         user_answer[1] = parse_expr(user_answer[1], transformations=transformations)
-        if self.logical_connector == 'and':
-            return f'\\( {latex(user_answer[0])} \\; \\textrm{{and}} \\; {latex(user_answer[1])} \\)'
-        else:
-            return f'\\( {latex(user_answer[0])} \\; \\textrm{{or}} \\; {latex(user_answer[1])} \\)'
+        return f'\\( {latex(user_answer[0])} \\; \\textrm{{{user_connector}}} \\; {latex(user_answer[1])} \\)'
 
     @classmethod
     def validator(self, user_answer):
