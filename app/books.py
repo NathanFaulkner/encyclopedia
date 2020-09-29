@@ -391,6 +391,8 @@ linearfunctionsfromatable.add_to_questions('altitude_temperature_problem',
                                             'altitude_temperature_problem_computation',
                                             'generic_table_hard',
                                             'generic_table_hard_computation')
+
+###
 standardformlines = Section('standardformlines', "Lines in Standard Form", '/sections/standard-form-lines')
 standardformlines.add_to_questions('graph_standard_form_line')
 
@@ -416,7 +418,7 @@ applicationsoflinearsystems = Section('applicationsoflinearsystems', "Applicatio
 applicationsoflinearsystems.add_to_questions('we_lost_the_receipts',
                                                 'air_travel',
                                                 'gold_alloy')
-
+#########
 graphofabsolutevaluebasic = Section('graphofabsolutevaluebasic', "Graphs of Absolute Value Functions: Basic Transformations", '/sections/graph-of-absolute-value')
 graphofabsolutevaluebasic.add_to_questions('graph_absolute_value_basic',
                                     'graph_absolute_value_basic_to_equation')

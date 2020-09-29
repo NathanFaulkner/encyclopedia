@@ -252,8 +252,6 @@ class GraphVert():
 
         fig, ax = plt.subplots()
 
-        ax.plot(x, y, color=color)
-
         fig.set_size_inches(6, 6)
 
         ax.axhline(y=0, color='k')
@@ -301,8 +299,6 @@ class GraphHoriz():
         minorLocator = MultipleLocator(spacing)
 
         fig, ax = plt.subplots()
-
-        ax.plot(x, y, color=color)
 
         fig.set_size_inches(6, 6)
 

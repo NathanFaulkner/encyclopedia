@@ -109,16 +109,13 @@ class ParallelPerpendicularToPointSlope(Question):
         self.prompt_single =  """Give an equation for the line described as follows."""
         self.prompt_multiple = """Give an equation for each of the lines described below."""
 
-        self.format_given_for_tex = """{prompt}
-        
+        self.format_given_for_tex = f"""{self.prompt_single}
+
             \\begin{{center}}
-                The line that passes through the point \\( ({x0}, {y0}) \\)
-                and has slope of \\( m = {m} \\)
+                The line that passes through the point \\( ({self.x0}, {self.y0}) \\)
+                and has slope of \\( m = {latex(self.m)} \\)
             \\end{{center}}
-            """.format(prompt=self.prompt_single,
-                        x0=latex(self.x0),
-                        y0=latex(self.y0),
-                        m=latex(self.m))
+            """
 
     name = 'Point Slope Form from Description (Parallel or Perpendicular)'
     module_name = 'parallel_perpendicular_to_point_slope_form'

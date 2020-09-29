@@ -30,7 +30,7 @@ from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 prob_type = 'graph'
 
-class GraphAbsoluteValue(Question):
+class GraphAbsoluteValueBasic(Question):
     """
     The given is of the form
 
@@ -46,23 +46,48 @@ class GraphAbsoluteValue(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
+        if 'num_transformations' in kwargs:
+            self.num_transformations = kwargs['num_transformation']
+        else:
+            self.num_transformations = random.choice([1, 2, 3])
+        transformation_options = ['vert', 'horiz', 'refl']
+        if 'transformations' in kwargs:
+            self.transformations = kwargs['transformations']
+        else:
+            if self.num_transformations == 1:
+                self.transformations = random.choice(transformation_options)
+            elif self.num_transformations == 2:
+                self.transformations = random.sample(transformation_options, 2)
+            else:
+                self.transformations = transformation_options
+        if self.transformations == ['refl']:
+            addendum = random.choice(['vert', 'horiz'])
+            self.transformations.append(addendum)
         if 'p' in kwargs:
             self.p = kwargs['p']
         else:
-            self.p = random_non_zero_integer(-5,5)
+            self.p = random_non_zero_integer(1,5)
         if 'q' in kwargs:
             self.q = kwargs['q']
         else:
-            self.q = random.randint(1,5)
+            self.q = random_non_zero_integer(1,5)
         self.m = Rational(self.p, self.q)
+        if 'refl' in self.transformations:
+            self.m = -self.m
         if 'x0' in kwargs:
             self.x0 = kwargs['x0']
         else:
-            self.x0 = random_non_zero_integer(-5,5)
+            if 'horiz' in self.transformations:
+                self.x0 = random_non_zero_integer(-5,5)
+            else:
+                self.x0 = 0
         if 'y0' in kwargs:
             self.y0 = kwargs['y0']
         else:
-            self.y0 = random.randint(-5,5)
+            if 'vert' in self.transformations:
+                self.y0 = random.randint(-5,5)
+            else:
+                self.y0 = 0
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:
@@ -120,8 +145,8 @@ the window and has at least two points clearly marked.
 
 """
 
-    name = 'Graph of an Absolute Value Function'
-    module_name = 'graph_absolute_value'
+    name = 'Graph of an Absolute Value Function: Basic'
+    module_name = 'graph_absolute_value_basic'
 
     prompt_single = """Graph the given equation by plotting at least three points
 that satisfy the equation."""
@@ -188,4 +213,4 @@ that satisfy the equation."""
 
 
 
-Question_Class = GraphAbsoluteValue
+Question_Class = GraphAbsoluteValueBasic

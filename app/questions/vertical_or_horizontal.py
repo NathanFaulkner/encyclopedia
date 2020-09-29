@@ -12,7 +12,8 @@ import json
 from app.questions import (Question,
                             latex_print,
                             random_non_zero_integer,
-                            GraphFromLambda)
+                            GraphFromLambda,
+                            GraphHoriz, GraphVert)
 from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 
@@ -103,7 +104,10 @@ that satisfy the equation."""
     has_img_in_key = True
 
     def save_img(self, filename):
-        graph = GraphFromLambda(self.as_lambda)
+        if self.orientation == 'vert':
+            graph = GraphVert(self.value)
+        else:
+            graph = GraphHoriz(self.value)
         graph.save_fig(filename)
 
     def get_svg_data(self, xwindow=[-10,10], ywindow=[-10,10]):

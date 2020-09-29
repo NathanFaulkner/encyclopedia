@@ -12,7 +12,8 @@ import json
 from app.questions import (Question,
                             latex_print,
                             random_non_zero_integer,
-                            GraphFromLambda)
+                            GraphFromLambda,
+                            GraphHoriz, GraphVert)
 from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 
