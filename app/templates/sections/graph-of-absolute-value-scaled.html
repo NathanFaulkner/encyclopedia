@@ -5,269 +5,25 @@
 
 {% block content %}
 <p class="subhead">
-  In the sections on
-  <a href="{{ url_for('section', section_name='simplegraphing') }}">
-      simple graphing
+  This is a continutation of the work begun in the section of
+  <a href="{{ url_for('section', section_name='graphofabsolutevaluebasic') }}">
+      graphs of absolute value functions (basic transformations).
   </a>
-  and
-  <a href="{{ url_for('section', section_name='pointslopeform') }}">
-      point-slope form
-  </a>
-  and others, you will have hopefully gotten a lot better at graphing lines.
-  I hope that you are very comfortable with them.
-  However, not every graph is a line, right?
-
-  In this section, we will be graphing absolute value functions&mdash;and
-  they will not have lines for their graphs!
-</p>
-
-<div class="definition">
-  <h2></h2>
-  By <b>absolute value function</b>,
-  I mean a function whose outputs can be obtained using a formula of the form
-    \[
-      f(x) = a|x-b|+c,
-    \]
-  where \(a\), \(b\), and \(c\) will be some numbers that vary from problem to problem
-
-  For example,
-    \[
-      f(x) = -2|x-7|+3
-    \]
-  is one such function.
-  At some point soon, you will be able to jot down a graph of this
-  without much more trouble than you have in graphing lines!
-</div>
-
-
-<p>
-  Whenever you are faced with the task of graphing something new,
-  you should start with the good-old ``just plot points'' method.
-  What I mean by that is to realize, first of all, that the graph of an
-  equation is just (a picture of) the set of pairs that make the equation
-  true.  So, you just plug in values for one of the variables (usually
-  \(x\)) and figure out what the other variable has to be to make it true.
-  Then, you plot those points.  Let's do that with the most basic
-  absolute value function via the following example.
-<p>
-
-
-
-<p>
-  <div class="example">
-    <h2></h2>
-    <p>
-    <!-- <a href="" target="_blank">Click for video.</a> -->
-    </p>
-
-    <p>
-      You are going to "plot points" until you realize what the graph
-      of \(y=|x|\) looks like.  You should repeat this activity on
-      your own whenever you forget what it looks like!
-      However, I want you to know up front that this is not
-      the method I suggest you use on any of the exercises in this
-      section.  Instead, this is a tedious method that you do to just
-      get started somewhere.  We will adopt a much more stream-lined
-      method in the examples below&mdash;but <em>only</em> after
-      going through these tedious process at least once.
-    </p>
-
-    <p>
-      All you have to do is to plug in a nice variety of \(x\)
-      values (plug in 0, plug in some positive numbers, plug in
-      some negative numbers), and keep going until a light
-      bulb goes on for you&mdash;and you are utterly certain
-      what the graph looks like.
-    </p>
-
-    <p>
-      Since this may be your first time in doing such a task,
-      I will guide you through it.  But in the future,
-      I expect you to be able to plot points on your own.
-    </p>
-    <ol>
-      <li>
-        Fill out the \(y\)-values in the following table
-        by performing the function \(y=|x|\)
-        on each of the \(x\)-values.  Then plot all of the
-        \((x,y)\)-pairs you obtain as dots on the graph.
-
-        <br>
-        <table border="1" style="border-collapse: collapse">
-          <tr>
-            <td style="text-align: center; width: 50px">\(x\)</td><td style="text-align: center;">\(y=|x|\)</td>
-          </tr>
-          <tr>
-            <td style="text-align: center;">-3</td><td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td style="text-align: center;">-2</td><td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td style="text-align: center;">-1</td><td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td  style="text-align: center;">0</td><td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td style="text-align: center;">1</td><td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td style="text-align: center;">2</td><td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td style="text-align: center;">3</td><td>&nbsp;</td>
-          </tr>
-        </table>
-
-        <div class="answer">
-          <a class="collapsible"><h3>Answer: </h3></a>
-          <div class='inner'>
-
-            <div style="text-align:center">
-              <table border="1" style="border-collapse: collapse">
-                <tr>
-                  <td style="text-align: center; width: 50px">\(x\)</td><td style="text-align: center;">\(y=|x|\)</td>
-                </tr>
-                <tr>
-                  <td style="text-align: center;">-3</td><td style="text-align: center;">3</td>
-                </tr>
-                <tr>
-                  <td style="text-align: center;">-2</td><td style="text-align: center;">2</td>
-                </tr>
-                <tr>
-                  <td style="text-align: center;">-1</td><td style="text-align: center;">1</td>
-                </tr>
-                <tr>
-                  <td  style="text-align: center;">0</td><td style="text-align: center;">0</td>
-                </tr>
-                <tr>
-                  <td style="text-align: center;">1</td><td style="text-align: center;">1</td>
-                </tr>
-                <tr>
-                  <td style="text-align: center;">2</td><td style="text-align: center;">2</td>
-                </tr>
-                <tr>
-                  <td style="text-align: center;">3</td><td style="text-align: center;">3</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li>
-         Plot these points on the \((x, y)\)-plane.
-        <div class="answer">
-          <a class="collapsible"><h3>Answer: </h3></a>
-          <div class='inner'>
-            <div style="text-align:center">
-              {% set svg_id = 'svg1' %}
-              {% set points = [[-3,3], [-2, 2], [-1,1], [0,0], [1,1], [2,2], [3,3]] %}
-              {% set poly_points = '' %}
-              {% set parameters = {
-                  'svg_x_length': 350,
-                  'svg_y_length': 350,
-                  'cart_x_min': -10,
-                  'cart_x_max': 10,
-                  'cart_x_length': 20,
-                  'cart_y_min': -10,
-                  'cart_y_max': 10,
-                  'cart_y_length': 20
-                }
-              %}
-              {% include "_static_graph.html" %}
-            </div>
-          </div>
-        </div>
-      </li>
-      <li>
-         Are you bored yet?  If you are, that's good!
-         But note that, in a way, we can never be totally sure what the
-         graph of this function looks like if all we do is plot points
-         one at a time.  After all, there is an infinite number of \(x\)-values
-         we would have to plug in&mdash;from the very large down to
-         untold reaches beyond the decimal place&mdash;and that we therefore
-         need some sort of "overall" observation to stop with this process
-         of plugging in points and to confidently "connect the dots".
-         Explain how you can know how to connect the dots.
-        <div class="answer">
-          <a class="collapsible"><h3>Answer: </h3></a>
-          <div class='inner'>
-            After having gotten our hands on it by plotting a few points,
-            it is now perfectly clear how the process works: for every
-            positive \(x\), the \(y\)-value coming out of
-            \(y = |x|\) is just \(x\).  That means that, for positive
-            \(x\),
-            the graph of \(y = |x|\) will just follow along with
-            the graph of \(y = x\).  It is clear that this will be a straight,
-            diagonal line along which you find all the pairs whose
-            \(x\) and \(y\) coordinates are the same.  Next, for negative
-            \(x\), the \(y\)-value coming out of \(y = |x|\) will just be
-            the positive version of \(x\).  So, the graph will also follow
-            along a straight, diagonal line for negative \(x\)&mdash;falling
-            on those pairs whose \(y\)-value has the same magnitude as
-            \(x\) but is positive instead of negative.  If you think about
-            it, since the negative of a negative is positive,
-            this means that, for negative \(x\), the graph of \(y = |x|\)
-            falls along the graph of \(y = -x\).  These two lines
-            meet in the middle at the origin, the point \((0,0)\), which is,
-            of course, also a pair that satisfies \(y = |x|\)
-            and hence lies on the graph, too.
-          </div>
-        </div>
-      </li>
-      <li>
-         Connect the dots: sketch a graph of the equation
-         \[
-          y = |x|
-         \]
-        <div class="answer">
-          <a class="collapsible"><h3>Answer: </h3></a>
-          <div class='inner'>
-            <div style="text-align:center">
-              {% set svg_id = 'svg2' %}
-              {% set points = [[-3,3], [-2, 2], [-1,1], [0,0], [1,1], [2,2], [3,3]] %}
-              {% set poly_points = '0.0,0 175.0,175.000000000000 350.0,0 ' %}
-              {% set parameters = {
-                  'svg_x_length': 350,
-                  'svg_y_length': 350,
-                  'cart_x_min': -10,
-                  'cart_x_max': 10,
-                  'cart_x_length': 20,
-                  'cart_y_min': -10,
-                  'cart_y_max': 10,
-                  'cart_y_length': 20
-                }
-              %}
-              {% include "_static_graph.html" %}
-            </div>
-          </div>
-        </div>
-      </li>
-    </ol>
-  </div>
+  The difference in this section is that we will be adding in
+  one more type of transformation&mdash;as well as combining them
+  with the other three seen in the previous section.
+  In particular, while we already considered transformations of
+  \(y = |x|\) involving horizontal shifts, vertical shifts,
+  and reflections across the \(x\)-axis, we will now
+  consider "scaling" of the \(y\)-values.  This won't necessarily
+  be harder than what we did in the previous section&mdash;it's just
+  that it can be confusing to consider everything at once when
+  you are starting out with the concept of transformations, so
+  I have saved part of the story until now.  (Actually, I will also
+  be saving yet more until a later time, too.)
 </p>
 
 
-<p>
-  Now that you know what the graph of \(y=|x|\) looks like,
-  it ends up that&mdash;after some practice with a certain set
-  of methods and perspectives&mdash;you can graph any function of the form
-    \[
-      f(x) = a|x-b|+c
-    \]
-  without much trouble.
-  To plot these, we won't just "plot points"&mdash;even though you
-  should also keep that method at the ready as a back-up or as a way
-  to check your work&mdash;but we are instead going to learn the
-  very useful&mdash;and pretty fun!&mdash;method of "transformations.""
-</p>
-
-<p>
-  Before I just come out and show you the method, though,
-  it is very helpful for you to start discovering the method for yourself.
-  That's what the following activities are about.
-</p>
 
 <p>
 <div class="example">
@@ -279,35 +35,60 @@
   <p>
     Graph the function
     \[
-      y = |x|+2
+      y = 2|x|
     \]
   </p>
-    Plot both the graph of \(y=|x|\) and \(y=|x|+2\) on the same set of axes.
+    Plot both the graph of \(y=|x|\) and \(y=2|x|\) on the same set of axes.
     Use different colors for each.
     Plot points if you have to, but think about the pattern that emerges
     and why it makes sense.
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          You should <em>think</em> about what would happen if you plugged
-          in different values for \(x\), but I don't recommend that
-          you actually write all of those down; I'm not advocating
-          the "plot points" method here.  Instead, note that if you
-          <em>did</em> plug any given value for \(x\), then the resulting
-          \(y\)-value&mdash;coming out of the formula \(y = |x|+2\)&mdash;will
-          just be 2 more than the \(y\)-value that comes out of
-          \(y = |x|\)&mdash;simply because "\(|x|+2\)"
-          is just "adding 2 to \(|x|\)".  Just think about what that means for the graph!
-          Since \(y\)-values are tracked by the vertical axis, that means
-          the graph will be the "same" as that of \(y = |x|\) except
-          that all the points will be "shifted up" by 2 units.
-          This is what mathematicians and company call a
-          "transformation" of the graph.  Actually, for this
-          specific example, they would call it a "translation": that's
-          the type of transformation it is&mdash;specifically, translation
-          up 2 units.
+          The first thing to realize is what the meaning of this expression
+          even is.  You see, you have a '2' written write next to \(|x|\).
+          (To use a fancy English-class word, you could say that
+          the '2' and the \(|x|\) are "juxtaposed", meaning
+          they are written right next to each other with nothing in between.)
+          What does that mean?  Well, in algebra, it is important to realize
+          that when there is a "missing" symbol like this, the operation
+          that is being communicated is multiplication.  For instance,
+          you can just write \(4x\) and what you mean is "4 times \(x\)".
+          You could have also included a dot for the multiplication sign,
+          as in \(4 \cdot x\), but that's optional, because your reader
+          is expected to know what it means either way (provided
+          it is explained to them at some point!)  Similarly,
+          I could have written \(2\cdot |x|\) above, but
+          the expression \(2|x|\) has the same meaning.
+
+          <p>
+            Now that that's out of the way, think about what happens
+            when you plug some different values of \(x\).
+            If you plug in 0, you get
+            \[
+              y = 2|0| = 2 \cdot 0 = 0
+            \]
+            If you plug in, say, 3, you get
+            \[
+              y = 2|3| = 2 \cdot 3 = 6
+            \]
+            You probably get the idea!  So, all that we're doing
+            is taking the \(y\)-value that comes out of the expression
+            \(|x|\) and doubling it.  Easy enough!  Now, the thing
+            to contemplate is what that means for the graph
+            of this new, transformed function.  Since \(y = 0\)
+            when \(x = 0\) but then is positive for any other
+            value of \(x\), the vertex (the lowest point)
+            of the graph will still be at \((0,0)\)&mdash;the same
+            as with \(y = |x|\).  But, then, for each unit you
+            travel away from there in the \(x\)-direction, the
+            \(y\)-value will grow at double the rate of that distance&mdash;which
+            makes it "rise" at double the rate of the graph of \(y = |x|\).
+            That means it will look a lot like \(y = |x|\),
+            but will just rise more steeply:
+          </p>
           <div style="text-align:center">
-            {% set svg_id = 'svg3' %}
+            {% set svg_id = 'svg1' %}
             {% set points = [] %}
             {% set poly_points = '0.0,0 175.0,175.000000000000 350.0,0 ' %}
             {% set parameters = {
@@ -324,7 +105,7 @@
             {% set color = "black" %}
             {% include "_static_graph.html" %}
             {% set points = [] %}
-            {% set poly_points = '0.0,-35.0000000000000 175.0,140.000000000000 350.0,-35.0000000000000 ' %}
+            {% set poly_points = '0.0,-175.000000000000 175.0,175.000000000000 350.0,-175.000000000000 ' %}
             <script>
               graph_info = {"shape": "polyline", "data": {"points" : "{{ poly_points|safe }}"}  }
               draw_graph(svg, graph_info, "blue");
@@ -336,7 +117,38 @@
             Note that I used <span style="color:black; opacity:0.5">gray</span>
             for the graph of \(x = |x|\) (for comparison purposes)
             and <span style="color:blue; opacity:0.5">blue</span> for the final
-            answer, that is, the graph of \(y = |x| + 2\).
+            answer, that is, the graph of \(y = 2|x|\).
+            Because of the visual effect created, this transformation
+            thus exhibited is often said to be "vertically stretching by
+            a factor of 2".  In the next example, we will see "vertical shrinking".
+            A word that can encompass both "stretching" and "shrinking"
+            is "scaling".
+          </p>
+
+          <p>
+            The concept of "slope" should come to mind here!  It is kind of like
+            the slope of \(y = 2|x|\) is \(2,\) whereas the slope of
+            \(y = |x|\) is \(1\).  The only problem with that is that neither of those
+            graphs should be said to have just one slope in the strictest sense.
+            After all, "slope" should be understood as the proportional change in \(y\) as
+            \(x\) runs to the right.  So, in that strict sense, \(y = |x|\)
+            has a negative slope for \(x \lt 0\) and a positive slope for
+            \(x \gt 0\).  So, it doesn't have a single slope,
+            but two different slopes on the different parts of the graph.
+            But, otherwise, thinking in terms of "slope"
+            is pretty helpful!
+          </p>
+
+          <p>
+            As a final recap, it can be said that for the function
+            \(
+              y = 2|x|
+            \)
+            the \(y\)'s start at 0 for \(x = 0\) and then \(y\) increases
+            in a 2 to 1 ratio no matter what direction you go (positive
+            is the same as negative) from there.  That's just a restatement
+            of the formula in English, but, in my opinion, also serves
+            to express exactly what the graph looks like.
           </p>
         </div>
       </div>
@@ -350,119 +162,48 @@
   <!-- <a href="" target="_blank">Click for video.</a> -->
   </p>
 
-  Graph each of the following without "just plotting points".
-  Instead, start with the "basic" graph of \(y=|x|\) and
-  explain how the graph of the given function will relate
-  to it via transformation.  Describe that transformation in words.
-  <ol>
-    <li>
-      \(y = |x| + 5\)
-      <div class="answer">
-        <a class="collapsible"><h3>Answer: </h3></a>
-        <div class='inner'>
-          Like the previous example, this function represents taking
-          \(y\)-values that come from the function \(f(x) = |x|\)
-          and just adding 5 to them.  Since \(y\) is plotted
-          vertically, that means a vertical shift of the plot of 5 units up.
-          <div style="text-align:center">
-            {% set svg_id = 'svg4' %}
-            {% set points = [] %}
-            {% set poly_points = '0.0,-87.5000000000000 175.0,87.5000000000000 350.0,-87.5000000000000 ' %}
-            {% set parameters = {
-                'svg_x_length': 350,
-                'svg_y_length': 350,
-                'cart_x_min': -10,
-                'cart_x_max': 10,
-                'cart_x_length': 20,
-                'cart_y_min': -10,
-                'cart_y_max': 10,
-                'cart_y_length': 20
-              }
-            %}
-            {% include "_static_graph.html" %}
-          </div>
-        </div>
-      </div>
-    </li>
-    <li>
-      \(y = |x| - 5\)
-      <div class="answer">
-        <a class="collapsible"><h3>Answer: </h3></a>
-        <div class='inner'>
-          This time, we observe that the \(y\)-values for this function
-          are obtained by using the outputs of the function
-          \(f(x) = 5\) and <em>subtracting</em> 5.  Since \(y\) is plotted
-          vertically, that means a vertical shift of the plot of 5 units
-          <em>down</em>.
-          <div style="text-align:center">
-            {% set svg_id = 'svg5' %}
-            {% set points = [] %}
-            {% set poly_points = '0.0,-87.5000000000000 175.0,87.5000000000000 350.0,-87.5000000000000 ' %}
-            {% set parameters = {
-                'svg_x_length': 350,
-                'svg_y_length': 350,
-                'cart_x_min': -10,
-                'cart_x_max': 10,
-                'cart_x_length': 20,
-                'cart_y_min': -10,
-                'cart_y_max': 10,
-                'cart_y_length': 20
-              }
-            %}
-            {% include "_static_graph.html" %}
-          </div>
-        </div>
-      </div>
-    </li>
-  </ol>
-</div>
-</p>
-
-<p>
-<div class="example" id="shift_right">
-  <h2></h2>
-  <p>
-  <!-- <a href="" target="_blank">Click for video.</a> -->
-  </p>
   <p>
     Graph the function
     \[
-      y = |x - 2|
+      y = \frac{1}{2}|x|
     \]
   </p>
-    Plot both the graph of \(y=|x|\) and \(y=|x - 2|\) on the same set of axes.
+    Plot both the graph of \(y=|x|\) and \(y=\frac{1}{2}|x|\) on the same set of axes.
     Use different colors for each.
     Plot points if you have to, but think about the pattern that emerges
     and why it makes sense.
-    Hint: It's nice to know where the <b>vertex</b>
-    of the graph will be&mdash;that is, the pointy part that lies at \((0,0)\) on
-    the graph of \(y=|x|\).  For what \(x\) do you get \(y\) to equal 0 coming
-    out of the function \(f(x)=|x-2|\)?
-    Start your graph there.
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          Note that all of the same \(y\)-values that come out of the function
-          \(f(x) = |x|\) will also come out of this one (to use the
-          technical vocab from
-          <a href="{{ url_for('section', section_name='functionnotation') }}">
-            the section on function notation,
-          </a> they will have the same <em>range</em>)
-          but that these \(y\)-values will "happen at different times", by
-          which I mean, because of the "-2", they will have to coincide with
-          different values on the \(x\)-axis.  For instance, to get 0 to
-          come out of \(y = |x - 2|\), you can't just plug in 0 for \(x\).
-          Instead, you have to plug in \(x=2\).  So, the vertex of this
-          graph will be at \((2, 0)\).  Likewise, to get <em>any</em> given
-          \(y\)-value that comes out of \(f(x) = |x|\), you'll have
-          to plug an \(x\)-value into \(|x-2|\) that is
-          <em>2 units to the right</em>: to get 1 out of \(|x|\) you can
-          just plug in 1, but to get 1 to come out of \(|x - 2|\) you might instead
-          plug in 3.  See what I mean?  Graphically, this means that we'll
-          have the same basic picture or shape to the graph, but the whole
-          thing will have to be shifted 2 units <em>to the right</em>.
+          <p>
+            Let's think about what happens
+            when you plug some different values of \(x\).
+            If you plug in 0, you get
+            \[
+              y = \frac{1}{2}|0| = \frac{1}{2} \cdot 0 = 0
+            \]
+            If you plug in, say, 3, you get
+            \[
+              y = \frac{1}{2}|3| = \frac{1}{2} \cdot 3 = 6
+            \]
+            You probably get the idea!  So, all that we're doing
+            is taking the \(y\)-value that comes out of the expression
+            \(|x|\) and doubling it.  Easy enough!  Now, the thing
+            to contemplate is what that means for the graph
+            of this new, transformed function.  Since \(y = 0\)
+            when \(x = 0\) but then is positive for any other
+            value of \(x\), the vertex (the lowest point)
+            of the graph will still be at \((0,0)\)&mdash;the same
+            as with \(y = |x|\).  But, then, for each unit you
+            travel away from there in the \(x\)-direction, the
+            \(y\)-value will grow at <em>half</em>
+            the rate of that distance&mdash;which
+            makes the graph "rise" at half the rate of the graph of \(y = |x|\).
+            That means it will look a lot like \(y = |x|\),
+            but will just rise less steeply:
+          </p>
           <div style="text-align:center">
-            {% set svg_id = 'svg6' %}
+            {% set svg_id = 'svg2' %}
             {% set points = [] %}
             {% set poly_points = '0.0,0 175.0,175.000000000000 350.0,0 ' %}
             {% set parameters = {
@@ -476,10 +217,10 @@
                 'cart_y_length': 20
               }
             %}
-            {% set color = 'black' %}
+            {% set color = "black" %}
             {% include "_static_graph.html" %}
             {% set points = [] %}
-            {% set poly_points = '0.0,-35.0000000000000 210.0,175.000000000000 350.0,35.0000000000000 ' %}
+            {% set poly_points = '0.0,87.5000000000000 175.0,175.000000000000 350.0,87.5000000000000 ' %}
             <script>
               graph_info = {"shape": "polyline", "data": {"points" : "{{ poly_points|safe }}"}  }
               draw_graph(svg, graph_info, "blue");
@@ -489,14 +230,38 @@
           </div>
           <p>
             Note that I used <span style="color:black; opacity:0.5">gray</span>
-            for the graph of \(x = |x|\) (for comparison purposes)
+            for the graph of \(y = |x|\) (for comparison purposes)
             and <span style="color:blue; opacity:0.5">blue</span> for the final
-            answer, that is, the graph of \(y = |x - 2|\).
+            answer, that is, the graph of \(y = 2|x|\).
+            The transformation exhibited here is often described as
+            "vertically srinking by half".
+          </p>
+
+          <p>
+            As a final recap, it can be said that for the function
+            \[
+              y = \frac{1}{2}|x|
+            \]
+            the \(y\)'s start at 0 for \(x = 0\) and then \(y\) increases
+            in a 1 to 2 ratio ((\x\) to \(y\)) no matter what direction you go
+            (positive
+            is the same as negative) from there.
+            That is, for every 2 \(x\) you run (left or right)
+            from \(x = 0\), the \(y\)'s will rise by 1.
+            That's just a restatement
+            of the formula in English, but, in my opinion, it also serves
+            to express exactly what the graph looks like.
           </p>
         </div>
       </div>
 </div>
 </p>
+
+
+
+
+
+
 
 <p>
 <div class="example"  id="shifthoriz">
@@ -511,28 +276,18 @@
   to it via a transformation.  Describe that transformation in words.
   <ol>
     <li>
-      \(y = |x - 5|\)
+      \(y = 3|x|\)
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          Like the previous example, this function involves all the
-          same \(y\)-values that come out of the function
-          \(f(x) = |x|\) except each \(y\) will coincide
-          with a different \(x\) from before.  To be precise,
-          you have to plug in \(x\)-values that are 5 units
-          to the right of the \(x\) that used to give rise
-          to a target \(y\).  For instance, if you want to get
-          0 out of \(|x - 5|\), you can't just plug in 0;
-          you'd have to plug in 5, instead.  To get 1 to come
-          out of \(|x - 5|\), you don't plug in 1; instead,
-          you might plug in 6.  In that fashion, you get all
-          the "old \(y\)-values", but, as they are co-occurring
-          with \(x\)-values that are 5 to the right, the graph will be
-          like that of \(y = |x|\) except shifted 5 units to the right:
+          This time, the \(y\)-values that come out of this function
+          are just triple those that come out of \(y = |x|\).
+          So, its graph will be like that of \(y = |x|\)
+          except it will "rise" at triple the rate.
           <div style="text-align:center">
-            {% set svg_id = 'svg7' %}
-            {% set points = [] %}
-            {% set poly_points = '0.0,-87.5000000000000 262.5,175.000000000000 350.0,87.5000000000000 ' %}
+            {% set svg_id = 'svg3' %}
+            {% set points = [[0,0], [1, 3], [-1, 3]] %}
+            {% set poly_points = '0.0,-350.000000000000 175.0,175.000000000000 350.0,-350.000000000000 ' %}
             {% set parameters = {
                 'svg_x_length': 350,
                 'svg_y_length': 350,
@@ -544,35 +299,25 @@
                 'cart_y_length': 20
               }
             %}
+            {% set color = "blue" %}
             {% include "_static_graph.html" %}
           </div>
         </div>
       </div>
     </li>
     <li>
-      \(y = |x + 5|\)
+      \(y = \frac{1}{3}|x|\)
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          Like the previous example, this function involves all the
-          same \(y\)-values that come out of the function
-          \(f(x) = |x|\) except each \(y\) will coincide
-          with a different \(x\) from before.  To be precise,
-          you have to plug in \(x\)-values that are 5 units <em>less</em> or,
-          graphically speaking, 5 units
-          to the <em>left</em>, of the \(x\) that used to give rise
-          to a target \(y\).  For instance, if you want to get
-          0 out of \(|x + 5|\), you can't just plug in 0;
-          you'd have to plug in \(-5\), instead.  To get 1 to come
-          out of \(|x + 5|\), you don't plug in 1; instead,
-          you might plug in \(-4\).  In that fashion, you get all
-          the "old \(y\)-values", but, as they are co-occurring
-          with \(x\)-values that are 5 to the left, the graph will be
-          like that of \(y = |x|\) except shifted 5 units to the left:
+          This time, the \(y\)-values that come out of this function
+          are just one third of those that come out of \(y = |x|\).
+          So, its graph will be like that of \(y = |x|\)
+          except it will "rise" at one third of the rate.
           <div style="text-align:center">
-            {% set svg_id = 'svg8' %}
-            {% set points = [] %}
-            {% set poly_points = '0.0,87.5000000000000 87.5,175.000000000000 350.0,-87.5000000000000 ' %}
+            {% set svg_id = 'svg4' %}
+            {% set points = [[0,0], [3,1], [-3,1]] %}
+            {% set poly_points = '0.0,116.666666666667 175.0,175.000000000000 350.0,116.666666666667 ' %}
             {% set parameters = {
                 'svg_x_length': 350,
                 'svg_y_length': 350,
@@ -594,6 +339,17 @@
 </p>
 
 <p>
+  The above examples are meant to illustrate that one type of transformation
+  that is new to this section (vertical scaling), but they are simpler than what you are
+  likely to see in the exercises.  Instead, you will see this
+  transformation in combination with those that we encountered in
+  <a href="{{ url_for('section', section_name='graphofabsolutevaluebasic') }}">
+      graphs of absolute value functions (basic transformations),
+  </a>
+  as in the following examples.
+</p>
+
+<p>
 <div class="example">
   <h2></h2>
   <p>
@@ -601,62 +357,45 @@
   </p>
   Graph the function
     \[
-    f(x)=-|x|
+      y = - \frac{3}{5}  \left|{x - 4}\right| - 5
     \]
-  Start by "plotting points" but then try to quickly observe what is going on.
-  How does the graph of \(y=-|x|\) relate to the graph of \(y=|x|\)?
-  Describe the transformation in words, and explain what it is going on with it.
-  How does it work?
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          You basically just have to get your order of operations right on this
-          one.  One key insight is that the absolute value signs
-          &mdash;in addition to being absolute value&mdash;work like parentheses
-          for the purposes of correct order of operations.
-          Ask yourself, what happens when you plug in various values for
-          \(x\)?  If you plug in, say, 1 for \(x\), then your computation is:
-          \begin{align*}
-            -|x| &= -|1| & \textrm{Plug in 1}\\
-            &= -1 & \textrm{Computed the value of } |1|
-          \end{align*}
-          If you plug in \(x = -1\), here's what it looks like:
-          \begin{align*}
-            -|x| &= -|-1| & \textrm{Plug in } -1\\
-            &= -1 & \textrm{Computed the value of } |-1|
-          \end{align*}
-          To clarify, the computation is equivalent to this:
-          \[
-            -|-1| = -\left({\color{green}|-1|}\right) = -\left({\color{green}1}\right) = -1
-          \]
-          Of course, if you plug in any other number, then something
-          similar happens: a positive number comes out of the absolute
-          value <em>and then</em> the negative is applied.  The end result
-          is that the \(y\)-value comes out negative.
-          (The one exception is \(x=0\), which would go like this:
-          \begin{align*}
-            -|x| &= -|0| & \textrm{Plug in } 0\\
-            &= -0 & \textrm{Computed the value of } |-0|\\
-            &= 0\\
-          \end{align*}
-          Note that the negative of 0 is indeed 0. After all, on the real line,
-          "negative" just means "go left".  So, \(-0\) means "go left 0 spaces".
-          Of course, that means staying put.  So, \(-0 = 0\).)
-          Since negative
-          \(y\)-values are plotted "in reverse order" (relative to the positive
-          values) going down the vertical \(y\)-axis, you get that
-          the graph of \(y = -|x|\) will be a mirror image of that
-          of \(y = |x|\).  That is why it is said to be "reflected
-          across the \(x\)-axis".  In other words, the \(x\) is like
-          the mirror and the graph of \(y = -|x|\) is like the
-          image of \(y = |x|\) "in the mirror".  (In fact, the
-          word "image" is used in a technical sense
-          by mathematicians for this and other
-          similar purposes!)
+          You can either try to analyze separately what each part of
+          what you are seeing in this formula means in terms of its graph&mdash;to
+          note each transformation separately and then also to execute them
+          in the proper order&mdash;or one can try to narrate
+          what the function does in a natural way.  Or you can try to both,
+          and one will reinforce the other!  (Of course, that's what I recommend.)
+
+          <p>
+            If you note the transformations one at a time working in an
+            "inside to out" fashion, you will be doing pretty good.  This would
+            go as follows:S
+            <table style="padding:10px;">
+              <tr>
+                <td style="width:50%">\(y = |x - 4|\)</td><td>Shift right 4 units</td>
+              </tr>
+              <tr>
+                <td>\(y = -\frac{3}{5}|x-4|\)</td><td>\(y\)'s will fall by 3 for every 5 you travel away from \(x = 4\)</td>
+              </tr>
+              <tr>
+                <td>\(y = -\frac{3}{5}|x - 4| + 5\)</td><td>Shift up 5</td>
+              </tr>
+            </table>
+            Because of the shift right 4 and up 5, I know the vertex will be
+            at \((4, 5)\) (right 4 and up 5 from the origin).  And
+            because of the coefficient of \(- \frac{3}{5}\), I know that
+            the rate of change of \(y\) will be "down 3 \(y\)'s for every
+            5 over in \(x\)".  Because of the absolute value, that means
+            that sort of change will happen in the same way whether we go
+            to the left of 4 or to the right of it.  So, the graph looks like so:
+          </p>
           <div style="text-align:center">
-            {% set svg_id = 'svg9' %}
-            {% set points = [] %}
-            {% set poly_points = '0.0,350.000000000000 175.0,175.000000000000 350.0,350.000000000000 ' %}
+            {% set svg_id = 'svg5' %}
+            {% set points = [[4, 5], [-1, 2], [9, 2]] %}
+            {% set poly_points = '0.0,234.500000000000 245.0,87.5000000000000 350.0,150.500000000000 ' %}
             {% set parameters = {
                 'svg_x_length': 350,
                 'svg_y_length': 350,
@@ -671,324 +410,129 @@
             {% set color = 'blue' %}
             {% include "_static_graph.html" %}
             {% set points = [] %}
-          </div>
-        </div>
-      </div>
-</div>
-</p>
-
-<p>
-  Now, we just need to put these various ideas together.  We now turn to examples
-  that involve multiple transformations at once.
-</p>
-
-<p>
-<div class="example">
-  <h2></h2>
-  <p>
-  <!-- <a href="" target="_blank">Click for video.</a> -->
-  </p>
-  Graph the function
-    \[
-    f(x) = -|x| + 5
-    \]
-      <div class="answer">
-        <a class="collapsible"><h3>Answer: </h3></a>
-        <div class='inner'>
-          It may be helpful to plug in a few "test-values" to get a feel for
-          what's going on.  The key is to think about correct
-          order of operations and what
-          they mean in terms of transformations of the graph.
-          Take \(x=0\). You'd first do the absolute value of 0&mdash;which is 0&mdash;then
-          you'd take the negative of 0 (0 again!); <em>then</em> you add 5.
-          So, what?  Well, think of it this way: We already know what the
-          graph of \(y = -|x|\) looks like.  And those are the values
-          that come first in terms of carrying out the order of operations
-          when computing the value of \(|x| + 5\). So, you can start
-          by thinking of the graph of \(y = -|x|\), and then just note
-          that it is shifted "up 5".  At least, this is one way of saying
-          what's going on!  (There is another good way of narrating it, too,
-          so I might explain that at some other point.  For now, let's
-          concentrate on this one.)
-          To illustrate what I am talking about, I have drawn
-          the graph of \(y = -|x|\) in
-          <span style="color:black; opacity:0.5">gray</span>
-          and the final answer, the graph of \(y = -|x| + 5\),
-          in
-          <span style="color:blue; opacity:0.5">blue</span>.
-          <div style="text-align:center">
-            {% set svg_id = 'svg10' %}
-            {% set points = [] %}
-            {% set poly_points = '0.0,350.000000000000 175.0,175.000000000000 350.0,350.000000000000 ' %}
-            {% set parameters = {
-                'svg_x_length': 350,
-                'svg_y_length': 350,
-                'cart_x_min': -10,
-                'cart_x_max': 10,
-                'cart_x_length': 20,
-                'cart_y_min': -10,
-                'cart_y_max': 10,
-                'cart_y_length': 20
-              }
-            %}
-            {% set color = 'black' %}
-            {% include "_static_graph.html" %}
-            {% set points = [] %}
-            {% set poly_points = '0.0,262.500000000000 175.0,87.5000000000000 350.0,262.500000000000 ' %}
-            <script>
-              graph_info = {"shape": "polyline", "data": {"points" : "{{ poly_points|safe }}"}  }
-              draw_graph(svg, graph_info, "blue");
-              points = {{ points|safe }}
-              graph_points(points);
-            </script>
-          </div>
-        </div>
-      </div>
-</div>
-</p>
-
-<p>
-<div class="example">
-  <h2></h2>
-  <p>
-  <!-- <a href="" target="_blank">Click for video.</a> -->
-  </p>
-  Graph the function
-    \[
-    f(x) = |x - 2| + 5
-    \]
-      <div class="answer">
-        <a class="collapsible"><h3>Answer: </h3></a>
-        <div class='inner'>
-          Here is a good way to approach this: Note first that,
-          based on examples like
-          <a href="#shift_right">
-          Example 4 above,
-          </a>
-          we know what the graph of \(y = |x-2|\)
-          (and similar examples) looks like.
-          Indeed, \(y = |x-2|\) is "the same as"
-          ("congruent to" would be a mathematically
-          correct statement!)
-          the graph of \(y = |x|\) except
-          shifted to the right 2 units.
-          Then,
-          thinking about order of operations (like always!)
-          we reason that the \(y\)-values coming out of
-          \[
-            f(x) = |x - 2| + 5
-          \]
-          are just 5 up from those of \(y = |x-2|\).
-          So, we also shift the graph up 5.
-          To keep track of all this, I just trace right 2 and
-          up 5 from the origin (so, to the point \((2,5)\))
-          and then proceed to draw the shape of \(y=|x|\)&mdash;albeit
-          "anchored" to a different spot.
-          <div style="text-align:center">
-            {% set svg_id = 'svg11' %}
-            {% set points = [] %}
-            {% set poly_points = '0.0,-122.500000000000 210.0,87.5000000000000 350.0,-52.5000000000000 ' %}
-            {% set parameters = {
-                'svg_x_length': 350,
-                'svg_y_length': 350,
-                'cart_x_min': -10,
-                'cart_x_max': 10,
-                'cart_x_length': 20,
-                'cart_y_min': -10,
-                'cart_y_max': 10,
-                'cart_y_length': 20
-              }
-            %}
-            {% set color = 'blue' %}
-            {% include "_static_graph.html" %}
-          </div>
-        </div>
-      </div>
-</div>
-</p>
-
-<p>
-<div class="example">
-  <h2></h2>
-  <p>
-  <!-- <a href="" target="_blank">Click for video.</a> -->
-  </p>
-  Graph the function
-    \[
-    f(x) = -|x - 2|
-    \]
-      <div class="answer">
-        <a class="collapsible"><h3>Answer: </h3></a>
-        <div class='inner'>
-          Basically, what I have been doing and will
-          continue to do is to think carefully about
-          correct order of operations and what they mean from a graphical
-          point of view.
-          Playing off my experience with the foregoing examples,
-          I know what what the graph of \(y = |x - 2|\)
-          looks like: it is like the graph of \(y = |x|\)
-          except shifted to the right 2 units.
-          Next, I think about what applying that negative sign will do.
-          I think about some random \(y\)-value coming out of the
-          expression \(|x - 2|\) and then note that
-          the expression \(-|x - 2|\) will just involve
-          taking the negative of that \(y\)-value.  Since
-          \(y\)-values are plotted "up and down", I know
-          that the graph of \(y = -|x-2|\)
-          will just be that of \(y = |x - 2|\)
-          except "flipped down" or "reflected across the \(x\)-axis".
-          To illustrate what I am saying, I have plotted the graph
-          of \(y = |x - 2|\) in
-          <span style="color:black; opacity:0.5">gray</span>
-          and the final answer, the graph of \(y = -|x-2|\),
-          in
-          <span style="color:blue; opacity:0.5">blue</span>.
-          <div style="text-align:center">
-            {% set svg_id = 'svg12' %}
-            {% set points = [] %}
-            {% set poly_points = '0.0,-35.0000000000000 210.0,175.000000000000 350.0,35.0000000000000 ' %}
-            {% set parameters = {
-                'svg_x_length': 350,
-                'svg_y_length': 350,
-                'cart_x_min': -10,
-                'cart_x_max': 10,
-                'cart_x_length': 20,
-                'cart_y_min': -10,
-                'cart_y_max': 10,
-                'cart_y_length': 20
-              }
-            %}
-            {% set color = 'black' %}
-            {% include "_static_graph.html" %}
-            {% set points = [] %}
-            {% set poly_points = '0.0,385.000000000000 210.0,175.000000000000 350.0,315.000000000000 ' %}
-            <script>
-              graph_info = {"shape": "polyline", "data": {"points" : "{{ poly_points|safe }}"}  }
-              draw_graph(svg, graph_info, "blue");
-              points = {{ points|safe }}
-              graph_points(points);
-            </script>
-          </div>
-        </div>
-      </div>
-</div>
-</p>
-
-<p>
-<div class="example">
-  <h2></h2>
-  <p>
-  <!-- <a href="" target="_blank">Click for video.</a> -->
-  </p>
-  Graph the function
-    \[
-    f(x) = -|x - 2| + 5
-    \]
-      <div class="answer">
-        <a class="collapsible"><h3>Answer: </h3></a>
-        <div class='inner'>
-          Now, in the previous example, we figured out
-          what the graph of \(y = -|x - 2|\) looks like.
-          Continuing to think about correct order of operations,
-          we can reason that the \(y\) values that come out of
-          \(f(x) = -|x-2| + 5\) will just be 5 more
-          than those coming out of \(y = -|x-2|\) for the same \(x\).
-          Thus, the graph of \(y = f(x)\) (the graph of the given function)
-          will just be the graph of \(y = -|x-2|\) except shifted
-          up 5 units.  To manage all those steps more easily,
-          I concentrate primarily on shifing <em>the vertex</em>
-          of the graph from the origin (where the vertex
-          of the original function \(y = |x|\) is located)
-          to the right 2 and up 5.  Then I draw
-          the "upside down" absolute value graph proceeding outward
-          from the vertex,
-          because I know, as noted in the previous example,
-          that the negative sign on the absolute value sign will involve
-          a reflection of the graph across the \(x\)-axis.
-          <div style="text-align:center">
-            {% set svg_id = 'svg13' %}
-            {% set points = [] %}
-            {% set poly_points = '0.0,297.500000000000 210.0,87.5000000000000 350.0,227.500000000000 ' %}
-            {% set parameters = {
-                'svg_x_length': 350,
-                'svg_y_length': 350,
-                'cart_x_min': -10,
-                'cart_x_max': 10,
-                'cart_x_length': 20,
-                'cart_y_min': -10,
-                'cart_y_max': 10,
-                'cart_y_length': 20
-              }
-            %}
-            {% set color = 'blue' %}
-            {% include "_static_graph.html" %}
           </div>
 
           <p>
-            Let me give you one other way of narrating what is going on with
-            this graph&mdash;and with the order of operations.  You may not
-            have fully contemplated this before, but the various rules of
-            arithmetic&mdash;I am thinking here of the commutative laws,
-            the associative laws, and the distributive law&mdash;actually
-            tell you that there is a certain flexibility in the way you
-            carry out operations, provided you are careful.  For instance,
-            if you want to add 5 and 12, you can start at 5 and then
-            "count up by 12" or start at 12 and then count up by 5.
-            This is a way of expressing what the content of the equation
-            \(
-              5 + 12 = 12 + 5
-            \)
-            is.  Now, using that same idea, you could rewrite the given function
-            as follows:
+            Maybe all of that made sense, but let's try another way of narrating what
+            is going on.  This other way of narrating really involves
+            rewriting the formula slightly, like so:
             \[
-              f(x) = 5 - |x - 2|
+              y = 5 - \frac{3}{5}|x - 4|
             \]
-            So what?  Well, when we write it this way, we can "read it"
-            left-to-right
-            in an intutive fashion that will inform us why the graph looks
-            the way it does.  The narrative goes like this: "The \(y\)-values
-            start at 5."
-            This would be like reading as far as this and then stopping
-            (knowing that we will add in a bit in a moment):
+            So, here is what I can say: The \(y\)'s start at 5, and then
+            proceed downwards from there&mdash;which takes me this far
+            into the formula:
             \[
-              f(x) = 5 \ldots
+              y = 5 - \phantom{x}
             \]
-            Fair enough?  To show you what I mean,
-            I am going to plot a dotted line at "level" \(y = 5\):
-            <div style="text-align:center">
-              <img src="{{ url_for('static', filename='images/absvalplot.png') }}"
-                width="40%">
-            </div>
-            Next, we note that the \(y\)-values will go <em>down</em> from there
-            as \(x\) changes:
+            For what follows next&mdash;the part that involves \(x\)&mdash;I
+            see that \(y\) will change depending on what \(x\) is.  I see
+            that \(y\) will go down by 3 for every 5 that \(x\) gets away
+            from \(x = 4.\)  That means that, whether you go left or
+            right of \(x = 4\), the \(y\)'s will change in a "down 3,
+            over 5" sort of fashion.  Note that \(|x-4|\) gives me
+            "the absolute value of the difference between number \(x\)
+            and 4", which is literally the distance (which can't be negative)
+            of whatever \(x\) anyone wants to consider to 4.  And the \(-\frac{3}{5}\)
+            is functioning kind of like slope, albeit in a new or generalized
+            sense of the word, as opposed to how it is strictly defined
+            in the context of a single line.
+          </p>
+        </div>
+      </div>
+</div>
+</p>
+
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+  Graph the function
+    \[
+      y = - \frac{5}{2}  \left|{x + 4}\right| - 4
+    \]
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          You can either try to analyze separately what each part of
+          what you are seeing in this formula means in terms of its graph&mdash;to
+          note each transformation separately and then also to execute them
+          in the proper order&mdash;or one can try to narrate
+          what the function does in a natural way.  Or you can try to both,
+          and one will reinforce the other!  (Of course, that's what I recommend.)
+
+          <p>
+            If you note the transformations one at a time working in an
+            "inside to out" fashion, you will be doing pretty good.  This would
+            go as follows:
+            <table style="padding:10px;">
+              <tr>
+                <td style="width:50%">\(y = |x + 4|\)</td><td>Shift left 4 units</td>
+              </tr>
+              <tr>
+                <td>\(y = -\frac{5}{2}|x+4|\)</td><td>\(y\)'s will fall by 5 for every 2 you travel away from \(x = 4\)</td>
+              </tr>
+              <tr>
+                <td>\(y = -\frac{5}{2}|x + 4| - 4\)</td><td>Shift down 4</td>
+              </tr>
+            </table>
+            Because of the shift left 4 and down 4, I know the vertex will be
+            at \((-4, -4)\) (left 4 and down 4 from the origin).  And
+            because of the coefficient of \(- \frac{5}{2}\), I know that
+            the rate of change of \(y\) will be "down 5 \(y\)'s for every
+            2 over in \(x\)".  Because of the absolute value, that means
+            that sort of change will happen in the same way whether we go
+            to the left of 4 or to the right of it.  So, the graph looks like so:
+          </p>
+          <div style="text-align:center">
+            {% set svg_id = 'svg6' %}
+            {% set points = [[-4, -4], [-6, -9], [-2, -9]] %}
+            {% set poly_points = '0.0,507.500000000000 105.0,245.000000000000 350.0,857.500000000000 ' %}
+            {% set parameters = {
+                'svg_x_length': 350,
+                'svg_y_length': 350,
+                'cart_x_min': -10,
+                'cart_x_max': 10,
+                'cart_x_length': 20,
+                'cart_y_min': -10,
+                'cart_y_max': 10,
+                'cart_y_length': 20
+              }
+            %}
+            {% set color = 'blue' %}
+            {% include "_static_graph.html" %}
+            {% set points = [] %}
+          </div>
+
+          <p>
+            Maybe all of that made sense, but let's try another way of narrating what
+            is going on.  This other way of narrating really involves
+            rewriting the formula slightly, like so:
             \[
-              f(x) = 5 - \phantom{x}
+              y = -4 - \frac{5}{2}  \left|{x - (-4)}\right|
             \]
-            Now, note that the part with \(x\) tells you how \(y\) will change
-            <em>for different \(x\)-values</em>.  In particular, reading
-            onwards, I process first the meaning of \(|x-2|\)
-            as giving me "the distance of a given \(x\) from 2".
-            After all, when I subtract \(x\) and 2, I get there difference,
-            and when I take the absolute value, I know that this difference
-            will be made positive, so it is fair to call it a literal
-            "distance" realizable on the real line.  So, how do the \(y\)'s
-            change?  Well, for every unit you go away from \(x=2\),
-            the \(y\)'s will fall by that distance.
-            So, literally, left to right, I can read
+            So, here is what I can say: The \(y\)'s start at -4, and then
+            proceed downwards from there&mdash;which takes me this far
+            into the formula:
             \[
-              f(x) = 5 - |x - 2|
+              y = -4 - \phantom{x}
             \]
-            as "start with \(y=5\) and for every unit of travel
-            left or right of \(x=2\), the \(y\)'s will fall by
-            one unit".  The \(y\)'s fall in a 1 to 1 ratio with
-            the distance away from \(x = 2\).
-            Hence, my final answer (together with the dotted
-            line at \(y = 5\) provided as visual "scaffolding")
-            is, once again:
-            <div style="text-align:center">
-              <img src="{{ url_for('static', filename='images/absvalplot1.png') }}"
-                width="40%">
-            </div>
+            For what follows next&mdash;the part that involves \(x\)&mdash;I
+            see that \(y\) will change depending on what \(x\) is.  I see
+            that \(y\) will go down by 5 for every 2 that \(x\) gets away
+            from \(x = -4.\)  That means that, whether you go left or
+            right of \(x = -4\), the \(y\)'s will change in a "down 5,
+            over 2" sort of fashion.  Note that \(|x+4| = |x - (-4)|\) gives me
+            "the absolute value of the difference between number \(x\)
+            and \(-4\)", which is literally the distance (which can't be negative)
+            of whatever \(x\) anyone wants to consider to \(-4\).  And the \(-\frac{5}{2}\)
+            is functioning kind of like slope, albeit in a new or generalized
+            sense of the word, as opposed to how it is strictly defined
+            in the context of a single line.
           </p>
         </div>
       </div>
@@ -1003,40 +547,45 @@
   </p>
   Graph the function
     \[
-    f(x) = -|x + 4| - 3
+      y = \frac{1}{5}  \left|{x}\right| - 3
     \]
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          To go a little more quickly now, I worm myself from inside to out
-          in the manner that correct order of operations demands, noting
-          that the graph of
-          \[
-            y = |x + 4|
-          \]
-          would be that of \(y = |x|\) only shifted to the
-          left 4.
-          (See
-          <a href="#shifthoriz">Example 5</a> above for help on this.)
-          Next, I note the negative on the outside of the absolute value signs
-          and what it means from a graphical point of view:
-          \[
-            y = -|x + 4|
-          \]
-          will be the graph of \(y = |x+4|\) only "flipped down" or
-          "reflected across the \(x\)-axis".
-          In terms of order of operations, the last thing that happens
-          is the subtraction of 3.  What does this do?  Well, it makes
-          \(y\)-values 3 less.  Graphically, this is a shift down of 3 units.
-          To better manage all those steps, I simply note that the vertex
-          of \(y = |x|\) is essentially shifted left 4 and down 3&mdash;so I
-          start my graph there&mdash;then I draw the graph proceeding
-          out an down in the manner of the graph of \(y = |x|\)&mdash;because
-          of that step in there in which we reflected across the \(x\)-axis.
+          You can either try to analyze separately what each part of
+          what you are seeing in this formula means in terms of its graph&mdash;to
+          note each transformation separately and then also to execute them
+          in the proper order&mdash;or one can try to narrate
+          what the function does in a natural way.  Or you can try to both,
+          and one will reinforce the other!  (Of course, that's what I recommend.)
+
+          <p>
+            If you note the transformations one at a time working in an
+            "inside to out" fashion, you will be doing pretty good.  This would
+            go as follows:
+            <table style="padding:10px;">
+              <tr>
+                <td style="width:50%">\(y = |x|\)</td><td>No horizontal shift!</td>
+              </tr>
+              <tr>
+                <td>\(y = \frac{1}{5}|x|\)</td><td>\(y\)'s will rise by 1 for every 5 you travel away from \(x = 0\)</td>
+              </tr>
+              <tr>
+                <td>\(y = \frac{1}{5}|x| - 3\)</td><td>Shift down 3</td>
+              </tr>
+            </table>
+            Because of the shift down 3, I know the vertex will be
+            at \((0, -3)\) (down 3 from the origin).  And
+            because of the coefficient of \(\frac{1}{5}\), I know that
+            the rate of change of \(y\) will be "up 1 \(y\)'s for every
+            5 over in \(x\)".  Because of the absolute value, that means
+            that sort of change will happen in the same way whether we go
+            to the left of 4 or to the right of it.  So, the graph looks like so:
+          </p>
           <div style="text-align:center">
-            {% set svg_id = 'svg14' %}
-            {% set points = [] %}
-            {% set poly_points = '0.0,332.500000000000 105.0,227.500000000000 350.0,472.500000000000 ' %}
+            {% set svg_id = 'svg7' %}
+            {% set points = [[0, -3], [5, -2], [-5, -2]] %}
+            {% set poly_points = '0.0,192.500000000000 175.0,227.500000000000 350.0,192.500000000000 ' %}
             {% set parameters = {
                 'svg_x_length': 350,
                 'svg_y_length': 350,
@@ -1050,24 +599,97 @@
             %}
             {% set color = 'blue' %}
             {% include "_static_graph.html" %}
+            {% set points = [] %}
           </div>
 
           <p>
-            To use my other way of narrating, I read the function
-            left to right (after rewriting):
+            Maybe all of that made sense, but let's try another way of narrating what
+            is going on.  This other way of narrating really involves
+            rewriting the formula slightly, like so:
             \[
-              f(x) = -3 - |x + 4| = -3 - |x - (-4)|
+              y = -3 + \frac{1}{5}  \left|{x}\right|
             \]
-            as "start with \(y=-3\) and for every unit of travel
-            away from \(x=-4\), the \(y\)'s will fall by
-            one unit".  The \(y\)'s fall in a 1 to 1 ratio with
-            the distance away from \(x = -4\).
-
-            <div style="text-align:center">
-              <img src="{{ url_for('static', filename='images/absvalplot2.png') }}"
-                width="40%">
-            </div>
+            So, here is what I can say: The \(y\)'s start at -3, and then
+            proceed upwards from there&mdash;which takes me this far
+            into the formula:
+            \[
+              y = -3 + \phantom{x}
+            \]
+            For what follows next&mdash;the part that involves \(x\)&mdash;I
+            see that \(y\) will change depending on what \(x\) is.  I see
+            that \(y\) will go up by 1 for every 5 that \(x\) gets away
+            from \(x = 0.\)  That means that, whether you go left or
+            right of \(x = 0\), the \(y\)'s will change in a "up 1,
+            over 5" sort of fashion.  Note that \(|x|\) is
+            the distance (which can't be negative)
+            of whatever \(x\) anyone wants to consider from 0.  And the \(\frac{1}{5}\)
+            is functioning kind of like slope, albeit in a new or generalized
+            sense of the word, as opposed to how it is strictly defined
+            in the context of a single line.
           </p>
+        </div>
+      </div>
+</div>
+</p>
+
+<p>
+  We've looked at examples where we graphed a given absolute value function.
+  Now, we do the reverse: Can you develop an equation for a given
+  (absolute value) graph?
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+  Develop an equation for the given graph.
+    <div style="text-align:center">
+      {% set svg_id = 'svg8' %}
+      {% set points = [] %}
+      {% set poly_points = '0.0,223.125000000000 157.5,262.500000000000 350.0,214.375000000000 ' %}
+      {% set parameters = {
+          'svg_x_length': 350,
+          'svg_y_length': 350,
+          'cart_x_min': -10,
+          'cart_x_max': 10,
+          'cart_x_length': 20,
+          'cart_y_min': -10,
+          'cart_y_max': 10,
+          'cart_y_length': 20
+        }
+      %}
+      {% set color = 'blue' %}
+      {% include "_static_graph.html" %}
+    </div>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          I note that the vertex is at \((-1, -5)\).
+          I use that as a starting point for both a narrative of what happens
+          in the graph as well as in developing the equation.
+          In particular, I can start by saying "the \(y\)'s
+          start at \(-5\) and then go up from there".
+          So, it will work to start by writing:
+          \[
+            y = -5 + \phantom{x}
+          \]
+          Next, I see that for every 4 you trace away from
+          \(x = -1\)&mdash;whether to the left or to the right&mdash;the
+          \(y\)'s by 1.  So, that's like a "rise over run" of \(\frac{1}{4}\)&mdash;
+          but, again, in such a way that I'll get \(y = -5\)
+          when \(x = 1\).  So, I continue:
+          \[
+            y =  - 5 + \frac{1}{4}  \left|{x - (-1)}\right| = -5 + \frac{1}{4}  \left|{x + 1}\right|
+          \]
+          Of course, you could also write this as
+          \[
+            y = \frac{1}{4}  \left|{x + 1}\right| - 5
+          \]
+
+          (The answer checker will take anything mathematically equivalent to
+          the right answer!&mdash;meaning, it doesn't have to be in one format or another.)
         </div>
       </div>
 </div>
@@ -1079,64 +701,56 @@
   <p>
   <!-- <a href="" target="_blank">Click for video.</a> -->
   </p>
-  Graph the function
-    \[
-    f(x) = |x + 4| - 3
-    \]
+  Develop an equation for the given graph.
+    <div style="text-align:center">
+      {% set svg_id = 'svg9' %}
+      {% set points = [] %}
+      {% set poly_points = '0.0,726.250000000000 227.5,157.500000000000 350.0,463.750000000000 ' %}
+      {% set parameters = {
+          'svg_x_length': 350,
+          'svg_y_length': 350,
+          'cart_x_min': -10,
+          'cart_x_max': 10,
+          'cart_x_length': 20,
+          'cart_y_min': -10,
+          'cart_y_max': 10,
+          'cart_y_length': 20
+        }
+      %}
+      {% set color = 'blue' %}
+      {% include "_static_graph.html" %}
+    </div>
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          I don't have much to say about this example since I only
-          wanted to tweak it a little relative to the previous one.
-          What happens now that we don't have the negative in front
-          of the absolute value signs?  Well, we don't have a step
-          where we reflect the graph across the \(x\)-axis, so it
-          will be like the graph of \(y = |x|\) only shifted
-          left 4 units and down 3 units.  So, start with the
-          vertex at \((-4, -3)\) and draw the graph
-          proceeding upwards as you move away from \(x=-4\)
-          with \(y\)'s increasing at the normal
-          1 to 1 rate that you have with \(y = |x|\).
-          <div style="text-align:center">
-            {% set svg_id = 'svg15' %}
-            {% set points = [] %}
-            {% set poly_points = '0.0,122.500000000000 105.0,227.500000000000 350.0,-17.5000000000000 ' %}
-            {% set parameters = {
-                'svg_x_length': 350,
-                'svg_y_length': 350,
-                'cart_x_min': -10,
-                'cart_x_max': 10,
-                'cart_x_length': 20,
-                'cart_y_min': -10,
-                'cart_y_max': 10,
-                'cart_y_length': 20
-              }
-            %}
-            {% set color = 'blue' %}
-            {% include "_static_graph.html" %}
-          </div>
+          I note that the vertex is at \((3, 1)\).
+          I use that as a starting point for both a narrative of what happens
+          in the graph as well as in developing the equation.
+          In particular, I can start by saying "the \(y\)'s
+          start at \(1\) and then go down from there".
+          So, it will work to start by writing:
+          \[
+            y =  1 - \phantom{x}
+          \]
+          Next, I see that for every 2 you trace away from
+          \(x = 3\)&mdash;whether to the left or to the right&mdash;the
+          \(y\)'s go down by 5.  So, that's like a "rise over run" of \(-\frac{5}{2}\)&mdash;
+          but, again, in such a way that I'll get \(y = 1\)
+          when \(x = 3\).  So, I continue:
+          \[
+            y =  1 - \frac{5}{2}  \left|{x - 3}\right|
+          \]
+          Of course, you could also write this as
+          \[
+            y = - \frac{5}{2}  \left|{x - 3}\right| + 1
+          \]
 
-          <p>
-            To use my other way of narrating, I read the function
-            left to right (after rewriting):
-            \[
-              f(x) = -3 + |x + 4| = -3 - |x - (-4)|
-            \]
-            as "start with \(y=-3\) and for every unit of travel
-            away from \(x=-4\), the \(y\)'s will rise by
-            one unit".  The \(y\)'s rise in a 1 to 1 ratio with
-            the distance away from \(x = -4\).
-
-            <div style="text-align:center">
-              <img src="{{ url_for('static', filename='images/absvalplot3.png') }}"
-                width="40%">
-            </div>
-          </p>
+          (The answer checker will take anything mathematically equivalent to
+          the right answer!&mdash;meaning, it doesn't have to be in one format or another.)
         </div>
       </div>
 </div>
 </p>
-
 
 <script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
 

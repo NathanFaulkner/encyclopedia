@@ -422,6 +422,10 @@ applicationsoflinearsystems.add_to_questions('we_lost_the_receipts',
 graphofabsolutevaluebasic = Section('graphofabsolutevaluebasic', "Graphs of Absolute Value Functions: Basic Transformations", '/sections/graph-of-absolute-value')
 graphofabsolutevaluebasic.add_to_questions('graph_absolute_value_basic',
                                     'graph_absolute_value_basic_to_equation')
+
+graphofabsolutevaluefull = Section('graphofabsolutevaluefull', "Graphs of Absolute Value Functions: The Full Treatment", '/sections/graph-of-absolute-value-scaled')
+graphofabsolutevaluefull.add_to_questions('graph_absolute_value',
+                                        'graph_absolute_value_to_equation')
 #########
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
@@ -466,7 +470,8 @@ functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coor
                                     solvingbyelimination,
                                     solvebysubstitution,
                                     applicationsoflinearsystems,
-                                    graphofabsolutevaluebasic])
+                                    graphofabsolutevaluebasic,
+                                    graphofabsolutevaluefull])
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
 
 

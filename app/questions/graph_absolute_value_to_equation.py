@@ -49,38 +49,23 @@ class AbsoluteValueBasicGraphToEquation(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        if 'num_transformations' in kwargs:
-            self.num_transformations = kwargs['num_transformation']
+        if 'p' in kwargs:
+            self.p = kwargs['p']
         else:
-            self.num_transformations = random.choice([1, 2, 3])
-        transformation_options = ['vert', 'horiz', 'refl']
-        if 'transformations' in kwargs:
-            self.transformations = kwargs['transformations']
+            self.p = random_non_zero_integer(-5,5)
+        if 'q' in kwargs:
+            self.q = kwargs['q']
         else:
-            self.transformations = random.sample(transformation_options, self.num_transformations)
-        if self.transformations == ['refl']:
-            addendum = random.choice(['vert', 'horiz'])
-            self.transformations.append(addendum)
-        if 'refl' in self.transformations:
-            self.m = -1
-        else:
-            self.m = 1
-        if 'm' in kwargs:
-            self.m = kwargs['m']
+            self.q = random.randint(1,5)
+        self.m = Rational(self.p, self.q)
         if 'x0' in kwargs:
             self.x0 = kwargs['x0']
         else:
-            if 'horiz' in self.transformations:
-                self.x0 = random_non_zero_integer(-5,5)
-            else:
-                self.x0 = 0
+            self.x0 = random_non_zero_integer(-5,5)
         if 'y0' in kwargs:
             self.y0 = kwargs['y0']
         else:
-            if 'vert' in self.transformations:
-                self.y0 = random.randint(-5,5)
-            else:
-                self.y0 = 0
+            self.y0 = random.randint(-5,5)
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:
@@ -140,8 +125,8 @@ class AbsoluteValueBasicGraphToEquation(Question):
 
 
 
-    name = 'Equation from Basic Absolute Value Graph'
-    module_name = 'graph_absolute_value_basic_to_equation'
+    name = 'Equation from Absolute Value Graph'
+    module_name = 'graph_absolute_value_to_equation'
 
 
 
@@ -211,7 +196,9 @@ class AbsoluteValueBasicGraphToEquation(Question):
         lhs = parse_expr(lhs, transformations=transformations)
         rhs = parse_expr(rhs, transformations=transformations)
         user_answer = Eq(lhs, rhs)
-        return f'\({latex(lhs)} = {latex(rhs)}\)'
+        y = Symbol('y')
+        user_answer = solve(user_answer, y)[0]
+        return f'\(y = {commute_sum(user_answer)}\)'
 
     @classmethod
     def validator(self, user_answer):

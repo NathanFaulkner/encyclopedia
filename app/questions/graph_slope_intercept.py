@@ -13,7 +13,8 @@ from app.questions import (Question,
                         latex_print,
                         random_non_zero_integer,
                         GraphFromLambda,
-                        fmt_slope_style)
+                        fmt_slope_style,
+                        commute_sum)
 from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 
@@ -68,13 +69,9 @@ class GraphSlopeIntercept(Question):
         # self.given = self.problem['given']
         # self.answer = self.problem['answer']
 
-        self.given_latex = '\\(y = ' + latex(self.given) + '\\)'
-        self.given_latex_display = '\\[y = ' + latex(self.given) + '\\]'
-        self.format_given_for_tex = f"""
-        {self.prompt_single}
+        self.given_latex = '\\(y = ' + commute_sum(self.given) + '\\)'
+        self.given_latex_display = '\\[y = ' + commute_sum(self.given) + '\\]'
 
-        {self.given_latex_display}
-        """
         self.format_answer = '\\quad\n'
         # self.answer_latex = latex_print(self.answer)
         # self.answer_latex_display = latex_print(self.answer, display=True)

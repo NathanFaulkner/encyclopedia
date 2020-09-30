@@ -52,7 +52,8 @@ __all__ = ['quadratic_pattern',
             'we_lost_the_receipts', 'air_travel', 'gold_alloy',
             'graph_absolute_value',
             'graph_absolute_value_basic',
-            'graph_absolute_value_basic_to_equation']
+            'graph_absolute_value_basic_to_equation',
+            'graph_absolute_value_to_equation']
 
 class Question():
     pass
@@ -448,7 +449,7 @@ def commute_sum(sum):
             i += 1
         return fmt_slope_style(second) + fmt_slope_style_trailing(first)
     else:
-        return latex(sum)
+        return fmt_slope_style(sum)
 
 def fmt_abs_value(string):
     count = 0
