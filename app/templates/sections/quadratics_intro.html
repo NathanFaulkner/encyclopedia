@@ -1,0 +1,40 @@
+{% extends "book_page.html" %}
+
+{% block content %}
+<p class="subhead">
+This chapter is about quadratic functions.  But what is a quadratic function?
+Basically, it is a function which has an
+"\(x^2\)" in its formula but no higher powers.  So, for example,
+  \[
+    f(x) = 3x^2 - 2x +5
+  \]
+is a quadratic function, but
+  \[
+    g(x) = 3x^3 - x^2 +x - 1
+  \]
+is not, because "\(x^3\)" is a higher power, isn't it?
+</p>
+
+<p>
+  Topics covered in this chapter include the study of quadratic
+  functions from three perspectives.  These perspectives are the key
+  to understanding basically all the math in the high school curriculum
+  (through calculus), too!
+  <ul>
+    <li></li>
+    <li>The Algebraic Perspective: This is working with functions symbolically, using
+    variables, equations, and other symbols.</li>
+    <li>The Graphical Perspective: We'll graph quadratic functions
+    just like, elsewhere, we hav graphed
+    <a href="{{ url_for('section', section_name='pointslopeform') }}">linear functions</a>
+    and
+    <a href="{{ url_for('section', section_name='graphofabsolutevaluefull') }}">absolute value functions</a>.
+    </li>
+    <li>The Inuitive or Real-World Perspectives: What sorts of applications
+    are quadratic functions relevant to?  Also, how does the concept
+    "live" in your mind?  How do you process what it's all about?</li>
+  </ul>
+</p>
+
+
+{% endblock %}

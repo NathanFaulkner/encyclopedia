@@ -1,0 +1,218 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  We start (in a manner very much in the current traditions of
+  mathematics!) with a bunch of definitions.  You can regard
+  this as vocab that we will just find convenient as a sort
+  of shorthand moving forward.  However, in this section, I also
+  aim to build your skills are doing some processes that
+  will be a sort of intermediate step toward harder tasks to come.
+</p>
+
+<p>
+  <div class="definition">
+    <h2></h2>
+    A function is called <b>quadratic</b> if its outputs can be obtained
+    by executing a formula of the form
+      \[
+        f(x) = ax^2 + bx +c
+      \]
+    where \(a\), \(b\), and \(c\) are numbers that
+    will be specified, with the added rule that \(a\neq 0\)
+    (because if \(a=0\) then the function would actually be <b>linear</b>!)
+  </div>
+</p>
+
+<p>
+  <div class="definition">
+    <h2></h2>
+    A quadratic written in the form
+      \begin{equation*}\tag{Standard Form}
+        ax^2+bx+c
+      \end{equation*}
+    is said to be in <b>standard form</b>.
+  </div>
+</p>
+
+<p>
+  But, at first, we will mostly be working with quadratics written in other forms.
+  ("Standard form" is not always the most convenient!)
+</p>
+
+<p>
+  <div class="definition">
+    <h2></h2>
+    A quadratic written in the form
+      \begin{equation*}\tag{Vertex Form}
+        a(x-h)^2+k
+      \end{equation*}
+    (where \(a\), \(h\), and \(k\)
+    will be numbers) is said to be in <b>vertex form</b>.
+  </div>
+</p>
+
+<p>
+  <div class="definition">
+    <h2></h2>
+    A quadratic written in the form
+      \begin{equation*}\tag{Intercept Form}
+      a(x-x_0)(x-x_1)
+      \end{equation*}
+    (where \(a\), \(x_0\), and \(x_1\) will be numbers) is said to be in
+    <b>intercept form</b>.
+  </div>
+</p>
+
+<p>
+  Let's practice a little bit of algebra that may come in handy:
+  switching from intercept form or vertex form into standard form.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+    Rewrite the following quadratic so that it is in standard form (by multiplying it all out.)
+    \[
+      f(x) = (x-5)(x+3)
+    \]
+  </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          You have to multiply this all out.  Let me note that, in general,
+            \begin{align*}
+              (a+b)(c+d) & = (a+b)c + (a+b)d & \textrm{(Distributive Property)}\\
+              & = ac + bc + ad + bd & \textrm{(Distributive Property again!)}
+            \end{align*}
+
+          Long story short "all the terms in the first pair get multiplied
+          by each of the terms in the second pair."
+          (You can also say "FOIL" if you like, but that is perhaps a
+          limited point-of-view in the long-run!)
+          So, we get that
+            \[
+              (x-5)(x+3) = x^2 + 3x - 5x - 15 = x^2 - 2x - 15
+            \]
+        </div>
+      </div>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+    Rewrite the following quadratic so that it is in standard form (by multiplying it all out.)
+      \[
+        f(x) = -2(x-5)(x+3)
+      \]
+  </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Recall the associative property of multiplication:
+            \[
+              a(b\cdot c) = (a\cdot b)\cdot c
+            \]
+          What does that mean?  It just means that you can multiply a product
+          of three things in either of those orders.
+          (Together with the commutativity of multiplication-&mdash;i.e.,
+          the fact that \(a\cdot b = b \cdot a\)&mdash;it means you can multiply
+          in <em>any</em> order you like.)
+          So, for this problem, I <em>choose</em>
+          to multiply \((x-5)(x+3)\)
+          and then just multiply everything by \(-2\) at the end:
+            \begin{align*}
+              -2(x-5)(x+3) &= -2\left(x^2 + 3x - 5x - 15\right)\\
+              & = -2\left(x^2 - 2x - 15\right) \\
+              & = -2x^2 +4x + 30
+            \end{align*}
+        </div>
+      </div>
+</div>
+</p>
+
+
+
+
+
+
+
+<p>
+<div class="example"  id="shifthoriz">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  Rewrite the following quadratic so that it is in standard form (by multiplying it all out.)
+    \[
+      f(x) = (x-2)^2+5
+    \]
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Multiply out the \((x-2)^2\) and then add 5 at the end:
+            \begin{align*}
+              (x-2)^2+5 &= (x-2)(x-2) + 5\\
+              & = x^2 - 2x -2x + 4 + 5 \\
+              & = x^2 -4x +9
+            \end{align*}
+        </div>
+      </div>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+  Rewrite the following quadratic so that it is in standard form (by multiplying it all out.)
+    \[
+      f(x) = -2(x-2)^2+5
+    \]
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Carry it all out in the order of operations:
+          Multiply out the \((x-2)^2\), then multiply the result by \(-2\),
+          and then add 5 at the end:
+          \begin{align*}
+            -2(x-2)^2+5 &= -2(x-2)(x-2) + 5\\
+            & = -2\left(x^2 - 2x -2x + 4\right) + 5 \\
+            & = -2\left(x^2 -4x +4\right) +5 \\
+            & = -2x^2 +8x - 8 +5 \\
+            &= -2x^2 +8x -3
+          \end{align*}
+        </div>
+      </div>
+</div>
+</p>
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

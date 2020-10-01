@@ -53,7 +53,9 @@ __all__ = ['quadratic_pattern',
             'graph_absolute_value',
             'graph_absolute_value_basic',
             'graph_absolute_value_basic_to_equation',
-            'graph_absolute_value_to_equation']
+            'graph_absolute_value_to_equation',
+            'vertex_form_to_standard_form',
+            'intercept_form_to_standard_form']
 
 class Question():
     pass
@@ -463,3 +465,9 @@ def fmt_abs_value(string):
             count += 1
         i += 1
     return string
+
+def sgn(x):
+	if x >= 0:
+		return '+'
+	else:
+		return '-'

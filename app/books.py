@@ -428,6 +428,13 @@ graphofabsolutevaluefull.add_to_questions('graph_absolute_value',
                                         'graph_absolute_value_to_equation')
 #########
 
+quadratics_intro = Section('quadratics_intro', "Introduction to Quadratics", '/sections/quadratics_intro')
+
+warmupwithquadratics = Section('warmupwithquadratics', 'Warm-up with Quadratics', '/sections/warm-up-with-quadratics')
+warmupwithquadratics.add_to_questions(#'vertex_form_to_standard_form',)
+                                'intercept_form_to_standard_form')
+
+#######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
 
@@ -474,13 +481,19 @@ functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coor
                                     graphofabsolutevaluefull])
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
 
+quadratics = Division('chapter', "Quadratic Functions",
+                                [warmupwithquadratics])
+quadratics.set_frontpage(quadratics_intro)
+
+
 
 polynomials = Division('chapter', 'Polynomials', [factoring1, quadraticpattern])
 #polynomials.intro = polynomials_intro
 polynomials.set_frontpage(polynomials_intro)
 
 main = Division('main', 'Main Matter', [nuts_and_bolts_of_algebra,
-                                        functions_and_the_coordinate_plane])
+                                        functions_and_the_coordinate_plane,
+                                        quadratics])
 
 Algebra2 = Division('book', 'Algebra 2', {'front': None, 'main': main, 'end': None})
 Algebra2.name_for_path = 'Algebra2'
