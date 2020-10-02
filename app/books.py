@@ -431,7 +431,7 @@ graphofabsolutevaluefull.add_to_questions('graph_absolute_value',
 quadratics_intro = Section('quadratics_intro', "Introduction to Quadratics", '/sections/quadratics_intro')
 
 warmupwithquadratics = Section('warmupwithquadratics', 'Warm-up with Quadratics', '/sections/warm-up-with-quadratics')
-warmupwithquadratics.add_to_questions(#'vertex_form_to_standard_form',)
+warmupwithquadratics.add_to_questions('vertex_form_to_standard_form',
                                 'intercept_form_to_standard_form')
 
 #######################################
