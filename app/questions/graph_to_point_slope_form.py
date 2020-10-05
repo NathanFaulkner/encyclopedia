@@ -13,7 +13,9 @@ from app.questions import (Question,
                         latex_print,
                         random_non_zero_integer,
                         poly_points_from_nparrays,
-                        GraphFromLambda)
+                        GraphFromLambda,
+                        fmt_slope_style,
+                        commute_sum)
 from app.interpolator import cart_x_to_svg, cart_y_to_svg, get_parameters
 
 from flask import render_template
@@ -85,9 +87,33 @@ class GraphToPointSlope(Question):
                             points=points)}
         </div>
         """
-
-
-        self.format_answer = f'\( y = {latex(self.answer)}\)'
+        m = self.m
+        x0 = self.x0
+        y0 = self.y0
+        x = self.x
+        term = factor(self.m*(self.x - self.x0))
+        if self.y0 > 0:
+            fmt_y0 = latex(self.y0)
+            sign = '+'
+        elif self.y0 == 0:
+            fmt_y0 = ''
+            sign = ''
+        else:
+            fmt_y0 = latex(abs(self.y0))
+            sign = '-'
+        # print(term)
+        try:
+            self.format_answer = f"""
+            \\(
+             y = {latex(term.args[0])} ({latex(term.args[1])}) {sign} {fmt_y0}
+            \\)
+            """
+        except IndexError:
+            self.format_answer = f"""
+            \\(
+             y = ({latex(term)}) {sign} {fmt_y0}
+            \\)
+            """
         # self.answer_latex = latex_print(self.answer)
         # self.answer_latex_display = latex_print(self.answer, display=True)
 

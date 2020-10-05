@@ -383,8 +383,8 @@ pointslopeform.add_to_questions('graph_point_slope_from_english',
                                  'description_to_point_slope_form')
 
 graphfromtwopoints = Section('graphfromtwopoints', "Graph from Two Points", '/sections/graph-from-two-points')
-graphfromtwopoints.add_to_questions('graph_to_point_slope_form',
-                                    'two_points_to_equation')
+graphfromtwopoints.add_to_questions('graph_to_point_slope_form',)
+                                    # 'two_points_to_equation')
 
 linearfunctionsfromatable = Section('linearfunctionsfromatable', "Linear Functions From a Table", '/sections/linear_functions_from_a_table')
 linearfunctionsfromatable.add_to_questions('altitude_temperature_problem',

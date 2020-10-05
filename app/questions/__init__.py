@@ -385,8 +385,13 @@ def fmt_slope_style_leading(term):
             coeff = latex(term.args[0])
         terms = term.args[1:]
         variable_part = ''
-        for term in terms:
-            variable_part += ' ' + latex(term)
+        x = Symbol('x')
+        if type(term/term.args[0]) == type(x+1):
+            variable_part = term/term.args[0]
+            variable_part = f'\\left({latex(variable_part)}\\right)'
+        else:
+            for term in terms:
+                variable_part += ' ' + latex(term)
         return f'{coeff} {variable_part} '
     else:
         return latex(term)
@@ -424,8 +429,12 @@ def fmt_slope_style_trailing(term):
         terms = []
         sign = '+'
     variable_part = ''
-    for term in terms:
-        variable_part += ' ' + latex(term)
+    if type(term/term.args[0]) == type(x+1):
+        variable_part = term/term.args[0]
+        variable_part = f'\\left({latex(variable_part)}\\right)'
+    else:
+        for term in terms:
+            variable_part += ' ' + latex(term)
     return f'{sign} {coeff} {variable_part} '
 
 def fmt_slope_style(sum):
@@ -471,3 +480,16 @@ def sgn(x):
 		return '+'
 	else:
 		return '-'
+
+def tolerates(f1, f2, tolerance=0.0005, window=[-10,10], res=10):
+    x_min = window[0]
+    x_max = window[1]
+    points = np.arange(x_min,x_max,res)
+    close_enough = False
+    for x in points:
+        try:
+            if abs(f1(x) - f2(x)) > tolerance:
+                return False
+        except ZeroDivisionError:
+            pass
+    return True
