@@ -35,10 +35,10 @@ class GraphAbsoluteValue(Question):
     The given is of the form
 
     \\[
-        y = Rational(p,q)|x - x0| + y0
+        y = Rational(p,q)(x - x0)^2 + y0
     \\]
 
-    The student is expected to graph by plotting points.  3 is sufficient.
+    The student is expected to graph by plotting points.  4 is sufficient.
     """
     def __init__(self, **kwargs):
         if 'seed' in kwargs:
@@ -49,11 +49,11 @@ class GraphAbsoluteValue(Question):
         if 'p' in kwargs:
             self.p = kwargs['p']
         else:
-            self.p = random_non_zero_integer(-5,5)
+            self.p = random_non_zero_integer(-2,2)
         if 'q' in kwargs:
             self.q = kwargs['q']
         else:
-            self.q = random.randint(1,5)
+            self.q = random.randint(1,2)
         self.m = Rational(self.p, self.q)
         if 'x0' in kwargs:
             self.x0 = kwargs['x0']
@@ -98,7 +98,7 @@ class GraphAbsoluteValue(Question):
         term = self.as_lambda(self.x)
         self.format_given = f"""
         \[
-            y = {commute_sum(term)}
+            y = {fmt_slope_style(term)}
         \]
         """
 
@@ -110,7 +110,7 @@ class GraphAbsoluteValue(Question):
 
         self.format_given_for_tex = f"""
 Sketch a graph of the given equation.  Make sure your graph is accurate throughout
-the window and has at least three points clearly marked.
+the window and has at least 5 points clearly marked.
 {self.format_given}
 
 \\begin{{flushright}}
@@ -120,12 +120,12 @@ the window and has at least three points clearly marked.
 
 """
 
-    name = 'Graph of an Absolute Value Function'
-    module_name = 'graph_absolute_value'
+    name = 'Graph from Vertex Form'
+    module_name = 'graph_vertex_form'
 
-    prompt_single = """Graph the given equation by plotting at least three points
+    prompt_single = """Graph the given equation by plotting at least 4 points
 that satisfy the equation."""
-    prompt_multiple = """Graph each of the following equations by plotting at least three points
+    prompt_multiple = """Graph each of the following equations by plotting at least 4 points
 that satisfy the equation."""
 
 
@@ -134,14 +134,14 @@ that satisfy the equation."""
     def genproblem(self):
         out = {}
         x = self.x
-        b = self.y0
+        k = self.y0
         h = self.x0
         # p = self.p
         # q = self.q
         m = self.m
-        self.as_lambda = lambda x: m*abs(x - h) + b
+        self.as_lambda = lambda x: m*(x - h)**2 + k
         f = self.as_lambda
-        self.given = factor(m*abs(x-h)) + b
+        self.given = factor(m*(x-h)**2) + k
         #print('3rd step: So far its ', expr)
         self.answer = f(x)
 
@@ -151,10 +151,10 @@ that satisfy the equation."""
         graph = GraphFromLambda(self.as_lambda)
         graph.save_fig(filename)
 
-    def get_svg_data(self, window=[-10,10], res=1000):
+    def get_svg_data(self, window=[-10,10], res=100):
         x_min = window[0]
         x_max = window[1]
-        x_points = np.array([-10, self.x0, 10])
+        x_points = np.linspace(x_min, x_max, res)
         y_points = self.as_lambda(x_points)
         x_points = cart_x_to_svg(x_points)
         y_points = cart_y_to_svg(y_points)
