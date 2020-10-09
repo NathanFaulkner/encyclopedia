@@ -42,7 +42,7 @@
 
 <p>
   Whenever you are faced with the task of graphing something new,
-  you should start with the good-old ``just plot points'' method.
+  you should start with the good-old "just plot points" method.
   What I mean by that is to realize, first of all, that the graph of an
   equation is just (a picture of) the set of pairs that make the equation
   true.  So, you just plug in values for one of the variables (usually
@@ -69,7 +69,7 @@
       section.  Instead, this is a tedious method that you do to just
       get started somewhere.  We will adopt a much more stream-lined
       method in the examples below&mdash;but <em>only</em> after
-      going through these tedious process at least once.
+      going through the tedious, point-by-point process at least once.
     </p>
 
     <p>
@@ -89,9 +89,7 @@
       <li>
         Fill out the \(y\)-values in the following table
         by performing the function \(y=|x|\)
-        on each of the \(x\)-values.  Then plot all of the
-        \((x,y)\)-pairs you obtain as dots on the graph.
-
+        on each of the \(x\)-values.
         <br>
         <table border="1" style="border-collapse: collapse">
           <tr>
@@ -326,6 +324,7 @@
             {% set points = [] %}
             {% set poly_points = '0.0,-35.0000000000000 175.0,140.000000000000 350.0,-35.0000000000000 ' %}
             <script>
+              {% set color = "blue" %}
               graph_info = {"shape": "polyline", "data": {"points" : "{{ poly_points|safe }}"}  }
               draw_graph(svg, graph_info, "blue");
               points = {{ points|safe }}
@@ -391,7 +390,7 @@
         <div class='inner'>
           This time, we observe that the \(y\)-values for this function
           are obtained by using the outputs of the function
-          \(f(x) = 5\) and <em>subtracting</em> 5.  Since \(y\) is plotted
+          \(f(x) = |x|\) and <em>subtracting</em> 5.  Since \(y\) is plotted
           vertically, that means a vertical shift of the plot of 5 units
           <em>down</em>.
           <div style="text-align:center">
@@ -481,6 +480,7 @@
             {% set points = [] %}
             {% set poly_points = '0.0,-35.0000000000000 210.0,175.000000000000 350.0,35.0000000000000 ' %}
             <script>
+              {% set color = "blue" %}
               graph_info = {"shape": "polyline", "data": {"points" : "{{ poly_points|safe }}"}  }
               draw_graph(svg, graph_info, "blue");
               points = {{ points|safe }}
@@ -636,7 +636,7 @@
           (The one exception is \(x=0\), which would go like this:
           \begin{align*}
             -|x| &= -|0| & \textrm{Plug in } 0\\
-            &= -0 & \textrm{Computed the value of } |-0|\\
+            &= -0 & \textrm{Computed the value of } |0|\\
             &= 0\\
           \end{align*}
           Note that the negative of 0 is indeed 0. After all, on the real line,
@@ -736,6 +736,7 @@
             {% set points = [] %}
             {% set poly_points = '0.0,262.500000000000 175.0,87.5000000000000 350.0,262.500000000000 ' %}
             <script>
+              {% set color = "blue" %}
               graph_info = {"shape": "polyline", "data": {"points" : "{{ poly_points|safe }}"}  }
               draw_graph(svg, graph_info, "blue");
               points = {{ points|safe }}
@@ -863,6 +864,7 @@
             {% set points = [] %}
             {% set poly_points = '0.0,385.000000000000 210.0,175.000000000000 350.0,315.000000000000 ' %}
             <script>
+              {% set color = "blue" %}
               graph_info = {"shape": "polyline", "data": {"points" : "{{ poly_points|safe }}"}  }
               draw_graph(svg, graph_info, "blue");
               points = {{ points|safe }}
@@ -1008,7 +1010,7 @@
       <div class="answer">
         <a class="collapsible"><h3>Answer: </h3></a>
         <div class='inner'>
-          To go a little more quickly now, I worm myself from inside to out
+          To go a little more quickly now, I work from inside to out
           in the manner that correct order of operations demands, noting
           that the graph of
           \[
@@ -1031,7 +1033,7 @@
           To better manage all those steps, I simply note that the vertex
           of \(y = |x|\) is essentially shifted left 4 and down 3&mdash;so I
           start my graph there&mdash;then I draw the graph proceeding
-          out an down in the manner of the graph of \(y = |x|\)&mdash;because
+          out and down in the manner of the graph of \(y = |x|\)&mdash;because
           of that step in there in which we reflected across the \(x\)-axis.
           <div style="text-align:center">
             {% set svg_id = 'svg14' %}

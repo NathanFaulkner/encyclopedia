@@ -164,14 +164,14 @@ function str_list_to_list_of_floats(str_list) {
 
 function graph_points(cart_pts) {
   // console.log("this is what it thinks cart_pts is:", cart_pts);
-  var circles = svg.getElementsByTagName("circle");;
-  // console.log('This is what it thinks the circles are before clean sweep: ', circles)
-  var i;
-  for (i = circles.length - 1; i > -1; i--) {
-    var circle = circles[i];
-    circle.parentNode.removeChild(circle);
-    // console.log('Cycle sweeper loop:', i, circle)
-  }
+  // var circles = svg.getElementsByTagName("circle");;
+  // // console.log('This is what it thinks the circles are before clean sweep: ', circles)
+  // var i;
+  // for (i = circles.length - 1; i > -1; i--) {
+  //   var circle = circles[i];
+  //   circle.parentNode.removeChild(circle);
+  //   // console.log('Cycle sweeper loop:', i, circle)
+  // }
 
   for (i=0; i < cart_pts.length; i++) {
     point = cart_coords_to_svg(cart_pts[i]);

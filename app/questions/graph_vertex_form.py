@@ -30,7 +30,7 @@ from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 prob_type = 'graph'
 
-class GraphAbsoluteValue(Question):
+class GraphVertexForm(Question):
     """
     The given is of the form
 
@@ -62,7 +62,12 @@ class GraphAbsoluteValue(Question):
         if 'y0' in kwargs:
             self.y0 = kwargs['y0']
         else:
-            self.y0 = random.randint(-5,5)
+            if self.m == 2 or self.m == Rational(1,2):
+                self.y0 = random.randint(-5, 2)
+            elif self.m == -2 or self.m == Rational(-1,2):
+                self.y0 = random.randint(-2, 5)
+            else:
+                self.y0 = random.randint(-5,5)
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:
@@ -70,37 +75,37 @@ class GraphAbsoluteValue(Question):
 
         self.genproblem()
 
-        # self.given = self.problem['given']
-        # self.answer = self.problem['answer']
-        # term = factor(self.m*(self.x - self.x0))
-        # if self.y0 > 0:
-        #     fmt_y0 = latex(self.y0)
-        #     sign = '+'
-        # elif self.y0 == 0:
-        #     fmt_y0 = ''
-        #     sign = ''
-        # else:
-        #     fmt_y0 = latex(abs(self.y0))
-        #     sign = '-'
-        # # print(term)
-        # try:
-        #     self.format_given = f"""
-        #     \\[
-        #      y = {latex(term.args[0])} ({latex(term.args[1])}) {sign} {fmt_y0}
-        #     \\]
-        #     """
-        # except IndexError:
-        #     self.format_given = f"""
-        #     \\[
-        #      y = ({latex(term)}) {sign} {fmt_y0}
-        #     \\]
-        #     """
-        term = self.as_lambda(self.x)
-        self.format_given = f"""
-        \[
-            y = {fmt_slope_style(term)}
-        \]
-        """
+
+        term = factor(self.m*(self.x - self.x0)**2)
+        if self.y0 > 0:
+            fmt_y0 = latex(self.y0)
+            sign = '+'
+        elif self.y0 == 0:
+            fmt_y0 = ''
+            sign = ''
+        else:
+            fmt_y0 = latex(abs(self.y0))
+            sign = '-'
+        # print(term)
+        if self.m == 1:
+            fmt_m = ''
+        elif self.m == -1:
+            fmt_m = '-'
+        else:
+            fmt_m = latex(self.m)
+        try:
+            self.format_given = f"""
+            \\[
+             y = {fmt_m} {latex((self.x - self.x0)**2)} {sign} {fmt_y0}
+            \\]
+            """
+        except IndexError:
+            self.format_given = f"""
+            \\[
+             y = {latex(term)} {sign} {fmt_y0}
+            \\]
+            """
+
 
 
 
@@ -188,4 +193,4 @@ that satisfy the equation."""
 
 
 
-Question_Class = GraphAbsoluteValue
+Question_Class = GraphVertexForm

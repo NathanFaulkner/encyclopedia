@@ -434,6 +434,10 @@ warmupwithquadratics = Section('warmupwithquadratics', 'Warm-up with Quadratics'
 warmupwithquadratics.add_to_questions('vertex_form_to_standard_form',
                                 'intercept_form_to_standard_form')
 
+vertexform = Section('vertexform', 'Quadratics in Vertex Form', '/sections/vertex-form')
+vertexform.add_to_questions('graph_vertex_form',
+                            'graph_vertex_form_to_equation')
+
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -482,7 +486,8 @@ functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coor
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
 
 quadratics = Division('chapter', "Quadratic Functions",
-                                [warmupwithquadratics])
+                                [warmupwithquadratics,
+                                vertexform])
 quadratics.set_frontpage(quadratics_intro)
 
 
