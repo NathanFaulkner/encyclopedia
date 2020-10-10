@@ -1,0 +1,783 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  As mentioned in the section on
+  <a href="{{ url_for('section', section_name='warmupwithquadratics') }}">
+    warming up with quadratics,
+  </a>
+  you have that any quadratic in the following
+  form is said to be in intercept form:
+    \begin{equation*}\tag{Intercept Form}
+      a(x-x_0)(x-x_1)
+    \end{equation*}
+  For example:
+    \[
+      y = -\frac{1}{2}(x+4)(x-3)
+    \]
+  is in intercept form.
+</p>
+
+<p>
+  In this section, we are going to
+  <ul style="list-style-type:circle">
+    <li>Learn the best way to graph a quadratic given in intercept form.</li>
+    <li>Learn what is nice about intercept
+    form&mdash;i.e., <em>factored</em> form&mdash;something that we will use in other
+    ways moving forward in other sections and that you will use elsewhere
+    if you continue in your studies of math.
+    </li>
+  </ul>
+</p>
+
+
+
+<p>
+  In the first example, I will walk you through the steps that you will
+  want to undertake to figure out what the graph of a quadratic given
+  in intercept form looks like.
+</p>
+
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      For the following, consider the function
+        \[
+          y = -\frac{1}{2}(x + 4)(x - 2)
+        \]
+    </p>
+
+    <ol>
+      <li>
+        Determine the \(x\)-intercepts of this function.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            First, make sure you are clear on the general concept
+            of \(x\)-intercept.  What does "\(x\)-intercept" mean?  Well,
+            when thinking of the graph of a function, it sometimes happens
+            that the graph crosses the \(x\)-axis.  Sometimes it will, sometimes
+            it won't.  The locations on the \(x\)-axis (the \(x\)-values)
+            at which this happens are the \(x\)-intercepts of the function.
+            They are where the graph intercepts or intersects the \(x\)-axis.
+            So, a function doesn't have to have \(x\)-intercepts.  Now,
+            how do you find them?
+
+            <p>
+              To find the \(x\)-intercepts, you figure out how to turn
+              an algebraic "lens" or perspective on the graphical concept
+              of an \(x\)-intercept.  The \(x\)-intercepts are where the
+              function crosses the \(x\)-axis&mdash;and this can be described
+              from an algebraic (equation-oriented) point of view as where
+              the \(y\)-value is \(0\).  So, to find the \(x\)-intercept(s)
+              (if it has any), just plug in \(0\) for \(y\) and try to solve
+              for \(x\):
+              \[
+                0 = -\frac{1}{2}(x + 4)(x - 2)
+              \]
+              Take a look!  This is where the strength of intercept-form
+              is evident.  This format is called "intercept form"
+              because you can simply "read off" what the intercepts are from it:
+              I can immediately see they will be at \(x = -4\) and \(x = 2.\)
+              What am I doing?  I am observing what values I can plug in for
+              \(x\) to make the equation true, to make \(y\) come out to 0.
+              Because I have my function given as a product (intercept form could also be called
+              "factored form"&mdash;meaning it is written as the product
+              of factors&mdash;meaning, multiplication!) I know that the only way
+              the function can come out to 0 is that one of the factors is 0.
+              Think about it: you can't get 0 from multiplying random numbers together
+              except when one or both of them is 0!
+              So, I see the factor \((x+4)\).  How do I make it come out 0?
+              Of course, I just need to have \(x\) be "the opposite" or
+              negative of 4.  And the other factor is even easier: What
+              can I plug in for \(x\) to make the factor \((x - 2)\) come out
+              0?  The answer, quite obviously, is \(2\).
+            </p>
+          </div>
+        </div>
+      </li>
+      <li>
+         Find the \((x,y)\)-coordinates of the vertex of this quadratic.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            Well, this seems a little harder than the first question.
+            The trick is to have our ultimate goal in mind, which is
+            to graph this quadratic.  We are going to build a bridge
+            from the \(x\)-intercepts&mdash;which were so very easy
+            to obtain&mdash;to finding the vertex by first realizing
+            that the vertex is as much a graphical or geometric concept
+            as it is an algebraic one.  I am going to start by graphing
+            the \(x\)-intercepts; then, I will try to trigger a light bulb
+            moment for you.  (You see, a student might be tempted
+            to take a wholly "algebraic" approach to the solution
+            of problems all the time.  For instance, in the section on
+            <a href="url_for('section', section_name='vertexform')">
+              vertex form
+            </a>
+            you may have observed that the vertex shows up in the formula
+            for vertex form.  So, an interesting question is, can you
+            take intercept form and change it into vertex form?  The answer is "yes,"
+            but it is isn't very easy.  The secret of mathematicians is that, while
+            they appear to just sit there and push symbols around for a living,
+            what they are really doing is masrhaling a combination of perspectives
+            on a given problem at hand, sometimes looking forward to see
+            what different algebraic manipulations might give them but just
+            as often switching perspectives and thinking about intuitive pictures
+            or representations of the math, such as graphs to represent formulas.
+            Then, they figure out how to represent those intuitive processes
+            in symbols merely to prove or test the truth of their intuitions.
+            This is the general, informal consensus among mathematicians about
+            how they work, in my experience in asking them or reading about
+            others who have also asked them.  An excellent
+            resource on this question is Reuben Hersh's,
+            <i>What is Mathematics, Really?</i>)
+
+            <div style="text-align:center">
+              {% set svg_id = 'svg1' %}
+              {% set points = [[-4, 0], [2, 0]] %}
+              {% set poly_points = '' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+
+            <p>
+              Now, what do we do with the graph?  Well, there really isn't much
+              of a graph there, so your first job is to start imagining
+              what it might look like.  It will cross through the two \(x\)-intercepts
+              we plotted.  And what else?  Perhaps you will be clever enough
+              to realize that the parabola will "open down", because of the
+              negative out front.  But they key realization you need to have,
+              to figure out what the vertex is, is that the graph of this
+              function&mdash;some parabola, because it involves a square&mdash;is
+              symmetrical.  Therefore, the vertex will lie halfway between the
+              two intercepts.  And you can just look: what is halfway on the
+              \(x\)-axis between \(-4\) and \(2\)?  The answer is \(-1\).
+              You could fiigure that out by noting that the distance between
+              the two is 6, and then adding half of that to \(-4\).  But, if
+              you write down a representation of that process in a generic
+              fashion you will get one more realization.  Here is what I mean.
+              Write \(a\) for "the lower number" and write \(b\) for the
+              "higher number", meaning the number to the right.  Then
+              the difference between them is
+              \[
+                b - a
+              \]
+              Then, you add half of that distance to the lower number, \(a\):
+              \[
+                a + \frac{1}{2}(b-a)
+              \]
+              Now, you can distribute the \(\frac{1}{2}\) and combine like terms:
+              \[
+                a + \frac{1}{2}b - \frac{1}{2}a = a - \frac{1}{2}a + \frac{1}{2}b = \frac{1}{2}a + \frac{1}{2}b
+              \]
+              Note that "one whole \(a\) minus one half of \(a\)" is indeed "one half of \(a\)".
+              Now, rewrite that final expression by factoring the \(\frac{1}{2}\)
+              back out:
+              \[
+                \frac{1}{2}\left(a + b\right)
+              \]
+              You could also write this in a slightly different way as
+              \[
+                \frac{a + b}{2}
+              \]
+              So, in the end, what you discover is something which might seem
+              obvious in hindsight: the vertex will lie at the average
+              of the \(x\)-coordinates.  At least, that will get you the
+              \(x\)-coordinate of the vertex, which we already noted it \(-1\).
+              It remains to get the \(y\)-coordinate.  That is, we want to know
+              "what is the \(y\)-value that gets paired with \(x = -1\)
+              by this particular function?"  But isn't that just asking
+              what \(y\)-value you get when you plug in that given \(x\)-value?
+              Of course it is!  So, you just plug in \(x = -1\) and get what you get:
+              \[
+                y = -\frac{1}{2}(-1 + 4)(-1 - 2) = -\frac{1}{2}(3)(-3) = \frac{9}{2}
+              \]
+              Did you notice how you got "the same thing" when plugging in the
+              \(x\)-coordinate of the vertex into the two different factors&mdash;except
+              one was positive and one was negative?  Does that always happen?
+              The answer is, "yes"; that's exactly what happens when you take
+              the difference of the average of two numbers from the two numbers
+              in succession:
+              \[
+                \frac{1}{2}(a + b) - a = \frac{1}{2}a + \frac{1}{2}b - a = \frac{1}{2}b - \frac{1}{2}a = \frac{1}{2}(b - a)
+              \]
+              and
+              \[
+                \frac{1}{2}(a + b) - b = \frac{1}{2}a + \frac{1}{2}b - b = -\frac{1}{2}b + \frac{1}{2}a = -\frac{1}{2}(b - a)
+              \]
+              "Same thing" both times, except one was negative and one was positive.
+              SO!  If you don't see that pattern when you plug in the \(x\)-coordinate
+              of the vertex, you have made a mistake and will want to check your work.
+            </p>
+          </div>
+        </div>
+      </li>
+      <li>
+        Sketch a graph of the function.  (You will need to plot at least 4 points
+        for the answer checker to understand your answer correctly.)
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            I already had my \(x\)-intercepts plotted from the first step.
+            Next, I plot the vertex:
+            <div style="text-align:center">
+              {% set svg_id = 'svg2' %}
+              {% set points = [[-4, 0], [2, 0], [-1, -9/2]] %}
+              {% set poly_points = '' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+
+            <p>
+              That helps start to give me an idea of what this thing looks like.
+              But I desire greater accuracy.  Plus, the answer checker
+              on the exercise pages will require you to plot at least 4 points
+              in order to figure out your intentions.  (Plotting the vertex
+              is also necessary for the answer checker to understand you.)
+              So, figure out at least one more point the graph passes through.
+              One way to do this would be to plug in another value for \(x\)
+              and see what \(y\) results.  The question is, what \(x\)-value
+              would be convenient?
+              <!-- Because of the coefficient of
+              \(\frac{1}{2}\) in front of the product, I reason that I would
+              prefer to have the other factors be even numbers, so that the
+              denominator can be cancelled away and I get a whole number
+              value for \(y\).  Since both the factors involve taking
+              the difference (or, sum, if you prefer) of \(x\) and an even number,
+              I ought to plug in a number that lies at a distance of even value
+              from the two \(x\)-intercepts.  But I also shouldn't try a number
+              too far away from these, because the \(y\)-value might lie outside
+              the -10 to 10 viewing window I provide for you, which would
+              be annoying.  So, you might plug in \(x = 5\).
+              At least that's one way to think about it!
+              Really, the way I think about it is that I observe that I already
+              know that the \(x\)-intercepts are 2 units away from and
+              below the vertex.  That, together with the coefficient of
+              \(\frac{1}{2}\) out front helps me realize that this is a
+              parabola that opens downward at "\(\frac{1}{2}\)-speed".
+              So, the next convenient point to plot is 4 points out from the vertex. -->
+              This may vary from problem-to-problem, but, for this one, plugging
+              in \(x = 0\) looks easy enough!  (Sometimes plugging
+              in 0 for \(x\) may result in a fractional value for \(y\).
+              That's okay, but in the exercises you'll need to use the manual-entry
+              "Plot Point" field to enter that.)
+              Here is what I get:
+              \begin{align*}
+                y &= \frac{1}{2}(0 + 4)(0 - 2) \\
+                & = \frac{1}{2} \cdot 4 (-2) \\
+                & = \frac{1}{2} (-8)\\
+                & = -4
+              \end{align*}
+              Plot that and you then have a pretty good idea of what the parabola
+              looks like!  But, if you are drawing this thing by hand rather
+              than letting my answer checker fill the rest in for you,
+              you will want to be sure to draw your parabola as symmetrically
+              as possible.  For instance, since \(x = 0\) lies 1 unit to the right
+              of the vertex, we know the \(y\)-value 1 unit to the left of
+              the vertex must be the same as the one we just obtained.  So,
+              except for with the vertex, on a parabola, you always get
+              "two for the price of one" when it comes to plotting points.
+            </p>
+
+
+            <div style="text-align:center">
+              {% set svg_id = 'svg3' %}
+              {% set points = [[-4, 0], [2, 0], [-1, -9/2], [0,-4], [-2 , -4]] %}
+              {% set poly_points = '0.0,-455.000000000000 3.5353535353535426,-423.538924599531 7.070707070707085,-392.792062034486 10.606060606060597,-362.759412304867 14.141414141414138,-333.440975410672 17.676767676767682,-304.836751351903 21.212121212121225,-276.946740128558 24.747474747474737,-249.770941740639 28.282828282828277,-223.309356188144 31.81818181818182,-197.561983471074 35.353535353535364,-172.528823589430 38.88888888888889,-148.209876543210 42.424242424242415,-124.605142332415 45.95959595959596,-101.714620957045 49.4949494949495,-79.5383124171003 53.03030303030303,-58.0762167125803 56.56565656565655,-37.3283338434854 60.1010101010101,-17.2946638098153 63.63636363636364,2.02479338842978 67.17171717171716,20.6300377512498 70.70707070707071,38.5210692786451 74.24242424242424,55.6978879706152 77.77777777777779,72.1604938271605 81.31313131313131,87.9088868482808 84.84848484848484,102.943067033976 88.38383838383838,117.263034384246 91.91919191919192,130.868788899092 95.45454545454545,143.760330578512 98.98989898989899,155.937659422508 102.52525252525251,167.400775431078 106.06060606060606,178.149678604224 109.59595959595958,188.184368941945 113.13131313131314,197.504846444240 116.66666666666667,206.111111111111 120.2020202020202,214.003162942557 123.73737373737374,221.181001938578 127.27272727272727,227.644628099174 130.8080808080808,233.394041424344 134.34343434343432,238.429241914090 137.87878787878788,242.750229568411 141.41414141414143,246.357004387307 144.94949494949495,249.249566370778 148.48484848484847,251.427915518825 152.02020202020202,252.892051831446 155.55555555555557,253.641975308642 159.09090909090907,253.677685950413 162.62626262626262,252.999183756760 166.16161616161617,251.606468727681 169.6969696969697,249.499540863177 173.23232323232324,246.678400163249 176.76767676767676,243.143046627895 180.3030303030303,238.893480257117 183.83838383838383,233.929701050913 187.37373737373738,228.251709009285 190.9090909090909,221.859504132231 194.44444444444443,214.753086419753 197.97979797979798,206.932455871850 201.51515151515153,198.397612488522 205.05050505050502,189.148556269768 208.58585858585857,179.185287215590 212.12121212121212,168.507805325987 215.65656565656568,157.116110600959 219.19191919191917,145.010203040506 222.72727272727272,132.190082644628 226.26262626262627,118.655749413325 229.7979797979798,104.407203346597 233.33333333333334,89.4444444444444 236.86868686868686,73.7674727068667 240.4040404040404,57.3762881338639 243.93939393939394,40.2708907254362 247.4747474747475,22.4512804815835 251.01010101010098,3.91745740230597 254.54545454545453,-15.3305785123966 258.0808080808081,-35.2928272625242 261.6161616161616,-55.9692888480768 265.1515151515151,-77.3599632690541 268.68686868686865,-99.4648505254565 272.22222222222223,-122.283950617284 275.75757575757575,-145.817263544536 279.2929292929293,-170.064789307213 282.82828282828285,-195.026527905316 286.3636363636364,-220.702479338843 289.8989898989899,-247.092643607795 293.4343434343434,-274.197020712172 296.96969696969694,-302.015610651974 300.5050505050505,-330.548413427202 304.04040404040404,-359.795429037853 307.57575757575756,-389.756657483930 311.11111111111114,-420.432098765432 314.64646464646466,-451.821752882359 318.18181818181813,-483.925619834711 321.7171717171717,-516.743699622488 325.25252525252523,-550.275992245689 328.7878787878788,-584.522497704316 332.32323232323233,-619.483215998367 335.85858585858585,-655.158147127844 339.3939393939394,-691.547291092746 342.9292929292929,-728.650647893072 346.4646464646465,-766.468217528824 350.0,-805.000000000000 ' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</p>
+
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+    Graph the function
+    \[
+      y = (x - 3)(x + 2)
+    \]
+  </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          First I obtain the \(x\)-intercepts:
+          \[
+            x = 3 \quad \textrm{and} \quad x = -2
+          \]
+          I found those using this chain of reasoning:
+          <ol>
+            <li>\(x\)-intercepts are where a graph crossses the \(x\)-axis</li>
+            <li>Algebraically, that is where \(y = 0\).</li>
+            <li>\(y\) is given as a product, and the only way to make
+            a product equal to 0 is where one or both of its factors are 0.
+            So, I just figure out what \(x\)-values make the factors equal 0.
+            </li>
+            <li>
+              \(x = 3\) and \(x = -2\) are clearly the only \(x\)-values that will do that.
+            </li>
+          </ol>
+
+            I plot the \(x\)-intercepts:
+            <div style="text-align:center">
+              {% set svg_id = 'svg4' %}
+              {% set points = [[3, 0], [-2, 0]] %}
+              {% set poly_points = '' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+
+            <p>
+              Next, I find the vertex.  As noted in the first example, I know
+              that a parabola is a symmetrical thing.  That means that the vertex
+              has to lie halfway between the \(x\)-intercepts.  I also explained
+              in the example above that this halfway point
+              is also the average of the two \(x\)-values:
+              \[
+                \frac{3 + (-2)}{2} = \frac{1}{2}
+              \]
+              So, the \(x\)-coordinate of the vertex is \(x = \frac{1}{2}\).
+              Next, I find the \(y\)-coordinate of the vertex by plugging
+              in the \(x\)-coordinate:
+              \begin{align*}
+                y &= \left(\frac{1}{2} - 3\right)\left(\frac{1}{2} + 2\right) & \textrm{Plug in \(x = \frac{1}{2}\) }\\
+                &= \left(\frac{1}{2} - \frac{6}{2}\right)\left(\frac{1}{2} + \frac{4}{2}\right) & \textrm{Create common denominators}\\
+                &= \left(\frac{-5}{2}\right)\left(\frac{5}{2}\right) & \textrm{Add like terms.}\\
+                & = -\frac{25}{4} & \textrm{I multiplied.}
+              \end{align*}
+              Note that when plugging in the \(x\)-coordinate of the vertex
+              in for \(x\), I get two factors that only differ in sign!
+              That's because those factors involve taking the difference
+              between \(x\) and the two values that we averaged together
+              to get the value we are thus plugging in for \(x\): it is
+              halfway between the two, so the difference is the same either way!
+              (It's just that one \(x\)-intercept lies <em>below</em>
+              the vertex and one lies <em>above</em>.)
+              Now plot the vertex:
+              <div style="text-align:center">
+                {% set svg_id = 'svg5' %}
+                {% set points = [[3, 0], [-2, 0], [1/2, -25/4]] %}
+                {% set poly_points = '' %}
+                {% set parameters = {
+                    'svg_x_length': 350,
+                    'svg_y_length': 350,
+                    'cart_x_min': -10,
+                    'cart_x_max': 10,
+                    'cart_x_length': 20,
+                    'cart_y_min': -10,
+                    'cart_y_max': 10,
+                    'cart_y_length': 20
+                  }
+                %}
+                {% include "_static_graph.html" %}
+              </div>
+            </p>
+
+            <p>
+              Finally, I need to plot at least one more point for the answer
+              checker in the exercises to understand my intentions.  (Plus
+              you just need more detail to get a clearer picture of what
+              the parabola looks like.)
+              For this purpose, you can just plug in whatever you like
+              for \(x\) (but not one of the 3 values we already know about)
+              and see what \(y\)-value gets paired up with it.
+              Plugging in \(x = 0\) is often convenient,
+              though it isn't guaranteed to be.  Here is what I got:
+              \[
+                y = \left(0 - 3\right)\left(0 + 2\right) = (-3)(2) = -6
+              \]
+              Then, I plot that point.  But, while I'm at it, using the
+              symmetry of the parabola, I can also plot one other point
+              "for free".  I'll get the same \(y\)-value of \(6\) if
+              I go the same distance but in the other direction from the
+              vertex.  The vertex is at \(x = \frac{1}{2}\) and we just
+              plugged in \(x = 0\) to get \(y = 6\).  The value \(x = 0\) is, of course,
+              \(\frac{1}{2}\) units below \(x = \frac{1}{2}\).
+              By going \(\frac{1}{2}\) units above \(x = \frac{1}{2}\)
+              we get to \(x = 1\), so we know \(y = 6\) for \(x = 1\), as well
+              (no computation is necessary, but you could plug in to check
+              if you were feeling doubtful.)
+              So, I plot both those points and "connect the dots":
+            </p>
+
+
+          <div style="text-align:center">
+            <div style="text-align:center">
+              {% set svg_id = 'svg6' %}
+              {% set points = [[3, 0], [-2, 0], [1/2, -25/4], [0, -6], [1, -6]] %}
+              {% set poly_points = '0.0,-1645.0 3.5353535353535426,-1571.4717885930006 7.070707070707085,-1499.372002856851 10.606060606060597,-1428.7006427915521 14.141414141414138,-1359.4577083971024 17.676767676767682,-1291.6431996735025 21.212121212121225,-1225.2571166207529 24.747474747474737,-1160.2994592388534 28.282828282828277,-1096.7702275278032 31.81818181818182,-1034.6694214876031 35.353535353535364,-973.997041118253 38.88888888888889,-914.7530864197531 42.424242424242415,-856.937557392103 45.95959595959596,-800.5504540353026 49.4949494949495,-745.591776349352 53.03030303030303,-692.0615243342515 56.56565656565655,-639.9596979900011 60.1010101010101,-589.2862973166004 63.63636363636364,-540.0413223140495 67.17171717171716,-492.2247729823488 70.70707070707071,-445.8366493214977 74.24242424242424,-400.8769513314969 77.77777777777779,-357.3456790123456 81.31313131313131,-315.2428323640445 84.84848484848484,-274.5684113865932 88.38383838383838,-235.32241607999194 91.91919191919192,-197.50484644424037 95.45454545454545,-161.1157024793389 98.98989898989899,-126.15498418528725 102.52525252525251,-92.62269156208558 106.06060606060606,-60.5188246097337 109.59595959595958,-29.84338332823189 113.13131313131314,-0.5963677175798576 116.66666666666667,27.22222222222225 120.2020202020202,53.612386491174355 123.73737373737374,78.57412508927663 127.27272727272727,102.1074380165289 130.8080808080808,124.21232527293135 134.34343434343432,144.8887868584838 137.87878787878788,164.1368227731864 141.41414141414143,181.95643301703913 144.94949494949495,198.34761759004175 148.48484848484847,213.31037649219465 152.02020202020202,226.84470972349757 155.55555555555557,238.95061728395066 159.09090909090907,249.62809917355366 162.62626262626262,258.8771553923069 166.16161616161617,266.69778594021017 169.6969696969697,273.0899908172635 173.23232323232324,278.053770023467 176.76767676767676,281.5891235588205 180.3030303030303,283.69605142332415 183.83838383838383,284.3745536169779 187.37373737373738,283.62463013978163 190.9090909090909,281.44628099173553 194.44444444444443,277.83950617283955 197.97979797979798,272.80430568309356 201.51515151515153,266.3406795224977 205.05050505050502,258.44862769105197 208.58585858585857,249.12815018875628 212.12121212121212,238.37924701561064 215.65656565656568,226.20191817161512 219.19191919191917,212.5961636567698 222.72727272727272,197.56198347107446 226.26262626262627,181.09937761452915 229.7979797979798,163.20834608713395 233.33333333333334,143.8888888888888 236.86868686868686,123.14100601979398 240.4040404040404,100.96469747984902 243.93939393939394,77.35996326905416 247.4747474747475,52.326803387409385 251.01010101010098,25.865217834914933 254.54545454545453,-2.024793388429691 258.0808080808081,-31.343230282624212 261.6161616161616,-62.09009284766866 265.1515151515151,-94.26538108356274 268.68686868686865,-127.86909499030702 272.22222222222223,-162.90123456790118 275.75757575757575,-199.3617998163453 279.2929292929293,-237.25079073563901 282.82828282828285,-276.5682073257833 286.3636363636364,-317.3140495867768 289.8989898989899,-359.4883175186202 293.4343434343434,-403.0910111213143 296.96969696969694,-448.12213039485744 300.5050505050505,-494.5816753392513 304.04040404040404,-542.4696459544945 307.57575757575756,-591.7860422405873 311.11111111111114,-642.5308641975311 314.64646464646466,-694.7041118253237 318.18181818181813,-748.3057851239664 321.7171717171717,-803.33588409346 325.25252525252523,-859.7944087338024 328.7878787878788,-917.6813590449957 332.32323232323233,-976.996735027038 335.85858585858585,-1037.74053667993 339.3939393939394,-1099.9127640036731 342.9292929292929,-1163.5134169982653 346.4646464646465,-1228.5424956637082 350.0,-1295.0 ' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+    Graph the function
+    \[
+      y = -(x - 2)(x + 2)
+    \]
+  </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          First I obtain the \(x\)-intercepts:
+          \[
+            x = 2 \quad \textrm{and} \quad x = -2
+          \]
+          I found those using this chain of reasoning:
+          <ol>
+            <li>\(x\)-intercepts are where a graph crossses the \(x\)-axis</li>
+            <li>Algebraically, that is where \(y = 0\).</li>
+            <li>\(y\) is given as a product, and the only way to make
+            a product equal to 0 is where one or both of its factors are 0.
+            So, I just figure out what \(x\)-values make the factors equal 0.
+            </li>
+            <li>
+              \(x = 2\) and \(x = -2\) are clearly the only \(x\)-values that will do that.
+            </li>
+          </ol>
+
+            I plot the \(x\)-intercepts:
+            <div style="text-align:center">
+              {% set svg_id = 'svg7' %}
+              {% set points = [[2, 0], [-2, 0]] %}
+              {% set poly_points = '' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+
+            <p>
+              Next, I find the vertex.  As noted in the first example, I know
+              that a parabola is a symmetrical thing.  That means that the vertex
+              has to lie halfway between the \(x\)-intercepts.  I also explained
+              in the example above that this halfway point
+              is also the average of the two \(x\)-values:
+              \[
+                \frac{2 + (-2)}{2} = \frac{0}{2} = 0
+              \]
+              So, the \(x\)-coordinate of the vertex is \(x = 0\).
+              Next, I find the \(y\)-coordinate of the vertex by plugging
+              in the \(x\)-coordinate:
+              \[
+                y = -\left(0 - 2\right)\left(0 + 2\right) = -(-2)(2) = 4
+              \]
+              Note that when plugging in the \(x\)-coordinate of the vertex
+              in for \(x\), I get two factors that only differ in sign!
+              That's because those factors involve taking the difference
+              between \(x\) and the two values that we averaged together
+              to get the value we are thus plugging in for \(x\): it is
+              halfway between the two, so the difference is the same either way!
+              (It's just that one \(x\)-intercept lies <em>below</em>
+              the vertex and one lies <em>above</em>.)
+              Now plot the vertex:
+              <div style="text-align:center">
+                {% set svg_id = 'svg8' %}
+                {% set points = [[2, 0], [-2, 0], [0, 4]] %}
+                {% set poly_points = '' %}
+                {% set parameters = {
+                    'svg_x_length': 350,
+                    'svg_y_length': 350,
+                    'cart_x_min': -10,
+                    'cart_x_max': 10,
+                    'cart_x_length': 20,
+                    'cart_y_min': -10,
+                    'cart_y_max': 10,
+                    'cart_y_length': 20
+                  }
+                %}
+                {% include "_static_graph.html" %}
+              </div>
+            </p>
+
+            <p>
+              Finally, I need to plot at least one more point for the answer
+              checker in the exercises to understand my intentions.  (Plus
+              you just need more detail to get a clearer picture of what
+              the parabola looks like.)
+              For this purpose, you can just plug in whatever you like
+              for \(x\) (but not one of the 3 values we already know about)
+              and see what \(y\)-value gets paired up with it.
+              We already know what happens at \(x = 0\), so
+              let's plug in \(x = 1\).  Here is what I got:
+              \[
+                y = -\left(1 - 2\right)\left(1 + 2\right) = -(-1)(3) = 3
+              \]
+              Then, I plot that point.  But, while I'm at it, using the
+              symmetry of the parabola, I can also plot one other point
+              "for free".  I'll get the same \(y\)-value of \(3\) if
+              I go the same distance but in the other direction from the
+              vertex.  The vertex is at \(x = 0\) and we just
+              plugged in \(x = 1\) to get \(y = 3\).
+              So we know \(y = 3\) for \(x = -1\), as well
+              (no computation is necessary, but you could plug in to check
+              if you were feeling doubtful.)
+              So, I plot both those points and "connect the dots":
+            </p>
+
+
+          <div style="text-align:center">
+            <div style="text-align:center">
+              {% set svg_id = 'svg9' %}
+              {% set points = [[2, 0], [-2, 0], [0, 4], [1, 3], [-1, 3]] %}
+              {% set poly_points = '0.0,1855.0 3.5353535353535426,1785.0071421283542 7.070707070707085,1716.442709927558 10.606060606060597,1649.3067033976126 14.141414141414138,1583.5991225385164 17.676767676767682,1519.3199673502702 21.212121212121225,1456.469237832874 24.747474747474737,1395.046933986328 28.282828282828277,1335.0530558106316 31.81818181818182,1276.4876033057851 35.353535353535364,1219.3505764717884 38.88888888888889,1163.6419753086418 42.424242424242415,1109.3617998163454 45.95959595959596,1056.5100499948985 49.4949494949495,1005.0867258443014 53.03030303030303,955.0918273645545 56.56565656565655,906.5253545556577 60.1010101010101,859.3873074176105 63.63636363636364,813.6776859504132 67.17171717171716,769.396490154066 70.70707070707071,726.5437200285685 74.24242424242424,685.1193755739212 77.77777777777779,645.1234567901234 81.31313131313131,606.5559636771758 84.84848484848484,569.4168962350781 88.38383838383838,533.7062544638303 91.91919191919192,499.4240383634323 95.45454545454545,466.5702479338844 98.98989898989899,435.14488317518624 102.52525252525251,405.14794408733815 106.06060606060606,376.5794306703397 109.59595959595958,349.43934292419146 113.13131313131314,323.727680848893 116.66666666666667,299.4444444444444 120.2020202020202,276.5896337108459 123.73737373737374,255.16324864809712 127.27272727272727,235.16528925619838 130.8080808080808,216.59575553514944 134.34343434343432,199.45464748495056 137.87878787878788,183.74196510560148 141.41414141414143,169.4577083971023 144.94949494949495,156.60187735945317 148.48484848484847,145.17447199265382 152.02020202020202,135.17549229670442 155.55555555555557,126.60493827160492 159.09090909090907,119.4628099173554 162.62626262626262,113.74910723395573 166.16161616161617,109.46383022140597 169.6969696969697,106.60697887970616 173.23232323232324,105.17855320885623 176.76767676767676,105.17855320885623 180.3030303030303,106.60697887970616 183.83838383838383,109.46383022140597 187.37373737373738,113.74910723395573 190.9090909090909,119.46280991735534 194.44444444444443,126.60493827160492 197.97979797979798,135.17549229670442 201.51515151515153,145.17447199265382 205.05050505050502,156.60187735945306 208.58585858585857,169.4577083971023 212.12121212121212,183.74196510560148 215.65656565656568,199.45464748495056 219.19191919191917,216.59575553514938 222.72727272727272,235.16528925619826 226.26262626262627,255.16324864809712 229.7979797979798,276.5896337108459 233.33333333333334,299.4444444444445 236.86868686868686,323.72768084889293 240.4040404040404,349.4393429241914 243.93939393939394,376.5794306703397 247.4747474747475,405.14794408733815 251.01010101010098,435.14488317518607 254.54545454545453,466.5702479338842 258.0808080808081,499.4240383634323 261.6161616161616,533.7062544638303 265.1515151515151,569.416896235078 268.68686868686865,606.5559636771757 272.22222222222223,645.1234567901234 275.75757575757575,685.1193755739212 279.2929292929293,726.5437200285683 282.82828282828285,769.3964901540661 286.3636363636364,813.6776859504132 289.8989898989899,859.3873074176101 293.4343434343434,906.5253545556577 296.96969696969694,955.0918273645544 300.5050505050505,1005.0867258443019 304.04040404040404,1056.5100499948985 307.57575757575756,1109.361799816345 311.11111111111114,1163.641975308642 314.64646464646466,1219.3505764717884 318.18181818181813,1276.4876033057847 321.7171717171717,1335.0530558106316 325.25252525252523,1395.0469339863275 328.7878787878788,1456.4692378328746 332.32323232323233,1519.3199673502702 335.85858585858585,1583.599122538516 339.3939393939394,1649.3067033976126 342.9292929292929,1716.442709927558 346.4646464646465,1785.0071421283546 350.0,1855.0 ' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+</p>
+
+<p>
+  So far, we have looked at examples that ask you to graph a quadratic
+  given in intercept form.  Now, to further test your understanding, let's
+  try the reverse: can you find an equation in intercept form for a
+  graph of a quadratic.  In particular, we will be using key graphical information
+  that we can use to determine the intercept form: the \(x\)-intercepts and one
+  other point.  In fact, the other point I have chosen to give you is the vertex.
+  BUt any other point would do as well.  Time to look at some examples.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+  Develop an equation for the given graph.  Note that the vertex is located at
+  \((0, 8)\).
+    <div style="text-align:center">
+      {% set svg_id = 'svg10' %}
+      {% set points = [[-4, 0], [4, 0], [0,8]] %}
+      {% set poly_points = '0.0,910.0 3.5353535353535426,875.0035710641771 7.070707070707085,840.721354963779 10.606060606060597,807.1533516988063 14.141414141414138,774.2995612692582 17.676767676767682,742.1599836751351 21.212121212121225,710.7346189164371 24.747474747474737,680.023466993164 28.282828282828277,650.0265279053158 31.81818181818182,620.7438016528926 35.353535353535364,592.1752882358942 38.88888888888889,564.3209876543209 42.424242424242415,537.1808999081727 45.95959595959596,510.7550249974492 49.4949494949495,485.0433629221507 53.03030303030303,460.0459136822773 56.56565656565655,435.76267727782886 60.1010101010101,412.19365370880524 63.63636363636364,389.33884297520655 67.17171717171716,367.198245077033 70.70707070707071,345.7718600142842 74.24242424242424,325.0596877869606 77.77777777777779,305.0617283950617 81.31313131313131,285.7779818385879 84.84848484848484,267.20844811753904 88.38383838383838,249.35312723191515 91.91919191919192,232.21201918171616 95.45454545454545,215.7851239669422 98.98989898989899,200.0724415875931 102.52525252525251,185.07397204366904 106.06060606060606,170.7897153351699 109.59595959595958,157.21967146209573 113.13131313131314,144.3638404244465 116.66666666666667,132.2222222222222 120.2020202020202,120.79481685542294 123.73737373737374,110.08162432404856 127.27272727272727,100.08264462809919 130.8080808080808,90.79787776757473 134.34343434343432,82.22732374247528 137.87878787878788,74.37098255280074 141.41414141414143,67.22885419855115 144.94949494949495,60.80093867972659 148.48484848484847,55.08723599632692 152.02020202020202,50.0877461483522 155.55555555555557,45.802469135802454 159.09090909090907,42.2314049586777 162.62626262626262,39.37455361697786 166.16161616161617,37.231915110702985 169.6969696969697,35.80348943985308 173.23232323232324,35.089276604428115 176.76767676767676,35.089276604428115 180.3030303030303,35.80348943985308 183.83838383838383,37.231915110702985 187.37373737373738,39.37455361697786 190.9090909090909,42.23140495867767 194.44444444444443,45.802469135802454 197.97979797979798,50.0877461483522 201.51515151515153,55.08723599632692 205.05050505050502,60.80093867972653 208.58585858585857,67.22885419855115 212.12121212121212,74.37098255280074 215.65656565656568,82.22732374247528 219.19191919191917,90.79787776757469 222.72727272727272,100.08264462809913 226.26262626262627,110.08162432404856 229.7979797979798,120.79481685542294 233.33333333333334,132.22222222222226 236.86868686868686,144.36384042444647 240.4040404040404,157.21967146209568 243.93939393939394,170.7897153351699 247.4747474747475,185.07397204366904 251.01010101010098,200.07244158759303 254.54545454545453,215.7851239669421 258.0808080808081,232.21201918171616 261.6161616161616,249.35312723191515 265.1515151515151,267.208448117539 268.68686868686865,285.77798183858783 272.22222222222223,305.0617283950617 275.75757575757575,325.0596877869606 279.2929292929293,345.77186001428413 282.82828282828285,367.19824507703305 286.3636363636364,389.33884297520655 289.8989898989899,412.193653708805 293.4343434343434,435.76267727782886 296.96969696969694,460.0459136822772 300.5050505050505,485.04336292215095 304.04040404040404,510.7550249974492 307.57575757575756,537.1808999081725 311.11111111111114,564.320987654321 314.64646464646466,592.1752882358942 318.18181818181813,620.7438016528923 321.7171717171717,650.0265279053158 325.25252525252523,680.0234669931638 328.7878787878788,710.7346189164373 332.32323232323233,742.1599836751351 335.85858585858585,774.299561269258 339.3939393939394,807.1533516988063 342.9292929292929,840.721354963779 346.4646464646465,875.0035710641773 350.0,910.0 ' %}
+      {% set parameters = {
+          'svg_x_length': 350,
+          'svg_y_length': 350,
+          'cart_x_min': -10,
+          'cart_x_max': 10,
+          'cart_x_length': 20,
+          'cart_y_min': -10,
+          'cart_y_max': 10,
+          'cart_y_length': 20
+        }
+      %}
+      {% set color = 'blue' %}
+      {% include "_static_graph.html" %}
+    </div>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Note first that the \(x\)-intercepts are \(x = -4\) and \(x = 4\).
+          That means that \(y\) has to equal 0 when \(x = -4\) or \(x = 4\), which,
+          in turn, means that the intercept form of this function will be
+          \[
+            y = a(x - 4)(x + 4)
+          \]
+          The only problem is, it is not immediately apparent what the value of
+          \(a\) will be.  On the other hand, there is one more piece of information
+          that we haven't used: the coordinates of the vertex, \((0, 8)\).
+          In particular, we know that when \(x = 0\), \(y = 8\).  Thus, the
+          value of \(a\) will have to satisfy this equation:
+          \[
+            8 = a(0 - 4)(0 + 4)
+          \]
+          To be clear, all I did was plug in \(x = 0\) and \(y = 8\).
+          Now, I simplify and solve:
+          \begin{align*}
+            & 8 = a(0 - 4)(0 + 4) \\
+            \Rightarrow \quad & 8 = a(-4)(4) \\
+            \Rightarrow \quad & 8 = -16a \\
+            \Rightarrow \quad a = \frac{8}{-16} = -\frac{1}{2}
+          \end{align*}
+          So, we have the full intercept form:
+          \[
+            y = -\frac{1}{2}(x - 4)(x + 4)
+          \]
+        </div>
+      </div>
+</div>
+</p>
+
+<p>
+  The next one is about as hard as they get.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+  Develop an equation for the given graph.  Note that the vertex is located
+  at \(\left(-\frac{7}{2}, -\frac{1}{8}\right)\)
+    <div style="text-align:center">
+      {% set svg_id = 'svg11' %}
+      {% set points = [[-4, 0], [-3, 0], [-7/2, -1/8]] %}
+      {% set poly_points = '0.0,-192.5 3.5353535353535426,-169.87730843791445 7.070707070707085,-147.96882971125387 10.606060606060597,-126.7745638200184 14.141414141414138,-106.29451076420773 17.676767676767682,-86.52867054382202 21.212121212121225,-67.47704315886128 24.747474747474737,-49.13962860932563 28.282828282828277,-31.5164268952148 31.81818181818182,-14.60743801652892 35.353535353535364,1.5873380267320103 38.88888888888889,17.0679012345679 42.424242424242415,31.83425160697884 45.95959595959596,45.8863891439649 49.4949494949495,59.22431384552599 53.03030303030303,71.84802571166207 56.56565656565655,83.7575247423732 60.1010101010101,94.95281093765942 63.63636363636364,105.43388429752068 67.17171717171716,115.20074482195695 70.70707070707071,124.25339251096828 74.24242424242424,132.59182736455463 77.77777777777779,140.21604938271608 81.31313131313131,147.1260585654525 84.84848484848484,153.321854912764 88.38383838383838,158.80343842465052 91.91919191919192,163.57080910111213 95.45454545454545,167.62396694214877 98.98989898989899,170.96291194776043 102.52525252525251,173.58764411794715 106.06060606060606,175.49816345270892 109.59595959595958,176.6944699520457 113.13131313131314,177.17656361595755 116.66666666666667,176.94444444444443 120.2020202020202,175.99811243750636 123.73737373737374,174.33756759514335 127.27272727272727,171.96280991735537 130.8080808080808,168.87383940414244 134.34343434343432,165.07065605550454 137.87878787878788,160.55325987144167 141.41414141414143,155.32165085195388 144.94949494949495,149.37582899704114 148.48484848484847,142.71579430670343 152.02020202020202,135.34154678094072 155.55555555555557,127.25308641975307 159.09090909090907,118.45041322314054 162.62626262626262,108.93352719110298 166.16161616161617,98.70242832364045 169.6969696969697,87.75711662075297 173.23232323232324,76.09759208244053 176.76767676767676,63.72385470870324 180.3030303030303,50.63590449954088 183.83838383838383,36.83374145495357 187.37373737373738,22.317365574941277 190.9090909090909,7.086776859504198 194.44444444444443,-8.858024691357986 197.97979797979798,-25.51703907764515 201.51515151515153,-42.89026629935726 205.05050505050502,-60.97770635649417 208.58585858585857,-79.77935924905617 212.12121212121212,-99.29522497704315 215.65656565656568,-119.52530354045508 219.19191919191917,-140.46959493929182 222.72727272727272,-162.12809917355364 226.26262626262627,-184.50081624324045 229.7979797979798,-207.58774614835224 233.33333333333334,-231.38888888888894 236.86868686868686,-255.90424446485042 240.4040404040404,-281.1338128762371 243.93939393939394,-307.0775941230487 247.4747474747475,-333.73558820528524 251.01010101010098,-361.1077951229465 254.54545454545453,-389.19421487603296 258.0808080808081,-417.99484746454436 261.6161616161616,-447.50969288848086 265.1515151515151,-477.73875114784187 268.68686868686865,-508.6820222426282 272.22222222222223,-540.3395061728395 275.75757575757575,-572.7112029384757 279.2929292929293,-605.7971125395366 282.82828282828285,-639.5972349760231 286.3636363636364,-674.1115702479339 289.8989898989899,-709.3401183552696 293.4343434343434,-745.2828792980308 296.96969696969694,-781.9398530762167 300.5050505050505,-819.3110396898278 304.04040404040404,-857.3964391388633 307.57575757575756,-896.1960514233239 311.11111111111114,-935.70987654321 314.64646464646466,-975.9379144985204 318.18181818181813,-1016.8801652892558 321.7171717171717,-1058.536628915417 325.25252525252523,-1100.907305377002 328.7878787878788,-1143.9921946740133 332.32323232323233,-1187.7912968064481 335.85858585858585,-1232.3046117743086 339.3939393939394,-1277.5321395775943 342.9292929292929,-1323.4738802163042 346.4646464646465,-1370.1298336904401 350.0,-1417.5 ' %}
+      {% set parameters = {
+          'svg_x_length': 350,
+          'svg_y_length': 350,
+          'cart_x_min': -10,
+          'cart_x_max': 10,
+          'cart_x_length': 20,
+          'cart_y_min': -10,
+          'cart_y_max': 10,
+          'cart_y_length': 20
+        }
+      %}
+      {% set color = 'blue' %}
+      {% include "_static_graph.html" %}
+    </div>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Note first that the \(x\)-intercepts are \(x = -4\) and \(x = -3\).
+          That means that \(y\) has to equal 0 when \(x = -4\) or \(x = -3\), which,
+          in turn, means that the intercept form of this function will be
+          \[
+            y = a(x + 4)(x + 3)
+          \]
+          The only problem is, it is not immediately apparent what the value of
+          \(a\) will be.  On the other hand, there is one more piece of information
+          that we haven't used: the coordinates of the vertex,
+          \(\left(-\frac{7}{2}, -\frac{1}{8}\right)\).
+          In particular, we know that when \(x = -\frac{7}{2}\), \(y = -\frac{1}{8}\).
+          Thus, the
+          value of \(a\) will have to satisfy this equation:
+          \[
+            -\frac{1}{8} = a\left(-\frac{7}{2} + 4\right)\left(-\frac{7}{2} + 3\right)
+          \]
+          To be clear, all I did was plug in \(x = -\frac{7}{2}\) and \(y = -\frac{1}{8}\).
+          Now, I simplify and solve:
+          \begin{align*}
+            & -\frac{1}{8} = a\left(-\frac{7}{2} + 4\right)\left(-\frac{7}{2} + 3\right) \\
+            \Rightarrow \quad & -\frac{1}{8} = a\left(-\frac{7}{2} + \frac{8}{2}\right)\left(-\frac{7}{2} + \frac{6}{2}\right) \\
+            \Rightarrow \quad & -\frac{1}{8} = a\left(\frac{1}{2}\right)\left(-\frac{1}{2}\right) \\
+            \Rightarrow \quad & -\frac{1}{8} = a\left(-\frac{1}{4}\right) \\
+            \Rightarrow \quad & -\frac{1}{8} \cdot (-4) = a\left(-\frac{1}{4}\right) \cdot (-4) \\
+            \Rightarrow \quad & \frac{4}{8} = a \\
+            \Rightarrow \quad & a = \frac{1}{2}  \\
+          \end{align*}
+          So, we have the full intercept form:
+          \[
+            y = \frac{1}{2}(x + 4)(x + 3)
+          \]
+        </div>
+      </div>
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

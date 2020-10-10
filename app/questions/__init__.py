@@ -57,7 +57,9 @@ __all__ = ['quadratic_pattern',
             'vertex_form_to_standard_form',
             'intercept_form_to_standard_form',
             'graph_vertex_form',
-            'graph_vertex_form_to_equation']
+            'graph_vertex_form_to_equation',
+            'graph_intercept_form',
+            'graph_intercept_form_to_equation']
 
 class Question():
     pass
