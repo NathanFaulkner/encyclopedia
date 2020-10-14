@@ -440,7 +440,7 @@ vertexform.add_to_questions('graph_vertex_form',
 
 interceptform = Section('interceptform', 'Quadratics in Intercept Form', '/sections/intercept-form')
 interceptform.add_to_questions('graph_intercept_form',
-                            'graph_intercept_form_to_equation')
+                             'graph_intercept_form_to_equation')
 
 standardform = Section('standardform', 'Quadratics in Standard Form', '/sections/standard-form')
 standardform.add_to_questions('standard_form_to_vertex_form',
