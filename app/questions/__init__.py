@@ -59,7 +59,9 @@ __all__ = ['quadratic_pattern',
             'graph_vertex_form',
             'graph_vertex_form_to_equation',
             'graph_intercept_form',
-            'graph_intercept_form_to_equation']
+            'graph_intercept_form_to_equation',
+            'standard_form_to_vertex_form',
+            'graph_standard_form']
 
 class Question():
     pass
@@ -400,6 +402,38 @@ def fmt_slope_style_leading(term):
     else:
         return latex(term)
 
+def signed_coeff(coeff):
+    if coeff > 0:
+        if coeff == 1:
+            coeff = ''
+        else:
+            coeff = latex(coeff)
+        sign = '+'
+    elif coeff == 0:
+        coeff = ''
+        sign = ''
+    else:
+        if coeff == -1:
+            coeff = ''
+        else:
+            coeff = latex(abs(coeff))
+        sign = '-'
+    return sign + ' ' + coeff
+
+def leading_coeff(coeff):
+    if coeff > 0:
+        if coeff == 1:
+            coeff = ''
+        else:
+            coeff = latex(coeff)
+    elif coeff == 0:
+        coeff = ''
+    else:
+        if coeff == -1:
+            coeff = '-'
+        else:
+            coeff = latex(coeff)
+    return coeff
 
 def fmt_slope_style_trailing(term):
     x = Symbol('x')

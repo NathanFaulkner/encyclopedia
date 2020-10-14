@@ -49,6 +49,7 @@
     <p>
       <input type="text" id="special_point"></input>
       <button type="button" onclick="manual_add_point()" id="special_point_submitter">Plot Point</button>
+      <div id="syntax_for_plot_points" style="color:red"></div>
     </p>
     <!-- </form> -->
   </div>
@@ -294,6 +295,22 @@ function str_list_to_list_of_floats(str_list) {
 
 // var repetition_warning = ""
 
+function is_point(str_list) {
+  if (str_list === null) {
+    return false;
+  }
+  if (a.length != 2) {
+    return false;
+  }
+  var i;
+  for (i=0; i < a.length; i++) {
+    if (typeof a[i] != "number") {
+      return false;
+    }
+  }
+  return true;
+}
+
 function manual_add_point() {
     var text = document.getElementById("special_point").value;
     // var para = document.createElement("p");
@@ -304,26 +321,36 @@ function manual_add_point() {
     //   return;
     // }
     // manual_points.push(text);
-    var point = str_list_to_list_of_floats(text);
-    // console.log('Need to look at the point:', point);
-    var i = check_for_nearby(point, points);
-    if (i != -1) {
-      points.splice(i, 1);
-      // var circles = svg.getElementsByTagName("circle");
-      // var circle = circles[i];
-      // circle.parentNode.removeChild(circle);
-    } else {
-      points.push(point);
+    // console.log(text);
+    if (text !== '') {
+      var point = str_list_to_list_of_floats(text);
+      // console.log('Need to look at the point:', point);
+      // console.log(point);
+      if (is_point(point)) {
+        document.getElementById('syntax_for_plot_points').innerHTML = ''
+        var i = check_for_nearby(point, points);
+        // console.log(check_for_nearby(point, points));
+        if (i != -1) {
+          points.splice(i, 1);
+          // var circles = svg.getElementsByTagName("circle");
+          // var circle = circles[i];
+          // circle.parentNode.removeChild(circle);
+        } else {
+          points.push(point);
+        }
+        // console.log(points);
+        // console.log(special_points_list.children[0]);
+        // var button = document.createElement("button");
+        // button.setAttribute("type", "button");
+        // button.setAttribute("onclick", `delete_manual_point('${text}')`);
+        // button.innerHTML = "Delete Point";
+        // para.appendChild(button);
+        // special_points_list.appendChild(para);
+        do_ajax();
+      } else {
+        document.getElementById('syntax_for_plot_points').innerHTML = '[Enter (x, y) coordinates separated by a comma.]'
+      }
     }
-    // console.log(manual_points);
-    // console.log(special_points_list.children[0]);
-    // var button = document.createElement("button");
-    // button.setAttribute("type", "button");
-    // button.setAttribute("onclick", `delete_manual_point('${text}')`);
-    // button.innerHTML = "Delete Point";
-    // para.appendChild(button);
-    // special_points_list.appendChild(para);
-    do_ajax();
   };
 
 // function delete_manual_point(text) {

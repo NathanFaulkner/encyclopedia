@@ -1,0 +1,829 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  Next, we learn how to graph a quadratic when it is
+  given in a pretty "generic" form: <b>standard form</b>.
+  <div class="definition">
+    <h2></h2>
+    A quadratic written in the form
+      \begin{equation*}\tag{Standard Form}
+        ax^2+bx+c
+      \end{equation*}
+    is said to be in <b>standard form</b>.
+  </div>
+  For example,
+    \[
+      y = 2x^2 - 8x + 11
+    \]
+  is in standard form.
+</p>
+
+<p>
+  So, what are we supposed to do with that?  Recall that it is pretty
+  straight-forward to graph a function in the form \(a(x-h)^2+k\).
+  Note that this is called "vertex" form because you can just
+  read the vertex off from it; it is \((h,k)\).
+  Our strategy is actually to figure out how to put the standard
+  form equation into vertex form!
+  I'll train you on how to do
+  that in the following example.
+  My claim to you will be that, if you can put vertex form into
+  standard form (which is something you would have done in the
+  section
+  <a href="{{ url_for('section', section_name='warmupwithquadratics') }}">
+    Warm-Up with Quadratics
+  </a>)
+  then you can do the reverse, as demonstrated next.
+</p>
+
+
+
+
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      We are going to put \(y=2x^2 - 8x+11\) into vertex form,
+      i.e., \(y=a(x-h)^2+k\).
+      The procedure is to follow these basic steps:
+    </p>
+
+    <ol>
+      <li>
+        We want to find \(a\), \(h\), and \(k\) that will make the following equation true:
+          \[
+            2x^2 - 8x + 11 = a(x-h)^2+k
+          \]
+        The trick is to realize that, if this equation is true, then
+        we should be able to multiply the right side all out and it will
+        still equal the left side.  Do that now, using the given letters
+        as stand-ins for the unknown numbers we seek (in other words,
+        in the usual manner of algebra!)
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            \begin{align*}
+              a(x-h)^2+k &= a(x-h)(x-h) + k & \textrm{Getting ready to ``FOIL''}\\
+              &= a\left(x^2 - hx - hx + h^2\right) + k & \textrm{Did it.}\\
+              &= a(x^2 - 2hx + h^2) + k & \textrm{Collected like terms}\\
+              &= ax^2 - 2ah x + ah^2 + k & \textrm{Distributed the \(a\).}
+            \end{align*}
+          </div>
+        </div>
+      </li>
+      <li>
+         Using the previous step, identify what \(a\) will have to be.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            So, we have learned that \(a\), \(h\), and \(k\) will have to satisfy
+            the following equation:
+            \[
+              2x^2 - 8x + 11 = ax^2 - 2ah x + ah^2 + k
+            \]
+            Now, just look at it: What \(a\) will do the trick?  Of course,
+            if we took \(a = 2\), we'd be making progress, no?  That way,
+            at least the '\(x^2\)' terms would match up.
+          </div>
+        </div>
+      </li>
+      <li>
+        Use your answer from the previous step to find what \(h\) would
+        seem to work.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            We can fill in our value of \(2\) for \(a\) and then see
+            what \(h\) will seem to work:
+            \begin{align*}
+              2x^2 - 8x + 11 &= 2x^2 - 2\cdot 2 \cdot h x + 2h^2 + k \\
+              & = 2x^2 - 4h x + 2h^2 + k
+            \end{align*}
+            I'm already happy with the \(x^2\)-term.  Now, I just keep
+            going "down the line", comparing coefficients as I go.
+            What value for \(h\) will make the
+            \(x\)-term work out?
+            Here is a side-by-side comparison of what we are after, with some
+            color-coding so you can see what I am looking at:
+            \[
+              2x^2 \; {\color{cyan}- 8x} + 11 = 2x^2 \; {\color{cyan}- 4h x} + 2h^2 + k
+            \]
+            So, we need an \(h\) that makes
+            \[
+              -8x = -4h x
+            \]
+            or, in other words, we need that
+            \[
+              -8 = -4h
+            \]
+            So, of course, \(h\) ought to be \(2\)!
+          </div>
+        </div>
+      </li>
+      <li>
+        Use your answer from the previous step to find what \(k\) would
+        seem to work.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            We can fill in our value of \(2\) for \(h\) and then see
+            what \(k\) will seem to work:
+            \begin{align*}
+              2x^2 - 8x + 11 &= 2x^2 - 4 \cdot 2 \cdot x + 2\cdot 2^2 + k \\
+              & = 2x^2 - 8 x + 8 + k
+            \end{align*}
+            We already knocked out the \(x^2\) and \(x\) terms.  Now, we
+            just figure out what \(k\) will make the "constant" terms
+            match up.
+            Here is a side-by-side comparison of what we are after, with some
+            color-coding so you can see what I am looking at:
+            \[
+              2x^2 - 8x \; {\color{cyan}+ 11} = 2x^2 - 8 x \; {\color{cyan} + 8 + k}
+            \]
+            We need that
+            \[
+              11 = 8 + k
+            \]
+            So, of course, \(k = 3\)!
+          </div>
+        </div>
+      </li>
+      <li>
+        Write down your final answer&mdash;the vertex form of the given quadratic.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            Just fill in the values for \(a\), \(h\), and \(k\):
+            \[
+              y = a(x - h)^2 + k = 2(x - 2)^2 + 3
+            \]
+          </div>
+        </div>
+      </li>
+      <li>
+        In all, this method could be described as "figure out what
+        \(a\) \(h\), and \(k\) would have to be to make the answer check
+        out right."  That is, if we multiply our vertex form back out, it
+        ought to take us back to the standard form.  Just double check that
+        now.  (This step is quite redundant, but I am just including
+        it in case it helps a light bulb turn on for you!)
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            \begin{align*}
+              2(x - 2)^2 + 3 &= 2(x-2)(x-2) + 3 & \textrm{Getting ready to ``FOIL''}\\
+              &= 2(x^2 - 2x - 2x + 4) + 3 & \textrm{Did it} \\
+              &= 2(x^2 - 4x + 4) + 3 & \textrm{Collected like terms}\\
+              &= 2x^2 - 8x + 8 + 3 & \textrm{Distributed the \(2\)}\\
+              &= 2x^2 - 8x + 11 & \textrm{Simplified}
+            \end{align*}
+            Look!  We did it!  The vertex form we supplied is indeed equivalent
+            to the given standard form.  (By the way, this might be a
+            good time to ask yourself what it means for two formulas to be "equivalent"
+            in math: it means that they are the same in a special sense: they
+            look different, but no matter what values you plug in for the variables,
+            they would come out the same.  In other words, they define the same
+            function/input-output relationship.)
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</p>
+
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+    Rewrite in vertex form and then graph the function
+    \[
+      f(x) = -x^{2} + 4 x - 6
+    \]
+  </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          First, write an equation that expresses your goal:
+          to find \(a\), \(h\), and \(k\)
+          such that
+          \[
+            -x^2 + 4x - 6 = a(x - h)^2 + k
+          \]
+          Multiply the right side all out, and then, one-by-one, deduce what
+          values of \(a\), \(h\), and \(k\) will work:
+          \begin{align*}
+            -x^2 + 4x - 6 &= a(x - h)^2 + k\\
+            &= a(x-h)(x-h) + k & \textrm{Getting ready to ``FOIL''}\\
+            &= a\left(x^2 - hx - hx + h^2\right) + k & \textrm{Did it.}\\
+            &= a(x^2 - 2hx + h^2) + k & \textrm{Collected like terms}\\
+            &= ax^2 - 2ah x + ah^2 + k & \textrm{Distributed the \(a\).}
+          \end{align*}
+          Here it is rewritten in a single line for easier visual comparison:
+          \[
+            -x^2 + 4x - 6 = ax^2 - 2ah x + ah^2 + k
+          \]
+          Now, I figure out what \(a\), \(h\), and \(k\) will work by considering
+          terms one at a time, left to right.  First I see that if I choose
+          \(a\) so that
+          \[
+            -x^2 = ax^2
+          \]
+          I'll be doing good.  Of course, that means choosing \(a = -1\).
+          So, I fill that in:
+          \begin{align*}
+          -x^2 + 4x - 6 &= ax^2 - 2ah x + ah^2 + k\\
+                        &= -x^2 - 2(-1)h x + (-1)h^2 + k \\
+                        &= -x^2 + 2h x - h^2 + k
+          \end{align*}
+            <p>
+              Next I find \(h\) and \(k\) by continuing to
+              compare the coefficients, one-by-one.
+              I'm already happy with the \(x^2\)-term.  Now, I just keep
+              going "down the line", comparing coefficients as I go.
+              What value for \(h\) will make the
+              \(x\)-term work out?
+              Here is a side-by-side comparison of what we are after, with some
+              color-coding so you can see what I am looking at:
+              \[
+                -x^2 \; {\color{cyan}+ \; 4x} - 6 = -x^2 \; {\color{cyan}+ \; 2h x} - h^2 + k
+              \]
+              So, we need an \(h\) that makes
+              \[
+                4x = 2h x
+              \]
+              or, in other words, we need that
+              \[
+                4 = 2h
+              \]
+              So, of course, \(h\) ought to be \(2\)!  So, I fill that in
+              as well:
+              \begin{align*}
+              -x^2 + 2h x - h^2 + k &= -x^2 + 2\cdot 2 x - 2^2 + k \\
+              & = -x^2 + 4x - 4 + k
+              \end{align*}
+              It helps to recopy this side-by-side with the given.
+              \[
+                -x^2 + 4x - 6 = x^2 + 4x - 4 + k
+              \]
+              Here it is color-coded, so you can see what I am looking at next:
+              \[
+                -x^2 + 4x \; {\color{cyan}-\; 6} = x^2 + 4x \; {\color{cyan}-\; 4 + k}
+              \]
+              So, \(k\) will have to satisfy
+              \[
+                -6 = - 4 + k
+              \]
+              Solving, I get \(k = -2\).
+              In all, I get this vertex form expression by filling
+              in the values of \(a\), \(h\), and \(k\):
+              \begin{align*}
+                f(x) &= a(x - h)^2 + k\\
+                    &= -1(x - (-2))^2 - 2 \\
+                    &= -(x + 2)^2 - 2
+              \end{align*}
+              From this, I can graph the function.  If you need
+              to review how to do that, you should head on over to the
+              section on
+              <a href="{{ url_for('section', section_name='vertexform') }}">
+                graphing from vertex form
+              </a>
+              But, as a brief review,
+              I interpret the vertex
+              form as a transformation of \(y = x^2\):  Because of the
+              "\(+2\)" next to \(x\), I know that the graph
+              involves a translation left 2 units.  Because of the
+              negative in front of the squared term, I know the
+              graph involves a reflection across the \(x\)-axis&mdash;making
+              the \(y\)-values head towards the negatives.  Because of
+              the "\(-2\)" added on there, I know the graph will
+              involve a translation down 2 units.   So, this is my graph:
+              <div style="text-align:center">
+                  {% set svg_id = 'svg6' %}
+                  {% set points = [[-2, -2], [-3, -3], [-1, -3], [-4, -6], [0, -6]] %}
+                  {% set poly_points = '0.0,1330.00000000000 3.5353535353535426,1274.14855626977 7.070707070707085,1219.72553821039 10.606060606060597,1166.73094582186 14.141414141414138,1115.16477910417 17.676767676767682,1065.02703805734 21.212121212121225,1016.31772268136 24.747474747474737,969.036832976227 28.282828282828277,923.184368941945 31.81818181818182,878.760330578512 35.353535353535364,835.764717885930 38.88888888888889,794.197530864197 42.424242424242415,754.058769513315 45.95959595959596,715.348433833282 49.4949494949495,678.066523824100 53.03030303030303,642.213039485767 56.56565656565655,607.787980818284 60.1010101010101,574.791347821651 63.63636363636364,543.223140495868 67.17171717171716,513.083358840935 70.70707070707071,484.372002856851 74.24242424242424,457.089072543618 77.77777777777779,431.234567901235 81.31313131313131,406.808488929701 84.84848484848484,383.810835629017 88.38383838383838,362.241607999184 91.91919191919192,342.100806040200 95.45454545454545,323.388429752066 98.98989898989899,306.104479134782 102.52525252525251,290.248954188348 106.06060606060606,275.821854912764 109.59595959595958,262.823181308030 113.13131313131314,251.252933374145 116.66666666666667,241.111111111111 120.2020202020202,232.397714518927 123.73737373737374,225.112743597592 127.27272727272727,219.256198347107 130.8080808080808,214.828078767473 134.34343434343432,211.828384858688 137.87878787878788,210.257116620753 141.41414141414143,210.114274053668 144.94949494949495,211.399857157433 148.48484848484847,214.113865932048 152.02020202020202,218.256300377512 155.55555555555557,223.827160493827 159.09090909090907,230.826446280992 162.62626262626262,239.254157739006 166.16161616161617,249.110294867871 169.6969696969697,260.394857667585 173.23232323232324,273.107846138149 176.76767676767676,287.249260279563 180.3030303030303,302.819100091827 183.83838383838383,319.817365574941 187.37373737373738,338.244056728905 190.9090909090909,358.099173553719 194.44444444444443,379.382716049383 197.97979797979798,402.094684215896 201.51515151515153,426.235078053260 205.05050505050502,451.803897561473 208.58585858585857,478.801142740537 212.12121212121212,507.226813590450 215.65656565656568,537.080910111213 219.19191919191917,568.363432302826 222.72727272727272,601.074380165289 226.26262626262627,635.213753698602 229.7979797979798,670.781552902765 233.33333333333334,707.777777777778 236.86868686868686,746.202428323640 240.4040404040404,786.055504540353 243.93939393939394,827.337006427916 247.4747474747475,870.046933986328 251.01010101010098,914.185287215590 254.54545454545453,959.752066115702 258.0808080808081,1006.74727068666 261.6161616161616,1055.17090092848 265.1515151515151,1105.02295684114 268.68686868686865,1156.30343842465 272.22222222222223,1209.01234567901 275.75757575757575,1263.14967860422 279.2929292929293,1318.71543720029 282.82828282828285,1375.70962146720 286.3636363636364,1434.13223140496 289.8989898989899,1493.98326701357 293.4343434343434,1555.26272829303 296.96969696969694,1617.97061524334 300.5050505050505,1682.10692786450 304.04040404040404,1747.67166615651 307.57575757575756,1814.66483011938 311.11111111111114,1883.08641975309 314.64646464646466,1952.93643505765 318.18181818181813,2024.21487603306 321.7171717171717,2096.92174267932 325.25252525252523,2171.05703499643 328.7878787878788,2246.62075298439 332.32323232323233,2323.61289664320 335.85858585858585,2402.03346597286 339.3939393939394,2481.88246097337 342.9292929292929,2563.15988164473 346.4646464646465,2645.86572798694 350.0,2730.00000000000 ' %}
+                  {% set parameters = {
+                      'svg_x_length': 350,
+                      'svg_y_length': 350,
+                      'cart_x_min': -10,
+                      'cart_x_max': 10,
+                      'cart_x_length': 20,
+                      'cart_y_min': -10,
+                      'cart_y_max': 10,
+                      'cart_y_length': 20
+                    }
+                  %}
+                  {% include "_static_graph.html" %}
+              </div>
+            </p>
+        </div>
+      </div>
+      <div class="answer">
+        <a class="collapsible"><h3>Alternate Method to Get Vertex Form, I: </h3></a>
+        <div class='inner'>
+          You may find the process I just demonstrated to be kind of tedious and
+          overly-involved.  So, you are the type of person to ask, "Isn't there
+          an easier way?"  And, yes, there is perhaps an easier way&mdash;an
+          easier way that pretty much amounts to the same thing but is less
+          trouble to write down.  Here goes:
+
+          <p>
+            Recall that our goal is to find \(a\), \(h\), and  \(k\) so that
+            \[
+              -x^2 + 4x - 6 = a(x - h)^2 + k
+            \]
+            You have to be able to at least partially imagine what it would
+            be like to multiply the right side all out and then to compare
+            coefficients.  The right side would end up looking like this:
+            \[
+              a(x^2 - 2h x + h^2) + k
+            \]
+            The way this method proceeds is to leave some blanks where
+            the terms involving \(h\) and \(k\) go and then fill them in bit-by-bit.
+            But first, you have to factor out the coefficient on \(x^2\)
+            from <em>both</em> the \(x^2\) and \(x\) terms.  While you are doing that,
+            go ahead and leave yourself some blank space, like so:
+            \[
+              -x^2 + 4x - 6  = -(x^2 - 4x + \phantom{44}) - 6
+            \]
+            Next up, you ask yourself what to add into that blank space
+            within the parentheses.  The idea is that, for this right side to follow
+            the pattern set by the generic format of
+            \[
+              a(x^2 - 2h x + h^2) + k
+            \]
+            you'll need that the number that fills in the blank will have to be the
+            square of half the coefficient of \(x\) in the middle.  After all,
+            what should go in the "blank" is \(h^2\), and \(2h\) actually appears
+            in the middle, as that coefficient on \(x\).  So you take half
+            that coefficient (to get \(h\)) and then square it to get what goes in
+            the blank.  In this case, the middle coefficient is
+            \(-4\), so \(h\) must be \(-2\), and therefore \(h^2 = (-2)^2 = 4\).
+            You can go ahead and fill in the blank, but BE CAREFUL,
+            your expression won't be equivalent to what you started with just yet: some
+            tweaking will have to be done to the numbers outside the
+            parentheses:
+            \[
+              -x^2 + 4x - 6  = -(x^2 - 4x + 4) - 6 - \textrm{one further tweak}
+            \]
+            Now, at this point, I have just inserted a '\(4\)' just because
+            I felt like it.  Is that legit math?  No, no exactly: our expression
+            will not be equivalent to the given if we change in any old, arbitrary
+            way like that.  So, we have to tweak it.  We <em>like</em> the
+            '\(4\)' we inserted, but we have to pay for it somehow; we can't get it
+            for free.  Really, since the \(4\) is inside parentheses with a minus
+            out front, I have really arbitrarily added \(-4\) to the expression
+            we started with.  So, to make it right&mdash;to make it equivalent
+            to the given&mdash;I just need to take away \(-4\) outside the parentheses.
+            Of course, taking away \(-4\) means adding \(4\), if you like.
+            So, the following statement is true:
+            \begin{align*}
+              -x^2 + 4x - 6  &= -(x^2 - 4x + 4) - 6 - (-4) \\
+              &= -(x^2 - 4x +4) - 6 + 4 \\
+              & = -(x^2 - 4x + 4) - 2
+            \end{align*}
+            Now, the point of inserting that \(4\) to begin with was to make
+            an expression that conforms to the pattern seen when multiplying
+            out a square:
+            \[
+              a(x - h)^2 + k = a(x^2 - 2h x + h^2) + k
+            \]
+            We now have something on our hands of the form of the right-hand side
+            of this equaiton, which means we can rewrite it according to the
+            form of the left-hand side.  In other words, we can now
+            make the observation that \(x^2 - 4x + 4\) is a square.  It is
+            what you get by expanding \((x-2)^2\).  Thus,
+            \[
+              -(x^2 - 4x + 4) - 2 = -(x-2)^2 - 2
+            \]
+            The expression on the right is our final, vertex form of the given.
+            </p>
+
+            <p>
+            By the way, this "fill in the blank" process that I am
+            demonstrating here is called <b>completing the square</b>.  It
+            refers to the fact that you have left a blank inside the
+            squared term and thus have to fill it in or "complete it".
+            This is a favorite buzzword of math teachers!  There are different
+            ways of narrating how to accomplish this, but they all amount
+            to about the same thing.  Perhaps you will like my first method
+            better, as it is more step-by-step.  The first method
+            involves a little less mental juggling, but, as a trade-off, has farmed
+            that mental juggling to the paper, so it involves
+            more writing.  So, you'll just have to decide which method gets
+            better outcomes for you&mdash;slow and steady (tortoise beats
+            hare) or quick like a bunny.  Or perhaps you will like
+            a kind of cheater's method, which involves a formula.  That's what
+            the next method is about.
+            </p>
+        </div>
+      </div>
+      <div class="answer">
+        <a class="collapsible"><h3>Alternate Method to Get Vertex Form II: </h3></a>
+        <div class='inner'>
+          Finally, let me show you a formula or algorithm for
+          accomplishing this task.  (By the way, as noted
+          in the explanation of Alternate Method I, this task is called
+          <b>completing the square</b> by math teachers.)  I am going to first
+          <em>derive</em> the formula, but, in the end, the point is just
+          to know the formula whether you know how to derive it or not.
+          You can derive or come up with this formula simply by doing my original
+          method to the "generic" problem.  That is, take a generic
+          quadratic written in standard form:
+          \[
+            f(x) = ax^2 + bx + c
+          \]
+          where \(a\), \(b\), and \(c\) are some given numbers.  Also,
+          \(a \not = 0\), because that would make it linear&mdash;which
+          we already know how to graph and don't need to bother with
+          any fancy formulas for.
+          Then, to put it into vertex form, we need to find \(h\) and \(k\)
+          so that:
+          \[
+            ax^2 + bx + c = a(x - h)^2 + k\\
+          \]
+          Spoiler alert: \(a\) is \(a\)!  Same on both sides.  What does that
+          mean for our solving process?  It means that whatever number
+          is the coefficient of \(x^2\) in the standard form expression
+          will also be the coefficient of the squared term in the vertex
+          form expression.  Now, for the rest of it, we expand
+          out the right side and compare coefficients:
+          \begin{align*}
+            ax^2 + bx + c &= a(x - h)^2 + k\\
+            &= a(x-h)(x-h) + k & \textrm{Getting ready to ``FOIL''}\\
+            &= a\left(x^2 - hx - hx + h^2\right) + k & \textrm{Did it.}\\
+            &= a(x^2 - 2hx + h^2) + k & \textrm{Collected like terms}\\
+            &= ax^2 - 2ah x + ah^2 + k & \textrm{Distributed the \(a\).}
+          \end{align*}
+          Here is what we deduced, written in a single line:
+          \[
+            ax^2 + bx + c = ax^2 - 2ah x + ah^2 + k
+          \]
+          So, what about \(h\)?  Compare the coefficients
+          on \(x\): it will work out if \(h\) satisfies
+          \[
+            b = -2ah
+          \]
+          So,
+          \[
+            h = -\frac{b}{2a}
+          \]
+          I solved for \(h\)!  So, this formula will work every time.
+          In words, it says to find the coefficient (\(b\))
+          of \(x\) in the standard form presentation.  Make it negative,
+          and then divide by twice the coefficient of \(x^2\).  That will
+          be your \(h\), which has to go after the <em>negative</em>
+          in the vertex format.  So, for example, if you are given
+          \[
+            f(x) = -x^2 - 4 x - 6
+          \]
+          then your \(a = -1\) and your \(b = -4\).  Thus,
+          \[
+            h = -\frac{b}{2a} = -\frac{-4}{2 (-1)} = \frac{4}{-2} = -2
+          \]
+          Thus, the vertex form is partially determined:
+          \[
+            a(x - h)^2 + k = -(x - (-2))^2 + k = -(x + 2)^2 + k
+          \]
+
+          <p>
+            Now, what about \(k\)?  Well, we could continue in the same
+            fashion.  But, the formula you get isn't all that nice.
+            I don't think it is fun or very useful to memorize formulas,
+            but you might tend to disagree with me on that.  So,
+            let's check it out just to see.
+            Going back to the task of comparing coefficients, I have
+            copied our template from above:
+            \[
+              ax^2 + bx + c = ax^2 - 2ah x + ah^2 + k
+            \]
+            So, looking at the "constant" terms (the parts without \(x\)),
+            we see that \(k\) needs to satisfy
+            \[
+            c = ah^2 + k
+            \]
+            Solving for \(k\) is actually quite easy:
+            \[
+              k = c - ah^2
+            \]
+            So, there you have it!  First, deduce what \(h\) is, and then
+            perform this formula to get \(k\).  Of course, you also
+            have to remember the formula.  Are you sure that you will?
+            How long will you remember the formula? Well, let's see it demonstrated.
+            Again, working from the given of
+            \[
+              f(x) = -x^2 - 4 x - 6
+            \]
+            we have \(a = -1\) and \(c = -6\).  We also already
+            figured out that
+            that \(h = -2\).  Therefore,
+            \[
+              k = c - ah^2 = -6 - (-1)(-2)^2 = -6 - (-1)\cdot 4 = -6- (-4) = -6 + 4 = -2
+            \]
+            Mind your order of operations!  So, there you have it.
+            Filling in the values in our final answer, we have the vertex
+            form is
+            \[
+              a(x - h)^2 + k = -1(x - (-2))^2 - 2 = -(x+2)^2 - 2
+            \]
+            Now, I have never met anyone (that I am aware of) that memorized
+            that formula for \(k\).  It just doesn't seem that fun to me.
+            Lucky for you, there is another way to figure out what
+            \(k\) is.  You see, \(k\) is just the \(y\)-value that gets
+            paired with \(x\) value of \(x = h\).  That is, since \(h = -2\),
+            the \(k\) will just be what you get when you plug in \(-2\)
+            for \(x\), like so:
+            \begin{align*}
+              k = f(h) = f(-2) &= -(-2)^2 - 4 (-2) - 6 \\
+              &= - 4 + 8 - 6 \\
+              &= -2
+            \end{align*}
+            So, in all, you certainly might consider memorizing the
+            facts that if
+            \[
+              f(x) = ax^2 + bx + c
+            \]
+            (fine print: \(a \not = 0\)) then the format
+            \[
+              f(x) = a(x - h)^2 + k
+            \]
+            can be obtained by computing
+            \[
+              h = -\frac{b}{2a}
+            \]
+            and
+            \[
+              k = f(h)
+            \]
+          </p>
+        </div>
+      </div>
+</div>
+</p>
+
+<p>
+  I am going to demonstrate just one more example, demoing each of the 3 methods
+  again, but with a lot less talk:
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <p>
+  <!-- <a href="" target="_blank">Click for video.</a> -->
+  </p>
+
+  <p>
+    Rewrite in vertex form and then graph the function
+    \[
+      f(x) = -\frac{1}{2}x^{2} + 3 x - \frac{7}{2}
+    \]
+  </p>
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          First, write an equation that expresses your goal:
+          to find \(a\), \(h\), and \(k\)
+          such that
+          \[
+            -\frac{1}{2}x^{2} + 3 x - \frac{7}{2} = a(x - h)^2 + k
+          \]
+          Multiply the right side all out, and then, one-by-one, deduce what
+          values of \(a\), \(h\), and \(k\) will work:
+          \begin{align*}
+            -\frac{1}{2}x^{2} + 3 x - \frac{7}{2} &= a(x - h)^2 + k\\
+            &= a(x-h)(x-h) + k & \textrm{Getting ready to ``FOIL''}\\
+            &= a\left(x^2 - hx - hx + h^2\right) + k & \textrm{Did it.}\\
+            &= a(x^2 - 2hx + h^2) + k & \textrm{Collected like terms}\\
+            &= ax^2 - 2ah x + ah^2 + k & \textrm{Distributed the \(a\).}
+          \end{align*}
+          Here it is rewritten in a single line for easier visual comparison:
+          \[
+            -\frac{1}{2}x^{2} + 3 x - \frac{7}{2} = ax^2 - 2ah x + ah^2 + k
+          \]
+          Now, I figure out what \(a\), \(h\), and \(k\) will work by considering
+          terms one at a time, left to right.  Equating the coefficients
+          of the \(x^2\) terms, I see that
+          \[
+            a = -\frac{1}{2}
+          \]
+          So, I fill that in:
+          \begin{align*}
+          -\frac{1}{2}x^{2} + 3 x - \frac{7}{2} &= ax^2 - 2ah x + ah^2 + k\\
+                        &= -\frac{1}{2}x^2 - 2(-\frac{1}{2})h x + (-\frac{1}{2})h^2 + k \\
+                        &= -\frac{1}{2}x^2 + h x -\frac{1}{2} h^2 + k
+          \end{align*}
+            <p>
+              Next I find \(h\) and \(k\) by continuing to
+              compare the coefficients, one-by-one.
+              I'm already happy with the \(x^2\)-term.  Now, I just keep
+              going "down the line": What value for \(h\) will make the
+              \(x\)-term work out?
+              Here is a side-by-side comparison of what we are after, with some
+              color-coding so you can see what I am looking at:
+              \[
+                -\frac{1}{2}x^{2} \; {\color{cyan} +\; 3 x} - \frac{7}{2} = -\frac{1}{2}x^2 \; {\color{cyan}+ \; h x} -\frac{1}{2} h^2 + k
+              \]
+              Comparing the coefficients of \(x\), I see
+              that
+              \[
+                 h = 3
+              \]
+              So, I fill that in
+              as well, to learn that:
+              \begin{align*}
+                -\frac{1}{2}x^{2} + 3 x - \frac{7}{2} &= -\frac{1}{2}x^2 + h x -\frac{1}{2} h^2 + k
+                & = &= -\frac{1}{2}x^2 + 3 x -\frac{1}{2} \cdot 3^2 + k \\
+                &= -\frac{1}{2}x^2 + 3 x -\frac{9}{2}  + k
+              \end{align*}
+              It helps to recopy this side-by-side with the given:
+              \[
+                -\frac{1}{2}x^{2} + 3 x - \frac{7}{2} = -\frac{1}{2}x^2 + 3 x -\frac{9}{2}  + k
+              \]
+              Here it is color-coded, so you can see what I am paying attention to
+              next:
+              \[
+                -\frac{1}{2}x^{2} + 3 x \; {\color{cyan}- \; \frac{7}{2}} = -\frac{1}{2}x^2 + 3 x \; {\color{cyan}-\;\frac{9}{2}  + k}
+              \]
+              So, now what does \(k\) have to be?  Specifically,
+              what will  \(k\) have to be to make the "constant" terms
+              (just numbers, no \(x\)'s) match up: \(k\) will have to satisfy
+              \[
+                - \frac{7}{2} = -\frac{9}{2}  + k
+              \]
+              Solving, I get
+              \[
+                k = - \frac{7}{2} + \frac{9}{2} = \frac{2}{2} = 1
+              \]
+              In all, I get this vertex form expression by filling
+              in the values of \(a\), \(h\), and \(k\):
+              \begin{align*}
+                f(x) &= a(x - h)^2 + k\\
+                    &= -\frac{1}{2}(x - 3)^2 + 1 \\
+              \end{align*}
+              From this, I can graph the function.  If you need
+              to review how to do that, you should head on over to the
+              section on
+              <a href="{{ url_for('section', section_name='vertexform') }}">
+                graphing from vertex form
+              </a>
+              But, as a brief review,
+              I interpret the vertex
+              form as a transformation of \(y = x^2\):  Because of the
+              "\(-3\)" next to \(x\), I know that the graph
+              involves a translation right 3 units.  Because of the
+              negative in front of the squared term, I know the
+              graph involves a reflection across the \(x\)-axis&mdash;making
+              the \(y\)-values head towards the negatives.  Because
+              the coefficient on the square term also has a magnitude
+              of \(\frac{1}{2}\), I know those \(y\)'s will decrease
+              at half the rate that they do for \(y = -x^2\).  Because of
+              the "\(+ 1\)" added on the end there, I know the graph will
+              involve a translation up 1 units.   So, this is my graph:
+              <div style="text-align:center">
+                  {% set svg_id = 'svg7' %}
+                  {% set points = [[3, 1], [1, -1], [5, -1], [7, -7], [-1, -7]] %}
+                  {% set poly_points = '0.0,1636.25000000000 3.5353535353535426,1590.64751045812 7.070707070707085,1545.75923375166 10.606060606060597,1501.58516988062 14.141414141414138,1458.12531884502 17.676767676767682,1415.37968064483 21.212121212121225,1373.34825528007 24.747474747474737,1332.03104275074 28.282828282828277,1291.42804305683 31.81818181818182,1251.53925619835 35.353535353535364,1212.36468217529 38.88888888888889,1173.90432098765 42.424242424242415,1136.15817263545 45.95959595959596,1099.12623711866 49.4949494949495,1062.80851443730 53.03030303030303,1027.20500459137 56.56565656565655,992.315707580859 60.1010101010101,958.140623405775 63.63636363636364,924.679752066116 67.17171717171716,891.933093561882 70.70707070707071,859.900647893072 74.24242424242424,828.582415059688 77.77777777777779,797.978395061728 81.31313131313131,768.088587899194 84.84848484848484,738.912993572085 88.38383838383838,710.451612080400 91.91919191919192,682.704443424140 95.45454545454545,655.671487603306 98.98989898989899,629.352744617896 102.52525252525251,603.748214467911 106.06060606060606,578.857897153352 109.59595959595958,554.681792674217 113.13131313131314,531.219901030507 116.66666666666667,508.472222222222 120.2020202020202,486.438756249362 123.73737373737374,465.119503111927 127.27272727272727,444.514462809917 130.8080808080808,424.623635343332 134.34343434343432,405.447020712172 137.87878787878788,386.984618916437 141.41414141414143,369.236429956127 144.94949494949495,352.202453831242 148.48484848484847,335.882690541781 152.02020202020202,320.277140087746 155.55555555555557,305.385802469136 159.09090909090907,291.208677685950 162.62626262626262,277.745765738190 166.16161616161617,264.997066625855 169.6969696969697,252.962580348944 173.23232323232324,241.642306907458 176.76767676767676,231.036246301398 180.3030303030303,221.144398530762 183.83838383838383,211.966763595551 187.37373737373738,203.503341495766 190.9090909090909,195.754132231405 194.44444444444443,188.719135802469 197.97979797979798,182.398352208958 201.51515151515153,176.791781450872 205.05050505050502,171.899423528211 208.58585858585857,167.721278440975 212.12121212121212,164.257346189164 215.65656565656568,161.507626772778 219.19191919191917,159.472120191817 222.72727272727272,158.150826446281 226.26262626262627,157.543745536170 229.7979797979798,157.650877461484 233.33333333333334,158.472222222222 236.86868686868686,160.007779818386 240.4040404040404,162.257550249974 243.93939393939394,165.221533516988 247.4747474747475,168.899729619427 251.01010101010098,173.292138557290 254.54545454545453,178.398760330578 258.0808080808081,184.219594939292 261.6161616161616,190.754642383430 265.1515151515151,198.003902662994 268.68686868686865,205.967375777982 272.22222222222223,214.645061728395 275.75757575757575,224.036960514233 279.2929292929293,234.143072135496 282.82828282828285,244.963396592185 286.3636363636364,256.497933884297 289.8989898989899,268.746684011835 293.4343434343434,281.709646974799 296.96969696969694,295.386822773186 300.5050505050505,309.778211406999 304.04040404040404,324.883812876237 307.57575757575756,340.703627180900 311.11111111111114,357.237654320988 314.64646464646466,374.485894296500 318.18181818181813,392.448347107438 321.7171717171717,411.125012753801 325.25252525252523,430.515891235588 328.7878787878788,450.620982552801 332.32323232323233,471.440286705438 335.85858585858585,492.973803693500 339.3939393939394,515.221533516988 342.9292929292929,538.183476175900 346.4646464646465,561.859631670238 350.0,586.250000000000 ' %}
+                  {% set parameters = {
+                      'svg_x_length': 350,
+                      'svg_y_length': 350,
+                      'cart_x_min': -10,
+                      'cart_x_max': 10,
+                      'cart_x_length': 20,
+                      'cart_y_min': -10,
+                      'cart_y_max': 10,
+                      'cart_y_length': 20
+                    }
+                  %}
+                  {% include "_static_graph.html" %}
+              </div>
+            </p>
+        </div>
+      </div>
+      <div class="answer">
+        <a class="collapsible"><h3>Alternate Method to Get Vertex Form I: </h3></a>
+        <div class='inner'>
+          To "complete the square", I first need to factor out the coefficient
+          on \(x^2\) from both the \(x^2\) term and the \(x\) term.  That's
+          a little trickier in this case, so let me talk you through it.
+          Factoring out \(-\frac{1}{2}\) would look something like this:
+          \[
+            -\frac{1}{2}\left(x^2 - ? x + \phantom{44}\right) - \frac{7}{2}
+          \]
+          When "factoring out", we have to leave something behind.  "Factoring"
+          is just a word for "reversing the distributive property"; you might
+          call it "undistributing" instead.  So, to figure out what \(?\)
+          has to be, just imagine what you could multiply by \(\frac{1}{2}\)
+          to go back to what you started with&mdash;in other words, to
+          get the \(3\) back.  That is, "one half of what number is 3?"
+          The answer, I hope you will agree, is \(6\).  That means
+           my first step of completing the square looks like this:
+           \[
+            -\frac{1}{2}\left(x^2 - 6 x + \phantom{44}\right) - \frac{7}{2} - \textrm{one more tweak}
+           \]
+           Next, I fill in the blank in such a way that "makes the thing inside
+           the parentheses a square."  What does that mean?  It means we want
+           to rewrite the part in parentheses in the form \((x - h)^2\).
+           To realize how to do that, you have to imagine expanding
+           the generic expression \((x-h)^2\) to realize ho to get from one
+           form to another:
+           \[
+            (x-h)^2 = x^2 - 2hx + h^2
+           \]
+           The observation to make is that you have to fill in the blank with
+           the square of one half of the middle coefficient.  The middle
+           coefficient (I mean, the coefficient on \(x\)) is \(-6\).
+           One half of that is \(-3\), and squaring yields \(9\).  So, that's it!
+           That's the next (half-)step of completing the square.  (We just
+           "completed the square" when we filled in the blank to make
+           the expression inside the parentheses a square.)
+           \[
+            f(x) = -\frac{1}{2}\left(x^2 - 6x + 9\right) - \frac{7}{2} - \textrm{one more tweak}
+           \]
+           Adding \(9\) within the paretheses&mdash;which have a \(-\frac{1}{2}\)
+           outside of them as a coefficient&mdash;means that we have arbitrarily
+           added
+           \[
+            -\frac{1}{2}\cdot 9 = - \frac{9}{2}
+           \]
+           to our expression.  Thus, it is not yet equivalent to the given.
+           TO fix it, on the outside of the parentheses, we just take
+           \(-\frac{9}{2}\) away again.  (But since we will be taking away
+           a negative, you could just register this as <em>adding</em>
+           it back in after having taken it away.)
+           \begin{align*}
+            f(x) &= -\frac{1}{2}\left(x^2 - 6x + 9\right) - \frac{7}{2} - \left(- \frac{9}{2}\right)\\
+                &= -\frac{1}{2}\left(x^2 - 6x + 9\right) - \frac{7}{2} + \frac{9}{2}\\
+                &= -\frac{1}{2}\left(x^2 - 6x + 9\right) + \frac{2}{2}\\
+                &= -\frac{1}{2}\left(x^2 - 6x + 9\right) + 1
+           \end{align*}
+           As a final step, we recall why we inserted the \(9\) in the first place:
+           to make the expression inside the parentheses a perfect square:
+           \[
+            f(x) = -\frac{1}{2}\left(x - 3\right)^2 + 1
+           \]
+           That's in vertex form!  So, we are ready to graph it.  (See the answer
+           above for the graph.)
+        </div>
+      </div>
+      <div class="answer">
+        <a class="collapsible"><h3>Alternate Method to Get Vertex Form II: </h3></a>
+        <div class='inner'>
+          We view our given as example of the generic format
+          \[
+            ax^2 + bx + c
+          \]
+          Thus, \(a = -\frac{1}{2}\), \(b = 3\), and \(c = -\frac{7}{2}\).
+          THe vertex form
+          \[
+            a(x-h)^2 + k
+          \]
+          can be obtained by using \(a = -\frac{1}{2}\) ("same \(a\) in both places")
+          and
+          \[
+            h = -\frac{b}{2a} = -\frac{3}{2 \cdot -\frac{1}{2}} = -\frac{3}{-1} = 3
+          \]
+          and
+          \begin{align*}
+            k = f(h) = f(3) &= -\frac{1}{2}\cdot 3^2 + 3\cdot 3 - \frac{7}{2}\\
+                            &= -\frac{9}{2} + 9 - \frac{7}{2}\\
+                            &= -\frac{16}{2} + 9\\
+                            &= -8 + 9\\
+                            &= 1
+          \end{align*}
+          So, in all, our vertex form is
+          \[
+            a(x - h)^2 + k = -\frac{1}{2}\left(x - 3\right)^2 + 1
+          \]
+          We are now ready to graph it. (See the answer
+          above for the graph.)
+        </div>
+      </div>
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

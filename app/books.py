@@ -442,7 +442,9 @@ interceptform = Section('interceptform', 'Quadratics in Intercept Form', '/secti
 interceptform.add_to_questions('graph_intercept_form',
                             'graph_intercept_form_to_equation')
 
-
+standardform = Section('standardform', 'Quadratics in Standard Form', '/sections/standard-form')
+standardform.add_to_questions('standard_form_to_vertex_form',
+                                'graph_standard_form')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -493,7 +495,8 @@ functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_
 quadratics = Division('chapter', "Quadratic Functions",
                                 [warmupwithquadratics,
                                 vertexform,
-                                interceptform])
+                                interceptform,
+                                standardform])
 quadratics.set_frontpage(quadratics_intro)
 
 
