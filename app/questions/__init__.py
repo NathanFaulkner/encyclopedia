@@ -62,7 +62,9 @@ __all__ = ['quadratic_pattern',
             'graph_intercept_form_to_equation',
             'standard_form_to_vertex_form',
             'graph_standard_form',
-            'generic_max_min']
+            'generic_max_min',
+            'cannonball_problem',
+            'max_revenue_problem']
 
 class Question():
     pass

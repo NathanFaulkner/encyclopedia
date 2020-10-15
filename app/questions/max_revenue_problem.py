@@ -25,7 +25,20 @@ from app.questions import (Question,
 #     from .. import general
 
 
-class GenericMaxMin(Question):
+class Good():
+    def __init__(self, plural_name, plausible_optimums):
+        self.plural_name = plural_name
+        self.plausible_optimums = plausible_optimums
+
+cans_of_soup = Good('cans of soup', [75, 595])
+bagels = Good('bagels', [20, 295])
+yoyos = Good('yo-yos', [125, 1995])
+sport_coats = Good('sport coats', [1995, 99500])
+turkeys = Good('pounds of Thanksgiving turkey', [45, 495])
+electric_blankets = Good('electric blankets', [595, 2995])
+sunglasses = Good('sunglasses', [325, 25500])
+
+class MaxRevenue(Question):
     """
     The given is an expanded form of
 
@@ -34,7 +47,7 @@ class GenericMaxMin(Question):
     \\]
 
     The directions are to find the max or min.  Answer example:
-    "Max at x= h  of y = k"
+    "Max at x = h  of y = k"
     """
     def __init__(self, **kwargs):
         if 'seed' in kwargs:
@@ -42,79 +55,81 @@ class GenericMaxMin(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        if 'a' in kwargs:
-            self.a = kwargs['p']
-        else:
-            a=0
-            while a == 0:
-                a = int(random.triangular(-19,19))
-            add_on = random.choice([Rational(1, 2), 0])
-            a = a + add_on
+        item = random.choice([cans_of_soup,
+                                    bagels,
+                                    yoyos,
+                                    sport_coats,
+                                    turkeys,
+                                    electric_blankets,
+                                    sunglasses])
+        item_plural = item.plural_name
+        l, u = item.plausible_optimums
+        optimum = 0.01*random.randint(l, u)
+        b = 0.01*random.randint(1500,6000)
+        a = float(str(round(-b/2/optimum, 3)))
+
+        self.item_plural = item_plural
         self.a = a
-        symb_a = '{}'.format(a)
-        if a == 1:
-            symb_a = ''
-        elif a == -1:
-            symb_a = '-'
-        if 'h' in kwargs:
-            self.h = kwargs['h']
-        else:
-            self.h = random.randint(-5,5)
-        if 'k' in kwargs:
-            self.k = kwargs['k']
-        else:
-            k = random_non_zero_integer(-10,10)
-            add_on = random.choice([Rational(1, 2), 0])
-            k = k + add_on
-            self.k = k
+        self.b = b
+
+        u = lambda x: b + a*x
+        y = lambda x: x*u(x)
+
+        x = Symbol('x')
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:
             self.x = Symbol('x')
 
 
-        a = self.a
-        h = self.h
-        k = self.k
-        x = self.x
-        self.given = expand(a*(x - h)**2 + k)
-        max_or_min = 'Min' if a > 0 else 'Max'
+        h = -b/2/a
+        k = y(h)
+        self.h = h
+        self.k = k
         self.format_answer = f"""
-        {max_or_min} at x = {self.h} of y = {self.k}
+        Max revenue of y = {k:.5f} million dollars at x = {h:.2f} dollars apiece
         """
 
-        expr = self.given
-        b = expr.coeff(x, 1)
-        c = expr.coeff(x, 0)
-        self.format_given = f"""
-        \\[
-            f(x) = {leading_coeff(a)}x^2 {signed_coeff(b)}x {sgn(c)} {latex(abs(c))}
-        \\]
+        self.prompt_single = f"""
+        Say that it has been determined through market research that the
+        number \(u\) of millions of  {item_plural} sold can be given as a function of
+        the price \(x\) at which they are sold (in dollars less than ${round(-b/a, 2):.2f})
+        using the following formula:
+        \[
+        u = {latex(u(x))}
+        \]
+        Find the price \(x\) that maximizes the revenue.
         """
 
         self.format_given_for_tex = f"""
-        {self.prompt_single}
-
-        {self.format_given}
+        Say that it has been determined through market research that the
+        number \(u\) of millions of  {item_plural} sold can be given as a function of
+        the price \(x\) (in dollars less than \${latex(round(-b/a, 2))})
+        using the following formula:
+        \[
+        u = {latex(b+a*x)}
+        \]
+        Find the price \(x\) that maximizes the revenue.
         """
 
-    name = 'Generic Max/Min Problem'
-    module_name = 'generic_max_min'
+        self.further_instruction = f"""
+        Your answer should be of the following style (or close to it), with items highlighted in
+        red replaced by your answer:
 
-    prompt_single = """Identify whether the quadratic has a max value or a
-    min value, where (on the \(x\)-axis) it attains it, and what that
-    \(y\)-value is."""
-    prompt_multiple = """TBA"""
+        <blockquote>
+            Max revenue of y = <span style="color: red">200</span> million dollars at
+            x = <span style="color: red">100</span> dollars apiece
+        </blockquote>
 
-    further_instruction = """
-    Your answer should be of the following style (or close to it), with items highlighted in
-    red replaced by your answer:
+        Do NOT use commas to format numbers.  For instance, write '2220' not '2,220'.
+        Your answer must be accurate to two decimal places.
+        """
 
-    <blockquote>
-        <span style="color: red">Max</span> at x = <span style="color: red">12.5</span>
-        of y = <span style="color: red">-3.5</span>
-    </blockquote>
-    """
+    name = 'Max Revenue Problem'
+    module_name = 'max_revenue_problem'
+
+
+
 
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
@@ -122,16 +137,12 @@ class GenericMaxMin(Question):
 
     def checkanswer(self, user_answer):
         user_answer = user_answer.lower()
-        if self.a > 0:
-            if 'min' not in user_answer:
-                return False
-        else:
-            if 'max' not in user_answer:
-                return False
-        if 'at x' not in user_answer or 'of y' not in user_answer:
+        if 'min' in user_answer:
             return False
-        i = user_answer.find('at x')
-        user_x = user_answer[i+4:]
+        if ' x' not in user_answer or ' y' not in user_answer:
+            return False
+        i = user_answer.find(' x')
+        user_x = user_answer[i+2:]
         i = user_x.find('=')
         user_x = user_x[i+1:]
         user_x = user_x.strip()
@@ -140,8 +151,8 @@ class GenericMaxMin(Question):
             user_x = user_x[:i]
         user_x = user_x.replace('^', '**')
         user_x = parse_expr(user_x, transformations=transformations)
-        i = user_answer.find('of y')
-        user_y = user_answer[i+4:]
+        i = user_answer.find(' y')
+        user_y = user_answer[i+2:]
         i = user_y.find('=')
         user_y = user_y[i+1:]
         user_y = user_y.strip()
@@ -150,7 +161,7 @@ class GenericMaxMin(Question):
             user_y = user_y[:i]
         user_y = user_y.replace('^', '**')
         user_y = parse_expr(user_y, transformations=transformations)
-        return user_x == float(self.h) and user_y == float(self.k)
+        return abs(user_x - self.h) < 0.005 and abs(user_y -self.k) < -self.a*0.01*self.h + self.b*0.005
 
     def format_useranswer(self, user_answer, display=False):
         user_answer = user_answer.split(' ')
@@ -174,10 +185,10 @@ class GenericMaxMin(Question):
             user_answer = user_answer.lower()
             if 'max' not in user_answer and 'min' not in user_answer:
                 raise SyntaxError
-            if 'at x' not in user_answer or 'of y' not in user_answer:
+            if ' x' not in user_answer or ' y' not in user_answer:
                 raise SyntaxError
-            i = user_answer.find('at x')
-            user_x = user_answer[i+4:]
+            i = user_answer.find(' x')
+            user_x = user_answer[i+2:]
             i = user_x.find('=')
             user_x = user_x[i+1:]
             user_x = user_x.strip()
@@ -186,8 +197,8 @@ class GenericMaxMin(Question):
                 user_x = user_x[:i]
             user_x = user_x.replace('^', '**')
             user_x = parse_expr(user_x, transformations=transformations)
-            i = user_answer.find('of y')
-            user_y = user_answer[i+4:]
+            i = user_answer.find(' y')
+            user_y = user_answer[i+2:]
             i = user_y.find('=')
             user_y = user_y[i+1:]
             user_y = user_y.strip()
@@ -200,5 +211,5 @@ class GenericMaxMin(Question):
             raise SyntaxError
 
 
-Question_Class = GenericMaxMin
+Question_Class = MaxRevenue
 prob_type = 'math_blank'

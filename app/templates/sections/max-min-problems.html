@@ -105,7 +105,121 @@
   </div>
 </p>
 
+<p>
+  We now turn to some applications of this technique.
+</p>
 
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      After rounding some intermediate calculations that are not displayed
+      here, the vertical height \(y\) above the ground of a cannonball shot
+      from an initial height of \(24\) feet with an initial velocity
+      of \(644\) feet per second and initial launch angle
+      (measured from the ground) of \(63^\circ\)
+      can be given as a function of the horizontal distance
+      \(x\) it has traveled from the launching point
+      (if we neglect air resistance and the coriolis effect!) by
+      \[
+          y(x) = - 0.00019 x^{2} + 1.963 x + 24
+      \]
+      Find the maximum height \(y\) attained by the cannonball and
+      the horizontal distance \(x\) from the launching point at
+      which this max height is attained.
+    </p>
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        Note that, if you graphed this, it would be an "upside-down" parabola,
+        meaning that it will indeed have a max \(y\)-value!  The maximum happens
+        at the vertex, with the \(y\)-coordinate the max height attained
+        and th \(x\)-coordinate representing the distance away from
+        the launching point at which the maximum is attained.
+        The vertex is at \(x = h\) and \(y = k\), where
+        \begin{align*}
+          h &= -\frac{b}{2a}\\
+            &= -\frac{1.963}{2 \cdot -0.00019} \\
+            &\approx 5165.79 \textrm{feet}
+        \end{align*}
+        (See the link in the answer to the previous example for details.)
+        Next, I'll use this value to get the max height \(k\) attained at this point:
+        \begin{align*}
+          k &= y(h) \\
+            &= - 0.00019 (5165.79)^{2} + 1.963 (5165.79) + 24 \\
+            &\approx 5094.22 \textrm{feet}
+        \end{align*}
+      </div>
+    </div>
+  </div>
+</p>
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      Say that it has been determined through market research that the
+      number \(u\) of millions of  yo-yos sold can be given as a function of
+      the price \(x\) at which they are sold (in dollars less than $22.70)
+      using the following formula:
+      \[
+        u = 26.51 - 1.168 x
+      \]
+      Find the price \(x\) that maximizes the revenue.
+    </p>
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        The first observation you need to make is that if
+        \(u\) represents the number of units sold (in millions)
+        and \(x\) represents the price&mdash;which is precisely
+        the revenue brought in for each unit sold&mdash;then the
+        total revenue brought in will be
+        \[
+          r(x) = x\cdot u = x(26.51 - 1.168 x) = 26.51x - 1.168 x^2
+        \]
+        in millions of dollars.  So, all that remains is for us
+        to try to maximize this function \(r\).  This function
+        is certainly quadratic, with \(a = -1.168\) and
+        \(b = 26.51\), so we can use the same technique demonstrated
+        in the examples above.
+        After all since the coefficient on \(x^2\) is negative,
+        its graph will be an "upside down" parabola, which
+        means it will indeed have a max \(y\)-value.  This max value
+        is attained at the vertex, which has coordinates \((h, k)\)
+        where
+        \[
+          h = -\frac{b}{2a}
+        \]
+        and
+        \[
+          k = r(h)
+        \]
+        (If you want an explanation of this, just follow the link
+        given in the answer of the first example.)
+        Thus, the maximum revenue is attained when the price is
+        \begin{align*}
+          x = -\frac{b}{2a} &= -\frac{26.51}{2 \cdot -1.168}\\
+           &\approx 11.35 \textrm{ dollars}
+        \end{align*}
+        That maximum revenue is
+        \begin{align*}
+          y &= r(h) \\
+          &\approx 26.51 \cdot 11.35 - 1.168 (11.35)^2 \\
+          &\approx 50.42 \textrm{ million dollars}
+        \end{align*}
+      </div>
+    </div>
+  </div>
+</p>
 
 <script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
 

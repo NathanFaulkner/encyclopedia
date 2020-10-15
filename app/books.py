@@ -447,7 +447,9 @@ standardform.add_to_questions('standard_form_to_vertex_form',
                                 'graph_standard_form')
 
 maxmin = Section('maxmin', "Max/Min Problems", '/sections/max-min-problems')
-maxmin.add_to_questions('generic_max_min')
+maxmin.add_to_questions('generic_max_min',
+                        'cannonball_problem',
+                         'max_revenue_problem')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 

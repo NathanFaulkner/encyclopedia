@@ -25,7 +25,7 @@ from app.questions import (Question,
 #     from .. import general
 
 
-class GenericMaxMin(Question):
+class CannonballProblem(Question):
     """
     The given is an expanded form of
 
@@ -42,78 +42,74 @@ class GenericMaxMin(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        if 'a' in kwargs:
-            self.a = kwargs['p']
-        else:
-            a=0
-            while a == 0:
-                a = int(random.triangular(-19,19))
-            add_on = random.choice([Rational(1, 2), 0])
-            a = a + add_on
+        theta = random.randint(10,75)
+        v0 = random.randint(328, 656)
+        h0 = random.randint(4,30)
+        c = h0
+
+        voy = v0*sin(theta*pi/180)
+        vox = v0*cos(theta*pi/180)
+        b = float(str(round(voy/vox,3)))
+        a = float(str(round(-16/vox**2,5)))
         self.a = a
-        symb_a = '{}'.format(a)
-        if a == 1:
-            symb_a = ''
-        elif a == -1:
-            symb_a = '-'
-        if 'h' in kwargs:
-            self.h = kwargs['h']
-        else:
-            self.h = random.randint(-5,5)
-        if 'k' in kwargs:
-            self.k = kwargs['k']
-        else:
-            k = random_non_zero_integer(-10,10)
-            add_on = random.choice([Rational(1, 2), 0])
-            k = k + add_on
-            self.k = k
+        self.b = b
+        self.c = c
+
+        def y(x):
+            return h0 + b*x + a*x**2
+
+        x = Symbol('x')
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:
             self.x = Symbol('x')
 
 
-        a = self.a
-        h = self.h
-        k = self.k
-        x = self.x
-        self.given = expand(a*(x - h)**2 + k)
-        max_or_min = 'Min' if a > 0 else 'Max'
+        h = -b/2/a
+        k = y(h)
+        self.h = h
+        self.k = k
         self.format_answer = f"""
-        {max_or_min} at x = {self.h} of y = {self.k}
+        Max height of y = {k:.5f} feet at x = {h:.5f} feet
         """
 
-        expr = self.given
-        b = expr.coeff(x, 1)
-        c = expr.coeff(x, 0)
-        self.format_given = f"""
-        \\[
-            f(x) = {leading_coeff(a)}x^2 {signed_coeff(b)}x {sgn(c)} {latex(abs(c))}
-        \\]
+        self.prompt_single = f"""
+        After rounding the results of some intermediate calculations that are not displayed
+        here, the vertical height \(y\) above the ground of a cannonball shot
+        from an initial height of \({h0}\) feet with an initial velocity
+        of \({v0}\) feet per second and initial launch angle
+        (measured from the ground) of \({theta}^\circ\)
+        can be given as a function of the horizontal distance
+        \(x\) it has traveled from the launching point
+        (if we neglect air resistance and the coriolis effect!) by
+        \[
+            y(x) = {a:.5f}x^2 + {b:.3}x + {c}
+        \]
+        Find the maximum height \(y\) attained by the cannonball and
+        the horizontal distance \(x\) from the launching point at
+        which this max height is attained.
         """
 
         self.format_given_for_tex = f"""
         {self.prompt_single}
-
-        {self.format_given}
         """
 
-    name = 'Generic Max/Min Problem'
-    module_name = 'generic_max_min'
+    name = 'Cannonball Problem'
+    module_name = 'cannonball_problem'
 
-    prompt_single = """Identify whether the quadratic has a max value or a
-    min value, where (on the \(x\)-axis) it attains it, and what that
-    \(y\)-value is."""
-    prompt_multiple = """TBA"""
 
     further_instruction = """
     Your answer should be of the following style (or close to it), with items highlighted in
     red replaced by your answer:
 
     <blockquote>
-        <span style="color: red">Max</span> at x = <span style="color: red">12.5</span>
-        of y = <span style="color: red">-3.5</span>
+        Max height of y = <span style="color: red">200</span> feet above
+        the ground at horizontal distance
+        x = <span style="color: red">100</span> feet from the launching point
     </blockquote>
+
+    Do NOT use commas to format numbers.  For instance, write '2220' not '2,220'.
+    Your answer must be accurate to two decimal places.
     """
 
 
@@ -122,16 +118,13 @@ class GenericMaxMin(Question):
 
     def checkanswer(self, user_answer):
         user_answer = user_answer.lower()
-        if self.a > 0:
-            if 'min' not in user_answer:
-                return False
-        else:
-            if 'max' not in user_answer:
-                return False
-        if 'at x' not in user_answer or 'of y' not in user_answer:
+        user_answer = user_answer.replace(',', '')
+        if 'min' in user_answer:
             return False
-        i = user_answer.find('at x')
-        user_x = user_answer[i+4:]
+        if ' x' not in user_answer or ' y' not in user_answer:
+            return False
+        i = user_answer.find(' x')
+        user_x = user_answer[i+2:]
         i = user_x.find('=')
         user_x = user_x[i+1:]
         user_x = user_x.strip()
@@ -140,8 +133,8 @@ class GenericMaxMin(Question):
             user_x = user_x[:i]
         user_x = user_x.replace('^', '**')
         user_x = parse_expr(user_x, transformations=transformations)
-        i = user_answer.find('of y')
-        user_y = user_answer[i+4:]
+        i = user_answer.find(' y')
+        user_y = user_answer[i+2:]
         i = user_y.find('=')
         user_y = user_y[i+1:]
         user_y = user_y.strip()
@@ -150,7 +143,7 @@ class GenericMaxMin(Question):
             user_y = user_y[:i]
         user_y = user_y.replace('^', '**')
         user_y = parse_expr(user_y, transformations=transformations)
-        return user_x == float(self.h) and user_y == float(self.k)
+        return abs(user_x - self.h) < 0.005 and abs(user_y -self.k) < -self.a*0.01*self.h + self.b*0.005
 
     def format_useranswer(self, user_answer, display=False):
         user_answer = user_answer.split(' ')
@@ -172,12 +165,16 @@ class GenericMaxMin(Question):
     def validator(self, user_answer):
         try:
             user_answer = user_answer.lower()
-            if 'max' not in user_answer and 'min' not in user_answer:
+            if ',' in user_answer:
                 raise SyntaxError
-            if 'at x' not in user_answer or 'of y' not in user_answer:
+            if ' x' not in user_answer or ' y' not in user_answer:
                 raise SyntaxError
-            i = user_answer.find('at x')
-            user_x = user_answer[i+4:]
+            if 'of x' in user_answer:
+                raise SyntaxError
+            if 'at y' in user_answer:
+                raise SyntaxError
+            i = user_answer.find(' x')
+            user_x = user_answer[i+2:]
             i = user_x.find('=')
             user_x = user_x[i+1:]
             user_x = user_x.strip()
@@ -186,8 +183,8 @@ class GenericMaxMin(Question):
                 user_x = user_x[:i]
             user_x = user_x.replace('^', '**')
             user_x = parse_expr(user_x, transformations=transformations)
-            i = user_answer.find('of y')
-            user_y = user_answer[i+4:]
+            i = user_answer.find(' y')
+            user_y = user_answer[i+2:]
             i = user_y.find('=')
             user_y = user_y[i+1:]
             user_y = user_y.strip()
@@ -196,9 +193,11 @@ class GenericMaxMin(Question):
                 user_y = user_y[:i]
             user_y = user_y.replace('^', '**')
             user_y = parse_expr(user_y, transformations=transformations)
+            if abs(user_x - 1.23) < 0.005 and abs(user_y - 1.23) < 0.01:
+                pass
         except:
             raise SyntaxError
 
 
-Question_Class = GenericMaxMin
+Question_Class = CannonballProblem
 prob_type = 'math_blank'
