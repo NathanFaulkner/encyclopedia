@@ -1,0 +1,120 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  We now turn to a skill concerning parabolas which has some nice
+  real-world applications.  The basic observation in this section is that,
+  depending on whether a parabola opens up or opens down,
+  there will always be a maximum \(y\)-value attained (if it opens down)
+  or a minimum \(y\)-value (if it opens up).
+
+  Let's practice this skill in a "pure" setting (and with easier numbers)
+  before we jump into the applications.
+</p>
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      Figure out whether the function has a maximum or a minimum,
+      and figure out what that (\(y\)) value is and where (on the \(x\)-axis)
+      it attains that value.
+      \[
+        f(x)=-x^2+2x-12
+      \]
+    </p>
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        To answer this, I am going to think a little bit about what I know
+        the graph will look like, but mostly I will be applying
+        my "Alternative Method to Find Vertex Form, II" from the section
+        on
+        <a href="{{ url_for('section', section_name='standardform') }}">
+          quadratics in standard form.
+        </a>
+        Since the coefficient on \(x^2\) is negative, we know the parabola opens
+        down; so, it will have a maximum (\(y\)) value.
+        This max value is, of course, attained at the vertex.
+        I will use the "short-cut" method for finding the
+        coordinates of the vertex.  The vertex is at
+          \[
+            x = \frac{-b}{2a} = \frac{-2}{2(-1)} = 1
+          \]
+        and
+          \[
+            y = f(1) = -1^2 +2\cdot 1 - 12 = -1 + 2 - 12 = -11
+          \]
+        So, its max value is \(=-11\), attained at \(x=1\).
+      </div>
+    </div>
+  </div>
+</p>
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+    <!-- <a href="" target="_blank">Click for video.</a> -->
+    </p>
+
+    <p>
+      Figure out whether the function has a maximum or a minimum,
+      and figure out what that (\(y\)) value is and where (on the \(x\)-axis)
+      it attains that value.
+      \[
+        f(x)=\frac{1}{2}x^2-7x+19
+      \]
+    </p>
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        To answer this, I am going to think a little bit about what I know
+        the graph will look like, but mostly I will be applying
+        my "Alternative Method to Find Vertex Form, II" from the section
+        on
+        <a href="{{ url_for('section', section_name='standardform') }}">
+          quadratics in standard form.
+        </a>
+        Since the coefficient on \(x^2\) is positive, we know the parabola opens
+        upwards; so, it will have a minimum (\(y\)) value.
+        This min value is, of course, attained at the vertex.
+        I will use the "short-cut" method for finding the
+        coordinates of the vertex.  The vertex is at
+          \[
+            x = \frac{-b}{2a} = \frac{-(-7)}{2\left(\frac{1}{2}\right)} = \frac{7}{1} = 7
+          \]
+        and
+          \begin{align*}
+            y = f(7) &= \frac{1}{2}(7)^2 - 7\cdot 7 + 19\\
+                    &= \frac{1}{2}\cdot 49 - 49 + 19 \\
+                    &= -\frac{1}{2}\cdot 49 + 19\\
+                    &= -24.5 + 19\\
+                    &= -5.5
+          \end{align*}
+        So, its min value is \(=-5.5\), attained at \(x=7\).
+      </div>
+    </div>
+  </div>
+</p>
+
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

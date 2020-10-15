@@ -445,6 +445,9 @@ interceptform.add_to_questions('graph_intercept_form',
 standardform = Section('standardform', 'Quadratics in Standard Form', '/sections/standard-form')
 standardform.add_to_questions('standard_form_to_vertex_form',
                                 'graph_standard_form')
+
+maxmin = Section('maxmin', "Max/Min Problems", '/sections/max-min-problems')
+maxmin.add_to_questions('generic_max_min')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -496,7 +499,8 @@ quadratics = Division('chapter', "Quadratic Functions",
                                 [warmupwithquadratics,
                                 vertexform,
                                 interceptform,
-                                standardform])
+                                standardform,
+                                maxmin])
 quadratics.set_frontpage(quadratics_intro)
 
 

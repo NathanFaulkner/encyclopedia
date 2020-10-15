@@ -61,7 +61,8 @@ __all__ = ['quadratic_pattern',
             'graph_intercept_form',
             'graph_intercept_form_to_equation',
             'standard_form_to_vertex_form',
-            'graph_standard_form']
+            'graph_standard_form',
+            'generic_max_min']
 
 class Question():
     pass
@@ -356,6 +357,12 @@ def fix_quotes_for_tex(string):
 def has_letters(s):
     for char in s:
         if char.isalpha():
+            return True
+    return False
+
+def has_numbers(s):
+    for char in s:
+        if char.isnumeric():
             return True
     return False
 
