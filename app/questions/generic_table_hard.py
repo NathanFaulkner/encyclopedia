@@ -102,7 +102,7 @@ class GenericTableHard(Question):
 
 
         self.prompt_single = f"""
-Consider the following table, depciting a relationship between \(x\) and \(y\).
+Consider the following table, depicting a relationship between \(x\) and \(y\).
 """
 
         prompt_multiple = f"""To be coded."""

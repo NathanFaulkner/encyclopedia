@@ -1,0 +1,1121 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  As I argued in the section on
+  <a href="{{ url_for('section', section_name='absolutevalueequations') }}">
+    absolute value equations,
+  </a>
+  absolute value is a pretty simple concept.  So, why does it
+  become difficult to work with it sometimes?  I argued that the reason is
+  that, all too often, either by training or inclination, the habit
+  in math is to "turn one's brain off" and to just try to "follow the rules"
+  instead of the critical alternative: to always think about the meaning
+  of what one is doing.  You see, while, ideally, "following the rules"
+  is exactly what you want to do, the problem is that, if one isn't thinking
+  carefully about a problem, one might not actually remember what the rules are
+  or might wantonly misapply "rules" that really have nothing to do with the
+  situation at hand and so really aren't rules at all&mdash;but rather the
+  appearance of rules!  (I hope you will agree that there might be some
+  life lessons here, too!)
+</p>
+
+<p>
+  To further put this advice or philosophy to the test, I offer you some
+  absolute value problems that are a little more challenging than the
+  ones addressed in the section linked to above.  These actually just
+  involve a simple change but one which again forces you to take a step
+  back and consider the basic meaning of absolute value in order to solve.
+  That is, the situation will be novel enough that your previous schema or "rule"
+  that you may have developed to solve equations in the section on
+  <a href="{{ url_for('section', section_name='absolutevalueequations') }}">
+    absolute value equations,
+  </a>
+  will no longer apply.  You'll have to either develop new rules or schema or,
+  much better yet, stop continually developing rules and instead think
+  at a fundamental level about the very simple meaning and definitions
+  of the concepts being expressed in a given problem and use those to
+  build in a creative way your own ways of solving (while also thinking
+  in fundamental terms about how to check the truth of your answers.)
+  This small tweak that we consider in this section is just to introduce
+  more than one term involving absolute value.  In this section, we
+  will consider equations with two terms involving \(x\) at least one
+  of which also involves absolute value terms but, as a further
+  challenge to yourself, you should consider how to solve equations
+  which involve three terms&mdash;to thereby begin to assay your general agility
+  and creativity in problem-solving rather than merely testing your ability
+  to regurgitate somebody else's methods all the time.
+</p>
+
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/c50ab696864645649c6cfef12d17d784" target="_blank">Click for video.</a>
+  </p> -->
+  Solve the equation.  (That is, give a simple description of the
+   set of all real numbers \(x\) that satisfy the given equation.)
+   \[
+    |x + 1| = |x - 7|
+   \]
+      <div class="answer">
+        <a class="collapsible"><h3>Answer, via "Visual" Argument: </h3></a>
+        <div class='inner'>
+          What can we do here?  Well, the best advice is to just think
+          about the meaning of the symbols and of the task at hand.
+          Recall that "solving the equation..." always involves
+          starting off with an often unstated narrative declaration:
+          <blockquote>
+            Suppose that \(x\) is a real number with the given property...
+          </blockquote>
+          In other words, we are assuming that \(x\) is an honest, real
+          number, meaning that it is sitting somewhere on the real line
+          Our task in solving is to deduce various ("necessary") properties
+          about \(x\) starting from the given.  We apply very basic
+          steps of logic along the way to make sure that we don't trick ourselves
+          into something false.  In a way, what we are doing is doing
+          our best not to tell a lie!
+          In the end, it is also not only prudent but necessary to check
+          one's answers.  After all, we will try to deduce the only
+          <em>possible</em> solutions but we must check them (either directly
+          or by some other argument of logic) that they are <em>actual</em>
+          soltions.
+          In all, you have to remain
+          faithful to the meaning of the given.
+          So, what does the given
+          statement mean in this case?  Accepting that
+           \(x\) is a real number, we have that the absolute value of
+           1 more than this number comes out to be the same as the absolute
+           value of 7 less than this number.  Is this even possible?
+           It may not be clear from the start that there is any possible
+           value for \(x\); the solution set could be "empty" (no solution),
+           after all.  But, giving it a try, the only possible step
+           of logic we can take is to think about the meaning of absolute value.
+           As noted in the section on
+           <a href="{{ url_for('section', section_name='absolutevalueequations') }}">
+             absolute value equations,
+           </a>
+           the concept of absolute value couldn't be simpler: if a number \(x\)
+           is negative, the absolute value of the number is what we get
+           by just stripping off the negative sign, and if the number
+           is positive, the absolute value of the number is just itself.
+           Put another way, absolute value just gives the plain, old
+           distance of \(x\) from 0.
+
+           <p>
+             Now, the given doesn't tell us about the absolute value of just
+             \(x\).  Instead, it talks about about 1 more than \(x\) (which is
+             also a number!) and about 7 less than \(x\).  But we can also
+             translate the absolute value of these numbers into a meaning
+             or fact
+             about \(x\).  You see, if you do \(x - 7\), you are finding
+             the difference between \(x\) and 7, are you not?  And
+             by taking the absolute value, you can actually just making
+             sure it comes out positive (after all, \(x - 7\) might come
+             out positive if \(x\) is to the right of 7 but
+             negative if \(x\) is to the left).  So, in that sense,
+             the expression \(|x-7|\) actually can be translated into meaning
+             as
+             <blockquote>
+               the distance of \(x\) from \(7\)
+              </blockquote>
+            Similarly, even though you could say that \(x + 1\) is a
+            sum not a difference, you can also <em>interpret</em> it as a
+            difference:
+            \[
+              x + 1 = x - (-1)
+            \]
+            So, \(x + 1\) represents the difference of \(x\) and \(-1\),
+            which might come out negative or positive.  But then
+            taking the aboslute value makes it come out positive no matter
+            what, so
+            \[
+              |x + 1| = |x - (-1)|
+            \]
+            represents the "distance of \(x\) from \(-1\) on the real line".
+           </p>
+
+           <p>
+             Thus, in all, our equation
+             \[
+              |x + 1| = |x - 7|
+             \]
+             says "the distance from \(x\) to \(-1\) equals the distance
+             of \(x\) to \(7\)".  So, is there a number that is
+             at an equal distance to both \(-1\) and \(7\)?
+             Well, how about the number that lies halfway between them?
+             There is certainly a number at the halfway point.  I bet we
+             could find it.  And if you were any other number, wouldn't you
+             have to closer to \(-1\) than \(7\) or vice versa?  So,
+             it will be a unique solution.  Of course, the full distance
+             between \(-1\) and \(7\) is \(8\), so the halfway point
+             will be at a distance of \(4\) from each (in other words
+             the distance represented by both the left and
+             right hand sides&mdash;which are equal after all!&mdash;will
+             be \(4\).)  So, the solution is \(-1 + 4 = 3\).  You can
+             easily chek your answer.  Does \(x = 3\) satisfy both equations?
+             Yes.  After all, if you substitute in \(x = 3\), you get
+             \[
+              \textrm{LHS} = |x + 1| = |3 + 1| = |4| = 4
+             \]
+             and
+             \[
+              \textrm{RHS} = |x - 7| = |3 - 7| = |-4| = 4
+             \]
+           </p>
+      </div>
+     </div>
+      <div class="answer">
+       <a class="collapsible"><h3>Answer, via Algebraic Method: </h3></a>
+         <div class='inner'>
+           <p>
+             Now, here is the dirty secret of mathematicians: When he or she
+             finds a solution, there always remains some doubt about the correctness
+             of their solution: "Did I make a mistake?"; "Did I fool myself
+             in logic in one step or another?"; "Was there some oversight
+             in my logical process?"  So, the concept of "proof" was invented&mdash;as
+             a disciplined method for saving one to the greatest extent possible
+             from the occasional embarassment of "being wrong".  That's maybe
+             nothing to hide, since the concept of "proof" is pretty famous
+             and vaunted, after all.  I actually haven't gotten to the
+             "dirty secret" yet!  The secret is that, quite often, a mathematician
+             will have one method of checking the truth of their conjectures
+             but will often write down another more careful way for the scrutiny
+             of other mathematicians and authors.  That is, quite often,
+             a mathematician is not assured by a <em>single</em> proof
+             but instead looks for a second.  By the time they have developed
+             and written down the second proof, they are feeling pretty confident,
+             so they will then publish this proof for others to consider, even
+             though lots of the juicy insights that really help one <em>understand</em>
+             how to come up with the solution at all are really in the first
+             proof, which was the genesis of it all, which remains withheld to
+             the public and, sometimes, even forgotten by the mathematician
+             him or herself.  So, what I have done is given you only one
+             proof.  But there may still be some room for doubt about it!
+             So, to be completely honest, I will offer you a second proof&mdash;which
+             is to say&mdash;a second argument as the correctness of my solution.
+           </p>
+
+           <p>
+             For the second method, we still think about the meaning
+             of absoute value, but, to be different, we don't think
+             about the "picture" on the real line of what absolute value
+             means but instead think about how to write down in symbols
+             what absolute value means.  Also, be sure to keep in mind
+             the fact that we are assuming \(x\) to be a real number.
+             Therefore, \(x + 1\) is also a real number, and so is \(x - 7\)&mdash;and
+             \(|x+1|\) and \(|x - 7|\) are too for that matter.  In fact, we are assuming that
+             \(|x + 1|\) and \(|x- 7|\) come out to be the same real number,
+             though we don't know that number that will be yet.
+             Regarding the meaning of this, also recall that absolute value just means
+             "make it positive if it was negative and otherwise
+             leave the number alone".  So, here is how we can deal with it.
+             The number \(x + 1\) might be negative or it might be positive
+             depending on what \(x\) turns out to be.  After all, if \(x\)
+             is some "big" negative number like \(-100\), then
+             \(x + 1\) would be like \(-100 + 1 = -99\), a negative number.
+             If \(x + 1\) comes out positive, then actually, \(|x + 1| = x +1 \).
+             After all, again, the absolute value of a positive
+             number is just itself.  So, if \(x +1 \) is positive, then
+             its absolute value is just itself.  So, when does it come out positive?
+             Well, our mode during this method of solution is to write down
+             in symbols what we <em>mean</em>.  So, here is
+             "\(x + 1\) is positive" in symbols:
+             \[
+              x + 1 \gt 0
+             \]
+             Of course, we can "solve" (i.e.: simplify) that statement to this:
+             \[
+              x \gt -1
+             \]
+             So, \(x + 1\) is positive precisely when \(x + 1 \gt 0\).
+             So, in all, we can say that <em>if</em> \(x > -1\), then
+             \[
+              |x + 1| = x + 1
+             \]
+             That could be a handy way of simplifying our equation!&mdash;but be careful,
+             we can only do that <em>if</em> \(x \gt -1\), which we don't
+             know to be the case: after all, we don't know what \(x\) is!
+             We are only assuming it is a real number and nothing beyond that.
+             And, yet, there is nothing stopping us from imposing
+             further assumptions, so long as we are careful about keeping
+             track of them and also of checking all the different possibilities
+             out to make sure we don't let something fall through the cracks.
+             What I am talking about is a problem-solving approach called
+             "solving by cases".  That is, we will first consider the possibility
+             that \(x \gt -1\) to see what values for \(x\) will work that
+             are greater than \(-1\) <em>and then</em> check out the other "case"
+             separately of  \(x \lt -1\).
+             So, to get started we could write (trying to keep track of things
+             carefully):
+             <h4>Case: \(x \gt -1\):</h4>
+             \begin{align*}
+              & |x + 1| = |x - 7|\\
+              \Rightarrow \quad & x + 1 = |x - 7|
+             \end{align*}
+             So, that's an <em>improvement</em>, maybe, but it still isn't clear
+             what to do from there.  Well, it might be helpful to consider a simpler
+             example of "solving by cases" first, but this ain't it.
+             You see, the bold insight to move forward with here is that we can just keep
+             imposing or refining our cases!  We can make a further assumption!
+             How about we look at the case that
+             \begin{align*}
+              & x -  7 \gt 0 \\
+              \Rightarrow \quad & x \gt 7
+             \end{align*}
+             In that case, it will <em>also</em> be true that
+             \(x \gt -1\) (after all, a number which is to the right of \(7\)
+             is also to the right of \(-1\), is it not?), so it will fall under but refine the earlier
+             case that we are already considering.  So, we refine our "case
+             logic":
+             <h4>Case: \(x \gt 7\):</h4>
+             Then, \(x \gt -1\), too, which means that \(x + 1 \gt 0\) and hence
+             \(|x + 1| = x + 1\) and also \(x - 7 \gt 0\), which means
+             \(|x - 7| = x - 7\).  Thus,
+             \begin{align*}
+              & |x + 1| = |x - 7|\\
+              \Rightarrow \quad & x + 1 = x - 7\\
+              \Rightarrow \quad & 1 = -7
+             \end{align*}
+             which is not true.  Thus, we conclude that, under the assumption
+             that \(x \gt 7\) <em>there is no solution</em>.
+             We are getting somehwher!  We have just eliminated a
+             huge chunk of the real line from consideration.  And we
+             can proceed by just checking out the other cases.
+             Actually, to be very thourogh, you should also note
+             that we can easily dispatch with the possibility that
+             \(x = 7\): You can just plug in \(x = 7\) to see
+             that the equation will not be satisfied with this value.
+           </p>
+
+           <h4>Case: \(-1 \leq x \lt 7\):</h4>
+           What am I up to now?  Well, we have already ruled out \(x \geq 7\)
+           from consideration.  So, we want to consider the case that \(x \lt 7\).
+           But, in the discussion above, we also talked about the helpfulness
+           of considering separately the case of \(x \gt -1\) and \(x \lt -1\)
+           separately.  Indeed, if I know that \(x \gt -1\), then I know that
+           \(x + 1 \gt 0\) and hence \(|x + 1| = x + 1\) which
+           could, potentially, make our equation easier to solve.
+           Actually, we could broaden our assumption a little here, since
+           if \(x = -1\) then \(x + 1 = 0\) and hence \(|x + 1| = x + 1\),
+           because both equal 0.  So, that's why I wrote \(-1 \leq x\)
+           in the description of the current case in the header above.
+           In all, \(-1 \leq x \lt 7\) just means "\(x\) is above or
+           equal to \(-1\) and yet below \(7\)"; it is between \(-1\) and \(7\).
+           Great!  So, what can we do under this assumption?  Well,
+           assuming that \(x \geq -1\) we also know that \(x + 1\geq 0\)
+           and hence \(|x + 1| = x + 1\).  That's nice.  But what
+           about \(|x - 7|\)?  Can we simplify this statement?  Note
+           that this does NOT equal: \(|x - 7|\) does not equal \(x - 7\).
+           After all, if \(x \lt 7\), then \(x - 7\) will come out
+           to be positive whereas the expression \(x - 7\) would be
+           negative.  So, what do we do?  Well, what can do to an expression
+           to a number to change it from negative to a positive?  You
+           might answer, "take its absolute value", and you'd be right,
+           but that wouldn't be getting us anywhere, since we are
+           trying to get rid of the absolute value signs in the
+           interest of simplifiying or changing our given equation.
+           So, think of something else: what can you <em>do</em> to
+           an number to change it from negative to positive?
+           Well, you could negate it!  That is, as you know, "the negative
+           of a negative is a positive", no?  (By the way, "negative"
+           on the real line just means "go in the opposite direction"; it
+           is about direction.  "Positive" means "go right", so "negative
+           of positive" means "go the opposite of right", meaning to the left,
+           whereas, "negative of negative" means "go the opposite of left",
+           which means, "right", of course.)
+           So, \(x \lt 7\) means \(x - 7 \lt 0\) means "\(x-7\) is negative"
+           which means that \(-(x - 7) = 7 - x\) will be the positive
+           version of this number.
+           Thus, under this case, we can write \(|x - 7| = -(x - 7) = 7 - x\).
+           In all, assuming that \(-1 \leq x \lt 7\), we can write
+           (recalling also that \(|x + 1| = x + 1\) under this assumption)
+           \begin{align*}
+            & |x + 1| = |x - 7|\\
+            \Rightarrow \quad & x + 1 = 7 - x\\
+            \Rightarrow \quad & 2x  = 6 \\
+            \Rightarrow \quad & x = 3
+           \end{align*}
+           So, look, we have found the sole solution that I argued
+           for in the first method above!  All that remains
+           is to consider the final case of \(x \lt -1\)
+           (and, according to our answer above, rule out any
+           solutions in that part of the real line).
+
+           <h4>Case: \(x \lt -1\):</h4>
+           This time, \(x + 1\) is negative, which means \(x + 1 = -(x +1) = -x - 1\)
+           (see the discussion in the previous case for explanation).  Also,
+           \(x \lt -1\) means that \(x \lt 7\), too, so \(x - 7 \lt 0\)
+           and hence \(|x - 7| = - (x - 7) = 7 - x\).
+           Thus, we get
+           \begin{align*}
+            & |x + 1| = |x - 7|\\
+            \Rightarrow \quad & -x - 1 = 7 - x\\
+            \Rightarrow \quad & - 1 = 7 \\
+           \end{align*}
+           This is a false statement, which confirms that there is no
+           solution in this case.  That means that the only solution
+           is that of \(x = 3\) that we already noted.
+        </div>
+      </div>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/c50ab696864645649c6cfef12d17d784" target="_blank">Click for video.</a>
+  </p> -->
+  Solve the equation.  (That is, give a simple description of the
+   set of all real numbers \(x\) that satisfy the given equation.)
+   \[
+    x + 1 = |x - 7|
+   \]
+      <div class="answer">
+       <a class="collapsible"><h3>Answer, via Algebraic Method: </h3></a>
+         <div class='inner'>
+           <p>
+             For his method, we think about the meaning
+             of absoute value, specifically, by thinking about how to write down in symbols
+             what absolute value means.  Also, be sure to keep in mind
+             the fact that we are assuming \(x\) to be a real number.
+             Therefore, \(x + 1\) is also a real number, and so is \(x - 7\)&mdash;and
+             and \(|x - 7|\) is too for that matter.  In fact, we are assuming that
+             \(x + 1\) and \(|x- 7|\) come out to be the same real number,
+             though we don't know that number that will be yet.
+             Regarding the meaning of this, also recall that absolute value just means
+             "make it positive if it was negative and otherwise
+             leave the number alone".
+             As described in the previous example, we tackle this problem
+             "by cases", which, in this example, is just a way of breaking
+             our solution process into different scenarios that help tell us
+             how to deal with the absolute value signs.  Specifically,
+             we will begin by assuming that \(x - 7 \geq 0\)&mdash;that is,
+             that \(x - 7\) is greater or equal than \(0\).  This means that
+             "the absolute value of \(x - 7\) will just come out to be itself."
+             In other words, \(|x-7| = x - 7\).
+             <h4>Case: \(x \geq 7\):</h4>
+             \begin{align*}
+              & x + 1 = |x - 7|\\
+              \Rightarrow \quad & x + 1 = x - 7 \\
+              \Rightarrow \quad & 1 = -7\\
+             \end{align*}
+             We get no solution under this scenario!  So, what if \(x - 7\)
+             comes out to be negative?  In that case, we know that "to make
+             it positive" we can take its negative (since "the negative
+             of a negative is positive").  So, assuming
+             \(x - 7 \lt 0\), we can write \(|x - 7| = -(x - 7) = 7 - x\).
+             Great!  Being a little fancy, I have chosen to title this
+             case \(x \lt 7\) rather than \(x - 7 \lt 0\) even though those
+             two statements amount to the same thing.
+             <h4>Case: \(x \lt 7\):</h4>
+             \begin{align*}
+              & x + 1 = |x - 7|\\
+              \Rightarrow \quad & x + 1 = 7 - x\\
+              \Rightarrow \quad & 2x = 6 \\
+              \Rightarrow \quad & x = 3
+             \end{align*}
+             Our cases together span the entire real line, so there cannot
+             be any more solutions!  (Also, it is evident that this
+             will work out to be a solution if we plug back in and check it;
+             one can check it mentally.)
+           </p>
+        </div>
+      </div>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/c50ab696864645649c6cfef12d17d784" target="_blank">Click for video.</a>
+  </p> -->
+  Solve the equation.  (That is, give a simple description of the
+   set of all real numbers \(x\) that satisfy the given equation.)
+   \[
+    -x - 1 = |x - 7|
+   \]
+      <div class="answer">
+       <a class="collapsible"><h3>Answer, via Algebraic Method: </h3></a>
+         <div class='inner'>
+           <p>
+             For his method, we think about the meaning
+             of absoute value, specifically, by thinking about how to write down in symbols
+             what absolute value means.  Also, be sure to keep in mind
+             the fact that we are assuming \(x\) to be a real number.
+             Therefore, \(x + 1\) is also a real number, and so is \(x - 7\)&mdash;and
+             and \(|x - 7|\) is too for that matter.  In fact, we are assuming that
+             \(x + 1\) and \(|x- 7|\) come out to be the same real number,
+             though we don't know that number that will be yet.
+             Regarding the meaning of this, also recall that absolute value just means
+             "make it positive if it was negative and otherwise
+             leave the number alone".
+             As described in the previous example, we tackle this problem
+             "by cases", which, in this example, is just a way of breaking
+             our solution process into different scenarios that help tell us
+             how to deal with the absolute value signs.  Specifically,
+             we will begin by assuming that \(x - 7 \geq 0\)&mdash;that is,
+             that \(x - 7\) is greater or equal than \(0\).  This means that
+             "the absolute value of \(x - 7\) will just come out to be itself."
+             In other words, \(|x-7| = x - 7\).
+             <h4>Case: \(x \geq 7\):</h4>
+             \begin{align*}
+              & -x - 1 = |x - 7|\\
+              \Rightarrow \quad & -x - 1 = x - 7 \\
+              \Rightarrow \quad & -2x = -6\\
+              \Rightarrow \quad & x = 3\\
+             \end{align*}
+             Great!  Or did we??  Note carefully that we have assumed
+             that \(x \geq 7\) in order to arrive at this conclusion!
+             And we deduced that... \(x = 3\).  There is a problem there,
+             as you can check by plugging your answer back in: \(3\)
+             is not actually greater than or equal to \(7\), so this
+             is not actually a solution!  So, what about in the
+             other case?
+             <h4>Case: \(x \lt 7\):</h4>
+             \begin{align*}
+              & -x - 1 = |x - 7|\\
+              \Rightarrow \quad & -x - 1 = 7 - x\\
+              \Rightarrow \quad & -1 = 7 \\
+             \end{align*}
+             By this false statement, we see that we get no solution in this case either!  Since our
+             cases span the entire real line, we know there is actually
+             no solution to be found anywhere on the real.  The
+             final answer is "no solution".
+           </p>
+        </div>
+      </div>
+      <div class="answer">
+       <a class="collapsible"><h3>Answer, via a New Graphical Perspective: </h3></a>
+         <div class='inner'>
+           <p>
+             I think the solution in this case (of "no solution")
+             that is worth considering it from another perspective.  Thinking
+             the private, concealed thoughts of a mathematician: well, there
+             might just be a little room for doubt about the correctness of the
+             proof just given.  When that happens, you look for another proof
+             or at least another way to represent the situation, even
+             if you keep this other way of thinking secret from your friends.
+          </p>
+
+            <p>
+             This other perspective takes just a little explaining in
+             case it is new to you.  It involves viewing the left
+             and right hand sides of our equations as "\(y\)"-values&mdash;outputs
+             from two different functions when you plug in a given \(x\).
+             Put another way, we are looking for the special \(x\) value
+             that produces the very same \(y\)-value from each of
+             the functions
+             \[
+              y = -x - 1
+             \]
+             and
+             \[
+              y = |x - 7|
+             \]
+             Put yet another way, we are trying to find the \(x,y\)-pair
+             (even though we really only care about the \(x\)
+             with the \(y\) just being what the two sides both come out to equal
+             for that special \(x\)) that satisfies the system
+             \[
+              \begin{cases}
+               y = - x - 1\\
+               y = |x - 7|
+              \end{cases}
+             \]
+             Now, as we discussed in the section on
+             <a href="{{ url_for('section', section_name='systemsofequations') }}">
+               systems of equations
+             </a>
+             the set of \((x, y)\)-pairs that solve a particular system
+             can be realized graphically as the points of intersection
+             of the graphs of the two equations in the system.  After all, the
+             graph of an equation is just (a picture of) the set of pairs
+             that satisfy that equation.  And if what we want is the set of
+             pairs that satisfy both equations, then what we want is the set
+             of pairs that lie on both graphs&mdash;which, visually-speaking
+             are just the points of intersection.
+           </p>
+
+           <p>
+            So, we graph both equations and look for intersections&mdash;or,
+            as it turns out in this case, use it to help explain why
+            it won't have any!
+           </p>
+
+           <div style="text-align:center">
+             {% set svg_id = 'svg' %}
+             {% set points = [] %}
+             {% set poly_points = '0.0,17.5000000000000 350.0,367.500000000000 ' %}
+             {% set parameters = {
+                 'svg_x_length': 350,
+                 'svg_y_length': 350,
+                 'cart_x_min': -10,
+                 'cart_x_max': 10,
+                 'cart_x_length': 20,
+                 'cart_y_min': -10,
+                 'cart_y_max': 10,
+                 'cart_y_length': 20
+               }
+             %}
+             {% set color = "blue" %}
+             {% include "_static_graph.html" %}
+             {% set points = [] %}
+             {% set poly_points = '0.0,-122.500000000000 297.5,175.000000000000 350.0,122.500000000000 ' %}
+             <script>
+               {% set color = "blue" %}
+               graph_info = {"shape": "polyline", "data": {"points" : "{{ poly_points|safe }}"}  }
+               draw_graph(svg, graph_info, "blue");
+               points = {{ points|safe }}
+               graph_points(points);
+             </script>
+        </div>
+
+        <p>
+          The graph is just a perspective on it, though.  You need to use the
+          graph to reflect on what the equations tell you to come to a firm
+          conclusion.  The observations you make are this: Part of the
+          absolute value graph has slope \(-1\).  This has the same
+          slope as the line \(y = -x- 1\), so those two will not intersect.
+          The other part of the absolute value graph has slope \(1\),
+          but, evidently, it does not extend over to intersect
+          the graphed line.  So, indeed, there is no intersection in this viewing window
+          or in any other viewing window.  The graph backs up what we already
+          know to be true: there is no solution to the given equation.
+        </p>
+      </div>
+    </div>
+</div>
+</p>
+
+<p>
+  There is actually quite a variety of things that can happen with the solution
+  set of equations like these.  For instance, we saw in the previous example
+  that one side of the equation might represent an absolute value function
+  while the other side represents a linear function&mdash;with a line for
+  its graph.  If one of the rays forming the absolute value graph is
+  parallel to the line, interesting things can happen.  They might fail to
+  intersect, as seen in the previous example, but it's also possible
+  for them to coincide&mdash;at least up until the vertex of the absolute
+  value graph.  So, this would result in infinite solutions!  In the
+  examples that follow, we will explore this further variety.
+  However, while I have provided multiple methods of solution above for perspective
+  to enrich your overall understanding, from now on I am going to specialize
+  in an algebraic method of solution: that of solving by cases.  Also, to handle
+  this variety of solution sets, we are going to turn to a streamlined and
+  uniform way of expressing sets&mdash;that of <b>set notation</b>,
+  supplemented by
+  <a href="{{ url_for('section', section_name='intervalnotation') }}">
+    interval notation.
+  </a>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/c50ab696864645649c6cfef12d17d784" target="_blank">Click for video.</a>
+  </p> -->
+  Solve the equation.  (That is, give a simple description of the
+   set of all real numbers \(x\) that satisfy the given equation.)
+   \[
+    0 = 9 x + 7 \left|{x}\right| + \left|{2 x + 4}\right| + 4
+   \]
+      <div class="answer">
+       <a class="collapsible"><h3>Answer:</h3></a>
+         <div class='inner'>
+           <p>
+             I am going to consider by cases.  Also, in preparation for
+             adopting a method of uniformly representing all possible
+             solutions to these problems, I will be using interval notation
+             to express each case I am considering.  As demonstrated in
+             examples above, considering by cases means to considerably
+             separately regions of the real line where the expressions
+             inside each absolute value term will come our negative
+             versus coming out positive.  For instance, we have the term
+             \(|x|\) in the equation above.  I know that when
+             \(x\) is positive, \(|x|\) is just \(x\).  So,
+             if I restrict myself to consider only possible solutions
+             where \(x \geq 0\), I can literally substitute \(x\) in place
+             of \(|x|\).  Then, hopefully, I can just solve in the usual way
+             (after also having dealt with the other absolute value term
+             in a similar way.)  But when
+             \(x\) is negative, \(|x|\) won't be \(x\), since \(|x|\) has
+             to come out positive whereas \(x\) is negative. On the other hand,
+             I can also make a negative value positive by taking the negative
+             of it.  Therefore, for \(x \lt 0\), I have \(|x| = -x\).
+             Make sense?  So, when I turn consider the case of solutions with
+             \(x \lt 0\), I can
+             literally make the substitution of the expression \(-x\)
+             in place of \(|x|\).  This could be very helpful!
+             Actually, it is also worth noting that, if \(x = 0\), then
+             \[
+              |x| = |0| = 0 = -0
+             \]
+             So, when \(x = 0\), \(x = x\) <em>and</em> \(x = -x\).
+             So, you could make any of those inequalities
+             in this paragraph into "or equal to"
+             inequalities and they would still be true.
+           </p>
+
+           <p>
+             I also need to treat the other absolute value term in like fashion.
+             I know that when \(2x + 4\) comes out positive, then
+             \(|2x + 4|\) will just equal \(2x+4\).  However, when
+             \(2x+4\) comes out negative, then \(|2x+4|\) will not equal
+             \(2x+4\).  On the other hand, it will equal the negative of that
+             number, since the negative of a negative is a positive!
+             So, when \(2x+4\) is negative, you'll have that
+             \(|2x+4| = -(2x + 4) = -2x - 4\).
+             Now, when <em>is</em> \(2x+4\) positive versus negative?
+             Presenting this in symbols can help.  The statement
+             "\(2x+4\) is positive" can be written
+             \[
+              2x + 4 \gt 0
+             \]
+             And, of course, you could just solve this expression to figure
+             out what \(x\) values will make this happen:
+             \begin{align*}
+              2x + 4 & \gt 0\\
+              2x & \gt -4 \\
+              x & \gt \frac{-4}{2} = -2
+             \end{align*}
+             Thus, when \(x \gt -2\), the number \(2x + 4\) comes out positive, and, plainly,
+             when \(x \lt -2\), the number \(2x + 4\) comes out negative.
+             So, for \(x \lt -2\),
+             \[
+              |2x + 4| = -(2x+4) = -2x - 4
+             \]
+             and for \(x \gt -2\)
+             \[
+              |2x + 4| = 2x + 4
+             \]
+             Actually, if \(x = -2\), then
+             \(2x+4 = 2 \cdot(-2) + 4 = -4 + 4 = 0\), which is the same
+             whether it is negative or positive, so you could make those
+             inequalities into "or equal to" inequalities and they would
+             still be true.
+           </p>
+
+           <p>
+             In all, we can rewrite out equation without any absolute value
+             signs at all provided we worry about where \(x\) is.
+             In particular, we have to keep track of whether \(x \leq -2\)
+             or not and whether \(x \leq 0\) or not.  In all, then,
+             we need to rewrite the equation differently depending on
+             whether \(x\) falls into the following 3 cases:
+             \[
+              x \leq -2; \quad \quad -2 \lt x \leq 0; \quad \quad 0 \lt x
+             \]
+             Put another way, we need to <em>partition</em> the real line
+             in the following way:
+             \[
+              (-\infty, \infty) = (-\infty, -2] \cup (-2, 0] \cup (0, \infty)
+             \]
+             Do you recall
+             <a href="{{ url_for('section', section_name='intervalnotation') }}">
+               interval notation?
+             </a>
+             Do you recall the meaning of the union symbol? If not, then
+             follow
+             <a href="{{ url_for('section', section_name='intervalnotation') }}">
+               this link
+             </a>
+             to review.
+             I will be using interval notation moving forward to express both the
+             cases that I will be breaking the analysis up into and to
+             express my final answer.  The answer checker on the exercise
+             pages will also require the use of interval notation and, more broadly,
+             set notation&mdash;which is also explained in the section I just linked
+             to above.
+           </p>
+
+           <p>
+           <h4>Case: \(x\) is in \((-\infty, -2]\):</h4>
+           In this case, \(2x+4\) is negative, as just explained, so
+           \(|2x + 4| = -2x - 4\). Also,
+           since \(-2 \lt 0\), we also have \(x \lt 0\) and so
+           \(|x| = -x\). Thus, we can rewrite our equation after making
+           those substitutions and then solve:
+           \begin{align*}
+            &  0 = 9 x - 7 x - 2x - 4 + 4 \\
+            \Rightarrow \quad & 0 = 0 \\
+           \end{align*}
+           What are we to do with that?  What does this mean?
+           Well, as noted in the section on
+           <a href="{{ url_for('section', section_name='solveforx') }}">
+             solving for \(x\),
+           </a>
+           strictly speaking, "\(0=0\)" tells us nothing.
+           The important observation comes out of reversing the steps.
+           You can narrate what I mean by saying, "Consider any
+           \(x\) that falls into the interval \((-\infty, -2]\)."
+           Isn't it true that for such an \(x\),
+            \[
+              0 = 9 x - 7 x - 2x - 4 + 4
+            \]
+            Of course!  But we also know that the right hand side of this
+            equation equals
+            \[
+              9x + 7|x| + |2x+4| + 4
+            \]
+            for \(x\) in that interval.  Thus, since we were considering
+            an arbitrary \(x\) in that interval, it must be that
+            each and every \(x\) in that intervals satisfies the given
+            equation.  That is, the interval
+            \[
+              (-\infty, -2]
+            \]
+            is part of our solution set!
+            What remains to find out is if there are any solutions
+            on the rest of the real line.  So, we have to continue
+            considering our cases.
+            </p>
+
+            <p>
+              <h4>Case: \(x\) is in \((-2, 0]\):</h4>
+              In this case, \(x \gt -2\), so \(2x+4\gt0\), so
+              \(|2x+4| = 2x+4\).  On the other hand, \(x \leq 0\)
+              means that \(|x| = -x\).  So we make these
+              substitutions and then solve:
+              \begin{align*}
+               &  0 = 9 x - 7 x + 2x + 4 + 4 \\
+               \Rightarrow \quad & 0 = 4x + 8 \\
+               \Rightarrow \quad & 4x = -8 \\
+               \Rightarrow \quad & x = \frac{-8}{4} = -2
+              \end{align*}
+              Great!  So we got another solution!  Or did we?
+              No, in fact not.  After all, we had already noticed
+              that \(-2\) is a solution since it falls in the previous
+              case.  It is, in fact, on the border of these two cases.
+            </p>
+
+            <p>
+              <h4>Case: \(x\) is in \((0, \infty)\):</h4>
+              In this case, \(x \gt 0 \gt -2\), so \(2x+4\gt0\). Therefore,
+              \(|2x+4| = 2x+4\).  Also, \(|x| = x\).  So we make these
+              substitutions and then solve:
+              \begin{align*}
+               &  0 = 9 x + 7 x + 2x + 4 + 4 \\
+               \Rightarrow \quad & 0 = 18x + 8 \\
+               \Rightarrow \quad & 18x = -8 \\
+               \Rightarrow \quad & x = \frac{-8}{18} = -\frac{4}{9}
+              \end{align*}
+              Is this a solution?  Well, note that to have made progress
+              to this possible solution, we were operating under the
+              assumption that \(x\) falls into the interval \((0, \infty)\).
+              The value \(x = -\frac{4}{9}\) does not fall into that
+              interval, so we actually have a contradiction.  So, this
+              is not an actual solution!
+            </p>
+
+            <p>
+              Since our cases exhaust the entire real line, we can conclude
+              that our solution set is
+              \[
+                (-\infty, -2]
+              \]
+            </p>
+        </div>
+      </div>
+</div>
+</p>
+
+<p>
+  I will demonstrate two more solution.  In the process, I will talk or explain
+  a little less about what I am up to, except to suggest one way you
+  might streamline the process a bit.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/c50ab696864645649c6cfef12d17d784" target="_blank">Click for video.</a>
+  </p> -->
+  Solve the equation.  (That is, give a simple description of the
+   set of all real numbers \(x\) that satisfy the given equation.)
+   \[
+    2 x + 11 = \left|{3 x - 6}\right| + \left|{5 x + 5}\right|
+   \]
+      <div class="answer">
+       <a class="collapsible"><h3>Answer:</h3></a>
+         <div class='inner'>
+           <p>
+             As demonstrated in the examples above, I will consider
+             by cases. You better look at the previous examples if you
+             want more detail!  The cases involve partititioning
+             the real line into parts, which are determined
+             by the points at which the term inside each absolute
+             value expression would equal zero.  These points
+             are important because they are those which the term changes
+             from negative to positive or vice versa.  (See above for more explanation.)
+             I know that \(3x - 6\) will change from negative
+             to positive at \(x = 2\).  That's because
+             \begin{align*}
+                & 3x - 6 = 0 \\
+                \Rightarrow \quad & 3x = 6 \\
+                \Rightarrow \quad & x = 2
+             \end{align*}
+             Similarly, I know that \(5x + 5\) will change from negative
+             to positive at \(x = -1\) because that is the solution
+             when I set it equal to 0.  So, the cases I need to consider
+             are represented by the following partition of the real line:
+             \[
+              (-\infty, -1] \cup (-1, 2] \cup (2, \infty)
+             \]
+             Actually, to streamline my process, I choose to pull
+             the absolute value terms over to the left side and then
+             reorder them according to the place where
+             they change from negative to positive.  This looks like so:
+             \[
+               \left|{5 x + 5}\right| + \left|{3 x - 6}\right| = 2x + 11
+             \]
+            Now, because of the way I have written these absolute value terms,
+            so that the expression inside each has a positive coefficient
+            on \(x\), I know that my first case of \(x\) in \((-\infty, -1]\)
+            will mean that each of the absolute value terms evaluates to the
+            negative of the number inside&mdash;because each of the expressions
+            inside the absolute value terms would evaluate to a negative
+            number for \(x\) in this region.  So, for my first case, I just drop
+            the absolute value signs and instead negate the expression
+            inside.  But, then, because of the way I  ordered the terms,
+            each successive case I consider will be equivalent to removing
+            that negative sign one at a time.  To show you what I mean,
+            I will use a <span style="color:black">black \(-\)</span>
+            and a <span style="color:green">green \(+\)</span> to highlight
+            the successive changes as I move through the cases.
+           </p>
+
+           <p>
+           <h4>Case: \(x\) is in \((-\infty, -1]\):</h4>
+           \begin{align*}
+              &  \left|{5 x + 5}\right| + \left|{3 x - 6}\right| = 2x + 11\\
+              \Rightarrow \quad & {\color{black}-}\left(5 x + 5\right) \mathbin{\color{black}-} \left({3 x - 6}\right) = 2x + 11 \\
+              \Rightarrow \quad & -5x - 5 - 3x + 6 = 2x + 11\\
+              \Rightarrow \quad & -8x + 1 = 2x + 11\\
+              \Rightarrow \quad & -10x = 10 \\
+              \Rightarrow \quad & x = -1
+           \end{align*}
+           The value \(x = -1\) is on the border of the region considered in
+           this case, but it's still in!  So, this is part of our solution set.
+           (One could also check this by plugging \(x = -1\) into the initial,
+           given equation.)
+           </p>
+
+           <p>
+             <h4>Case: \(x\) is in \((-1, 2]\):</h4>
+             \begin{align*}
+                &  \left|{5 x + 5}\right| + \left|{3 x - 6}\right| = 2x + 11\\
+                \Rightarrow \quad & {\color{green}+}\left(5 x + 5\right) \mathbin{\color{black}-} \left({3 x - 6}\right) = 2x + 11 \\
+                \Rightarrow \quad & 5x + 5 - 3x + 6 = 2x + 11\\
+                \Rightarrow \quad & 2x + 11 = 2x + 11\\
+             \end{align*}
+             This is an indication that all \(x\) within the region considered
+             in this case will be part of the solution set.  This can be confirmed
+             formally by thinking through the process of "reversing"
+             the solving steps we just undertook.  (Basically,
+             you can just say to yourself, "Take any \(x\) in the
+             in the interval \((-1, 2]\).  Certainly it is true that
+             \[
+               2x + 11 = 2x + 11
+             \]
+             But then it is also true that
+             \[
+               5x + 5 - 3x + 6 = 2x + 11
+             \]
+             Finally, since for any \(x\) in the interval considered in this case,
+             we have that
+             \[
+               5x + 5 - 3x + 6 = (5x + 5) - (3x - 6) = |5x+5| + |3x - 6|
+             \]
+             it follows that every \(x\) in this interval solves the given equation.)
+             Therefore, so far we now that our solution set includes
+             \[
+              [-1, 2]
+             \]
+           </p>
+
+            <p>
+              <h4>Case: \(x\) is in \((2, \infty)\):</h4>
+              \begin{align*}
+                 &  \left|{5 x + 5}\right| + \left|{3 x - 6}\right| = 2x + 11\\
+                 \Rightarrow \quad & {\color{green}+}\left(5 x + 5\right) \mathbin{\color{green}+} \left({3 x - 6}\right) = 2x + 11 \\
+                 \Rightarrow \quad & 5x + 5 + 3x - 6 = 2x + 11\\
+                 \Rightarrow \quad & 8x - 1 = 2x + 11\\
+                 \Rightarrow \quad & 6x = 12 \\
+                 \Rightarrow \quad & x = 2
+              \end{align*}
+              This is not a new solution, as it fell under the earlier case.
+            </p>
+
+
+
+            <p>
+              Since our cases exhaust the entire real line, we can conclude
+              that our solution set is
+              \[
+                [-1, 2]
+              \]
+            </p>
+        </div>
+      </div>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/c50ab696864645649c6cfef12d17d784" target="_blank">Click for video.</a>
+  </p> -->
+  Solve the equation.  (That is, give a simple description of the
+   set of all real numbers \(x\) that satisfy the given equation.)
+   \[
+    0 = 8 x + \left|{x + 3}\right| - \left|{9 x + 7}\right| + 4
+   \]
+      <div class="answer">
+       <a class="collapsible"><h3>Answer:</h3></a>
+         <div class='inner'>
+           <p>
+             As demonstrated in the examples above, I will consider
+             by cases. You better look at the previous examples if you
+             want more detail!  The cases involve partititioning
+             the real line into parts, which are determined
+             by the points at which the term inside each absolute
+             value expression would equal zero.  These points
+             are important because they are those which the term changes
+             from negative to positive or vice versa.  (See above for more explanation.)
+             I know that \(9 x + 7\) will change from negative
+             to positive at \(x = -\frac{7}{9}\).  That's because
+             \begin{align*}
+                & 9 x + 7 = 0 \\
+                \Rightarrow \quad & 9x = -7 \\
+                \Rightarrow \quad & x = -\frac{7}{9}
+             \end{align*}
+             Similarly, I know that \(x + 3\) will change from negative
+             to positive at \(x = -3\) because that is the solution
+             when I set it equal to 0.  So, the cases I need to consider
+             are represented by the following partition of the real line:
+             \[
+              (-\infty, -3] \cup \left(-3, -\frac{7}{9}\right] \cup \left(-\frac{7}{9}, \infty\right)
+             \]
+             Actually, to streamline my process, I choose to pull
+             the absolute value terms over to the left side and then
+             reorder them according to the place where
+             they change from negative to positive.  This looks like so:
+             \[
+               - \left|{x + 3}\right| + \left|{9 x + 7}\right| = 8 x  + 4
+             \]
+            Now, because of the way I have written these absolute value terms,
+            so that the expression inside each has a positive coefficient
+            on \(x\), I know that my first case of \(x\) in \((-\infty, -3]\)
+            will mean that each of the absolute value terms evaluates to the
+            negative of the number inside&mdash;because each of the expressions
+            inside the absolute value terms would evaluate to a negative
+            number for \(x\) in this region.  So, for my first case, I just drop
+            the absolute value signs and instead negate the expression
+            inside.  But, then, because of the way I  ordered the terms,
+            each successive case I consider will be equivalent to removing
+            that negative sign one at a time.  To show you what I mean,
+            I will use a <span style="color:black">black \(-\)</span>
+            and a <span style="color:green">green \(+\)</span> to highlight
+            the successive changes as I move through the cases.
+           </p>
+
+           <p>
+           <h4>Case: \(x\) is in \((-\infty, -3]\):</h4>
+             \begin{align*}
+                &  - \left|{x + 3}\right| + \left|{9 x + 7}\right| = 8 x  + 4\\
+                \Rightarrow \quad & -\left({\color{black}-}\left(x + 3\right)\right) \mathbin{\color{black}-} \left({9x + 7}\right) = 8x + 4 \\
+                \Rightarrow \quad & x + 3 - 9x - 7 = 8x + 4\\
+                \Rightarrow \quad & -8x - 4 = 8x + 4\\
+                \Rightarrow \quad & -16x = 8 \\
+                \Rightarrow \quad & x = -\frac{8}{16} = - \frac{1}{2}
+             \end{align*}
+             The value \(x = - \frac{1}{2}\) is not in the region
+             considered in this case, so
+             we cannot yet conclude that it is a solution (it doesn't seem like a
+             solution from this case, but maybe it will turn out to be
+             a solution in a later case.)
+           </p>
+
+           <p>
+           <h4>Case: \(x\) is in \(\left(-3, -\frac{7}{9}\right]\):</h4>
+             \begin{align*}
+                &  - \left|{x + 3}\right| + \left|{9 x + 7}\right| = 8 x  + 4\\
+                \Rightarrow \quad & -\left({\color{green}+}\left(x + 3\right)\right) \mathbin{\color{black}-} \left({9x + 7}\right) = 8x + 4 \\
+                \Rightarrow \quad & -x - 3 - 9x - 7 = 8x + 4\\
+                \Rightarrow \quad & -10x - 10 = 8x + 4\\
+                \Rightarrow \quad & -18x = 14 \\
+                \Rightarrow \quad & x = -\frac{14}{18} = - \frac{7}{9}
+             \end{align*}
+             The value \(x = - \frac{7}{9}\) is on the border of the
+             region considered in thie case, but it is in all the same!
+             So, it is part of the solution set.
+           </p>
+
+           <p>
+           <h4>Case: \(x\) is in \(\left(-\frac{7}{9}, \infty\right)\):</h4>
+             \begin{align*}
+                &  - \left|{x + 3}\right| + \left|{9 x + 7}\right| = 8 x  + 4\\
+                \Rightarrow \quad & -\left({\color{green}+}\left(x + 3\right)\right) \mathbin{\color{green}+} \left({9x + 7}\right) = 8x + 4 \\
+                \Rightarrow \quad & -x - 3 + 9x + 7 = 8x + 4\\
+                \Rightarrow \quad & 8x + 4 = 8x + 4\\
+             \end{align*}
+             This is an indication that all \(x\) within the region considered
+             in this case will be part of the solution set.  This can be confirmed
+             formally by thinking through the process of "reversing"
+             the solving steps we just undertook.  (Basically,
+             you can just say to yourself, "Take any \(x\) in the
+             in the interval \(\left(-\frac{7}{9}, \infty\right)\).  Certainly it is true that
+             \[
+               8x + 4 = 8x + 4
+             \]
+             But then it is also true that
+             \[
+               -x - 3 + 9x + 7 = 8x + 4
+             \]
+             Finally, since for any \(x\) in the interval considered in this case,
+             we have that
+             \[
+               -x - 3 + 9x + 7 = 8x + 4 = -(x+3) + (9x + 7) = -|x+3| + |9x + 7|
+             \]
+             it follows that every \(x\) in this interval solves the given equation.)
+             Therefore, we now know that our solution set includes
+             \[
+              \left(-\frac{7}{9}, \infty\right)
+             \]
+             Actually, included in the former case (and, really, we could
+             have included it in this case as well), we had that
+             \(-\frac{7}{9}\) is also part of the solution set.
+             So, we know at this point that
+              \[
+                \left[-\frac{7}{9}, \infty\right)
+              \]
+              is included in our solution set.  And, since our cases have now covered
+              the entire real line, we know this is the entire solution set.
+            </p>
+        </div>
+      </div>
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

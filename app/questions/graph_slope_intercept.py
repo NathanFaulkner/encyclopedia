@@ -118,7 +118,7 @@ that satisfy the equation."""
         graph = GraphFromLambda(self.as_lambda)
         graph.save_fig(filename)
 
-    def get_svg_data(self, window):
+    def get_svg_data(self, window=[-10,10]):
         x_min = window[0]
         x_max = window[1]
         x_points = np.array([x_min, x_max])

@@ -19,7 +19,7 @@ __all__ = ['quadratic_pattern',
             'inequality_to_interval_notation',
             'interval_to_inequality_notation',
             'interval_notation_to_graph',
-            'absolute_value_equation',
+            'absolute_value_equation', 'absolute_value_equation_plus_linear',
             'absolute_value_inequality',
             'absolute_value_inequality_to_interval_notation',
             'absolute_value_inequality_to_graph',
@@ -64,7 +64,9 @@ __all__ = ['quadratic_pattern',
             'graph_standard_form',
             'generic_max_min',
             'cannonball_problem',
-            'max_revenue_problem']
+            'max_revenue_problem',
+            'absolute_value_equation_multi',
+            'absolute_value_equation_multi_one_or_two']
 
 class Question():
     pass
@@ -81,7 +83,9 @@ def random_non_zero_integer(a,b):
         out = random.randint(a,b)
     return out
 
-def permute_equation(terms, as_list=False):
+def permute_equation(terms, as_list=False, **kwargs):
+    if 'seed' in kwargs:
+        random.seed(kwargs['seed'])
     random.shuffle(terms)
     l = len(terms)
     divider = random.randint(0, l)

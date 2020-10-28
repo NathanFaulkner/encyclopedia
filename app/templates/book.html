@@ -41,7 +41,11 @@
                         {% else %}
                           {% set url = '#' %}
                         {% endif %}
-                        <li><a href={{ url }}>{{ section.display_name }}</a></li>
+                        {% if section.challenge %}
+                          <li><a href={{ url }}>Challenge: {{ section.display_name }}</a></li>
+                        {% else %}
+                          <li><a href={{ url }}>{{ section.display_name }}</a></li>
+                        {% endif %}
                       {% endfor %}
                     </ul>
                   {% endif %}

@@ -93,7 +93,7 @@ as long as you don't round until the very last step.
         self.format_given_for_tex = f"""
 Say that we have a quantity of {self.high_pct}\%
 gold alloy (the rest is silver), and we want to mix it with a
-{self.new_pct}\% gold alloy.
+{self.low_pct}\% gold alloy.
 If we want {self.how_much}
 {inflector.plural(str(self.mass_units))} of
 the {self.new_pct}\% gold alloy,
@@ -136,7 +136,9 @@ get a syntax error or, possibly, the checker will misunderstand your intent.
             for unit in bad_units:
                 if unit in user_answer:
                     return False
-        user_answer = user_answer.replace('%', '')
+        user_answer = user_answer.replace('%', ' ')
+        user_answer = user_answer.replace(' ' + str(self.high_pct) + ' ', ' higher ')
+        user_answer = user_answer.replace(' ' + str(self.low_pct) + ' ', ' lower ')
         user_answer = user_answer.replace('^', '**')
         user_answer = user_answer.replace('(', '')
         user_answer = user_answer.replace(')', '')
@@ -148,7 +150,7 @@ get a syntax error or, possibly, the checker will misunderstand your intent.
             user_x, user_y = user_answer.split(' and')
         if ' y ' in user_x:
             user_x, user_y = [user_y, user_x]
-        elif ' low' in user_x or 'low ' in user_x or 'lower ' in user_x or ' lower' in user_x:
+        elif ' low' in user_x or 'low ' in user_x or 'lower ' in user_x or ' lower' in user_x or ' ' + str(self.low_pct) in user_x:
             user_x, user_y = [user_y, user_x]
         if ' x ' in user_x or 'x=' in user_x:
             i = user_x.find('x')
@@ -157,7 +159,7 @@ get a syntax error or, possibly, the checker will misunderstand your intent.
             user_x = user_x[i+1:]
             user_x = user_x.replace(' ', '')
             user_x = parse_expr(user_x, transformations=transformations)
-        elif ' high' in user_x or 'high ' in user_x or 'higher ' in user_x or ' higher' in user_x:
+        elif ' high' in user_x or 'high ' in user_x or 'higher ' in user_x or ' higher' in user_x or ' ' + str(self.high_pct) in user_x:
             user_x = find_numbers(user_x)
         else:
             user_x = user_x.replace(' ', '')
@@ -187,7 +189,9 @@ get a syntax error or, possibly, the checker will misunderstand your intent.
     def validator(self, user_answer):
         try:
             user_answer = user_answer.lower()
-            user_answer = user_answer.replace('%', '')
+            # if '%' in user_answer:
+            #     raise SyntaxError
+            user_answer = user_answer.replace('%', ' ')
             user_answer = user_answer.replace('^', '**')
             user_answer = user_answer.replace('(', '')
             user_answer = user_answer.replace(')', '')

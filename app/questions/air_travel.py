@@ -181,6 +181,7 @@ The distance between these two cities is about
 <p>
 Find the average wind speed and the average apparent speed
 of the plane (relative to the air) across a two-way trip.
+Give you answer in miles per hour.
 The key here is to realize that you can add the wind
 speed to the plane's speed for the return (west to east trip),
 but you must subtract it on the trip from east to west.

@@ -54,7 +54,7 @@ class AbsoluteValueEquation(Question):
                 self.a = 1
             elif self.difficulty == 2:
                 _a = random.choice(['a', 'c'])
-                if _a:
+                if _a == 'a':
                     self.a = random.randint(2,9)
                 else:
                     self.a = 1
@@ -70,7 +70,7 @@ class AbsoluteValueEquation(Question):
             if self.difficulty == 1:
                 self.c = 0
             elif self.difficulty == 2:
-                if _a:
+                if _a == 'a':
                     self.c = 0
                 else:
                     self.c = random_non_zero_integer(-9,9)

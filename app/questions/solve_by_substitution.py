@@ -176,8 +176,8 @@ class SolveBySubstitution(Question):
 {self.format_given}
 """
 
-    name = 'Solve By Elimination'
-    module_name = 'solve_by_elimination'
+    name = 'Solve By Substitution'
+    module_name = 'solve_by_substitution'
 
     prompt_single = """Give a simple description of the set of all pairs
     that satisfy this system."""

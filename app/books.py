@@ -13,12 +13,13 @@ class Book(): #Not used at this time
         self.end = end
 
 class Section():
-    def __init__(self, view_name, display_name, template_path):
+    def __init__(self, view_name, display_name, template_path, challenge=False):
         self.view_name = view_name
         self.display_name = display_name
         self.template_path = template_path
         self.questions = []
         self.due_date = None
+        self.challenge = challenge
 
     def add_to_questions(self, question_name, *args):
         self.questions.append(question_name)
@@ -56,7 +57,7 @@ class Division():
 
 
     @staticmethod
-    def list_bottom_elements(subdivisions):
+    def list_bottom_elements(subdivisions, include_challenge=False):
         bottom = []
         if type(subdivisions) == dict:
             subdivisions = [subdivisions[i] for i in subdivisions]
@@ -65,8 +66,12 @@ class Division():
                 subdivision.subdivisions
                 bottom += Division.list_bottom_elements(subdivision.subdivisions)
             except AttributeError:
-                if subdivision is not None:
-                    bottom.append(subdivision)
+                if include_challenge:
+                    if subdivision is not None:
+                        bottom.append(subdivision)
+                else:
+                    if subdivision is not None and not subdivision.challenge:
+                        bottom.append(subdivision)
         return bottom
 
     def list_all_sections(self):
@@ -302,8 +307,166 @@ class SevenTest():
         return status
 
 
+class ProblemSet():
+    def __init__(self, question_names, title, **kwargs):
+        if 'seed' in kwargs:
+            self.seed = kwargs['seed']
+        else:
+            self.seed = random.random()
+        random.seed(self.seed)
+        self.question_names = [questions]
+        question_set = []
+        for question_name in question_names:
+            question_module = getattr(questions, question_name)
+            q = question_module.Question_Class(seed=self.seed)
+            question_set.append(q)
+        self.question_sets = [question_set]
+        self.title = title
+
+    preamble = r"""
+\documentclass[12pt]{article}
+\usepackage{amsmath}% http://ctan.org/pkg/amsmath
+\usepackage[
+  height=10in,      % height of the text block
+  width=7in,       % width of the text block
+  top=0.5in,        % distance of the text block from the top of the page
+  headheight=48pt, % height for the header block
+  headsep=12pt,    % distance from the header block to the text block
+  heightrounded,   % ensure an integer number of lines
+  %showframe,       % show the main blocks
+  verbose,         % show the values of the parameters in the log file
+]{geometry}
 
 
+\pagestyle{empty}
+
+
+
+\usepackage{graphicx}
+
+
+\usepackage{xcolor}
+
+\definecolor{epsilon-blue}{RGB}{0,0,155}
+
+
+\newcommand{\lt}{<}
+\newcommand{\gt}{>}
+
+
+
+
+
+\pagestyle{empty}
+
+"""
+
+    def make_tex(self, key=False):
+        title = self.title.replace(' ', '') + f'_v{self.seed}'
+        if key:
+            title += '_key'
+        file_name_with_path = os.path.join('app', 'for_printing', title, '{a}.tex'.format(a=title))
+        # print(os.getcwd())
+        try:
+            os.chdir('app')
+            os.chdir('for_printing')
+            # print(os.getcwd())
+            os.mkdir(title)
+            os.chdir(title)
+            f = open('{a}.tex'.format(a=title), 'w+')
+        except:
+            os.chdir(title)
+            # print(os.getcwd())
+            f = open('{a}.tex'.format(a=title), 'w+')
+        # all_img_names = []
+        for question_set in self.question_sets:
+            i = 0
+            # img_names = []
+            for question in question_set:
+                try:
+                    if question.has_img:
+                        img_name = '{qname}{i}'.format(qname=question.module_name, i=i)
+                        question.save_img(img_name)
+                    # img_names.append(img_name)
+                except AttributeError:
+                    pass
+                if key:
+                    try:
+                        if question.has_img_in_key:
+                            img_name = 'ans_for_{qname}{i}'.format(qname=question.module_name, i=i)
+                            question.save_img(img_name)
+                        # img_names.append(img_name)
+                    except AttributeError:
+                        pass
+                i += 1
+                # all_img_names.append(img_names)
+        out = self.preamble
+        # title_head = f"\\lhead{{\\textbf{{{self.book.display_name} - Test {self.which_test} v. {self.seed} \\\\Printed on \\today}}}}"
+        # out += title_head + '\n\n'
+        out += '\\begin{document}\n\n'
+        # out += '\\thispagestyle{fancy}\n\n'
+        header = f"""\\noindent
+        \\begin{{tabular}}{{ p{{3.5in}} p{{3.2in}} }}
+        \\hspace{{-1ex}}{{{self.title} }} & \\textbf{{Name: \\underline{{\\hspace{{2.65in}} }}}}\\\\
+        \\hspace{{-1ex}}\\textbf{{Version - {self.seed} }} &   \\textbf{{Date: \\hspace{{2in}} }}\\
+        \\end{{tabular}}
+        \\hrule
+        """
+        out += header
+        out += '\\begin{enumerate}\n'
+        for question_set in self.question_sets:
+            if question_set != []:
+                for i in range(len(question_set)):
+                    question = question_set[i]
+                    # section_info = self.book.get_skill_info(question.module_name)[0]
+                    # out += f'\\item {{\color{{gray}}({section_info[0]}.{section_info[1]})}} \n'
+                    # out += '\\item \n'
+                    # out += '\\begin{enumerate}\n'
+                    out += f'\\item {question.format_given_for_tex}\n'
+                    try:
+                        question.has_img
+                        out += """
+                        \\begin{{flushright}}
+                            \\includegraphics[scale=0.6]{{{img_name}}}
+                        \\end{{flushright}}
+                        \\vspace{{-9\\baselineskip}}
+                        """.format(img_name=question.module_name + f'{i}')
+                    except AttributeError:
+                        pass
+                    out += '\\vspace{12\\baselineskip}\n'
+            else:
+                out += f'\\item No questions have been constructed for this section.\n'
+            out += '\\newpage\n'
+        out += '\\end{enumerate}\n'
+        if key:
+            out += '\\newpage'
+            out += '\\textbf{Answers:}\n'
+            out += '\\begin{enumerate}\n'
+            for question_set in self.question_sets:
+                # out += '\\item\n'
+                if question_set != []:
+                    # out += '\\begin{enumerate}\n'
+                    for i in range(len(question_set)):
+                        out += f'\\item {question_set[i].format_answer}\n'
+                        try:
+                            if question_set[i].has_img_in_key:
+                                out += """\\includegraphics[scale=0.6]{{{img_name}}}""".format(img_name='ans_for_' + question_set[i].module_name + f'{i}')
+                        except AttributeError:
+                            pass
+                        # out += f'\\item {question_set[i].format_answer}\n'
+            out += '\\end{enumerate}\n'
+        out += '\\end{document}'
+
+        f.write(out)
+        f.close()
+
+        status = os.system('pdflatex {title}'.format(title=title))
+
+        os.chdir('..')
+        os.chdir('..')
+        os.chdir('..')
+
+        return status
 
 #########################
 # Free Sections -- not "bound" in a book
@@ -352,7 +515,11 @@ absolutevalueinequalities.add_to_questions('absolute_value_inequality',
                             )
 absolutevalueinequalities.due_date = datetime.datetime(2020, 9, 14)
 
-
+absolutevalueequationspart2 = Section('absolutevalueequationspart2', "Absolute Value Equations, Part 2", '/sections/absolute-value-equations-challenge', True)
+# print('challenge:', absolutevalueequationspart2.challenge)
+absolutevalueequationspart2.add_to_questions(#'absolute_value_equation_plus_linear')
+                                    #'absolute_value_equation_multi')
+                                    'absolute_value_equation_multi_one_or_two')
 #########################
 
 functionsandthecoordinateplane_intro = Section('functionsandthecoordinateplane_intro', "Functions and the Coordinate Plane", '/sections/functions-and-the-coordinate-plane')
@@ -475,7 +642,7 @@ nuts_and_bolts_of_algebra = Division('chapter', 'Nuts and Bolts of Algebra',
                                 solvingcompoundinequalities,
                                 intervalnotation,
                                 absolutevalueequations,
-                                absolutevalueinequalities])
+                                absolutevalueinequalities,])
 nuts_and_bolts_of_algebra.set_frontpage(nutsandboltsofalgebra)
 
 functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coordinate Plane",
@@ -494,7 +661,8 @@ functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coor
                                     solvebysubstitution,
                                     applicationsoflinearsystems,
                                     graphofabsolutevaluebasic,
-                                    graphofabsolutevaluefull])
+                                    graphofabsolutevaluefull,
+                                    absolutevalueequationspart2])
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
 
 quadratics = Division('chapter', "Quadratic Functions",

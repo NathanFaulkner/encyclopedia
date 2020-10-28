@@ -194,8 +194,8 @@ class AbsoluteValueInequality(Question):
         user_answer[1] = user_answer[1].replace('^', '**')
         user_answer[1] = parse_expr(user_answer[1], transformations=transformations)
         user_answer = set(user_answer)
-        print('correct', self.ineq_answers, type(list(self.ineq_answers)[0]), 'user', user_answer, type(list(user_answer)[0]))
-        print('union', self.ineq_answers.union(user_answer))
+        # print('correct', self.ineq_answers, type(list(self.ineq_answers)[0]), 'user', user_answer, type(list(user_answer)[0]))
+        # print('union', self.ineq_answers.union(user_answer))
         # return self.ineq_answers == user_answer
         cong = AbsoluteValueInequality.congruent
         user_answer = list(user_answer)
@@ -209,7 +209,7 @@ class AbsoluteValueInequality(Question):
         try:
             return ineq1.equals(ineq2)
         except TypeError:
-            return false
+            return False
 
 
     # @staticmethod

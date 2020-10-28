@@ -104,7 +104,7 @@ class GraphPointSlope(Question):
         # self.answer_latex_display = latex_print(self.answer, display=True)
 
         self.format_given_for_tex = f"""
-Sketch a grph of the given equation.  Make sure your graph is accurate throughout
+Sketch a graph of the given equation.  Make sure your graph is accurate throughout
 the window and has at least two points clearly marked.
 {self.format_given}
 
