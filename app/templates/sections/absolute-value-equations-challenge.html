@@ -40,12 +40,16 @@
   of the concepts being expressed in a given problem and use those to
   build in a creative way your own ways of solving (while also thinking
   in fundamental terms about how to check the truth of your answers.)
-  This small tweak that we consider in this section is just to introduce
-  more than one term involving absolute value.  In this section, we
-  will consider equations with two terms involving \(x\) at least one
-  of which also involves absolute value terms but, as a further
-  challenge to yourself, you should consider how to solve equations
-  which involve three terms&mdash;to thereby begin to assay your general agility
+  The small tweak (that causes relatively big problems)
+  that we consider in this section is just to introduce
+  more than one term involving \(x\) in addition to the
+  absolute value term.  Actually, it isn't so much harder to go ahead and
+  consider more than one absolute value term as well.  So, in this section, we
+  will consider equations with two or 3 terms involving \(x\) at least one
+  of which and at most two of which also involves absolute value terms.  But
+  as a further
+  challenge to yourself, you should see if you can solve equations
+  that involve three absolute value terms&mdash;to thereby begin to assay your general agility
   and creativity in problem-solving rather than merely testing your ability
   to regurgitate somebody else's methods all the time.
 </p>
@@ -74,11 +78,11 @@
             Suppose that \(x\) is a real number with the given property...
           </blockquote>
           In other words, we are assuming that \(x\) is an honest, real
-          number, meaning that it is sitting somewhere on the real line
+          number, meaning that it is sitting somewhere on the real line.
           Our task in solving is to deduce various ("necessary") properties
           about \(x\) starting from the given.  We apply very basic
           steps of logic along the way to make sure that we don't trick ourselves
-          into something false.  In a way, what we are doing is doing
+          into believing something false.  In a way, what we are doing is doing
           our best not to tell a lie!
           In the end, it is also not only prudent but necessary to check
           one's answers.  After all, we will try to deduce the only
@@ -115,14 +119,14 @@
              or fact
              about \(x\).  You see, if you do \(x - 7\), you are finding
              the difference between \(x\) and 7, are you not?  And
-             by taking the absolute value, you can actually just making
+             by taking the absolute value, you are actually just making
              sure it comes out positive (after all, \(x - 7\) might come
              out positive if \(x\) is to the right of 7 but
              negative if \(x\) is to the left).  So, in that sense,
              the expression \(|x-7|\) actually can be translated into meaning
              as
              <blockquote>
-               the distance of \(x\) from \(7\)
+               \(|x - 7|\) = the distance of \(x\) from \(7\)
               </blockquote>
             Similarly, even though you could say that \(x + 1\) is a
             sum not a difference, you can also <em>interpret</em> it as a
@@ -132,7 +136,7 @@
             \]
             So, \(x + 1\) represents the difference of \(x\) and \(-1\),
             which might come out negative or positive.  But then
-            taking the aboslute value makes it come out positive no matter
+            taking the absolute value makes it come out positive no matter
             what, so
             \[
               |x + 1| = |x - (-1)|
@@ -151,7 +155,7 @@
              Well, how about the number that lies halfway between them?
              There is certainly a number at the halfway point.  I bet we
              could find it.  And if you were any other number, wouldn't you
-             have to closer to \(-1\) than \(7\) or vice versa?  So,
+             have to be closer to \(-1\) than \(7\) or vice versa?  So,
              it will be a unique solution.  Of course, the full distance
              between \(-1\) and \(7\) is \(8\), so the halfway point
              will be at a distance of \(4\) from each (in other words
@@ -199,6 +203,8 @@
              proof.  But there may still be some room for doubt about it!
              So, to be completely honest, I will offer you a second proof&mdash;which
              is to say&mdash;a second argument as the correctness of my solution.
+             This method will be what I use exclusively in the harder examples
+             below.
            </p>
 
            <p>
@@ -211,7 +217,8 @@
              Therefore, \(x + 1\) is also a real number, and so is \(x - 7\)&mdash;and
              \(|x+1|\) and \(|x - 7|\) are too for that matter.  In fact, we are assuming that
              \(|x + 1|\) and \(|x- 7|\) come out to be the same real number,
-             though we don't know that number that will be yet.
+             though we don't know what that number that will be yet
+             (at least apeaking hypothetically).
              Regarding the meaning of this, also recall that absolute value just means
              "make it positive if it was negative and otherwise
              leave the number alone".  So, here is how we can deal with it.
@@ -284,7 +291,7 @@
              \end{align*}
              which is not true.  Thus, we conclude that, under the assumption
              that \(x \gt 7\) <em>there is no solution</em>.
-             We are getting somehwher!  We have just eliminated a
+             We are getting somewhere!  We have just eliminated a
              huge chunk of the real line from consideration.  And we
              can proceed by just checking out the other cases.
              Actually, to be very thourogh, you should also note
@@ -312,16 +319,16 @@
            and hence \(|x + 1| = x + 1\).  That's nice.  But what
            about \(|x - 7|\)?  Can we simplify this statement?  Note
            that this does NOT equal: \(|x - 7|\) does not equal \(x - 7\).
-           After all, if \(x \lt 7\), then \(x - 7\) will come out
+           After all, if \(x \lt 7\), then \(|x - 7|\) will come out
            to be positive whereas the expression \(x - 7\) would be
-           negative.  So, what do we do?  Well, what can do to an expression
+           negative.  So, what do we do?  Well, what can we do
            to a number to change it from negative to a positive?  You
            might answer, "take its absolute value", and you'd be right,
            but that wouldn't be getting us anywhere, since we are
            trying to get rid of the absolute value signs in the
            interest of simplifiying or changing our given equation.
            So, think of something else: what can you <em>do</em> to
-           an number to change it from negative to positive?
+           a number to change it from negative to positive?
            Well, you could negate it!  That is, as you know, "the negative
            of a negative is a positive", no?  (By the way, "negative"
            on the real line just means "go in the opposite direction"; it
@@ -348,7 +355,7 @@
            solutions in that part of the real line).
 
            <h4>Case: \(x \lt -1\):</h4>
-           This time, \(x + 1\) is negative, which means \(x + 1 = -(x +1) = -x - 1\)
+           This time, \(x + 1\) is negative, which means \(|x + 1| = -(x +1) = -x - 1\)
            (see the discussion in the previous case for explanation).  Also,
            \(x \lt -1\) means that \(x \lt 7\), too, so \(x - 7 \lt 0\)
            and hence \(|x - 7| = - (x - 7) = 7 - x\).
@@ -381,12 +388,12 @@
        <a class="collapsible"><h3>Answer, via Algebraic Method: </h3></a>
          <div class='inner'>
            <p>
-             For his method, we think about the meaning
-             of absoute value, specifically, by thinking about how to write down in symbols
+             For this method, we think about the meaning
+             of absolute value, specifically, by thinking about how to write down in symbols
              what absolute value means.  Also, be sure to keep in mind
              the fact that we are assuming \(x\) to be a real number.
              Therefore, \(x + 1\) is also a real number, and so is \(x - 7\)&mdash;and
-             and \(|x - 7|\) is too for that matter.  In fact, we are assuming that
+             \(|x - 7|\) is too for that matter.  In fact, we are assuming that
              \(x + 1\) and \(|x- 7|\) come out to be the same real number,
              though we don't know that number that will be yet.
              Regarding the meaning of this, also recall that absolute value just means
@@ -397,7 +404,7 @@
              our solution process into different scenarios that help tell us
              how to deal with the absolute value signs.  Specifically,
              we will begin by assuming that \(x - 7 \geq 0\)&mdash;that is,
-             that \(x - 7\) is greater or equal than \(0\).  This means that
+             that \(x - 7\) is greater or equal to \(0\).  This means that
              "the absolute value of \(x - 7\) will just come out to be itself."
              In other words, \(|x-7| = x - 7\).
              <h4>Case: \(x \geq 7\):</h4>
@@ -446,13 +453,13 @@
        <a class="collapsible"><h3>Answer, via Algebraic Method: </h3></a>
          <div class='inner'>
            <p>
-             For his method, we think about the meaning
-             of absoute value, specifically, by thinking about how to write down in symbols
+             For this method, we think about the meaning
+             of absolute value, specifically, by thinking about how to write down in symbols
              what absolute value means.  Also, be sure to keep in mind
              the fact that we are assuming \(x\) to be a real number.
-             Therefore, \(x + 1\) is also a real number, and so is \(x - 7\)&mdash;and
+             Therefore, \(-x - 1\) is also a real number, and so is \(x - 7\)&mdash;and
              and \(|x - 7|\) is too for that matter.  In fact, we are assuming that
-             \(x + 1\) and \(|x- 7|\) come out to be the same real number,
+             \(-x - 1\) and \(|x- 7|\) come out to be the same real number,
              though we don't know that number that will be yet.
              Regarding the meaning of this, also recall that absolute value just means
              "make it positive if it was negative and otherwise
@@ -472,7 +479,7 @@
               \Rightarrow \quad & -2x = -6\\
               \Rightarrow \quad & x = 3\\
              \end{align*}
-             Great!  Or did we??  Note carefully that we have assumed
+             Great!  We came up with a solution!  Or did we??  Note carefully that we have assumed
              that \(x \geq 7\) in order to arrive at this conclusion!
              And we deduced that... \(x = 3\).  There is a problem there,
              as you can check by plugging your answer back in: \(3\)
@@ -496,7 +503,8 @@
        <a class="collapsible"><h3>Answer, via a New Graphical Perspective: </h3></a>
          <div class='inner'>
            <p>
-             I think the solution in this case (of "no solution")
+             I think the solution in this case (of "no solution") may be
+             unsettling enough
              that is worth considering it from another perspective.  Thinking
              the private, concealed thoughts of a mathematician: well, there
              might just be a little room for doubt about the correctness of the
@@ -636,9 +644,9 @@
              adopting a method of uniformly representing all possible
              solutions to these problems, I will be using interval notation
              to express each case I am considering.  As demonstrated in
-             examples above, considering by cases means to considerably
+             examples above, considering by cases means to consider
              separately regions of the real line where the expressions
-             inside each absolute value term will come our negative
+             inside each absolute value term will come out negative
              versus coming out positive.  For instance, we have the term
              \(|x|\) in the equation above.  I know that when
              \(x\) is positive, \(|x|\) is just \(x\).  So,
@@ -651,7 +659,7 @@
              to come out positive whereas \(x\) is negative. On the other hand,
              I can also make a negative value positive by taking the negative
              of it.  Therefore, for \(x \lt 0\), I have \(|x| = -x\).
-             Make sense?  So, when I turn consider the case of solutions with
+             Make sense?  So, when I consider the case of solutions with
              \(x \lt 0\), I can
              literally make the substitution of the expression \(-x\)
              in place of \(|x|\).  This could be very helpful!
@@ -705,7 +713,7 @@
            </p>
 
            <p>
-             In all, we can rewrite out equation without any absolute value
+             In all, we can rewrite the given equation without any absolute value
              signs at all provided we worry about where \(x\) is.
              In particular, we have to keep track of whether \(x \leq -2\)
              or not and whether \(x \leq 0\) or not.  In all, then,
@@ -741,11 +749,15 @@
            <h4>Case: \(x\) is in \((-\infty, -2]\):</h4>
            In this case, \(2x+4\) is negative, as just explained, so
            \(|2x + 4| = -2x - 4\). Also,
-           since \(-2 \lt 0\), we also have \(x \lt 0\) and so
+           since \(-2 \lt 0\), we have that \(x \lt 0\), so
            \(|x| = -x\). Thus, we can rewrite our equation after making
-           those substitutions and then solve:
+           those substitutions and then solve.
+           \[
+            0 = 9 x + 7 \left|{x}\right| + \left|{2 x + 4}\right| + 4\\
+           \]
+           becomes...
            \begin{align*}
-            &  0 = 9 x - 7 x - 2x - 4 + 4 \\
+            &   0 = 9 x - 7 x - 2x - 4 + 4 \\
             \Rightarrow \quad & 0 = 0 \\
            \end{align*}
            What are we to do with that?  What does this mean?
@@ -784,7 +796,11 @@
               In this case, \(x \gt -2\), so \(2x+4\gt0\), so
               \(|2x+4| = 2x+4\).  On the other hand, \(x \leq 0\)
               means that \(|x| = -x\).  So we make these
-              substitutions and then solve:
+              substitutions and then solve.
+              \[
+               0 = 9 x + 7 \left|{x}\right| + \left|{2 x + 4}\right| + 4\\
+              \]
+              becomes...
               \begin{align*}
                &  0 = 9 x - 7 x + 2x + 4 + 4 \\
                \Rightarrow \quad & 0 = 4x + 8 \\
@@ -801,7 +817,11 @@
               <h4>Case: \(x\) is in \((0, \infty)\):</h4>
               In this case, \(x \gt 0 \gt -2\), so \(2x+4\gt0\). Therefore,
               \(|2x+4| = 2x+4\).  Also, \(|x| = x\).  So we make these
-              substitutions and then solve:
+              substitutions and then solve.
+              \[
+               0 = 9 x + 7 \left|{x}\right| + \left|{2 x + 4}\right| + 4\\
+              \]
+              becomes...
               \begin{align*}
                &  0 = 9 x + 7 x + 2x + 4 + 4 \\
                \Rightarrow \quad & 0 = 18x + 8 \\
@@ -829,7 +849,7 @@
 </p>
 
 <p>
-  I will demonstrate two more solution.  In the process, I will talk or explain
+  I will demonstrate two more solutions.  In the process, I will talk or explain
   a little less about what I am up to, except to suggest one way you
   might streamline the process a bit.
 </p>

@@ -314,6 +314,7 @@ class AbsoluteValueEquationMulti(Question):
         self.format_given_for_tex = f"""
         {self.prompt_single} \n
         {self.format_given}
+        Show your work.
         """
 
 

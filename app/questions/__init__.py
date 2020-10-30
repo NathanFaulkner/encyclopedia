@@ -66,7 +66,8 @@ __all__ = ['quadratic_pattern',
             'cannonball_problem',
             'max_revenue_problem',
             'absolute_value_equation_multi',
-            'absolute_value_equation_multi_one_or_two']
+            'absolute_value_equation_multi_one_or_two',
+            'absolute_value_equation_multi_three']
 
 class Question():
     pass

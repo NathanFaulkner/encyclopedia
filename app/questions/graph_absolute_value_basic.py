@@ -128,7 +128,7 @@ class GraphAbsoluteValueBasic(Question):
 
         self.format_given_for_tex = f"""
 Sketch a graph of the given equation.  Make sure your graph is accurate throughout
-the window and has at least two points clearly marked.
+the window and has at least three points clearly marked.
 {self.format_given}
 
 \\begin{{flushright}}

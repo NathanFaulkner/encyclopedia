@@ -138,8 +138,8 @@ the window and has at least 5 points clearly marked.
 
 """
 
-    name = 'Graph from Vertex Form'
-    module_name = 'graph_vertex_form'
+    name = 'Graph from Standard Form'
+    module_name = 'graph_standard_form'
 
     prompt_single = """Graph the given equation by plotting at least 4 points
 that satisfy the equation."""
