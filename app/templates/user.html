@@ -71,7 +71,7 @@
 
 {% if (user == current_user) or current_user.is_observing(user) %}
   {% set pupil = user %}
-  {% include "_gradebook.html" %}
+  {% include "_gradebook2.html" %}
 
   <hr style="color: var(--section-header-color);">
 {% endif %}

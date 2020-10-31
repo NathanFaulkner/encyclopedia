@@ -180,10 +180,11 @@ class UserSectionGradeInfo():
     session_duration = 24
 
     def set_grade_info(self):
+        # print('set grade info got called')
         self.due_date = self.initial_due_date
         self.mastery_date = None
         question_names = self.section.questions
-        # print('section:', self.chapter_number, ':', self.section_number, ':', question_names)
+        print('section:', self.chapter_number, ':', self.section_number, ':', question_names)
         if question_names != []:
             answers_by_section = StudentAnswer.query.filter_by(user_id=self.user.id,
                                                             skillname=question_names[0])
@@ -359,6 +360,15 @@ class UserGradeInfo():
     def __init__(self, user):
         self.user = user
         self.answers = StudentAnswer.query.filter_by(user_id=user.id).all()
+        all_info = {}
+        self.user_books = self.get_books()
+        self.book_names = self.get_book_names()
+        for book in self.user_books:
+            info = self.whole_book_info(book)
+            grade = self.get_whole_book_grade(book, whole_book_info=info)
+            all_info[book] = {'grade': grade, 'info': info}
+        self.all_info = all_info
+
 
     def get_book_names(self):
         answers = self.answers
@@ -401,7 +411,9 @@ class UserGradeInfo():
         return sections
 
     def get_answers_by_section_desc(self, book, chapter, section):
-        answers_by_section = UserSectionGradeInfo(self.user, book, chapter, section).get_answers()
+        # book = getattr(books, book)
+        # print('book', book)
+        answers_by_section = self.all_info[book]['info'][chapter-1][section-1].get_answers()#UserSectionGradeInfo(self.user, book, chapter, section).get_answers()
         if answers_by_section is not None:
             return answers_by_section.order_by(StudentAnswer.timestamp.desc()).all()
         return []
@@ -415,7 +427,7 @@ class UserGradeInfo():
         return answers
 
     max_grade = 4
-    base = 2#math.sqrt(7) # This is supposed to model duration of memory factoring in past repetitions
+    base = 2#math.sqrt(7) # This is supposed to model duration of memory, factoring in past repetitions
     session_duration = 24
 
     def grade_section(self, book, chapter, section):
@@ -434,8 +446,12 @@ class UserGradeInfo():
             info.append(chapter_info)
         return info
 
-    def get_whole_book_grade(self, book):
-        whole_book_info = self.whole_book_info(book)
+    def get_whole_book_grade(self, book, **kwargs):
+        if 'whole_book_info' in kwargs:
+            whole_book_info = kwargs['whole_book_info']
+        else:
+            print('oops')
+            whole_book_info = self.whole_book_info(book)
         grades = []
         for chapter in whole_book_info:
             for section_info in chapter:
