@@ -113,7 +113,10 @@ class ParallelPerpendicularToPointSlope(Question):
 
             \\begin{{center}}
                 The line that passes through the point \\( ({self.x0}, {self.y0}) \\)
-                and has slope of \\( m = {latex(self.m)} \\)
+                and is {self.parallel_or_perp} to the line with equation
+                \\[
+                    y = {fmt_slope_style(self.m1*self.x + self.b1)}
+                \\]
             \\end{{center}}
             """
 

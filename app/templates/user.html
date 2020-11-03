@@ -84,7 +84,7 @@
       {% set grades = pupil.user_grade_info() %}
       {% set user_books = grades.get_books() %}
       <p>{{pupil.lastname}}, {{ pupil.firstname }}</p>
-      {% include "_gradebook.html" %}
+      {% include "_gradebook2.html" %}
       <!-- {% for book in user_books %}
         <p>{{ book.display_name }}</p>
       {% endfor %} -->

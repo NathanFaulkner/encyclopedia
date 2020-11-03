@@ -569,6 +569,7 @@ verticalorhorizontal.add_to_questions('vertical_or_horizontal_graph_to_equation'
 
 parallelorperpendicular = Section('parallelorperpendicular', "Parallel and Perpendicular Lines", '/sections/parallel-and-perpendicular')
 parallelorperpendicular.add_to_questions('parallel_perpendicular_to_point_slope_form',
+                                        'parallel_perpendicular_to_point_slope_form',
                                          'vertical_or_horizontal_info_to_equation',
                                         'vertical_or_horizontal_graph_from_description')
 

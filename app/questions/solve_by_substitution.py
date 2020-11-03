@@ -174,6 +174,7 @@ class SolveBySubstitution(Question):
         self.format_given_for_tex = f"""
 {self.prompt_single}
 {self.format_given}
+Use substitution.
 """
 
     name = 'Solve By Substitution'

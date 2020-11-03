@@ -1,0 +1,367 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In the sections
+  <a href="{{ url_for('section', section_name='solvingbyelimination') }}">
+    Solving by Elimination
+  </a>
+  and
+  <a href="{{ url_for('section', section_name='solvingbysubstitution') }}">
+    Solving by Substitution
+  </a>
+  we learned two different algorithms for solving systems of linear equations.
+  As mentioned in those sections, each method has is strengths: solving by
+  elimination is arguably the easiest method to apply to systems of linear
+  equations.  "Linear" equations are where no variable has any power on it.
+  It can be applied in a prescriptive fashion to solve any linear system&mdash;including
+  systems with more than two variables!  Indeed, you can devise any linear system
+  you like&mdash;with as many variables and as many equations as you like&mdash;and you
+  could solve it by elimination.  Actually, you could solve it by substitution, too,
+  but is just wouldn't be very fun.  Elimination can be performed in such a
+  stream-lined way that even your basic hand-held graphing calculator knows
+  how to do it.  In this section, we will solve a certain class
+  of systems of three equations in three unknowns.
+  On the other hand, we won't treat this class of problems in full generality.
+  We will only look at systems that actually have a single solution.  (To
+  reason about the other possibilities, it helps to undertake a study
+  of how to represent equations and relationships among 3 variables.
+  This entails conceptualizing points in space identified by 3 coordinates,
+  instead of just looking at two dimensions as we do in the \((x, y)\)-plane.
+  That is, think of the \((x, y)\)-coordinates of telling you how far
+  to go from the origin in, first, the East/West ((\x\)-direction), then the
+  North/South direction (\(y\)-direction), and finally Up/Down (\(z\)-direction.))
+</p>
+
+<p>
+  We'll start with a classic example, so you can see how the algorithm works.
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve the following system using the method of elimination.
+  That is, find a nice description of its solution set.
+  \[
+    \begin{cases}
+    x + 2y + 3x = 10 \\
+    4x + 5y + 6z = 11 \\
+    7x + 8y - 9z = 12
+    \end{cases}
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      What we are doing when we find the solution to a system is <em>assuming</em> \(x\)
+      and \(y\) are <em>actual</em>, <em>honest</em>
+      real numbers with the property that when they are
+      simultaneously substituted into each equation both equations are satisfied.
+      So, the point is, by assumption, \(x\) and \(y\) represent the same number
+      in each equation.
+      Elimination uses that fact in a clever way: Note that if the two
+      equations above are true, then so are these two:
+        \[
+          \begin{cases}
+          -2x +4y = 18 \\
+          2x + 3y = 10
+          \end{cases}
+        \]
+      All I did was multiply both sides of the first equation by \(-2\).
+      Why did I do that?
+      It's so that I can now add the two left sides of the equations
+      together and <em>eliminate</em> \(x\).
+      Since the left sides equal the right sides,
+      I know the sum of the left sides will equal the sum of the right sides.
+      To be clear, since \(x\) and \(y\) are (by assumption)
+      real numbers&mdash;meaning, they could actually be plotted on the
+      real line somewhere!&mdash;I know, too, that
+      \(
+        -2x + 4y
+      \)
+      and
+      \(
+        2x + 3y
+      \)
+      both represent real numbers.  They are sumbols for real numbers.
+      Actually, in this case I know a bit more than that!  We are
+      assuming that&mdash;even though I don't know what \(x\) and \(y\) are&mdash;I
+      know that \(-2x + 4y\) is literally 18 and \(2x + 3y\) is literally 10.
+      Put another way, I know something about what \(x\) and \(y\)
+      <em>do</em>, but not yet what they <em>are</em>.
+      The question is, do I know <em>enough</em> about what \(x\) and \(y\)
+      do to figure out what they <em>are</em>?
+      <p>
+        Back to the strategy: I know that  when I add 10 to 18, I will
+        undoubtedly get 28.  But have special <em>representations</em>
+        of the numbers 10 and 18.  I can also "add" those
+        <em>representations</em> of 10 and 28 and simplify.  That is,
+        I "add the left sides together",, knowing that, when I do so, there
+        sum will definitely be 28:
+        \[
+          \begin{align*}
+          \phantom{+\quad} -2x +4y &= 18 \\
+          + \quad 2x + 3y &= 10\\
+          \hline
+          7y &= 28
+          \end{align*}
+        \]
+
+      Of course, from the equation that resulted, I
+      quickly learn that \(y = 4\).  That's the real number that \(y\)
+      actually represented all along!  It's just that it took a few
+      steps to discover that.  Next, remember out goal:
+      by assumption, I am looking for
+      an \((x,y)\)-pair that makes both equations true.  Now that I know
+      that the only possible \(y\)-coordinate for such a  pair is 7,
+      I can just plug in \(y=4\) to <em>either</em>
+      equation to discover what \(x\) is supposed to be:
+      \begin{align*}
+        & -2x + 4\cdot 4 = 18 \\
+        \Rightarrow \quad & -2x + 16 = 18 \\
+        \Rightarrow \quad & -2x = 2 \\
+        \Rightarrow \quad & x = -1 \\
+      \end{align*}
+      So, it looks like my solution set contains just the single pair \((-1,4)\).
+      You can check your answer by plugging back in to make sure each equation
+      is satisfied (or, at least, plug back into the other equation
+      that you didn't just use to get the final answer):
+        \[
+          -2\cdot(-1) + 4\cdot 4 = 2 + 16 = 18
+        \]
+      and
+        \[
+          2 \cdot (-1) + 3\cdot 4 = -2 + 12 = 10
+        \]
+      So, I know my answer is correct.
+      </p>
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  I will do the next examples faster&mdash;without quite so much explanation.
+  The next example illustrates a case where you need to adjust both equations,
+  not just one, to perform elimination.
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/e7a746462c284a1e91b7326e6c78fdd5" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve the following system using the method of elimination.
+  That is, find a nice description of its solution set.
+  \[
+    \begin{cases}
+      2x - 3y = 1\\
+      -3x + 7y = 1
+    \end{cases}
+  \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      To perform elimination on \(x\), you could multiply both sides of the
+      first equation by \(3\) and both sides of the second equation by \(2\):
+        \[
+          \begin{cases}
+            6x - 9y = 3\\
+            -6x + 14y = 2
+          \end{cases}
+        \]
+      Now, add the sides together:
+      \[
+        \begin{align*}
+        6x - 9y &= 3\\
+        + \quad -6x + 14y &= 2\\
+        \hline
+        5y &= 5
+        \end{align*}
+      \]
+      So, \(y=1\).  Sub-in \(y=1\) to either equation to get the value of
+      \(x\).  I used the first equation, from the original system:
+        \begin{align*}
+          & 2x - 3\cdot 1 = 1\\
+          \Rightarrow \quad & 2x - 3 = 1 \\
+          \Rightarrow \quad & 2x = 4 \\
+          \Rightarrow \quad & x = 2 \\
+        \end{align*}
+      So, the solution set just contains \((2,1)\).
+      Remember, you can check your answer by plugging back in and seeing
+      if this pair satisfies both equations!  It does:
+      \[
+        \begin{cases}
+          2x - 3y = 2\cdot 2 - 3\cdot 1 = 4 - 3 = 1\\
+          -3x + 7y = -3\cdot 2 + 7\cdot 1 = -6 + 7 = 1
+        \end{cases}
+      \]
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  Now, what happens in the elimation procedure when the solution set is empty or consists
+  of an infinite set of points along a single line?  That's what the next two examples
+  are designed to explore.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/dbf0dd8785a54f9f80d58bf735672e0f" target="_blank">Click for video.</a>
+  </p> -->
+  Solve the following system using the method of elimination.
+  That is, find a nice description of its solution set.
+    \[
+      \begin{cases}
+        x - 2y = -9 \\
+        -4x + 8y = 36
+      \end{cases}
+    \]
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        To perform elimination on \(x\),
+        you could multiply the first equation by \(4\).  Here is what results:
+          \[
+            \begin{cases}
+            4x - 8y = -36 \\
+            -4x + 8y = 36
+            \end{cases}
+          \]
+        When you add the sides together, though, you get
+          \[
+            0 = 0
+          \]
+        Strictly speaking, that tells you nothing.
+        I mean, we already knew that 0 equals 0 with doing all that work.
+        But we can take it as a reliable indicator that when you graph
+        the two equations, you get the same line.
+        Just look at the two equations!
+        They only differ by a factor of \(-1\)!
+        So, the solution set is infinite, consisting in all points along
+        the line with equation \(x - 2y = -9\).
+
+        <p>
+          A mathematician would represent this set using "set notation".
+          Do remember the notation that used "curly braces"
+          that we discussed in the section on
+          <a href="{{ url_for('section', section_name='functionnotation') }}">
+            function notation?
+          </a>
+          There, we defined functions as a special set of ordered pairs.
+          Well, the solution to a system of equations is a set of
+          ordered pairs as well (though you wouldn't necessarily think
+          of it as a function).  So, like in the other section I just linked to,
+          we can use set notation to represent it.  Previously, we
+          used set notation to just provide a scope for listing
+          elements in a set.  For instance,
+          \[
+            \{(1, 2), (-5, 6), (9,12)\}
+          \]
+          is a set of ordered pairs.  But the solution set for this example
+          is an infinite set, so this notation isn't entirely adequate.
+          We need to adapt it in a certain way.  Specifically, as there
+          is now way to list an infinite set of this nature, we have
+          to describe the set by a "rule".  This is much the same
+          as what we did when we used function notation instead of
+          set notation to define a set.  But, really, you can use both.
+          Here is a symbol a mathematician would use to represent
+          the solution set for this system:
+          \[
+            \left\{(x, y)\mathbin{|} x - 2y = -9\right\}
+          \]
+          What does this mean?  Well, here is how you would "read" it:
+          <table style="border-collapse: collapse; width: 100%">
+            <tr>
+              <td style="text-align:center">\(\{\)</td>
+              <td style="text-align:center">\((x, y)\)</td>
+              <td style="text-align:center">\(|\)</td>
+              <td style="text-align:center">\(x - 2y = -9\)</td>
+              <td style="text-align:center">\(\}\)</td>
+            </tr>
+            <tr>
+              <td style="text-align:center">"Set of"</td>
+              <td style="text-align:center">\((x,y)\)-pairs</td>
+              <td style="text-align:center">"with the property that"</td>
+              <td style="text-align:center">"this equation is true"</td>
+              <td style="text-align:center">[end set]</td>
+            </tr>
+          </table>
+            So to be clear, it is a symbol for "the set of all
+            \((x, y)\)-pairs that satisfy the equation \(x - 2y =-9\)"&mdash;which
+            is none other than the solution set for this system.
+            Now, this notation is kind of clunky, so on the exercise
+            page, you can just enter the equation part.  You can enter
+            either equation as a description of your set of infinite solutions
+            when that case comes up.
+        </p>
+      </div>
+    </div>
+</div>
+</p>
+
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/58635914aa6c4b2aa4fee004bf032da5" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve the following system using the method of elimination.
+  That is, find a nice description of its solution set.
+  \[
+  \begin{cases}
+  x - 2y = -9 \\
+  -4x + 8y = 30
+  \end{cases}
+  \]
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        To perform elimination on \(x\),
+        you could multiply the first equation by \(4\).  Here is what results:
+        \[
+          \begin{cases}
+            4x - 8y = -36 \\
+            -4x + 8y = 30
+          \end{cases}
+        \]
+        When you add the sides together, though, you get
+        \[
+          0 = -6
+        \]
+        Of course, that is a false statement.
+        That means there are no such \(x\) and \(y\) that make both
+        equations true:  There is no solution.
+      </div>
+    </div>
+</div>
+</p>
+
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}
