@@ -273,7 +273,7 @@ class SevenTest():
         out += '\\end{enumerate}\n'
         if key:
             out += '\\newpage'
-            out += '\\textbf{Answers:}\n'
+            out += f'\\textbf{{Answers}} for Test {self.which_test}, Version - {self.seed}\n'
             out += '\\begin{enumerate}\n'
             for question_set in self.question_sets:
                 out += '\\item\n'
@@ -314,11 +314,13 @@ class ProblemSet():
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        self.question_names = [questions]
+        self.question_names = question_names
         question_set = []
+        i = 1
         for question_name in question_names:
             question_module = getattr(questions, question_name)
-            q = question_module.Question_Class(seed=self.seed)
+            new_seed = (self.seed * i) % 1
+            q = question_module.Question_Class(seed=new_seed)
             question_set.append(q)
         self.question_sets = [question_set]
         self.title = title
@@ -586,6 +588,10 @@ applicationsoflinearsystems = Section('applicationsoflinearsystems', "Applicatio
 applicationsoflinearsystems.add_to_questions('we_lost_the_receipts',
                                                 'air_travel',
                                                 'gold_alloy')
+
+solvingbyeliminationthreeequationsonesolution = Section('solvingbyeliminationthreeequationsonesolution', "Solving By Elimination: Intro to Three Unknowns", '/sections/solving-by-elimination-three-equations-intro', True)
+solvingbyeliminationthreeequationsonesolution.add_to_questions('solve_by_elimination_three',)
+                                                                # 'vertex_form_from_three_points')
 #########
 graphofabsolutevaluebasic = Section('graphofabsolutevaluebasic', "Graphs of Absolute Value Functions: Basic Transformations", '/sections/graph-of-absolute-value')
 graphofabsolutevaluebasic.add_to_questions('graph_absolute_value_basic',
@@ -663,8 +669,10 @@ functions_and_the_coordinate_plane = Division('chapter', "Functions and the Coor
                                     applicationsoflinearsystems,
                                     graphofabsolutevaluebasic,
                                     graphofabsolutevaluefull,
-                                    absolutevalueequationspart2])
+                                    ])
 functions_and_the_coordinate_plane.set_frontpage(functionsandthecoordinateplane_intro)
+
+
 
 quadratics = Division('chapter', "Quadratic Functions",
                                 [warmupwithquadratics,
@@ -674,7 +682,9 @@ quadratics = Division('chapter', "Quadratic Functions",
                                 maxmin])
 quadratics.set_frontpage(quadratics_intro)
 
-
+algebra2_challenge = Division('chapter', "Challenge Sections",
+                                    [absolutevalueequationspart2,
+                                    solvingbyeliminationthreeequationsonesolution])
 
 polynomials = Division('chapter', 'Polynomials', [factoring1, quadraticpattern])
 #polynomials.intro = polynomials_intro
@@ -682,7 +692,8 @@ polynomials.set_frontpage(polynomials_intro)
 
 main = Division('main', 'Main Matter', [nuts_and_bolts_of_algebra,
                                         functions_and_the_coordinate_plane,
-                                        quadratics])
+                                        quadratics,
+                                        algebra2_challenge])
 
 Algebra2 = Division('book', 'Algebra 2', {'front': None, 'main': main, 'end': None})
 Algebra2.name_for_path = 'Algebra2'

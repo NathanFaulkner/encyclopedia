@@ -222,7 +222,7 @@ include four decimal places for intermediate steps.
     prompt_multiple = """TBA
     """
     further_instruction = """Enter your answer as
-"number of average apparent speed of planes, average wind speed".
+"average apparent speed of planes, average wind speed".
 For instance, you answer might be "405.31, 35.67"
 The point is, you must separate the values by a comma and list
 the airplanes' apparent speed first!  Also, do NOT use commas

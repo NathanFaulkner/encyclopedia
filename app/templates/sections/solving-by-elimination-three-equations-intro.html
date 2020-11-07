@@ -1,0 +1,577 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In the sections
+  <a href="{{ url_for('section', section_name='solvingbyelimination') }}">
+    Solving by Elimination
+  </a>
+  and
+  <a href="{{ url_for('section', section_name='solvebysubstitution') }}">
+    Solving by Substitution
+  </a>
+  we learned two different algorithms for solving systems of linear equations.
+  As mentioned in those sections, each method has is strengths: solving by
+  elimination is arguably the easiest method to apply to systems of linear
+  equations.  "Linear" equations are where no variable has any power on it.
+  It can be applied in a prescriptive fashion to solve any linear system&mdash;including
+  systems with more than two variables!  Indeed, you can devise any linear system
+  you like&mdash;with as many variables and as many equations as you like&mdash;and you
+  could solve it by elimination.  Actually, you could solve it by substitution, too,
+  but is just wouldn't be very fun.  Elimination can be performed in such a
+  stream-lined way that even your basic hand-held graphing calculator knows
+  how to do it.    (There is a name for the algorithm I have in mind; it is called
+    <a href="https://en.wikipedia.org/wiki/Gaussian_elimination">
+      Gauss-Jordan elimination
+    </a>.)
+  In this section, we will solve a certain class
+  of systems of three equations in three unknowns.
+  On the other hand, we won't treat this class of problems in full generality.
+  We will only look at systems that actually have a single solution.  (To
+  reason about the other possibilities, it helps to undertake a study
+  of how to represent equations and relationships among 3 variables.
+  This entails conceptualizing points in space identified by 3 coordinates,
+  instead of just looking at two dimensions as we do in the \((x, y)\)-plane.
+  That is, think of the \((x, y)\)-coordinates of telling you how far
+  to go from the origin in, first, the East/West (\(x\)-direction), and then the
+  North/South direction (\(y\)-direction).  Adding in \(z\), enables
+  you to give a third instruction about how far to go in a third dimension:
+  the Up/Down (\(z\)-direction.))
+</p>
+
+<p>
+  In this introductory section, we won't give a full treatment to the algorithm.
+  Rather we'll use a kind of free-wheeling approach to just get our hands
+  (and minds) on the concept.  That will leave you better prepared to learn
+  the algorithm later, if you so choose.  Of course, in practice, the algorithm
+  is left to computers!  It is a very good job for a computer, and a pretty poor
+  one for a human.  A human's job, instead, is to think about the meaning
+  of it all.  So, we'll be thinking about the meaning of what we're up to.
+  We'll start with a basic example.
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve the following system using the method of elimination.
+  That is, find a nice description of its solution set.
+  \[
+    \begin{cases}
+    x + 2y + 3z = -2 \\
+    4x + 5y + 6z = -8 \\
+    7x + 8y - 9z = 4
+    \end{cases}
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      A solution to a system of this sort is a set of three numbers
+      that we can plug in for \(x\), \(y\), and \(z\) that will satisfy
+      all three equations.  Put another way, we are not just looking for a <em>pair</em>
+      but a <em>triple</em>, \((x, y, z)\)-coordinates!
+      The solution <em>set</em> would then be the set of all \((x, y, z)\)-triples
+      that satisfy all three equations.
+      (In case you are wondering what you call a set of 4 coordinates
+      or 5 coordinates, you might call them "quadruples" or "quintuples", but, then,
+      inventing names for these gets tiresome, so some mathematician
+      decided we would just the case of 5 as the template for all the rest and invented
+      the word "tuple" to cover all cases.  For example, instead of saying "quadruple"
+      you can just say "4-tuple".)
+      So, that opens up
+      a brave new world to consider.  But, in other respects, this is the
+      same old routine: we start off our process of solving by saying
+      "Assume that \(x\), \(y\), \(z\) are real numbers and that each of the
+      equations holds true for those numbers."
+      Then, we do very straightforward
+      logic after that.  For instance, if I choose, I could multiply both sides
+      of any of the equations, by whatever number I like, to deduce a new equation.
+      And, just as with elimination in the case of two equations and two
+      unknowns, I could also add the two left sides of any two equations
+      to equal the sum of the two right sides of those equations.
+      Using this approach, I could eliminate different variables.  By eliminating,
+      say \(x\) in two different ways, I could then find a system
+      of two equations in just two unknowns, \(y\) and \(z\), which
+      I could then solve using the method of elimination
+      as demonstrated in the section on
+      <a href="{{ url_for('section', section_name='solvingbyelimination') }}">
+        Solving by Elimination.
+      </a>
+
+      <p>
+        For instance, I can look at the first two equations, and think what
+        it would take to eliminate \(x\).  I could multiply both sides
+        of the first equation by \(-4\), and then rewrite the second
+        equation below it, like so:
+        \[
+          \begin{cases}
+            -4x - 8y - 12z = 8 \\
+            4x + 5y + 6z = -8 \\
+          \end{cases}
+        \]
+        Now, I reason that the left side of the top plus the left side
+        of the bottom equals the sum of the left sides:
+          \begin{align*}
+            -4x - 8y - 12z &= 8 \\
+            4x + 5y + 6z &= -8 \\
+            \hline
+             -3y  -6z &= 0\\
+          \end{align*}
+        So, that's another true statement about \(x\), \(y\), and \(z\)&mdash;except
+        \(x\) isn't mentioned!  That's nice&mdash;but you really get somewhere
+        when you realize you can do that same trick but with the first
+        and third equations.  I will instead multiply the first equation
+        by \(-7\), write it above the third equation, and then add the sides
+        together:
+          \begin{align*}
+            -7x - 14y - 21z &= 14 \\
+            7x + 8y -9z &= 4 \\
+            \hline
+             -6y  -30z &= 18\\
+          \end{align*}
+      </p>
+
+      <p>
+        So, now I have not one but <em>two</em> true statements
+        that only involve \(y\) and \(z\).  I can now take these
+        and figure out how to eliminate \(y\).  That will give me \(z\)!
+        I will begin by just writing the equations next to each other:
+        \begin{align*}
+          -3y - 6z &= 0\\
+          -6y - 30z &= 18 \\
+        \end{align*}
+        I can now take the first equation and multiply by \(-2\)
+        on both sides to yield something that will help me eliminate
+        \(y\):
+        \begin{align*}
+          6y  + 12z &= 0\\
+          -6y  -30z &= 18 \\
+          \hline
+          -18 z &= 18
+        \end{align*}
+        I deduce that \(z = -1\)!  With that, I can use either of
+        my equations that involve just \(y\) and \(z\) to get
+        \(y\).  I just plug in \(z = -1\):
+        \begin{align*}
+          & 6y  + 12z = 0\\
+          \Rightarrow \quad & 6y + 12(-1) = 0\\
+          \Rightarrow \quad & 6y - 12 = 0 \\
+          \Rightarrow \quad & 6y = 12 \\
+          \Rightarrow \quad y = 2
+        \end{align*}
+        Now I know what both \(y\) and \(z\) have to be!
+        All that remains is to plug these values into any
+        of the original equations to figure out
+        what \(x\) is.  I'll use the first equation:
+        \begin{align*}
+          & x + 2y + 3z = -2 \\
+          \Rightarrow \quad & x + 2\cdot 2 + 3(-1) = -2\\
+          \Rightarrow \quad & x + 4 - 3 = -2 \\
+          \Rightarrow \quad & x + 1 = -2 \\
+          \Rightarrow \quad x = -3
+        \end{align*}
+        So, that's it!  There is only one solution:
+        \[
+          (x, y, z) = (-3, 2, -1)
+        \]
+      </p>
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  In theory, you could do the very same algorithm on every one of these problems.
+  On the other hand, the large numbers that pop up when you eliminate one or another
+  variable can be pretty annoying.  So, if solving by hand, what is often
+  better is to be a little flexible or agile in your decision-making, to
+  look for ways to make the system simpler and to try to keep the numbers small.
+  I'll demonstrate what I mean here, but for subsequent examples, I will
+  be using software to solve the system.  After all, computers are pretty indifferent
+  about handling double digit numbers rather than single digit numbers,
+  even if doing so is tiresome for a human.
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/e7a746462c284a1e91b7326e6c78fdd5" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve the following system using the method of elimination.
+  That is, find a nice description of its solution set.
+  \[
+          \begin{cases}
+              - 3 x + y - 2 z = -5\\
+              5 x - 4 y + 3 z = 9\\
+              2 x - 2 y + 4 z = -2\\
+          \end{cases}
+  \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      I am going to solve this in a haphazard way.  There is certainly an algorithm
+      you can follow (as noted above) and a discipline to observe to make
+      sure you are working efficiently.  I won't be doing either of those.
+      (However, as you may discover on your own, there is a certain danger
+      in taking this approach: wrily, I can describe this as the danger
+      of stumbling upon some interesting discoveries and some interesting
+      things to think about.)
+
+      <p>
+        What I am going to do instead is to combine different equations in multiple
+        ways until I get numbers to match up (and eliminate) for the
+        different coefficients.  I am looking at the "\(x\)-column" and
+        seeing what I could add to what to get the coefficients on \(x\)
+        to match up.  The thing that you might not realize is that not
+        only do you have freedom to multiply both sides of an equation by
+        anything you like to help get a match, but you are also free to
+        add together two <em>different pairs</em> of equations
+        to get matching coefficients in the resulting equations.  That's what
+        I'm going to do !  In fact, just due to an interesting conincidence
+        that I noticed, I am going to add the second equation to the first.
+        This will result in a coefficient of \(2\) on \(x\), which will
+        make the coefficient on the third equation.  I will negate both sides
+        of one of those equations (it doesn't matter which) so that when I add then
+        up, I eliminate \(x\).
+      </p>
+
+      <p>
+        First, I sum the left sides and right sides of the first and second
+        equations:
+        \[
+          \begin{cases}
+              - 3 x + y - 2 z = -5\\
+              5 x - 4 y + 3 z = 9\\
+              \hline
+              2x - 3y + z = 4\\
+          \end{cases}
+        \]
+        Next, I write this equation next to the negative of the third
+        and then add:
+        \[
+        \begin{align*}
+            2x - 3y + z &= 4\\
+            -2 x + 2 y - 4 z &= 2\\
+            \hline
+             - y - 3z &= 6\\
+        \end{align*}
+        \]
+      </p>
+
+      <p>
+        Now, I just have to eliminate \(x\) in some other, <i>new</i> way
+        to get another equation with just \(y\) and \(z\) in it.  So, I look
+        for some other combination I can make.  The only danger here is
+        failing to come up with something new.  One thing I might
+        try is to just eliminate \(x\) by concentrating on the second
+        and third equations only.  For instance, I could multiply both sides
+        of the second equation by \(2\) and both sides of the third equation
+        by \(-5\). Then I add the sides together as follows:
+        \[
+        \begin{align*}
+          10 x - 8 y + 6 z &= 18\\
+          -10 x + 10 y + -20 z &= 10\\
+            \hline
+             2y - 14z &= 28\\
+        \end{align*}
+        \]
+      </p>
+
+      <p>
+        Next I write these two equations involving just \(y\) and \(z\)
+        together to see what I might do next:
+        \[
+          \begin{cases}
+              - y - 3z &= 6\\
+              2y - 14z &= 28\\
+          \end{cases}
+        \]
+        How about I multiply both sides of the first equation by \(2\)
+        and then add:
+        \[
+          \begin{align*}
+            - 2y - 6z &= 12\\
+            2y - 14z &= 28\\
+              \hline
+               -20z &= 40\\
+          \end{align*}
+        \]
+        From here I see that \(z = -2\)!  That gives you an idea of the sort of
+        things you might try.  Again, I have been quite free-wheeling about this.
+        I have not followed a prescribed process that will necessarily work
+        every time.  I just tried interesting things that I noticed
+        would help me to eliminate variables.  This is a good way to start getting
+        a handle on how to solve systems!  Though there is an algorithm,
+        it is better to learn it after you have engaged in some "play time"
+        like I have just modeled.  You might learn the algorithm in a
+        later college course.  But, I still have a little work to do here, too!
+        I just figured out what \(z\) has to be, but what about \(y\) and \(x\)?
+        To figure those out, I can first substitute this \(z\)-value
+        into one of my equations that involve \(y\) and \(z\) (the first
+        one I found looks easy to work with) and then solve for \(y\).  Having
+        then gotten both \(y\) and \(z\), I can plug these
+        values into either of the original equations to solve for \(x\).
+        Here goes the step of plugging in the \(z\)-value to one of the
+        equations that just involve \(y\) and \(z\):
+        \begin{align*}
+          & - y - 3z = 6\\
+          \Rightarrow \quad &-y - 3 \cdot (-2) = 6 \\
+          \Rightarrow \quad &-y + 6 = 6\\
+          \Rightarrow \quad &-y = 0 \\
+          \Rightarrow \quad & y = 0
+        \end{align*}
+        So, that's \(y\)!  Now, I plug \(z = -2\) and \(y = 0\) into any of the
+        original equations&mdash;how about the first one&mdash;and then solve
+        for \(x\):
+        \begin{align*}
+          & - 3 x + y - 2 z = -5\\
+          \Rightarrow \quad & -3 x + 0 - 2 (-2) = -5 \\
+          \Rightarrow \quad & -3x + 4 = -5\\
+          \Rightarrow \quad & -3x = -9 \\
+          \Rightarrow \quad & x = 3
+        \end{align*}
+        Great!  In all, we got that
+          \[
+            x = 3, y = 0, z = -2
+          \]
+        Now, all that's left to do is to check this answer by plugging
+        these values in to each of the equations to verify that
+        each is satisfied:
+        \[
+          \begin{align*}
+              - 3 x + y - 2 z = -3 \cdot 3 + 0 - 2(-2) = -9 + 4 &= -5 & {\color{green}\textrm{Check!}}\\
+              5 x - 4 y + 3 z = 5 \cdot 3 - 4 \cdot 0 + 3(-2) = 15 - 0 - 6 &= 9 & {\color{green}\textrm{Check!}}\\
+              2 x - 2 y + 4 z = 2\cdot 3 - 2\cdot 0 + 4(-2) = 6 - 0 - 8 &= -2 & {\color{green}\textrm{Check!}}\\
+          \end{align*}
+        \]
+      </p>
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  In a final example, I will show you how to use a TI calculator to obtain
+  the solution to a system.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/dbf0dd8785a54f9f80d58bf735672e0f" target="_blank">Click for video.</a>
+  </p> -->
+  Solve the following system using the method of elimination.
+  That is, find a nice description of its solution set.
+    \[
+          \begin{cases}
+              - 4 x + 4 y + 2 z = 10\\
+              4 x - 4 y + 5 z = -31\\
+              - x - y + 3 z = -11\\
+          \end{cases}
+    \]
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        Your calculator can solve this for you!  It performs some variant
+        of Gaussian elimination, which is the algorithm I have alluded to.
+        First, you have to enter this system into your calculator in special
+        format, called a matrix.
+        On your TI graphing calculator, find the button marked
+        \(x^{-1}\).  The "2nd" option on that button is called MATRX
+        for "matrix."  Hit that button to open the MATRX menu.
+        Next, use the arrow keys to toggle to the \texttt{EDIT} tab.
+        Select matrix <span class="typewriter">[A]</span>.
+        A matrix is just a set of rows and columns.  What does that
+        have to with our system?  Well, we can view our system
+        as a bunch of numbers (coefficients) in different positions.
+        There are coefficients on \(x\), \(y\), and \(z\), as well
+        as a number on the other side of the equals sign.
+        We'll use columns to represent these different positions, and
+        we'll use a row for each equation.  Since we have 4 positions
+        and 3 equations, we need a "3 x 4" matrix, meaning one with
+        3 rows and 4 columns.  So, enter the dimensions as <span class="typewriter">2 x 3</span>.
+        Then enter the coefficients of your matrix like so:
+
+        <div class="typewriter">
+          <table width="300px" style="margin-left:auto;margin-right:auto;">
+            <tr>
+              <td width="50px">[ -4 </td><td width="50px"> 4 </td><td width="50px"> 2 </td><td width="50px"> 10&nbsp; ]</td>
+            </tr>
+            <tr>
+              <td width="50px">[ 4</td><td width="50px">-4</td><td width="50px"> 5 </td><td width="50px"> 31 &nbsp;]</td>
+            </tr>
+            <tr>
+              <td width="50px">[ -1</td><td width="50px">-1</td><td width="50px"> 3 </td><td width="50px"> -11 ]</td>
+            </tr>
+          </table>
+        </div>
+
+        Next, we are going to issue the command to the TI instructing it to carry
+        out elimination on this system.  You have to issue this
+        command from the <em>command line</em> of the calculator, which
+        is a fancy name for the home screen.  So, you first have
+        to exit the MATRX menu by hitting [2nd] [MODE] (QUIT).
+        But the TI doesn't have a button devoted to the elimination
+        command.  Instead, it stores "the button" (or, a reference
+        to the command) under the MATRX menu itself.
+        So, from the command line, you go back to the MATRX menu (hit "[2nd] [\(x^{-1}\)]
+        (MATRX)" again)
+        and toggle to the <span class="typewriter">MATH</span> tab.
+        Here, you will scroll down until you find
+        <span class="typewriter">rref(</span>.
+        (FYI: "rref" stands for "reduced row echeleon form," not that it matters.)
+        Now, hit [2nd] [\(x^{-1}\)] (MATRX) again, and, under
+        <span class="typewriter">NAMES</span>, select
+        <span class="typewriter">[A]</span>. Hit [ENTER] twice.
+        You will see something like the following displayed:
+
+        <div class="typewriter">
+          <table min-width="300px" style="margin-left:auto;margin-right:auto;">
+            <tr>
+              <td width="50px">[ 1 </td><td width="50px"> 0  </td><td width="50px"> 0  </td><td> -1 ]</td>
+            </tr>
+            <tr>
+              <td width="50px">[ 0 </td><td width="50px"> 1 </td><td width="50px"> 0  </td><td> &nbsp;3 ]</td>
+            </tr>
+            <tr>
+              <td width="50px">[ 0 </td><td width="50px"> 0 </td><td width="50px"> 1  </td><td> -3 ]</td>
+            </tr>
+          </table>
+        </div>
+        Again, this "reduced" matrix can be decoded back into a system
+        of equations by interpreting the position of the numbers in the columns
+        as giving coefficients in a equation, one for each row.  The resulting
+        system is:
+        \[
+          \begin{cases}
+              1 x + 0 y + 0 z = -1\\
+              0 x + 1 y + 0 z = 3\\
+              0 x + 0y + 1 z = -3\\
+          \end{cases}
+        \]
+        which, of course, means that
+        \[
+        \begin{cases}
+            x = -1\\
+            y = 3\\
+            z = -3\\
+        \end{cases}
+        \]
+        (FYI: This is the "row reduced echelon form" of the original matrix,
+        which is why the TI calls this solving command "<span class="typewriter">rref()</span>."
+        )
+
+        <p>
+          Actually, this system is really easy to solve by hand!  Let
+          me show you how to do that, too, for extra practice.
+          You see, there is an interesting observation to make:
+          If you add the left sides of the first two equations, you eliminate
+          <em>both</em> \(x\) and \(y\)!  That's a pretty neat coincidence
+          (one that won't happen every time).  So, let's do that.  I
+          write the first two equations next to each other and add
+          the respective sides:
+          \[
+          \begin{align*}
+              - 4 x + 4 y + 2 z &= 10\\
+              4 x - 4 y + 5 z &= -31\\
+              \hline
+              7 z &= -21\\
+          \end{align*}
+          \]
+          So, you get that \(z = -3\) with very little effort!
+          That means you can plug in this value for \(z\) into
+          the equations, thus reducing them down to two variable
+          equations.  Take a look:
+          \begin{align*}
+                & \begin{cases}
+                    - 4 x + 4 y + 2 z = 10\\
+                    4 x - 4 y + 5 z = -31\\
+                    - x - y + 3 z = -11\\
+                \end{cases}\\
+
+                \Rightarrow \quad &
+                \begin{cases}
+                    - 4 x + 4 y + 2 (-3) = 10\\
+                    4 x - 4 y + 5 (-3) = -31\\
+                    - x - y + 3 (-3) = -11\\
+                \end{cases}\\
+
+                \Rightarrow \quad &
+                \begin{cases}
+                    - 4 x + 4 y - 6 = 10\\
+                    4 x - 4 y  - 15 = -31\\
+                    - x - y - 9 = -11\\
+                \end{cases}\\
+
+                \Rightarrow \quad &
+                \begin{cases}
+                    - 4 x + 4 y = 16\\
+                    4 x - 4 y  = -16\\
+                    - x - y  = -2\\
+                \end{cases}\\
+          \end{align*}
+          Something interesting happens with the second and first equations:
+          they are redundant!  Basically, it means we don't have three
+          independent pieces of information about \(x\) and \(y\), only
+          two.  As an interesting perspective, consider the idea
+          of the three original equations as three pieces of
+          information about \(x\), \(y\), and \(z\).  It is quite
+          sensible to imagine that we would need three independent
+          pieces of information to figure out the value of these
+          three unknowns which are themselves independent in that
+          they could really be anything.  But, now that we know
+          what \(z\) is, we really only <em>need</em> two more
+          pieces of information to figure out \(x\) and \(y\)&mdash;and
+          it just so happens that's all we get: just two more independent
+          equations!  (FYI: I am using the word "independent" here because
+          I expect it will have an intuitive appeal.  But is just so
+          happens that it is the very word that mathematicians also use
+          to describe this situation.)
+        </p>
+
+        <p>
+          Let's rewrite our remaining system of two, independent equations.
+          Can I really call the remaining two equations "independent"?
+          Well, what I mean (in this special context of two equations)
+          is that they are not equivalent to each other: you can deduce one
+          from the other or vice versa.  (Actually, this definition
+          can be extended to any number of equations: a third equation
+          would fail to be independent of two others if you could deduce
+          that equation from the first two.  This is an exciting topic
+          for me as it comes very close to what I did my doctoral dissertaion
+          research on, which has to do with the logic of deducing an equation, one
+          deduced from others, in
+          the context of any abstract mathematical system you care to devise.)
+        </p>
+      </div>
+    </div>
+</div>
+</p>
+
+
+
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

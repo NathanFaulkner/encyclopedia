@@ -131,7 +131,7 @@ and passes through \(({self.x0}, {self.y0})\).
 
 
 
-    has_img = True
+    # has_img = True
 
     def save_img(self, filename):
         if self.orientation == 'vert':
