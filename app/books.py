@@ -128,14 +128,16 @@ class SevenTest():
         question_sets = []
         for i, section in enumerate(self.sections):
             if section.questions != []:
-                question_name = random.choice(section.questions)
-                section_info = self.book.get_skill_info(question_name)[0]
-                question_module = getattr(questions, question_name)
-                seed = (self.seed * i) % 1
+                if len(set(section.questions)) > 1:
+                    question_names = random.sample(set(section.questions), 2)
+                else:
+                    question_names = [section.questions[0], section.questions[0]]
+                section_info = self.book.get_skill_info(question_names[0])[0]
+                question_module = getattr(questions, question_names[0])
+                seed = (self.seed * (i+1)) % 1
                 question = question_module.Question_Class(seed=seed)
                 question_set = [question]
-                question_name = random.choice(section.questions)
-                question_module = getattr(questions, question_name)
+                question_module = getattr(questions, question_names[1])
                 question = question_module.Question_Class(seed=abs(1-seed))
                 question_set.append(question)
                 question_sets.append(question_set)
@@ -624,6 +626,10 @@ maxmin = Section('maxmin', "Max/Min Problems", '/sections/max-min-problems')
 maxmin.add_to_questions('generic_max_min',
                         'cannonball_problem',
                          'max_revenue_problem')
+
+factoringtrinomialslevel1 = Section('factoringtrinomialslevel1', "Factoring Trinomials, Part 1", '/sections/factoring-trinomials-part1')
+factoringtrinomialslevel1.add_to_questions(#'factor_trinomials_level1',
+                                            'factoring_warm_up')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -679,7 +685,9 @@ quadratics = Division('chapter', "Quadratic Functions",
                                 vertexform,
                                 interceptform,
                                 standardform,
-                                maxmin])
+                                maxmin,
+                                # factoringtrinomialslevel1
+                                ])
 quadratics.set_frontpage(quadratics_intro)
 
 algebra2_challenge = Division('chapter', "Challenge Sections",

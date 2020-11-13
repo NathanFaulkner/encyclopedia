@@ -53,6 +53,7 @@ class CannonballProblem(Question):
         a = float(str(round(-16/vox**2,5)))
         self.a = a
         self.b = b
+        print(b)
         self.c = c
 
         def y(x):
@@ -83,7 +84,7 @@ class CannonballProblem(Question):
         \(x\) it has traveled from the launching point
         (if we neglect air resistance and the coriolis effect!) by
         \[
-            y(x) = {a:.5f}x^2 + {b:.3}x + {c}
+            y(x) = {a:.5f}x^2 + {b:.3f}x + {c}
         \]
         Find the maximum height \(y\) attained by the cannonball and
         the horizontal distance \(x\) from the launching point at

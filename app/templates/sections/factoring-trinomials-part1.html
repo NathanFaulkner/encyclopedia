@@ -1,0 +1,319 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  We now turn to factoring.
+  Let's recall the basic meaning of the word "factor" with a warm-up.
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Completely factor the expression.
+    \[
+      3x^2 - 12x
+    \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      "Factoring" is simply reversing the distributive property.  It
+      could be called "undistributing."  What we are looking for is
+      any common factors that could be moved "out front" (or behind)
+      in a manner such that, if they were distributed back in,
+      the result would be the given expression.  Like this:
+      \[
+        3x^2 - 12x = 3x(x - 4)
+      \]
+      What have I done here? I have done two things: I have first observed
+      that both terms have a factor of \(3\) and second that both terms
+      have a factor of \(x\).  So, I pulled "out" \(3x\).  Notice
+      that if I distributed the \(3x\) back in, I would indeed get
+      the expression I started with.
+
+
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  That's factoring!  The point of it is to take an expression involving
+  a sum of terms and then rewrite it as a product of terms.  What's
+  the point of that, you may ask?  We shall see in later sections.
+  Let's do one more warm-up.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/e7a746462c284a1e91b7326e6c78fdd5" target="_blank">Click for video.</a>
+  </p> -->
+
+  Completely factor the expression.  Also, factor out any negative leading coefficients.
+    \[
+      -3x^2 + 12x
+    \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Mind the specific request to factor out any negative leading coefficients!
+      What does that mean?  A leading coefficient is the number (coefficient)
+      on the term with the highest power; this term is called the <b>leading term.</b>
+      The leading term in this case is \(-3x^2\).  Of course, it does indeed
+      have a negative coefficient, so let's factor it out.  What's the point
+      of doing so?  Again, this will become apparent in a later section.
+      For now, treat as just something arbitrary I am asking of you.
+      Here is what I got:
+      \[
+        -3x^2(x - 4)
+      \]
+      Notice that I had to "leave behind" a negative!  Again, you have
+      to imagine distributing the term that you factor out back inside
+      the parentheses.  I would need a negative on the \(4\) waiting
+      for the negative on the \(3\) to create a positive \(12\).
+      Make sense?
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  Here's a few more without any talk:
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/dbf0dd8785a54f9f80d58bf735672e0f" target="_blank">Click for video.</a>
+  </p> -->
+  Factor each of the following.  Also, factor out any negative leading coefficient.
+    <ol type="a">
+      <li> \(4x^2 + 16x\)
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            \[
+              4x^2 + 16x = 4x(x + 4)
+            \]
+          </div>
+        </div>
+      </li>
+      <li> \(-3x^2 - 24\)
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            \[
+              -3x^2 - 24 = -3(x^2 + 8)
+            \]
+          </div>
+        </div>
+      </li>
+      <li> \(36x - 54\)
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            \[
+              36x - 54 = 18(2x - 3)
+            \]
+          </div>
+        </div>
+      </li>
+      <li> \(-5x^2 + 25x\)
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            \[
+              -5x^2 + 25x = -5x(x - 5)
+            \]
+          </div>
+        </div>
+      </li>
+    </ol>
+</div>
+</p>
+
+<p>
+Now, what gets a little more complicated is when you have to run in
+reverse <em>two</em> distributions which have been done in
+succession&mdash;and even combined with other steps.
+What I am talking about is the sort of expansion that
+you may have already practiced in the section entitled
+<a href="{  url_for('section', section_name='warmupwithquadratics')}">
+  Warm-up with Quadratics.
+</a>
+Here are a few more examples of these warm-up problems, which, you will
+do well to note, involve the process that we are going to figure out
+how to <em>reverse</em> in the examples that follow.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/dbf0dd8785a54f9f80d58bf735672e0f" target="_blank">Click for video.</a>
+  </p> -->
+  Factor each of the following.  Also, factor out any negative leading coefficient.
+    <ol type="a">
+      <li> \((x-3)(x+4)\)
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            \begin{align*}
+              (x-3)(x+4) &= (x - 3)x + (x - 3)4 & \textrm{Distributed } (x-3)\\
+              &= x^2 - 3x + 4x - 12 & \textrm{Distributed \(x\) and \(4\)}\\
+              &= x^2 + x - 12 & \textrm{Combined like terms}
+            \end{align*}
+
+            <p>
+              In the section,
+              <a href="{  url_for('section', section_name='warmupwithquadratics')}">
+                Warm-up with Quadratics,
+              </a>
+              we already noted a way to skip some of those steps.  You may want to
+              review that now.  In what follows, we will be reversing
+              this process.  That is imagine being given the end result
+              of the computation we just undertook and trying to
+              "reverse engineer" the factored form that we just started with.
+            </p>
+          </div>
+        </div>
+      </li>
+      <li> \((x-6)(x-7)\)
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            \begin{align*}
+              (x-6)(x-7) &= (x - 6)x - (x - 6)7 & \textrm{Distributed } (x-6)\\
+              &= x^2 - 6x - x + 42 & \textrm{Distributed \(x\), \(7\), and the negative}\\
+              &= x^2 - 7x + 42 & \textrm{Combined like terms}
+            \end{align*}
+          </div>
+        </div>
+    </ol>
+</div>
+</p>
+
+<p>
+  Now, we turn to the main tast: factoring trinomials.  Note that
+  a trinomial is just a formula that involves the sum of three terms.
+  (Terms are made of symbols, which many logicians call "names"; the
+  word fragment "nom" means "name"; so there you have it.)
+  That is, what we want to do is to take something of the form
+  Our goal will be to take things of the form
+    \[
+      x^2 + {\color{blue} b}x + {\color{orange}c}
+    \]
+  and write them in the form
+    \[
+      (x+{\color{green}p})(x+{\color{purple}q}),
+    \]
+  where \({\color{blue} b}\) and \({\color{orange}c}\) are given numbers but
+  \({\color{green}p}\) and \({\color{purple}q}\)
+  are what you have to figure out.  This general example
+  is very instructive.  Imagine what it would take for the factored
+  form to multiply out to give the original.  You would need that
+  \(x^2 + {\color{blue} b}x + {\color{orange}c}\) would equal
+  \begin{align*}
+    (x+{\color{green}p})(x+{\color{purple}q}) &= (x+{\color{green}p})x + (x+{\color{green}p}){\color{purple}q}\\
+      &= x^2 + {\color{green}p}x + {\color{purple}q}x + {\color{green}p}{\color{purple}q}\\
+      &= x^2 + ({\color{green}p} + {\color{purple}q})x + {\color{green}p}{\color{purple}q}
+  \end{align*}
+  So, in all, to get
+  \[
+    x^2 + {\color{blue} b}x + {\color{orange}c} = (x+{\color{green}p})(x+{\color{purple}q})
+  \]
+  you also have to have that
+  \[
+    x^2 + {\color{blue} b}x + {\color{orange}c} = x^2 + ({\color{green}p} + {\color{purple}q})x + {\color{green}p}{\color{purple}q}
+  \]
+  Equating the coeffients, you can see that all of this will work out if you can find
+  \({\color{green}p}\) and \({\color{purple}q}\)
+  so that
+  \[
+    {\color{blue} b} = {\color{green}p} + {\color{purple}q}
+  \]
+  and
+  \[
+    {\color{orange}c} = {\color{green}p}{\color{purple}q}
+  \]
+  Put another way, based on your given of \({\color{blue} b}\)
+  and \({\color{orange}c}\), you have to figure out
+  two numbers \({\color{green}p}\) and \({\color{purple}q}\)
+  that <em>multiply</em> together to give you \({\color{orange}c}\) and
+  <em>add</em> together to give you \({\color{blue} b}\).
+  Time for some examples!
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/e7a746462c284a1e91b7326e6c78fdd5" target="_blank">Click for video.</a>
+  </p> -->
+
+  Factor
+    \[
+      x^2 - 6x - 16
+    \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      As explained in the paragraph just above, I need two numbers that multiply
+      together to give me \(-16\) and add together to give me
+      \(-6\).  Those numbers are \(-8\) and \(2\).  Therefore,
+        \[
+          x^2 - 6x - 16 = (x-8)(x+2)
+        \]
+      You should always check your work of factoring.  The question is, if
+      you multiplied everything back out and cmobined resulting like
+      terms would you go back to the given?  You can mentally check this
+      provided you make an observation about how to quickly multiply
+      polynomials together, which was made in the section on
+      <a href="{  url_for('section', section_name='warmupwithquadratics')}">
+        Warm-up with Quadratics:
+      </a>
+      Every term in the first parentheses will hit every term in the second&mdash;but
+      just once.  Mentally, I note this by starting with the first
+      term of \(x\) in \(x - 8\), noting that it will multiply the terms
+      in the second parentheses to yield
+      \[
+        x^2 + 2x
+      \]
+      and then I proceed with the next term in the first set of parentheses, namely,
+      \(-8\), noting that it will multiply with the terms in the second set of
+      parentheses to give me
+      \[
+        -8x - 16
+      \]
+      I then mentally check off that this produces the \(x^2\) and \(-16\) of
+      the given and that also the \(-6x\) is produced after you combine
+      the like terms of \(2x\) and \(-8x\).  Anyway, that's a rough description
+      of what I would do to mentally verify my answer!
+    </div>
+  </div>
+</div>
+</p>
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

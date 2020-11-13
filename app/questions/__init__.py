@@ -68,7 +68,9 @@ __all__ = ['quadratic_pattern',
             'max_revenue_problem',
             'absolute_value_equation_multi',
             'absolute_value_equation_multi_one_or_two',
-            'absolute_value_equation_multi_three']
+            'absolute_value_equation_multi_three',
+            'factor_trinomials_level1',
+            'factoring_warm_up']
 
 class Question():
     pass

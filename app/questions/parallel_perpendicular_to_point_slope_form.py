@@ -54,6 +54,7 @@ class ParallelPerpendicularToPointSlope(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
+        print('seed', self.seed)
         if 'p' in kwargs:
             self.p = kwargs['p']
         else:
@@ -90,12 +91,30 @@ class ParallelPerpendicularToPointSlope(Question):
 
         self.genproblem()
 
+        m1 = self.m1
+        x = self.x
+        b1 = self.b1
+        if m1 == 1:
+            fmt_m1 = ''
+        elif m1 == -1:
+            fmt_m1 = '-'
+        else:
+            fmt_m1 = latex(m1)
+        if b1 == 1:
+            fmt_b1 = '+ '
+        elif b1 == -1:
+            fmt_b1 = '- '
+        elif b1 > 0:
+            fmt_b1 = '+ ' + latex(b1)
+        else:
+            fmt_b1 = latex(b1)
+
         self.format_given = f"""
         <blockquote>
             The line that passes through the point \\( ({self.x0}, {self.y0}) \\)
             and is {self.parallel_or_perp} to the line with equation
             \\[
-                y = {fmt_slope_style(self.m1*self.x + self.b1)}
+                y = {fmt_m1}{self.x} {fmt_b1}
             \\]
         </blockquote>
         """
@@ -114,7 +133,7 @@ class ParallelPerpendicularToPointSlope(Question):
                 The line that passes through the point \\( ({self.x0}, {self.y0}) \\)
                 and is {self.parallel_or_perp} to the line with equation
                 \\[
-                    y = {fmt_slope_style(self.m1*self.x + self.b1)}
+                    y = {fmt_m1}{self.x} {fmt_b1}
                 \\]
             """
 

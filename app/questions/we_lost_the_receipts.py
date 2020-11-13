@@ -62,18 +62,18 @@ class WeLostTheReceipts(Question):
 "We lost the receipts": For the opening day of the fair,
 (let's say that) {'{:,}'.format(self.total_tix)}
 admission tickets were sold.
-The receipts totaled {'{:,}'.format(self.total_rev)}.
-Tickets for children cost {self.cost_kid} each and adults cost
-{self.cost_adult} each.   How many of each type of ticket were sold?
+The receipts totaled ${'{:,}'.format(self.total_rev)}.
+Tickets for children cost ${self.cost_kid} each and adults cost
+${self.cost_adult} each.   How many of each type of ticket were sold?
 """
 
         self.format_given_for_tex = f"""
 ``We lost the receipts'': For the opening day of the fair,
 (let's say that) {'{:,}'.format(self.total_tix)}
 admission tickets were sold.
-The receipts totaled {'{:,}'.format(self.total_rev)}.
-Tickets for children cost {self.cost_kid} each and adults cost
-{self.cost_adult} each.   How many of each type of ticket were sold?
+The receipts totaled \${'{:,}'.format(self.total_rev)}.
+Tickets for children cost \${self.cost_kid} each and adults cost
+\${self.cost_adult} each.   How many of each type of ticket were sold?
 """
 
     prob_type = 'math_blank'
