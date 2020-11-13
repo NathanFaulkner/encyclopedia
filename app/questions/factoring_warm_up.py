@@ -46,7 +46,10 @@ class FactoringWarmUp(Question):
         if 'r' in kwargs:
             self.r = kwargs['r']
         else:
-            self.r = random_non_zero_integer(-9,9)
+            r = random_non_zero_integer(-9,9)
+            while r == 1 or r == -1:
+                r = random_non_zero_integer(-9,9)
+            self.r = r
         if 'e' in kwargs:
             self.e = kwargs['e']
         else:
@@ -82,7 +85,7 @@ class FactoringWarmUp(Question):
     name = 'Factoring Warm-Up'
     module_name = 'factoring_warm_up'
 
-    prompt_single = """Completely factor."""
+    prompt_single = """Completely factor.  Also, factor out a negative if the leading coefficient is negative."""
     prompt_multiple = """TBA"""
 
     further_instruction = """
@@ -117,6 +120,7 @@ class FactoringWarmUp(Question):
                     new_set1 = set1.remove(element)
                     new_set2 = set2.remove(elem)
                     return FactoringWarmUp.sets_evaluate_equal(set1, set2)
+            return False
 
 
     def format_useranswer(self, user_answer, display=False):
