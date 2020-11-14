@@ -70,7 +70,8 @@ __all__ = ['quadratic_pattern',
             'absolute_value_equation_multi_one_or_two',
             'absolute_value_equation_multi_three',
             'factor_trinomials_level1',
-            'factoring_warm_up']
+            'factoring_warm_up',
+            'solving_by_factoring_level1']
 
 class Question():
     pass

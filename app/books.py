@@ -631,6 +631,9 @@ factoringtrinomialslevel1 = Section('factoringtrinomialslevel1', "Factoring Trin
 factoringtrinomialslevel1.add_to_questions('factor_trinomials_level1',
                                         'factor_trinomials_level1',
                                             'factoring_warm_up')
+
+solvingquadraticspart1 = Section('solvingquadraticspart1', "Solving Quadratics, Part 1", '/sections/solving-quadratics-part1')
+solvingquadraticspart1.add_to_questions('solving_by_factoring_level1')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -687,7 +690,8 @@ quadratics = Division('chapter', "Quadratic Functions",
                                 interceptform,
                                 standardform,
                                 maxmin,
-                                factoringtrinomialslevel1
+                                factoringtrinomialslevel1,
+                                solvingquadraticspart1
                                 ])
 quadratics.set_frontpage(quadratics_intro)
 

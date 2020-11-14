@@ -1,0 +1,241 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  Now, what's the purpose of factoring?
+  The really useful thing about factoring is described by the following general fact.
+</p>
+
+
+<p>
+  <div class="fact">
+    <h2></h2>
+    If \(A\) and \(B\) are real numbers and
+      \[
+        A\cdot B = 0
+      \]
+    then either \(A=0\) or \(B=0\) (or both).
+
+<h3>Proof:</h3>
+  Say that \(A\) and \(B\) are real numbers and that \(A\cdot B = 0\).
+  Suppose, too, that \(A\neq 0\).  In that case, we can divide both sides of the
+  equation by \(A\):
+    \begin{align*}
+      &AB = 0 \\
+      \Rightarrow \quad& \frac{AB}{A} = \frac{0}{A}\\
+      \Rightarrow \quad & B = 0
+    \end{align*}
+  So, in case \(A\) <em>isn't</em> \(0\), we find that \(B\) has to be.
+  And, of course, if we had assumed that \(B\neq 0\),
+  then we would discover that \(A=0\)!
+  So, one of the factors has to be \(0\).
+  Finally, note that there is nothing preventing both of them from being 0. &#9633;
+  </div>
+  By the way, what is that little symbol '&#9633;'.  Is that a typo, you may ask?
+  No, what I am writing there is in place of where the old scribes would have
+  written
+  <a href="https://en.wikipedia.org/wiki/Q.E.D." target="_blank">
+    "Q.E.D.", <i>quad erat demonstrandum</i>
+  </a>
+  or "which is what was to be shown", a phrase that dates back to Euclid
+  (albeit translated from Greek into Latin).
+  So, the point of the symbol '&#9633;' or of writing "Q.E.D." is to just provide a
+  a kind of narrative suffix to signal that the proof has stopped and the narrative
+  mode will go back to whatever it was before the proof.  After all, a proof
+  is a special narrative mode: things might be declared within a proof that
+  pertain specifically to the proof, and only things declared inside the proof
+  or the statement of the theorem are admissable as evidence within the proof.
+  So, it is a logically "bracketed" thing, if that makes sense.
+  More important question: what does the proof or the "Fact" really mean?
+  What's the point of it?  Let's consider an example to see it at work.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve the following.
+  \[
+    (12x-1)(x+5) = 0
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      As always, our solving algorithm begins with the mental declaration,
+      <blockquote>
+        Assume that \(x\) is an honest, real number (located somewhere on the real line),
+        with the property expressed in the given...
+      </blockquote>
+      Now, since \(x\) is a real number, so are \(12x-1\) and \(x+5\); I
+      mean they are <em>actual</em>, honest numbers sitting
+      somewhere on the real line, even though we don't know where quite
+      yet.  Note that I can view \(12x-1\) and \(x+5\)
+      as my \(A\) and \(B\) to apply the Fact above.
+      What I mean is, we are looking here at a product of two numbers
+      that come out to \(0\).  The "Fact" just says that when that happens
+      one (or both) of the numbers has to be \(0\).
+      So, that means
+      \begin{align*}
+        12x - 1 =0 &\quad \quad \textrm{or} \quad \quad  x+5 = 0 \\
+        \Rightarrow \quad 12x = 1 &\quad \quad \textrm{or} \quad \quad  x = -5 \\
+        \Rightarrow \quad x = \frac{1}{12} &\quad \quad \textrm{or} \quad \quad  x = -5 \\
+      \end{align*}
+      So, how about that?  As you can see, if what you have is a
+      product equal to \(0\), then you can just set the individual factors equal to
+      \(0\) and solve each of the resulting equations.
+      (This would even work for a product of more tan \(2\) factors.)
+      Since the factors have to be simpler than
+      what you started with, this is a helpful approach or algorithm!
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  Let's do a few more along those lines as a kind of warm-up.  (The exercises
+  will have one added step of complication relative to these next few problems.)
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/dbf0dd8785a54f9f80d58bf735672e0f" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve each of the following.
+    <ol type="a">
+      <li> \((x-3)(x+4)=0\)
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            \[
+              x = 3 \quad \textrm{or} \quad x = -4
+            \]
+          </div>
+        </div>
+      </li>
+      <li> \((12x-3)(x-5)=0\)
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            \begin{align*}
+              & (12x-3)(x-5)=0 \\
+              \Rightarrow \quad & 12x - 3 = 0 \quad \quad \textrm{or} \quad \quad x - 5 = 0 \\
+              \Rightarrow \quad& x = \frac{3}{12} = \frac{1}{4} \quad \quad \textrm{or} \quad \quad x =5 \\
+            \end{align*}
+          </div>
+        </div>
+      </li>
+      <li> \((x+10)(5x+2)=0\)
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            \begin{align*}
+              & (x+10)(5x+2)=0 \\
+              \Rightarrow \quad & x + 10 = 0 \quad \quad \textrm{or} \quad \quad 5x + 2 = 0 \\
+              \Rightarrow \quad& x = -10 \quad \quad \textrm{or} \quad \quad x = -\frac{2}{5} \\
+            \end{align*}
+          </div>
+        </div>
+      </li>
+      <li> \((2x-3)(16x+4)=0\)
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            \begin{align*}
+              & (2x-3)(16x+4)=0 \\
+              \Rightarrow \quad & 2x-3 = 0 \quad \quad \textrm{or} \quad \quad 16x+4 = 0 \\
+              \Rightarrow \quad& x = \frac{3}{2} \quad \quad \textrm{or} \quad \quad x = -\frac{4}{16} = - \frac{1}{4} \\
+            \end{align*}
+          </div>
+        </div>
+      </li>
+    </ol>
+</div>
+</p>
+
+<p>
+Now, we can combine this basic skill with
+<a href="{  url_for('section', section_name='factoringtrinomialslevel1')}">
+  factoring
+</a>
+to solve certain quadratic equations.
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/e7a746462c284a1e91b7326e6c78fdd5" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve the following by factoring.
+    \[
+      x^2 - 7x - 18 = 0
+    \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      First, I factor. Then I equate the individual factors to
+      \(0\) to find all possible solutions:
+        \begin{align*}
+          & x^2 - 7x - 18 = 0 \\
+          \Rightarrow \quad &(x-9)(x+2)=0 \\
+          \Rightarrow \quad &x - 9 = 0 \quad \quad \textrm{or} \quad \quad x + 2= 0 \\
+          \Rightarrow \quad& x = 9 \quad \quad \textrm{or} \quad \quad x =-2 \\
+        \end{align*}
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/e7a746462c284a1e91b7326e6c78fdd5" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve the following by factoring.
+    \[
+      x^2 - 8x + 7 = 0
+    \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      First, I factor. Then I equate the individual factors to
+      \(0\) to find all possible solutions:
+        \begin{align*}
+          & x^2 - 8x + 7 = 0 \\
+          \Rightarrow \quad &(x-7)(x-1)=0 \\
+          \Rightarrow \quad &x - 7 = 0 \quad \quad \textrm{or} \quad \quad x - 1= 0 \\
+          \Rightarrow \quad& x = 7 \quad \quad \textrm{or} \quad \quad x = 1 \\
+        \end{align*}
+    </div>
+  </div>
+</div>
+</p>
+
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}
