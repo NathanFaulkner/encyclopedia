@@ -149,6 +149,8 @@ class SolvingByFactoringLevel1(Question):
             if has_letters(user_answer):
                 if 'x' not in user_answer:
                     raise SyntaxError
+                elif ',' in user_answer and 'or' not in user_answer:
+                    raise SyntaxError
                 else:
                     user_answer = user_answer.replace('x', '')
                     user_answer = user_answer.replace('=', '')
