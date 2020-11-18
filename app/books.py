@@ -634,6 +634,9 @@ factoringtrinomialslevel1.add_to_questions('factor_trinomials_level1',
 
 solvingquadraticspart1 = Section('solvingquadraticspart1', "Solving Quadratics, Part 1", '/sections/solving-quadratics-part1')
 solvingquadraticspart1.add_to_questions('solving_by_factoring_level1')
+
+specialpatterns = Section('specialpatterns', "Special Patterns", '/sections/special-patterns')
+specialpatterns.add_to_questions('factor_special_patterns')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -691,7 +694,8 @@ quadratics = Division('chapter', "Quadratic Functions",
                                 standardform,
                                 maxmin,
                                 factoringtrinomialslevel1,
-                                solvingquadraticspart1
+                                solvingquadraticspart1,
+                                specialpatterns
                                 ])
 quadratics.set_frontpage(quadratics_intro)
 

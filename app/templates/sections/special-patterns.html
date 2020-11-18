@@ -1,0 +1,261 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  When it comes to factoring trinomials, there are
+  some "special patterns" that aren't really exceptions to the rule,
+  but which are just worth looking at specifically.
+  The "special patterns" also provide a bridge to harder techniques of factoring.
+</p>
+
+
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Factor the following.
+    \[
+      x^2 - 9
+    \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      This is really just a special case of examples treated elsewhere in the
+      <a href="{{ url_for('section', section_name='factoringtrinomialslevel1') }}">
+        section on factoring trinomials, part 1.
+      </a>
+      The only thing that might confuse you about this problem is that the
+      middle term is missing.  Really you could rewrite the given as
+        \[
+          x^2 - 9  = x^2 + 0x - 9
+        \]
+      So, using our technique from the section just linked to above,
+      you want to find two numbers that multiply together to give
+      you \(-9\) but add together to give you \(0\).
+      Of course, the numbers are \(-3\) and \(3\):
+        \[
+          x^2 - 9 = (x-3)(x+3)
+        \]
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  So, the above example wasn't necessarily something new to you.
+  But it still might be worth considering in a special way; that
+  is, it can make your life easier to watch for the pattern exhibited
+  in this example.
+  The special pattern involved here can be expressed by the fact that for any
+  real numbers \(x\) and  \(p\)
+    \[
+      (x-p)(x+p) = x^2 +px - px - p^2 = x^2 - p^2
+    \]
+  So, if someone hands you something of the form "square minus a square"
+  then you know how to factor it.  Here's one more example.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Factor the following.
+  \[
+    x^2 - 64
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      It's a "square minus a square"!
+        \[
+          x^2 - 64 = (x-8)(x+8)
+        \]
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  Now, actually, this "pattern" can be extended to cover more
+  complicated expressions.  After all, in the expression
+  \((x-p)(x+p) = x^2 - p^2\), there's no reason why \(x\) or \(p\)
+  couldn't be something more complicated.  To see what I mean,
+  it might help to look at the following "pattern" instead.
+  For any real numbers \(A\) and \(B\)
+    \[
+      (A-B)(A+B) = A^2 - B^2
+    \]
+  So, if someone hands you something that follows the "pattern" of
+  the right side (or you are able to <em>recognize</em> it as an
+  instance of this pattern) then you can factor it, by writing it
+  according to the pattern of the left hand side.  In words, what
+  you are looking for is "a square minus a square" (which is the
+  same as we already practiced above.)
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Factor the following.
+  \[
+    16x^2 - 9
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      I recognize this as an instance of the formula
+      \(A^2 - B^2\)
+      since
+        \[
+          16x^2 - 9 = (4x)^2 - 3^2
+        \]
+      That is, I can see this as a "square minus a square."
+      Therefore, it factors into the form \((A-B)(A+B)\)
+      where \(A=4x\) and \(B=3\):
+        \[
+          16x^2 - 9 = (4x-3)(4x+3)
+        \]
+    </div>
+  </div>
+</div>
+</p>
+
+
+<p>
+Here is an even weirder example:
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Factor the following.
+  \[
+    9r^2 - 100p^2
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      You just have to recnognize that each of the terms are squares of
+      less complicated expressions, which means this follows
+      the "square minus a square" pattern:
+      \begin{align*}
+        9r^2 - 100p^2 &= (3r)^2-(10p)^2\\
+        & = (3r-10p)(3r+10p)
+      \end{ailgn*}
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  Next up, we examine another special pattern before you do some mixed
+  practice on the various special patterns.
+  The special pattern or patterns to watch for this time is
+    \[
+      (A+B)^2 = A^2 + 2AB + B^2
+    \]
+  and
+    \[
+      (A-B)^2 = A^2 - 2AB + B^2
+    \]
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Factor the following.
+  \[
+    x^2 + 14x + 49
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      This does indeed follow the pattern mentioned just above, as follows:
+      \begin{align*}
+        x^2 + 14x + 49 &= x^2 + 2\cdot 7x+ 7^2 \\
+        & = (x+7)^2
+      \end{align*}
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  A harder example will better illustrate the usefulness of being able to
+  recognize this "special pattern."
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Factor the following.
+  \[
+    9x^2 - 48x + 64
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Because \(9x^2\) and \(64\) are both squares,
+      I suspect that this might follow the
+        \[
+          (A-B)^2 = A^2 - 2ABx + B^2
+        \]
+      pattern.  To verify that it does, I just note that
+      \(48 = 2\cdot 3 \cdot 8\) and so
+        \begin{align*}
+          9x^2 - 48x + 64 & = (3x)^2 - 2\cdot 3x \cdot 8 + 8^2 \\
+          & = (3x-8)^2
+        \end{align*}
+    </div>
+  </div>
+</div>
+</p>
+
+
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

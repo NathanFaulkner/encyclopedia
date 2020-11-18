@@ -71,7 +71,8 @@ __all__ = ['quadratic_pattern',
             'absolute_value_equation_multi_three',
             'factor_trinomials_level1',
             'factoring_warm_up',
-            'solving_by_factoring_level1']
+            'solving_by_factoring_level1',
+            'factor_special_patterns']
 
 class Question():
     pass
@@ -549,3 +550,18 @@ def tolerates(f1, f2, tolerance=0.0005, window=[-10,10], res=10):
         except ZeroDivisionError:
             pass
     return True
+
+
+def sets_evaluate_equal(set1, set2):
+    if len(set1) != len(set2):
+        return False
+    elif len(set1) == 0 and len(set2) == 0:
+        return True
+    else:
+        element = list(set1)[0]
+        for elem in set2:
+            if element.equals(elem):
+                new_set1 = set1.remove(element)
+                new_set2 = set2.remove(elem)
+                return sets_evaluate_equal(set1, set2)
+        return False

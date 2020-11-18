@@ -99,12 +99,12 @@ class FactoringWarmUp(Question):
         user_answer = user_answer.lower()
         user_answer = user_answer.replace('^', '**')
         user_answer = parse_expr(user_answer, transformations=transformations, evaluate=False)
-        print(self.answer, user_answer)
-        print(set(self.answer.args), set(user_answer.args))
+        # print(self.answer, user_answer)
+        # print(set(self.answer.args), set(user_answer.args))
         constraints = [FactoringWarmUp.sets_evaluate_equal(set(self.answer.args), set(user_answer.args)), type(self.answer) == type(user_answer)]
-        print([type(elem) for elem in self.answer.args], [type(elem) for elem in user_answer.args])
-        print(type(self.answer), type(user_answer))
-        print(constraints)
+        # print([type(elem) for elem in self.answer.args], [type(elem) for elem in user_answer.args])
+        # print(type(self.answer), type(user_answer))
+        # print(constraints)
         return False not in constraints
 
     @staticmethod
