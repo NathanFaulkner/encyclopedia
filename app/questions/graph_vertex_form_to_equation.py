@@ -211,7 +211,7 @@ class GraphVertexFormToEquation(Question):
         user_answer = Eq(lhs, rhs)
         y = Symbol('y')
         user_answer = solve(user_answer, y)[0]
-        return f'\(y = {commute_sum(user_answer)}\)'
+        return f'\(y = {latex(user_answer)}\)'
 
     @classmethod
     def validator(self, user_answer):
