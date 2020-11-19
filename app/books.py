@@ -653,6 +653,8 @@ quadraticpattern.add_to_questions('quadratic_pattern')
 #
 #############################
 
+
+challenge_intro = Section('challenge_intro', "Challenge Intro", '/sections/challenge_intro')
 ##############################
 # Construction of book, Algebra2 -- collecting, "binding" sections, frontpages, etc.
 nuts_and_bolts_of_algebra = Division('chapter', 'Nuts and Bolts of Algebra',
@@ -702,6 +704,7 @@ quadratics.set_frontpage(quadratics_intro)
 algebra2_challenge = Division('chapter', "Challenge Sections",
                                     [absolutevalueequationspart2,
                                     solvingbyeliminationthreeequationsonesolution])
+algebra2_challenge.set_frontpage(challenge_intro)
 
 polynomials = Division('chapter', 'Polynomials', [factoring1, quadraticpattern])
 #polynomials.intro = polynomials_intro
