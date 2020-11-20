@@ -637,6 +637,9 @@ solvingquadraticspart1.add_to_questions('solving_by_factoring_level1')
 
 specialpatterns = Section('specialpatterns', "Special Patterns", '/sections/special-patterns')
 specialpatterns.add_to_questions('factor_special_patterns')
+
+factoringbygrouping = Section('factoringbygrouping', "Factoring by Grouping", '/sections/factoring-by-grouping')
+factoringbygrouping.add_to_questions('factoring_by_grouping')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -697,7 +700,8 @@ quadratics = Division('chapter', "Quadratic Functions",
                                 maxmin,
                                 factoringtrinomialslevel1,
                                 solvingquadraticspart1,
-                                specialpatterns
+                                specialpatterns,
+                                factoringbygrouping
                                 ])
 quadratics.set_frontpage(quadratics_intro)
 

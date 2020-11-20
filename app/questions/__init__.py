@@ -72,7 +72,8 @@ __all__ = ['quadratic_pattern',
             'factor_trinomials_level1',
             'factoring_warm_up',
             'solving_by_factoring_level1',
-            'factor_special_patterns']
+            'factor_special_patterns',
+            'factoring_by_grouping']
 
 class Question():
     pass
@@ -565,3 +566,8 @@ def sets_evaluate_equal(set1, set2):
                 new_set2 = set2.remove(elem)
                 return sets_evaluate_equal(set1, set2)
         return False
+
+def check_congruence_after_factoring_out_gcf(expr1, expr2):
+    gcd1 = gcd(Poly(expr1).coeffs())
+    gcd2 = gcd(Poly(expr2).coeffs())
+    return gcd1 == gcd2 and simplify(expr1/gcd1) == simplify(expr2/gcd2)
