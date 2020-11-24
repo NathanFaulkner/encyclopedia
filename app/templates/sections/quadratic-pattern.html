@@ -5,151 +5,148 @@
 
 {% block content %}
 <p class="subhead">
-In this section, we learn that even some of the easier factoring strategies we
-have learned can be extended to cover seemingly more difficult cases.
-For example, can you imagine that you actually already have a trick for
-factoring the following?
-\[
-x^{10} - 6x^5 - 16
-\]
-Well, you have multiple tricks!  Since there are multiple ways of getting this
-thing factored, I want you to have first crack at it---to see what ways you
- might tend to favor and which way might make sense to you most readily.
+  In this section, we learn that even some of the easier factoring strategies
+  we have learned
+  <a href="{{ url_for('section', section_name='factoringtrinomialslevel1')}}">
+  here
+  </a>
+  and
+  <a href="{{ url_for('section', section_name='specialpatterns') }}">
+    here
+  </a>
+  can be extended to cover seemingly more difficult cases.
+  For example, can you imagine that you actually already have a trick for
+  factoring the following?
+  \[
+    x^4 - 2x^2 +1
+  \]
+  I'll work some examples for you that are similar.
+  I'll show you three techniques, and you decide whichever one you prefer.
+  You can use any of them.
 </p>
+
 
 <p>
-  <div class="activity">
-    <h2>Activity</h2>
-    <span class="inline-header">Goal:</span> Completely factor
-    \[
-    x^{10} - 6x^5 - 16
-    \]
-    Step 1: Build a mental "bridge" between this hard new problem and the
-    old-style problem---which I hope you have mastered---
-    \[
-    x^2 - 6x - 16
-    \]
-    Reflect on how you might solve this.  Using a guess-and-check approach, you
-    set up some "empty parentheses":
-    \[
-    (\quad \quad \quad)(\quad \quad \quad)
-    \]
-    Well, really, you probably already know that you'll need "\(x\) and \(x\)"
-    in there, too:
-    \[
-    (x \quad \quad)(x \quad \quad)
-    \]
-    And, as you may well know, the idea is to fill in those blanks with numbers
-    that make it all work---which you mentally verify by checking to
-    see how they would all multiply together and simplify out.  Now, that
-    may make perfect sense to you already, but, to clarify, one can make up
-    symbols for "this number" and "that number".  For instance, you might write
-    \[
-    (x + {\color{red}A})(x + {\color{blue}B})
-    \]
-    and explain that what you want is a numbers \({\color{red}A}\) and
-    \({\color{blue}B}\) that multiply together to give you \(-16\)
-    and add together to give you \(-6\).  Go ahead and fill in the
-    blanks here to make sure you have the right idea:
-    <!-- <form>
-      <>
-    </form> -->
-  </div>
-</p>
-
-<p>
-Next, I'll work some examples for you that are similar.
-I'll show you three techniques, and you decide whichever one you prefer.
-You can use either one.
-</p>
-
-
 <div class="example">
   <h2></h2>
-Completely factor the following.
-\[
-x^6 - 10x^3 + 24
-\]
-<div class="answer">
-  <a class="collapsible"><h3>Answer: </h3></a>
-  <div class='inner'>
-    <b>Method 1:</b> Notice that this is <i>like</i>
-    \[
-    w^2 - 10w +24 = (w-6)(w-4)
-    \]
-    After all,
-    \[
-    x^6 - 10x^3 + 24 = (x^3)^2 - 10(x^3) + 24
-    \]
-    See the similarity?  The point is that, for <i>any</i> real number \(w\)
-    \[
-    w^2 - 10w +24 = (w-6)(w-4)
-    \]
-    is true.  Also, \(x^3\) is (the symbol for) a real number.
-    So, this \(w\) equation is also true when \(x^3\) is substituted in for \(w\):
-    \[
-    (x^3)^2 - 10x^3 + 24 = (x^3-6)(x^3-4)
-    \]
-    Get it?  Since \( (x^3)^2=x^3\cdot x^3 = x^6 \), it's also true that
-    \[
-    x^6 - 10x^3 + 24 = (x^3-6)(x^3-4)
-    \]
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Completely factor the following.
+  \[
+    x^6 - 10x^3 + 24
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer, via Method 1: </h3></a>
+    <div class='inner'>
+      Notice that this is <em>like</em>
+        \[
+          w^2 - 10w +24 = (w-6)(w-4)
+        \]
+      After all,
+        \[
+          x^6 - 10x^3 + 24 = (x^3)^2 - 10(x^3) + 24
+        \]
+      See the similarity?  The point is that, for <em>any</em> real number \(w\)
+        \[
+          w^2 - 10w +24 = (w-6)(w-4)
+        \]
+      is true.  Also, \(x^3\) is (the symbol for) a real number.
+      So, this \(w\) equation is also true when \(x^3\) is substituted in for \(w\):
+        \[
+          (x^3)^2 - 10x^3 + 24 = (x^3-6)(x^3-4)
+        \]
+      Get it?  Since \((x^3)^2=x^3\cdot x^3 = x^6\), it's also true that
+        \[
+          x^6 - 10x^3 + 24 = (x^3-6)(x^3-4)
+        \]
+    </div>
   </div>
-<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
-
-<p>
-  <b>Method 2:</b>
-  Use the "\( ac \)" method.  That is, you first find a factorization of
-  \( ac = 1\cdot 24 = 24 \) into two numbers that add up to \(-10\).
-  Those numbers are \(-4\) and \(-6\). Then, rewrite the middle term according to
-  that breakdown and then factor by grouping:
-  \begin{align*}
-  x^6 - 10x^3 + 24 &= x^6 - 4x^3 - 6x^3 + 24 \\
-  &= x^3(x^3 - 4) - 6(x^3 - 4) \\
-  & = (x^3-6)(x^3 - 4)
-  \end{align*}
+  <div class="answer">
+    <a class="collapsible"><h3>Answer, via Method 2: </h3></a>
+    <div class='inner'>
+      Use the "\(ac\)" method, which is explained
+      in
+      <a href="{{ url_for('section', section_name='factoringtrinomialslevel2') }}">
+        this section.
+      </a>
+      That is, you first find a factorization of
+      \(ac = 1\cdot 24 = 24\) into two numbers that add up to \(-10\).
+      Those numbers are \(-4\) and \(-6\).
+      Then, rewrite the middle term according to that breakdown and then factor by grouping:
+        \begin{align*}
+          x^6 - 10x^3 + 24 &= x^6 - 4x^3 - 6x^3 + 24 \\
+          &= x^3(x^3 - 4) - 6(x^3 - 4) \\
+          & = (x^3-6)(x^3 - 4)
+        \end{align*}
+    </div>
+  </div>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer, via Method 3 (Guess and Check): </h3></a>
+    <div class='inner'>
+      Guessing-and-checking might look like this:
+        \[
+          x^6 - 10x^3 + 24 = (x^3 - \quad)(x^3 - \quad)
+        \]
+      You just sit there and think about how to fill in the blanks: You'd need
+      two numbers that multiply together to give you \(24\) and add together
+      to give you \(-10\)&mdash;which is the
+      same thing you had to think about when factoring, say, \(w^2 - 10w + 24\).
+      So, yup, \(-4\) and \(-6\) are the numbers:
+        \[
+          x^6 - 10x^3 + 24 = (x^3 - 4)(x^3 - 6)
+        \]
+    </div>
+  </div>
+  <div class="answer">
+    <a class="collapsible"><h3>Important Last Step (applies to all 3): </h3></a>
+    <div class='inner'>
+      Scrutinize the resulting factors, namely \(x^3-4\) and \(x^3 - 6\) and see
+      if there any factoring methods that will apply to break these down further.
+      This should really be understood relative to your knowledge base.
+      The background knowledge of factoring assumed in this section
+      is contained in the sections linked to in the first paragraph above.
+      No methods described in those sections apply to these factors, so
+      we're done.
+    </div>
+  </div>
+</div>
 </p>
 
 <p>
-  <b>Method 3: Guess and Check.</b>  Guessing-and-checking might look like this:
-  \[
-  x^6 - 10x^3 + 24 = (x^3 - \quad)(x^3 - \quad)
-  \]
-  You just sit there and think about how to fill in the blanks:
-  You'd need two numbers that multiply together to give you \(24\)
-  and add together to give you \(-10\)---which is the
-  same thing you had to think about when factoring, say, \(w^2 - 10w + 24\).
-  So, yup, \(-4\) and \(-6\) are the numbers:
-  \[
-  x^6 - 10x^3 + 24 = (x^3 - 4)(x^3 - 6)
-  \]
-  <b>Last step:</b> Scrutinize the resulting factors, namely \(x^3-4\) and
-  \(x^3 - 6\) and see
-  if there any factoring methods that will apply.
-  Have we learned anything that will apply to those?  Nope!  So, we're done.
+  Would you like to see one more without all the talk?  I'll use
+  the guess-and-check method, which is really my favorite.
 </p>
-</div>
-</div>
 
 <p>
-Would you like to see one more without all the talk?
-  <div class="example">
-    <h2></h2>
-    Completely factor the following.
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Completely factor the following.
     \[
-    x^8 +7x^4 - 8
+      x^8 +7x^4 - 8
     \]
-    <div class="answer">
-      <h3>Answer</h3>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
       \begin{align*}
-      x^8 +7x^4 - 8 & = (x^4 - \quad)(x^4 + \quad)\\
-      & = (x^4 - 1)(x^4 +8) \\
-      & = (x^2 - 1)(x^2+1)(x^4 + 8)\\
-      & = (x-1)(x+1)(x^2 +1)(x^4 + 8)
+        x^8 +7x^4 - 8 & = (x^4 - \quad)(x^4 + \quad)\\
+        & = (x^4 - 1)(x^4 +8) \\
+        & = (x^2 - 1)(x^2+1)(x^4 + 8)\\
+        & = (x-1)(x+1)(x^2 +1)(x^4 + 8)
       \end{align*}
     </div>
   </div>
+</div>
 </p>
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
 
 <div class="exercise">
 
