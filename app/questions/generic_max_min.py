@@ -60,6 +60,7 @@ class GenericMaxMin(Question):
             self.h = kwargs['h']
         else:
             self.h = random.randint(-5,5)
+        # self.h = 0
         if 'k' in kwargs:
             self.k = kwargs['k']
         else:
@@ -85,10 +86,16 @@ class GenericMaxMin(Question):
 
         expr = self.given
         b = expr.coeff(x, 1)
+        format_middle_term = ''
+        if b != 0:
+            format_middle_term = signed_coeff(b) + 'x'
         c = expr.coeff(x, 0)
+        format_last_term = ''
+        if c!= 0:
+            format_last_term = latex(abs(c))
         self.format_given = f"""
         \\[
-            f(x) = {leading_coeff(a)}x^2 {signed_coeff(b)}x {sgn(c)} {latex(abs(c))}
+            f(x) = {leading_coeff(a)}x^2 {format_middle_term} {sgn(c)} {format_last_term}
         \\]
         """
 

@@ -1,0 +1,178 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section, we learn how to tackle more general cases&mdash;those
+  that were the result of multiplying out something of the form
+    \[
+      (mx+p)(nx+q)
+    \]
+  This is a bit more complicated, but can be tackled in a similar way as
+  the easier cases you already learned&mdash;by first considering the
+  general "forward" process and then imagining what it would take
+  to "run it in reverse.""
+</p>
+<p>
+  When you multiply the above expression out, showing all work, you get
+    \begin{align*}\tag{Forward Process}\label{forward process}
+      (mx+p)(nx+q) & = (mx+p)nx + (mx+p)q \\
+      & = mnx^2 +pnx + mqx + pq \\
+      & = mnx^2 +(pn+mq)x +pq
+    \end{align*}
+  Seems complicated, right?  And we have to imagine how to run this process in reverse!
+  That is, we will need to take some thing of the form
+    \[
+      ax^2 +bx +c
+    \]
+  and view it as being of the form
+    \[
+      mnx^2 + (pn+mq)x +pq
+    \]
+  That is, we need to find \(m\), \(n\), \(p\), and \(q\) so that
+    \[
+      ax^2 + bx + c = mnx^2 + (pn+mq)x +pq
+    \]
+  What the heck?  Well, after much contemplation, you may get the following
+  insight: To run that \ref{forward process} in reverse, you
+  should start by taking the product \(ac\).  Note that if
+    \[
+      ax^2 + bx + c = mnx^2 + (pn+mq)x +pq
+    \]
+  then \(ac = mnpq\)&mdash;meaning, all the numbers we need "are in there."
+  Next, we need two factors of \(ac=mnpq\) that add up to \(b\)&mdash;namely
+  \(pn\) and \(mq\).  Actually, at that point we won't know what
+  \(m\), \(n\), \(p\), or \(q\) will be.
+  But, if we can find two factors of \(ac\) that add up to
+  \(b\) we can then run the \ref{forward process} in reverse by
+  <a href="{{ url_for('section', section_name='factoringbygrouping')}}">
+  "factoring by grouping."
+  </a>
+</p>
+<p>
+  That's the explanation, but no doubt you'll need to see it
+  done a couple times to make sense of it.
+</p>
+
+
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Factor the following.
+  \[
+    6x^2 + 11x - 10
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      <ol>
+        <li>
+          First find the product of the outer two numbers,  "\(a\) times \(c\)."
+            \[
+              ac = 6\cdot (-10) = -60
+            \]
+        </li>
+        <li>
+          Next, break apart \(-60\) into two factors that add up to 11.
+          You might accomplish that by just listing factorizations of
+          \(60\) until you discover which two have a difference of \(11\):
+            \begin{align*}
+              1 & \quad \quad 60 \\
+              2 & \quad \quad 30 \\
+              3 & \quad \quad 20 \\
+              4 & \quad \quad 15
+            \end{align*}
+          That's it!  Since \(15 - 4= 11\), the
+          factorization of \(-60\) we are looking for is \(15\cdot (-4)\).
+        </li>
+        <li>
+          Next, you rewrite \(bx = 11x\) according to that break down:
+            \[
+              6x^2 + 11x - 10 = 6x^2 + 15x - 4x - 10
+            \]
+        </li>
+        <li>
+          Then you
+          factor by grouping.
+            \begin{align*}
+              6x^2 + 11x - 10 &= 6x^2 + 15x - 4x - 10 \\
+              & = 3x(2x+5) - 2(2x+5) \\
+              & = (3x-2)(2x+5)
+            \end{align*}
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  Here goes one more example with a little less narrative.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Factor the following.
+  \[
+    2x^2 - 9x + 9
+  \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Here are the steps:
+      <ol>
+        <li>
+          \(ac = 2\cdot 9 = 18\)
+        </li>
+        <li>
+          \((-3)\cdot(-6)=18\) and \(-3+(-6) = -9\).
+        </li>
+        <li>
+          Rewrite the quadratic:
+          \[2x^2-9x+9 = 2x^2 - 6x - 3x +9\]
+        </li>
+        <li>
+          Factor by grouping:
+            \begin{align*}
+              2x^2 - 6x - 3x +9 &= 2x(x-3) - 3(x-3)\\
+              &=(2x-3)(x-3)
+            \end{align*}
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  Now, go for it!  Become the master of even these harder factoring problems.
+</p>
+
+
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

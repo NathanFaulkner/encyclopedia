@@ -623,9 +623,9 @@ standardform.add_to_questions('standard_form_to_vertex_form',
                                 'graph_standard_form')
 
 maxmin = Section('maxmin', "Max/Min Problems", '/sections/max-min-problems')
-maxmin.add_to_questions('generic_max_min',
-                        'cannonball_problem',
-                         'max_revenue_problem')
+maxmin.add_to_questions('generic_max_min',)
+                        # 'cannonball_problem',
+                         # 'max_revenue_problem')
 
 factoringtrinomialslevel1 = Section('factoringtrinomialslevel1', "Factoring Trinomials, Part 1", '/sections/factoring-trinomials-part1')
 factoringtrinomialslevel1.add_to_questions('factor_trinomials_level1',
@@ -640,6 +640,9 @@ specialpatterns.add_to_questions('factor_special_patterns')
 
 factoringbygrouping = Section('factoringbygrouping', "Factoring by Grouping", '/sections/factoring-by-grouping')
 factoringbygrouping.add_to_questions('factoring_by_grouping')
+
+factoringtrinomialslevel2 = Section('factoringtrinomialslevel2', "Factoring Trinomials, Part 2", '/sections/factoring-trinomials-part2')
+factoringtrinomialslevel2.add_to_questions('factor_trinomials_level2')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -701,7 +704,8 @@ quadratics = Division('chapter', "Quadratic Functions",
                                 factoringtrinomialslevel1,
                                 solvingquadraticspart1,
                                 specialpatterns,
-                                factoringbygrouping
+                                factoringbygrouping,
+                                factoringtrinomialslevel2
                                 ])
 quadratics.set_frontpage(quadratics_intro)
 

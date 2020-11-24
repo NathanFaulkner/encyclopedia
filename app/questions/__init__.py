@@ -70,6 +70,7 @@ __all__ = ['quadratic_pattern',
             'absolute_value_equation_multi_one_or_two',
             'absolute_value_equation_multi_three',
             'factor_trinomials_level1',
+            'factor_trinomials_level2',
             'factoring_warm_up',
             'solving_by_factoring_level1',
             'factor_special_patterns',
@@ -534,10 +535,12 @@ def fmt_abs_value(string):
     return string
 
 def sgn(x):
-	if x >= 0:
-		return '+'
-	else:
-		return '-'
+    if x > 0:
+        return '+'
+    elif x == 0:
+        return ''
+    else:
+        return '-'
 
 def tolerates(f1, f2, tolerance=0.0005, window=[-10,10], res=10):
     x_min = window[0]

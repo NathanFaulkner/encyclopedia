@@ -50,7 +50,7 @@ class VertexFormToStandardForm(Question):
         if 'h' in kwargs:
             self.h = kwargs['h']
         else:
-            self.h = random.randint(-5,5)
+            self.h = random_non_zero_integer(-5,5)
         if 'k' in kwargs:
             self.k = kwargs['k']
         else:
