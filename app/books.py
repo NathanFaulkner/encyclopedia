@@ -646,6 +646,9 @@ factoringtrinomialslevel2.add_to_questions('factor_trinomials_level2')
 
 quadraticpattern = Section('quadraticpattern', "Quadratic Pattern", '/sections/quadratic-pattern')
 quadraticpattern.add_to_questions('quadratic_pattern')
+
+mixedpracticeplusgcf = Section('mixedpracticeplusgcf', "Putting It All Together", '/sections/putting-it-all-together-factoring')
+mixedpracticeplusgcf.add_to_questions('mixed_practice_plus_gcf')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -709,6 +712,7 @@ quadratics = Division('chapter', "Quadratic Functions",
                                 factoringbygrouping,
                                 factoringtrinomialslevel2,
                                 quadraticpattern,
+                                mixedpracticeplusgcf,
                                 ])
 quadratics.set_frontpage(quadratics_intro)
 

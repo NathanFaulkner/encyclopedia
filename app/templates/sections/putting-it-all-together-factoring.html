@@ -1,0 +1,226 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  Now, I bet you know the concept of factoring out a "greatest common factor"
+  or GCF, but now we use that technique in concert with some of the other
+  lessons we've learned, specifically,
+  <ul>
+    <li>
+      <a href="{{ url_for('section', section_name='factoringtrinomialslevel1') }}">
+        factoring trinomials, part 1
+      </a>
+    </li>
+    <li>
+      <a href="{{ url_for('section', section_name='specialpatterns') }}">
+        special patterns,
+      </a>
+    </li>
+    <li>
+      <a href="{{ url_for('section', section_name='factoringbygrouping') }}">
+        factoring by grouping,
+      </a>
+    </li>
+    <li>
+      <a href="{{ url_for('section', section_name='factoringtrinomialslevel2') }}">
+        factoring trinomials, part 2,
+      </a>
+    </li>
+    <li>
+      and
+      <a href="{{ url_for('section', section_name='quadraticpattern') }}">
+        quadratic pattern.
+      </a>
+    </li>
+  </ul>
+</p>
+
+<p>
+  Consider a few examples to get you headed in the right direction.
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Completely factor the following.
+  \[
+    x^6 - 8x^5 + 15x^4
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Look for a GCF, and then use any or all of your factoring skills to finish it:
+        \begin{align*}
+          x^6 - 8x^5 + 15x^4 &= x^4(x^2 - 8x+15) \\
+          &= x^4(x-3)(x-5)
+        \end{align*}
+        After identifying the GCF, my next step was accomplished
+        using the methods of the section,
+        <a href="{{ url_for('section', section_name='factoringtrinomialslevel1') }}">
+          Factoring Trinomials, Part 1.
+        </a>
+    </div>
+  </div>
+</div>
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Completely factor the following.
+    \[
+      81 r^{2} x^{5} + 54 r t x^{5} + 9 t^{2} x^{5}
+    \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Look for a GCF, and then use any or all of your factoring skills to finish it:
+      \begin{align*}
+        81 r^{2} x^{5} + 54 r t x^{5} + 9 t^{2} x^{5}   &= 9x^5(9r^2-6rt+t^2)\\
+        & = 9x^5((3r)^2 - 2 \cdot 3r \cdot t + t^2) \\
+        & = 3x^2(3r + t)^2\\
+      \end{align*}
+      The hard part here is to realize that
+      \[
+        9r^2-6rt+t^2 = (3r)^2 - 2 \cdot 3r \cdot t + t^2
+      \]
+      follows the
+      <a href="{{ url_for('section', section_name='specialpatterns') }}">
+        special patterns,
+      </a>
+      of
+      \[
+        A^2 + 2 AB + B^2
+      \]
+      and thus factors into the form \((A+B)^2\).  My \(A\) in this case
+      is \(3r\) and my \(B\) is \(t\).
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Completely factor the following.
+    \[
+      28 x^{6} - 112 x^{5} + 21 x^{4} - 84 x^{3}
+    \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Look for a GCF, and then use any or all of your factoring skills to finish it:
+      \begin{align*}
+        28 x^{6} - 112 x^{5} + 21 x^{4} - 84 x^{3}    &= 7x^3(4x^3-16x^2+3x - 12)\\
+        & = 7x^3\left(4x^2(x - 4) + 3(x-4)\right) \\
+        & = 7x^3\left(4x^2 + 3\right)\left(x-4)\right) \\
+      \end{align*}
+      How did I figure out that the GCF included \(7\)?&mdash---answer: basically
+      just by inspection and reinspection of each coefficient until something
+      worked out.  That is, I slowly realized I could factor out \(7\) and then
+      when I had done that I found that there were no common factors left.
+      The next step was done by
+      <a href="{{ url_for('section', section_name='factoringbygrouping') }}">
+        factoring by grouping,
+      </a>
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Completely factor the following.
+    \[
+      -8x^4+2x^3+6x^2
+    \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Look for a GCF, and then use any or all of your factoring
+      skills to finish it:
+      \begin{align*}
+        -8x^4+2x^3+6x^2 &= -2x^2(4x^2 - x - 3) \\
+        & = -2x^2(4x^2 - 4x + 3x - 3)\\
+        &= -2x^2\big(4x(x-1)+3(x-1)\big)\\
+        &= -2x^2(4x+3)(x-1)
+      \end{align*}
+      After identifying the GCF, my next step was accomplished
+      using the methods of the section,
+      <a href="{{ url_for('section', section_name='factoringtrinomialslevel2') }}">
+        Factoring Trinomials, Part 2,
+      </a>
+    </div>
+  </div>
+</div>
+</p>
+
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Completely factor the following.
+    \[
+      3x^{10} - 9x^6 +6x^2
+    \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Look for a GCF, and then use any or all of your factoring skills to finish it:
+      \begin{align*}
+        3x^{10} - 9x^6 +6x^2 &= 3x^2(x^8-3x^4+2)\\
+        & = 3x^2(x^4 - \quad)(x^4 - \quad)\\
+        & = 3x^2(x^4 - 2)(x^4 - 1)\\
+        & = 3x^2(x^4 - 2)(x^2 - 1)(x^2+1)\\
+        & = 3x^2(x^4 - 2)(x- 1)(x+1)(x^2+1)\\
+      \end{align*}
+      After identifying the GCF, my next step was accomplished
+      using the methods of the section on recognizing a
+      <a href="{{ url_for('section', section_name='quadraticpattern') }}">
+        "quadratic pattern".
+      </a>
+    </div>
+  </div>
+</div>
+</p>
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}
