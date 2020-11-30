@@ -623,8 +623,8 @@ standardform.add_to_questions('standard_form_to_vertex_form',
                                 'graph_standard_form')
 
 maxmin = Section('maxmin', "Max/Min Problems", '/sections/max-min-problems')
-maxmin.add_to_questions(#'generic_max_min',
-                        # 'cannonball_problem',
+maxmin.add_to_questions('generic_max_min',
+                        'cannonball_problem',
                          'max_revenue_problem')
 
 factoringtrinomialslevel1 = Section('factoringtrinomialslevel1', "Factoring Trinomials, Part 1", '/sections/factoring-trinomials-part1')
