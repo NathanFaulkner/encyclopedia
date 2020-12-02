@@ -132,6 +132,7 @@ Consider the following table, depciting a relationship between \(x\) and \(y\).
         self.further_instruction = f"""Using a linear model based on this data,
         predict the value of \(y\)
         when \(x = {self.input} \).
+        Just enter the value, not "y=".
         """
 
         tabular = "\\begin{tabular}{|l||"

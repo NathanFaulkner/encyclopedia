@@ -136,7 +136,7 @@ def get_user_books(user):
 class UserSectionGradeInfo():
     def __init__(self, user, book, chapter, section):
         """book is really the name of the book;
-        section and chapter are numbers from 1 to...
+        section and chapter are numbers from 1 to n.
         """
         self.user = user
         self.book_name = book
@@ -184,7 +184,7 @@ class UserSectionGradeInfo():
         self.due_date = self.initial_due_date
         self.mastery_date = None
         question_names = self.section.questions
-        print('section:', self.chapter_number, ':', self.section_number, ':', question_names)
+        # print('section:', self.chapter_number, ':', self.section_number, ':', question_names)
         if question_names != []:
             answers_by_section = StudentAnswer.query.filter_by(user_id=self.user.id,
                                                             skillname=question_names[0])
@@ -359,7 +359,7 @@ class UserGradeInfo():
     """
     def __init__(self, user):
         self.user = user
-        self.answers = StudentAnswer.query.filter_by(user_id=user.id).all()
+        self.answers = user.answers #StudentAnswer.query.filter_by(user_id=user.id).all()
         all_info = {}
         self.user_books = self.get_books()
         self.book_names = self.get_book_names()
