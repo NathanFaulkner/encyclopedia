@@ -257,7 +257,10 @@ class UserSectionGradeInfo():
                     #         'mastery count:', mastery_count)
                 # print('days since previous', days_since_previous)
                 # print('expected_recall_duration', expected_recall_duration)
-                memory_decay_penalty = int(days_since_previous/expected_recall_duration)
+                if mastery_count == 0:
+                    memory_decay_penalty = 0
+                else:
+                    memory_decay_penalty = int(days_since_previous/expected_recall_duration)
                 grade = int(grade*0.5**memory_decay_penalty)
                 if i < len(answers) and not same_session: #This really just covers the first of a new session
                     if answer.correct:
