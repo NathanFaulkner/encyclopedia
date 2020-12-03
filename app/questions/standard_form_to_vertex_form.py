@@ -130,6 +130,8 @@ class StandardFormToVertexForm(Question):
     """
 
 
+    loom_link = "https://www.loom.com/share/11e5d7f20e994650ac8175ac0a2a1b8b?sharedAppSource=personal_library"
+
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
 
