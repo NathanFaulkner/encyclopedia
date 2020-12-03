@@ -113,6 +113,7 @@ class CannonballProblem(Question):
     Your answer must be accurate to two decimal places.
     """
 
+    loom_link = "https://www.loom.com/share/d6efec7f9ae0459e93344e76e4a3ec3b"
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 

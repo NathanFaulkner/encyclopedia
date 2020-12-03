@@ -129,7 +129,7 @@ class MaxRevenue(Question):
     module_name = 'max_revenue_problem'
 
 
-
+    loom_link = "https://www.loom.com/share/d750437d30a140548e229fb86f0449a5?sharedAppSource=personal_library"
 
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'

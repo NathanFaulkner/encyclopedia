@@ -123,6 +123,7 @@ class GenericMaxMin(Question):
     </blockquote>
     """
 
+    loom_link = "https://www.loom.com/share/ac60fe1ba6094af1b630def7bfc15083?sharedAppSource=personal_library"
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
