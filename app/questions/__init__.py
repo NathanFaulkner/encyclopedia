@@ -75,7 +75,8 @@ __all__ = ['quadratic_pattern',
             'solving_by_factoring_level1',
             'factor_special_patterns',
             'factoring_by_grouping',
-            'mixed_practice_plus_gcf']
+            'mixed_practice_plus_gcf',
+            'solving_by_factoring_level2',]
 
 class Question():
     pass

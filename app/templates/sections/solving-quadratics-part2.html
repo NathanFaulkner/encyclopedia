@@ -1,0 +1,93 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section, we use what you might call the "\(ac\)" method to factor
+  certain quadratics of the form
+  \[
+    ax^2 + bx + c
+  \]
+  that are actually the result of multiplying together an expression of the form
+  \[
+    (mx+p)(nx+q)
+  \]
+  (This is the method of factoring that is detailed in the the section entitled,
+  <a href="{{ url_for('section', section_name='factoringtrinomialslevel2') }}">
+    Factoring Trinomials, Part 2.
+  </a>
+  )
+  However, it is certainly possible that \(ax^2+bx+c\) was not the result of multiplying
+  together something of the form \((mx+p)(nx+q)\),
+  which means it will not be factorable using that method.
+  So, while all the quadratics in this section will be factorable using this
+  method, those in future sections may not be factorable in any nice way.
+</p>
+
+<p>
+  Recall that if we can factor a quadratic, then we can use that to solve an
+  equation.  After all, if \(m\neq 0\), \(n \neq 0\), \(p\), \(q\), and \(x\)
+  are real numbers and
+    \[
+      (mx+p)(nx+q)=0
+    \]
+  then
+    \begin{align*}
+      mx + p = 0 & \textrm{     or    } nx+q = 0 \\
+      mx = - p & \textrm{     or    } nx = -q \\
+      x = - \frac{p}{m} & \textrm{     or    } x = -\frac{q}{n} \\
+    \end{align*}
+  I bet you're ready to just see an example already!
+</p>
+
+
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/f10afd4ed13544cc8410cebad96bd86a" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve by factoring.
+    \[
+      3x^2- 2x - 8 = 0
+    \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Since \(3(-8) = -24 = 4(-6)\) and \(4 - 6 = -2\), the trick is to rewrite
+      \(-2x\) as \(-6x + 4x\) and
+      factor by grouping, then to set the individual factors equal to zero:
+        \begin{align*}
+          & 3x^2- 2x - 8 = 0\\
+          \Rightarrow \quad & 3x^2 - 6x + 4x - 8 = 0 \\
+          \Rightarrow \quad & 3x(x-2) + 4(x - 2) = 0 \\
+          \Rightarrow \quad & (3x+4)(x-2) = 0 \\
+          \Rightarrow \quad & 3x+4 = 0 \quad \textrm{or}\quad x-2 = 0 \\
+          \Rightarrow \quad & x = -\frac{4}{3} \quad \textrm{or}\quad x = 2 \\
+        \end{align*}
+    </div>
+  </div>
+</div>
+</p>
+
+
+
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

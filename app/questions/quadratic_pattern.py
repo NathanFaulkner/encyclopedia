@@ -44,34 +44,58 @@ class QuadraticPattern(Question):
             self.p = kwargs['p']
         else:
             self.p = random_non_zero_integer(-7,7)
+        self.p = -1
         if 'q' in kwargs:
             self.q = kwargs['q']
         else:
             self.q = random_non_zero_integer(-5,5)
+        self.q = -3
         if 'r' in kwargs:
             self.r = kwargs['r']
         else:
             self.r = random.randint(2,6)
+        self.r=4
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:
             self.x = Symbol('x')
 
-        self.problem = self.genproblem()
+        x = self.x
+        r = self.r
+        p = self.p
+        q = self.q
+        # expr = 1
+        # if r % 2 == 0:
+        #     if sqrt(-p) % 1 == 0 and p < 0:
+        #         expr *= (x**int(r/2)+sqrt(-p))*(x**int(r/2)-sqrt(-p))
+        #         #print('1st step: So far its ', expr)
+        #     else:
+        #         expr *= (x**r+p)
+        #     if sqrt(-q) % 1 == 0 and q < 0:
+        #         expr *= (x**int(r/2)+sqrt(-q))*(x**int(r/2)-sqrt(-q))
+        #     else:
+        #         expr *= (x**r+q)
+        #         #print('2nd step: So far its ', expr)
+        # else:
+        #     expr = (x**r+p)*(x**r+q)
 
-        self.given = self.problem['given']
-        self.answer = self.problem['answer']
+        # self.given = self.problem['given']
+        # self.answer = self.problem['answer']
+        expr = (x**r + p)*(x**r+q)
+        self.answer = factor(expr)
+        self.format_answer = '\\(' + latex(self.answer) + '\\)'
+        self.format_given = '\\[' + latex(expand(expr)) + '\\]'
 
-        self.given_latex = latex_print(self.given)
-        self.given_latex_display = latex_print(self.given, display=True)
-        self.answer_latex = latex_print(self.answer)
-        self.format_answer = self.answer_latex
-        self.answer_latex_display = latex_print(self.answer, display=True)
+        # self.given_latex = latex_print(self.given)
+        # self.given_latex_display = latex_print(self.given, display=True)
+        # self.answer_latex = latex_print(self.answer)
+        # self.format_answer = self.answer_latex
+        # self.answer_latex_display = latex_print(self.answer, display=True)
 
         self.format_given_for_tex = f"""
         {self.prompt_single}
 
-        {self.given_latex_display}
+        {self.format_given}
         """
 
     name = 'Quadratic Pattern'
@@ -83,35 +107,12 @@ class QuadraticPattern(Question):
 
     prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
-    def genproblem(self):
-        out = {}
-        x = self.x
-        r = self.r
-        p = self.p
-        q = self.q
-        expr = 1
-        if r % 2 == 0:
-            if sqrt(-p) % 1 == 0 and p < 0:
-                expr *= (x**int(r/2)+sqrt(-p))*(x**int(r/2)-sqrt(-p))
-                #print('1st step: So far its ', expr)
-            else:
-                expr *= (x**r+p)
-            if sqrt(-q) % 1 == 0 and q < 0:
-                expr *= (x**int(r/2)+sqrt(-q))*(x**int(r/2)-sqrt(-q))
-            else:
-                expr *= (x**r+q)
-                #print('2nd step: So far its ', expr)
-        else:
-            expr = (x**r+p)*(x**r+q)
-        out['given'] = expand(expr)
-        #print('3rd step: So far its ', expr)
-        out['answer'] = expr
-        return out
 
     def checkanswer(self, user_answer):
         user_answer = user_answer.replace('^', '**')
         user_answer = parse_expr(user_answer, transformations=transformations)
-        return self.answer == user_answer
+        answer = parse_expr(str(self.answer), transformations=transformations)
+        return answer == user_answer
 
     def format_useranswer(self, user_answer, display=False):
         user_answer = user_answer.replace('^', '**')
