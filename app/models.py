@@ -12,6 +12,7 @@ observers = db.Table('observers',
     db.Column('observed_id', db.Integer, db.ForeignKey('student.id'))
 )
 
+
 class Student(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
@@ -22,6 +23,7 @@ class Student(UserMixin, db.Model):
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     answers = db.relationship('StudentAnswer', backref='student', lazy='dynamic')
+    section_statuses = db.relationship('UserSectionStatus', back_populates="student")
     fav_color = db.Column(db.String(30))
     observed_students = db.relationship(
         'Student', secondary=observers,
@@ -99,6 +101,20 @@ class BugReport(db.Model):
     seed = db.Column(db.Float)
     question_name = db.Column(db.String)
 
+class UserSectionStatus(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    grade = db.Column(db.Integer)
+    masteries_count = db.Column(db.Integer)
+    last_mastery =  db.Column(db.DateTime)
+    time_of_last_record = db.Column(db.DateTime) #ignore this
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    underway = db.Column(db.Boolean)
+    underway_seed = db.Column(db.Float)
+    underway_question_name = db.Column(db.String)
+    section_name = db.Column(db.String)
+    user_id = db.Column(db.Integer, db.ForeignKey('student.id'))
+    student = db.relationship("Student", back_populates="section_statuses")
+
 class StudentAnswer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_answer = db.Column(db.String(200))
@@ -136,7 +152,7 @@ def get_user_books(user):
 class UserSectionGradeInfo():
     def __init__(self, user, book, chapter, section):
         """book is really the name of the book;
-        section and chapter are numbers from 1 to n.
+        section and chapter are numbers from 1 to...
         """
         self.user = user
         self.book_name = book
@@ -180,9 +196,10 @@ class UserSectionGradeInfo():
     session_duration = 24
 
     def set_grade_info(self):
-        # print('set grade info got called')
         self.due_date = self.initial_due_date
         self.mastery_date = None
+        self.mastery_count = 0
+        self.grade = None
         question_names = self.section.questions
         # print('section:', self.chapter_number, ':', self.section_number, ':', question_names)
         if question_names != []:
@@ -257,10 +274,7 @@ class UserSectionGradeInfo():
                     #         'mastery count:', mastery_count)
                 # print('days since previous', days_since_previous)
                 # print('expected_recall_duration', expected_recall_duration)
-                if mastery_count == 0:
-                    memory_decay_penalty = 0
-                else:
-                    memory_decay_penalty = int(days_since_previous/expected_recall_duration)
+                memory_decay_penalty = int(days_since_previous/expected_recall_duration)
                 grade = int(grade*0.5**memory_decay_penalty)
                 if i < len(answers) and not same_session: #This really just covers the first of a new session
                     if answer.correct:
@@ -353,6 +367,7 @@ class UserSectionGradeInfo():
             else:
                 self.memory_gradient = -1
         self.grade = grade
+        self.mastery_count = mastery_count
 
 
 class UserGradeInfo():
@@ -362,16 +377,7 @@ class UserGradeInfo():
     """
     def __init__(self, user):
         self.user = user
-        self.answers = user.answers #StudentAnswer.query.filter_by(user_id=user.id).all()
-        all_info = {}
-        self.user_books = self.get_books()
-        self.book_names = self.get_book_names()
-        for book in self.user_books:
-            info = self.whole_book_info(book)
-            grade = self.get_whole_book_grade(book, whole_book_info=info)
-            all_info[book] = {'grade': grade, 'info': info}
-        self.all_info = all_info
-
+        self.answers = StudentAnswer.query.filter_by(user_id=user.id).all()
 
     def get_book_names(self):
         answers = self.answers
@@ -414,9 +420,7 @@ class UserGradeInfo():
         return sections
 
     def get_answers_by_section_desc(self, book, chapter, section):
-        # book = getattr(books, book)
-        # print('book', book)
-        answers_by_section = self.all_info[book]['info'][chapter-1][section-1].get_answers()#UserSectionGradeInfo(self.user, book, chapter, section).get_answers()
+        answers_by_section = UserSectionGradeInfo(self.user, book, chapter, section).get_answers()
         if answers_by_section is not None:
             return answers_by_section.order_by(StudentAnswer.timestamp.desc()).all()
         return []
@@ -430,7 +434,7 @@ class UserGradeInfo():
         return answers
 
     max_grade = 4
-    base = 2#math.sqrt(7) # This is supposed to model duration of memory, factoring in past repetitions
+    base = 2#math.sqrt(7) # This is supposed to model duration of memory factoring in past repetitions
     session_duration = 24
 
     def grade_section(self, book, chapter, section):
@@ -449,20 +453,53 @@ class UserGradeInfo():
             info.append(chapter_info)
         return info
 
-    def get_whole_book_grade(self, book, **kwargs):
-        if 'whole_book_info' in kwargs:
-            whole_book_info = kwargs['whole_book_info']
-        else:
-            print('oops')
-            whole_book_info = self.whole_book_info(book)
+    def get_whole_book_grade(self, book):
+        whole_book_info = self.whole_book_info(book)
         grades = []
         for chapter in whole_book_info:
             for section_info in chapter:
                 try:
-                    grades.append(section_info.grade)
+                    if section_info.grade is not None:
+                        grades.append(section_info.grade)
                 except AttributeError:
                     pass
         if len(grades) > 0:
             return sum(grades)/len(grades)
         else:
             return 0
+
+def recompute_grade(student, section_name):
+    def _recompute_grade(student, book_name, chapter, section):
+        grade_info = UserSectionGradeInfo(student, book_name, chapter, section)
+        grade = grade_info.grade
+        last_mastery = grade_info.mastery_date
+        mastery_count = grade_info.mastery_count
+        section_status = UserSectionStatus.query.filter_by(user_id=student.id, section_name=section_name).first()
+        if section_status is not None:
+            section_status.grade = grade
+            section_status.masteries_count = mastery_count
+            section_status.last_mastery = last_mastery
+            section_status.section_name = section_name
+        else:
+            section_status = UserSectionStatus(user_id=student.id,
+                                                    grade=grade,
+                                                    masteries_count=mastery_count,
+                                                    last_mastery=last_mastery,
+                                                    section_name=section_name
+                                                    )
+            db.session.add(section_status)
+        db.session.commit()
+    student_books = get_user_books(student)
+    for book_name in student_books:
+        book = getattr(books, book_name)
+        chapter, section = book.get_section_and_chapter_numbers(section_name)
+        _recompute_grade(student, book_name, chapter, section)
+
+
+def recompute_all(book):
+    sections = book.list_all_sections()
+    users = Student.query.all()
+    for user in users:
+        for section in sections:
+            print(user.username)
+            recompute_grade(user, section.view_name)
