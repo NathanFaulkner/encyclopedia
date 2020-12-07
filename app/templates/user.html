@@ -71,7 +71,7 @@
 
 {% if (user == current_user) or current_user.is_observing(user) %}
   {% set pupil = user %}
-  {% include "_gradebook2.html" %}
+  {% include "_gradebook3.html" %}
 
   <hr style="color: var(--section-header-color);">
 {% endif %}
@@ -84,7 +84,7 @@
       {% set grades = pupil.user_grade_info() %}
       {% set user_books = grades.get_books() %}
       <p>{{pupil.lastname}}, {{ pupil.firstname }}</p>
-      {% include "_gradebook2.html" %}
+      {% include "_gradebook3.html" %}
       <!-- {% for book in user_books %}
         <p>{{ book.display_name }}</p>
       {% endfor %} -->

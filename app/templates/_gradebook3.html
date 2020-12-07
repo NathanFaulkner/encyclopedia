@@ -1,0 +1,147 @@
+<div class="gradebook">
+  <span style="font-size:18;">Grades for {{ pupil.firstname }}</span>
+  <button class="show_hide_button">Hide Grades</button>
+  <div>
+  <table>
+    {% for book in user_books %}
+    {% set whole_book_info = grades.all_info[book] %}
+    <tr>
+      <td class="gradebook-section">
+        <a href="{{ url_for('book', book_name=book.name_for_path) }}">{{ book.display_name }}</a>
+      </td>
+      <td>
+        <table>
+          <tr>
+            <td>Grade</td><td>Pct</td>
+          </tr>
+          <tr>
+            {% set overall_grade = whole_book_info['grade'] %}
+            <td>{{ "%.3f" % overall_grade }}</td><td>{{ "%.2f" % (overall_grade/4*100) }}%</td>
+          </tr>
+        </table>
+      </td>
+      {% for chapter in book.subdivisions['main'].subdivisions %}
+        {% set outer_loop = loop %}
+        <tr>
+          <td class="gradebook-section" style="max-width:300px">
+            <a style="min-width:250px" href="{{ url_for('book_chapter', book_name=book.name_for_path, chapter_number=outer_loop.index) }}">
+              {{ outer_loop.index }}: {{ chapter.display_name }}
+            </a>
+          </td>
+        </tr>
+        {% for section in chapter.subdivisions %}
+        {% set section_loop = loop %}
+        <tr>
+          <td class="gradebook-section" valign="top" style="max-width:300px">
+            <a href="{{ url_for('book_section',
+                                book_name=book.name_for_path,
+                                chapter_number=outer_loop.index,
+                                section_number=loop.index) }}">
+            {{ outer_loop.index }}.{{ loop.index }}: {{ section.display_name }}
+            </a>
+          </td>
+          <td valign="top">
+          <table>
+            <tr>
+              <td style="min-width:150px">Next Due Date</td>
+              <td>Grade</td>
+              {% if request.args.get('section') == section.view_name %}
+              {% set answers = grades.get_answers_by_section_desc(book, outer_loop.index, loop.index) %}
+              {% for answer in answers %}
+              {% if loop.index < 40 %}
+              <td>
+                {#{{ answer.timestamp.month }}/{{ answer.timestamp.day }}#}
+                <div class="tooltip">
+                  {{ momentjs(answer.timestamp).format("M/DD") }}
+                  <!-- {{ momentjs(answer.timestamp).calendar() }} -->
+                  <span class="tooltiptext">{{ momentjs(answer.timestamp).format("hh:mmA") }}</span>
+                </div>
+              </td>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+            </tr>
+            <tr>
+              {#{% set section_grades = grades.grade_section(book.name_for_path, outer_loop.index, loop.index) %}#}
+              {% set section_grades = whole_book_info['info'][outer_loop.index - 1][loop.index - 1] %}
+              {% if section_grades.memory_gradient %}
+                {% if section_grades.memory_gradient < 0.75 %}
+                  {% set bgcolor = 'rgba(0, 255, 0, 0.5)' %}
+                {% elif section_grades.memory_gradient < 1 %}
+                  {% set bgcolor = 'rgba(252, 186, 3, 0.5)' %}
+                {% else %}
+                  {% set bgcolor = 'rgba(255, 0, 0, 0.5)' %}
+                {% endif %}
+              {% else %}
+                {% set bgcolor = 'white' %}
+              {% endif %}
+              <td style="background-color:{{ bgcolor }}">
+                {% if section_grades.next_due_date %}
+                {#{{ section_grades.next_due_date.month }}/{{ section_grades.next_due_date.day }}#}
+                {{ momentjs(section_grades.next_due_date).grade_book() }}
+                {% endif %}
+              </td>
+              {% if section_grades.grade %}
+                {% if section_grades.grade <= 1 %}
+                  {% set bgcolor = 'rgba(0, 0, 255, 0.25)' %}
+                {% elif section_grades.grade <= 2 %}
+                  {% set bgcolor = 'rgba(0, 0, 255, 0.5)' %}
+                {% elif section_grades.grade <= 3 %}
+                  {% set bgcolor = 'rgba(0, 0, 255, 0.75)' %}
+                {% else %}
+                  {% set bgcolor = 'rgba(0, 0, 255, 1)' %}
+                {% endif %}
+              {% else %}
+                {% set bgcolor = 'gray' %}
+              {% endif %}
+              <td style="background-color:{{ bgcolor }}">{{ section_grades.grade }}</td>
+              {% if request.args.get('section') == section.view_name %}
+              {% for answer in answers %}
+              {% if loop.index < 40 %}
+              {% if answer.correct %}
+              <td>
+                <a style="text-align:center; color:green;"
+                  href="{{ url_for('book_section',
+                                      book_name=book.name_for_path,
+                                      chapter_number=outer_loop.index,
+                                      section_number=section_loop.index,
+                                      skip_to_exercises='True',
+                                      question_name=answer.skillname,
+                                      ans_id=answer.id) }}">
+                  &#x2714;
+                </a>
+              </td>
+              {% else %}
+              <td>
+                <a style="text-align:center; color:red;"
+                  href="{{ url_for('book_section',
+                                      book_name=book.name_for_path,
+                                      chapter_number=outer_loop.index,
+                                      section_number=section_loop.index,
+                                      skip_to_exercises='True',
+                                      question_name=answer.skillname,
+                                      ans_id=answer.id) }}">
+                  &#x2716;
+                </a>
+              </td>
+              {% endif %}
+              {% endif %}
+              {% endfor %}
+              {% else %}
+              <td>
+                <a href="{{ url_for('user', username=user.username, section=section.view_name) }}">
+                  Click to see past work.
+                </a>
+              </td>
+              {% endif %}
+            </tr>
+          </table>
+          </td>
+        </tr>
+        {% endfor %}
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+  </div>
+</div>

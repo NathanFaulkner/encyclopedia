@@ -96,6 +96,18 @@ class Division():
                     info.append([i+1,j+1])
         return info
 
+    def get_section_and_chapter_numbers(self, section_name):
+        if self.category != 'book':
+            return None
+        info = []
+        main = self.subdivisions['main']
+        chapters = main.subdivisions
+        for i, chapter in enumerate(chapters):
+            section = chapter.subdivisions
+            for j, section in enumerate(section):
+                if section_name == section.view_name:
+                    return [i+1,j+1]
+
 
 class SevenTest():
     def __init__(self, book, which_test, **kwargs):
