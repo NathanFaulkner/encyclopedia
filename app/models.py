@@ -116,7 +116,7 @@ class UserSectionStatus(db.Model):
     student = db.relationship("Student", back_populates="section_statuses")
 
     max_grade = 4
-    base = 2#math.sqrt(7) # This is supposed to model duration of memory factoring in past repetitions
+    base = 2 #math.sqrt(7) # This is supposed to model duration of memory factoring in past repetitions
     session_duration = 24
     waiting_factor = 0.75
 
@@ -127,8 +127,12 @@ class UserSectionStatus(db.Model):
         if correct:
             grade = min(self.max_grade, self.grade + 1)
             if grade == self.max_grade:
-                if self.days_since_previous_mastery() >= self.waiting_factor*self.expected_recall_duration() or self.masteries_count == 0:
+                if self.masteries_count == 0:
                     self.masteries_count += 1
+                    self.last_mastery = now
+                elif self.days_since_previous_mastery(now) >= self.waiting_factor*self.expected_recall_duration():
+                    self.masteries_count += 1
+                    self.last_mastery = now
         else:
             grade = max(0, self.grade - 1)
         self.timestamp = now
@@ -143,8 +147,8 @@ class UserSectionStatus(db.Model):
         days_since_previous = time_since_previous.days + time_since_previous.seconds/60/60/24
         return days_since_previous
 
-    def days_since_previous_mastery(self):
-        time_since_previous = self.last_mastery - self.timestamp
+    def days_since_previous_mastery(self, now):
+        time_since_previous = now - self.last_mastery
         days_since_previous = time_since_previous.days + time_since_previous.seconds/60/60/24
         return days_since_previous
 
@@ -205,6 +209,7 @@ class UserSectionStatus(db.Model):
         i = 1
         for answer in answers:
             self.update_grade_after_user_attempt(answer.correct, answer.timestamp, commit=False)
+            print(f'Round {i}', f'Masteries count: {self.masteries_count}')
             i += 1
         self.decay_grade(datetime.utcnow())
 
@@ -212,7 +217,7 @@ class UserSectionStatus(db.Model):
 
     @staticmethod
     def initialize_from_answers(student, section_name):
-        if UserSectionStatus.query.filter_by(user_id=student.id).first() == None:
+        if UserSectionStatus.query.filter_by(user_id=student.id, section_name=section_name).first() == None:
             section_status = UserSectionStatus(student=student, section_name=section_name)
             section_status.regrade()
 
