@@ -109,7 +109,7 @@ class MaxRevenue(Question):
         \[
         u = {latex(b+a*x)}
         \]
-        Find the price \(x\) that maximizes the revenue.
+        Find the maximum revenue and the price \(x\) at which that maximum is attained.
         """
 
         self.further_instruction = f"""

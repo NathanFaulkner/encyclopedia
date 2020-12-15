@@ -108,7 +108,7 @@ class SolveByElimination(Question):
         self.format_given_for_tex = f"""
 {self.prompt_single}
 {self.format_given}
-Use elimination.
+Use elimination.  Show all work.
 """
 
     name = 'Solve By Elimination'
