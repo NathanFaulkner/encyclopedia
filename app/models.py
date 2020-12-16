@@ -185,7 +185,7 @@ class UserSectionStatus(db.Model):
                                                         skillname=question_names[0])
         i = 1
         while i < len(question_names):
-            query = StudentAnswer.query.filter_by(user_id=self.user.id,
+            query = StudentAnswer.query.filter_by(user_id=self.student.id,
                                                             skillname=question_names[i])
             answers_by_section = answers_by_section.union(query)
             i += 1
@@ -209,16 +209,17 @@ class UserSectionStatus(db.Model):
         i = 1
         for answer in answers:
             self.update_grade_after_user_attempt(answer.correct, answer.timestamp, commit=False)
-            print(f'Round {i}', f'Masteries count: {self.masteries_count}')
+            print(f'Round {i}', f'Grade: {self.grade}', f'Masteries count: {self.masteries_count}')
             i += 1
-        self.decay_grade(datetime.utcnow())
+        if len(answers) > 0:
+            self.decay_grade(datetime.utcnow())
 
         db.session.commit()
 
     @staticmethod
     def initialize_from_answers(student, section_name):
         if UserSectionStatus.query.filter_by(user_id=student.id, section_name=section_name).first() == None:
-            section_status = UserSectionStatus(student=student, section_name=section_name)
+            section_status = UserSectionStatus(student=student, section_name=section_name, grade=0)
             section_status.regrade()
 
 
@@ -272,26 +273,30 @@ class UserSectionGradeInfo():
         self.set_initial_due_date()
         section_record = UserSectionStatus.query.filter_by(user_id=user.id, section_name=self.section.view_name).first()
         if section_record is not None:
+            if type(section_record.grade) == type(5):
+                if section_record.grade > 0:
+                    section_record.decay_grade(datetime.utcnow())
             grade = section_record.grade
             mastery_count = section_record.masteries_count
             last_mastery_date = section_record.last_mastery
-            expected_recall_duration = max(1, int(self.base**(mastery_count-1)))
+            expected_recall_duration = section_record.expected_recall_duration()
             if last_mastery_date is not None:
-                time_since_last_mastery = datetime.utcnow() - last_mastery_date
-                days_since_last_mastery = time_since_last_mastery.days + time_since_last_mastery.seconds/60/60/24
-                self.memory_gradient = days_since_last_mastery/expected_recall_duration
-                memory_decay_penalty = int(days_since_last_mastery/expected_recall_duration)
-                grade = max(0, int(grade*0.5**memory_decay_penalty))
+                # time_since_last_mastery = datetime.utcnow() - last_mastery_date
+                # days_since_last_mastery = time_since_last_mastery.days + time_since_last_mastery.seconds/60/60/24
+                self.memory_gradient = section_record.days_since_previous(datetime.utcnow())/expected_recall_duration
+                # memory_decay_penalty = int(days_since_last_mastery/expected_recall_duration)
+                # grade = max(0, int(grade*0.5**memory_decay_penalty))
             if mastery_count == 0:
                 self.next_due_date = None
             else:
-                self.next_due_date = last_mastery_date + timedelta(days=expected_recall_duration)
+                self.next_due_date = section_record.timestamp + timedelta(days=expected_recall_duration)
             self.set_answers()
             self.grade = grade
             self.mastery_date = last_mastery_date
             self.mastery_count = mastery_count
         else:
-            self.set_grade_info()
+            UserSectionStatus.initialize_from_answers(user, self.section.view_name)
+            # self.set_grade_info()
 
     def set_book(self):
         self.book = getattr(books, self.book_name)
@@ -654,3 +659,16 @@ def recompute_all(book):
         for section in sections:
             print(user.username)
             recompute_grade(user, section.view_name)
+
+def regrade_all_sections_for_student(student, book):
+    sections = book.list_all_sections()
+    for section in sections:
+        print(section.view_name)
+        section_status = UserSectionStatus.query.filter_by(student=student, section_name=section.view_name).all()
+        if len(section_status) > 1:
+            raise ValueError('Too many records!!')
+        if section_status != []:
+            section_status = section_status[0]
+            section_status.regrade()
+        else:
+            UserSectionStatus.initialize_from_answers(student, section.view_name)
