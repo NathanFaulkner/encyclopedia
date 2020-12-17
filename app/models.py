@@ -157,6 +157,8 @@ class UserSectionStatus(db.Model):
         return max(1, int(self.base**(self.masteries_count-1)))
 
     def decay_grade(self, now, commit=True):
+        if self.masteries_count == 0:
+            return None
         decayed_grade = self.grade_after_last_user_attempt * 0.5**int(self.days_since_previous(now)/self.expected_recall_duration())
         if int(decayed_grade) < self.grade:
             self.grade = int(decayed_grade)
@@ -193,7 +195,7 @@ class UserSectionStatus(db.Model):
         self.answers = answers_by_section
 
 
-    def regrade(self):
+    def regrade(self, commit=True):
         self.set_answers()
         answers = self.answers.order_by(StudentAnswer.timestamp.asc()).all()
         self.masteries_count = 0
@@ -215,13 +217,14 @@ class UserSectionStatus(db.Model):
         if len(answers) > 0:
             self.decay_grade(datetime.utcnow())
 
-        db.session.commit()
+        if commit:
+            db.session.commit()
 
     @staticmethod
-    def initialize_from_answers(student, section_name):
+    def initialize_from_answers(student, section_name, commit=True):
         if UserSectionStatus.query.filter_by(user_id=student.id, section_name=section_name).first() == None:
             section_status = UserSectionStatus(student=student, section_name=section_name, grade=0)
-            section_status.regrade()
+            section_status.regrade(commit)
 
 
 
@@ -661,7 +664,7 @@ def recompute_all(book):
             print(user.username)
             recompute_grade(user, section.view_name)
 
-def regrade_all_sections_for_student(student, book):
+def regrade_all_sections_for_student(student, book, commit=True):
     sections = book.list_all_sections()
     for section in sections:
         print(section.view_name)
@@ -670,6 +673,13 @@ def regrade_all_sections_for_student(student, book):
             raise ValueError('Too many records!!')
         if section_status != []:
             section_status = section_status[0]
-            section_status.regrade()
+            section_status.regrade(commit=commit)
         else:
-            UserSectionStatus.initialize_from_answers(student, section.view_name)
+            UserSectionStatus.initialize_from_answers(student, section.view_name, commit=commit)
+
+def regrade_all(book):
+    users = Student.query.all()
+    for user in users:
+        print(user.username)
+        regrade_all_sections_for_student(user, book, commit=False)
+    db.session.commit()
