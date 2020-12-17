@@ -28,7 +28,8 @@ from app.models import (Student,
                         BugReport,
                         get_user_books,
                         UserGradeInfo,
-                        UserSectionGradeInfo)
+                        UserSectionGradeInfo,
+                        UserSectionStatus)
 from app.email import (send_password_reset_email,
                         send_report_bug_email)
 
@@ -271,6 +272,7 @@ def hello():
 
 @app.route('/section/<section_name>')
 def section(section_name):
+    session['section_name'] = section_name ## Added 12/16/2020
     section = getattr(books, section_name)
     template_path = section.template_path
     section_display_name = section.display_name
@@ -492,10 +494,16 @@ def question(question_name):
     # Added the request.args.get('form') == 'form' requirement in the process
     # of figuring out if I could have a second submit button---for submitting
     # requests for a preview of the math AnswerForm
+    if current_user.is_authenticated: ## Added 12/16/2020
+        section_name = session.get('section_name') ## Added 12/16/2020
+        grade_info = UserSectionStatus.query.filter_by(student=current_user, section_name=section_name).first() ## Added 12/16/2020
+    else:  ## Added 12/16/2020
+        grade_info = None  ## Added 12/16/2020
     if form.validate_on_submit() and request.args.get('form') == 'form' and not (whether_graph and points == []):
         correct = question.checkanswer(useranswer)
         if current_user.is_authenticated and not session['tried']:
             user = current_user
+            grade_info.update_grade_after_user_attempt(correct, datetime.datetime.utcnow(), commit=False) ## Added 12/16/2020
             for book_info in books_info:
                 answer_event = StudentAnswer(student=user,
                                         skillname=question_name,
@@ -566,22 +574,25 @@ but you should try a different problem if you want credit."""
         new_question_name = question_name
 
     ###############################
-    #This is for the progress bar.
+    #This is for the progress bar.   Commented out on 12/16/2020
     ###############################
-    if current_user.is_authenticated:
-        book_info = books_info[0]
-        # grades = UserGradeInfo(current_user)
-        # print(current_user.username)
-        # print('book', book_info.get('book'))
-        # print('chapter', book_info.get('chapter'))
-        # print('section', book_info.get('section'))
-        grade_info = UserSectionGradeInfo(current_user,
-                                        book_info.get('book'),
-                                        book_info.get('chapter'),
-                                        book_info.get('section'))
-        # print('grade is:', grade_info.grade)
-    else:
-        grade_info = None
+    # if current_user.is_authenticated:
+    #     book_info = books_info[0]
+    #     # grades = UserGradeInfo(current_user)
+    #     # print(current_user.username)
+    #     # print('book', book_info.get('book'))
+    #     # print('chapter', book_info.get('chapter'))
+    #     # print('section', book_info.get('section'))
+    #     grade_info = UserSectionGradeInfo(current_user,
+    #                                     book_info.get('book'),
+    #                                     book_info.get('chapter'),
+    #                                     book_info.get('section'))
+    #     # print('grade is:', grade_info.grade)
+    # else:
+    #     grade_info = None
+    #
+    #  ## Concludes comment from 12/16/2020
+    ###############################
     return render_template('question_page.html', user=user, title='Question',
         site_name=app.config['SITE_NAME'], form=form, question=question,
         tried=session['tried'], message=message, whether_graph=whether_graph,
