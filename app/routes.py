@@ -279,7 +279,14 @@ def section(section_name):
     questions = section.questions
     # print(questions)
     if questions != []:
-        question_name = random.choice(questions)
+        if current_user.is_authenticated:
+            section_status = UserSectionStatus.query.filter_by(student=current_user, section_name=section_name).first()
+            if section_status.underway:
+                question_name = section_status.underway_question_name
+            else:
+                question_name = random.choice(questions)
+        else:
+            question_name = random.choice(questions)
     else:
         question_name = False
     # print(question_name)
@@ -315,6 +322,11 @@ def question(question_name):
     bug_form = ReportBugForm()
     book_info = {}
     session['question_name'] = question_name
+    if current_user.is_authenticated: ## Added 12/16/2020
+        section_name = session.get('section_name') ## Added 12/16/2020
+        grade_info = UserSectionStatus.query.filter_by(student=current_user, section_name=section_name).first() ## Added 12/16/2020
+    else:  ## Added 12/16/2020
+        grade_info = None  ## Added 12/16/2020
     if current_user.is_authenticated:
         user_book_names = json.loads(current_user.books)
         # user_books = [getattr(books, book_name) for book_name in user_book_names]
@@ -425,9 +437,19 @@ def question(question_name):
                 question.intervals = user_intervals
             else:
                 form.answer.data = answer.user_answer
+        elif current_user.is_authenticated and grade_info.underway:
+            question = question_module.Question_Class(seed=grade_info.underway_seed)
+            session['tried'] = False
+            session['seed'] = grade_info.underway_seed
+            session['user_points'] = []
         else: # AttributeError:
             session['tried'] = False
             session['seed'] = random.random()
+            if current_user.is_authenticated:
+                grade_info.underway = True
+                grade_info.underway_question_name = question_name
+                grade_info.underway_seed = session['seed']
+                db.session.commit()
             session['user_points'] = []
         # form.seed.data = session['seed']
 
@@ -494,16 +516,12 @@ def question(question_name):
     # Added the request.args.get('form') == 'form' requirement in the process
     # of figuring out if I could have a second submit button---for submitting
     # requests for a preview of the math AnswerForm
-    if current_user.is_authenticated: ## Added 12/16/2020
-        section_name = session.get('section_name') ## Added 12/16/2020
-        grade_info = UserSectionStatus.query.filter_by(student=current_user, section_name=section_name).first() ## Added 12/16/2020
-    else:  ## Added 12/16/2020
-        grade_info = None  ## Added 12/16/2020
     if form.validate_on_submit() and request.args.get('form') == 'form' and not (whether_graph and points == []):
         correct = question.checkanswer(useranswer)
         if current_user.is_authenticated and not session['tried']:
             user = current_user
             grade_info.update_grade_after_user_attempt(correct, datetime.datetime.utcnow(), commit=False) ## Added 12/16/2020
+            grade_info.underway = False
             for book_info in books_info:
                 answer_event = StudentAnswer(student=user,
                                         skillname=question_name,
