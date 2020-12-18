@@ -518,36 +518,39 @@ def question(question_name):
     # requests for a preview of the math AnswerForm
     if form.validate_on_submit() and request.args.get('form') == 'form' and not (whether_graph and points == []):
         correct = question.checkanswer(useranswer)
+    if form.validate_on_submit() and request.args.get('form') == 'form' and not (whether_graph and points == []):
+        correct = question.checkanswer(useranswer)
         if current_user.is_authenticated and not session['tried']:
             user = current_user
-            now = datetime.datetime.utcnow()
-            diff = now - grade_info.timestamp
-            if diff > datetime.timedelta(0,5,0):
-                grade_info.update_grade_after_user_attempt(correct, now, commit=False) ## Added 12/16/2020
-                for book_info in books_info:
-                    answer_event = StudentAnswer(student=user,
-                                            skillname=question_name,
-                                            grade_category='check',
-                                            seed=session['seed'],
-                                            book=book_info.get('book'),
-                                            chapter=book_info.get('chapter'),
-                                            section=book_info.get('section'),
-                                            user_answer=user_answer_for_db)
-                    db.session.add(answer_event)
-                    answer_event.correct = correct
-            grade_info.underway = False
+            grade_info.update_grade_after_user_attempt(correct, datetime.datetime.utcnow(), commit=False) ## Added 12/16/2020
+            for book_info in books_info:
+                answer_event = StudentAnswer(student=user,
+                                        skillname=question_name,
+                                        grade_category='check',
+                                        seed=session['seed'],
+                                        book=book_info.get('book'),
+                                        chapter=book_info.get('chapter'),
+                                        section=book_info.get('section'),
+                                        user_answer=user_answer_for_db)
+            db.session.add(answer_event)
         if correct:
             message = 'You got it right!!'
             if session['tried'] == True:
                 message += " But you'll have to try a new problem to earn credit."
+            else:
+                if current_user.is_authenticated:
+                    answer_event.correct = True
+                    db.session.commit()
         else:
             message = "Incorrect. You'll have to try a new problem."
             if whether_graph:
                 message = 'The correct answer is in <span style="color:green">green</span>.'
             if question_module.prob_type == 'real_line_graph':
                 message = 'The correct answer is in <span style="color:green">green</span>'
-        if current_user.is_authenticated and not session['tried']:
-            db.session.commit()
+            if current_user.is_authenticated:
+                if not session['tried']:
+                    answer_event.correct = False
+                    db.session.commit()
         session['tried'] = True
     else:
         if request.method == 'POST':
