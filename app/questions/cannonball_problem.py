@@ -145,7 +145,9 @@ class CannonballProblem(Question):
             user_y = user_y[:i]
         user_y = user_y.replace('^', '**')
         user_y = parse_expr(user_y, transformations=transformations)
-        return abs(user_x - self.h) < 0.005 and abs(user_y -self.k) < max(-self.a*0.01*self.h + self.b*0.005, 0.005)
+        correct = abs(user_x - self.h) < 0.005 and abs(user_y -self.k) < max(-self.a*0.01*self.h + self.b*0.005, 0.005)
+        return bool(correct)
+        # return correct
 
     def format_useranswer(self, user_answer, display=False):
         user_answer = user_answer.split(' ')
