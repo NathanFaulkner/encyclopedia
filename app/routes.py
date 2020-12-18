@@ -522,7 +522,7 @@ def question(question_name):
             user = current_user
             now = datetime.datetime.utcnow()
             diff = now - grade_info.timestamp
-            if diff > datetime.timedelta(0,1,0):
+            if diff > datetime.timedelta(0,5,0):
                 grade_info.update_grade_after_user_attempt(correct, now, commit=False) ## Added 12/16/2020
                 for book_info in books_info:
                     answer_event = StudentAnswer(student=user,
