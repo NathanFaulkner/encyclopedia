@@ -532,9 +532,9 @@ def question(question_name):
                                             book=book_info.get('book'),
                                             chapter=book_info.get('chapter'),
                                             section=book_info.get('section'),
-                                            user_answer=user_answer_for_db,
-                                            correct=correct)
-                db.session.add(answer_event)
+                                            user_answer=user_answer_for_db)
+                    db.session.add(answer_event)
+                    answer_event.correct = correct
             grade_info.underway = False
         if correct:
             message = 'You got it right!!'
