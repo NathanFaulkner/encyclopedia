@@ -212,7 +212,7 @@ class UserSectionStatus(db.Model):
         # i = 1
         for answer in answers:
             self.update_grade_after_user_attempt(answer.correct, answer.timestamp, commit=False)
-            print(f'Round {i}', f'timestamp: {self.timestamp}', f'Grade: {self.grade}', f'Masteries count: {self.masteries_count}')
+            # print(f'Round {i}', f'timestamp: {self.timestamp}', f'Grade: {self.grade}', f'Masteries count: {self.masteries_count}')
             # i += 1
         if len(answers) > 0:
             self.decay_grade(datetime.utcnow())
