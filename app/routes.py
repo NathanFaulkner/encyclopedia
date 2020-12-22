@@ -281,6 +281,9 @@ def section(section_name):
     if questions != []:
         if current_user.is_authenticated:
             section_status = UserSectionStatus.query.filter_by(student=current_user, section_name=section_name).first()
+            if section_status == None:
+                section_status = UserSectionStatus(student=current_user, section_name=section_name, grade=0)
+                db.session.commit()
             if section_status.underway:
                 question_name = section_status.underway_question_name
             else:
