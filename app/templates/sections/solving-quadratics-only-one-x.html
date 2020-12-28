@@ -1,0 +1,264 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  You are (hopefully) now capable of solving a large class of quadratic equations.
+  But what about the following?
+    \[
+      2x^2 - 7x +1 =0
+    \]
+  Could you solve that?  Well, maybe&mdash;but one problem is that that
+  quadratic is not factorable.  In this section, we start building a
+  process that will enable us to solve any quadratic.  It will not (seem to)
+  involve factoring at all.  But since we aren't starting with the hardest
+  problems, some of these could also be solved by factoring, even though
+  we will be using a new method.
+</p>
+
+<p>
+  By the way:
+  <div class="definition">
+    <h2></h2>
+    A \textbf{quadratic equation} is any equivalent to one of the form
+      \[
+        ax^2 +bx +c = 0,
+      \]
+    where \(a\), \(b\), and \(c\) are numbers, but \(a\neq 0\).
+    This presentation is called <b>standard form</b>.
+  </div>
+</p>
+
+<p>
+  After reading the foregoing definition, you should ask yourself
+  what I mean by ``equivalent to'' in the above definition?  That is, what does it mean
+  for two <em>equations</em> to be <em>equivalent</em>?
+</p>
+
+<p>
+  To learn our new method, we will be starting with very basic examples but making them increasingly complex.
+</p>
+
+
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/0d619e8c06094b71ad53db54a204d460" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve each of the following by taking square roots.
+
+  <ol type="a">
+    <li> \(x^2 = 4\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          As always, an equation&mdash;and the prompt to <em>solve</em>
+          it&mdash;invites us to initiate a narrative byt saying, "Suppose
+          that \(x\) is an honest, real number with the given property."
+          This equation poses the question, what number times itself comes out to 4?
+          Of course, one answer is "\(2\)".  But, the important thing to realize
+          is that there is another possibility as well: \(x\) could be
+          \(-2\) as well.
+        </div>
+      </div>
+    </li>
+    <li>
+      \(3x^2 = 12\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Again, we are supposing that \(x\) is a real number (sitting
+          somewhere on the real line) with the property given by the
+          equation.  This means that \(3x^2\) is also a real number; indeed,
+          we know that this real number is \(12\)!  Of course, we
+          can then divide both sides to learn that
+          \[
+            x^2 = 4
+          \]
+          and thus
+          \[
+            x = 2 \quad \textrm{or} \quad x = -2
+          \]
+          as before.
+        </div>
+      </div>
+    </li>
+    <li>
+      \(3(x-5)^2 = 12\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          As a first step, I'd divide both sides by \(3\):
+          \begin{align*}
+            & 3(x-5)^2 =12 \\
+            \Rightarrow \quad & (x-5)^2 = 4
+          \end{align*}
+          Next, it is helpful to recall the secret narrative
+          behind this process that begins by declaring that \(x\) is
+          a real number.  Since \(x\) is a real number (or so we are assuming)
+          \(x-5\) is also a real number.  That's good to know since we are told
+          that the square of \(x-5\) is \(4\).  That means that
+          \(x-5\) has to be either \(2\) or \(-2\), though it really
+          isn't possible to know which it is based only on our assumptions.
+          So, I continue:
+          \begin{align*}
+            & (x-5)^2 = 4 \\
+            \Rightarrow \quad & x - 5= -2 \quad \textrm{or} \quad x - 5= 2\\
+            \Rightarrow \quad & x = 3 \quad \textrm{or} \quad x = 7
+          \end{align*}
+        </div>
+      </div>
+    </li>
+    <li>
+      \(3(x-5)^2 + 7= 19\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \begin{align*}
+            & 3(x-5)^2 + 7= 19 \\
+            \Rightarrow \quad & 3(x-5)^2 =12 \\
+            \Rightarrow \quad & (x-5)^2 = 4 \\
+            \Rightarrow \quad & x - 5= -2 \quad \textrm{or} \quad x - 5= 2\\
+            \Rightarrow \quad & x = 3 \quad \textrm{or} \quad x = 7
+          \end{align*}
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+
+<p>
+  It's also important to realize that this process works even in more awkward cases:
+</p>
+
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/0d619e8c06094b71ad53db54a204d460" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve each of the following by taking square roots.
+
+  <ol type="a">
+    <li> \(x^2 = 3\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Again, this equation poses the question, what number times itself comes out to \(3\)?
+          The answer this is not so obvious.  Upon a little reflection,
+          you will hopefully agree that it must be a number between \(1\)
+          and \(2\), since multiplying \(1\) by itself is to small and
+          multiplying \(2\) by itself is too big.  However, we will content
+          ourselves with writing a <em>symbol</em> for this number.  (Actually,
+          if you think about it, '2' is just a symbol for number as well, isn't it?)
+          The symbol, as you will probably know is \(\sqrt{3}\), which is read
+          "the square root of 3".  Of course, you might also realize
+          that it is called "the square root" because it is the number
+          that "gives rise to 3" when squaring.  The image suggested
+          is that this unknown number lying buried underground gave rise to the
+          part that we can see (like the stalk of a plant above ground)&mdash;namely
+          3&mdash;through squaring.  The important thing to realize is that
+          there really is a real number with this property.  You can imagine
+          it as the side length inches of a square whose area is 3 square inches.
+          That has to exist at least in an ideal sense, no?  One more important
+          thing to realize: if yu take the negative of whatever that number is
+          and multiply it by itself, then it will come out positive; it will come
+          out to \(+3\) as well.  So, there are two solutions:
+          \[
+            x = \sqrt{3} \quad \textrm{or} \quad x = -\sqrt{3}
+          \]
+        </div>
+      </div>
+    </li>
+    <li>
+      \(4(x+5)^2 + 13 = 25\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \begin{align*}
+            & 4(x+5)^2 + 13 = 25 \\
+            \Rightarrow \quad & 4(x+5)^2 =12 \\
+            \Rightarrow \quad & (x+5)^2 = 3 \\
+            \Rightarrow \quad & x + 5= -\sqrt{3} \quad \textrm{or} \quad x + 5= \sqrt{3} \\
+            \Rightarrow \quad & x = -5 -\sqrt{3} \quad \textrm{or} \quad x = -5 + \sqrt{3}
+          \end{align*}
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+
+
+<p>
+  In yet other cases, you will find that there is no (real) solution to the quadratic:
+</p>
+
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/0d619e8c06094b71ad53db54a204d460" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve each of the following by taking square roots.
+
+  <ol type="a">
+    <li> \(x^2 = -3\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Since the square of any (real) number is positive (or at least 0), there is no real number that will solve this equation.
+        </div>
+      </div>
+    </li>
+    <li>
+      \(4(x+5)^2 + 13 = 1\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \begin{align*}
+            & 4(x+5)^2 + 13 = 1 \\
+            \Rightarrow \quad & 4(x+5)^2 = - 12 \\
+            \Rightarrow \quad & (x+5)^2 = -3 \\
+          \end{align*}
+          Since the square of any (real) number is positive (or at least 0), there is no real number that will solve this equation.
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+
+<p>
+  We will learn later&mdash;in a concept that you will at first find to be
+  bizarre&mdash;that there is actually a far-reaching utility in "pretending"
+  that equations such as those in the last example do have a solution&mdash;albeit
+  one which is not a real number.  This takes us to study "imaginary numbers"
+  (which we will do only briefly)&mdash;and what you might prefer to call
+  "the imaginary element," \(i\).
+  The point of \(i\) is that \(i^2 = -1\)
+  (which means \(i\) certainly isn't a <em>real</em> number, to that extent that
+  you insist on calling it a number at all), and so it provides a "solution"
+  to equations such as
+    \[
+      x^2 = -1
+    \]
+  The real purpose in inventing such a bizarre concept lies "outside the scope
+  of this course," which you should regard as the teacher cop-out.
+  But I'd like to give you an indication of one or two applications of \(i\)
+  when we get there.
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+
+{% endblock %}

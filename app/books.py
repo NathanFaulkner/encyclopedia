@@ -664,6 +664,9 @@ mixedpracticeplusgcf.add_to_questions('mixed_practice_plus_gcf')
 
 solvingquadraticspart2 = Section('solvingquadraticspart2', "Solving Quadratics, Part 2", '/sections/solving-quadratics-part2')
 solvingquadraticspart2.add_to_questions('solving_by_factoring_level2')
+
+solvingquadraticsonlyonex = Section('solvingquadraticsonlyonex', "Solving Quadratics: Only One x", '/sections/solving-quadratics-only-one-x')
+solvingquadraticsonlyonex.add_to_questions('quadratic_only_one_x')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -729,6 +732,7 @@ quadratics = Division('chapter', "Quadratic Functions",
                                 quadraticpattern,
                                 mixedpracticeplusgcf,
                                 solvingquadraticspart2,
+                                solvingquadraticsonlyonex,
                                 ])
 quadratics.set_frontpage(quadratics_intro)
 
