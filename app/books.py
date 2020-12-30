@@ -644,7 +644,7 @@ factoringtrinomialslevel1.add_to_questions('factor_trinomials_level1',
                                         'factor_trinomials_level1',
                                             'factoring_warm_up')
 
-solvingquadraticspart1 = Section('solvingquadraticspart1', "Solving Quadratics, Part 1", '/sections/solving-quadratics-part1')
+solvingquadraticspart1 = Section('solvingquadraticspart1', "Solving by Factoring, Part 1", '/sections/solving-quadratics-part1')
 solvingquadraticspart1.add_to_questions('solving_by_factoring_level1')
 
 specialpatterns = Section('specialpatterns', "Special Patterns", '/sections/special-patterns')
@@ -662,11 +662,15 @@ quadraticpattern.add_to_questions('quadratic_pattern')
 mixedpracticeplusgcf = Section('mixedpracticeplusgcf', "Putting It All Together", '/sections/putting-it-all-together-factoring')
 mixedpracticeplusgcf.add_to_questions('mixed_practice_plus_gcf')
 
-solvingquadraticspart2 = Section('solvingquadraticspart2', "Solving Quadratics, Part 2", '/sections/solving-quadratics-part2')
+solvingquadraticspart2 = Section('solvingquadraticspart2', "Solving by Factoring, Part 2", '/sections/solving-quadratics-part2')
 solvingquadraticspart2.add_to_questions('solving_by_factoring_level2')
 
 solvingquadraticsonlyonex = Section('solvingquadraticsonlyonex', "Solving Quadratics: Only One x", '/sections/solving-quadratics-only-one-x')
 solvingquadraticsonlyonex.add_to_questions('quadratic_only_one_x')
+
+solvingbycompletingthesquare = Section('solvingbycompletingthesquare', "Solving by Completing the Square", '/sections/solving-by-completing-the-square')
+solvingbycompletingthesquare.add_to_questions('solve_by_completing_the_square')
+
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -733,6 +737,7 @@ quadratics = Division('chapter', "Quadratic Functions",
                                 mixedpracticeplusgcf,
                                 solvingquadraticspart2,
                                 solvingquadraticsonlyonex,
+                                solvingbycompletingthesquare,
                                 ])
 quadratics.set_frontpage(quadratics_intro)
 

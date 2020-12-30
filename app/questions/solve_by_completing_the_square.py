@@ -16,13 +16,14 @@ from app.questions import (Question,
 
 prob_type = 'math_blank'
 
-class QuadraticOnlyOneX(Question):
+class SolveByCompletingTheSquare(Question):
     """
     The given is
     \\[
         a(x-b)^2 + c = d,
     \\]
-    but permuted with =.
+    but expanded and permuted with =... possibly recombine
+    with extra quadratic terms added to both sides...
     """
     def __init__(self, **kwargs):
         if 'seed' in kwargs:
@@ -37,15 +38,11 @@ class QuadraticOnlyOneX(Question):
         if 'a' in kwargs:
             self.a = kwargs['a']
         else:
-            self.a = random_non_zero_integer(-9,9)
+            self.a = random_non_zero_integer(-3,3)
         if 'b' in kwargs:
             self.b = kwargs['b']
         else:
             self.b = random.randint(-9,9)
-        if 'c' in kwargs:
-            self.c = kwargs['c']
-        else:
-            self.c = random_non_zero_integer(-9,9)
         if 'sqr' in kwargs:
             self.sqr = kwargs['sqr']
         else:
@@ -61,21 +58,24 @@ class QuadraticOnlyOneX(Question):
             self.x = kwargs['x']
         else:
             self.x = sy.Symbol('x')
-
         x = self.x
         a = self.a
         b = self.b
-        c = self.c
         sqr = self.sqr
-        d = a*self.sqr + c
+        d = a*self.sqr
         self.d = d
-        terms = [q*sy.factor(a*(x-b)**2), q*c, -d*q]
-        if not self.has_solutions:
-            LHS, RHS = permute_equation(terms, as_list=True)
-            self.given = f'{sy.latex(LHS)} = {sy.latex(RHS)}'
-        else:
-            self.given = permute_equation(terms)
-        #print('3rd step: So far its ', expr)
+        difficulty = random.choice([0,0,1,1,2])
+        aux_a = 0
+        aux_b = 0
+        aux_c = int(random.triangular(-9,9,0))
+        if difficulty > 0:
+            aux_b = random_non_zero_integer(-9,9)
+        if difficulty > 1:
+            aux_a = random_non_zero_integer(-9,9)
+        aux = aux_a*x + aux_b*x + aux_c
+        LHS = q*sy.expand(a*(x-b)**2) + aux
+        RHS = q*d + aux
+        self.given = f'{sy.latex(LHS)} = {sy.latex(RHS)}'
         if self.has_solutions:
             self.answer = {-sy.sqrt(sqr)+b, sy.sqrt(sqr)+b}
             format_answer = ''
@@ -100,10 +100,10 @@ class QuadraticOnlyOneX(Question):
         {self.given_latex_display}
         """
 
-    name = 'Solving Quadratic: Only One x'
-    module_name = 'quadratic_only_one_x'
+    name = 'Solve by Completing the Square'
+    module_name = 'solve_by_completing_the_square'
 
-    prompt_single = 'Solve for \\(x\\) by taking square roots.  (Find the solution set.) '
+    prompt_single = 'Solve for \\(x\\) by completing the square and taking square roots.  (Find the solution set.) '
     prompt_multiple = 'TBA'
     further_instruction = """If you get one or more solutions,
     enter symbols for your solutions separated by commas.
@@ -185,4 +185,4 @@ class QuadraticOnlyOneX(Question):
 
 
 
-Question_Class = QuadraticOnlyOneX
+Question_Class = SolveByCompletingTheSquare

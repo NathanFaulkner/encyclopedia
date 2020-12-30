@@ -1,0 +1,430 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In the section entitled,
+  <a href="{{ url_for('section', section_name='solvingquadraticsonlyonex') }}">
+    Solving Quadratics: Only One x,
+  </a>
+  we solved quadratic equations in which there was
+  only one occurrence of the variable \(x\).
+  This extended the range of possible quadratics we are able to solve
+  beyond the "factorable" cases covered in sections
+  <a href="{{ url_for('section', section_name='solvingquadraticspart1') }}">
+    Solving by Factoring, Part 1
+  </a>
+  and
+  <a href="{{ url_for('section', section_name='solvingquadraticspart2') }}">
+    Part 2.
+  </a>
+  Actually,  the techniques that we developed in the section
+  <a href="{{ url_for('section', section_name='solvingquadraticsonlyonex') }}">
+    Solving Quadratics: Only One x,
+  </a>
+  enable us to "solve" any quadratic equation of the form
+  \[
+  a(x-h)^2 +k = 0
+  \]
+  However, we also learned in the section on
+  <a href="{{ url_for('section', section_name='standardform') }}">
+    putting standard form into vertex form
+  </a>
+  that <em>any</em> quadratic can be put into the form
+  \[
+  a(x-h)^2 + k
+  \]
+  Thus, the skills from these previous sections can be leveraged
+  to solve any quadratic equation whatsoever!
+  On the other hand, there is a little bit of "fine print" here.  We
+  did observe that some quadratics will not have a "real" solution.  But
+  the process we develop here (which, again, is just a combination
+  of skills developed in the other sections linked to here) will also
+  uncover exactly when that will happen.
+</p>
+
+
+<p>
+  In yet other cases, you will find that there is no (real) solution to the quadratic:
+</p>
+
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/0d619e8c06094b71ad53db54a204d460" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve the following.
+  \[
+    x^2 - 10x + 18 = 0
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer, via Method 1: </h3></a>
+    <div class='inner'>
+      As discussed in the section entitled,
+      <a href="{{ url_for('section', section_name='standardform') }}">
+        Quadratics in Standard Form
+      </a>
+      we can take any quadratic given initially in standard form,
+      \[
+        ax^2 + bx + c
+      \]
+      and rewrite it in vertex form
+      \[
+        a(x-h)^2 + k
+      \]
+      There are different ways to accomplish this that you might review
+      by clicking the link just referenced, but I will review one way
+      here.  Start by writing out what your goal is, namely to figure
+      out what \(a\), \(h\), and \(k\) will make this equation true:
+      \[
+        x^2 - 10x + 18 = a(x-h)^2 + k
+      \]
+      One approach is to multiply out the right side and then make a
+      comparison of the coefficients on each side:
+      \begin{align*}
+        x^2 - 10x + 18 &= a(x-h)^2 + k \\
+        &= a\left((x-h)(x-h)\right) + k \\
+        &= a\left(x^2 - 2hx + h^2\right) + k \\
+        &= ax^2 - 2ah x + ah^2 + k
+      \end{align*}
+      It also helps to rewrite the left side right next to the end
+      result from rewriting the right side:
+      \[
+        x^2 - 10x + 18 = ax^2 - 2ah x + ah^2 + k
+      \]
+      The first easy observation to make is that setting \(a = 1\)
+      will at least make the \(x^2\) terms match up.  I proceed
+      by subbing in \(a=1\):
+      \begin{align*}
+        & x^2 - 10x + 18 = ax^2 - 2ah x + ah^2 + k\\
+        \Rightarrow \quad \quad & x^2 - 10x + 18 = x^2 -2hx + h^2 + k
+      \end{align*}
+      Next, I compare the coefficients of \(x\) on the left and the right
+      sides.  On the left, we have \(-10x\) (so, the coefficient is \(-10\).
+      On the right we have \(-2hx\).  So, what can we set \(h\) to to make
+      this work out?  Evidently, we just need to figure out what
+      real number \(h\) makes \(-2h = -10\).  Of course, the answer is
+      \(h=5\).  So, we make that substitution:
+      \begin{align*}
+        & x^2 - 10x + 18 = x^2 -2hx + h^2 + k\\
+        \Rightarrow \quad \quad & x^2 -10x + 18 = x^2 -10x + 25 + k\\
+      \end{align*}
+      Finally, we see that on the left we have \(18\) sitting there and on
+      the right, we have \(25 + k\).  Observe that if we just set \(k = -7\)
+      all of this will work out! Now we just refer back to our original
+      vertex form, and sub-in the \(a\), \(h\), and  \(k\) that we
+      have figured out:
+      \[
+        x^2 - 10x + 18 = a(x-h)^2 + k
+      \]
+      becomes, after subbing in \(a = 1\), \(h = 5\), and \(k = -7\),
+      \[
+        x^2 - 10x + 18 = (x-5)^2 - 7
+      \]
+      Now, we recall that our intent was to solve the equation
+      \[
+        x^2 - 10x + 18 = 0
+      \]
+      We have just learned that the left side of this equation is
+      equivalent to \((x-5)^2-7\), so we can make that change.  That is,
+      it is equivalent to solve this:
+      \[
+        (x-5)^2-7 = 0
+      \]
+      We do this by following the approach modeled in the section,
+      <a href="{{ url_for('section', section_name='solvingquadraticsonlyonex') }}">
+        Solving Quadratics: Only One x:
+      </a>
+      \begin{align*}
+        &(x-5)^2-7 = 0\\
+        \Rightarrow \quad \quad & (x-5)^2 = 7 \\
+        \Rightarrow \quad \quad & x-5 = -\sqrt{7} \quad \textrm{or} \quad x - 5 = \sqrt{7}\\
+        \Rightarrow \quad \quad & x = 5-\sqrt{7} \quad \textrm{or} \quad x = 5+\sqrt{7}\\
+      \end{align*}
+    </div>
+  </div>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer, via Method 2: </h3></a>
+    <div class='inner'>
+      Another approach, called "completing the square", involves adding or subtracting
+      numbers from both sides until one side follows either the "special pattern"
+        \[
+          (x+B)^2 = x^2 + 2Bx + B^2
+        \]
+      or
+        \[
+          (x-B)^2 = x^2 - 2Bx + B^2
+        \]
+      It may be helpful to review the section on factoring
+      <a href="{{ url_for('section', section_name='specialpattterns') }}">
+        special patterns.
+      </a>
+      Here is how this method works in this case. Beginning with
+      \[
+        x^2 - 10x + 18 = 0
+      \]
+      I can simply subtract the \(18\) from both sides, leaving myself a
+      generous blank space where the \(18\) used to be:
+      \[
+        x^2 - 10x \phantom{+\, 18} = -18
+      \]
+      Next, I imagine how to "fill in the blank" in such a way as
+      to make the left side an instance of the pattern
+      \[
+        x^2 - 2Bx + B^2
+      \]
+      The point is, I really want it to be equivalent to something of the form
+      \[
+        (x-B)^2
+      \]
+      They key is to realize that whatever coefficient you have on \(x\), you
+      just need to take half of it (to get rid of the 2, thus extracting the
+      unknown \(B\)), which you then square.  That is, I am viewing the term
+      \(10x\) as being of the form \(2Bx\).  My goal  is to supply the missing
+      part, the \(B^2\).   So, I just take half of \(10\)&mdash;my "\(2B\)"
+      in this case&mdash;to get the \(B\). (That means \(B\) is \(5\) in this case!)
+      Then I just square that to get \(B^2\).  Thus, I choose to add \(5^2 = 25\) to both sides
+      to complete this pattern.  Since it makes the left side follow
+      one of the "square" special patterns, this trick is called "completing the square."
+      Here is what it looks like after I add \(25\) to both sides:
+      \begin{align*}
+        & x^2 - 10x \phantom{+\, 25\,} = -18\\
+        \Rightarrow \quad \quad & x^2 - 10x + 25 = 7
+      \end{align*}
+      Now, I observe that the left side is equivalent to
+      \((x-5)^2\)&mdash;to be sure, that was the reason I chose to add
+      25 to both sides!&mdash;and I rewrite it as such:
+      \[
+        (x-5)^2 = 7
+      \]
+      Now, I can proceed using the methods of the section,
+      <a href="{{ url_for('section', section_name='solvingquadraticsonlyonex') }}">
+        Solving Quadratics: Only One x:
+      </a>
+      \begin{align*}
+        & (x-5)^2 = 7 \\
+        \Rightarrow \quad \quad & x-5 = -\sqrt{7} \quad \textrm{or} \quad x - 5 = \sqrt{7}\\
+        \Rightarrow \quad \quad & x = 5-\sqrt{7} \quad \textrm{or} \quad x = 5+\sqrt{7}\\
+      \end{align*}
+    </div>
+  </div>
+</div>
+
+<p>
+  Let's do one more example.
+</p>
+
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/0d619e8c06094b71ad53db54a204d460" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve the following.
+  \[
+    2x^2 + 20x + 43 = -4
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer, via Method 1: </h3></a>
+    <div class='inner'>
+      This method involves combining like terms by pulling everything
+      over to one side and then rewriting what results in vertex form.
+      In this case, to combine like terms, all I can do is to add \(4\)
+      to both sides.  (It turns out that this step isn't all that important in this case
+      since it involves only combining numbers whereas
+      combining terms with \(x\) or  \(x^2\) would be useful.)  Here is what I get:
+      \begin{align*}
+        & 2x^2 + 20x + 43 = -4\\
+        \Rightarrow \quad \quad & 2x^2 + 20x + 47 = 0
+      \end{align*}
+
+      <p>
+        Next, as discussed in the section entitled,
+        <a href="{{ url_for('section', section_name='standardform') }}">
+          Quadratics in Standard Form
+        </a>
+        we can take any quadratic given initially in standard form,
+        \[
+          ax^2 + bx + c
+        \]
+        and rewrite it in vertex form,
+        \[
+          a(x-h)^2 + k
+        \]
+        There are different ways to accomplish this that you might review
+        by clicking the link just referenced, but I will review one way
+        here.  Start by writing out what your goal is, namely to figure
+        out what \(a\), \(h\), and \(k\) will make this equation true:
+        \[
+          2x^2 + 20x + 47  = a(x-h)^2 + k
+        \]
+        One approach is to multiply out the right side and then make a
+        comparison of the coefficients on each side:
+        \begin{align*}
+          2x^2 + 20x + 47  &= a(x-h)^2 + k \\
+          &= a\left((x-h)(x-h)\right) + k \\
+          &= a\left(x^2 - 2hx + h^2\right) + k \\
+          &= ax^2 - 2ah x + ah^2 + k
+        \end{align*}
+        It also helps to rewrite the left side right next to the end
+        result from rewriting the right side:
+        \[
+          2x^2 + 20x + 47 = ax^2 - 2ah x + ah^2 + k
+        \]
+        The first easy observation to make is that setting \(a = 2\)
+        will at least make the \(x^2\) terms match up.  I proceed
+        by subbing in \(a=2\):
+        \begin{align*}
+          & 2x^2 + 20x + 47 = ax^2 - 2ah x + ah^2 + k \\
+          \Rightarrow \quad \quad & 2x^2 + 20x + 47 = 2x^2 -4hx + 2h^2 + k
+        \end{align*}
+        Next, I compare the coefficients of \(x\) on the left and the right
+        sides.  On the left, we have \(20x\) (so, the coefficient is \(20\)).
+        On the right we have \(-4hx\).  So, what can we set \(h\) to to make
+        this work out?  Evidently, we just need to figure out what
+        real number \(h\) makes \(-4h = 20\).  Of course, the answer is
+        \(h=-5\).  So, we make that substitution:
+        \begin{align*}
+          & 2x^2 + 20x + 47 = 2x^2 - 4hx + 2h^2 + k\\
+          \Rightarrow \quad \quad & 2x^2 + 20x + 47 = 2x^2 + 20x + 50 + k
+        \end{align*}
+        Finally, we see that on the left we have \(47\) sitting there and on
+        the right, we have \(50 + k\).  Observe that if we just set \(k = -3\)
+        all of this will work out! Now we just refer back to our original
+        vertex form, and sub-in the \(a\), \(h\), and  \(k\) that we
+        have figured out:
+        \[
+          2x^2 + 20x + 47 = a(x-h)^2 + k
+        \]
+        becomes, after subbing in \(a = 2\), \(h = -5\), and \(k = -3\),
+        \[
+          2x^2 + 20x + 47 = 2(x+5)^2 - 3
+        \]
+        Now, we recall that our intent was to solve the equation
+        \[
+          2x^2 + 20x + 47 = 0
+        \]
+        We have just learned that the left side of this equation is
+        equivalent to \(2(x+5)^2 - 3\), so we can make that change.  That is,
+        it is equivalent to solve this:
+        \[
+          2(x+5)^2 - 3 = 0
+        \]
+        We do so following the approach modeled in the section,
+        <a href="{{ url_for('section', section_name='solvingquadraticsonlyonex') }}">
+          Solving Quadratics: Only One x:
+        </a>
+        \begin{align*}
+          &(x-5)^2-7 = 0\\
+          \Rightarrow \quad \quad & (x-5)^2 = 7 \\
+          \Rightarrow \quad \quad & x-5 = -\sqrt{7} \quad \textrm{or} \quad x - 5 = \sqrt{7}\\
+          \Rightarrow \quad \quad & x = 5-\sqrt{7} \quad \textrm{or} \quad x = 5+\sqrt{7}\\
+        \end{align*}
+      </p>
+    </div>
+  </div>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer, via Method 2: </h3></a>
+    <div class='inner'>
+      Another approach, called "completing the square", involves adding or subtracting
+      numbers from both sides until one side follows either the "special pattern"
+        \[
+          (x+B)^2 = x^2 + 2Bx + B^2
+        \]
+      or
+        \[
+          (x-B)^2 = x^2 - 2Bx + B^2
+        \]
+      It may be helpful to pause here and review the section on
+      <a href="{{ url_for('section', section_name='specialpattterns') }}">
+        factoring special patterns.
+      </a>
+      Here is how this method works in this case. Beginning with
+      \[
+        2x^2 + 20x + 47  = 0
+      \]
+      We want to rewrite the left side in the form
+      \[
+        x^2 + 2Bx + B^2
+      \]
+      So, for starters, we need to divide both sides by the coefficient
+      on \(x^2\), namely \(2\):
+      \begin{align*}
+        & 2x^2 + 20x + 47  = 0\\
+        \Rightarrow \quad \quad & x^2 +10x + \frac{47}{2} = 0
+      \end{align*}
+      As you can see, this results in a fraction in this case, which
+      isn't so nice, but we can live with it.
+      Next, as in the example above, I can simply subtract the "constant term"
+      from both sides&mdash;that is, the part that is just a number and does not
+      involve a variable&mdash;which, in this case, is \(\frac{47}{2}\).  Again,
+      I leave myself a nice blank space where the constant was in preparation for
+      replacing it with a number that makes the left side follow one of those
+      special patterns involving a square&mdash;that is, I am getting ready to
+      "complete the square".
+      \[
+        x^2 + 10x \phantom{+\, 18} = -\frac{47}{2}
+      \]
+      Next, I imagine how to "fill in the blank" in such a way as
+      to make the left side an instance of the pattern
+      \[
+        x^2 + 2Bx + B^2
+      \]
+      The point is, I really want it to be equivalent to something of the form
+      \[
+        (x+B)^2
+      \]
+      They key is to realize that whatever coefficient you have on \(x\), you
+      just need to take half of it (to get rid of the 2, thus extracting the
+      unknown \(B\)), which you then square.  That is, I am viewing the term
+      \(10x\) as being of the form \(2Bx\).  My goal  is to supply the missing
+      part, the \(B^2\).   So, I just take half of \(10\)&mdash;my "\(2B\)"
+      in this case&mdash;to get the \(B\). (That means \(B\) is \(5\) in this case!)
+      Then I just square that to get \(B^2\).  Thus, I choose to add \(5^2 = 25\) to both sides
+      to complete this pattern.  Since it makes the left side follow
+      one of the "square" special patterns, this trick is called "completing the square."
+      Here is what it looks like after I add \(25\) to both sides:
+      \begin{align*}
+        & x^2 + 10x \phantom{+\, 25\,} = -\frac{47}{2}\\
+        \Rightarrow \quad \quad & x^2 + 10x + 25 = -\frac{47}{2} + 25\\
+        \Rightarrow \quad \quad & x^2 + 10x + 25 = -\frac{47}{2} + \frac{50}{2}\\
+        \Rightarrow \quad \quad & x^2 + 10x + 25 = \frac{3}{2}\\
+      \end{align*}
+      Now, I observe that the left side is equivalent to
+      \((x+5)^2\)&mdash;to be sure, that was the reason I chose to add
+      25 to both sides!&mdash;and I rewrite it as such:
+      \[
+        (x+5)^2 = \frac{3}{2}
+      \]
+      Now, I can proceed using the methods of the section,
+      <a href="{{ url_for('section', section_name='solvingquadraticsonlyonex') }}">
+        Solving Quadratics: Only One x:
+      </a>
+      \begin{align*}
+        & (x+5)^2 = \frac{3}{2} \\
+        \Rightarrow \quad \quad & x+5 = -\sqrt{\frac{3}{2}} \quad \textrm{or} \quad x + 5 = \sqrt{\frac{3}{2}}\\
+        \Rightarrow \quad \quad & x = -5-\sqrt{\frac{3}{2}} \quad \textrm{or} \quad x = -5+\sqrt{\frac{3}{2}}\\
+      \end{align*}
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+
+{% endblock %}
