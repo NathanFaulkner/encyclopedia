@@ -216,7 +216,9 @@
 </div>
 
 <p>
-  Let's do one more example.
+  That's pretty much it!  The only way to complicate these a bit is to introduce more terms.
+  But that is easy to handle: you just combine like terms as a first step.  Still,
+  let's look a couple examples like that to reassure you on those as well.
 </p>
 
 <div class="example">
@@ -412,6 +414,99 @@
         \Rightarrow \quad \quad & x+5 = -\sqrt{\frac{3}{2}} \quad \textrm{or} \quad x + 5 = \sqrt{\frac{3}{2}}\\
         \Rightarrow \quad \quad & x = -5-\sqrt{\frac{3}{2}} \quad \textrm{or} \quad x = -5+\sqrt{\frac{3}{2}}\\
       \end{align*}
+    </div>
+  </div>
+</div>
+
+<p>
+  On this last example, I'm only going to demonstrate the method of
+  "completing the square" rather than showing both methods as I did above.
+</p>
+
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/0d619e8c06094b71ad53db54a204d460" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve the following.
+  \[
+    - 5 x^{2} - 39 x + 130 = - 7 x^{2} - 7 x - 12
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer, via Method 2: </h3></a>
+    <div class='inner'>
+      "Completing the square" involves adding or subtracting
+      numbers from both sides until one side follows either the "special pattern"
+        \[
+          (x+B)^2 = x^2 + 2Bx + B^2
+        \]
+      or
+        \[
+          (x-B)^2 = x^2 - 2Bx + B^2
+        \]
+      It may be helpful to pause here and review the section on
+      <a href="{{ url_for('section', section_name='specialpattterns') }}">
+        factoring special patterns.
+      </a>
+      Here is how this method works in this case.
+      To begin, we combine like terms, bringing all terms to, say, the left side,
+      and leaving \(0\) on the other:
+      \begin{align*}
+        & - 5 x^{2} - 39 x + 130 = - 7 x^{2} - 7 x - 12\\
+        \Rightarrow \quad \quad & 2x^2 - 32x + 142 = 0 \\
+      \end{align*}
+      Next, stay alert to the possibility that you might be able to simplify
+      a little bit.  In this case, I notice that each of the coefficients
+      is even, so I can divide both sides by \(2\):
+      \begin{align*}
+        & 2x^2 - 32x + 142 = 0 \\
+        \Rightarrow \quad \quad & x^2 - 16x + 71 = 0 \\
+      \end{align*}
+      Next, as in the example above, I can simply subtract the "constant term"
+      from both sides&mdash;that is, the part that is just a number and does not
+      involve a variable&mdash;which, in this case, is \(71\).  Again,
+      I leave myself a nice blank space where the constant was in preparation for
+      replacing it with a number that makes the left side follow one of those
+      special patterns involving a square&mdash;that is, I am getting ready to
+      "complete the square".
+      \[
+        x^2 - 16x \phantom{+\, 18} = -71
+      \]
+      Next, I imagine how to "fill in the blank" in such a way as
+      to make the left side an instance of the pattern
+      \[
+        x^2 - 2Bx + B^2
+      \]
+      The point is, I really want it to be equivalent to something of the form
+      \[
+        (x-B)^2
+      \]
+      They key is to realize that whatever coefficient you have on \(x\), you
+      just need to take half of it (to get rid of the 2, thus extracting the
+      unknown \(B\)), which you then square.  That is, I am viewing the term
+      \(16x\) as being of the form \(2Bx\).  My goal  is to supply the missing
+      part, the \(B^2\).   So, I just take half of \(16\)&mdash;my "\(2B\)"
+      in this case&mdash;to get the \(B\). (That means \(B\) is \(8\) in this case!)
+      Then I just square that to get \(B^2\).  Thus, I choose to add \(8^2 = 64\) to both sides
+      to complete this pattern.  Since it makes the left side follow
+      one of the "square" special patterns, this trick is called "completing the square."
+      Here is what it looks like after I add \(64\) to both sides:
+      \begin{align*}
+        & x^2 - 16x \phantom{+\, 64\,} = -71\\
+        \Rightarrow \quad \quad & x^2 - 16x + 64 = -7\\
+      \end{align*}
+      Now, I observe that the left side is equivalent to
+      \((x-8)^2\)&mdash;to be sure, that was the reason I chose to add
+      64 to both sides!&mdash;and I rewrite it as such:
+      \[
+        (x-8)^2 = -7
+      \]
+      Now, I observe that there is actually no (real) solution, since
+      on the left, I have a square and, on the right, I have a negative number.
+      You can't square any real number and have it come out negative,
+      so that's the end of that.
     </div>
   </div>
 </div>

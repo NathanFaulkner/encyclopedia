@@ -64,7 +64,8 @@ class SolveByCompletingTheSquare(Question):
         sqr = self.sqr
         d = a*self.sqr
         self.d = d
-        difficulty = random.choice([0,0,1,1,2])
+        difficulty = random.choice([0,0,0,1,1,2])
+        difficulty = 2
         aux_a = 0
         aux_b = 0
         aux_c = int(random.triangular(-9,9,0))
@@ -72,7 +73,7 @@ class SolveByCompletingTheSquare(Question):
             aux_b = random_non_zero_integer(-9,9)
         if difficulty > 1:
             aux_a = random_non_zero_integer(-9,9)
-        aux = aux_a*x + aux_b*x + aux_c
+        aux = aux_a*x**2 + aux_b*x + aux_c
         LHS = q*sy.expand(a*(x-b)**2) + aux
         RHS = q*d + aux
         self.given = f'{sy.latex(LHS)} = {sy.latex(RHS)}'
