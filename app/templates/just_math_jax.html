@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% if title %}
+    <title>{{ site_name }} - {{ title }}</title>
+    {% else %}
+    <title>{{ site_name }}</title>
+    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      }
+    </script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <script>
+      function show_hide_toc() {
+        var x = document.getElementById("table_of_contents");
+        var iframe = document.getElementById("iframe");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+          iframe.style.width = "75%";
+        } else {
+          x.style.display = "none";
+          iframe.style.width = "100%"
+        }
+      }
+    </script>
+    <script>
+      function show_hide_nav() {
+        var x = document.getElementById("nav");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  </head>
+
+  <hr>
+
+  {{ content }}
+</html>

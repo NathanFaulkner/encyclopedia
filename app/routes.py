@@ -6,7 +6,7 @@ from flask import (render_template,
                     url_for,
                     request,
                     session,
-                    make_response)
+                    make_response,)
 from flask_login import (current_user,
                         login_user,
                         logout_user,
@@ -296,6 +296,23 @@ def section(section_name):
     return render_template(template_path + '.html',
         section_display_name=section_display_name,
         question_name=question_name)
+
+
+@app.route('/answer_previewer/<question_name>', methods=['GET', 'POST'])
+def answer_previewer(question_name):
+    user_answer = request.args.get('user_answer')
+    question = getattr(questions, question_name).Question_Class
+    # print(question.format_useranswer)
+
+    try:
+        content = question.format_useranswer(user_answer)
+    except TypeError:
+        return 'This functionality is not available for this problem.'
+    except:
+        return 'This will result in an error.'
+    return render_template('just_math_jax.html', content=content)
+        # return 'hello'
+
 
 # Avert your eyes from this monster!!  This is what happens
 # when you learn as you build and don't have time for a re-write!!
@@ -587,6 +604,8 @@ but you should try a different problem if you want credit."""
                 report_id = bug_report.id
                 # print('report_id', report_id)
                 send_report_bug_email(report_id)
+            # if preview_form.validate_on_submit() and request.args.get('form') == 'preview_form':
+            #     return redirect(url_for('answer_previewer', question_name=question_name))
         else:
             message = "It's a brand new problem!!"
     # print('session user_points just before rendering', session.get('user_points'))

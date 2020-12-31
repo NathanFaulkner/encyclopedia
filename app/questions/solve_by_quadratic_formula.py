@@ -13,10 +13,9 @@ from app.questions import (Question,
                             permute_equation,
                             has_numbers)
 
-
 prob_type = 'math_blank'
 
-class SolveByCompletingTheSquare(Question):
+class SolveByQuadraticFormula(Question):
     """
     The given is
     \\[
@@ -38,22 +37,18 @@ class SolveByCompletingTheSquare(Question):
         if 'a' in kwargs:
             self.a = kwargs['a']
         else:
-            self.a = random_non_zero_integer(-3,3)
+            self.a = random_non_zero_integer(-9,9)
         if 'b' in kwargs:
             self.b = kwargs['b']
         else:
             self.b = random.randint(-9,9)
-        if 'sqr' in kwargs:
-            self.sqr = kwargs['sqr']
+        if 'c' in kwargs:
+            self.c = kwargs['c']
         else:
+            self.c = random.randint(-9,9)
             if self.has_solutions:
-                p = random.randint(0,9)
-                q = random.choice([1, 1, 1, 2, 3])
-                self.sqr = sy.Rational(p,q)
-            else:
-                p = random.randint(-9,-1)
-                q = random.choice([1, 1, 1, 2, 3])
-                self.sqr = sy.Rational(p,q)
+                while (self.b**2 - 4*self.a*self.c < 0):
+                    self.c = random.randint(-9,9)
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:
@@ -61,9 +56,7 @@ class SolveByCompletingTheSquare(Question):
         x = self.x
         a = self.a
         b = self.b
-        sqr = self.sqr
-        d = a*self.sqr
-        self.d = d
+        c = self.c
         difficulty = random.choice([0,0,0,1,1,2])
         # difficulty = 2
         aux_a = 0
@@ -74,11 +67,11 @@ class SolveByCompletingTheSquare(Question):
         if difficulty > 1:
             aux_a = random_non_zero_integer(-9,9)
         aux = aux_a*x**2 + aux_b*x + aux_c
-        LHS = q*sy.expand(a*(x-b)**2) + aux
-        RHS = q*d + aux
+        LHS = sy.expand(a*x**2 + b*x + c + aux)
+        RHS = aux
         self.given = f'{sy.latex(LHS)} = {sy.latex(RHS)}'
         if self.has_solutions:
-            self.answer = {-sy.sqrt(sqr)+b, sy.sqrt(sqr)+b}
+            self.answer = {(-b-sy.sqrt(b**2-4*a*c))/(2*a), (-b+sy.sqrt(b**2-4*a*c))/(2*a)}
             format_answer = ''
             for ans in self.answer:
                 format_answer += sy.latex(ans) + ' ,'
@@ -101,8 +94,8 @@ class SolveByCompletingTheSquare(Question):
         {self.given_latex_display}
         """
 
-    name = 'Solve by Completing the Square'
-    module_name = 'solve_by_completing_the_square'
+    name = 'Solve by the Quadratic Formula'
+    module_name = 'solve_by_quadratic_formula'
 
     prompt_single = 'Solve for \\(x\\) by completing the square and taking square roots.  (Find the solution set.) '
     prompt_multiple = 'TBA'
@@ -111,10 +104,12 @@ class SolveByCompletingTheSquare(Question):
     Use 'sqrt()' (without the quotes) to enter square roots.  For instance,
     a possible solution might be
     \\[
-        x = 5 - \\sqrt{\\frac{3}{2}} \\quad \\textrm{or} \\quad x = 5 + \\sqrt{\\frac{3}{2}}
+        x = \\frac{7 - \\sqrt{157}}{18} \\quad \\textrm{or} \\quad x = \\frac{7 + \\sqrt{157}}{18}
     \\]
-    You would enter, "5 - sqrt(3/2), 5 + sqrt(3/2)".
+    You would enter, "(7 - sqrt(157))/18, (7 + sqrt(157))/18".
     """
+
+    prob_type = prob_type
 
     # loom_link = "https://www.loom.com/share/331e43b308a64cefbafdb1ac3211c9ac"
 
@@ -160,6 +155,7 @@ class SolveByCompletingTheSquare(Question):
             format_answer = format_answer[:-2]
             return '\(' + format_answer + '\)'
 
+
     @classmethod
     def validator(self, user_answer):
         try:
@@ -187,4 +183,4 @@ class SolveByCompletingTheSquare(Question):
 
 
 
-Question_Class = SolveByCompletingTheSquare
+Question_Class = SolveByQuadraticFormula

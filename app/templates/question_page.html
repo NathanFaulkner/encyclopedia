@@ -57,22 +57,32 @@
           <span style="color: red;">[{{ error }}]</span>
           {% endfor %}
           <table>
-            <tr><td>{{ form.submit() }}</td><!--<td><button>Preview</button></td>--></tr>
+            <tr>
+              <td>{{ form.submit() }}</td>
+              <!-- <td><button id='previewBtn'>Preview</button></td> -->
+            </tr>
           </table>
+        </form>
+        <!-- <button id='previewBtn' style="float: left;" onclick="window.location.href='https://w3docs.com';">Preview</button> -->
+        <form action="?form=preview_form" method="post">
+        <!-- <input class="button" href="#" onClick="MyWindow=window.open('{{ url_for('answer_previewer', question_name=question.module_name, user_answer='hello') }}','MyWindow','width=600,height=300'); return false;">Click to Preview</input> -->
+          <input type="button" onClick="MyWindow=window.open('{{ url_for('answer_previewer', question_name=question.module_name) }}'.concat('?user_answer=',document.getElementById('useranswer').value),'MyWindow','width=600,height=300'); return false;" value="Preview" />
         </form>
       </p>
     </div>
 
-    <div style="width: 50%; float: left; border: 1px solid red; display:none;">
+    <div style="width: 50%; float: left; border: 1px solid red; display: none"> <!-- Add display:none to turn off -->
       <p id="format_user_answer"></p>
       <script>
         document.getElementById('useranswer').addEventListener("keyup", show_answer);
 
         var input_field = document.getElementById('useranswer');
+        // {% set input_field = form.answer %}
 
         function show_answer(){
         document.getElementById("format_user_answer").innerHTML = input_field.value;
         }
+
       </script>
     </div>
   <!-- </div> -->
@@ -110,6 +120,7 @@
 <div style="float:left; width: 100%">
   <a id="myBtn" style="cursor: pointer">Click for help with syntax</a>
 </div>
+
 
 <!-- Trigger/Open The Modal -->
 
@@ -233,6 +244,7 @@
 </div>
 {% endif %}
 
+
 {% if request.method == 'POST' and form.validate_on_submit() and (not (whether_graph and points == []))%}
 <div class="exercise" style="float: left; width: 100%">
   <table>
@@ -327,4 +339,6 @@ window.onclick = function(event) {
   }
 }
 </script>
+
+
 {% endblock %}

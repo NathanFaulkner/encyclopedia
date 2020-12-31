@@ -79,6 +79,7 @@ __all__ = ['quadratic_pattern',
             'solving_by_factoring_level2',
             'quadratic_only_one_x',
             'solve_by_completing_the_square',
+            'solve_by_quadratic_formula',
             ]
 
 class Question():

@@ -1,0 +1,462 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  No matter what way you do it, you can put any standard form quadratic into
+  vertex form.
+  As we saw in the section on
+  <a href="{{ url_for('section', section_name='solvebycompletingthesquare') }}">
+    solving by completing the square,
+  </a>
+  you can "solve" any quadratic equation in the sense that you can carry out
+  the solving process&mdash;accepting that sometimes you won't get any real
+  solution.  Indeed, you can even "solve" the generic case.
+  When you do so, what you get is a formula&mdash;a famous formula.  Here is the
+  "generic" case that I have in mind:
+    \[
+      ax^2 + bx + c = 0,
+    \]
+  in which \(a \neq 0\).
+</p>
+
+
+<div class="example">
+  <h2> (One time activity)</h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/0d619e8c06094b71ad53db54a204d460" target="_blank">Click for video.</a>
+  </p> -->
+
+  Solve the following.
+  \[
+    ax^2 + bx + c = 0,
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer, via Method 1: </h3></a>
+    <div class='inner'>
+      As discussed in the section entitled,
+      <a href="{{ url_for('section', section_name='standardform') }}">
+        Quadratics in Standard Form
+      </a>
+      we can take any quadratic given initially in standard form,
+      \[
+        ax^2 + bx + c
+      \]
+      and rewrite it in vertex form
+      \[
+        a(x-h)^2 + k
+      \]
+      There are different ways to accomplish this that you might review
+      by clicking the link just referenced, but I will review one way
+      here.  Start by writing out what your goal is, namely to figure
+      out what \(a\), \(h\), and \(k\) will make this equation true:
+      \[
+        ax^2 + bx + c = a(x-h)^2 + k
+      \]
+      One approach is to multiply out the right side and then make a
+      comparison of the coefficients on each side:
+      \begin{align*}
+        ax^2 + bx + c &= a(x-h)^2 + k \\
+        &= a\left((x-h)(x-h)\right) + k \\
+        &= a\left(x^2 - 2hx + h^2\right) + k \\
+        &= ax^2 - 2ah x + ah^2 + k
+      \end{align*}
+      It also helps to rewrite the left side right next to the end
+      result from rewriting the right side:
+      \[
+        ax^2 + bx + c = ax^2 - 2ah x + ah^2 + k
+      \]
+      The first easy observation to make is that we are talking about the
+      same \(a\) on both sides.  (A good mathematician would observe
+      that I potentially introduced an element of confusion by using
+      the symbol '\(a\)' in both the standard form and the
+      vertex form, but you can make the observation from this stage
+      that the two numbers represented by '\(a\)' on the left and the
+      right will indeed be the same, so no untruth comes out of the
+      potential confusion introduced there.)
+      Next, I compare the coefficients of \(x\) on the left and the right
+      sides.  On the left, we have \(bx\) (so, the coefficient is \(b\).
+      On the right we have \(-2ahx\).  The scenario that we are trying
+      to express with this "generic example" is that \(a\), \(b\), and \(c\)
+      are known numbers; they are the givens.  The goal is to find \(h\)
+      and \(k\); they are like the unknowns.  So, what can we set \(h\) to to make
+      this work out?  Evidently, we just need to figure out what
+      real number \(h\) makes \(-2ah = b\).
+      All you have to do is to solve for \(h\)!  I can do that by
+      taking the negative of both sides and then dividing by \(2a\):
+      \begin{align*}
+        & -2ah = b\\
+        \Rightarrow \quad \quad & 2ah = -b \\
+        \Rightarrow \quad \quad & h = \frac{-b}{2a}
+      \end{align*}
+      In the section on
+      <a href="{{ url_for('section', section_name='standardform') }}">
+        Quadratics in Standard Form
+      </a>
+      we noted that \(k\) is really just the \(y\)-coordinate
+      that gets paired with \(x=h\), so you can obtain \(k\) by just plugging
+      in your value for \(h\) for \(x\).  However, I am not going to do that here.
+      Instead, I am going to find an expression for \(k\) by plugging
+      my expression for \(h\) in for \(h\) and then comparing the constant term:
+      So, I make that substitution, \(h = \frac{-b}{2a}\):
+      \begin{align*}
+        & ax^2 + bx + c = ax^2 -2ahx + ah^2 + k\\
+        \Rightarrow \quad \quad & ax^2 + bx + c = ax^2 -2a \left(\frac{-b}{2a}\right) x + a\left(\frac{-b}{2a}\right)^2 + k\\
+        \Rightarrow \quad \quad & ax^2 + bx + c = ax^2 +b x + a\frac{b^2}{4a^2} + k\\
+        \Rightarrow \quad \quad & ax^2 + bx + c = ax^2 +b x + \frac{b^2}{4a} + k\\
+      \end{align*}
+      The key step there was carrying out the computation
+      \[
+        \left(\frac{-b}{2a}\right)^2 = \left(\frac{-b}{2a}\right)\left(\frac{-b}{2a}\right) = \frac{(-b)(-b)}{(2a)(2a)} = \frac{b^2}{4a^2}
+      \]
+      The final step is to compare the constant terms&mdash;that is,
+      the terms without an \(x\).
+      On the left we have just \(c\) and on the right we have \(\frac{b^2}{4a} + k\).
+      The point is to imagine that \(a\), \(b\), and \(c\) are givens
+      and that \(k\) is what we are after.  Our observation here is that if
+      \[
+        c = \frac{b^2}{4a} + k
+      \]
+      then all will work out.  Thus, for any given \(a\), \(b\), and \(c\),
+      all we need is to make
+      \[
+        k = c - \frac{b^2}{4a}
+      \]
+      In all, we now have formulas for the coordinates \(h, k\) for the
+      vertex depending on the coefficients of the quadratic given in
+      standard form:
+      \[
+        ax^2 + bx + c = a(x-h)^2 + k
+      \]
+      where \(h = \frac{-b}{2a}\) and \(k = c - \frac{b^2}{4a}\) (and
+      "\(a\) is \(a\)".)
+      Now, we recall that our intent was to solve the equation
+      \[
+        ax^2 + bx + c = 0
+      \]
+      But, we also know that the left side is equal to
+      \(a(x-h)^2 + k\) with \(h\) and \(k\) as just described, so we can make that change.
+      That is,
+      it is equivalent to solve this:
+      \[
+        a(x-h)^2 + k = 0
+      \]
+      We do this by following the approach modeled in the section,
+      <a href="{{ url_for('section', section_name='solvingquadraticsonlyonex') }}">
+        Solving Quadratics: Only One x:
+      </a>
+      \begin{align*}
+        & a(x-h)^2 + k = 0\\
+        \Rightarrow \quad \quad & a(x-h)^2 = -k \\
+        \Rightarrow \quad \quad & (x-h)^2 = \frac{-k}{a} \\
+        \Rightarrow \quad \quad & x-h = -\sqrt{\frac{-k}{a}} \quad \textrm{or} \quad x - h = \sqrt{\frac{-k}{a}}\\
+        \Rightarrow \quad \quad & x = h-\sqrt{\frac{-k}{a}} \quad \textrm{or} \quad x = h+\sqrt{\frac{-k}{a}}\\
+      \end{align*}
+      To complete our generic solution, we might plug in the formulas for
+      \(h\) and \(k\) that we obtained above, namely
+      \(h = -\frac{b}{2a}\) and \(k = c - \frac{b^2}{4a^2}\).  Actually, it is
+      traditional to first rewrite \(k\) by finding a common denominator:
+      \[
+        k = c - \frac{b^2}{4a} = \frac{4ac}{4a} - \frac{b^2}{4a} = \frac{4ac - b^2}{4a}
+      \]
+      Here is my solution with these expressions plugged in:
+      \begin{align*}
+        & x = h-\sqrt{\frac{-k}{a}} \quad \textrm{or} \quad x = h+\sqrt{\frac{-k}{a}}\\
+        \Rightarrow \quad \quad & x = -\frac{b}{2a}-\sqrt{\frac{-\left(\frac{4ac-b^2}{4a}\right)}{a}} \quad \textrm{or} \quad x = -\frac{b}{2a}+\sqrt{\frac{-\left(\frac{4ac-b^2}{4a}\right)}{a}}\\
+        \Rightarrow \quad \quad & x = -\frac{b}{2a}-\sqrt{\frac{\frac{b^2-4ac}{4a}}{a}} \quad \textrm{or} \quad x = -\frac{b}{2a}+\sqrt{\frac{\frac{b^2-4ac}{4a}}{a}}\\
+        \Rightarrow \quad \quad & x = -\frac{b}{2a}-\sqrt{\frac{b^2-4ac}{4a^2}} \quad \textrm{or} \quad x = -\frac{b}{2a}+\sqrt{\frac{b^2-4ac}{4a^2}}\\
+      \end{align*}
+      We are well on our way to deriving the famous quadratic formula.
+      Really, we have already done that, except that it isn't quite
+      presented in the traditional manner yet.
+      All that's
+      left is to realize that "the square root of a quotient will be the
+      quotient of the square roots of the factors."  For example, the
+      square root of \(\frac{9}{4}\) will be \(\frac{3}{2}\).  This is
+      just a consequence of how multiplication of fractions works:
+      "straight across".  That is, since
+        \[
+          \frac{3}{2}\cdot \frac{3}{2} = \frac{3\cdot 3}{2 \cdot 2} = \frac{9}{4}
+        \]
+        then it follows that
+        \[
+          \sqrt{\frac{9}{4}} = \frac{\sqrt{9}}{\sqrt{4}} = \frac{3}{2}
+        \]
+        This means that we can rewrite
+        \[
+          \sqrt{\frac{b^2-4ac}{4a^2}} = \frac{\sqrt{b^2-4ac}}{\sqrt{4a^2}}.
+        \]
+        That's nice&mdash;but what exactly was the point of that, you might ask?
+        The payoff is to realize that we can simplify the expression
+        \[
+          \sqrt{4a^2}
+        \]
+        I mean, it's just posing the question, "what times itself is \(4a^2\)?"
+        If you answer, "\(2a\)", then you just might be right.  After all,
+        \[
+          (2a)(2a) = 4a^2
+        \]
+        On the other hand, <i>the</i> square root of a number is
+        defined as the <i>positive</i> number that can be multiplied
+        by itself to obtain the target number.  For example, the square root
+        of \(4\) is 2 even though \(-2\) times itself is <i>also</i> \(4\).
+        I mention this only because we are trying to tackle the generic
+        problem&mdash;which is a way of saying that we are trying to derive
+        a formula that will provide the solution to a quadratic equation
+        in absolutely any situation.  And, the problem is, half of all
+        cases will involve \(2a\) being positive (when \(a\) is positive)
+        and half will involve \(2a\) being negative.  If \(a\) is positive,
+        we have that
+        \[
+          \sqrt{4a^2} = 2a
+        \]
+        but if \(a\) is negative, it will actually be that \(-2a\) is
+        positive and hence \(-2a\) is "the positive number that you
+        can multiply by itself to obtain \(4a^2\)", so
+        \[
+          \sqrt{4a^2} = -2a
+        \]
+        in that case.
+        But, it doesn't matter; here's why:
+        If \(a\) is positive, then we can write our solutions as follows,
+        after substituting \(2a\) for \(\sqrt{4a^2}\):
+        \begin{align*}
+          & x = -\frac{b}{2a}-\frac{\sqrt{b^2-4ac}}{\sqrt{4a^2}} \quad \textrm{or} \quad x = -\frac{b}{2a}+\frac{\sqrt{b^2-4ac}}{\sqrt{4a^2}}\\
+          \Rightarrow \quad \quad & x = -\frac{b}{2a}-\frac{\sqrt{b^2-4ac}}{2a} \quad \textrm{or} \quad x = -\frac{b}{2a}+\frac{\sqrt{b^2-4ac}}{2a}\\
+          \Rightarrow \quad \quad & x = -\frac{b - \sqrt{b^2-4ac}}{2a} \quad \textrm{or} \quad x = -\frac{b + \sqrt{b^2-4ac}}{2a}\\
+        \end{align*}
+        On other hand, if \(a\) is negative, then we substitute \(-2a\) for \(\sqrt{4a^2}\):
+        \begin{align*}
+          & x = -\frac{b}{2a}-\frac{\sqrt{b^2-4ac}}{\sqrt{4a^2}} \quad \textrm{or} \quad x = -\frac{b}{2a}+\frac{\sqrt{b^2-4ac}}{\sqrt{4a^2}}\\
+          \Rightarrow \quad \quad & x = -\frac{b}{2a}-\frac{\sqrt{b^2-4ac}}{-2a} \quad \textrm{or} \quad x = -\frac{b}{2a}+\frac{\sqrt{b^2-4ac}}{-2a}\\
+          \Rightarrow \quad \quad & x = -\frac{b}{2a}+\frac{\sqrt{b^2-4ac}}{2a} \quad \textrm{or} \quad x = -\frac{b}{2a}-\frac{\sqrt{b^2-4ac}}{2a}\\
+          \Rightarrow \quad \quad & x = -\frac{b + \sqrt{b^2-4ac}}{2a} \quad \textrm{or} \quad x = -\frac{b - \sqrt{b^2-4ac}}{2a}\\
+        \end{align*}
+        So, in the end, all that happens is our two solutions switch places, but our solution
+        set remains the same.
+
+        <p>
+          So, that's it!  That's the quadratic formula!
+        </p>
+    </div>
+  </div>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer, via Method 2: </h3></a>
+    <div class='inner'>
+      The more traditional approach to derive the quadratic formula
+      is "completing the square".  Again, this involves adding or subtracting
+      numbers from both sides until one side follows either the "special pattern"
+        \[
+          (x+B)^2 = x^2 + 2Bx + B^2
+        \]
+      or
+        \[
+          (x-B)^2 = x^2 - 2Bx + B^2
+        \]
+      It may be helpful to review the section on factoring
+      <a href="{{ url_for('section', section_name='specialpattterns') }}">
+        special patterns.
+      </a>
+      Following the traditional approach, I will ``complete the square'':
+        \begin{align*}
+          & ax^2 + bx + c = 0\\
+          \Rightarrow \quad & ax^2 + bx = -c \\
+          \Rightarrow \quad & x^2 + \frac{b}{a}x \,+ \quad= -\frac{c}{a}  \\
+          \Rightarrow \quad & x^2 + \frac{b}{a}x \,+ \left(\frac{b}{2a}\right)^2= -\frac{c}{a} + \left(\frac{b}{2a}\right)^2 \\
+          \Rightarrow \quad & \left(x+\frac{b}{2a}\right)^2= -\frac{c}{a}  + \frac{b^2}{4a^2}\\
+          \Rightarrow \quad & \left(x+\frac{b}{2a}\right)^2= -\frac{4ac}{4a^2}  + \frac{b^2}{4a^2}\\
+          \Rightarrow \quad & \left(x+\frac{b}{2a}\right)^2= \frac{b^2-4ac}{4a^2}  \\
+          \Rightarrow \quad & x+\frac{b}{2a}= -\frac{\sqrt{b^2-4ac}}{2a} \quad \textrm{or} \quad
+          x+\frac{b}{2a}= \frac{\sqrt{b^2-4ac}}{2a}\\
+          \Rightarrow \quad & x=-\frac{b}{2a} -\frac{\sqrt{b^2-4ac}}{2a} \quad \textrm{or} \quad
+          x=-\frac{b}{2a} + \frac{\sqrt{b^2-4ac}}{2a}\\
+          \Rightarrow \quad & x=\frac{-b-\sqrt{b^2-4ac}}{2a} \quad \textrm{or} \quad
+          x=\frac{-b+\sqrt{b^2-4ac}}{2a}\\
+        \end{align*}
+      That's it&mdash;that's the quadratic formula!
+    </div>
+  </div>
+</div>
+
+
+<p>
+  Now, what's the point of all this?  Nothing much: all we are doing
+  is solving equations of the type that we already solved in the section on
+  <a href="{ url_for('section', section_name='solvingbycompletingthesquare') }">
+    solving by completing the square.
+  </a>
+  The thing is, real life problems often aren't all that fun to perform
+  completing the square on; the numbers just aren't nice.  In those cases,
+  you might find that you prefer referring to (or, traditionally, memorizing)
+  the quadratic formula:
+</p>
+
+<div class="definition">
+  <h2></h2>
+  The \textbf{quadratic formula} is used to find the solution to quadratic equations expressed in standard form:
+    \[
+      ax^2 + bx +c = 0
+    \]
+  (\(a\neq 0\)) if and only if
+    \[
+      x=\frac{-b-\sqrt{b^2-4ac}}{2a} \quad \textrm{or} \quad
+      x=\frac{-b+\sqrt{b^2-4ac}}{2a}\\
+    \]
+  These <b>two</b> solutions are often presented in a lazy way (which
+  I do not encourage a new student of this subject matter to use):
+    \[
+      x =  \frac{-b\pm \sqrt{b^2-4ac}}{2a}
+    \]
+  (There is a little fine print here: We have elsewhere observed that sometimes
+  you don't get a real solution.  It can also happen that \(b^2 = 4ac\) which
+  zeroes out the "\(\pm\)" term, which reduces the set to a single solution.)
+</div>
+
+<p>
+  Then, instead of following a process to solve, you
+  just plug in the given numbers to get your solution.  This is isn't necessarily
+  a better approach than "solving by hand", but it can be convenient.
+  That's why we are studying it here.  Indeed, the problems I will be
+  presenting in this section will be pretty arbitrary&mdash;meaning, I
+  provide no guarantee that they would be fun to solve using completing
+  the square or by putting the quadratic into vertex form.  On the contrary,
+  I encourage you to practice the quadratic formula here.
+</p>
+
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/0d619e8c06094b71ad53db54a204d460" target="_blank">Click for video.</a>
+  </p> -->
+
+  Use the quadratic formula to solve.
+  \[
+    2x^2 - 8x + 5 = 0
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Note that \(a=2\), \(b=-8\), and \(c=5\).  So,
+        \begin{align*}
+          &  x=\frac{-b-\sqrt{b^2-4ac}}{2a} \quad \textrm{or} \quad
+            x=\frac{-b+\sqrt{b^2-4ac}}{2a}\\
+          \Rightarrow \quad \quad & x = \frac{-(-8)-\sqrt{(-8)^2-4\cdot 2 \cdot 5}}{2 \cdot 5} \quad \textrm{or} \quad
+          x = \frac{-(-8)+\sqrt{(-8)^2-4\cdot 2 \cdot 5}}{2 \cdot 5}\\
+          \Rightarrow \quad \quad & x = \frac{8-\sqrt{64-40}}{10} \quad \textrm{or} \quad
+          x = \frac{8+\sqrt{64-40}}{10}\\
+          \Rightarrow \quad \quad & x = \frac{8-\sqrt{24}}{10} \quad \textrm{or} \quad
+          x = \frac{8+\sqrt{24}}{10}\\
+        \end{align*}
+      Often, you can further simplify an answer (such as this one) but the relevant
+      skills appear in another section, and I am neglecting that here.
+    </div>
+  </div>
+</div>
+
+<p>
+  You can also use the quadratic formula to solve equations that are not in
+  standard form&mdash;or, rather, you can if you first put them into standard form.
+</p>
+
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/0d619e8c06094b71ad53db54a204d460" target="_blank">Click for video.</a>
+  </p> -->
+
+  Use the quadratic formula to solve.
+  \[
+    x^2 + 27x  = 15x - 13 - x^2
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      First, pull all terms to one side (with $0$ on the other) and put it in the standard form order:
+        \[
+        2x^2  + 12x + 13 = 0
+        \]
+      Now use the quadratic formula (or complete the square, etc., if you prefer):
+      Note that \(a=2\), \(b=12\), and \(c=13\).  So,
+        \begin{align*}
+          &  x=\frac{-b-\sqrt{b^2-4ac}}{2a} \quad \textrm{or} \quad
+            x=\frac{-b+\sqrt{b^2-4ac}}{2a}\\
+          \Rightarrow \quad \quad & x = \frac{-12-\sqrt{(12)^2-4\cdot 2 \cdot 13}}{2 \cdot 2} \quad \textrm{or} \quad
+          x = \frac{-12+\sqrt{(12)^2-4\cdot 2 \cdot 13}}{2 \cdot 2}\\
+          \Rightarrow \quad \quad & x = \frac{-12-\sqrt{144-104}}{4} \quad \textrm{or} \quad
+          x = \frac{-12+\sqrt{144-104}}{4}\\
+          \Rightarrow \quad \quad & x = \frac{-12-\sqrt{40}}{4} \quad \textrm{or} \quad
+          x = \frac{-12+\sqrt{40}}{4}\\
+        \end{align*}
+      Often, you can further simplify an answer (such as this one) but the relevant
+      skills appear in another section, and I am neglecting that here.
+    </div>
+  </div>
+</div>
+
+<p>
+  Finally, let's look at an example in which no real solution results:
+</p>
+
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/0d619e8c06094b71ad53db54a204d460" target="_blank">Click for video.</a>
+  </p> -->
+
+  Use the quadratic formula to solve.
+  \[
+    x^2 + x + 1 = 0
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Note that \(a=1\), \(b=1\), and \(c=1\).  So,
+        \begin{align*}
+          &  x=\frac{-b-\sqrt{b^2-4ac}}{2a} \quad \textrm{or} \quad
+            x=\frac{-b+\sqrt{b^2-4ac}}{2a}\\
+          \Rightarrow \quad \quad & x = \frac{-1-\sqrt{(1)^2-4\cdot 1 \cdot 1}}{2 \cdot 1} \quad \textrm{or} \quad
+          x = \frac{-1+\sqrt{(1)^2-4\cdot 1 \cdot 1}}{2 \cdot 1}\\
+          \Rightarrow \quad \quad & x = \frac{-1-\sqrt{1-4}}{2} \quad \textrm{or} \quad
+          x = \frac{-1+\sqrt{1-4}}{2}\\
+          \Rightarrow \quad \quad & x = \frac{-1-\sqrt{-3}}{2} \quad \textrm{or} \quad
+          x = \frac{-1+\sqrt{-3}}{2}\\
+        \end{align*}
+      Note that \(\sqrt{-3}\) can't be a real number because there is no real
+      number that multiplies together to give you a negative such as \(-3\).
+    </div>
+  </div>
+</div>
+
+<p>
+  A key observation you need to make is that there will be no real solution
+  to a quadratic precisely when the number under the square root symbol
+  is negative.  Why?  Well, because the question of a square root
+  of a negative number is what real number times itself comes out negative.
+  But we know that you cannot multiply any real number times itself
+  to yield a negative.  By the way, a "square root sign" is often called
+  a "radical".  Really, the word is the same: "radical" means "root"
+  as in "radish."
+  <a href="https://www.etymonline.com/search?q=radical" target="_blank">
+    Etymologies can be very instructive!
+  </a>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+
+{% endblock %}

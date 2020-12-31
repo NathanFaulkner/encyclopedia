@@ -115,6 +115,8 @@ class QuadraticOnlyOneX(Question):
     You would enter, "5 - sqrt(3/2), 5 + sqrt(3/2)".
     """
 
+    prob_type = 'math_blank'
+
     # loom_link = "https://www.loom.com/share/331e43b308a64cefbafdb1ac3211c9ac"
 
 
