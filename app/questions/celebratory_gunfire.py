@@ -42,16 +42,15 @@ class CelebratoryGunfire(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        theta = random.randint(10,75)
-        v0 = random.randint(328, 656)
-        h0 = random.randint(4,30)
-        c = h0
-
-        voy = v0*sy.sin(theta*sy.pi/180)
-        vox = v0*sy.cos(theta*sy.pi/180)
-        b = float(str(round(voy/vox,3)))
-        a = float(str(round(-16/vox**2,5)))
-        self.a = a
+        starting_height = random.randint(75,95)
+        c = round(starting_height/12.0,3)
+        h0 = c
+        veloc_factor = random.randint(15,32)
+        velocity = veloc_factor*100
+        b = velocity
+        t = sy.Symbol('t')
+        y = c + b*t - 16*t**2
+        self.a = a = -16
         self.b = b
         # print(b)
         self.c = c
@@ -59,30 +58,28 @@ class CelebratoryGunfire(Question):
         def y(x):
             return h0 + b*x + a*x**2
 
-
-
-        x = sy.Symbol('x')
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:
-            self.x = sy.Symbol('x')
+            self.x = sy.Symbol('t')
+        x = self.x
         expr = y(x)
 
         h = -b/2/a
         k = y(h)
         self.h = h
         self.k = k
-        self.format_answer = f"""
-        Max height of y = {k:.5f} feet at x = {h:.5f} feet
-        """
+        ans = h + sy.sqrt(-k/a)
+        self.answer = ans
+        self.format_answer = f"""{ans:.5f} seconds"""
 
         self.prompt_single = f"""
         In some cultures it is common to celebrate a holiday or special event
         by firing bullets into the air.
 
         Let's imagine that the bullet leaves the muzzle of a gun at a position
-        of 85 inches (let's call it 7.083 feet) from the ground.
-        A typical bullet velocity is 2000 feet per second
+        of {starting_height} inches (let's call it {c} feet) from the ground.
+        A typical bullet velocity is {velocity} feet per second
         (but it varies considerably).
         According to Newton's law of gravitation,
         the bullet falls to Earth (neglecting air resistance)
@@ -92,56 +89,24 @@ class CelebratoryGunfire(Question):
         All that combines to give you the following model for the position
         \(y\) of the bullet relative to the ground after \(t\) seconds
             \[
-                y(t) = 7.083 + 2000t - 16 t^2
+                y(x) = {c:.3f} + {b}t - 16t^2
             \]
         (FYI: Where did the '32' go?  It became a 16.)
 
-        Your task: Figure how quickly the party-goers need to leave the area!!
-        \[
-            y(x) = {a:.5f}x^2 + {b:.3f}x + {c}
-        \]
-        Find the horizontal distance \(x\) away from the launching point at
-        which the cannonball crashes to Earth.
+        Your task: Figure how quickly (in seconds) the party-goers need to leave the area!!
         """
 
         self.format_given_for_tex = f"""
         {self.prompt_single}
         """
 
-        self.full_answer = f"""We need to solve the equation
-        \\[
-        {self.a:.5f}x^2 + {self.b:.3f}x + {self.c} = 0
-        \\]
-        Just use the quadratic formula:
-        \\begin{{align*}}
-        x & = \\frac{{-b\pm\sqrt{{b^2-4ac}}}}{{2a}} \\\\
-        & = \\frac{{ -{self.b} \pm \\sqrt{{({self.b})^2 - 4({self.a})({self.c})}}}}{{2({self.a})}} \\\\
-        x & \\approx {round(sy.solve(expr)[0], 3)} \\quad  \\textrm{{or}}
-         \\quad x \\approx {round(sy.solve(expr)[1], 3)}
-        \\end{{align*}}
-        Now, since we are interested in the cannonball hitting the ground beyond our
-        target (rather than behind it!) we select the positive answer.
-        As a challenge, you should contemplate what the negative answer represents;
-        it isn't meaningless!
-
-        So, the final answer is \\(x \\approx {round(sy.solve(expr)[1], 3)}\\) ft."""
-
     name = 'Celebratory Gunfire'
     module_name = 'celebratory_gunfire'
 
 
     further_instruction = """
-    Your answer should be of the following style (or close to it), with items highlighted in
-    red replaced by your answer:
-
-    <blockquote>
-        Max height of y = <span style="color: red">200</span> feet above
-        the ground at horizontal distance
-        x = <span style="color: red">100</span> feet from the launching point
-    </blockquote>
-
-    Do NOT use commas to format numbers.  For instance, write '2220' not '2,220'.
-    Your answer must be accurate to two decimal places.
+    Your answer should just include the numerical answer and correct units.
+    Do not include "t=".
     """
 
     # loom_link = "https://www.loom.com/share/d6efec7f9ae0459e93344e76e4a3ec3b"
@@ -153,88 +118,64 @@ class CelebratoryGunfire(Question):
 
     def checkanswer(self, user_answer):
         user_answer = user_answer.lower()
+        user_answer = user_answer.strip()
+        # user_answer = user_answer.replace(' ', '')
+        user_answer = user_answer.replace('t', '')
+        user_answer = user_answer.replace('=', '')
         user_answer = user_answer.replace(',', '')
-        if 'min' in user_answer:
+        user_answer = user_answer.replace('seconds', 's')
+        user_answer = user_answer.replace('secs', 's ')
+        user_answer = user_answer.replace('sec', 's')
+        if user_answer[-1] != 's':
             return False
-        if ' x' not in user_answer or ' y' not in user_answer:
-            return False
-        i = user_answer.find(' x')
-        user_x = user_answer[i+2:]
-        i = user_x.find('=')
-        user_x = user_x[i+1:]
-        user_x = user_x.strip()
-        i = user_x.find(' ')
-        if i != -1:
-            user_x = user_x[:i]
+        user_x = user_answer[:-1]
         user_x = user_x.replace('^', '**')
         user_x = parse_expr(user_x, transformations=transformations)
-        i = user_answer.find(' y')
-        user_y = user_answer[i+2:]
-        i = user_y.find('=')
-        user_y = user_y[i+1:]
-        user_y = user_y.strip()
-        i = user_y.find(' ')
-        if i != -1:
-            user_y = user_y[:i]
-        user_y = user_y.replace('^', '**')
-        user_y = parse_expr(user_y, transformations=transformations)
-        correct = abs(user_x - self.h) < 0.005 and abs(user_y -self.k) < max(-self.a*0.01*self.h + self.b*0.005, 0.005)
+        correct = abs(user_x - self.answer) < 0.005
         return bool(correct)
         # return correct
 
-    def format_useranswer(self, user_answer, display=False):
-        user_answer = user_answer.split(' ')
-        for i in range(len(user_answer)):
-            word = user_answer[i]
-            try:
-                if has_numbers(word):
-                    word = word.replace('^', '**')
-                    word = parse_expr(word, transformations=transformations)
-                    user_answer[i] = latex(word)
-            except:
-                pass
-        formatted = ''
-        for word in user_answer:
-            formatted += str(word) + ' '
+    @staticmethod
+    def format_useranswer(user_answer, display=False):
+        user_answer = user_answer.lower()
+        user_answer = user_answer.strip()
+        # user_answer = user_answer.replace(' ', '')
+        user_answer = user_answer.replace('t', '')
+        user_answer = user_answer.replace('=', '')
+        user_answer = user_answer.replace(',', '')
+        user_answer = user_answer.replace('seconds', 's')
+        user_answer = user_answer.replace('secs', 's ')
+        user_answer = user_answer.replace('sec', 's')
+        if user_answer[-1] != 's':
+            return user_answer
+        user_x = user_answer[:-1]
+        user_x = user_x.replace('^', '**')
+        user_x = parse_expr(user_x, transformations=transformations)
+        formatted = f'\({sy.latex(user_x)}\) ' + ' seconds'
         return formatted
 
-    @classmethod
-    def validator(self, user_answer):
+    @staticmethod
+    def validator(user_answer):
         try:
             user_answer = user_answer.lower()
-            if ',' in user_answer:
-                raise SyntaxError
-            if ' x' not in user_answer or ' y' not in user_answer:
-                raise SyntaxError
-            if 'of x' in user_answer:
-                raise SyntaxError
-            if 'at y' in user_answer:
-                raise SyntaxError
-            i = user_answer.find(' x')
-            user_x = user_answer[i+2:]
-            i = user_x.find('=')
-            user_x = user_x[i+1:]
-            user_x = user_x.strip()
-            i = user_x.find(' ')
-            if i != -1:
-                user_x = user_x[:i]
-            user_x = user_x.replace('^', '**')
-            user_x = parse_expr(user_x, transformations=transformations)
-            i = user_answer.find(' y')
-            user_y = user_answer[i+2:]
-            i = user_y.find('=')
-            user_y = user_y[i+1:]
-            user_y = user_y.strip()
-            i = user_y.find(' ')
-            if i != -1:
-                user_y = user_y[:i]
-            user_y = user_y.replace('^', '**')
-            user_y = parse_expr(user_y, transformations=transformations)
-            if abs(user_x - 1.23) < 0.005 and abs(user_y - 1.23) < 0.01:
-                pass
+            user_answer = user_answer.strip()
+            # user_answer = user_answer.replace(' ', '')
+            user_answer = user_answer.replace('t', '')
+            user_answer = user_answer.replace('=', '')
+            user_answer = user_answer.replace(',', '')
+            user_answer = user_answer.replace('seconds', 's')
+            user_answer = user_answer.replace('secs', 's ')
+            user_answer = user_answer.replace('sec', 's')
+            if user_answer[-1] != 's':
+                user_x = user_answer[:-1]
+                user_x = user_x.replace('^', '**')
+                user_x = parse_expr(user_x, transformations=transformations)
+                correct = abs(user_x - self.answer) < 0.005
+                correct = bool(correct)
+                formatted = f'\({sy.latex(user_x)}\) ' + ' seconds'
         except:
             raise SyntaxError
 
 
-Question_Class = CannonballHitsTarget
+Question_Class = CelebratoryGunfire
 prob_type = 'math_blank'

@@ -133,8 +133,8 @@ class SolveByQuadraticFormula(Question):
             user_answers = set(user_answers)
             return self.answer == user_answers
 
-    @classmethod
-    def format_useranswer(self, user_answer, display=False):
+    @staticmethod
+    def format_useranswer(user_answer, display=False):
         user_answer = user_answer.lower()
         if 'no' in user_answer or 'null' in user_answer or 'empty' in user_answer:
             return user_answer
@@ -156,8 +156,8 @@ class SolveByQuadraticFormula(Question):
             return '\(' + format_answer + '\)'
 
 
-    @classmethod
-    def validator(self, user_answer):
+    @staticmethod
+    def validator(user_answer):
         try:
             # pass
             user_answer = user_answer.lower()

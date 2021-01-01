@@ -66,7 +66,10 @@
         <!-- <button id='previewBtn' style="float: left;" onclick="window.location.href='https://w3docs.com';">Preview</button> -->
         <form action="?form=preview_form" method="post">
         <!-- <input class="button" href="#" onClick="MyWindow=window.open('{{ url_for('answer_previewer', question_name=question.module_name, user_answer='hello') }}','MyWindow','width=600,height=300'); return false;">Click to Preview</input> -->
+        <div class="tooltip">
           <input type="button" onClick="MyWindow=window.open('{{ url_for('answer_previewer', question_name=question.module_name) }}'.concat('?user_answer=',encodeURIComponent(document.getElementById('useranswer').value)),'MyWindow','width=600,height=300'); return false;" value="Preview" />
+          <span class="tooltiptext">Click to see how the answer checker will process your response</span>
+        </div>
         </form>
       </p>
     </div>

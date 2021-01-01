@@ -72,10 +72,7 @@ class CannonballHitsTarget(Question):
         self.answer = ans
         self.h = h
         self.k = k
-        self.format_answer = f"""
-        The cannonball will crash to earth at a horizontal distance
-        of x = {ans:.5f} feet away from the launching point.
-        """
+        self.format_answer = f"""{ans:.5f} feet"""
 
         self.prompt_single = f"""
         After rounding the results of some intermediate calculations that are not displayed
@@ -120,7 +117,8 @@ class CannonballHitsTarget(Question):
 
 
     further_instruction = """
-    Your answer should include the numerical answer and correct units.
+    Your answer should just include the numerical answer and correct units.
+    Do not include "x=".
     """
 
     # loom_link = "https://www.loom.com/share/d6efec7f9ae0459e93344e76e4a3ec3b"
@@ -141,8 +139,10 @@ class CannonballHitsTarget(Question):
 
     def checkanswer(self, user_answer):
         user_answer = user_answer.lower()
-        user_answer = user_answer.replace(' ', '')
+        # user_answer = user_answer.replace(' ', '')
         user_answer = user_answer.replace(',', '')
+        user_answer = user_answer.replace('x', '')
+        user_answer = user_answer.replace('=', '')
         user_answer = user_answer.replace('feet', ' ft')
         if 'ft' not in user_answer:
             return False
@@ -157,8 +157,10 @@ class CannonballHitsTarget(Question):
     @staticmethod
     def format_useranswer(user_answer, display=False):
         user_answer = user_answer.lower()
-        user_answer = user_answer.replace(' ', '')
+        # user_answer = user_answer.replace(' ', '')
         user_answer = user_answer.replace(',', '')
+        user_answer = user_answer.replace('x', '')
+        user_answer = user_answer.replace('=', '')
         user_answer = user_answer.replace('feet', ' ft')
         try:
             i = user_answer.index('ft')
@@ -174,15 +176,19 @@ class CannonballHitsTarget(Question):
     def validator(self, user_answer):
         try:
             user_answer = user_answer.lower()
-            user_answer = user_answer.replace(' ', '')
+            # user_answer = user_answer.replace(' ', '')
             user_answer = user_answer.replace(',', '')
+            user_answer = user_answer.replace('x', '')
+            user_answer = user_answer.replace('=', '')
             user_answer = user_answer.replace('feet', ' ft')
             i = user_answer.find('ft')
-            user_x = user_answer[:i]
-            user_x = user_x.replace('^', '**')
-            user_x = parse_expr(user_x, transformations=transformations)
-            formatted = f'\({sy.latex(user_x)}\) ' + user_answer[i:]
-            correct = abs(user_x - 1.234) < 0.005
+            if i != -1:
+                user_x = user_answer[:i]
+                user_x = user_x.replace('^', '**')
+                user_x = parse_expr(user_x, transformations=transformations)
+                formatted = f'\({sy.latex(user_x)}\) ' + user_answer[i:]
+                correct = abs(user_x - 1.234) < 0.005
+                correct = bool(correct)
         except:
             raise SyntaxError
 
