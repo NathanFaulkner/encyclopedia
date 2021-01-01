@@ -1,0 +1,155 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section, we multiply polynomials.
+  Basically, we are just going to "distribute the expression out," to speak roughly.
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/6adc211e382440c2a63fac4668a7f222" target="_blank">Click for video.</a>
+  </p> -->
+
+  <p>
+    Carry out the indicated operation (i.e.: multiply it all out).
+    \[
+      \left(3x+3\right)\left(x^2 - 7x + 3\right)
+    \]
+  </p>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      I am going to show you all the steps this first time, but, generally, people like to skip steps and you probably will, too, once you get the hang of it.  However, after showing you how the math works in the background (by showing you all the ugly steps) I will also them demonstrate a streamlined method involving lining up like terms in columns.  It will help you (in the long run) if you adopt this method; it will be the key to undertaking the hardest task (coming next) of dividing polynomials (which you might anticipate as being an attempt at fully generalized factoring, i.e., ``undistributing.'').
+
+      <p>
+        At the most basic level, multiplying polynomials involves doing two
+        steps of the distributive property.  As a reminder, this is the
+        distributive property (or one way of writing it), color-coded:
+          \[
+            ({\color{black}a}+{\color{blue}b}){\color{orange}c} =
+            {\color{black}a}{\color{orange}c} + {\color{blue}b}{\color{orange}c}
+          \]
+        The color-coding helps explain what I will do to carry out the multiplication of the polynomials:
+          \begin{align*}
+          \left({\color{black}3x}+{\color{blue}3}\right){\color{orange}\left(x^2 - 7x + 1\right)} &=
+          {\color{black}3x}{\color{orange}\left(x^2 - 7x + 1\right)} + {\color{blue}3}{\color{orange}\left(x^2 - 7x + 1\right)}\\
+          &= {\color{black}3x} \cdot{\color{orange} x^2} \mathbin{\color{orange}-} {\color{black}3x}\cdot {\color{orange}7x} \mathbin{\color{orange}+} {\color{black}3x} \cdot {\color{orange}1} +{\color{blue}3}\cdot {\color{orange}x^2} \mathbin{\color{orange}-} {\color{blue}3} \cdot {\color{orange}7x} \mathbin{\color{orange}+} {\color{blue}3}\cdot {\color{orange}1}\\
+          &= 3x^3 - 21x^2 + 3x + 3x^2 - 21x + 3\\
+          & = 3x^2 - 18x^3 - 18x + 3
+          \end{align*}
+        Here it is again skipping steps, but utilizing a "column" format.
+        Line up like terms into columns:
+          \begin{align*}
+            \left(3x+3\right)\left(x^2 - 7x + 3\right) = \; &\\
+            &\begin{matrix}
+               3x^3& - & 21x ^2  & + & 9x &       &  \\
+                      & +  &  3x^2  & -   & 21x & +  & 9\\
+            \hline
+              3x^3 & - & 18x^2  & -   & 18x & + & 9\\
+            \end{matrix}
+          \end{align*}
+      </p>
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  A couple more examples ought to do the trick!
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/6adc211e382440c2a63fac4668a7f222" target="_blank">Click for video.</a>
+  </p> -->
+
+  <p>
+    Carry out the indicated operation (i.e.: multiply it all out).
+      \[
+        (2x-1)\left(x^2 - 3x + 1\right)
+      \]
+  </p>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Line up like terms in columns.  The first row comes from when I multiply
+      \(2x\) through, and the second row is from when I multiply \(-1\) through.
+      Notice that entries will shift one column over on each new row
+      since I am treating the terms in descending order of their degree (power),
+      one at a time:
+        \begin{align*}
+          (2x-1)\left(x^2 - 3x + 1\right) = \; &\\
+          &\begin{matrix}
+             2x^3& - & 6x^2  & + & 2x &       &  \\
+                    & - &    x^2  &  + & 3x & -  & 1\\
+          \hline
+            2x^3 & - & 7x^2  & +   & 5x & - & 1\\
+          \end{matrix}
+        \end{align*}
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/6adc211e382440c2a63fac4668a7f222" target="_blank">Click for video.</a>
+  </p> -->
+
+  <p>
+    Carry out the indicated operation (i.e.: multiply it all out).
+      \[
+        (x^2+2x -5)\left(2x^2 - 3x + 1\right)
+      \]
+  </p>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      I line up like terms in columns.  The first row is what results when
+      I multiply \(x^2\) all the way through.
+      The second row is for when I multiply \(2x\) through.
+      And the third row is for when I multiply \(-5\) through.
+      Notice that entries will shift one column over on each new row
+      since I am treating the terms in descending order of their
+      degree (power), one at a time:
+        \begin{align*}
+        (x^2+2x -5)\left(2x^2 - 3x + 1\right)= \; &\\
+        &\begin{matrix}
+        2x^4& - & 3x^3    & +    & x^2  &     &  	&	&\\
+                 & +&    4x^3  &  - & 6x^2 & + & 2x      &   &  \\
+        	&  &		&  - & 10x^2&  +  & 15x  & - & 5\\
+        \hline
+          2x^4 & + & x^3  & -   & 15x^2 & + & 17x & - & 5\\
+        \end{matrix}
+        \end{align*}
+    </div>
+  </div>
+</div>
+</p>
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

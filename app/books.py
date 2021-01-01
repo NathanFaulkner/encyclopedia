@@ -678,6 +678,14 @@ solvingquadraticsapplications = Section('solvingquadraticsapplications', "Solvin
 solvingquadraticsapplications.add_to_questions('cannonball_hits_target',
                                                 'celebratory_gunfire')
 #######################################
+polynomials_intro = Section('polynomials', "Polynomials", '/sections/polynomials-intro')
+
+polynomialsaddingandsubtracting = Section('polynomialsaddingandsubtracting', "Adding and Subtracting Polynomials", '/sections/polynomials-adding-and-subtracting')
+polynomialsaddingandsubtracting.add_to_questions('adding_or_subtracting_polynomials')
+
+polynomialsmultiplying = Section('polynomialsmultiplying', "Multiplying Polynomials", '/sections/polynomials-multiplying')
+polynomialsmultiplying.add_to_questions('multiplying_polynomials')
+#######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
 
@@ -685,7 +693,6 @@ linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sectio
 factoring1 = Section('factoring1', "Factoring - Level 1", '/sections/factoring-coeff-of-one')
 # factoring1.due_date = datetime.datetime(2020, 8, 28)
 
-polynomials_intro = Section('polynomials', "Polynomials", '/sections/polynomials-intro')
 
 
 # quadraticpattern.due_date = datetime.datetime(2020, 12, 2)
@@ -749,18 +756,23 @@ quadratics = Division('chapter', "Quadratic Functions",
                                 ])
 quadratics.set_frontpage(quadratics_intro)
 
+polynomials = Division('chapter', 'Polynomials',
+                                [polynomialsaddingandsubtracting,
+                                polynomialsmultiplying
+                                ])
+polynomials.set_frontpage(polynomials_intro)
+
 algebra2_challenge = Division('chapter', "Challenge Sections",
                                     [absolutevalueequationspart2,
                                     solvingbyeliminationthreeequationsonesolution])
 algebra2_challenge.set_frontpage(challenge_intro)
 
-polynomials = Division('chapter', 'Polynomials', [factoring1, quadraticpattern])
-#polynomials.intro = polynomials_intro
-polynomials.set_frontpage(polynomials_intro)
+
 
 main = Division('main', 'Main Matter', [nuts_and_bolts_of_algebra,
                                         functions_and_the_coordinate_plane,
                                         quadratics,
+                                        polynomials,
                                         algebra2_challenge])
 
 Algebra2 = Division('book', 'Algebra 2', {'front': None, 'main': main, 'end': None})

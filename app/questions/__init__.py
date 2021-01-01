@@ -82,6 +82,8 @@ __all__ = ['quadratic_pattern',
             'solve_by_quadratic_formula',
             'cannonball_hits_target',
             'celebratory_gunfire',
+            'adding_or_subtracting_polynomials',
+            'multiplying_polynomials',
             ]
 
 class Question():

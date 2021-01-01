@@ -1,0 +1,95 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  There is nothing earth-shattering here!
+  All we have to do is "combine like terms."
+  So, I expect you will get through this part quickly.
+  Yet, I will advocate a special approach to this very easy
+  task&mdash;of lining up like terms in columns&mdash;because this will
+  help you in the harder tasks of multiplying and, especially, dividing polynomials.
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/6adc211e382440c2a63fac4668a7f222" target="_blank">Click for video.</a>
+  </p> -->
+
+  <p>
+    Carry out the indicated operation (i.e., addition):
+      \[
+        \left(-3x^4 + 4x^3 - 2x^2 + 1\right) + \left(2x^4 +6x^2 - x- 5\right)
+      \]
+  </p>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Just combine like terms!  But, take my advice, and start
+      rewriting the polynomials above each other with like terms lined up
+      in columns, like so:
+        \[
+          \begin{matrix}
+          &-3x^4 & + & 4x^3 & - & 2x^2 & & & +& 1\\
+          +&2x^4 &  &  & + & 6x^2 & -& x& - & 5 \\
+          \hline
+          &-x^4 & + & 4x^3 & + & 4x^2 & -& x& - & 4 \\
+          \end{matrix}
+        \]
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/6adc211e382440c2a63fac4668a7f222" target="_blank">Click for video.</a>
+  </p> -->
+
+  <p>
+    Carry out the indicated operation (i.e., subtraction):
+      \[
+        \left(-3x^4 + 4x^3 - 2x^2 + 1\right) - \left(2x^4 +6x^2 - x- 5\right)
+      \]
+  </p>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Be sure to "distribute" the minus to the terms in the second
+      polynomial as you subtract.  Here is the answer using my "column"
+      method (which, again, will be especially useful if not almost
+      required when we get to division of polynomials.)
+        \[
+          \begin{matrix}
+             &-3x^4 & + & 4x^3 & -    & 2x^2 &   &   & +& 1 \\
+          -&(2x^4 &  &               & +   & 6x^2 & -  & x& - & 5 )\\
+          \hline
+            &-5x^4  & + & 4x^3  & -   & 8x^2 & + & x& + & 6 \\
+          \end{matrix}
+        \]
+    </div>
+  </div>
+</div>
+</p>
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

@@ -3,13 +3,119 @@
 {% block content %}
 
 <p class="subhead">
-  Let's learn about polynomials!
+  In this chapter we study <b>polynomials</b>.  We study them from two points of view:
+  <ul>
+    <li>Algebraic point of view: formulas and equations</li>
+    <li>Graphical perspective: what kind of observations can you make when you graph a polynomial</li>
+  </ul>
+  It is probably best to start with some definitions&mdash;which is really the
+  start of getting an algebraic perspective on polynomials.  We are also
+  setting up some useful vocabulary or shorthand here.
 </p>
 
-<div style="background-color: green">
-  <h2>Practice</h2>
-  <p>
-    Some content coming soon.
-  </p>
-</div>
+<p>
+  <div class="definition">
+    <h2></h2>
+    A <b>polynomial function</b> \(f\) is any function whose output can be
+    obtained by evaluating at a given value of \(x\) a formula of the form
+      \[
+        f(x) = a_n x^n + a_{n-1}x^{n-1} + \cdots + a_1 x +a_0,
+      \]
+    where the numbers \(a_i\) are meant to be fixed real numbers
+    (which will vary from problem to problem) and where $n$ is a whole number
+    (0, 1, 2, 3, 4, 5, etc.)
+
+    Any expression or formula equivalent to something of this form is called
+    a <b>polynomial expression</b>.
+
+    In English, then, a polynomial is just an expression formed using \(x\),
+    numbers, and plus and times (subtraction is okay, too.)  For example,
+      \[
+        f(x) = 3x^5 - 4x^3 - 2x +1
+      \]
+    is a polyomial, and so is
+      \[
+        g(x) = 1 - 2x - 4x^3 + 3x^5
+      \]
+    In fact, these two polynomials are equivalent.
+    (By the way, what does it mean for two algebraic expressions to be equivalent?)
+  </div>
+
+
+  <div class="definition">
+    <h2></h2>
+    A polynomial expression is said to be in <b>standard form</b>
+    if it is written with the terms in descending order of their powers on \(x\):
+      \begin{equation*}\tag{Standard Form}
+        f(x) = a_n x^n + a_{n-1}x^{n-1} + \cdots + a_1 x +a_0,
+      \end{equation*}
+    For example,
+      \[
+        f(x) = 3x^5 - 4x^3 - 2x +1
+      \]
+    is in standard form, while,
+      \[
+        g(x) = 1 - 2x - 4x^3 + 3x^5
+      \]
+    is not.
+  </div>
+
+  <div class="definition">
+    <h2></h2>
+    The highest power on \(x\) appearing in a polynomial is
+    called the <b>degree</b> of the polynomial.  For example,
+      \[
+        f(x) = 3x^5 - 4x^3 - 2x +1
+      \]
+    has degree 5, while,
+      \[
+        f(x) = 2x^2 +3x +1
+      \]
+    has degree 2.
+  </div>
+
+  <div class="definition">
+    <h2></h2>
+    Certain degrees have special names:
+
+    <table border="1">
+      <tr>
+        <th>Degree</th><th>Special Name</th><th>Example</th>
+      </tr>
+      <tr>
+        <td>0</td><td>Constant Function</td><td>\(f(x) = 5\)</td>
+      </tr>
+      <tr>
+        <td>1</td><td>Linear Function</td><td>\(f(x) = -\frac{3}{2}x+5\)</td>
+      </tr>
+      <tr>
+        <td>2</td><td>Quadratic Function</td><td>\(f(x) = 3x^2 - 2x - 8\)</td>
+      </tr>
+      <tr>
+        <td>3</td><td>Cubic Function</td><td>\(f(x)= 4x^3 - 2x +1\)</td>
+      </tr>
+      <tr>
+        <td>4</td><td>Quartic Function</td><td>\(f(x) = -2x^4 + 7x^2 - x +1\)</td>
+      </tr>
+      <tr>
+        <td>5</td><td>Quintic Function</td><td>\(f(x) = 3x^5 - 4x^3 - 2x +1\)</td>
+      </tr>
+    </table>
+
+
+    Polynomials of higher degrees are less commonly called anything special.
+  </div>
+</p>
+
+<p>
+  First up, we are going to learn to
+  <ul>
+    <li>add and subtract</li>
+    <li>multiply</li>
+    <li>and divide</li>
+  </ul>
+  polynomial functions.  What do you think will be easiest?
+</p>
+
+
 {% endblock %}
