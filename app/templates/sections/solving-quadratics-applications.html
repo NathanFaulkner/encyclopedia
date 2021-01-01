@@ -1,0 +1,224 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  What is the point of solving a quadratic equation?
+  In this section, we'll partially answer that question
+  by looking at some applications of quadratics.  For context,
+  when I say "solve a quadratic", I mean that you are to solve an equation
+  that is equivalent to one of the form
+    \[
+      ax^2 + bx + c = 0
+    \]
+  where \(a\neq 0\), \(b\), and \(c\) are given real numbers and \(x\) is the unknown.
+</p>
+
+
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/0d619e8c06094b71ad53db54a204d460" target="_blank">Click for video.</a>
+  </p> -->
+
+  After rounding the results of some intermediate calculations that are not displayed
+  here, the vertical height \(y\) above the ground of a cannonball shot
+  from an initial height of \(28\) feet with an initial velocity
+  of \(334\) feet per second and initial launch angle
+  (measured from the ground) of \(23^\circ\)
+  can be given as a function of the horizontal distance
+  \(x\) it has traveled from the launching point
+  (if we neglect air resistance and the coriolis effect!) by
+  \[
+      y(x) = -0.00017x^2 + 0.424x + 28
+  \]
+  Find the horizontal distance \(x\) away from the launching point at
+  which the cannonball crashes to Earth.
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      The cannonball crashes to earth when the vertical height, \(y\) is \(0\).
+      So, we just set \(y=0\) and solve.  That is,w e need to solve the equation
+        \[
+        -0.00017x^2 + 0.424x + 28 = 0
+        \]
+      Just use the quadratic formula:
+        \begin{align*}
+          x & = \frac{-b\pm\sqrt{b^2-4ac}}{2a} \\
+          & = \frac{ -0.424 \pm \sqrt{(0.424)^2 - 4(-0.00017)(28)}}{2(-0.00017)} \\
+          x & \approx -64.376 \quad  \textrm{or}
+           \quad x \approx 2558.494
+        \end{align*}
+      Now, since we are interested in the cannonball hitting the ground beyond our
+      target (rather than behind it!) we select the positive answer.
+      As a challenge, you should contemplate what the negative answer represents;
+      it isn't meaningless!
+
+      So, the final answer is \(x \approx 2558.494\) ft.
+    </div>
+  </div>
+</div>
+
+
+
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/0d619e8c06094b71ad53db54a204d460" target="_blank">Click for video.</a>
+  </p> -->
+
+  In some cultures it is common to celebrate a holiday or special event by
+  firing bullets into the air.  According to Wikipedia,
+  "It is culturally accepted in parts of the Balkans, parts of Russia,
+  the Middle East, the Central Asian country of Afghanistan, and the
+  South Asian country of Pakistan."
+  <a hre="https://en.wikipedia.org/wiki/Celebratory_gunfire">See
+    Wikipedia article, "Celebratory Gunfire".
+  </a>
+  Of course, this can be a problem&mdash;with bullets returning to Earth and
+  sometimes fatally wounding random people&mdas;and thus the practice is
+  outlawed in many areas.
+
+  <p>
+  A completely accurate model of the path the bullet travels will take
+  into account "air resistance" which actually causes the bullet
+  as it returns to Earth to reach a ``terminal velocity''
+  that is lower than what it was when first leaving the barrel of the gun
+  but which is still great enough to kill.
+  However, this model involves exponentials and logarithms,
+  so we aren't quite ready for it yet.
+  Instead, we will model it based off of Newton's law
+  of graviation (which is that bodies fall with constant
+  acceleration of 32 feet per second, if you neglect air resistance.)
+  (The Coriolis Effect also plays a role.)
+  </p>
+
+  <p>
+  Let's consider the simple case of when a bullet is fired
+  "straight up" in the air, and study how long it takes to come
+  back down&mdash;which could at least give party-goers some idea of how
+  quickly they need move to a safe distance away after a celebration
+  of this kind.  (In reality, it will take a little longer
+  since air slows the bullet down, so we will be
+  recommending a safe amount of time.)
+  </p>
+
+  <p>
+  Let's imagine that the bullet leaves the muzzle of a gun at a
+  position of 85 inches (let's call it 7.083 feet) from the ground.
+  A typical bullet velocity is 2000 feet per second
+  (but it varies considerably).
+  According to Newton's law of gravitation, the bullet falls to Earth
+  (neglecting air resistance) with an acceleration of 32 feet per second
+  per second.  (FYI: Acceleration measures the rate of change of the velocity.)
+  </p>
+
+  <p>
+  All that combines to give you the following model
+  for the position $y$ of the bullet relative to the ground after $t$ seconds
+    \[
+      y(t) = 7.083 + 2000t - 16 t^2
+    \]
+  (FYI: Where did the `32' go?  It became a 16.)
+  </p>
+
+  <p>
+  Your task: Figure how quickly the party-goers need to leave the area!!
+  </p>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      We need to solve
+        \[
+          7.083 + 2000t - 16t^2 = 0
+        \]
+      Let's use the quadratic formula:
+        \[
+          t = \frac{}{} = \frac{-2000 \pm \sqrt{2000^2 - 4(-16)(7.083)}}{2(7.083)}
+        \]
+      which means
+        \[
+          t \approx {% set when0 = (-2000-(2000**2-4*-16*7.083)**0.5)/(2*-16) %}{{when0|round(3)}}
+          \quad\quad \textrm{or} \quad\quad
+          t \approx {% set when1 = (-2000+(2000**2-4*-16*7.083)**0.5)/(2*-16) %}{{when1|round(3)}}
+        \]
+      Now, which do you suppose is the right answer?  Of course, the
+      nonnegative one.  Can you make sense of the negative answer?
+      Do you know what it represents?
+
+      So, in all, we are recommending that the party-goers clear the area
+      {% set when = (-2000-(2000**2-4*-16*7.083)**0.5)/(2*-16) %}
+      within about {{when|round(0)}}
+      seconds!!  Of course, if the bullet actual was
+      fired at an angle rather than straight up, you'd want
+      to run in the correct (opposite) direction, too!
+    </div>
+  </div>
+</div>
+
+<p>
+  Finally, let's look at an example in which no real solution results:
+</p>
+
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/0d619e8c06094b71ad53db54a204d460" target="_blank">Click for video.</a>
+  </p> -->
+
+  Use the quadratic formula to solve.
+  \[
+    x^2 + x + 1 = 0
+  \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Note that \(a=1\), \(b=1\), and \(c=1\).  So,
+        \begin{align*}
+          &  x=\frac{-b-\sqrt{b^2-4ac}}{2a} \quad \textrm{or} \quad
+            x=\frac{-b+\sqrt{b^2-4ac}}{2a}\\
+          \Rightarrow \quad \quad & x = \frac{-1-\sqrt{(1)^2-4\cdot 1 \cdot 1}}{2 \cdot 1} \quad \textrm{or} \quad
+          x = \frac{-1+\sqrt{(1)^2-4\cdot 1 \cdot 1}}{2 \cdot 1}\\
+          \Rightarrow \quad \quad & x = \frac{-1-\sqrt{1-4}}{2} \quad \textrm{or} \quad
+          x = \frac{-1+\sqrt{1-4}}{2}\\
+          \Rightarrow \quad \quad & x = \frac{-1-\sqrt{-3}}{2} \quad \textrm{or} \quad
+          x = \frac{-1+\sqrt{-3}}{2}\\
+        \end{align*}
+      Note that \(\sqrt{-3}\) can't be a real number because there is no real
+      number that multiplies together to give you a negative such as \(-3\).
+    </div>
+  </div>
+</div>
+
+<p>
+  A key observation you need to make is that there will be no real solution
+  to a quadratic precisely when the number under the square root symbol
+  is negative.  Why?  Well, because the question of a square root
+  of a negative number is what real number times itself comes out negative.
+  But we know that you cannot multiply any real number times itself
+  to yield a negative.  By the way, a "square root sign" is often called
+  a "radical".  Really, the word is the same: "radical" means "root"
+  as in "radish."
+  <a href="https://www.etymonline.com/search?q=radical" target="_blank">
+    Etymologies can be very instructive!
+  </a>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+
+{% endblock %}

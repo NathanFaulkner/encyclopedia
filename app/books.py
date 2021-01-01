@@ -673,6 +673,8 @@ solvingbycompletingthesquare.add_to_questions('solve_by_completing_the_square')
 
 solvingbythequadraticformula = Section('solvingbythequadraticformula', "Solving by the Quadratic Formula", '/sections/solving-by-the-quadratic-formula')
 solvingbythequadraticformula.add_to_questions('solve_by_quadratic_formula')
+
+solvingquadraticsapplications = Section('solvingquadraticsapplications', "Solving Quadratics: Applications", '/sections/solving-quadratics-applications')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -741,6 +743,7 @@ quadratics = Division('chapter', "Quadratic Functions",
                                 solvingquadraticsonlyonex,
                                 solvingbycompletingthesquare,
                                 solvingbythequadraticformula,
+                                solvingquadraticsapplications,
                                 ])
 quadratics.set_frontpage(quadratics_intro)
 
