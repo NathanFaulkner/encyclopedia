@@ -675,6 +675,7 @@ solvingbythequadraticformula = Section('solvingbythequadraticformula', "Solving 
 solvingbythequadraticformula.add_to_questions('solve_by_quadratic_formula')
 
 solvingquadraticsapplications = Section('solvingquadraticsapplications', "Solving Quadratics: Applications", '/sections/solving-quadratics-applications')
+solvingquadraticsapplications.add_to_questions('cannonball_hits_target')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 

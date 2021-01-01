@@ -59,8 +59,6 @@ class CannonballHitsTarget(Question):
         def y(x):
             return h0 + b*x + a*x**2
 
-
-
         x = sy.Symbol('x')
         if 'x' in kwargs:
             self.x = kwargs['x']
@@ -70,10 +68,13 @@ class CannonballHitsTarget(Question):
 
         h = -b/2/a
         k = y(h)
+        ans = h + sy.sqrt(-k/a)
+        self.answer = ans
         self.h = h
         self.k = k
         self.format_answer = f"""
-        Max height of y = {k:.5f} feet at x = {h:.5f} feet
+        The cannonball will crash to earth at a horizontal distance
+        of x = {ans:.5f} feet away from the launching point.
         """
 
         self.prompt_single = f"""
@@ -119,107 +120,69 @@ class CannonballHitsTarget(Question):
 
 
     further_instruction = """
-    Your answer should be of the following style (or close to it), with items highlighted in
-    red replaced by your answer:
-
-    <blockquote>
-        Max height of y = <span style="color: red">200</span> feet above
-        the ground at horizontal distance
-        x = <span style="color: red">100</span> feet from the launching point
-    </blockquote>
-
-    Do NOT use commas to format numbers.  For instance, write '2220' not '2,220'.
-    Your answer must be accurate to two decimal places.
+    Your answer should include the numerical answer and correct units.
     """
 
-    loom_link = "https://www.loom.com/share/d6efec7f9ae0459e93344e76e4a3ec3b"
+    # loom_link = "https://www.loom.com/share/d6efec7f9ae0459e93344e76e4a3ec3b"
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
 
+    @staticmethod
+    def insert_space_before_units(string, list_of_names):
+        for name in list_of_names:
+            try:
+                i = string.index(name)
+                string = string[:i-1] + ' ' + string[i:]
+            except ValueError:
+                pass
+        return string
 
 
     def checkanswer(self, user_answer):
         user_answer = user_answer.lower()
+        user_answer = user_answer.replace(' ', '')
         user_answer = user_answer.replace(',', '')
-        if 'min' in user_answer:
+        user_answer = user_answer.replace('feet', ' ft')
+        if 'ft' not in user_answer:
             return False
-        if ' x' not in user_answer or ' y' not in user_answer:
-            return False
-        i = user_answer.find(' x')
-        user_x = user_answer[i+2:]
-        i = user_x.find('=')
-        user_x = user_x[i+1:]
-        user_x = user_x.strip()
-        i = user_x.find(' ')
-        if i != -1:
-            user_x = user_x[:i]
+        i = user_answer.find('ft')
+        user_x = user_answer[:i]
         user_x = user_x.replace('^', '**')
         user_x = parse_expr(user_x, transformations=transformations)
-        i = user_answer.find(' y')
-        user_y = user_answer[i+2:]
-        i = user_y.find('=')
-        user_y = user_y[i+1:]
-        user_y = user_y.strip()
-        i = user_y.find(' ')
-        if i != -1:
-            user_y = user_y[:i]
-        user_y = user_y.replace('^', '**')
-        user_y = parse_expr(user_y, transformations=transformations)
-        correct = abs(user_x - self.h) < 0.005 and abs(user_y -self.k) < max(-self.a*0.01*self.h + self.b*0.005, 0.005)
+        correct = abs(user_x - self.answer) < 0.005
         return bool(correct)
         # return correct
 
-    def format_useranswer(self, user_answer, display=False):
-        user_answer = user_answer.split(' ')
-        for i in range(len(user_answer)):
-            word = user_answer[i]
-            try:
-                if has_numbers(word):
-                    word = word.replace('^', '**')
-                    word = parse_expr(word, transformations=transformations)
-                    user_answer[i] = latex(word)
-            except:
-                pass
-        formatted = ''
-        for word in user_answer:
-            formatted += str(word) + ' '
+    @staticmethod
+    def format_useranswer(user_answer, display=False):
+        user_answer = user_answer.lower()
+        user_answer = user_answer.replace(' ', '')
+        user_answer = user_answer.replace(',', '')
+        user_answer = user_answer.replace('feet', ' ft')
+        try:
+            i = user_answer.index('ft')
+        except ValueError:
+            return user_answer
+        user_x = user_answer[:i]
+        user_x = user_x.replace('^', '**')
+        user_x = parse_expr(user_x, transformations=transformations)
+        formatted = f'\({sy.latex(user_x)}\) ' + user_answer[i:]
         return formatted
 
     @classmethod
     def validator(self, user_answer):
         try:
             user_answer = user_answer.lower()
-            if ',' in user_answer:
-                raise SyntaxError
-            if ' x' not in user_answer or ' y' not in user_answer:
-                raise SyntaxError
-            if 'of x' in user_answer:
-                raise SyntaxError
-            if 'at y' in user_answer:
-                raise SyntaxError
-            i = user_answer.find(' x')
-            user_x = user_answer[i+2:]
-            i = user_x.find('=')
-            user_x = user_x[i+1:]
-            user_x = user_x.strip()
-            i = user_x.find(' ')
-            if i != -1:
-                user_x = user_x[:i]
+            user_answer = user_answer.replace(' ', '')
+            user_answer = user_answer.replace(',', '')
+            user_answer = user_answer.replace('feet', ' ft')
+            i = user_answer.find('ft')
+            user_x = user_answer[:i]
             user_x = user_x.replace('^', '**')
             user_x = parse_expr(user_x, transformations=transformations)
-            i = user_answer.find(' y')
-            user_y = user_answer[i+2:]
-            i = user_y.find('=')
-            user_y = user_y[i+1:]
-            user_y = user_y.strip()
-            i = user_y.find(' ')
-            if i != -1:
-                user_y = user_y[:i]
-            user_y = user_y.replace('^', '**')
-            user_y = parse_expr(user_y, transformations=transformations)
-            if abs(user_x - 1.23) < 0.005 and abs(user_y - 1.23) < 0.01:
-                pass
+            formatted = f'\({sy.latex(user_x)}\) ' + user_answer[i:]
+            correct = abs(user_x - 1.234) < 0.005
         except:
             raise SyntaxError
 
