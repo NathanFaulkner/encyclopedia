@@ -2,6 +2,7 @@ __pycache__
 .flaskenv
 *.py[cod]
 *.insyncdl
+.python-version
 
 # Installer logs
 pip-log.text

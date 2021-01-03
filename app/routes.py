@@ -339,6 +339,7 @@ def question(question_name):
     #     answer_id = request.args.get('bug_id')
     #     bug_answer = StudentAnswer.query.filter_by(id=answer_id).first()
         # print('bug_answer.seed', bug_answer.seed)
+    # print(request.args)
     bug_form = ReportBugForm()
     book_info = {}
     session['question_name'] = question_name
@@ -438,6 +439,7 @@ def question(question_name):
             else:
                 form.answer.data = bug_answer.user_answer
         elif request.args.get('ans_id'):
+            # print('This worked!')
             ans_id = request.args.get('ans_id')
             answer = StudentAnswer.query.filter_by(id=ans_id).first()
             session['tried'] = True
@@ -457,6 +459,13 @@ def question(question_name):
                 question.intervals = user_intervals
             else:
                 form.answer.data = answer.user_answer
+        elif request.args.get('skip_to_exercises'):
+            # print('It worked!')
+            session['tried'] = True
+            session['seed'] = random.random()
+            question = question_module.Question_Class(seed=session['seed'])
+            session['user_points'] = []
+            flash('This problem is just for practice.  If you want to work one for credit, navigate from a book section.')
         elif current_user.is_authenticated and grade_info.underway:
             question = question_module.Question_Class(seed=grade_info.underway_seed)
             session['tried'] = False
@@ -703,7 +712,7 @@ def book_section(book_name, chapter_number, section_number):
         if request.args.get('question_name'):
             question_name = request.args.get('question_name')
             ans_id = request.args.get('ans_id')
-            path_for_iframe = url_for('question', question_name=question_name, ans_id=ans_id)
+            path_for_iframe = url_for('question', question_name=question_name, skip_to_exercises=True, ans_id=ans_id)
         else:
             try:
                 question_name = random.choice(section.questions)
