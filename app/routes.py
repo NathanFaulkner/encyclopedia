@@ -716,7 +716,7 @@ def book_section(book_name, chapter_number, section_number):
         else:
             try:
                 question_name = random.choice(section.questions)
-                path_for_iframe = url_for('question', question_name=question_name)
+                path_for_iframe = url_for('question', question_name=question_name, skip_to_exercises=True)
             except IndexError:
                 path_for_iframe = ''
     else:
