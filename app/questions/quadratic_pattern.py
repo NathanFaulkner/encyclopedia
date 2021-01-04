@@ -107,6 +107,8 @@ class QuadraticPattern(Question):
 
     prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
+    loom_link = "https://www.loom.com/share/b8f13752fadc4a3eb5cc7697f21e60db?sharedAppSource=personal_library"
+
 
     def checkanswer(self, user_answer):
         user_answer = user_answer.replace('^', '**')
@@ -114,7 +116,8 @@ class QuadraticPattern(Question):
         answer = parse_expr(str(self.answer), transformations=transformations)
         return answer == user_answer
 
-    def format_useranswer(self, user_answer, display=False):
+    @staticmethod
+    def format_useranswer(user_answer, display=False):
         user_answer = user_answer.replace('^', '**')
         user_answer = parse_expr(user_answer, transformations=transformations)
         return latex_print(user_answer, display)

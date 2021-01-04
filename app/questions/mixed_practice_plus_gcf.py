@@ -47,7 +47,7 @@ class MixedPracticePlusGCF(Question):
                                                 'fancyFactorExpr',
                                                 'quadraticPatternExpr'])
 
-        self.type_of_problem = 'factorByGroupingExpr'
+        # self.type_of_problem = 'easyFactorExpr'
 
         if self.type_of_problem == 'quadraticPatternExpr':
             p = 0
@@ -170,12 +170,13 @@ class MixedPracticePlusGCF(Question):
         # return answer ==  user_answer
         return check_congruence_after_factoring_out_gcf(answer, user_answer)
 
-    def format_useranswer(self, user_answer, display=False):
+    @staticmethod
+    def format_useranswer(user_answer, display=False):
         user_answer = user_answer.lower()
         return f'\\({user_answer}\\)'
 
-    @classmethod
-    def validator(self, user_answer):
+    @staticmethod
+    def validator(user_answer):
         try:
             user_answer = user_answer.lower()
             user_answer = user_answer.replace('^', '**')
