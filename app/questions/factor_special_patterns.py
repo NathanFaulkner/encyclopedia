@@ -77,6 +77,7 @@ class FactorSpecialPatterns(Question):
     further_instruction = """
     """
 
+    loom_link = "https://www.loom.com/share/0dd641248d0742c4b7908a3164c2bb91?sharedAppSource=personal_library"
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 

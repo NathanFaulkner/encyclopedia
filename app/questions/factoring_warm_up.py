@@ -91,6 +91,7 @@ class FactoringWarmUp(Question):
     further_instruction = """
     """
 
+    loom_link = "https://www.loom.com/share/470c947cc1a7445ab9962ab7b32df837?sharedAppSource=personal_library"
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 

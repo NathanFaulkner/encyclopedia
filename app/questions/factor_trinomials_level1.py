@@ -91,6 +91,7 @@ class FactorTrinomialsLevel1(Question):
     further_instruction = """
     """
 
+    loom_link = "https://www.loom.com/share/0b7dafaa1b6c4c83b758d6ed07cbd1b0?sharedAppSource=personal_library"
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 

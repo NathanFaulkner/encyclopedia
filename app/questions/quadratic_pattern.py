@@ -44,17 +44,17 @@ class QuadraticPattern(Question):
             self.p = kwargs['p']
         else:
             self.p = random_non_zero_integer(-7,7)
-        self.p = -1
+        # self.p = -1
         if 'q' in kwargs:
             self.q = kwargs['q']
         else:
             self.q = random_non_zero_integer(-5,5)
-        self.q = -3
+        # self.q = -3
         if 'r' in kwargs:
             self.r = kwargs['r']
         else:
             self.r = random.randint(2,6)
-        self.r=4
+        # self.r=4
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:

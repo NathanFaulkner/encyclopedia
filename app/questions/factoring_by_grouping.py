@@ -86,6 +86,7 @@ class FactoringByGrouping(Question):
     further_instruction = """
     """
 
+    loom_link = "https://www.loom.com/share/c11ba7dfa7594bedaede71e9ad32c10c?sharedAppSource=personal_library"
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
