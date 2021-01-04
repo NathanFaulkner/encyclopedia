@@ -142,7 +142,7 @@ class MixedPracticePlusGCF(Question):
     further_instruction = """
     """
 
-    loom_link = "https://www.loom.com/share/b8f13752fadc4a3eb5cc7697f21e60db"
+    loom_link = "https://www.loom.com/share/d438c1117f6947dba59cb1023a6a9bae?sharedAppSource=personal_library"
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
