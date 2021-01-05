@@ -219,7 +219,8 @@ in this table.
         user_answer = solve(user_answer, y)[0]
         user_m = float(user_answer.coeff(x))
         user_b = float(user_answer.coeff(x, 0))
-        return f'\({user_y} = {user_b:.4f} - {abs(user_m):.4f} {user_x}\)'
+        sign = '+' if user_m >= 0 else '-'
+        return f'\({user_y} = {user_b:.4f} {sign} {abs(user_m):.4f} {user_x}\)'
 
     @classmethod
     def validator(self, user_answer):
