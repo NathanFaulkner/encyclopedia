@@ -1,10 +1,11 @@
 <div class="gradebook">
   <span style="font-size:18;">Grades for {{ pupil.firstname }}</span>
-  <button class="show_hide_button">Hide Grades</button>
+  <!-- <button class="show_hide_button">Hide Grades</button> -->
   <!-- <form action="{{ url_for('user', username=pupil.username, all_sections='True') }}">
          <button type="submit">Show Past Problems</button>
   </form> -->
-  <a href="{{ url_for('user', username=pupil.username, all_sections='True') }}">Click to see past work for all sections</a>
+  <a class="button" href="{{ url_for('user', username=pupil.username, sections='all') }}">Click to see past work for all sections (Allow for a few seconds to load.)</a>
+  <a class="button" href="{{ url_for('user', username=pupil.username, sections='recent') }}">Click to see all recent work</a>
   <div>
   <table>
     {% for book in user_books %}
@@ -49,7 +50,11 @@
             <tr>
               <td style="min-width:150px">Next Due Date</td>
               <td>Grade</td>
-              {% if (request.args.get('section') == section.view_name or request.args.get('all_sections') == 'True') %}
+              {% set section_grades = whole_book_info['info'][outer_loop.index - 1][loop.index - 1] %}
+              {% if (request.args.get('section') == section.view_name or
+                    request.args.get('sections') == 'all' or
+                    (request.args.get('sections') == 'recent' and section_grades.section_record.days_since_previous() < 5 )
+                    ) %}
               {% set answers = grades.get_answers_by_section_desc(book, outer_loop.index, loop.index) %}
               {% for answer in answers %}
               {% if loop.index < 40 %}
@@ -67,7 +72,7 @@
             </tr>
             <tr>
               {#{% set section_grades = grades.grade_section(book.name_for_path, outer_loop.index, loop.index) %}#}
-              {% set section_grades = whole_book_info['info'][outer_loop.index - 1][loop.index - 1] %}
+              {# set section_grades = whole_book_info['info'][outer_loop.index - 1][loop.index - 1] #}
               {% if section_grades.memory_gradient %}
                 {% if section_grades.memory_gradient < 0.75 %}
                   {% set bgcolor = 'rgba(0, 255, 0, 0.5)' %}
@@ -99,7 +104,10 @@
                 {% set bgcolor = 'gray' %}
               {% endif %}
               <td style="background-color:{{ bgcolor }}">{{ section_grades.grade }}</td>
-              {% if (request.args.get('section') == section.view_name or request.args.get('all_sections') == 'True') %}
+              {% if (request.args.get('section') == section.view_name or
+                    request.args.get('sections') == 'all' or
+                    (request.args.get('sections') == 'recent' and section_grades.section_record.days_since_previous() < 5 )
+                    ) %}
                 {% for answer in answers %}
                   {% if loop.index < 40 %}
                     {% if answer.correct %}

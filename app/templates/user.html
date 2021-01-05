@@ -40,7 +40,7 @@
 </table> -->
 
 <div class="user">
-  <span style="font-size:32"><b>{{ user.firstname or user.username }}</b></span>
+  <span style="font-size:32"><a href="{{ url_for('user', username=user.username) }}" style="color:black;"><b>{{ user.firstname or user.username }}</b></a></span>
   {% if current_user != user %}
     {% if not current_user.is_observed_by(user)%}
     <span style="float:right">

@@ -143,7 +143,7 @@ class UserSectionStatus(db.Model):
         if commit:
             db.session.commit()
 
-    def days_since_previous(self, now):
+    def days_since_previous(self, now=datetime.utcnow()):
         time_since_previous = now - self.timestamp
         days_since_previous = time_since_previous.days + time_since_previous.seconds/60/60/24
         return days_since_previous
@@ -276,6 +276,7 @@ class UserSectionGradeInfo():
         self.set_section()
         self.set_initial_due_date()
         section_record = UserSectionStatus.query.filter_by(user_id=user.id, section_name=self.section.view_name).first()
+        self.section_record = section_record
         if section_record is not None:
             if type(section_record.grade) == type(5):
                 if section_record.grade > 0:
