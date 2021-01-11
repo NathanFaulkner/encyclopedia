@@ -84,6 +84,8 @@ __all__ = ['quadratic_pattern',
             'celebratory_gunfire',
             'adding_or_subtracting_polynomials',
             'multiplying_polynomials',
+            'long_division_of_polynomials',
+            'long_division_of_polynomials_harder',
             ]
 
 class Question():

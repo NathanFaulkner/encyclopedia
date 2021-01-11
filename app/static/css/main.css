@@ -513,3 +513,72 @@ a {
   border-bottom: 1px solid #333333;
   border-left: 1px solid #CCCCCC;
 }
+
+table.long-division {
+  /* margin-left: auto;
+  margin-right: auto; */
+  border-collapse: collapse;
+  border-style: hidden;
+}
+
+table.long-division td {
+  padding: 0.5ex;
+}
+
+table.long-division td.left {
+  border-left: 2px solid black;
+}
+
+table.long-division td.right {
+  border-right: 2px solid black;
+}
+
+table.long-division td.top {
+  border-top: 2px solid black;
+}
+
+table.long-division td.bottom {
+  border-bottom: 2px solid black;
+}
+
+.div-border-none {
+  border: solid 0;
+  padding:0.5ex;
+}
+
+.div-border-left {
+  border: solid 0;
+  border-left-width:2px;
+  padding:0.5ex;
+}
+
+.div-border-left-top {
+  border: solid 0;
+  border-left-width:2px;
+  border-top-width:2px;
+  padding:0.5ex
+}
+
+.div-border-top-left {
+  border: solid 0;
+  border-left-width:2px;
+  border-top-width:2px;
+  padding:0.5ex
+}
+
+.div-border-top {
+  border: solid 0;
+  border-top-width:2px;
+  padding:0.5ex
+}
+
+.div-border-bottom {
+  border: solid 0;
+  border-bottom-width:2px;
+  padding:0.5ex
+}
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}

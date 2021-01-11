@@ -253,7 +253,12 @@ class SevenTest():
             if question_set != []:
                 question = question_set[0]
                 section_info = self.book.get_skill_info(question.module_name)[0]
-                out += f'\\item {{\color{{gray}}({section_info[0]}.{section_info[1]})}} \n'
+                out += f"""\\item {{\color{{gray}}({section_info[0]}.{section_info[1]})}}
+                For both problems, completely document the process by which you come to our answer.
+                If there is no work to show, verbally explain how you arrived at your answer.
+                This explanation does not need to be duplicated for each problem if
+                the same process applies to each.
+                (You will only receive half credit, otherwise.)\n"""
                 out += '\\begin{enumerate}\n'
                 out += f'\\item {question.format_given_for_tex}\n'
                 try:
@@ -439,6 +444,8 @@ class ProblemSet():
                     # out += '\\item \n'
                     # out += '\\begin{enumerate}\n'
                     out += f'\\item {question.format_given_for_tex}\n'
+                    out += f"""Completely document the process by which you come to our answer.
+                    (You will only receive half credit, otherwise.)"""
                     try:
                         question.has_img
                         out += """
@@ -685,6 +692,11 @@ polynomialsaddingandsubtracting.add_to_questions('adding_or_subtracting_polynomi
 
 polynomialsmultiplying = Section('polynomialsmultiplying', "Multiplying Polynomials", '/sections/polynomials-multiplying')
 polynomialsmultiplying.add_to_questions('multiplying_polynomials')
+
+
+polynomialsdividing = Section('polynomialsdividing', "Dividing Polynomials", '/sections/polynomials-dividing')
+polynomialsdividing.add_to_questions('long_division_of_polynomials', 
+                                        'long_division_of_polynomials_harder',)
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -758,7 +770,8 @@ quadratics.set_frontpage(quadratics_intro)
 
 polynomials = Division('chapter', 'Polynomials',
                                 [polynomialsaddingandsubtracting,
-                                polynomialsmultiplying
+                                polynomialsmultiplying,
+                                polynomialsdividing,
                                 ])
 polynomials.set_frontpage(polynomials_intro)
 
