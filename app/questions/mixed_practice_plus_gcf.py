@@ -48,6 +48,9 @@ class MixedPracticePlusGCF(Question):
                                                 'quadraticPatternExpr'])
 
         # self.type_of_problem = 'easyFactorExpr'
+        # self.type_of_problem = 'quadraticPatternExpr'
+        # self.type_of_problem = 'specialPatternExpr'
+
 
         if self.type_of_problem == 'quadraticPatternExpr':
             p = 0
@@ -56,9 +59,19 @@ class MixedPracticePlusGCF(Question):
             q = 0
             while q ==0:
             	q = random.randint(-5,5)
-            e = random.randint(2,6)
-            expr = (x-p)*(x-q)
-            expr = expr.subs(x, x**e)
+            r = random.randint(2,6)
+            expr = 1
+            for num in [p, q]:
+                new_r = r
+                depth = 1
+                while new_r/2 % 1 == 0 and num < 0 and (-num)**(1/(depth+1)) % 1 == 0:
+                    depth += 1
+                    new_r = int(new_r/2)
+                    expr *= (x**new_r + int((-num)**(1/depth)))
+                if new_r < r:
+                    expr *= (x**new_r - int((abs(num))**(1/depth)))
+                else:
+                    expr *= (x**r + num)
         if self.type_of_problem == 'fancyFactorExpr':
             m = random.randint(2, 5)
             p = random.choice([-5,-3,-2,-1,1,2, 3, 5])
@@ -71,8 +84,9 @@ class MixedPracticePlusGCF(Question):
             sign1 = random.choice([-1,1])
             sign2 = random.choice([-1,1])
             x, t, r, y = sy.symbols('x t r y')
-            vars = random.choice([(x,1),(x,y),(r,t),(1,y)])
-            vars = (r,t)
+            vars = random.choice([(x,1),(x,y),(r,t),(y,1)])
+            # vars = (r,t)
+            x = vars[0]
             A = a*vars[0]
             B1 = sign1*b*vars[1]
             B2 = sign2*b*vars[1]
@@ -92,7 +106,8 @@ class MixedPracticePlusGCF(Question):
                 d = random.randint(-5,5)
             x, t, r, y = sy.symbols('x t r y')
             vars = random.choice([(x,1),(x,y),(r,t)])
-            vars = [x,1]
+            # vars = [x,1]
+            x = vars[0]
             A = a*vars[0]**2
             C = c*vars[1]
             B = b*vars[0]
@@ -108,6 +123,7 @@ class MixedPracticePlusGCF(Question):
             b = p+q
             c = p*q
             expr = x**2+b*x+c
+            expr = sy.factor(expr)
         random.seed(self.seed) #Why do I have to put this here??? ... meaning, I put it here to get consistent behavior from the random generator, but why do I need to do that?
         A = 0
         while A == 0:
@@ -118,7 +134,7 @@ class MixedPracticePlusGCF(Question):
 
         expr = GCF*expr
 
-        self.answer = sy.factor(expr)
+        self.answer = expr
         # expr1 = sy.factor(A+B1)*(A+B2)
         # expr2 = (A+B1)*sy.factor(A+B2)
         # expr3 = sy.factor((A+B1)*(A+B2))

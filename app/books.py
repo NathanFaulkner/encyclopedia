@@ -695,8 +695,10 @@ polynomialsmultiplying.add_to_questions('multiplying_polynomials')
 
 
 polynomialsdividing = Section('polynomialsdividing', "Dividing Polynomials", '/sections/polynomials-dividing')
-polynomialsdividing.add_to_questions('long_division_of_polynomials', 
+polynomialsdividing.add_to_questions('long_division_of_polynomials',
                                         'long_division_of_polynomials_harder',)
+
+syntheticdivision = Section('syntheticdivision', "Synthetic Division", '/sections/polynomials-synthetic-division')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -772,6 +774,7 @@ polynomials = Division('chapter', 'Polynomials',
                                 [polynomialsaddingandsubtracting,
                                 polynomialsmultiplying,
                                 polynomialsdividing,
+                                # syntheticdivision,
                                 ])
 polynomials.set_frontpage(polynomials_intro)
 

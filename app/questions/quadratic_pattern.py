@@ -54,7 +54,7 @@ class QuadraticPattern(Question):
             self.r = kwargs['r']
         else:
             self.r = random.randint(2,6)
-        # self.r=4
+        # self.r=5
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:
@@ -64,7 +64,19 @@ class QuadraticPattern(Question):
         r = self.r
         p = self.p
         q = self.q
-        # expr = 1
+        expr = 1
+        for num in [p, q]:
+            new_r = r
+            depth = 1
+            while new_r/2 % 1 == 0 and num < 0 and (-num)**(1/(depth+1)) % 1 == 0:
+                depth += 1
+                new_r = int(new_r/2)
+                expr *= (x**new_r + int((-num)**(1/depth)))
+            if new_r < r:
+                expr *= (x**new_r - int((abs(num))**(1/depth)))
+            else:
+                expr *= (x**r + num)
+
         # if r % 2 == 0:
         #     if sqrt(-p) % 1 == 0 and p < 0:
         #         expr *= (x**int(r/2)+sqrt(-p))*(x**int(r/2)-sqrt(-p))
@@ -81,8 +93,8 @@ class QuadraticPattern(Question):
 
         # self.given = self.problem['given']
         # self.answer = self.problem['answer']
-        expr = (x**r + p)*(x**r+q)
-        self.answer = factor(expr)
+        # expr = (x**r + p)*(x**r+q)
+        self.answer = expr #factor(expr)
         self.format_answer = '\\(' + latex(self.answer) + '\\)'
         self.format_given = '\\[' + latex(expand(expr)) + '\\]'
 
@@ -101,7 +113,7 @@ class QuadraticPattern(Question):
     name = 'Quadratic Pattern'
     module_name = 'quadratic_pattern'
 
-    prompt_single = 'Completely factor the following: '
+    prompt_single = 'Completely factor the following (neglecting certain advanced rules): '
     prompt_multiple = 'Completely factor each of the following.'
 
 
