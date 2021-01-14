@@ -38,10 +38,22 @@ class FactorTrinomialsLevel2(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        m = random.choice([1, 2, 3, 5])
-        p = random.choice([-5,-3,-2,-1,1,2,3,5])
-        n = random.choice([-5,-3,-2,-1,1,2,3,5])
-        q = random.choice([-5,-3,-2,-1,1,2,3,5])
+        if 'p' in kwargs:
+            p = kwargs['p']
+        else:
+            p = random.choice([-5,-3,-2,-1,1,2,3,5])
+        if 'q' in kwargs:
+            q = kwargs['q']
+        else:
+            q = random.choice([-5,-3,-2,-1,1,2,3,5])
+        if 'm' in kwargs:
+            m = kwargs['m']
+        else:
+            m = random.choice([1, 2, 3, 5])
+        if 'n' in kwargs:
+            n = kwargs['n']
+        else:
+            n = random.choice([-5,-3,-2,-1,1,2,3,5])
 
         if 'x' in kwargs:
             self.x = kwargs['x']
@@ -82,6 +94,8 @@ class FactorTrinomialsLevel2(Question):
 
     def checkanswer(self, user_answer):
         user_answer = user_answer.lower()
+        if 'x' not in user_answer:
+            return False
         user_answer = user_answer.replace('^', '**')
         user_answer = parse_expr(user_answer, transformations=transformations)
         # if not (isinstance(user_answer, sy.core.power.Pow) or isinstance(user_answer, sy.core.mul.Mul)):
@@ -115,6 +129,8 @@ class FactorTrinomialsLevel2(Question):
             user_answer = user_answer.lower()
             user_answer = user_answer.replace('^', '**')
             user_answer = parse_expr(user_answer, transformations=transformations)
+            # type(user_answer) == type(parse_expr('5', transformations=transformations))
+            # check_congruence_after_factoring_out_gcf(, user_answer)
         except:
             raise SyntaxError
 
