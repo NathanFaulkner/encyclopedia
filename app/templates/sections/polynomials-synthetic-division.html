@@ -46,300 +46,110 @@
   degree 0&mdash;an example of which is \(f(x) = 5\)&mdash;but they aren't
   very important).  For instance, in a few sections from now,
   we will be able to determine that the polynomial
-</p>
+    \[
+      2x^4 - 14x^3 - 26x^2 + 206x - 168
+    \]
+    can be factored
+      \[
+        2(x-3)(x+4)(x-7)(x-1)
+      \]
+    This "factored" form, of course, is useful for figuring out the
+    \(x\)-intercepts of the graph and, really, for solving any polynomial equation.
+  </p>
+
+  <p>
+    In the exposition below, I will be using the following vocab:
+    <div class="definition">
+      <h2></h2>
+      A number \(z\) is called a <b>zero</b> of the function \(f\) if
+        \[
+          f(z) = 0
+        \]
+      An important example is when
+        \[
+          f(x) = a(x-z_1)(x-z_2)\cdots(x-z_n)
+        \]
+      You can see that the numbers \(z_1\), \(z_2\),&#8230;, \(z_n\) are zeroes
+      of \(f\).  For instance,
+        \[
+          f(z_1) = a(z_1-z_1)(z_1-z_2)\cdots(z_1-z_n) = a \cdot 0 \cdot (z_1-z_2) \cdots (z_1-z_n) = 0
+        \]
+      As a concrete example, \(3\), \(-4\), \(7\), and \(1\) are
+      <b>zeroes</b> of the polynomial
+        \[
+          f(x) = 2(x-3)(x+4)(x-7)(x-1)
+        \]
+      Can you see why?  <b>Zeroes</b> are also often called <b>roots</b>.
+    </div>
+
+    Since we will be doing a lot of long division problems where we just divide
+    by something of the form \(x-z\), in this section we will learn a stream-lined
+    method for doing so.  It may be annoying to learn this method at first,
+    but, like others before you, you will soon grow to like it, because
+    it is so much faster.  In fact, it would be quite fun to see you all
+    race on problems&mdash;with one person using the old method and one person
+    using the new method, which is called \textbf{synthetic division}.
+    As always, I will begin with a really detailed example, then do
+    a quicker one, and then you'll try some on your own.  But, first,
+    you'll appreciate getting your brain warmed-up by executing our
+    first example using the old method of <b>long division</b>
+  </p>
 
 <p>
 <div class="example">
   <h2> (Warm-up)</h2>
 
-Carry out the following long division problem.
-(Determine the quotient and remainder when performing \(1332 \div 11\).)
-<!--
-<p>
-  <table border="0" cellspacing="0" cellpadding="0" class="center">
-    <tr>
-      <td><div class="div-border-none">1</div></td>
-      <td><div class="div-border-none">1</div></td>
-      <td><div class="div-border-left-top">1</div></td>
-      <td><div class="div-border-top">3</div></td>
-      <td><div class="div-border-top">3</div></td>
-      <td><div class="div-border-top">2</div></td>
-    </tr>
-  </table>
-</p> -->
+  Use long division to determine quotient and remainder resulting from the
+  following:
+    \[
+      \left(x^3 - 5 x^2  + 25\right) \div \left(x-3\right)
+    \]
+  Put your answer in the form
+    \[
+      q(x) + \frac{r}{d(x)}
+    \]
+  where \(q(x)\) is the quotient, \(d(x)\) is the divisor, and \(r\) is
+  the remainder.
 
-
-  <table class="center long-division">
-    <tr>
-      <td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-      <td>\(1\)</td><td>\(1\)</td><td class="left top">\(1\)</td><td class="top">\(3\)</td><td class="top">\(3\)</td><td class="top">\(2\)</td>
-    </tr>
-  </table>
 
 
 <div class="answer">
   <a class="collapsible"><h3>Answer: </h3></a>
   <div class='inner'>
-    How does the long division algorithm work?  Well, what you are after is to figure
-    out "how many times" \(11\) goes into \(1332\).  The answer&mdash;which is
-    called the quotient (note that the Latinate word
-    <a href="https://www.etymonline.com/search?q=quotient">
-      "quotient"
-    </a>
-    just has
-    to do with posing a question, as in "what number?")
-    gets written on the upper line bit by bit.
-    What we do, as you may well know, is that keep adding
-    to the quotient&mdash;the thing we multiply \(11\) by&mdash;and subtract
-    what results from the dividend (\(1332\)) as we go until
-    the divident is gone&mdash;meaning we have added in parts to the
-    quotient until, when multiplied, we get all of the
-    dividend of \(1332\) and nothing is left over; there is no remainder.
-    At each intermediate step, you get a remainder, but you keep adding to the
-    quotient to keep killing off more and more of that ever-dwindling remainder
-    until it is gone.
-
-    <p>
-      Each step in the process involves looking at the different
-      place-values&mdash;the thousands columns, the hundreds, the tens,
-      and the ones column.  You figure out the biggest whole number multiple of
-      each place-value you can multiply the divisor of \(11\) by to kill
-      off as much of the dividend as possible at each step.  In this case,
-      our leading place-value of the dividend of \(1332\) is 1,000.
-      Since multiplying this by \(11\) would be to big (11,000 is bigger than 1,332)
-      I actually skip that column and go to the next: I think about the hundreds
-      column.  Since 1,100 (eleven hundred!) is less than 1,332 but
-      \(200\cdot 11 = 2,200\) is too big, I know that the leading digit of
-      my quotient is a \(1\) in the hundreds column:
-    </p>
-    <!-- <table border="0" cellspacing="0" cellpadding="0" class="center">
-      <tr>
-        <td><div class="div-border-none"></div></td>
-        <td><div class="div-border-none"></div></td>
-        <td><div class="div-border-none"></div></td>
-        <td><div class="div-border-none">\(1\)</div></td>
-        <td><div class="div-border-none""></div></td>
-        <td><div class="div-border-none"></div></td>
-      </tr>
-      <tr>
-        <td><div class="div-border-none">\(1\)</div></td>
-        <td><div class="div-border-none">\(1\)</div></td>
-        <td><div class="div-border-left-top">\(1\)</div></td>
-        <td><div class="div-border-top">\(3\)</div></td>
-        <td><div class="div-border-top">\(3\)</div></td>
-        <td><div class="div-border-top">\(2\)</div></td>
-      </tr>
-    </table> -->
-
     <table class="center long-division">
       <tr>
-        <td></td><td></td><td></td><td>1</td><td></td><td></td>
+        <td></td>     <td></td>     <td></td>    <td></td>                               <td></td>                 <td>\(x^2\)</td>                    <td>\(-\)</td>      <td>\(2x\)</td>          <td>\(-\)</td><td>\(6\)</td><td>\(+\)</td><td>\(\frac{7}{x-3}\)</td>
       </tr>
       <tr>
-        <td>1</td><td>1</td><td class="top left">\(\phantom{-}1\)</td><td class="top">\(3\)</td><td class="top">\(3\)</td><td class="top">\(2\)</td>
+        <td>\(x\)</td><td>\(-\)</td><td>\(3\)</td><td class="left top">\(\quad x^3\)</td><td class="top">\(-\)</td><td class="top">\(5x^2\)</td><td class="top">\(+\)</td><td class="top">\(0x\)</td><td class="top">\(+\)</td><td class="top">\(25\)</td>
       </tr>
       <tr>
-        <td></td><td></td><td>\(-1\)</td><td>\(1\)</td><td>\(0\)</td><td>\(0\)</td>
+        <td></td><td></td><td></td><td class="bottom">\(-\left(x^3\right.\)</td><td class="bottom">\(-\)</td><td class="bottom">\(\left.3x^2\right)\)</td><td></td><td></td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td><td></td>                                 <td></td>                       <td>\(-2x^2\)</td>                   <td>\(+\)</td>           <td>\(0x\)</td>          <td>\(+\)</td>                 <td>\(25\)</td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td><td></td>                                 <td class="bottom">\(-\)</td>                       <td class="bottom">\(\left(-2x^2\right.\)</td>                   <td class="bottom">\(+\)</td>           <td class="bottom">\(\left.6x\right)\)</td>          <td></td>                 <td></td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                              <td style="text-align:right">\(-6x\)</td>                        <td>\(+\)</td>             <td>\(25\)</td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td style="text-align:right">\(-\)</td>                              <td class="bottom" style="text-align:right">\(\left(-6x\right.\)</td>                        <td class="bottom">\(+\)</td>             <td class="bottom">\(\left.18\right)\)</td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                                                                         <td></td>                                                                                              <td></td>                                                    <td>\(7\)</td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                              <td></td>                        <td class="bottom">\(-\)</td>             <td class="bottom">\(7\)</td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                                                                         <td></td>                                                                                              <td></td>                                                    <td>\(0\)</td>
+      </tr>
+      <tr>
       </tr>
     </table>
-
-    <p>
-      Next, you multiply the divisor \(11\) by what this \(1\) in the
-      hundreds column actually represents&mdash;by \(100\)&mdash;and then
-      kill off the result from the dividend to get your first remainder:
-      <table class="center long-division">
-        <tr>
-          <td></td><td></td><td></td><td>1</td><td></td><td></td>
-        </tr>
-        <tr>
-          <td>1</td><td>1</td><td class="top left">\(\phantom{-}1\)</td><td class="top">\(3\)</td><td class="top">\(3\)</td><td class="top">\(2\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td class="bottom">\(-1\)</td><td class="bottom">\(1\)</td><td class="bottom">\(0\)</td><td class="bottom">\(0\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td>\(2\)</td><td>\(3\)</td><td>\(2\)</td>
-        </tr>
-      </table>
-
-
-      <!-- <table border-collapse="collapse" cellspacing="0" cellpadding="0" class="center">
-        <tr>
-          <td><div class="div-border-none"></div></td>
-          <td><div class="div-border-none"></div></td>
-          <td><div class="div-border-none"></div></td>
-          <td><div class="div-border-none">\(1\)</div></td>
-          <td><div class="div-border-none""></div></td>
-          <td><div class="div-border-none"></div></td>
-        </tr>
-        <tr>
-          <td><div class="div-border-none">\(1\)</div></td>
-          <td><div class="div-border-none">\(1\)</div></td>
-          <td><div class="div-border-left-top">\(1\)</div></td>
-          <td><div class="div-border-top">\(3\)</div></td>
-          <td><div class="div-border-top">\(3\)</div></td>
-          <td><div class="div-border-top">\(2\)</div></td>
-        </tr>
-        <tr>
-          <td><div class="div-border-none"></div></td>
-          <td><div class="div-border-none"></div></td>
-          <td><div class="div-border-none">\(1\)</div></td>
-          <td><div class="div-border-none">\(1\)</div></td>
-          <td><div class="div-border-none">\(0\)</div></td>
-          <td><div class="div-border-none">\(0\)</div></td>
-        </tr>
-      </table> -->
-    </p>
-
-    <p>
-      Next, we see how many times the divisor \(11\) goes into the remainder
-      \(232\).  Again, we choose to multiply by something as large as possible,
-      while only playing with one digit or one place-value at a time.  We already
-      multiplied by a \(1\) in the hundrends place-value, so we try the tens.
-      Multiplying the division \(11\) by \(20\) gives \(220\).  Clearly, multiplying
-      by \(30\) would be too much, exceeding the remainder of \(232\), so we stick
-      with that.  Of course, impatient reader (whom I admire), might also observe
-      that we could just go ahead and multiply the divisor \(11\) by \(21\), since
-      that will give us \(11\) more than \(220\), which takes us darn close
-      to the remainder of \(232\).  But, sorry, I'll do that in the next step.
-
-      <table class="center long-division">
-        <tr>
-          <td></td><td></td><td></td><td>\(1\)</td><td>\(2\)</td><td></td>
-        </tr>
-        <tr>
-          <td>1</td><td>1</td><td class="top left">\(\phantom{-}1\)</td><td class="top">\(3\)</td><td class="top">\(3\)</td><td class="top">\(2\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td class="bottom">\(-1\)</td><td class="bottom">\(1\)</td><td class="bottom">\(0\)</td><td class="bottom">\(0\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td>\(2\)</td><td>\(3\)</td><td>\(2\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td class="bottom">\(2\)</td><td class="bottom">\(2\)</td><td class="bottom">\(0\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td>\(1\)</td><td>\(2\)</td>
-        </tr>
-      </table>
-    </p>
-
-    <p>
-      For the next step, since I still have a remainder, I add further to the quotient
-      (the answer that gets written on the upper line).  Since \(11\) is less than 12,
-      I can at least add \(1\) to my quotient.  This enables me to kill off \(11\)
-      more from the remainder, leaving me with a remainder of \(1\):
-      <table class="center long-division">
-        <tr>
-          <td></td><td></td><td></td><td>\(1\)</td><td>\(2\)</td><td>\(1\)</td>
-        </tr>
-        <tr>
-          <td>1</td><td>1</td><td class="top left">\(\phantom{-}1\)</td><td class="top">\(3\)</td><td class="top">\(3\)</td><td class="top">\(2\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td class="bottom">\(-1\)</td><td class="bottom">\(1\)</td><td class="bottom">\(0\)</td><td class="bottom">\(0\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td>\(2\)</td><td>\(3\)</td><td>\(2\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td>\(-\)</td><td class="bottom">\(2\)</td><td class="bottom">\(2\)</td><td class="bottom">\(0\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td>\(1\)</td><td>\(2\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td>\(-\)</td><td class="bottom">\(1\)</td><td class="bottom">\(1\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td>\(1\)</td>
-        </tr>
-      </table>
-    </p>
-
-    <p>
-      Now, at this stage, there a couple of different things you might do&mdash;depending
-      on your ultimate goal (or, alternatively, depending on the goal of your teacher,
-      as the case may be.)  For instance, depending on your mood or goal, you might
-      say, "Well, so \(11\) only goes into \(1332\) \(121\) times, though it
-      doesn't go into it evenly, and we get \(1\) left over."
-      That's nice, but, if you are bold enough, you can actually continue with the
-      division algorithm by still trying to kill of that remainder.
-      Further, there are two ways of trying to kill of the remainder.
-      For one, you could go to "decimal places".  For instance, you could
-      try to go to the next place-value over&mdash;which takes you one past the ones
-      place into the tenths place.  That means, you could try to figure out how many
-      tenths of \(11\) will go into \(1\), trying to figure out the maximum
-      such number.  In other words, you can keep going with the algorithm
-      proceeding in <i>the exact same way as you had already been proceeding</i>.
-      That's very interesting to think about, but there is another possibility.
-      There is also the possibility of ending the algortithm right now (or, really,
-      at any time you like) by going to a fraction of the right denominator.
-      You see, the "tenths place" is really just multiplying by a fraction, too:
-      by \(\frac{1}{10}\).  But you could really choose any denominator
-      you want rather than powers of 10.  For one, you could really just add
-      \(\frac{1}{11}\) into your quotient (having it trail off the end
-      since you are basically giving up on doing place values); multiplying
-      \(11\) by \(\frac{1}{11}\) yields \(1\), which enables you to kill
-      off your final remainder:
-
-      <table class="center long-division">
-        <tr>
-          <td></td><td></td><td></td><td>\(1\)</td><td>\(2\)</td><td>\(1\)</td><td>\(+\frac{1}{11}\)</td>
-        </tr>
-        <tr>
-          <td>1</td><td>1</td><td class="top left">\(\phantom{-}1\)</td><td class="top">\(3\)</td><td class="top">\(3\)</td><td class="top">\(2\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td class="bottom">\(-1\)</td><td class="bottom">\(1\)</td><td class="bottom">\(0\)</td><td class="bottom">\(0\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td>\(2\)</td><td>\(3\)</td><td>\(2\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td>\(-\)</td><td class="bottom">\(2\)</td><td class="bottom">\(2\)</td><td class="bottom">\(0\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td>\(1\)</td><td>\(2\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td>\(-\)</td><td class="bottom">\(1\)</td><td class="bottom">\(1\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td>\(1\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td>\(-\)</td><td class="bottom">\(1\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td>\(0\)</td>
-        </tr>
-      </table>
-    </p>
-
-    <p>
-      In all, from this algorithm, what we have actually learned is that
-      \[
-        (11)\cdot\left(121 + \frac{1}{11}\right) = 1332
-      \]
-      That is, we figured out exactly how many \(11\)'s there are in
-      \(1,332\), namely one-hundred-twenty-one and one eleventh of them.
-      If you think about it, our algorithm is just a demonstration of the fact that
-      \[
-        1332 - 11\cdot 1000 - 11\cdot 20 - 11\cdot 1 - 11\cdot \frac{1}{11} = 0
-      \]
-      whic, using the distributive property, means that
-      \begin{align*}
-        &1332 - 11 \cdot\left(1000 + 20 + 1 + \frac{1}{11}\right) = 0 \\
-        \Rightarrow \quad & 1332 - 11 \cdot\left(121+\frac{1}{11}\right) = 0\\
-        \Rightarrow \quad & 11 \cdot \left(121+\frac{1}{11}\right) = 1332
-      \end{align*}
-      This, I hope you will see in the next example, is precisely how
-      long division of polynomials will also work.
-    </p>
   </div>
 </div>
 
@@ -356,319 +166,8 @@ Carry out the following long division problem.
   </p> -->
 
   <p>
-    Determine quotient and remainder resulting from the following:
-      \[
-        \left(x^3 + 3 x^2 + 3x + 2\right) \div \left(x+1\right)
-      \]
-    Put your answer in the form
-      \[
-        q(x) + \frac{r}{d(x)}
-      \]
-    where \(q(x)\) is the quotient, \(d(x)\) is the divisor, and \(r\) is the remainder.
-  </p>
-
-  <div class="answer">
-    <a class="collapsible"><h3>Answer: </h3></a>
-    <div class='inner'>
-      <p>
-      I am going to explain this first one thoroughly.
-      I'll do later examples more quickly.
-      I bet you'll be able to understand the process by comparing it to the
-      parallel process of executing \(1332\div 11\), which I will carry
-      out with explanations on the right.  Here is the initial set-up:
-      </p>
-
-      <div style="float:left; width:45%; padding:5%">
-        <table class="long-division">
-          <tr>
-            <td></td><td></td><td></td><td></td><td></td><td></td>
-          </tr>
-          <tr>
-            <td>\(x\)</td><td>\(+\)</td><td>\(1\)</td><td class="left top">\(\quad x^3\)</td><td class="top">\(+\)</td><td class="top">\(3x^2\)</td><td class="top">\(+\)</td><td class="top">\(3x\)</td><td class="top">\(+\)</td><td class="top">\(2\)</td>
-          </tr>
-        </table>
-      </div>
-      <div style="float:left; width:45%; padding:5%;">
-        <table class="long-division">
-          <tr>
-            <td></td>     <td></td>     <td></td>                      <td></td><td></td><td></td>
-          </tr>
-          <tr>
-            <td>\(1\)</td><td>\(1\)</td><td class="left top">\(1\)</td><td class="top">\(3\)</td><td class="top">\(3\)</td><td class="top">\(2\)</td>
-          </tr>
-        </table>
-      </div>
-
-      <p style="clear:left">
-        I am going to line up like terms in columns&mdash;a column
-        for \(x^3\) terms, a column for \(x^2\) terms, a column for
-        \(x\) terms, and column for numbers&mdash;just like I line up the
-        digits representing
-        thousands, hundreds, tens, and hundreds at the right.
-      </p>
-
-      <div style="float:left; width:45%; padding:5%">
-        <table class="long-division">
-          <tr>
-            <td></td>     <td></td>     <td></td>    <td></td>                               <td></td>                 <td>\(x^2\)</td>                    <td></td>
-          </tr>
-          <tr>
-            <td>\(x\)</td><td>\(+\)</td><td>\(1\)</td><td class="left top">\(\quad x^3\)</td><td class="top">\(+\)</td><td class="top">\(3x^2\)</td><td class="top">\(+\)</td><td class="top">\(3x\)</td><td class="top">\(+\)</td><td class="top">\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td class="bottom">\(-\left(x^3\right.\)</td><td class="bottom">\(+\)</td><td class="bottom">\(\left.x^2\right)\)</td><td></td><td></td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td>\(2x^2\)</td>                   <td>\(+\)</td>           <td>\(3x\)</td>          <td>\(+\)</td>                 <td>\(2\)</td>
-          </tr>
-        </table>
-      </div>
-      <div style="float:right; width:45%; padding:5%">
-        <table class="long-division">
-          <tr>
-            <td></td><td></td><td></td><td>\(1\)</td><td></td><td></td>
-          </tr>
-          <tr>
-            <td>\(1\)</td><td>\(1\)</td><td class="top left">\(\phantom{-}1\)</td><td class="top">\(3\)</td><td class="top">\(3\)</td><td class="top">\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td class="bottom">\(-1\)</td><td class="bottom">\(1\)</td><td></td><td></td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td>\(2\)</td><td>\(3\)</td><td>\(2\)</td>
-          </tr>
-        </table>
-      </div>
-
-      <p style="clear:left">
-        For the next step, on the right, I multiply \(11\) by as big a digit
-        placed in the left-most possible column that I can&mdash;that is,
-        without going <em>over</em> \(1332\).  Since \(1100\) is less
-        than \(1332\), but \(2200\) would be bigger, I place a \(1\) in the
-        hundreds column.
-        Then, I compute the remainder, by subtracting \(100 \cdot 11 = 1100\)
-        from \(1332\)s.  This remainder basically just sets up a new division
-        problem: I now see how many \(11\)'s will go into the remainder,
-        starting in the tens column this time.
-      </p>
-      <p>
-        With the polynomial, I do something very similar.  I realize the
-        left-most column I can start in: what highest power of \(x\) can I
-        multiply \(x+1\) by without "going over" \(x^3+3x^2+3x+1\)?
-        The answer is \(x^2\).  (This is the same as starting in the
-        \(100=10^2\) column at the right.)  So, I place an \(x^2\) on the
-        quotient line.  I then multiply \(x+1\) by \(x^2\) and get the
-        remainder&mdash;by subtracting \(x^2\left(x+1\right) = x^3 + x^2\)
-        from the dividend \(x^3+3x^3+3x+2\).  Again, this just sets up a
-        "reduced" division with remainder problem&mdash;the problem of
-        seeing what I can multiply \(x+1\) by to get close to the new
-        remainder!  So, the process will continue in the same manner
-        after that.  Each new "cycle" of the algorithm is indicated
-        here in <span style="color:blue">blue</span>.
-      </p>
-
-      <div style="float:left; width:45%; padding:5%">
-        <table class="long-division">
-          <tr>
-            <td></td>     <td></td>     <td></td>    <td></td>                               <td></td>                 <td>\(x^2\)</td>                    <td><span style="color:blue">\(+\)</span></td>      <td><span style="color:blue">\(2x\)</span></td>
-          </tr>
-          <tr>
-            <td>\(x\)</td><td>\(+\)</td><td>\(1\)</td><td class="left top">\(\quad x^3\)</td><td class="top">\(+\)</td><td class="top">\(3x^2\)</td><td class="top">\(+\)</td><td class="top">\(3x\)</td><td class="top">\(+\)</td><td class="top">\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td class="bottom">\(-\left(x^3\right.\)</td><td class="bottom">\(+\)</td><td class="bottom">\(\left.x^2\right)\)</td><td class="bottom"></td><td></td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td>\(2x^2\)</td>                   <td>\(+\)</td>           <td>\(3x\)</td>          <td>\(+\)</td>                 <td>\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td>                                 <td style="color:blue">\(-\)</td>                       <td style="color:blue" class="bottom">\(\left(2x^2\right.\)</td>                   <td class="bottom" style="color:blue">\(+\)</td>           <td class="bottom" style="color:blue">\(\left.2x\right)\)</td>          <td></td>                 <td></td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                              <td class="bottom" style="color:blue; text-align:right">\(x\)</td>                        <td style="color:blue">\(+\)</td>             <td style="color:blue">\(2\)</td>
-          </tr>
-        </table>
-      </div>
-      <div style="float:right; width:45%; padding:5%">
-        <table class="long-division">
-          <tr>
-            <td></td><td></td><td></td><td>\(1\)</td><td><span style="color:blue">\(2\)</span></td><td></td>
-          </tr>
-          <tr>
-            <td>\(1\)</td><td>\(1\)</td><td class="top left">\(\phantom{-}1\)</td><td class="top">\(3\)</td><td class="top">\(3\)</td><td class="top">\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td class="bottom">\(-1\)</td><td class="bottom">\(1\)</td><td></td><td></td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td>\(2\)</td><td>\(3\)</td><td>\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td style="color:blue; text-align:right">\(-\)</td><td class="bottom" style="color:blue">\(2\)</td><td class="bottom" style="color:blue">\(2\)</td><td></td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td><td style="color:blue">\(1\)</td><td style="color:blue">\(2\)</td>
-          </tr>
-        </table>
-      </div>
-
-      <p style="clear:left">
-        The next step is similar:
-      </p>
-
-      <div style="float:left; width:45%; padding:5%">
-        <table class="long-division">
-          <tr>
-            <td></td>     <td></td>     <td></td>    <td></td>                               <td></td>                 <td>\(x^2\)</td>                    <td>\(+\)</td>      <td>\(2x\)</td>          <td  style="color:blue">\(+\)</td><td style="color:blue">\(1\)</td>
-          </tr>
-          <tr>
-            <td>\(x\)</td><td>\(+\)</td><td>\(1\)</td><td class="left top">\(\quad x^3\)</td><td class="top">\(+\)</td><td class="top">\(3x^2\)</td><td class="top">\(+\)</td><td class="top">\(3x\)</td><td class="top">\(+\)</td><td class="top">\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td class="bottom">\(-\left(x^3\right.\)</td><td class="bottom">\(+\)</td><td class="bottom">\(\left.x^2\right)\)</td><td class="bottom"></td><td></td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td>\(2x^2\)</td>                   <td>\(+\)</td>           <td>\(3x\)</td>          <td>\(+\)</td>                 <td>\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td>                                 <td>\(-\)</td>                       <td class="bottom">\(\left(2x^2\right.\)</td>                   <td class="bottom">\(+\)</td>           <td class="bottom">\(\left.2x\right)\)</td>          <td></td>                 <td></td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                              <td style="text-align:right">\(x\)</td>                        <td>\(+\)</td>             <td>\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td style="color:blue; text-align:right">\(-\)</td>                              <td class="bottom" style="color: blue; text-align:right">\(\left(x\right.\)</td>                        <td class="bottom" style="color:blue">\(+\)</td>             <td class="bottom" style="color:blue">\(\left.1\right)\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                                                                         <td></td>                                                                                              <td></td>                                                    <td style="color:blue">\(1\)</td>
-          </tr>
-          <tr>
-          </tr>
-        </table>
-      </div>
-      <div style="float:right; width:45%; padding:5%">
-        <table class="long-division">
-          <tr>
-            <td></td><td></td><td></td><td>\(1\)</td><td>\(2\)</td><td style="color:blue">\(1\)</td>
-          </tr>
-          <tr>
-            <td>\(1\)</td><td>\(1\)</td><td class="top left">\(\phantom{-}1\)</td><td class="top">\(3\)</td><td class="top">\(3\)</td><td class="top">\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td class="bottom">\(-1\)</td><td class="bottom">\(1\)</td><td></td><td></td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td>\(2\)</td><td>\(3\)</td><td>\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td class="bottom" style="text-align:right">\(-\)</td><td class="bottom">\(2\)</td><td class="bottom">\(2\)</td><td></td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td><td>\(1\)</td><td>\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td class="bottom" style="color:blue; text-align:right">\(-\)</td><td class="bottom" style="color:blue">\(1\)</td><td class="bottom" style="color:blue">\(1\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td><td></td><td style="color:blue">\(1\)</td>
-          </tr>
-        </table>
-      </div>
-
-      <p style="clear:left">
-        The last step is to "kill off" the final remainder by multiplying by a fraction:
-      </p>
-
-      <div style="float:left; width:45%; padding:5%">
-        <table class="long-division">
-          <tr>
-            <td></td>     <td></td>     <td></td>    <td></td>                               <td></td>                 <td>\(x^2\)</td>                    <td>\(+\)</td>      <td>\(2x\)</td>          <td>\(+\)</td><td>\(1\)</td><td style="color:blue">\(+\)</td><td style="color:blue">\(\frac{1}{x+1}\)</td>
-          </tr>
-          <tr>
-            <td>\(x\)</td><td>\(+\)</td><td>\(1\)</td><td class="left top">\(\quad x^3\)</td><td class="top">\(+\)</td><td class="top">\(3x^2\)</td><td class="top">\(+\)</td><td class="top">\(3x\)</td><td class="top">\(+\)</td><td class="top">\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td class="bottom">\(-\left(x^3\right.\)</td><td class="bottom">\(+\)</td><td class="bottom">\(\left.x^2\right)\)</td><td></td><td></td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td>\(2x^2\)</td>                   <td>\(+\)</td>           <td>\(3x\)</td>          <td>\(+\)</td>                 <td>\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td>                                 <td class="bottom">\(-\)</td>                       <td class="bottom">\(\left(2x^2\right.\)</td>                   <td class="bottom">\(+\)</td>           <td class="bottom">\(\left.2x\right)\)</td>          <td></td>                 <td></td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                              <td style="text-align:right">\(x\)</td>                        <td>\(+\)</td>             <td>\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td style="text-align:right">\(-\)</td>                              <td class="bottom" style="text-align:right">\(\left(x\right.\)</td>                        <td class="bottom">\(+\)</td>             <td class="bottom">\(\left.1\right)\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                                                                         <td></td>                                                                                              <td></td>                                                    <td>\(1\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                              <td></td>                        <td style="color:blue" class="bottom">\(-\)</td>             <td style="color:blue" class="bottom">\(1\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                                                                         <td></td>                                                                                              <td></td>                                                    <td style="color:blue">\(0\)</td>
-          </tr>
-          <tr>
-          </tr>
-        </table>
-      </div>
-      <div style="float:right; width:45%; padding:5%">
-        <table class="long-division">
-          <tr>
-            <td></td><td></td><td></td><td>\(1\)</td><td>\(2\)</td><td>\(1\)</td><td style="color:blue">\(+\)</td><td style="color:blue">\(\frac{1}{11}\)</td>
-          </tr>
-          <tr>
-            <td>\(1\)</td><td>\(1\)</td><td class="top left">\(\phantom{-}1\)</td><td class="top">\(3\)</td><td class="top">\(3\)</td><td class="top">\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td class="bottom">\(-1\)</td><td class="bottom">\(1\)</td><td></td><td></td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td>\(2\)</td><td>\(3\)</td><td>\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td style="text-align:right">\(-\)</td><td class="bottom">\(2\)</td><td class="bottom">\(2\)</td><td></td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td><td>\(1\)</td><td>\(2\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td style="color:blue; text-align:right">\(-\)</td><td class="bottom" style="color:blue">\(1\)</td><td class="bottom" style="color:blue">\(1\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td><td></td><td>\(1\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td><td class="bottom" style="color:blue">\(-\)</td><td class="bottom" style="color:blue">\(1\)</td>
-          </tr>
-          <tr>
-            <td></td><td></td><td></td><td></td><td></td><td style="color:blue">\(0\)</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
-</p>
-
-<p>
-  The next few examples will be much the same as the first, but will feature
-  various complications that might throw you off the first time
-  you encounter them.
-</p>
-
-<p>
-<div class="example">
-  <h2></h2>
-  <!-- <p>
-  <a href="https://www.loom.com/share/6adc211e382440c2a63fac4668a7f222" target="_blank">Click for video.</a>
-  </p> -->
-
-  <p>
-    Determine quotient and remainder resulting from the following:
+    Use synthetic division to determine quotient and remainder resulting
+    from the following:
       \[
         \left(x^3 - 5 x^2  + 25\right) \div \left(x-3\right)
       \]
@@ -676,43 +175,257 @@ Carry out the following long division problem.
       \[
         q(x) + \frac{r}{d(x)}
       \]
-    where \(q(x)\) is the quotient, \(d(x)\) is the divisor, and \(r\) is the remainder.
+    where \(q(x)\) is the quotient, \(d(x)\) is the divisor, and \(r\)
+    is the remainder.
   </p>
 
   <div class="answer">
     <a class="collapsible"><h3>Answer: </h3></a>
     <div class='inner'>
-      This problem illustrates what to do when a term is missing:
-      you need to have a \(0\) in the column corresponding to the missing term.
-      What happens if you don't, you ask?  Well, I'm sure some of you will
-      discover that for yourselves when you fail to leave this \(0\) in the
-      necessary column; it probably won't work out for you!
+      <p>
+        You'll need to build a mental bridge from the old
+        method&mdash;<b>long division</b>&mdash;to the new method of
+        <b>synthetic division</b>.  I'll place the old method on the
+        right for comparision to help me explain the new method.
+        Basically, <b>synthetic division</b>
+        just involves writing down "the highlights" of the process of carrying
+        out long division.  The idea is this: when doing regular
+        long division of polynomials, you are already using the columns
+        to mark what powers of \(x\) are involved&mdash;for instance,
+        using the third column from the right for the terms involving \(x^2\),
+        just like you use the third column for hundreds (Note: \(100 = 10^2\)).
+        But, since the column tells you what power is inolved there,
+        why do you need to write the \(x\)'s at all?
+      </p>
+      <p>
+        So, <b>synthetic division</b> involves the discipline of lining up the
+        coefficients of terms according to their powers.
+        The initial set-up is to place the "zero" of the divisor in a box at
+        left.  Since the divisor is \(x-3\), the zero is \(3\).
+        Then, extending to the right, you write the coefficients of the
+        dividend in separate columns in descending order of
+        degree&mdash;being vigilant about writing in 0's for missing terms:
+      </p>
 
-    <p style="">
-        <table class="center long-division">
+      <div style="float:left; width:45%; padding:5%;">
+        <table class="synthetic long-division">
           <tr>
-            <td></td>     <td></td>     <td></td>    <td></td>                               <td></td>                 <td>\(x^2\)</td>                    <td>\(-\)</td>      <td>\(2x\)</td>          <td>\(-\)</td><td>\(6\)</td><td style="color:blue">\(+\)</td><td style="color:blue">\(\frac{7}{x-3}\)</td>
+            <td class="bottom right">\(3\)</td><td>\(1\)</td><td>\(-5\)</td><td>\(0\)</td><td>\(25\)</td>
+          </tr>
+          <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr>
+            <td></td><td class="bottom"></td><td class="bottom"></td><td class="bottom"></td><td class="bottom"></td>
+          </tr>
+          <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+          </tr>
+        </table>
+      </div>
+      <div style="float:left; width:45%; padding:5%">
+        <table class="long-division">
+          <tr>
+            <td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr>
+            <td>\(x\)</td><td>\(-\)</td><td>\(3\)</td><td class="left top">\(\quad x^3\)</td><td class="top">\(-\)</td><td class="top">\(5x^2\)</td><td class="top">\(+\)</td><td class="top">\(0x\)</td><td class="top">\(+\)</td><td class="top">\(25\)</td>
+          </tr>
+        </table>
+      </div>
+
+      <p style="clear:left">
+        What is going to happen is that we will place the coefficients of the
+        quotient and remainder (i.e.: "the answer" to the problem)
+        in the spaces below that horizontal line.
+        We will write those coefficients in descending order of their powers.
+        Since we are dividing \(x^3-5x^2+25\)
+        by \(x-3\), and we know that is just the question of what (quotient)
+        to multiply \(x-3\) by to get as close as you can to \(x^3-5x^2+25\),
+        I hope you can see that the leading term of the quotient will be \(x^2\).
+        So, you just place a \(\color{blue}{1}\) in that first slot.
+        You'll have to mentally know that it represents
+        \(\color{blue}{1x^2}\) and that the powers will descend from there.
+      </p>
+
+      <div style="float:left; width:45%; padding:5%;">
+        <table class="synthetic long-division">
+          <tr>
+            <td class="bottom right">\(3\)</td><td>\(1\)</td><td>\(-5\)</td><td>\(0\)</td><td>\(25\)</td>
+          </tr>
+          <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr>
+            <td></td><td class="bottom"></td><td class="bottom"></td><td class="bottom"></td><td class="bottom"></td>
+          </tr>
+          <tr>
+            <td></td><td>\(\color{blue}{1}\)</td><td></td><td></td><td></td>
+          </tr>
+        </table>
+      </div>
+      <div style="float:left; width:45%; padding:5%">
+        <table class="long-division">
+          <tr>
+            <td></td><td></td><td></td><td></td><td></td><td>\(\color{blue}{1x^2}\)</td>
+          </tr>
+          <tr>
+            <td>\(x\)</td><td>\(-\)</td><td>\(3\)</td><td class="left top">\(\quad x^3\)</td><td class="top">\(-\)</td><td class="top">\(5x^2\)</td><td class="top">\(+\)</td><td class="top">\(0x\)</td><td class="top">\(+\)</td><td class="top">\(25\)</td>
+          </tr>
+        </table>
+      </div>
+
+      <p style="clear:left">
+        Next up, on the right, you multiply \(x-3\) by
+        \(\color{blue}{1x^2}\) and "kill off" some of the dividend.
+        But right here is where some streamlining comes in!
+        Why do we even need to write down the fact that \(x^3\) gets
+        killed off?  That was the whole point in multiplying by
+        \(\color{blue}{1x^2}\) in the first place, so it is
+        redundant to write it out.   Instead, at left, we write the only
+        interesting thing that happens at this second step:
+        \(\color{magenta} -3x^2\) gets <em>subtracted</em> from \(-5x^2\)&mdash;resulting
+        in a new leading term of \(\color{green} -2x^2\), which
+        means \(\color{green} -2x^2\) will have to get killed off next,
+        which means \(\color{green}-2\) will be the next coefficient in our
+        quotient.  I record all this activity at left by multiplying my
+        \(\color{blue} 1\) by the <em>positive</em> \(3\) and <em>adding</em>
+        that to \(-5\).  You see, subtracting a negative is positive,
+        which means subtracting "\([\textrm{whatever}] \cdot (-3)\)"
+        will be the same as <em>adding</em> "\([\textrm{whatever}] \cdot 3\)".
+        So, the subtraction gets "built in" to the "synthetic"
+        division process by changing that \(-3\) in the divisor \(x-3\) to \(3\)
+        and just adding all the time.  So, in the next column over and just
+        below the \(-5\), I write the product of "the number in the box"
+        (the \(3\)) and the
+        previous coefficient (the \(\color{blue} 1\)) of my quotient:
+        \(3\cdot \color{blue} 1 = \color{magenta} 3\). Then I add \(-5\) and
+        \(\color{magenta} 3\) to get \(\color{green} -2\).
+      </p>
+
+      <div style="float:left; width:45%; padding:5%;">
+        <table class="synthetic long-division">
+          <tr>
+            <td class="bottom right">\(3\)</td><td>\(1\)</td><td>\(-5\)</td><td>\(0\)</td><td>\(25\)</td>
+          </tr>
+          <tr>
+            <td></td><td class="bottom"></td><td class="bottom" style="text-align:right">\(\color{magenta} 3\)</td><td class="bottom"></td><td class="bottom"></td>
+          </tr>
+          <tr>
+            <td></td><td>\(\color{blue}{1}\)</td><td>\(\color{green} -2\)</td><td></td><td></td>
+          </tr>
+        </table>
+      </div>
+      <div style="float:left; width:45%; padding:5%">
+        <table class="long-division">
+          <tr>
+            <td></td><td></td><td></td><td></td><td></td><td>\(\color{blue}{1x^2}\)</td><td>\(\color{green}{-}\)</td><td>\(\color{green}{2x}\)</td>
           </tr>
           <tr>
             <td>\(x\)</td><td>\(-\)</td><td>\(3\)</td><td class="left top">\(\quad x^3\)</td><td class="top">\(-\)</td><td class="top">\(5x^2\)</td><td class="top">\(+\)</td><td class="top">\(0x\)</td><td class="top">\(+\)</td><td class="top">\(25\)</td>
           </tr>
           <tr>
-            <td></td><td></td><td></td><td class="bottom">\(-\left(x^3\right.\)</td><td class="bottom">\(-\)</td><td class="bottom">\(\left.3x^2\right)\)</td><td></td><td></td>
+            <td></td><td></td><td></td><td class="bottom">\({\color{magenta}-}\left(x^3\right.\)</td><td class="bottom">\(-\)</td><td class="bottom">\(\left.\color{magenta}3x^2\right)\)</td><td></td><td></td>
           </tr>
           <tr>
-            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td>\(-2x^2\)</td>                   <td>\(+\)</td>           <td>\(0x\)</td>          <td>\(+\)</td>                 <td>\(25\)</td>
+            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td>\(\color{green}-2x^2\)</td>                   <td>\(+\)</td>           <td>\(0x\)</td>          <td>\(+\)</td>                 <td>\(25\)</td>
+          </tr>
+        </table>
+      </div>
+
+      <p style="clear:left">
+        After that, the process repeats: multiply your
+        newest coefficient (in this case \(\color{green}-2\)) on the quotient line
+        (the bottom line) by "the number in the box."
+        Place that product (in this case, \(\color{orange}-6\)) in the next column over
+        directly below the next coefficient in the dividend and add the
+        result to get your next coefficient (in this case, \(\color{purple}-6\))
+        in the quotient:
+      </p>
+
+      <div style="float:left; width:45%; padding:5%;">
+        <table class="synthetic long-division">
+          <tr>
+            <td class="bottom right">\(3\)</td><td>\(1\)</td><td>\(-5\)</td><td style="text-align:right">\(0\)</td><td>\(25\)</td>
           </tr>
           <tr>
-            <td></td><td></td><td></td><td></td>                                 <td class="bottom">\(-\)</td>                       <td class="bottom">\(\left(-2x^2\right.\)</td>                   <td class="bottom">\(+\)</td>           <td class="bottom">\(\left.6x\right)\)</td>          <td></td>                 <td></td>
+            <td></td><td class="bottom"></td><td class="bottom" style="text-align:right">\(\color{magenta} 3\)</td><td class="bottom">\(\color{orange}-6\)</td><td class="bottom"></td>
           </tr>
           <tr>
-            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                              <td style="text-align:right">\(-6x\)</td>                        <td>\(+\)</td>             <td>\(25\)</td>
+            <td></td><td>\(\color{blue}{1}\)</td><td>\(\color{green} -2\)</td><td>\(\color{purple}-6\)</td><td></td>
+          </tr>
+        </table>
+      </div>
+      <div style="float:left; width:45%; padding:5%">
+        <table class="long-division">
+          <tr>
+            <td></td><td></td><td></td><td></td><td></td><td>\(\color{blue}{1x^2}\)</td><td>\(\color{green}{-}\)</td><td>\(\color{green}{2x}\)</td><td>\(\color{purple}-\)</td><td>\(\color{purple}{6}\)</td>
           </tr>
           <tr>
-            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td style="text-align:right">\(-\)</td>                              <td class="bottom" style="text-align:right">\(\left(-6x\right.\)</td>                        <td class="bottom">\(+\)</td>             <td class="bottom">\(\left.18\right)\)</td>
+            <td>\(x\)</td><td>\(-\)</td><td>\(3\)</td><td class="left top">\(\quad x^3\)</td><td class="top">\(-\)</td><td class="top">\(5x^2\)</td><td class="top">\(+\)</td><td class="top">\(0x\)</td><td class="top">\(+\)</td><td class="top">\(25\)</td>
           </tr>
           <tr>
-            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                                                                         <td></td>                                                                                              <td></td>                                                    <td>\(7\)</td>
+            <td></td><td></td><td></td><td class="bottom">\({\color{magenta}-}\left(x^3\right.\)</td><td class="bottom">\(-\)</td><td class="bottom">\(\left.\color{magenta}3x^2\right)\)</td><td></td><td></td>
+          </tr>
+          <tr>
+            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td>\(\color{green}-2x^2\)</td>                   <td>\(+\)</td>           <td>\(0x\)</td>          <td>\(+\)</td>                 <td>\(25\)</td>
+          </tr>
+          <tr>
+            <td></td><td></td><td></td><td></td>                                 <td class="bottom">\(\color{orange}-\)</td>                       <td class="bottom">\(\left(-2x^2\right.\)</td>                   <td class="bottom">\(+\)</td>           <td class="bottom">\(\left.\color{orange}6x\right)\)</td>          <td></td>                 <td></td>
+          </tr>
+          <tr>
+            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                              <td style="text-align:right">\(\color{purple}-6x\)</td>                        <td>\(+\)</td>             <td>\(25\)</td>
+          </tr>
+        </table>
+      </div>
+
+      <p style="clear:left">
+        The steps are the same until the last step.  But since the last step
+        involves finding the remainder, it is common to separate it out
+        visually.  Your remainder will always be the last number in the
+        quotient line, but I recommend putting a box around it:
+      </p>
+
+      <div style="float:left; width:45%; padding:5%;">
+        <table class="synthetic long-division">
+          <tr>
+            <td class="bottom right">\(3\)</td><td>\(1\)</td><td>\(-5\)</td><td style="text-align:right">\(0\)</td><td>\(25\)</td>
+          </tr>
+          <tr>
+            <td></td><td class="bottom"></td><td class="bottom" style="text-align:right">\(\color{magenta} 3\)</td><td class="bottom">\(\color{orange}-6\)</td><td class="bottom">\(\color{brown}-18\)</td>
+          </tr>
+          <tr>
+            <td></td><td>\(\color{blue}{1}\)</td><td>\(\color{green} -2\)</td><td>\(\color{purple}-6\)</td><td class="left bottom">\(\color{red}7\)</td>
+          </tr>
+          <tr>
+          </tr>
+        </table>
+      </div>
+      <div style="float:left; width:45%; padding:5%">
+        <table class="long-division">
+          <tr>
+            <td></td><td></td><td></td><td></td><td></td><td>\(\color{blue}{1x^2}\)</td><td>\(\color{green}{-}\)</td><td>\(\color{green}{2x}\)</td><td>\(\color{purple}-\)</td><td>\(\color{purple}{6}\)</td><td>\(\color{red} +\)</td>                 <td>\(\color{red}\frac{7}{x-3}\)</td>
+          </tr>
+          <tr>
+            <td>\(x\)</td><td>\(-\)</td><td>\(3\)</td><td class="left top">\(\quad x^3\)</td><td class="top">\(-\)</td><td class="top">\(5x^2\)</td><td class="top">\(+\)</td><td class="top">\(0x\)</td><td class="top">\(+\)</td><td class="top">\(25\)</td>
+          </tr>
+          <tr>
+            <td></td><td></td><td></td><td class="bottom">\({\color{magenta}-} \left(x^3\right.\)</td><td class="bottom">\(-\)</td><td class="bottom">\(\left.\color{magenta}3x^2\right)\)</td><td></td><td></td>
+          </tr>
+          <tr>
+            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td>\(\color{green}-2x^2\)</td>                   <td>\(+\)</td>           <td>\(0x\)</td>          <td>\(+\)</td>                 <td>\(25\)</td>
+          </tr>
+          <tr>
+            <td></td><td></td><td></td><td></td>                                 <td class="bottom">\(\color{orange}-\)</td>                       <td class="bottom">\(\left(-2x^2\right.\)</td>                   <td class="bottom">\(+\)</td>           <td class="bottom">\(\left.\color{orange}6x\right)\)</td>
+          </tr>
+          <tr>
+            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                              <td style="text-align:right">\(\color{purple}-6x\)</td>                        <td>\(+\)</td>             <td>\(25\)</td>
+          </tr>
+          <tr>
+            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td style="text-align:right">\(\color{brown}-\)</td>                              <td class="bottom" style="text-align:right">\(\left(-6x\right.\)</td>                        <td class="bottom">\(+\)</td>             <td class="bottom">\(\left.\color{brown}18\right)\)</td>
+          </tr>
+          <tr>
+            <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                                                                         <td></td>                                                                                              <td></td>                                                    <td>\(\color{red}7\)</td>
           </tr>
           <tr>
             <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                              <td></td>                        <td class="bottom">\(-\)</td>             <td class="bottom">\(7\)</td>
@@ -723,77 +436,31 @@ Carry out the following long division problem.
           <tr>
           </tr>
         </table>
-    </p>
+      </div>
+
+      <p style="clear:left">
+        The very last step---which is redundant in this case since we
+        also carried out the long-division&mdash;is to interpret the numbers
+        on the quotient line as the coefficients of the quotient listed in
+        descending order
+        with the final remainder listed last.
+        The thing to realize here is that the degree of the quotient
+        will be one less than the degree of the original thing you
+        divided&mdash;the dividend&mdash;because the divisor was degree 1.
+        Since the dividend in this case is degree 3 (\(x^3-5x^2 + 25\)) the
+        quotient is degree 2; you start with \(1x^2\) and continue in
+        decreasing order.  So, the quotient with final remainder is
+          \[
+            x^2 - 2x - 6 + \frac{7}{x-3}
+          \]
+      </p>
     </div>
   </div>
 </div>
 </p>
 
 <p>
-  Long division is completely versatile or "universal"&mdash;it is an algorithm
-  that works no matter what.  So, we consider two more examples where the
-  divisor polynomial is more complicated than in the previous two.
-</p>
-
-<p>
-<div class="example">
-  <h2></h2>
-  <!-- <p>
-  <a href="https://www.loom.com/share/6adc211e382440c2a63fac4668a7f222" target="_blank">Click for video.</a>
-  </p> -->
-
-  <p>
-    Determine quotient and remainder resulting from the following:
-      \[
-        \left(6x^3 - 5 x^2  + 7x - 4\right) \div \left(2x-1\right)
-      \]
-    Put your answer in the form
-      \[
-        q(x) + \frac{r}{d(x)}
-      \]
-    where \(q(x)\) is the quotient, \(d(x)\) is the divisor, and \(r\) is the remainder.
-  </p>
-
-  <div class="answer">
-    <a class="collapsible"><h3>Answer: </h3></a>
-    <div class='inner'>
-      <table class="center long-division">
-        <tr>
-          <td></td>     <td></td>     <td></td>    <td></td>                               <td></td>                 <td>\(3x^2\)</td>                    <td>\(-\)</td>      <td>\(x\)</td>          <td>\(+\)</td><td>\(3\)</td><td>\(-\)</td><td>\(\frac{1}{2x-1}\)</td>
-        </tr>
-        <tr>
-          <td>\(2x\)</td><td>\(-\)</td><td>\(1\)</td><td class="left top">\(\quad 6x^3\)</td><td class="top">\(-\)</td><td class="top">\(5x^2\)</td><td class="top">\(+\)</td><td class="top">\(7x\)</td><td class="top">\(-\)</td><td class="top">\(4\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td class="bottom">\(-\left(6x^3\right.\)</td><td class="bottom">\(-\)</td><td class="bottom">\(\left.3x^2\right)\)</td><td></td><td></td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td>                                 <td></td>                       <td>\(-2x^2\)</td>                   <td>\(+\)</td>           <td>\(7x\)</td>          <td>\(-\)</td>                 <td>\(4\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td>                                 <td class="bottom">\(-\)</td>                       <td class="bottom">\(\left(-2x^2\right.\)</td>                   <td class="bottom">\(+\)</td>           <td class="bottom">\(\left.x\right)\)</td>          <td></td>                 <td></td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                              <td style="text-align:right">\(6x\)</td>                        <td>\(-\)</td>             <td>\(4\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td style="text-align:right">\(-\)</td>                              <td class="bottom" style="text-align:right">\(\left(6x\right.\)</td>                        <td class="bottom">\(-\)</td>             <td class="bottom">\(\left.3\right)\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                                                                         <td></td>                                                                                              <td></td>                                                    <td>\(-1\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                              <td></td>                        <td class="bottom">\(-\)</td>             <td class="bottom">\(\left(-1\right)\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>                                                         <td></td>                                                                         <td></td>                                                                                              <td></td>                                                    <td style="text-align:right">\(0\)</td>
-        </tr>
-        <tr>
-        </tr>
-      </table>
-    </div>
-  </div>
-</div>
+  Here goes one more example before you start practicing on your own.
 </p>
 
 <p>
@@ -804,58 +471,60 @@ Carry out the following long division problem.
   </p> -->
 
   <p>
-    Determine quotient and remainder resulting from the following:
+    Use synthetic division to determine quotient and remainder resulting
+    from the following:
       \[
-        \left(3x^4 + 3 x^2  - x + 7\right) \div \left(x^2 - x + 3\right)
+        \left(3x^5 - 8x^3 + 2x^2 - x + 1\right) \div \left(x+2\right)
       \]
     Put your answer in the form
       \[
         q(x) + \frac{r}{d(x)}
       \]
-    where \(q(x)\) is the quotient, \(d(x)\) is the divisor, and \(r\) is the remainder.
+    where \(q(x)\) is the quotient, \(d(x)\) is the divisor, and \(r\)
+    is the remainder.
   </p>
 
   <div class="answer">
     <a class="collapsible"><h3>Answer: </h3></a>
     <div class='inner'>
-      <table class="center long-division">
-        <tr>
-          <td></td><td></td><td></td>     <td></td>     <td></td>    <td></td>                               <td></td> <td></td> <td></td>                 <td>\(3x^3\)</td>                    <td>\(+\)</td>      <td>\(3x\)</td>          <td>\(-\)</td><td>\(3\)</td><td>\(+\)</td><td>\(\frac{-13x+16}{x^2-x+3}\)</td>
-        </tr>
-        <tr>
-          <td>\(x^2\)</td><td>\(-\)</td><td>\(x\)</td><td>\(+\)</td><td>\(3\)</td><td class="left top">\(\quad 3x^4\)</td><td class="top">\(+\)</td><td class="top">\(0x^3\)</td><td class="top">\(+\)</td><td class="top">\(3x^2\)</td><td class="top">\(-\)</td><td class="top">\(x\)</td><td class="top">\(+\)</td><td class="top">\(7\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td class="bottom">\(-\left(3x^4\right.\)</td><td class="bottom">\(-\)</td><td class="bottom">\(3x^3\)</td><td class="bottom">\(+\)</td><td class="bottom">\(\left.9x^2\right)\)</td><td></td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td></td>                                 <td></td>                       <td>\(3x^3\)</td>                   <td>\(-\)</td>           <td>\(6x^2\)</td>          <td>\(-\)</td>                 <td>\(x\)</td> <td>\(+\)</td><td>\(7\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td></td>                                 <td class="bottom">\(-\)</td>                       <td class="bottom">\(\left(3x^3\right.\)</td>                   <td class="bottom">\(-\)</td>           <td class="bottom">\(3x^2\)</td>          <td class="bottom">\(+\)</td>        <td class="bottom">\(\left.9x\right)\)</td>         <td></td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td></td>                                 <td></td>                                            <td></td>                                                         <td></td>                              <td style="text-align:right">\(-3x^2\)</td>                        <td>\(-\)</td>             <td>\(10x\)</td> <td>\(+\)</td><td>\(7\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>   <td style="text-align:right">\(-\)</td>   <td class="bottom" style="text-align:right">\(\left(-3x^2\right.\)</td>   <td class="bottom">\(+\)</td>  <td class="bottom">\(3x\)</td> <td class="bottom">\(-\)</td> <td class="bottom">\(\left.9\right)\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td></td> <td></td><td></td>   <td></td>  <td></td>   <td></td>  <td>\(-13x\)</td> <td>\(+\)</td> <td>\(16\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td></td> <td></td> <td></td>   <td></td> <td></td> <td class="bottom">\(-\)</td>             <td class="bottom">\(\left(-13x\right.\)</td> <td class="bottom">\(+\)</td> <td class="bottom">\(\left.16\right)\)</td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td></td>                                 <td></td>                       <td></td>   <td></td>  <td></td>   <td></td>   <td></td> <td></td> <td style="text-align:right">\(0\)</td>
-        </tr>
-        <tr>
-        </tr>
-      </table>
+      <p>
+        As a quick recap, put the "zero" of the divisor in the box.
+        Since \(x+2\) is the divisor, its zero is \(-2\).
+        Put the coefficients of the dividend in order, placing \(0\)'s for any
+        missing terms.  Bring down the leading coefficient of your dividend
+        as the leading coefficient of the quotient.  Multiply each coefficient o
+        f the quotient by the zero in "the box", adding this to the next
+        coefficient of the dividend to get the next coefficient of the
+        quotient and finally the remainder:
+        <table class="center synthetic long-division">
+          <tr>
+            <td class="bottom right">\(-2\)</td><td>\(3\)</td><td style="text-align:right">\(0\)</td><td>\(-8\)</td><td>\(2\)</td><td>\(-1\)</td><td>\(1\)</td>
+          </tr>
+          <tr>
+            <td></td><td class="bottom"></td><td class="bottom" style="text-align:right">\(-6\)</td><td class="bottom">\(12\)</td><td class="bottom">\(-8\)</td><td class="bottom">\(12\)</td><td class="bottom">\(-22\)</td>
+          </tr>
+          <tr>
+            <td></td><td>\(3\)</td><td>\(-6\)</td><td>\(4\)</td><td>\(-6\)</td><td>\(11\)</td><td class="left bottom">\(-21\)</td>
+          </tr>
+          <tr>
+          </tr>
+        </table>
+      </p>
+      <p>
+        Finally, interpret the numbers on the bottom line as the coefficients
+        of the quotient, plus remainder, with terms listed in descending
+        order of power.  Since the dividend was degree 5, the
+        quotient is degree 4:
+          \[
+            3x^4 - 6x^3 + 4x^2 - 6x + 11 - \frac{21}{x+2}
+          \]
+      </p>
     </div>
   </div>
 </div>
 </p>
+
+
 
 
 <script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>

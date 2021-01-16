@@ -123,6 +123,7 @@ class QuadraticPattern(Question):
 
 
     def checkanswer(self, user_answer):
+        user_answer = user_answer.lower()
         user_answer = user_answer.replace('^', '**')
         user_answer = parse_expr(user_answer, transformations=transformations)
         answer = parse_expr(str(self.answer), transformations=transformations)
@@ -130,6 +131,7 @@ class QuadraticPattern(Question):
 
     @staticmethod
     def format_useranswer(user_answer, display=False):
+        user_answer = user_answer.lower()
         user_answer = user_answer.replace('^', '**')
         user_answer = parse_expr(user_answer, transformations=transformations)
         return latex_print(user_answer, display)
@@ -137,6 +139,7 @@ class QuadraticPattern(Question):
     @classmethod
     def validator(self, user_answer):
         try:
+            user_answer = user_answer.lower()
             user_answer = user_answer.replace('^', '**')
             user_answer = parse_expr(user_answer, transformations=transformations)
         except:

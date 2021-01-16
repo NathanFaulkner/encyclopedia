@@ -115,6 +115,7 @@ class FactorTrinomialsLevel2(Question):
         # return (isinstance(user_answer, sy.core.power.Pow) or isinstance(user_answer, sy.core.mul.Mul)) and sy.expand(user_answer) == sy.expand(self.answer)
         # return user_answer == self.answer
         answer = parse_expr(str(self.answer), transformations=transformations)
+        check_congruence_after_factoring_out_gcf(sy.Symbol('x'), user_answer)
         # return answer ==  user_answer
         return check_congruence_after_factoring_out_gcf(answer, user_answer)
 
@@ -130,7 +131,8 @@ class FactorTrinomialsLevel2(Question):
             user_answer = user_answer.replace('^', '**')
             user_answer = parse_expr(user_answer, transformations=transformations)
             # type(user_answer) == type(parse_expr('5', transformations=transformations))
-            # check_congruence_after_factoring_out_gcf(, user_answer)
+            if 'x' in str(user_answer):
+                check_congruence_after_factoring_out_gcf(sy.Symbol('x'), user_answer)
         except:
             raise SyntaxError
 
