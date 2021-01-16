@@ -46,7 +46,7 @@ class SyntheticDivisionOfPolynomialsHarder(Question):
             z = random.randint(-9,9)
         divisorexpr = x - z
         d = [] # coeffs of dividend
-        deg_d = 4
+        deg_d = random.randint(4, 6) #really, the degree is going to be ne less of this
         # while not(at_least_one_zero(d)):
             # d = []
         for i in range(deg_d):

@@ -21,7 +21,7 @@ class SyntheticDivisionOfPolynomials(Question):
             self.seed = random.random()
         random.seed(self.seed)
         a = []
-        len_a = 3
+        len_a = random.randint(3, 5)
         temp = 0
         for i in range(len_a):
             if i == 0:
