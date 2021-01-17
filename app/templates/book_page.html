@@ -30,6 +30,11 @@
     content: "Fact " counter(fact) "."
   }
 
+  .theorem h2::before {
+    counter-increment: fact;
+    content: "Theorem " counter(fact) "."
+  }
+
   h1 + p::first-letter {
     /* color: var(--section-header-color); */
     font-size: 275%;

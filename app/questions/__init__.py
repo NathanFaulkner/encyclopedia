@@ -88,6 +88,8 @@ __all__ = ['quadratic_pattern',
             'long_division_of_polynomials_harder',
             'synthetic_division_of_polynomials',
             'synthetic_division_of_polynomials_harder',
+            'complete_factorization_level1',
+            'complete_factorization_level1_nice_factors',
             ]
 
 class Question():

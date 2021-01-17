@@ -701,6 +701,10 @@ polynomialsdividing.add_to_questions('long_division_of_polynomials',
 syntheticdivision = Section('syntheticdivision', "Synthetic Division", '/sections/polynomials-synthetic-division')
 syntheticdivision.add_to_questions('synthetic_division_of_polynomials',
                                     'synthetic_division_of_polynomials_harder')
+
+completefactorizationpart1 = Section('completefactorizationpart1', "Complete Factorization: Part 1", '/sections/complete-factorization-part1')
+completefactorizationpart1.add_to_questions('complete_factorization_level1',
+                                            'complete_factorization_level1_nice_factors')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -777,6 +781,7 @@ polynomials = Division('chapter', 'Polynomials',
                                 polynomialsmultiplying,
                                 polynomialsdividing,
                                 syntheticdivision,
+                                completefactorizationpart1,
                                 ])
 polynomials.set_frontpage(polynomials_intro)
 

@@ -1,0 +1,288 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  I mentioned in the previous section that we are on a quest to learn
+  how to break apart polynomials into "primes."
+  I have alerted you to the fact that we are leading up to the fact that any
+  polynomial can (theoretically) be broken apart in to the following factored form:
+    \[
+    f(x) = a(x-z_1)(x-z_1) \cdots (x-z_n)
+    \]
+  where \(a\) is some number, as are \(z_1\), \(z_2\),&#8230;, \(z_n\).
+  So, factors of the form \(a\) (a number) and \(x-z\), where \(z\) is a number,
+  are the "primes" when it comes to polynomials.
+  Why should we want to do this?  Well, for one thing, if we can figure out
+  how to factor a polynomial like that, then we can also solve equations
+  involving polynomials.  For instance, ponder how in the world you are
+  supposed to solve the following equation:
+  \[
+    x^4 + 4x^3 - 34x^2 - 76x + 105 = 0
+  \]
+  Well, what if I told you that the equation factors like so?
+    \[
+      x^4 + 4x^3 - 34x^2 - 76x + 105  = (x-1)(x+3)(x-5)(x+7)
+    \]
+    Then, I bet you can solve it!  Do so now:
+</p>
+<p>
+<div class="example">
+  <h2> (Warm-up)</h2>
+
+  Solve the following:
+    \[
+      (x-1)(x+3)(x-5)(x+7) = 0
+    \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      As discussed in the section,
+      <a href="{{ url_for('section', section_name='solvingquadraticspart1') }}">
+        Solving by Factoring, Part 1
+      </a>
+      if you have a product of numbers that equals \(0\), as we have here,
+      then it must be that (at least) one of the numbers has to be \(0\).
+      Thus, we make the following deductions:
+      \begin{align*}
+        & (x-1)(x+3)(x-5)(x+7) = 0\\
+        \Rightarrow \quad & x-1 = 0 \quad \textrm{or} \quad x + 3 = 0 \quad \textrm{or} \quad x - 5 = 0 \quad \textrm{or} \quad x + 7 = 0\\
+        \Rightarrow \quad & x = 1 \quad \textrm{or} \quad x = -3 \quad \textrm{or} \quad x = 5 \quad \textrm{or} \quad x = -7\\
+      \end{align*}
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  So, you can hopefully see there is a connection between factoring and
+  being able to solve polynomial equations: If you can factor, then you can
+  solve.  Actually, the converse is true as well&mdash;and just as useful:
+  If you can solve, then you can factor.
+
+  <div class="theorem">
+    <h2></h2>
+    For polynomial \(f\) and number \(z\), \(f(z) = 0\) if and only if \(x-z\)
+    divides evenly into \(f(x)\).
+    In other words, if you know that \(f(z) = 0\), then you know \(f(x)\) factors as
+      \[
+        (x-z)q(x)
+      \]
+    for some polynomial (of degree one less!) \(q(x)\).  And, if you know that
+    \(x-z\) divides evenly
+    into \(f(x)\), then you can also conclude that \(f(z) = 0\).
+
+    <h3>Proof:</h3>
+    The proof is just to think about what doing long division of \(f(x)\) by \(x-z\)
+    would give you.  Say that you get quotient \(q(x)\) and remainder \(r\)
+    when dividing by \(x-z\):
+      \[
+        \frac{f(x)}{x-z} = q(x) + \frac{r}{x-z}
+      \]
+    To put that another way (after multiplying both sides by \(x-z\)):
+      \[
+        f(x) = (x-z)q(x) + r
+      \]
+    Now, check out what happens when you plug in \(z\) for \(x\):
+      \[
+        f(z) = (z-z)q(z) + r = 0\cdot q(z) + r = 0 + r = r
+      \]
+      Thus, by transitive property of your equals sign, if \(f(z) = 0\), then \(r = 0\),
+      which means that \(f(x) = (x-z)q(x)\) (\(x-z\) divides into \(f(x)\) evenly).
+      And, if \(r=0\) (that is, if \(x-z\) divides into \(f(x)\) evenly), then \(f(z) = 0\). &#9633;
+  </div>
+    By the way, what is that little symbol '&#9633;'.  Is that a typo, you may ask?
+    No, what I am writing there is in place of where the old scribes would have
+    written
+    <a href="https://en.wikipedia.org/wiki/Q.E.D." target="_blank">
+      "Q.E.D.", <i>quad erat demonstrandum</i>
+    </a>
+    or "which is what was to be shown", a phrase that dates back to Euclid
+    (albeit translated from Greek into Latin).
+    So, the point of the symbol '&#9633;' or of writing "Q.E.D." is to just provide a
+    a kind of narrative suffix to signal that the proof has stopped and the narrative
+    mode will go back to whatever it was before the proof.  After all, a proof
+    is a special narrative mode: things might be declared within a proof that
+    pertain specifically to the proof, and only things declared inside the proof
+    or the statement of the theorem are admissable as evidence within the proof.
+    So, it is a logically "bracketed" thing, if that makes sense.
+</p>
+
+<p>
+  So, what's the point of all of this? What this all amounts too is that,
+  if you want to solve or factor, then you can start by trying to guess
+  some answers and that those answers will actually help you find the others,
+  because they can be used to factor the original polynomial&mdash;thus breaking
+  it down in to simpler and, hopefully, easier parts.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/6adc211e382440c2a63fac4668a7f222" target="_blank">Click for video.</a>
+  </p> -->
+
+  <p>
+    Suppose you were able to guess that \(x=3\) is a zero of the following
+    polynomial.  Use this to find all solutions to the equation:
+    \[
+      x^3 - 4x^2 + x + 6 = 0
+    \]
+  </p>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      <p>
+        Let's quickly verify that there wasn't a mistake in the prompt
+        by plugging in \(x=3\): We want to make sure it comes out to zero:
+          \[
+            f(3) = 3^3 - 4\cdot 3^2 + 3 + 6 = 0
+          \]
+        So, since \(x=3\) is a zero of \(f(x)\), \(x-3\) will divide into
+        it evenly.  I'll use synthetic division to carry this division out,
+        since it is faster, and then the resulting quotient will be quadratic,
+        which I could use the quadratic formula to solve if I have to, or
+        maybe I could factor it:
+        <table class="center synthetic long-division">
+          <tr>
+            <td class="bottom right">\(3\)</td><td>\(1\)</td><td style="text-align:right">\(-4\)</td><td>\(1\)</td><td>\(6\)</td>
+          </tr>
+          <tr>
+            <td></td><td class="bottom"></td><td class="bottom" style="text-align:right">\(3\)</td><td class="bottom">\(-3\)</td><td class="bottom">\(-6\)</td>
+          </tr>
+          <tr>
+            <td></td><td>\(1\)</td><td>\(-1\)</td><td>\(-2\)</td><td class="left bottom">\(0\)</td>
+          </tr>
+          <tr>
+          </tr>
+        </table>
+      </p>
+      <p style="clear:left">
+        Notice that we got \(0\) for the remainder!  This verifies that \(x=3\)
+        is a zero of the original function (making our earlier check redundant.)
+        Also, correctly interpreting the quotient line, we can see that \(f(x)\)
+        factors like so:
+        \[
+          x^3 - 4x^2 + x + 6 = (x-3)(x^2-x+2)
+        \]
+        Also, we luck out on this one since the quotient is easily factorable
+          \[
+            x^2 - x + 2 = (x+1)(x-2)
+          \]
+        (Sometimes you may
+        have to use the quadratic formula or use vertex form, etc., to find the
+        remaining solutions.)
+        Thus, it is easy to find all solutions to our original equation:
+          \begin{align*}
+            &\sympy{latex(expand(expr))} = 0\\
+            \Rightarrow \quad & (x-3)(x+1)(x-2) = 0\\
+            \Rightarrow \quad &x-3 = 0 \quad \textrm{or} \quad  x+ 1 = 0 \quad \textrm{or} \quad x - 2 = 0\\
+            \Rightarrow \quad &x= 3 \quad \textrm{or} \quad  x = -1 \quad \textrm{or} \quad x = 2\\
+          \end{align*}
+      </p>
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  We'll do two more examples, both of which will end up also involving the quadratic formula.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+  Suppose you were able to guess that \(x = -2\) is a zero of the following
+  polynomial.  Use this to find all solutions to the equation:
+    \[
+      x^3 - 2x^2 - 6x + 4 = 0
+    \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Let's do synthetic division to discover the quotient that results when
+      we divide the given polynomial by \(x+2\).
+      <table class="center synthetic long-division">
+        <tr>
+          <td class="bottom right">\(-2\)</td><td>\(1\)</td><td style="text-align:right">\(-2\)</td><td>\(-6\)</td><td>\(4\)</td>
+        </tr>
+        <tr>
+          <td></td><td class="bottom"></td><td class="bottom" style="text-align:right">\(-2\)</td><td class="bottom">\(8\)</td><td class="bottom">\(-4\)</td>
+        </tr>
+        <tr>
+          <td></td><td>\(1\)</td><td>\(-4\)</td><td>\(2\)</td><td class="left bottom">\(0\)</td>
+        </tr>
+        <tr>
+        </tr>
+      </table>
+      We can now proceed to find all solutions:
+        \begin{align*}
+          & x^3 - 2x^2 - 6x + 4 = 0\\
+          \Rightarrow \quad & (x+2)(x^2 - 4x +2) = 0\\
+          \Rightarrow \quad &x+ 2 = 0 \quad \textrm{or} \quad  x^2 - 4x +2 = 0\\
+          \Rightarrow \quad &x= -2 \quad \textrm{or} \quad  x = \frac{4- \sqrt{16 - 4\cdot 2}}{2} \quad \textrm{or} \quad x = \frac{4+ \sqrt{16 - 4\cdot 2}}{2}\\
+          \Rightarrow \quad &x= -2 \quad \textrm{or} \quad  x = \frac{4- \sqrt{8}}{2} \quad \textrm{or} \quad x = \frac{4+ \sqrt{8}}{2}\\
+        \end{align*}
+    </div>
+  </div>
+</div>
+</p>
+
+<div class="example">
+  <h2></h2>
+  Suppose you were able to guess that \(x=-5\) is a zero of the
+  following polynomial.  Use this to find all solutions to the equation:
+    \[
+      3x^3 + 11x^2 - 18x + 10 = 0
+    \]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Let's do synthetic division to discover the quotient that
+      results when we divide the given polynomial by \(x+5\).
+      <table class="center synthetic long-division">
+        <tr>
+          <td class="bottom right">\(-5\)</td><td>\(3\)</td><td style="text-align:right">\(11\)</td><td>\(-18\)</td><td>\(10\)</td>
+        </tr>
+        <tr>
+          <td></td><td class="bottom"></td><td class="bottom" style="text-align:right">\(-15\)</td><td class="bottom">\(20\)</td><td class="bottom">\(-10\)</td>
+        </tr>
+        <tr>
+          <td></td><td>\(3\)</td><td>\(-4\)</td><td>\(2\)</td><td class="left bottom">\(0\)</td>
+        </tr>
+        <tr>
+        </tr>
+      </table>
+      We can now proceed to find all solutions:
+        \begin{align*}
+          & x^3 - 4x^2 + x + 6 = 0\\
+          \Rightarrow \quad & (x+5)(3x^2 - 4x +2) = 0\\
+          \Rightarrow \quad &x+ 5 = 0 \quad \textrm{or} \quad  3x^2 - 4x +2 = 0\\
+          \Rightarrow \quad &x= -5 \quad \textrm{or} \quad  x = \frac{4- \sqrt{16 - 4\cdot 3\cdot 2}}{2} \quad \textrm{or} \quad x = \frac{4+ \sqrt{16 - 4\cdot 3\cdot 2}}{2}\\
+          \Rightarrow \quad &x= -5 \quad \textrm{or} \quad  x = \frac{4- \sqrt{-8}}{2} \quad \textrm{or} \quad x = \frac{4+ \sqrt{-8}}{2}\\
+        \end{align*}
+      Since \(\sqrt{-8}\) isn't a real number, we find that \(x=-5\) is actually the only solution.
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}
