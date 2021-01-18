@@ -34,6 +34,10 @@ class CompleteFactorizationLevel1(Question):
         # a = 1
         # b = 1
         # c = 1
+        if 'num_factors' in kwargs:
+            self.num_factors = kwargs['num_factors']
+        else:
+            self.num_factors = random.choice([3, 4])
 
         if 'nice' in kwargs:
             self.nice = kwargs['nice']
@@ -48,6 +52,9 @@ class CompleteFactorizationLevel1(Question):
             expr = (x-z)*(x-z1)*(x-z2)
         else:
             expr = (x-z)*(a*x**2+b*x+c)
+        if self.num_factors == 4:
+            z3 = random.randint(-10,10)
+            expr *= (x - z3)
         #symb_z = Symbol(str(z))
 
         self.answer = set(sy.solve(expr))

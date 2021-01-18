@@ -324,15 +324,14 @@ a {
 
 
 .activity {
-  border: 1px solid rgba(226, 79, 29, 1);
+  border: 1px solid var(--logo-background-color);
   padding-left: 1%;
-  margin-top: 0;
 }
 
-.activity h2 {
+/* .activity h2 {
   color: var(--theme-color-3);
   margin-top: 0;
-}
+} */
 
 .activity .inline-header {
   color: var(--theme-color-3);
@@ -344,6 +343,7 @@ a {
   border: 1px solid var(--logo-background-color);
   padding-left: 1%;
 }
+
 
 .answer {
   margin-left: 5%;

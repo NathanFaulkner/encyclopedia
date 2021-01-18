@@ -90,6 +90,12 @@ __all__ = ['quadratic_pattern',
             'synthetic_division_of_polynomials_harder',
             'complete_factorization_level1',
             'complete_factorization_level1_nice_factors',
+            'complete_factorization_level1_three_factors',
+            'complete_factorization_level1_three_nice_factors',
+            'imaginary_element_level1',
+            'imaginary_element_level2',
+            'imaginary_element_level3',
+            'imaginary_element_level4',
             ]
 
 class Question():

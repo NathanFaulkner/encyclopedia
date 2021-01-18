@@ -1,0 +1,352 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section, we'll touch on a subject which has struck hosts of Algebra 2
+  students who came before you as useless.  One problem for us is that its
+  usefulness lies beyond our immediate scope of interest&mdash;but I will
+  still touch on it.
+</p>
+
+<p>
+  As a quick intro, we return here to the claim that any polynomial (f)
+  (of degree (n>0), say) can be factored into the following form:
+    \[
+      f(x) = a(x-z_1)(x-z_2)\cdots(x-z_n)
+    \]
+  where the (z_i)'s are numbers and (a) is too. By the way, this fact is
+  called <b>the Fundamental Theorem of Algebra</b>.  Fancy-sounding, isn't it?
+  We also argued that if you can factor a polynomial, then you can find its
+  zeroes (aka "solutions")&mdash;and <em>vice versa</em>.
+  But, here's the thing.  Sometimes we found that there was
+  <em>no solution</em> to certain quadratics.
+</p>
+<p>
+<div class="example">
+  <h2> (Motivation)</h2>
+
+  For instance, what happens when you perform the quadratic formula on this:
+    \[
+      x^2 + x+ 1 = 0
+    \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+        \begin{align*}
+          x &= \frac{-b\pm\sqrt{b^2 - 4ac}}{2a}\\
+           & = \frac{-1\pm\sqrt{1 - 4}}{2}\\
+           & = \frac{-1\pm\sqrt{-3}}{2}\\
+        \end{align*}
+      We know that \(\sqrt{-3}\) isn't a real number, so we have "no solution."
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  In this section, we <em>invent</em> a solution to this equation.  (Some might say "discover" a solution, but I leave that up to you.)  Why on Earth would we want to do that?  Well, for one thing, it will enable us to factor this polynomial like so
+  \[
+  x^2 + x + 1  = (x-z_1)(x-z_2)
+  \]
+  where \(z_1\) and \(z_2\) are as some sort of spurious "numbers" whose nature I have yet to disclose in this narrative.  So, read on, brave student!
+</p>
+
+What we study here is "<b>imaginary numbers</b>," also called <b>complex numbers</b>, of which the primary example is \(\sqrt{-1}\), which we will mostly denote by the symbol \(i\).  What does all this mean?  For ine thing, it means that we are inventing solutions to the equation
+\[
+x^2 = -1
+\]
+whereas, before, we would have just noted that there is no solution.  First, note why it is quite sensible to say that there is no solution: what real number times itself comes out to be \(-1\)?  Noting that a "positive times a positive" comes out positive and a "negative times a negative" comes out positive as well, we see there is no real number \(x\) that can be multiplied by itself to come to "negative anything," in particular to \(-1\).  That is to say, \(-1\) doesn't have a square root.
+
+So, you will be asking yourself&mdash;as you should!&mdash;What is the point of going on to write this:
+\begin{align*}
+x^2 &=  -1\\
+\Rightarrow \quad x = \sqrt{-1} \quad & \textrm{or} \quad x = -\sqrt{-1}
+\end{align*}
+In fact, we'll actually express the "answer" as
+\[
+ x = i \quad  \textrm{or} \quad x = -i
+\]
+where it is understood that \(i\) represents \(\sqrt{-1}\).
+
+Let me show you what sort of knowledge concerning \(i\) is traditionally expected of Algebra 2 students, and then we will go on to try to understand more.  The key to it all is the following:
+
+
+<p>
+<div class="definition">
+  <h2></h2>
+
+It is common to call \(i = \sqrt{-1}\) an "<b>imaginary number</b>." You can also refer to it as the <b>imaginary element</b>.  While I'm happy if you dispute the use of the word "number" in this case, there is a purpose in calling it a number.  The point is to suggest that "all the familiar rules of arithmetic apply;" it's just that we have a new rule, namely
+\[
+i^2 = -1
+\]
+</div>
+</p>
+
+Hey, by the way, what are "the rules of arithmetic"?
+
+<p>
+<div class="activity">
+  <h2></h2>
+  <p>
+  List all the rules of arithmetic that you can think of.  I'll get you started:
+  </p>
+
+  <table class="center" style="width:80%; clear:left">
+    <tr>
+      <td style="width:40%"><u>Rule</u></td><td style="width:40%"><u>Name of Rule</u></td>
+    </tr>
+    <tr>
+      <td>\(a(b+c) = ab + ac\)</td><td>Distributive Property</td>
+    </tr>
+  </table>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      <table class="center" cellpadding="4" style="width:80%;">
+        <tr>
+          <td style="width:40%"><u>Rule</u></td><td style="width:40%"><u>Name of Rule</u></td>
+        </tr>
+        <tr>
+          <td>\(a + b = b + a\)</td><td>Commutative Property of Addition</td>
+        </tr>
+        <tr>
+          <td>\(a + (b + c) = (a + b) + c\)</td><td>Associative Property of Addition</td>
+        </tr>
+        <tr>
+          <td>\(a + 0 = a\)</td><td>Additive Identity Element (\(0\))</td>
+        </tr>
+        <tr>
+          <td>\(a + (-a) = 0\)</td><td>Additive Inverse</td>
+        </tr>
+        <tr>
+          <td>\(ab = ba\)</td><td>Commutative Property of Multiplication</td>
+        </tr>
+        <tr>
+          <td>\(a(bc) = (ab)c\)</td><td>Associative Property of Multiplication</td>
+        </tr>
+        <tr>
+          <td>\(a \cdot 1 = a\)</td><td>Multiplicative Identity Element (\(1\))</td>
+        </tr>
+        <tr>
+          <td>\(a + \left(\frac{1}{a}\right) = 1\) for \(a \neq 0\)</td><td>Multiplicative Inverse</td>
+        </tr>
+        <tr>
+          <td>\(a(b+c) = ab + ac\)</td><td>Distributive Property</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<p>
+  So, we will call \(i = \sqrt{-1}\) a number in the sense that we are declaring that we intend
+  to keep all the other "rules of numbers" the same, only to add one more in:
+  \(i^2 = -1\).  That is, we'll call it a number because we are going to treat it like one.
+</p>
+
+<div class="example">
+  <h2></h2>
+  <!-- <p>
+  <a href="https://www.loom.com/share/0d619e8c06094b71ad53db54a204d460" target="_blank">Click for video.</a>
+  </p> -->
+
+
+  Simplify the following expressions by using all the usual rules of arithmetic
+  together with the added rule that \(i^2 = -1\).
+
+  <ol type="a">
+    <li> \(i^3\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \(i^3 = i^2 \cdot i = (-1) i = -i\)
+        </div>
+      </div>
+    </li>
+    <li> \(i^4\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \(i^4 = (i^2) (i^2) = (-1)(-1) = 1\)
+        </div>
+      </div>
+    </li>
+    <li> \(i^{18}\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \(i^{18} = (i^2)^9 = (-1)^9  = -1\)
+        </div>
+      </div>
+    </li>
+    <li> \(i^{19}\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \(i^{19} = (i^2)^9 \cdot i = (-1)^9 \cdot i = -i\)
+        </div>
+      </div>
+    </li>
+    <li> \((4i)^2\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \((4i)^2 = (4i)(4i) = 16i^2 = -16\)
+        </div>
+      </div>
+    </li>
+    <li> \((-2i)^2\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \((-2i)^2 = (-2i)(-2i) = 4 i^2 = -4\)
+        </div>
+      </div>
+    </li>
+    <li> \((i\sqrt{5})^2\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \begin{align*}
+            (i\sqrt{5})^2 &= (i\sqrt{5})(i\sqrt{5}) \\
+            &= i^2 \cdot 5 \\
+            &=  -1\cdot 5 = -5
+          \end{align*}
+        </div>
+      </div>
+    </li>
+    <li> \(\left(-i\sqrt{7}\right)^2\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \begin{align*}
+            \left(-i\sqrt{7}\right)^2 &= \left(-i\sqrt{7}\right)\left(-i\sqrt{7}\right) \\
+            &=  i^2 \cdot 7 \\
+            &=  -1\cdot 7 = -7
+          \end{align*}
+        </div>
+      </div>
+    </li>
+    <li> \(\left(-i\sqrt{7}i\right)^{ 3 }\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \begin{align*}
+            \left(-i\sqrt{7}\right)^{ 3 } &= \left(-i\sqrt{7}\right)\left(-i\sqrt{7}\right)\left(-i\sqrt{7}i\right) \\
+            &= -i^3 \sqrt{7}\cdot\sqrt{7}\cdot\sqrt{7} \\
+            &= -i^2 \cdot i \left(\sqrt{7}\sqrt{7}\right)\sqrt{7} \\
+            &= -(-1)i\cdot 7 \sqrt{7} \\
+            &= 7i\sqrt{7}
+          \end{align*}
+        </div>
+      </div>
+    </li>
+    <li> \(i(3 + 4i)\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \begin{align*}
+            i(3 + 4i) &= 3i + 4i^2 \\
+            &= 3i  - 4 \\
+            &= -4 + 3i
+          \end{align*}
+        </div>
+      </div>
+    </li>
+    <li> \(-i (9-2i)\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \begin{align*}
+            -i (9-2i) &= -9i + 2i^2 \\
+            &= -9i  - 2 \\
+            &= -2 - 9i
+          \end{align*}
+        </div>
+      </div>
+    </li>
+    <li> \(-4  i \left(8 + 5i\right)\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \begin{align*}
+            -4  i \left(8 + 5i\right) &= -32i  - 20i^2 \\
+            &= -32i  - 20\cdot(-1) \\
+            &= -32i + 20\\
+            &= 20 - 32i
+          \end{align*}
+        </div>
+      </div>
+    </li>
+    <li> \((2-i)(3 + 4i)\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \begin{align*}
+            (2-i)(3 + 4i) &= 6 + 8i - 3i - 4i^2 \\
+            &= 6 + 5i + 4\\
+            &= 10 + 5i
+          \end{align*}
+        </div>
+      </div>
+    </li>
+    <li> \((9+2i)(9-2i)\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \begin{align*}
+            (9+2i)(9-2i) &= 81 - 18i + 18i - 4i^2 \\
+            &= 81 + 4 \\
+            &= 85
+          \end{align*}
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+
+You may have noticed that I chose to rewrite various answers in the form \(a+bi\).  That is
+a pretty standard thing to do.  In fact,...
+
+<p>
+  <div class="definition">
+    <h2></h2>
+
+    A <b>complex number</b> is any combination of \(i\) and regular numbers
+    via arithmetic.  For instance,
+    \[
+    -1+i\sqrt{3}
+    \]
+    is a complex number.  A complex number written in the form
+    \[
+    a+bi \quad \quad \textrm{or} \quad \quad a +ib
+    \]
+    where \(a\) and \(b\) are real numbers is said to be in <b>standard form</b>.
+    Furthermore, you call  \(a\) the <b>real part</b> of the number and \(b\)
+    the <b>imaginary part</b> of the number.
+  </div>
+</p>
+
+<p>
+  I know you are probably still asking what in the heck this is all about,
+  but humor me and practice these exercises before I give you some further
+  explanation and commentary.
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+
+
+{% endblock %}

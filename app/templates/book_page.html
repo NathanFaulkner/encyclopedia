@@ -12,7 +12,7 @@
     margin-right: 10%;
     margin-top: 80px;
     margin-bottom: 100px;
-    counter-reset: example 0 definition 0 fact 0;
+    counter-reset: example 0 definition 0 fact 0 activity 0;
   }
 
   .example h2::before {
@@ -33,6 +33,11 @@
   .theorem h2::before {
     counter-increment: fact;
     content: "Theorem " counter(fact) "."
+  }
+
+  .activity h2::before {
+    counter-increment: activity;
+    content: "Activity " counter(activity) "."
   }
 
   h1 + p::first-letter {

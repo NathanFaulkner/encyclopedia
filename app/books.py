@@ -703,8 +703,15 @@ syntheticdivision.add_to_questions('synthetic_division_of_polynomials',
                                     'synthetic_division_of_polynomials_harder')
 
 completefactorizationpart1 = Section('completefactorizationpart1', "Complete Factorization: Part 1", '/sections/complete-factorization-part1')
-completefactorizationpart1.add_to_questions('complete_factorization_level1',
-                                            'complete_factorization_level1_nice_factors')
+completefactorizationpart1.add_to_questions('complete_factorization_level1_three_factors',
+                                            'complete_factorization_level1_three_nice_factors')
+
+imaginaryelementpart1 = Section('imaginaryelementpart1', "Imaginary Element, Part 1", '/sections/imaginary-element-part1')
+imaginaryelementpart1.add_to_questions('imaginary_element_level1',
+                                        'imaginary_element_level2',
+                                        'imaginary_element_level3',
+                                        'imaginary_element_level4',
+                                        )
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -782,6 +789,7 @@ polynomials = Division('chapter', 'Polynomials',
                                 polynomialsdividing,
                                 syntheticdivision,
                                 completefactorizationpart1,
+                                imaginaryelementpart1,
                                 ])
 polynomials.set_frontpage(polynomials_intro)
 
