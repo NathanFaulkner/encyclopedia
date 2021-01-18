@@ -173,8 +173,8 @@ class AbsoluteValueEquation(Question):
             format_answer = format_answer[:-2]
             return '\(' + format_answer + '\)'
 
-    @classmethod
-    def validator(self, user_answer):
+    @staticmethod
+    def validator(user_answer):
         try:
             user_answer = user_answer.lower()
             user_answer = user_answer.replace('x', ' ')

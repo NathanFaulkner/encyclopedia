@@ -1,0 +1,343 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  Now, let me give you one explanation for why we are bothering with such a
+  spurious notion.  I am going to argue that adding in this suspicious
+  "number" \(i=\sqrt{-1}\) has much in common with our previously having
+  argued that negative numbers should also be regarded as "a thing."
+  In fact, while complex/imaginary numbers are regarded by students with
+  suspicion&mdash;as they also were by early Renaissance mathematicians
+  who were struggling with algorithms like the quadratic formula and
+  encountered the notion as you have&mdash;negative numbers are also regarded
+  by students (initially) with suspicion and also were historicall.
+  Why should we say that \(-1\) is a number?  Why should we start inventing
+  notions like \((-1)\cdot(-1) = 1\)?  Well, it's because we want full
+  freedom of movement on the real line: we want to be able to move left
+  as well as to the right by certain distances.  That is, the sign of a
+  real number helps you tell about direction, whereas the "number"
+  part of the number tells you the distance traveled.
+  The reason we invent the further rules like \((-1)(-1)=1\) is
+  because that is the sort of thing that enables us to treat at
+  one and the same time changes in direction and also regular
+  multiplication and division (meaning just as with adding in \(i\),
+  "all the rules apply", except we add a few more in, namely that
+  \((-1)a = -a\), \(-(-1) = 1\), and \(1 + (-1) = 0\) and then we just
+  deal with the consequences of that choice, among them that \((-1)(-1) = 1\).
+</p>
+
+
+<p>
+  In brief, the idea of negative numbers is, first of all, the desire to
+  express direction in a convenient manner and, secondly, streamlining the
+  system to work with "all the old rules."
+  The full story of imaginary numbers has to do with the desire to do
+  "something similar" for 2-d space.  Here is what I mean:  You are
+  familiar with the idea of using coordinates like \((2,3)\)
+  for points in the \((x,y)\) plane.  So, since it takes two coordinates to
+  specify a point on the plane, it is said to be two-dimensional.
+  Now, in this space, you can move forward, back, and side-to-side.
+  You can strike off in any direction you like!  For instance,
+  negative numbers do come into play here, too; you can plot \((-2,-3)\)
+  and see for yourself that it will lie in exactly at the same distance
+  away from the origin \((0,0)\) as \((2,3)\) but in the opposite direction.
+  So, how can we represent the other movements?  Imagine that you are a
+  programmer working on problems of computerized animation, and you want
+  to have a figure spin around with that figure specified as a bunch of
+  \((x,y)\) pairs (which are lit up as colored pixels on the screen, of course).
+  Well, then, you want a way to conveniently capture that rotation mathematically.
+  You may be rather surprised to learn the complex numbers&mdash;the
+  villain \(i\)&mdash;is exactly the thing!  Don't believe me?
+  Well, as rotations are really about angles, which is really
+  what trig is all about&mdash;we won't do a
+  full treatment of the concept here, but I can get you started in the
+  following activity:
+</p>
+
+
+<p>
+  <div class="activity">
+    <h2></h2>
+    Carry out the following instructions.  As you do so, I aim to suggest to you that multiplication
+    by \(i\) is just the thing to help us represent any sort of rotation in the plane.
+
+    <ol type="a">
+      <li>Plot the point \((2,3)\).
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            <div style="text-align:center">
+            {% set svg_id = 'svg1' %}
+            {% set points = [[2, 3]]%}
+            {# set poly_points = '0.0,373.333333333333 350.0,-385.000000000000 ' #}
+            {% set parameters = {
+                'svg_x_length': 350,
+                'svg_y_length': 350,
+                'cart_x_min': -10,
+                'cart_x_max': 10,
+                'cart_x_length': 20,
+                'cart_y_min': -10,
+                'cart_y_max': 10,
+                'cart_y_length': 20
+              }
+            %}
+            {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>Now, plot the point \((-3,2)\) together with \((2, 3)\).
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            <div style="text-align:center">
+              {% set svg_id = 'svg2' %}
+              {% set points = [[2, 3], [-3,2]]%}
+              {# set poly_points = "-1309.92424049175,-814.9494936611666 175.0,175.0 1164.9494936611666,-1309.92424049175" #}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+      Do you recall how the slopes of perpendicular lines are related?
+      It is covered in
+      <a href="{{ url_for('section', section_name='parallelorperpendicular') }}">
+        the section on parallel and perpendicular lines,
+      </a>
+      if you want to review.
+      What do you notice about the
+      lines connecting \((-3,2)\) to the origin and \((2,3)\)
+      to the origin?  What do you notice about how the coordinates are related?
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          Take a look at this:
+          <div style="text-align:center">
+            {% set svg_id = 'svg3' %}
+            {% set points = [[2, 3], [-3,2]]%}
+            {% set poly_points = "-1309.92424049175,-814.9494936611666 175.0,175.0 1164.9494936611666,-1309.92424049175" %}
+            {% set parameters = {
+                'svg_x_length': 350,
+                'svg_y_length': 350,
+                'cart_x_min': -10,
+                'cart_x_max': 10,
+                'cart_x_length': 20,
+                'cart_y_min': -10,
+                'cart_y_max': 10,
+                'cart_y_length': 20
+              }
+            %}
+            {% include "_static_graph.html" %}
+          </div>
+          As you may notice, the two rays extending from the origin
+          form a right angle between them!
+        </div>
+      </div>
+      </li>
+      <li>
+        Now, what we are going to do is, first of all, to think about a complex
+        number as a set of coordinates&mdash;that is, as specifiying directions
+        in the plane.  (A mathematician would call a complex number a
+        <b>vector</b> and he or she would use the same work to describe a pair
+        of \((x,y)\)-coordinates).  That is, we are going  set up an obvious
+        "visual" comparsion between the complex number \(a+bi\) and \((a,b)\).
+        Let \(\sim\) be a symbol
+        suggesting this obvious comparison, like so:
+          \[
+             a + bi\sim (a,b)
+          \]
+        For example,
+          \[
+            2 + 3i \sim (2,3)
+          \]
+        Now, what do you get when you multiply by \(i\)?  Simplify the left side
+        and the fill-in-the-blank on the right side of the \(\sim\) symbol:
+          \[
+            i(a+ib) \sim [?]
+          \]
+          <div class="answer">
+            <a class="collapsible"><h3>Answer: </h3></a>
+            <div class='inner'>
+              \[
+                i(a+ib) = ia + i^2 b = -b + ia \sim (-b, a)
+              \]
+            </div>
+          </div>
+      </li>
+      <li>
+        Conclude with me that, viewed as coordinates in the \((x,y)\)-plane via
+        this relation \(\sim\) just discussed, \(i(a+bi)\) is just \(a+bi\)
+        rotated \(90^\circ\) counter-clockwise about the origin.
+        The point is that multiplication by \(i\) is a way
+        of representing rotation in the plane.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            The key observation is that given any point \((a,b)\)
+            in the
+            \((x,y)\)-plane
+            and imagining the ray, \(\mathcal R\), pointing from the origin
+            to this point, the point \((-b, a)\) will lie on a ray
+            emanating from the origin that is
+            perpendicular
+            (specificall, rotated \(90^\circ\) counter-clockwise)
+            to \(\mathcal R\).
+            Since multiplication by \(i\) converts the point
+            \[
+              (a, b) \sim a + ib
+            \]
+            to
+            \[
+              -b + ia \sim (-b, a)
+            \]
+            it follows that multiplication by \(i\)
+            "represents" rotation of a vector by
+            \(90^\circ\) counter-clockwise about the origin.
+          </div>
+        </div>
+      </li>
+    </ol>
+    <p>
+      You can also
+      demonstate that multiplying complex number \(z\) by another complex
+      number \(w\), the latter representing a point lying at distance 1 from
+      the origin, will result in the rotation of \(z\) about the origin an
+      angle congruent to that between the \(x\)-axis and \(w\).
+      Treating these other, arbitrary angles, though, involves further
+      discussion of right triangles and angles, so we'll skip that for now.
+    </p>
+  </div>
+</p>
+
+<p>
+  There is one last thing we'll need to worry about concerning imaginary numbers.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+  Find all solutions. Instead of merely saying there is "no solution"
+  when you encounter a negative under a square root, write those
+  solutions in terms of \(i\).
+  <ol>
+    <li>
+      \(x^2 = -1\)
+    </li>
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        \(x = \pm\sqrt{-1} = \pm i\).
+        That is, both \(x=i\) and \(x=-i\) are solutions.  In particular,
+          \[
+            (-i)^2 = (-i)(-i) = +i^2 = -1
+          \]
+      </div>
+    </div>
+    <li>
+      \(x^2 = -4\)
+    </li>
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        \(x = \pm 2i\).  To check this, note that
+          \[
+            (2i)^2 = (2i)(2i)=  4i^2 = -4
+          \]
+      </div>
+    </div>
+    <li>
+      \(x^2 = -3\)
+    </li>
+    <div class="answer">
+      <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        \(x = \pm\sqrt{-3} = \pm i \sqrt{3}\).  To check this, note that
+        \begin{align*}
+        (i\sqrt{3})^2 &= (i\sqrt{3})(i\sqrt{3})\\
+        & = i^2 \cdot 3 \\
+        & = -1 \cdot 3 \\
+        & = -3
+        \end{align*}
+      </div>
+    </div>
+  </ol>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  Find all solutions. Instead of merely saying there is "no solution" when you
+  encounter a negative under a square root, write those solutions in terms of \(i\).
+    \[
+      3x^2 - 4x +2 = 0
+    \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      \begin{align*}
+      3x^2 - 4x +2 &= 0 \\
+      x = \frac{4\pm\sqrt{16-4 \cdot 3\cdot 2}}{2\cdot 3}\\
+      x = \frac{4\pm\sqrt{16-24}}{6}\\
+      x = \frac{4\pm\sqrt{-8}}{6}\\
+      x = \frac{4\pm i\sqrt{8}}{6}\\
+      \end{align*}
+    </div>
+  </div>
+
+</div>
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  Find all solutions. Instead of merely saying there is "no solution" when you encounter a negative under a square root, write those solutions in terms of \(i\).
+    \[
+      4x^2 - 7x +2 = 0
+    \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      \begin{align*}
+      4x^2 - 5x +2 &= 0 \\
+      x = \frac{5\pm\sqrt{25-4 \cdot 4\cdot 2}}{2\cdot 4}\\
+      x = \frac{5\pm\sqrt{25-32}}{8}\\
+      x = \frac{5\pm\sqrt{-7}}{8}\\
+      x = \frac{5\pm i\sqrt{7}}{8}\\
+      \end{align*}
+    </div>
+  </div>
+
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+
+
+{% endblock %}

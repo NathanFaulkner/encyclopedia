@@ -325,7 +325,10 @@ a {
 
 .activity {
   border: 1px solid var(--logo-background-color);
-  padding-left: 1%;
+  background-color: rgba(256,182,3, 0.25); //This is logo-text-color but in rbg---should be automated!!
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 8px;
 }
 
 /* .activity h2 {

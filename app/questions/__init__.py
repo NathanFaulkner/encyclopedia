@@ -96,6 +96,8 @@ __all__ = ['quadratic_pattern',
             'imaginary_element_level2',
             'imaginary_element_level3',
             'imaginary_element_level4',
+            'quadratic_can_be_imaginary',
+            'quadratic_force_imaginary',
             ]
 
 class Question():

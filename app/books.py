@@ -712,6 +712,10 @@ imaginaryelementpart1.add_to_questions('imaginary_element_level1',
                                         'imaginary_element_level3',
                                         'imaginary_element_level4',
                                         )
+
+imaginaryelementpart2 = Section('imaginaryelementpart2', "Imaginary Element, Part 2", '/sections/imaginary-element-part2')
+imaginaryelementpart2.add_to_questions('quadratic_can_be_imaginary',
+                                        'quadratic_force_imaginary')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -790,6 +794,7 @@ polynomials = Division('chapter', 'Polynomials',
                                 syntheticdivision,
                                 completefactorizationpart1,
                                 imaginaryelementpart1,
+                                imaginaryelementpart2,
                                 ])
 polynomials.set_frontpage(polynomials_intro)
 
