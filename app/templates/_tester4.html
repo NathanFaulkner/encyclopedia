@@ -1,0 +1,653 @@
+<div id="tester" style="width:500px;"></div>
+
+<!-- <script>
+  TESTER = document.getElementById('tester');
+  Plotly.plot( TESTER, [{
+  x: [1, 2, 3, 4, 5],
+  y: [1, 2, 4, 8, 16] }], {
+  margin: {t: 0}  }, {showSendToCloud:true}  );
+</script> -->
+
+<!-- <canvas id="axes" width="200", height="200"
+  style="border:1px solid #d3d3d3;">
+  Your browser does not support canvas elements.
+</canvas>
+
+<script>
+  var canvas = document.getElementById('axes');
+  var ctx = canvas.getContext("2d");
+  ctx.moveTo(0,0);
+  ctx.lineTo(200,100);
+  ctx.stroke();
+</script> -->
+
+<!-- <svg height="200" width="500">
+  <polyline points="20,20 40,25 60,40 80,120 120,140 200,180"
+  style="fill:none; stroke:black; stroke-width: 3"/>
+  Sorry, your browser does not support inline SVG.
+</svg> -->
+<table>
+<tr>
+<td>
+<svg class="jctx-host jctx-id-svg" height="{{ parameters['svg_y_length'] }}" width="{{ parameters['svg_x_length'] }}" id="svg">
+  <rect height="{{ parameters['svg_y_length'] }}" width="{{ parameters['svg_x_length'] }}"
+    style="fill:none; stroke:black; stroke-width:4;" />
+  <!-- <line x1="-100" y1="200" x2="800" y2="200" style="stroke:purple; stroke-width:4"> -->
+</svg>
+</td>
+
+<td valign="top">
+  <p>
+    To remove a (<span style="color:red">red</span>) point that you already selected, just click it a second time.
+  </p>
+
+  <div>
+    <p>
+    You can also add or remove points manually by entering them here:
+    </p>
+  <!-- <form> -->
+    <p>
+      <input type="text" id="special_point"></input>
+      <button type="button" onclick="manual_add_point()" id="special_point_submitter">Plot Point</button>
+      <div id="syntax_for_plot_points" style="color:red"></div>
+      <!-- <div oncontextmenu="contextMenuFunction(event)">
+        <p>Right-click inside this box to see the context menu!</p>
+      </div> -->
+      <!-- <div class="jctx-host jctx-id-demo">Right-click Me</div> -->
+      <ul class="jctx jctx-id-svg jctx-white jctx-white-shadow">
+          <li data-action="delete">Delete All</li>
+          <li data-action="add">(Re-)Add Point</li>
+          <hr>
+          <li data-action="disable" class="disabled">Disabled Item</li>
+      </ul>
+    </p>
+  </div>
+
+  <p>
+    <!-- <form> -->
+      <button type="button" onclick="clear_points()" id="point_clearer">Clear All</button>
+    <!-- </form> -->
+  </p>
+
+
+  <p>
+    <div style="width: 50%; float: left; border: 1px solid red;">
+        <form action="?form=form" method="post">
+          {{ form.hidden_tag() }}
+          <p>{{ form.submit() }}</p>
+        </form>
+    </div>
+  </p>
+
+  <div style="border: 1px solid cyan; clear:left;">
+    <p>
+    {{ message|safe }}
+    </p>
+  </div>
+
+  <!-- <p>
+  <div style="clear: left" class="exercise">
+    <a style="clear: left" href="{{ url_for('question', question_name=question_name, new=True) }}">New Problem</a>
+
+    <p>
+      {{ message|safe }}
+    </p>
+  </div>
+  </p> -->
+
+
+  <!-- <div id="special_points_list">
+  </div> -->
+  <!-- <p>
+    <form method="post" action="">
+      <label for="anchor">You MUST also enter the vertex/anchor here:</label>
+      <input type="text" id="anchor" name="anchor" value="Print as (x, y)">
+    </form>
+  </p> -->
+</td>
+</tr>
+</table>
+
+<p>
+\(x\) = <span id="x"></span>, \(y\) = <span id="y"></span>
+</p>
+
+<script>
+  var svg = document.querySelector('svg');
+
+  // Get parameters of graph from flask route (height and width in terms of cartesian and svg, etc.)
+  var parameters = {};
+  {% for key in parameters %}
+  parameters.{{ key }} = {{ parameters[key] }};
+  // console.log(parameters.{{ key }})
+  {% endfor %}
+  // parameters = JSON.parse(parameters);
+
+
+  // Drawing the gridlines
+  for (i=1; i < 20; i++) {
+    var vertLine = document.createElementNS("http://www.w3.org/2000/svg",
+      'line');
+    var horizLine = document.createElementNS("http://www.w3.org/2000/svg",
+      'line');
+    vertLine.setAttribute("x1", parameters.svg_x_length/parameters.cart_x_length*i);
+    vertLine.setAttribute("y1", 0);
+    vertLine.setAttribute("x2", parameters.svg_x_length/parameters.cart_x_length*i);
+    vertLine.setAttribute("y2", parameters.svg_y_length);
+    vertLine.style.stroke = "#000";
+    horizLine.setAttribute("x1", 0);
+    horizLine.setAttribute("y1", parameters.svg_y_length/parameters.cart_y_length*i);
+    horizLine.setAttribute("x2", parameters.svg_x_length);
+    horizLine.setAttribute("y2", parameters.svg_y_length/parameters.cart_y_length*i);
+    horizLine.style.stroke = "#000";
+    svg.appendChild(vertLine);
+    svg.appendChild(horizLine);
+  }
+
+  // Drawing the axes
+  var vAxis = document.createElementNS("http://www.w3.org/2000/svg",
+    'line');
+  var hAxis = document.createElementNS("http://www.w3.org/2000/svg",
+    'line');
+  vAxis.setAttribute("x1", parameters.svg_x_length/2);
+  vAxis.setAttribute("y1", 0);
+  vAxis.setAttribute("x2", parameters.svg_x_length/2);
+  vAxis.setAttribute("y2", parameters.svg_y_length);
+  vAxis.style.stroke = "#000";
+  vAxis.style.opacity = "1";
+  vAxis.style.strokeWidth = "4";
+  svg.appendChild(vAxis);
+  hAxis.setAttribute("x1", 0);
+  hAxis.setAttribute("y1", parameters.svg_y_length/2);
+  hAxis.setAttribute("x2", parameters.svg_x_length);
+  hAxis.setAttribute("y2", parameters.svg_y_length/2);
+  hAxis.style.stroke = "#000";
+  hAxis.style.opacity = "1";
+  hAxis.style.strokeWidth = "4";
+  svg.appendChild(hAxis);
+
+  // var testPoint = document.createElementNS("http://www.w3.org/2000/svg",
+  //   'circle');
+  // testPoint.setAttribute("cx", 50/3);
+  // testPoint.setAttribute("cy", 50/3);
+  // testPoint.setAttribute("r", 3);
+  // testPoint.style.stroke = "none";
+  // testPoint.style.fill = "red";
+  // svg.appendChild(testPoint);
+
+  // Responding to user's clicks on graph -- rounded to cartesian grid points
+  var points = [];
+
+
+
+  var pt = svg.createSVGPoint();
+
+  function cursorPoint(evt) {
+    pt.x = evt.clientX;
+    pt.y = evt.clientY;
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
+  }
+
+  function svg_coords_to_cart(pair) {
+    var x; var y; var svg_x; var svg_y;
+    [svg_x, svg_y] = pair;
+    x = parameters.cart_x_min + svg_x/parameters.svg_x_length*parameters.cart_x_length;
+    y = parameters.cart_y_max - svg_y/parameters.svg_y_length*parameters.cart_y_length;
+    return [x, y];
+  }
+
+function cart_coords_to_svg(pair) {
+    x = pair[0];
+    y = pair[1];
+    svg_x = (x-parameters.cart_x_min)*(parameters.svg_x_length/parameters.cart_x_length);
+    svg_y = (parameters.cart_y_max - y)*(parameters.svg_y_length/parameters.cart_y_length);
+    return [svg_x, svg_y]
+  }
+
+function frac_str_to_float(frac_str) {
+  var numer, denom;
+  var splat = frac_str.split('/');
+  if (splat.length == 1) {
+    numer = splat[0];
+    denom = 1;
+  } else {
+  [numer, denom] = splat;
+  }
+  return numer / denom;
+}
+
+function str_list_to_list_of_floats(str_list) {
+    a = str_list.replace('[', '');
+    a = a.replace(']', '');
+    a = str_list.replace('(', '');
+    a = a.replace(')', '');
+    a = a.split(',');
+    var i;
+    for (i=0; i < a.length; i++) {
+      a[i] = frac_str_to_float(a[i]);
+    }
+    return a
+  }
+
+  // Totally auxiliary -- sad necessity!
+  function searchForArrayInArray(needle, haystack) {
+    // console.log('search called ', needle, haystack);
+    var i, j, current;
+    for (i=0; i < haystack.length; ++i) {
+      if (needle.length === haystack[i].length) {
+        current = haystack[i];
+        for (j=0; j < needle.length && (needle[j] === current[j]); ++j);
+        if (j ===  needle.length)
+          return i;
+      }
+    }
+    // console.log('came out false');
+    return -1;
+  }
+
+  var tolerance = 0.2;
+
+  function check_for_nearby(pt, pts) {
+    var i, current;
+    for (i=0; i < pts.length; i++) {
+      current = pts[i];
+      sq_dist_to_current = (current[0] - pt[0])**2 + (current[1] - pt[1])**2
+      if (sq_dist_to_current < tolerance) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  function contextMenuFunction(e) {
+    e.preventDefault();
+    //do something differant context menu
+    alert("You right-clicked inside the div!");
+  }
+
+  var global_x;
+  var global_y;
+
+  svg.addEventListener('contextmenu', function(self) {
+    var loc = cursorPoint(self);
+    var x = Math.round(loc.x/parameters.svg_x_length*parameters.cart_x_length);
+    out_x = x + parameters.cart_x_min;
+    var y = Math.round(loc.y/parameters.svg_y_length*parameters.cart_y_length);
+    out_y = parameters.cart_y_max - y;
+    // x = Number.parseFloat(x).toFixed(1);
+    // y = Number.parseFloat(y).toFixed(1);
+    global_x = out_x;
+    global_y = out_y;
+    // alert(String(x) + ', ' + String(y));
+  }, true);
+
+  function handleMenuAction(evt) {
+    // alert("Action required: " + evt);
+    if (evt == 'add') {
+      // console.log('add');
+      alert('You added ' + String(global_x) + ', ' + String(global_y));
+      points.push([global_x, global_y]);
+      do_ajax();
+    }
+    if (evt == 'delete') {
+      // console.log('add');
+      alert('You deleted ' + String(global_x) + ', ' + String(global_y));
+      var pair = [global_x, global_y]
+      var i = check_for_nearby(pair, points);
+      while (i != -1) {
+        points.splice(i, 1);
+        i = check_for_nearby(pair, points);
+      }
+      do_ajax();
+    }
+  }
+
+// Potentiometer
+  svg.addEventListener('mousemove', function(self) {
+    var loc = cursorPoint(self);
+    var x = loc.x;
+    var y = loc.y;
+    [x, y] = svg_coords_to_cart([x,y])
+    x = Number.parseFloat(x).toFixed(1);
+    y = Number.parseFloat(y).toFixed(1);
+    document.getElementById('x').innerHTML = x;
+    document.getElementById('y').innerHTML = y;
+  }, false);
+
+
+
+// Draws/deletes grid points created by clicking on graph and passes them to Flask
+  svg.addEventListener('click', function(self) {
+    var loc = cursorPoint(self);
+    var pair = svg_coords_to_cart([loc.x, loc.y]);
+    var i = check_for_nearby(pair, points);
+    if (i != -1) {
+      points.splice(i, 1);
+      do_ajax();
+    } else {
+      // var newElement = document.createElementNS("http://www.w3.org/2000/svg",
+      //   'circle');
+      // newElement.setAttribute("cx", x);
+      // newElement.setAttribute("cy", y);
+      // newElement.setAttribute("r", 3);
+      // newElement.style.stroke = "none";
+      // newElement.style.fill = "red";
+      // svg.appendChild(newElement);
+      // points.push([out_x, out_y]);
+      var x = Math.round(loc.x/parameters.svg_x_length*parameters.cart_x_length);
+      out_x = x + parameters.cart_x_min;
+      var y = Math.round(loc.y/parameters.svg_y_length*parameters.cart_y_length);
+      out_y = parameters.cart_y_max - y;
+      points.push([out_x, out_y]);
+      do_ajax();
+    }
+  }, false  );
+
+// manual_points = []
+
+// var repetition_warning = ""
+
+function is_point(str_list) {
+  if (str_list === null) {
+    return false;
+  }
+  if (a.length != 2) {
+    return false;
+  }
+  var i;
+  for (i=0; i < a.length; i++) {
+    if (typeof a[i] != "number") {
+      return false;
+    }
+  }
+  return true;
+}
+
+function manual_add_point() {
+    var text = document.getElementById("special_point").value;
+    // var para = document.createElement("p");
+    // var node = document.createTextNode(text  + " ");
+    // para.appendChild(node);
+    // if (manual_points.includes(text)) {
+    //   repetition_warning = "You already entered that point.";
+    //   return;
+    // }
+    // manual_points.push(text);
+    // console.log(text);
+    if (text !== '') {
+      var point = str_list_to_list_of_floats(text);
+      // console.log('Need to look at the point:', point);
+      // console.log(point);
+      if (is_point(point)) {
+        document.getElementById('syntax_for_plot_points').innerHTML = ''
+        var i = check_for_nearby(point, points);
+        // console.log(check_for_nearby(point, points));
+        if (i != -1) {
+          points.splice(i, 1);
+          // var circles = svg.getElementsByTagName("circle");
+          // var circle = circles[i];
+          // circle.parentNode.removeChild(circle);
+        } else {
+          points.push(point);
+        }
+        // console.log(points);
+        // console.log(special_points_list.children[0]);
+        // var button = document.createElement("button");
+        // button.setAttribute("type", "button");
+        // button.setAttribute("onclick", `delete_manual_point('${text}')`);
+        // button.innerHTML = "Delete Point";
+        // para.appendChild(button);
+        // special_points_list.appendChild(para);
+        do_ajax();
+      } else {
+        document.getElementById('syntax_for_plot_points').innerHTML = '[Enter (x, y) coordinates separated by a comma.]'
+      }
+    }
+  };
+
+// function delete_manual_point(text) {
+//   console.log(manual_points);
+//   console.log('text: ', text);
+//   var i = manual_points.indexOf(text);
+//   // console.log('i: ', i);
+//   manual_points.splice(i, 1);
+//   var element = document.getElementById("special_points_list");
+//   element.removeChild(element.getElementsByTagName("p")[i]);
+//   i = points.indexOf(text);
+//   points.splice(i, 1);
+//   do_ajax();
+// };
+
+// Graphs all the points in the points array
+function graph_points(cart_pts) {
+  // console.log("this is what it thinks cart_pts is:", cart_pts);
+  var circles = svg.getElementsByTagName("circle");;
+  // console.log('This is what it thinks the circles are before clean sweep: ', circles)
+  var i;
+  for (i = circles.length - 1; i > -1; i--) {
+    var circle = circles[i];
+    circle.parentNode.removeChild(circle);
+    // console.log('Cycle sweeper loop:', i, circle)
+  }
+
+  for (i=0; i < cart_pts.length; i++) {
+    point = cart_coords_to_svg(cart_pts[i]);
+    var x = point[0];
+    var y = point[1];
+    var newElement = document.createElementNS("http://www.w3.org/2000/svg",
+      'circle');
+    newElement.setAttribute("cx", x);
+    newElement.setAttribute("cy", y);
+    newElement.setAttribute("r", 3);
+    newElement.style.stroke = "none";
+    newElement.style.fill = "red";
+    svg.appendChild(newElement);
+  }
+};
+// var hello = 'hi';
+// var message = `Why, ${hello}, Bob!`;
+// console.log(`Why, ${hello}, Snob!`);
+
+
+
+  // <polyline points="20,20 40,25 60,40"
+  //   style="fill:none; stroke:blue; stroke-width:3; opacity:1.0" />
+
+  function clear_points() {
+    points = [];
+    // var list_of_graphs = [];
+    // draw_graphs(svg, list_of_graphs);
+    erase_graphs(svg);
+    graph_points(points);
+  }
+
+  function erase_graphs(svg_element) {
+    let svg = svg_element;
+    var the_old_graphs = svg.getElementsByTagName("polyline");
+    // console.log('the_graphs[0]', the_graphs[0]);
+    if (the_old_graphs) {
+      var k = 0;
+      var old_graph;
+      var l = the_old_graphs.length;
+      for (k=0; k < l; k++) {
+        old_graph = the_old_graphs[l - 1 - k];
+        old_graph.parentNode.removeChild(old_graph);
+      }
+    }
+  }
+
+  function draw_graph(svg_element, graph_info, color) {
+    let svg = svg_element;
+    var graph, obj;
+    graph = document.createElementNS("http://www.w3.org/2000/svg",
+              graph_info.shape);
+    obj = graph_info.data;
+    Object.keys(obj).forEach( (key) => {
+      graph.setAttribute(key, obj[key]);
+      // console.log(key + obj[key]);
+    });
+    graph.style.stroke = color;
+    graph.style.strokeWidth = "4";
+    graph.style.opacity = "0.5";
+    graph.style.fill = "none";
+    graph.setAttribute("id", "graph" + i);
+    svg.appendChild(graph);
+  }
+
+  function draw_graphs(svg_element, list_of_graphs, color) {
+    let svg = svg_element;
+    // erase_graphs(svg);
+    var i, graph_info, graph, obj;
+    for (i=0; i < list_of_graphs.length; i++) {
+      draw_graph(svg, list_of_graphs[i], color);
+      // graph_info = list_of_graphs[i];
+      // graph = document.createElementNS("http://www.w3.org/2000/svg",
+      //           graph_info.shape);
+      // obj = graph_info.data;
+      // Object.keys(obj).forEach( (key) => {
+      //   graph.setAttribute(key, obj[key]);
+      //   // console.log(key + obj[key]);
+      // });
+      // graph.style.stroke = color;
+      // graph.style.strokeWidth = "4";
+      // graph.style.opacity = "0.5";
+      // graph.style.fill = "none";
+      // graph.setAttribute("id", "graph" + i);
+      // svg.appendChild(graph);
+    }
+  }
+
+  function do_ajax() {
+    // console.log('ajax thinks points is', points);
+    var req = new XMLHttpRequest();
+    var result = document.getElementById('result');
+    req.onreadystatechange = function()
+    {
+      if(this.readyState == 4 && this.status == 200) {
+        return_data = JSON.parse(this.responseText);
+        // console.log('return_data', return_data);
+        // result.innerHTML = return_data.shape + ': ' + return_data.data;
+        // result.innerHTML = 'You entered: ' + return_data.return_user_points;
+        result.innerHTML = ''
+        if (return_data.shape == 'none') {
+          // graph_points(JSON.parse(return_data.return_user_points));
+          clear_points();
+          return
+        }
+        // console.log('This is what it thinks return_data.piecewise is', JSON.parse(return_data.piecewise))
+        if (JSON.parse(return_data.piecewise)) {
+          var pieces = JSON.parse(return_data.pieces);
+          // console.log(pieces);
+          var list_of_pieces = [];
+          var piece, obj;
+          for (i=0; i < pieces.length; i++) {
+            obj = JSON.parse(pieces[i]);
+            piece = {"shape": return_data.shape,
+                    "data": obj};
+            list_of_pieces.push(piece);
+          }
+        } else {
+          var list_of_pieces = [{"shape": return_data.shape,
+                                "data": JSON.parse(return_data.data)}]
+        }
+        erase_graphs(svg);
+        draw_graphs(svg, list_of_pieces, "blue");
+        graph_points(JSON.parse(return_data.return_user_points));
+        // console.log('circles', svg.getElementsByTagName("circles"));
+      } else {
+        result.innerHTML = "Processing... (if this takes more than a few seconds, you can assume an error has occurred.)";
+        // "You need to enter coordinates for your anchor for the algorithm to guess what you intend to graph."//"処理中...";
+      }
+    }
+
+    // var anchor_field = document.getElementById('anchor');
+
+    // req.open('POST', '{{ url_for('question', question_name=question_name) }}', true);
+    req.open('POST', '', true);
+    req.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+    req.send("data=" + JSON.stringify(points));
+  }
+
+{#
+  function do_alt_ajax() {
+    // console.log('alt_ajax thinks points is', points);
+    var req = new XMLHttpRequest();
+    // var submit_result = document.getElementById('submit_result');
+    // console.log('alt_ajax thinks submit_result is', submit_result);
+    req.onreadystatechange = function()
+    {
+      if(this.readyState == 4 && this.status == 200) {
+        // console.log('responseText', this.responseText);
+        return_data = JSON.parse(this.responseText);
+        // console.log('return_data', return_data);
+        // result.innerHTML = return_data.shape + ': ' + return_data.data;
+        submit_result.innerHTML = 'Submit points: ' + return_data.return_user_points;
+        if (return_data.shape == 'none') {
+          // graph_points(JSON.parse(return_data.return_user_points));
+          clear_points();
+          return
+        }
+        // console.log('This is what it thinks return_data.piecewise is', JSON.parse(return_data.piecewise))
+        if (JSON.parse(return_data.piecewise)) {
+          var pieces = JSON.parse(return_data.pieces);
+          // console.log(pieces);
+          var list_of_pieces = [];
+          var piece, obj;
+          for (i=0; i < pieces.length; i++) {
+            obj = JSON.parse(pieces[i]);
+            piece = {"shape": return_data.shape,
+                    "data": obj};
+            list_of_pieces.push(piece);
+          }
+        } else {
+          var list_of_pieces = [{"shape": return_data.shape,
+                                "data": JSON.parse(return_data.data)}]
+        }
+        erase_graphs(svg);
+        draw_graphs(svg, list_of_pieces, "blue");
+        graph_points(JSON.parse(return_data.return_user_points));
+        // console.log('circles', svg.getElementsByTagName("circles"));
+      } else {
+        submit_result.innerHTML = "Processing... (if this takes more than a few seconds, you can assume an error has occurred.)";
+        // "You need to enter coordinates for your anchor for the algorithm to guess what you intend to graph."//"処理中...";
+      }
+    }
+
+    // var anchor_field = document.getElementById('anchor');
+
+    req.open('POST', '{{ url_for('handle_graph') }}', true);
+    req.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+    req.send("data=" + JSON.stringify(points));
+  }
+#}
+  // do_ajax();
+  // svg.getElementsByTagName('circle')
+
+  // console.log('form.validate_on_submit()', {{ form.validate_on_submit() }})
+  {% if (form.validate_on_submit() and not (points == [])) %}
+    // console.log('user_svg_data', user_svg_data);
+    // list_of_graphs = [user_svg_data];
+    // if (user_svg_data !== null) {
+    //   draw_graphs(svg, list_of_graphs);
+    // }
+    points = {{ points }};
+    // do_alt_ajax();
+    graph_info = {"shape": "polyline", "data": {"points" : "{{ user_poly_points }}"}  }
+    draw_graph(svg, graph_info, "blue");
+    graph_info = {"shape": "polyline", "data": {"points" : "{{ correct_answer_poly_points }}"}  }
+    draw_graph(svg, graph_info, "green");
+    graph_points(points);
+  {% elif points %}
+    points = {{ points }};
+    // do_alt_ajax();
+    graph_info = {"shape": "polyline", "data": {"points" : "{{ user_poly_points }}"}  }
+    draw_graph(svg, graph_info, "blue");
+    graph_points(points);
+  {% endif %}
+</script>
+
+<div id="result"></div>
+
+<div id="submit_result"></div>
+
+<p id="submit_feedback"></p>

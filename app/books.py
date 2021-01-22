@@ -728,6 +728,7 @@ endbehavior = Section('endbehavior', "Curve Sketching: End Behavior for Polynomi
 endbehavior.add_to_questions('polynomial_end_behavior')
 
 curvesketchingpolynomials = Section('curvesketchingpolynomials', "Curve Sketching: Polynomials", '/sections/curve-sketching-polynomials')
+curvesketchingpolynomials.add_to_questions('polynomial_curve_sketching')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -808,7 +809,7 @@ polynomials = Division('chapter', 'Polynomials',
                                 imaginaryelementpart1,
                                 imaginaryelementpart2,
                                 endbehavior,
-                                # curvesketchingpolynomials,
+                                curvesketchingpolynomials,
                                 ])
 polynomials.set_frontpage(polynomials_intro)
 

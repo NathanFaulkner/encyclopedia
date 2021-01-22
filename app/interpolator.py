@@ -1,6 +1,7 @@
 import numpy as np
 import json
 import random
+import sympy as sy
 #import sympy
 
 svg_x_length = 350
@@ -308,6 +309,30 @@ def try_inverse_x(points):
             return {"function": f, "x_points": x_points, "horiz_shift": x0-1}
         i += 1
 
+def try_factored_polynomial(points):
+    zeroes = [p[0] for p in points if p[1] == 0]
+    other_points = [p for p in points if p[1] != 0]
+    if zeroes == []:
+        return None
+    if other_points == []:
+        return None
+    x = sy.Symbol('x')
+    expr = 1
+    for z in zeroes:
+        expr *= (x-z)
+    x0, y0 = other_points[0]
+    try:
+        a = y0/expr.subs(x, x0)
+    except ZeroDivisionError:
+        return None
+    expr = a*expr
+    f = sy.lambdify(x, expr)
+    if all_satisfy(f, points):
+        x_points = np.linspace(cart_x_min, cart_x_max, 1000)
+        # print('points:', points)
+        return {"function": f, "x_points": x_points}
+
+
 
 def interpolate(points):
     points = list(set(tuple(point) for point in points))
@@ -330,6 +355,8 @@ def interpolate(points):
             return try_cube_root(points)
         if try_inverse_x(points):
             return try_inverse_x(points)
+        if try_factored_polynomial(points):
+            return try_inverse_x(points)
 
 class Graph():
     def __init__(self, user_input, piecewise=False):
@@ -339,7 +366,8 @@ class Graph():
 
     def setup(self):
         self.vert = False
-        points = list(set(tuple(point) for point in self.user_input))
+        # points = list(set(tuple(point) for point in self.user_input))
+        points = list(tuple(point) for point in self.user_input)
         # print('user points in cartesian', points)
         if (repeat_in_x(points) and len(points) == 2):
             self.vert = True
@@ -356,7 +384,8 @@ class Graph():
                             try_cubic,
                             try_square_root,
                             try_cube_root,
-                            try_inverse_x]
+                            try_inverse_x,
+                            try_factored_polynomial]
             one_of_the_things_worked_out = False
             for thing_to_try in things_to_try:
                 print('I am trying ', thing_to_try)
@@ -387,7 +416,9 @@ class Graph():
                 deg = 4
                 user_x = [a[0] for a in points]
                 user_y = [a[1] for a in points]
-                p = np.polyfit(user_x, user_y, deg)
+                polyinfo = np.polyfit(user_x, user_y, deg, full=True)
+                p = polyinfo[0]
+                R2 = polyinfo[-1]
                 self.x_points = np.linspace(-10, 10, 1000)
                 self.y_points = np.polyval(p, self.x_points)
                 self.as_lambda = lambda x: np.polyval(p, x)

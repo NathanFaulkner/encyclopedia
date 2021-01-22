@@ -100,6 +100,7 @@ __all__ = ['quadratic_pattern',
             'quadratic_force_imaginary',
             'quadratic_pattern_for_photomath',
             'polynomial_end_behavior',
+            'polynomial_curve_sketching',
             ]
 
 class Question():
