@@ -1,0 +1,242 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In the last section, we analyzed from an algebraic or numerical perspective
+  what goes on with the \(y\)-values of a polynomial function when \(x\)
+  gets large in either the positive or negative direction.  This concerns
+  what the graph of the function will look like.  In this section, we will
+  learn about more predictable features of the graph.  Then we will combine
+  all these features into one rough "sketch" of the graph.  Again, by calling
+  it a "sketch" we are warning people that our pictures won't be exact and
+  may contain some inaccuracies&mdash;btu that they will be failthful at least
+  to the skills that we are building in these two sections.
+</p>
+<p>
+  Specifically, in this section, we will contemplate the zeroes of the polynomial
+  and what happens to the graph there.  Well, for starters, a "zero"
+  of a polynomial is just another word for an \(x\)-intercept&mdash;and
+  you already know what that means: the graph will touch the \(x\)-axis there.
+  But, the interesting question will be whether the function crosses the
+  \(x\)-axis at that point or "bounces."
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Provide a rough sketch of the following polynomial.
+\[
+f(x) = (x+1)^2(x-3)(x-4)
+\]
+
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+Even though in practice you will only draw the one graph, I have drawn my
+answer over multiple windows so you can see my process of solving.
+
+
+
+Note that the \(x\)-intercepts of the graph are \(x=-1\), \(3\), and \(4\).
+So, we could plot those as dots, as I did below.
+<div style="text-align:center">
+  <img src="{{ url_for('static', filename='images/polynomial-graph-points-1.png') }}">
+</div>
+
+Next, we'll check the end behavior&mdash;which tells us how the graph should
+exit the viewing window.  To do so, you need to know about the leading term of
+the polynomial&mdash;meaning, the
+term with the highest power.  Remember that that highest power is called the
+<b>degree</b>.  To figure out what the leading term is, imagine multiplying
+the original, factored formula all out&mdash;but you only need to worry
+about the leading term:
+  \begin{align*}
+  f(x) &= (x+1)^2(x-3)(x-4)  \\
+  &= (\underline x+1)(\underline x+1)(\underline x-3)(\underline x-4)\\
+  &=xxxx + \cdots \\
+  &=  x^4 + \cdots
+  \end{align*}
+So, the leading coefficient is \(x^4\).  That means the end behavior is as follows:
+<ul>
+<li>
+As \(x \rightarrow -\infty\), \(f(x) \rightarrow \infty\)
+</li>
+<li>
+As \(x \rightarrow \infty\), \(f(x) \rightarrow \infty\)
+</li>
+</ul>
+
+
+
+This means that the \(y\)-values should get larger for \(x\)-values far out to
+the left and right, so I have part of the graph extending upwards at the left and right edges.
+<div style="text-align:center">
+  <img src="{{ url_for('static', filename='images/polynomial-graph-arrows-1.png') }}">
+</div>
+
+
+Next, we know that the graph has to continue down from that left side on its
+way to meet the first zero, which I have plotted here.
+But now we have something new to consider; while we know the graph has to touch
+zero there, there is a question: Does the graph cross through the
+\(x\)-axis there or does it "bounce"?
+<div style="text-align:center">
+  <img src="{{ url_for('static', filename='images/polynomial-graph-first-zero-1.png') }}">
+</div>
+
+To answer that last question, look at the original formula for the function:
+\[
+f(x) = (x+1)^2(x-3)(x-4)
+\]
+Contemplate with me the meaning of the zeroes: They are where the graph touches
+the \(x\)-axis&mdash;the <em>only</em> places it does so.  That means that the
+\(y\)-values coming out from this function can only change from negative to
+positive as you pass by another zero.  The question of whether or not the
+graph punches through the \(x\)-axis at a zero or "bounces" off of it is the
+same as the question of whether the \(y\)-values can change from positive to
+negative at that zero.  We are considering here the zero \(x=-1\), which
+concerns the factor \((x+1)^2\).  Note that the sign (\(+/-\)) of the other
+factors \((x-3)\) and \((x-4)\) does not change as \(x\) changes from just
+below \(-1\) to just above it: \((x-3)\) and \((x-4)\) will be negative for all
+\(x\)-values near \(-1\).  But, also, while \(x+1\) changes from negative to
+positive as \(x\) changes from below \(-1\) to above \(-1\), \((x+1)^2\) does
+not change sign, because it is a square&mdash;which is always positive.
+So, \(y\) doesn't change sign there and the graph bounces.  The moral: a
+graph will bounce at any zero associated with a factor raised to an even power.
+\((x+1)^2\) is a factor raised to the second power, which has to come out
+positive no matter what, so the \(y\)'s won't change sign near \(-1\) and the
+graph bounces.  On the other hand, at any zero associated with a factor raised
+to an odd power&mdash;such as \((x-3)\), which is raised to power \(1\) or,
+say, \((x-7)^3\), which is rasied to power \(3\)&mdash;the graph will
+"punch through."
+
+
+
+So, plot the graph bouncing at \(x=-1\), but then note that it will have to
+turn and come back down at some point to hit the next zero at \(x=3\).
+<div style="text-align:center">
+  <img src="{{ url_for('static', filename='images/polynomial-graph-second-zero-1.png') }}">
+</div>
+
+
+Noting the discussion about "bouncing" versus "punching through" just above,
+the graph will  punch through at \(x=3\), and then will have to turn back up
+to reach the zero at \(x=4\).
+<div style="text-align:center">
+  <img src="{{ url_for('static', filename='images/polynomial-graph-third-zero-1.png') }}">
+</div>
+
+
+Again, the graph punches through at \(x=4\) (because the associated factor
+\((x-4)\) is of odd degree, namely degree \(1\)), which concludes our analysis:
+<div style="text-align:center">
+  <img src="{{ url_for('static', filename='images/polynomial-graph-1.png') }}">
+</div>
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+
+Here is a synopsis of an important point from the last example:
+
+<div style="border: 1px solid var(--logo-background-color);
+            margin-top: 4px;
+            margin-bottom: 4px;
+            padding: 8px;">
+  <b>"Punch Through" or "Bounce?"</b>:
+
+  A graph will "punch through" the \(x\)-axis at any zeroes associated with a
+  factor of odd degree but will "bounce" at any zeroes associated with factor of
+  even degree.  For example, the graph of
+  \[
+  f(x) = (x+5)^3(x+1)^2(x-3)^4(x-4)
+  \]
+  will "bounce" at \(x=-2\) and \(x=3\) but will "punch through" at \(x=-5\) and \(x=4\).
+</div>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Provide a rough sketch of the following polynomial.
+\[
+f(x) =-\frac{1}{3} (x+2)(x-3)^2
+\]
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+<ol>
+
+
+<h4>Work flow:</h4>
+<li>
+Plot the zeroes, \(-2\) and \(3\) as dots.
+</li>
+<li>
+Check the end behavior, by first figuring out the degree and leading coefficient.  The leading term is found as follows:
+\begin{align*}
+f(x) &=-\frac{1}{3} (x+2)(x-3)^2 \\
+&=-\frac{1}{3} (\underline x+2)(\underline x-3)(\underline x-3)\\
+&= -\frac{1}{3} xxx + \cdots \\
+&=  -\frac{1}{3} x^3 + \cdots
+\end{align*}
+</li>
+So, the degree is \(3\) and the leading coefficient is negative.  Therefore:
+<div class="center" style="text-align:center; padding:10px">
+  <ul>
+  <li>
+  As \(x \rightarrow -\infty\), \(f(x) \rightarrow \infty\)
+  </li>
+  <li>
+  As \(x \rightarrow \infty\), \(f(x) \rightarrow -\infty\)
+  </li>
+  </ul>
+</div>
+
+
+<li>
+Plot little pieces of the graph at the edges&mdash;to indicate how the graph
+should exit the window.
+</li>
+<li>
+Decide whether the graph bounces or punches through at each zero.
+</li>
+</ol>
+<div style="text-align:center;">
+  <img src="{{ url_for('static', filename='images/polynomial-graph-2.png') }}">
+</div>
+
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+
+
+{% endblock %}

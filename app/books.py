@@ -724,8 +724,10 @@ imaginaryelementpart2 = Section('imaginaryelementpart2', "Imaginary Element, Par
 imaginaryelementpart2.add_to_questions('quadratic_can_be_imaginary',
                                         'quadratic_force_imaginary')
 
-endbehavior = Section('endbehavior', "Curve Sketching: End Behavior", '/sections/curve-sketching-end-behavior')
+endbehavior = Section('endbehavior', "Curve Sketching: End Behavior for Polynomials", '/sections/curve-sketching-end-behavior')
 endbehavior.add_to_questions('polynomial_end_behavior')
+
+curvesketchingpolynomials = Section('curvesketchingpolynomials', "Curve Sketching: Polynomials", '/sections/curve-sketching-polynomials')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -806,6 +808,7 @@ polynomials = Division('chapter', 'Polynomials',
                                 imaginaryelementpart1,
                                 imaginaryelementpart2,
                                 endbehavior,
+                                # curvesketchingpolynomials,
                                 ])
 polynomials.set_frontpage(polynomials_intro)
 
