@@ -98,6 +98,8 @@ __all__ = ['quadratic_pattern',
             'imaginary_element_level4',
             'quadratic_can_be_imaginary',
             'quadratic_force_imaginary',
+            'quadratic_pattern_for_photomath',
+            'polynomial_end_behavior',
             ]
 
 class Question():

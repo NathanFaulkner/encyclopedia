@@ -1,0 +1,358 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this first part, we will contemplate what's called the "end behavior" of
+  the function, which is maybe a funny way of saying this: What do the
+  \(y\)-values do when you put in very large \(x\)-values&mdash;positive or
+  negative.  In fact, there are only two possibilities&mdash;but let's a consider
+  a specific example before saying anything further.  Per usual, this first
+  example will contain a lot of explanation, not all of which needs to appear
+  in your answers (rather, it represents what might be going on in your head while
+  your figure out what the answer is.)
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  Fill in the blanks to describe the end behavior of the function
+    \[
+      f(x) = x^3 + 3x + 4
+    \]
+  <ul>
+    <li>
+      As \(x \rightarrow -\infty\), \(f(x) \rightarrow\)
+      <u><span style="color:white">mmmmmmmmmmmmm</span></u>
+    </li>
+    <li>
+      As \(x \rightarrow \infty\), \(f(x) \rightarrow\) <u><span style="color:white">mmmmmmmmmmmmmm</span></u>
+    </li>
+  </ul>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      This problem asks you to think about what happens to the \(y\)-values
+      (represented here by the symbol \(f(x)\)) when you plug in very large
+      \(x\)-values&mdash; both very large negative and positive values&mdash;and,
+      really, to say what the basic trend is.  For instance, if you were to
+      plug in one billion for \(x\), i.e., \(x=1,000,000,000 = 10^9\), what
+      happens to \(f(x)\)?  While you definitely don't need to actually
+      write all this out, it would look like this:
+        \begin{align*}
+          f\left(10^9\right) &= \left(10^9\right)^3 + 3 \cdot 10^9 + 4\\
+          & = 10^{27} + 3 \cdot 10^9 + 4 \\
+          & = 1,000,000,000,000,000,003,000,000,004
+        \end{align*}
+      Now, that big long answer isn't quite to the point.
+      Instead, we need to contemplate "the trend." The trend is
+      sufficiently understood by considering a rounded version of this number.
+      Note that, when rounding, you might as well neglect the '3' and the '4',
+      which are 9 and 18 decimal points away from the leading digit of '1',
+      respectively!
+      What I mean is that this would round to \(1,000,000,000,000,000,000,000,000,000\).
+      All that to say: the trend is that when you plug in a very large number
+      the only thing that matters is the largest power.
+      The others will round away.  We can now answer the second bullet as
+      <div class="center" style="text-align:center; padding:10px">
+        As \(x \rightarrow \infty\), \(f(x) \rightarrow \infty\)
+      </div>
+      It means that "As \(x\) gets really large in the positive direction, \(y\) does, too."
+      <p>
+        Now, to figure out the first bullet, think what happens
+        when you plug in a very large but negative number: Again, you
+        can make the argument that the only thing that matters is the
+        largest power&mdash;that \(x^3\)&mdash;with the other terms
+        "rounding away" when you plug in big numbers.
+        So, the only thing you need to note is that if you cube a big
+        negative number, it comes out negative&mdash;and that it comes
+        out very large (but negative)!
+        So the answer to the first bullet is
+        <div style="text-align:center; padding:10px">
+          As \(x \rightarrow -\infty\), \(f(x) \rightarrow -\infty\)
+        </div>
+      </p>
+    </div>
+  </div>
+
+</div>
+</p>
+
+<p>
+  Next, let's look at a quicker example.  After that, I will give you a synopsis of all possible examples.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+    Fill in the blanks to describe the end behavior of the function
+      \[
+        f(x) = -2x^4 + 3x^2 - x + 9
+      \]
+    <ul>
+      <li>
+        As \(x \rightarrow -\infty\), \(f(x) \rightarrow\)
+        <u><span style="color:white">mmmmmmmmmmmmm</span></u>
+      </li>
+      <li>
+        As \(x \rightarrow \infty\), \(f(x) \rightarrow\)
+        <u><span style="color:white">mmmmmmmmmmmmm</span></u>
+      </li>
+    </ul>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      <div class="center" style="text-align:center; padding:10px">
+        <ul>
+          <li>
+            As \(x \rightarrow -\infty\), \(f(x) \rightarrow -\infty\)
+          </li>
+          <li>
+            As \(x \rightarrow \infty\), \(f(x) \rightarrow -\infty\)
+          </li>
+        </ul>
+      </div>
+      Quick explanation: As \(x\) gets really large in the positive direction,
+      \(-2x^4\) gets very large, too, but will be negative&mdash;and the
+      other terms would "round away", representing much smaller numbers.
+      Also, if you raise a negative number to
+      the fourth power, it comes out positive.  So, whichever direction you
+      go in, really large (negative <em>or</em> positive) \(x\)-values lead to
+      really large negative \(y\)-values for this function.
+    </div>
+  </div>
+</div>
+</p>
+
+
+
+<div style="border: 1px solid var(--logo-background-color);
+            margin-top: 4px;
+            margin-bottom: 4px;
+            padding: 8px;">
+  <h3>Possible End Behaviors for Polynomials</h3>
+  <table class="center">
+    <th style="border:none">
+      <!-- <div style="margin-left:auto; margin-right:auto; text-align:center"> -->
+        For \(f(x) = ax^n + \cdots\)
+      <!-- </div> -->
+    </th>
+    <tr>
+      <td  width="40%">
+        <div>
+          <h4>Case 1: \(n\) is even, \(a\) is positive</h4>
+          <ul>
+            <li>
+              As \(x \rightarrow -\infty\), \(f(x) \rightarrow \infty\)
+            </li>
+            <li>
+              As \(x \rightarrow \infty\), \(f(x) \rightarrow \infty\)
+            </li>
+          </ul>
+        </div>
+      </td>
+      <td width="40%">
+        <div style="float:left">
+          <h4>Case 2:           \(n\) is even,
+                    \(a\) is negative</h4>
+          <ul>
+            <li>
+              As \(x \rightarrow -\infty\), \(f(x) \rightarrow -\infty\)
+            </li>
+            <li>
+              As \(x \rightarrow \infty\), \(f(x) \rightarrow -\infty\)
+            </li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div style="">
+          <h4>Case 3: \(n\) is odd,
+                    \(a\) is positive</h4>
+          <ul>
+            <li>
+              As \(x \rightarrow -\infty\), \(f(x) \rightarrow -\infty\)
+            </li>
+            <li>
+              As \(x \rightarrow \infty\), \(f(x) \rightarrow \infty\)
+            </li>
+          </ul>
+        </div>
+      </td>
+      <td>
+        <div style="">
+          <h4>Case 4:           \(n\) is odd,
+                    \(a\) is negative</h4>
+          <ul>
+            <li>
+              As \(x \rightarrow -\infty\), \(f(x) \rightarrow \infty\)
+            </li>
+            <li>
+              As \(x \rightarrow \infty\), \(f(x) \rightarrow -\infty\)
+            </li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<p>
+<div class="activity" style="clear:left">
+  <h2></h2>
+Explain how each of the cases work in the synopsis just above.
+</div>
+</p>
+<p>
+  Here's four more quick examples to illustrate each case.
+</p>
+<p>
+<div class="example">
+  <h2> (Case 1)</h2>
+  Fill in the blanks to describe the end behavior of the function
+  \[
+  f(x) = 5x^4 + x^2 - 3x - 7
+  \]
+  <ul>
+    <li>
+      As \(x \rightarrow -\infty\), \(f(x) \rightarrow\) <u><span style="color:white">mmmmmmmmmmmmm</span></u>
+    </li>
+    <li>
+      As \(x \rightarrow \infty\), \(f(x) \rightarrow\) <u><span style="color:white">mmmmmmmmmmmmm</span></u>
+    </li>
+  </ul>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      <div class="center" style="text-align:center; padding:10px">
+        <ul>
+          <li>
+            As \(x \rightarrow -\infty\), \(f(x) \rightarrow \infty\)
+          </li>
+          <li>
+            As \(x \rightarrow \infty\), \(f(x) \rightarrow \infty\)
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2> (Case 2)</h2>
+  Fill in the blanks to describe the end behavior of the function
+  \[
+  f(x) = -5x^4 + x^2 - 3x - 7
+  \]
+  <ul>
+    <li>
+      As \(x \rightarrow -\infty\), \(f(x) \rightarrow\) <u><span style="color:white">mmmmmmmmmmmmm</span></u>
+    </li>
+    <li>
+      As \(x \rightarrow \infty\), \(f(x) \rightarrow\) <u><span style="color:white">mmmmmmmmmmmmm</span></u>
+    </li>
+  </ul>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      <div class="center" style="text-align:center; padding:10px">
+        <ul>
+          <li>
+            As \(x \rightarrow -\infty\), \(f(x) \rightarrow -\infty\)
+          </li>
+          <li>
+              As \(x \rightarrow \infty\), \(f(x) \rightarrow -\infty\)
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2> (Case 3)</h2>
+  Fill in the blanks to describe the end behavior of the function
+    \[
+      f(x) = 5x^3 + x^2 - 3x - 7
+    \]
+  <ul>
+    <li>
+      As \(x \rightarrow -\infty\), \(f(x) \rightarrow\) <u><span style="color:white">mmmmmmmmmmmmm</span></u>
+    </li>
+    <li>
+      As \(x \rightarrow \infty\), \(f(x) \rightarrow\) <u><span style="color:white">mmmmmmmmmmmmm</span></u>
+    </li>
+  </ul>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      <div class="center" style="text-align:center; padding:10px">
+        <ul>
+          <li>
+            As \(x \rightarrow -\infty\), \(f(x) \rightarrow -\infty\)
+          </li>
+          <li>
+            As \(x \rightarrow \infty\), \(f(x) \rightarrow \infty\)
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2> (Case 4)</h2>
+  Fill in the blanks to describe the end behavior of the function
+    \[
+      f(x) = -5x^3 + x^2 - 3x - 7
+    \]
+  <ul>
+    <li>
+      As \(x \rightarrow -\infty\), \(f(x) \rightarrow\) <u><span style="color:white">mmmmmmmmmmmmm</span></u>
+    </li>
+    <li>
+      As \(x \rightarrow \infty\), \(f(x) \rightarrow\) <u><span style="color:white">mmmmmmmmmmmmm</span></u>
+    </li>
+  </ul>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      <div class="center" style="text-align:center; padding:10px">
+          <ul>
+            <li>
+              As \(x \rightarrow -\infty\), \(f(x) \rightarrow \infty\)
+            </li>
+            <li>
+              As \(x \rightarrow \infty\), \(f(x) \rightarrow -\infty\)
+            </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+
+
+{% endblock %}

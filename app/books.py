@@ -178,7 +178,7 @@ class SevenTest():
 
 \usepackage{graphicx}
 
-
+\usepackage{soul}
 \usepackage{xcolor}
 
 \definecolor{epsilon-blue}{RGB}{0,0,155}
@@ -246,6 +246,12 @@ class SevenTest():
         \\hspace{{-1ex}}\\textbf{{Version - {self.seed} }} &   \\textbf{{Date: \\hspace{{2in}} }}\\
         \\end{{tabular}}
         \\hrule
+
+        \\smallskip
+        \\noindent I have not used any resources external to myself or an
+        approved calculator. In particular, I have not used Photomath.
+
+        \\noindent Sign pledge here: \\underline{{\\hspace{{2.65in}} }}
         """
         out += header
         out += '\\begin{enumerate}\n'
@@ -664,7 +670,8 @@ factoringtrinomialslevel2 = Section('factoringtrinomialslevel2', "Factoring Trin
 factoringtrinomialslevel2.add_to_questions('factor_trinomials_level2')
 
 quadraticpattern = Section('quadraticpattern', "Quadratic Pattern", '/sections/quadratic-pattern')
-quadraticpattern.add_to_questions('quadratic_pattern')
+quadraticpattern.add_to_questions('quadratic_pattern',
+                                'quadratic_pattern_for_photomath')
 
 mixedpracticeplusgcf = Section('mixedpracticeplusgcf', "Putting It All Together", '/sections/putting-it-all-together-factoring')
 mixedpracticeplusgcf.add_to_questions('mixed_practice_plus_gcf')
@@ -716,6 +723,9 @@ imaginaryelementpart1.add_to_questions('imaginary_element_level1',
 imaginaryelementpart2 = Section('imaginaryelementpart2', "Imaginary Element, Part 2", '/sections/imaginary-element-part2')
 imaginaryelementpart2.add_to_questions('quadratic_can_be_imaginary',
                                         'quadratic_force_imaginary')
+
+endbehavior = Section('endbehavior', "Curve Sketching: End Behavior", '/sections/curve-sketching-end-behavior')
+endbehavior.add_to_questions('polynomial_end_behavior')
 #######################################
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -795,6 +805,7 @@ polynomials = Division('chapter', 'Polynomials',
                                 completefactorizationpart1,
                                 imaginaryelementpart1,
                                 imaginaryelementpart2,
+                                endbehavior,
                                 ])
 polynomials.set_frontpage(polynomials_intro)
 
