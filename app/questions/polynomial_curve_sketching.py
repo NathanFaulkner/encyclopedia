@@ -86,7 +86,7 @@ class PolynomialCurveSketching(Question):
         self.as_lambda = lambdify(x, f(x))
         f = self.as_lambda
         self.given = factor(f(x))
-        self.format_given = f'\\(f(x) = {latex(LC)}{latex(expr)}\\)'
+        self.format_given = f'\\[f(x) = {latex(LC)}{latex(expr)}\\]'
         #print('3rd step: So far its ', expr)
         self.answer = f(x)
 
@@ -118,7 +118,7 @@ the window and has at least 5 points clearly marked.
     the points you click on and serves up different graphs
     that it thinks you might have in mind.  I have set it up
     so that, when you graph a point twice, it will interpret
-    this is a "repeated" zero of a factored polynomial.) 
+    this is a "repeated" zero of a factored polynomial.)
     """
 
 
