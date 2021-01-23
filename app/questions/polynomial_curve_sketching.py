@@ -74,6 +74,12 @@ class PolynomialCurveSketching(Question):
         for z in zeroes:
             prod *= (x_0-z)
         LC = Rational(y_0, prod)
+        if LC == 1:
+            fmt_lc = ''
+        elif LC == -1:
+            fmt_lc = '-'
+        else:
+            fmt_lc = latex(LC)
 
         def f(x):
             out = LC
@@ -86,7 +92,7 @@ class PolynomialCurveSketching(Question):
         self.as_lambda = lambdify(x, f(x))
         f = self.as_lambda
         self.given = factor(f(x))
-        self.format_given = f'\\[f(x) = {latex(LC)}{latex(expr)}\\]'
+        self.format_given = f'\\[f(x) = {latex(fmt_lc)}{latex(expr)}\\]'
         #print('3rd step: So far its ', expr)
         self.answer = f(x)
 
@@ -120,7 +126,6 @@ the window and has at least 5 points clearly marked.
     so that, when you graph a point twice, it will interpret
     this is a "repeated" zero of a factored polynomial.)
     """
-
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 

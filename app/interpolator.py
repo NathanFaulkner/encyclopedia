@@ -212,7 +212,7 @@ def all_satisfy(f, points):
     return True
 
 def try_linear(points):
-    points = list(set(tuple(point) for point in points))
+    # points = list(set(tuple(point) for point in points))
     """Assumes points has two pairs with distinct x coords"""
     x0, y0 = points[0]
     x1, y1 = points[1]
@@ -222,7 +222,7 @@ def try_linear(points):
         return {"function": f, "x_points": x_points}
 
 def try_abs_value(points):
-    points = list(set(tuple(point) for point in points))
+    # points = list(set(tuple(point) for point in points))
     i = 0
     while i < len(points):
         x0, y0 = points[i]
@@ -238,7 +238,7 @@ def try_abs_value(points):
         i += 1
 
 def try_quadratic(points):
-    points = list(set(tuple(point) for point in points))
+    # points = list(set(tuple(point) for point in points))
     i = 0
     while i < len(points):
         x0, y0 = points[i]
@@ -253,7 +253,7 @@ def try_quadratic(points):
         i += 1
 
 def try_cubic(points):
-    points = list(set(tuple(point) for point in points))
+    # points = list(set(tuple(point) for point in points))
     i = 0
     while i < len(points):
         x0, y0 = points[i]
@@ -268,7 +268,7 @@ def try_cubic(points):
         i += 1
 
 def try_square_root(points):
-    points = list(set(tuple(point) for point in points))
+    # points = list(set(tuple(point) for point in points))
     points.sort(key=lambda x: x[0])
     x0, y0 = points[0]
     x1, y1 = points[1]
@@ -285,7 +285,7 @@ def try_square_root(points):
         return {"function": f, "x_points": x_points}
 
 def try_cube_root(points):
-    points = list(set(tuple(point) for point in points))
+    # points = list(set(tuple(point) for point in points))
     i = 0
     while i < len(points):
         x0, y0 = points[i]
@@ -300,7 +300,7 @@ def try_cube_root(points):
         i += 1
 
 def try_inverse_x(points):
-    points = list(set(tuple(point) for point in points))
+    # points = list(set(tuple(point) for point in points))
     points.sort(key=lambda x: x[0])
     i = 0
     while i < len(points):

@@ -227,14 +227,107 @@ Decide whether the graph bounces or punches through at each zero.
 </div>
 </p>
 
+<p>
+All that's left is to figure out the equation of a polynomial given information about its graph.
+In other words, we are just going to do the concept from the previous examples but in reverse.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+  Develop an equation for a polynomial graph consistent with the one at below.
+  <div style="text-align:center;">
+    <img src="{{ url_for('static', filename='images/polynomial-graph-to-eqn-example-1.png') }}">
+  </div>
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+      <div class='inner'>
+        Note from the graph that the polynomial has \(x\)-intercepts&mdash;AKA,
+        zeroes&mdash;\(1\), \(2\), and \(3\).
+        In other words, if \(f(x)\) is our formula, then, if you plug any of
+        those values in for \(x\) you should get the \(y\)-value is
+        \(0\).  E.g., \(f(1)=0\).
+        Therefore, the following factorization would work:
+        \[
+        f(x) = a(x-1)(x-2)(x-3)
+        \]
+        where \(a\) is the leading coefficient.
+
+
+        We don't know what \(a\) is yet!  How do we find it?
+        Well, we just need to know about one more point the graph passes
+        through (aside from the zeroes), like the one provided.
+
+        As you can see, when you plug in \(1.5\) for \(x\)
+        the \(y\)-value has to be \(1.125\).
+        That means the following is true:
+          \begin{align*}
+            &a(1.5-1)(1.5-2)(1.5-3) = 1.125 \\
+            \Rightarrow \quad &a(0.5)(-0.5)(-1.5) = 1.125 \\
+            \Rightarrow \quad &0.375a  = 1.125 \\
+            \Rightarrow \quad &a  = \frac{1.125}{0.375} =3
+          \end{align*}
+        Therefore, our final answer is
+          \[
+            f(x) = 3(x-1)(x-2)(x-3)
+          \]
+      </div>
+    </div>
+  </div>
+</p>
+
+<p>
+  Let's do one more example, and then you're on your own.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+  Develop an equation for a polynomial graph consistent with the one at right.
+  <div style="text-align:center;">
+    <img src="{{ url_for('static', filename='images/polynomial-graph-to-eqn-example-1.png') }}">
+  </div>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      This time its zeroes include \(-2\), \(-1\), and \(4\).
+      But note that the graph "bounces" off
+      the \(x\)-axis at \(x=-1\).  So, it must be an even factor.
+      Let's choose a square factor.
+      Therefore, the following factorization would work:
+        \[
+          f(x) = a(x+2)(x+1)^2(x-4)
+        \]
+      where \(a\) is the leading coefficient.
+
+      Now, we use that other given point to find \(a\).
+      As you can see, when you plug in \(0\) for \(x\)
+      the \(y\)-value has to be \(4\).
+
+      So, we solve:
+        \begin{align*}
+          & a(0+2)(0+1)^2(0-4) = 4 \\
+          \Rightarrow \quad &a(2)(1)(-4) = 4 \\
+          \Rightarrow \quad &-8a  = 4 \\
+          \Rightarrow \quad &a  = \frac{4}{-8} = -\frac{1}{2}
+        \end{align*}
+      Therefore, our final answer is
+        \[
+        f(x) = -\frac{1}{2}(x+2)(x+1)^2(x-4)
+        \]
+    </div>
+  </div>
+</div>
+</p>
+
 <script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
 
 <div class="exercise">
-
   {% if question_name %}
   <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
   {% endif %}
-
 </div>
 
 
