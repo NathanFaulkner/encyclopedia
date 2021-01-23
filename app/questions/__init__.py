@@ -101,6 +101,7 @@ __all__ = ['quadratic_pattern',
             'quadratic_pattern_for_photomath',
             'polynomial_end_behavior',
             'polynomial_curve_sketching',
+            'polynomial_curve_to_equation',
             ]
 
 class Question():
@@ -601,3 +602,15 @@ def check_congruence_after_factoring_out_gcf(expr1, expr2):
     gcd1 = gcd(Poly(expr1).coeffs())
     gcd2 = gcd(Poly(expr2).coeffs())
     return gcd1 == gcd2 and simplify(expr1/gcd1) == simplify(expr2/gcd2)
+
+def get_coeff(expr):
+    poly = Poly(expr)
+    gcf = gcd(poly.coeffs())
+    lc = LC(poly)
+    # print('lc', lc)
+    if lc < 0:
+        gcf = -gcf
+    if gcf.is_number:
+        return gcf
+    else:
+        return 1

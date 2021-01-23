@@ -145,7 +145,8 @@ class TwoPointsToEquation(Question):
         return self.answer.equals(user_answer)
 
 
-    def format_useranswer(self, user_answer, display=False):
+    @staticmethod
+    def format_useranswer(user_answer, display=False):
         user_answer = user_answer.lower()
         user_answer = user_answer.replace('^', '**')
         lhs, rhs = user_answer.split('=')
@@ -154,8 +155,8 @@ class TwoPointsToEquation(Question):
         user_answer = Eq(lhs, rhs)
         return f'\({latex(lhs)} = {latex(rhs)}\)'
 
-    @classmethod
-    def validator(self, user_answer):
+    @staticmethod
+    def validator(user_answer):
         try:
             user_answer = user_answer.lower()
             user_answer = user_answer.replace('^', '**')

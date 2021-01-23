@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import random
-# from sympy.parsing.sympy_parser import parse_expr
-# from sympy.parsing.sympy_parser import standard_transformations, implicit_multiplication_application
-# transformations = (standard_transformations + (implicit_multiplication_application,))
-from sympy import *
+from sympy.parsing.sympy_parser import parse_expr
+from sympy.parsing.sympy_parser import standard_transformations, implicit_multiplication_application
+transformations = (standard_transformations + (implicit_multiplication_application,))
+import sympy as sy
 import numpy as np
 import json
 
@@ -13,8 +13,12 @@ from app.questions import (Question,
                             latex_print,
                             random_non_zero_integer,
                             GraphFromLambda,
-                            tolerates)
-from app.interpolator import cart_x_to_svg, cart_y_to_svg
+                            tolerates,
+                            get_coeff)
+from app.interpolator import cart_x_to_svg, cart_y_to_svg, get_parameters
+
+from flask import render_template
+
 
 
 # if __name__ == '__main__':
@@ -38,7 +42,7 @@ class PolynomialCurveToEquation(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        x = Symbol('x', real=True)
+        x = sy.Symbol('x')
         self.x = x
         degree = random.choice([3,4])
         #degree = 4
@@ -57,7 +61,7 @@ class PolynomialCurveToEquation(Question):
         else:
             for i in range(degree):
                     zeroes.append(random.randint(-5,5))
-        #print(zeroes)
+        # print(zeroes)
 
         y_0 = random.randint(-9,9)
         prod = 1
@@ -66,7 +70,7 @@ class PolynomialCurveToEquation(Question):
             x_0 = random_non_zero_integer(-5,5)
         for z in zeroes:
             prod *= (x_0-z)
-        LC = Rational(y_0, prod)
+        LC = sy.Rational(y_0, prod)
 
         def f(x):
             out = LC
@@ -74,18 +78,18 @@ class PolynomialCurveToEquation(Question):
                 out *= (x-zeroes[i])
             return out
 
-        expr = simplify(1/LC*f(x))
-
-        self.as_lambda = lambdify(x, f(x))
-        f = self.as_lambda
-        self.given = factor(f(x))
-        self.format_given = f'\\(f(x) = {latex(LC)}{latex(expr)}\\)'
-        #print('3rd step: So far its ', expr)
         self.answer = f(x)
+        # print('answer', self.answer)
 
-        self.format_answer = '\\quad\n'
-        # self.answer_latex = latex_print(self.answer)
-        # self.answer_latex_display = latex_print(self.answer, display=True)
+        expr = sy.simplify(1/LC*f(x))
+
+        self.as_lambda = sy.lambdify(x, f(x))
+        # f = self.as_lambda
+        self.given = sy.factor(f(x))
+        self.format_given = f'\\(f(x) = {sy.latex(LC)}{sy.latex(expr)}\\)'
+
+
+        self.format_answer = self.format_given
 
         self.format_given_for_tex = f"""
 Sketch a graph of the given equation.  Make sure your graph is accurate throughout
@@ -99,18 +103,37 @@ the window and has at least 5 points clearly marked.
 
 """
 
+        self.prompt_single = f"""Give an equation for the given graph.  Note
+        that the graph passes through the point \\({sy.latex((x_0, y_0))}\\)"""
+
+        self.further_instruction = """Write 'f(x) =' or 'y = ' and then
+        and expression for your function.
+        """
+
+        points = [[z, 0] for z in zeroes]
+        points += [[x_0, y_0]]
+        self.points = points
+
+        poly_points = self.get_svg_data([-10,10])
+
+        self.format_given = f"""
+        <div style="text-align:center">
+            {render_template('_static_graph.html',
+                            poly_points=poly_points,
+                            parameters=get_parameters(),
+                            points=points)}
+        </div>
+        """
+
     name = 'Polynomial Curve To Equation'
     module_name = 'polynomial_curve_to_equation'
 
-    prompt_single = """Graph the given equation by plotting at least 4 points
-that satisfy the equation."""
-    prompt_multiple = """Graph each of the following equations by plotting at least 4 points
-that satisfy the equation."""
+    prompt_multiple = """TBA"""
 
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
-    has_img_in_key = True
+    has_img = True
 
     def save_img(self, filename):
         graph = GraphFromLambda(self.as_lambda)
@@ -133,25 +156,71 @@ that satisfy the equation."""
 
 
     def checkanswer(self, user_answer):
-        if type(user_answer) == type(5):
+        user_answer = user_answer.lower()
+        user_answer = user_answer.replace(' ', '')
+        user_answer = user_answer.replace('f(x)', 'y')
+        if 'y' not in user_answer:
             return False
-        # user_answer = user_answer(self.x)
-        # return self.answer.equals(user_answer)
-        return tolerates(user_answer, self.as_lambda)
-
-    # def useranswer_latex(self, user_answer, display=False):
-    #     user_answer = user_answer.replace('^', '**')
-    #     user_answer = parse_expr(user_answer, transformations=transformations)
-    #     return latex_print(user_answer, display)
-
-    # @classmethod
-    # def validator(self, user_answer):
-    #     try:
-    #         user_answer = user_answer.replace('^', '**')
-    #         user_answer = parse_expr(user_answer, transformations=transformations)
-    #     except:
-    #         raise SyntaxError
+        user_answer = user_answer.replace('^', '**')
+        lhs, rhs = user_answer.split('=')
+        lhs = parse_expr(lhs, transformations=transformations)
+        rhs = parse_expr(rhs, transformations=transformations)
+        user_answer = sy.Eq(lhs, rhs)
+        y = sy.Symbol('y')
+        user_answer = sy.solve(user_answer, y)[0]
+        # print(sy.expand(self.answer), '\n', sy.expand(user_answer))
+        # print('LC = ', lc)
+        return self.answer.equals(user_answer)
 
 
+    @staticmethod
+    def format_useranswer(user_answer, display=False):
+        user_answer = user_answer.lower()
+        user_answer = user_answer.replace(' ', '')
+        user_answer = user_answer.replace('f(x)', 'y')
+        user_answer = user_answer.replace('^', '**')
+        lhs, rhs = user_answer.split('=')
+        lhs = parse_expr(lhs, transformations=transformations)
+        rhs = parse_expr(rhs, transformations=transformations)
+        user_answer = sy.Eq(lhs, rhs)
+        y = sy.Symbol('y')
+        user_answer = sy.solve(user_answer, y)[0]
+        lc = get_coeff(user_answer)
+        if lc == 1:
+            fmt_lc = ''
+        elif lc == -1:
+            fmt_lc = '-'
+        else:
+            fmt_lc = sy.latex(lc)
+        expr = user_answer/lc
+        return f'\({sy.latex(lhs)} = {fmt_lc}{sy.latex(sy.factor(expr))}\)'
 
-Question_Class = PolynomialCurveSketching
+    @staticmethod
+    def validator(user_answer):
+        try:
+            # pass
+            user_answer = user_answer.lower()
+            user_answer = user_answer.replace(' ', '')
+            user_answer = user_answer.replace('f(x)', 'y')
+            user_answer = user_answer.replace('^', '**')
+            lhs, rhs = user_answer.split('=')
+            lhs = parse_expr(lhs, transformations=transformations)
+            rhs = parse_expr(rhs, transformations=transformations)
+            user_answer = sy.Eq(lhs, rhs)
+            y = sy.Symbol('y')
+            user_answer = sy.solve(user_answer, y)[0]
+            lc = get_coeff(user_answer)
+            if lc == 1:
+                fmt_lc = ''
+            elif lc == -1:
+                fmt_lc = '-'
+            else:
+                fmt_lc = sy.latex(lc)
+            expr = user_answer/lc
+        except:
+            raise SyntaxError
+
+
+
+
+Question_Class = PolynomialCurveToEquation
