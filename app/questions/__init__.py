@@ -102,6 +102,7 @@ __all__ = ['quadratic_pattern',
             'polynomial_end_behavior',
             'polynomial_curve_sketching',
             'polynomial_curve_to_equation',
+            'rationals_multiply_or_divide'
             ]
 
 class Question():
@@ -599,9 +600,18 @@ def sets_evaluate_equal(set1, set2):
         return False
 
 def check_congruence_after_factoring_out_gcf(expr1, expr2):
-    gcd1 = gcd(Poly(expr1).coeffs())
-    gcd2 = gcd(Poly(expr2).coeffs())
-    return gcd1 == gcd2 and simplify(expr1/gcd1) == simplify(expr2/gcd2)
+    try:
+        gcd1 = gcd(Poly(expr1).coeffs())
+        gcd2 = gcd(Poly(expr2).coeffs())
+        return gcd1 == gcd2 and simplify(expr1/gcd1) == simplify(expr2/gcd2)
+    except polys.polyerrors.GeneratorsNeeded:
+        return expr1 == expr2
+
+def safe_gcf(expr):
+    try:
+        return gcd(Poly(expr).coeffs())
+    except polys.polyerrors.GeneratorsNeeded:
+        return expr
 
 def get_coeff(expr):
     poly = Poly(expr)
@@ -614,3 +624,42 @@ def get_coeff(expr):
         return gcf
     else:
         return 1
+
+def factor_negative_out_from_denominator(quotient_expr):
+    out = -1
+    for term in quotient_expr.args:
+        if term.func == (Symbol('x')**2).func and term.args[1] == -1:
+            denom = term.args[0]
+            new_denom = -denom
+            out *= new_denom**(-1)
+        else:
+            out *= term
+    return out
+
+def get_numer_denom(quot_expr):
+    if quot_expr.args == ():
+        return [quot_expr, 1]
+    numer = 1
+    denom = 1
+    for term in quot_expr.args:
+        if term.func == (Symbol('x')**2).func and term.args[1] < 0:
+            denom *= Pow(term.args[0], abs(term.args[1]))
+        else:
+            numer *= term
+    return [numer, denom]
+
+def congruence_of_quotient(quot1, quot2):
+    numer1, denom1 = get_numer_denom(quot1)
+    numer2, denom2 = get_numer_denom(quot2)
+    gcf_numer1, gcf_denom1 = [safe_gcf(numer1), safe_gcf(denom1)]
+    gcf_numer2, gcf_denom2 = [safe_gcf(numer2), safe_gcf(denom2)]
+    nec = gcf_numer1/gcf_denom1 == gcf_numer2/gcf_denom2
+    nec1 = (numer1/gcf_numer1)/(denom1/gcf_denom1) == (numer2/gcf_numer2)/(denom2/gcf_denom2)
+    nec2 = (numer1/gcf_numer1)/(denom1/gcf_denom1) == (-numer2/gcf_numer2)/(-denom2/gcf_denom2)
+    return nec and (nec1 or nec2)
+
+def basic_parse_and_check(user_answer, answer):
+    user_answer = user_answer.lower()
+    user_answer = user_answer.replace('^', '**')
+    user_answer = parse_expr(user_answer, transformations=transformations)
+    return answer == user_answer

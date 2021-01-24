@@ -732,6 +732,12 @@ curvesketchingpolynomials.add_to_questions('polynomial_curve_sketching',
                                              'polynomial_curve_to_equation'
                                             )
 #######################################
+rationals_intro = Section('rationals_intro', "Introduction to Rational Functions", '/sections/rationals-intro')
+
+rationalsmultiplyinganddividing = Section('rationalsmultiplyinganddividing', "Rationals: Multiplying and Dividing", '/sections/rationals-multiplying-and-dividing')
+rationalsmultiplyinganddividing.add_to_questions('rationals_multiply_or_divide')
+#######################################
+
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
 
@@ -815,6 +821,12 @@ polynomials = Division('chapter', 'Polynomials',
                                 ])
 polynomials.set_frontpage(polynomials_intro)
 
+rationals = Division('chapter', "Rationals",
+                                [
+                                rationalsmultiplyinganddividing,
+                                ])
+rationals.set_frontpage(rationals_intro)
+
 algebra2_challenge = Division('chapter', "Challenge Sections",
                                     [absolutevalueequationspart2,
                                     solvingbyeliminationthreeequationsonesolution])
@@ -826,6 +838,7 @@ main = Division('main', 'Main Matter', [nuts_and_bolts_of_algebra,
                                         functions_and_the_coordinate_plane,
                                         quadratics,
                                         polynomials,
+                                        rationals,
                                         algebra2_challenge])
 
 Algebra2 = Division('book', 'Algebra 2', {'front': None, 'main': main, 'end': None})

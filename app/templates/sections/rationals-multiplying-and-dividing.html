@@ -1,0 +1,335 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  What are we going to do with all of these weird functions?
+  Answer: the same thing we did in the last chapter: We are
+  going to add, subtract, multiply, divide, and graph these critters.
+  What do you think will be easiest?  If you answered "addition," you
+  spoke too soon!  Note that rational functions are foremost just
+  fractions&mdash;albeit where the exact value of the numerator and
+  denominator are not given (their identities are withheld under the
+  guise of variables).  So, what is easier to do with fractions&mdash;add,
+  subract, multiply, or divide?
+</p>
+
+How do you multiply rational functions?  Well, since rational functions
+just have fractions as outputs, the answer is "in the same way you multiply
+fractions."  So, how you do you multiply fractions?
+You'd better make sure you're clear on this&mdash;because this is really the heart of the matter!
+
+
+<p>
+<div class="example">
+  <h2> (Warm-up)</h2>
+
+Multiply the following fractions together.  Simplify (reduce to lowest terms).
+
+<ol>
+<li>
+\(\frac{3}{4}\cdot \frac{8}{7}\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    \[
+      \frac{3}{4}\cdot \frac{8}{7} = \frac{3\cdot 8}{4 \cdot 7} = \frac{24}{28}
+    \]
+    But!  You could also reduce this ratio to lower terms.
+    After all, \(24\) and \(28\) are both divisible by \(4\):
+    \[
+      \frac{24}{28} = \frac{\cancel{4}\cdot 6}{\cancel{4} \cdot 7} = \frac{6}{7}
+    \]
+    Indeed, you actually could have reduced <i>before</i> multiplying
+    by canceling common factors, like so:
+    \[
+      \frac{3}{4} \cdot \frac{8}{7} = \frac{3}{\cancelto{1}{4}}\cdot \frac{\cancelto{2}{8}}{7} = \frac{3 \cdot 2}{7} = \frac{6}{7}
+    \]
+  </div>
+</div>
+</li>
+<li>
+\(\frac{5}{3}\cdot \frac{7}{15}\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    \[
+      \frac{5}{3}\cdot \frac{7}{15} = \frac{\cancelto{1}{5}\cdot 7}{3 \cdot \cancelto{3}{15}} = \frac{7}{9}
+    \]
+  </div>
+</div>
+</li>
+<li>
+\(\frac{2}{9}\cdot \frac{3}{8}\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    \[
+      \frac{2}{9}\cdot \frac{3}{8} = \frac{\cancelto{1}{2}\cdot \cancelto{1}{3}}{\cancelto{3}{9} \cdot \cancelto{4}{8}} = \frac{1}{12}
+    \]
+  </div>
+</div>
+</li>
+<li>
+\(\frac{4}{3}\cdot \frac{6}{5}\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    \[
+      \frac{4}{3}\cdot \frac{6}{5} = \frac{4\cdot \cancelto{2}{6}}{\cancelto{1}{3} \cdot 5} = \frac{8}{5}
+    \]
+  </div>
+</div>
+</li>
+</ol>
+
+</div>
+</p>
+
+Next, we do "the very same thing" with rational functions!  Firstly,
+that will mean "multiplying numerator by numerator and denominator by
+denominator" (don't dare think "cross multiply"!!).  Next, what about the
+"reduce to lowest terms" concept?  With numbers, you are looking for
+common factors to cancel, so you are mentally breaking the numerator and
+denominator into primes and crossing out those common factors: you are
+<em>factoring</em>.  So, how does that work when the numerator and
+denominator aren't numbers but rather polynomials?  Well, still you
+<em>factor</em>.  Recall from a previous section above that, indeed, what
+the "primes" of the world of polynomials are can be understood by the
+fact that any polynomial can be (theoretically) written in the form
+\[
+f(x) = a(x-z_1)(x-z_2)\cdots (x-z_n)
+\]
+where the \(a\) and the \(z\)'s are numbers.  So, this expresses that
+polynomials can be factored and what the "primes are in this setting."
+
+<p>
+  So, here will be our m.o.: factor numerator and denominator; cross out
+  common factors (reducing to lowest terms); multiply numerator times numerator
+  and denominator times denominator&mdash;but don't bother distributing out.
+  Check out my examples to make sure you understand what I am looking for.
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify.  That is, reduce the following to lowest terms.
+
+\[
+\frac{x^2 - 3x - 18}{x^2 - 1} \cdot \frac{x^2+ 4x - 5}{x^2 -5x - 6}
+\]
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+\frac{x^2 - 3x - 18}{x^2 - 1} \cdot \frac{x^2+ 4x - 5}{x^2 -x - 30} &=
+\frac{(x-6)(x+3)}{(x-1)(x+1)} \cdot \frac{(x+5)(x-1)}{(x-6)(x+5)} \\
+& = \frac{\cancel{(x-6)}(x+3)}{\bcancel{(x-1)}(x+1)} \cdot \frac{\xcancel{(x+5)}\bcancel{(x-1)}}{\cancel{(x-6)}\xcancel{(x+5)}} \\
+& = \frac{x+3}{x+1}
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+Let's do one more, then we'll think about division.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify.  That is, reduce the following to lowest terms.
+
+\[
+\frac{2x^2+2x-12}{x^2 + 6x - 7} \cdot \frac{x^2+4x-5}{4x^2 + 32x + 60}
+\]
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      \begin{align*}
+      \frac{2x^2+2x-12}{x^2 + 6x - 7} \cdot \frac{x^2+4x-5}{4x^2 + 32x + 60} &=
+      \frac{2(x-2)(x+3)}{(x-1)(x+7)} \cdot \frac{(x+5)(x-1)}{4(x+3)(x+5)} \\
+      &=\frac{\cancelto{1}{2}(x-2)\cancel{(x+3)}}{\bcancel{(x-1)}(x+7)} \cdot \frac{\xcancel{(x+5)}\bcancel{(x-1)}}{\cancelto{2}{4}\cancel{(x+3)}\xcancel{(x+5)}} \\
+      & = \frac{x-2}{2(x+7)}
+      \end{align*}
+    </div>
+  </div>
+
+</div>
+</p>
+
+Next, what about division of rational functions?  Well, how do you divide fractions?
+
+
+<p>
+<div class="example">
+  <h2> (Warm-up)</h2>
+
+Divide the fractions, and reduce to lowest terms.
+
+<ol>
+<li>
+\(\frac{3}{4}\div\frac{7}{8}\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    \[
+      \frac{3}{4}\div \frac{7}{8} = \frac{3}{4} \cdot \frac{8}{7}
+      = \frac{3}{\cancelto{1}{4}}\cdot \frac{\cancelto{2}{4}}{7} = \frac{6}{7}
+    \]
+  </div>
+</div>
+</li>
+<li>
+\(\frac{5}{3}\div \frac{15}{7}\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    \[
+      \frac{5}{3}\div \frac{15}{7} = \frac{5}{3} \cdot \frac{7}{15}
+      = \frac{\cancelto{1}{5}}{3}\cdot \frac{7}{\cancelto{3}{15}} = \frac{7}{9}
+    \]
+  </div>
+</div>
+</li>
+<li>
+\(\dfrac{\;\frac{6}{5} \;}{\frac{3}{4}}\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer (Style 1):</h3></a>
+  <div class='inner'>
+    \[
+      \dfrac{\;\frac{6}{5} \;}{\frac{3}{4}}
+      = \frac{6}{5}\cdot \frac{4}{3}
+      = \frac{\cancelto{2}{6}}{5} \cdot \frac{4}{\cancelto{1}{2}}
+      = \frac{8}{5}
+    \]
+  </div>
+</div>
+<div class="answer">
+  <a class="collapsible"><h3>Answer (Style 2):</h3></a>
+  <div class='inner'>
+    \[
+      \dfrac{\;\frac{6}{5} \;}{\frac{3}{4}}
+      = \dfrac{\;\frac{6\cdot 4}{5 \cdot 4} \;}{\frac{3 \cdot 5}{4 \cdot 5}}
+      = \frac{6 \cdot 4}{5 \cdot 3}
+      = \frac{\cancelto{2}{6} \cdot 4}{5 \cdot \cancelto{1}{3}}
+      = \frac{8}{5}
+    \]
+  </div>
+</div>
+</li>
+<li>
+\(\dfrac{\;\frac{12}{5}\;}{\frac{3}{10}}\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer (Style 1):</h3></a>
+  <div class='inner'>
+    \[
+      \dfrac{\;\frac{12}{5} \;}{\frac{3}{10}}
+      = \frac{12}{5}\cdot \frac{10}{3}
+      = \frac{\cancelto{4}{12}}{\cancelto{1}{5}} \cdot \frac{\cancelto{2}{10}}{\cancelto{1}{3}}
+      = \frac{8}{1}
+      = 8
+    \]
+  </div>
+</div>
+<div class="answer">
+  <a class="collapsible"><h3>Answer (Style 2):</h3></a>
+  <div class='inner'>
+    \[
+      \dfrac{\;\frac{12}{5} \;}{\frac{3}{10}}
+      = \dfrac{\;\frac{12\cdot 2}{5 \cdot 2} \;}{\frac{3}{10}}
+      = \dfrac{\;\frac{12\cdot 2}{10} \;}{\frac{3}{10}}
+      = \frac{12 \cdot 2}{3}
+      = \frac{\cancelto{4}{12} \cdot 2}{\cancelto{1}{3}}
+      = \frac{8}{1}
+      = 8
+    \]
+  </div>
+</div>
+</li>
+</ol>
+
+</div>
+</p>
+
+So, hopefully you recall the "rule", "divide means multiply the numerator
+by the reciprocal of the denominator."  (Say, why does that rule work?
+It's worth contemplating, even though I haven't yet supplied
+an answer&mdash;or a link to an answer&mdash;here.)
+
+<!-- \begin{question}
+Why does fraction multiplication and division of fractions work like it does?  Could you explain it?
+
+
+\vspace{10\baselineskip}
+\end{question} -->
+
+We will divide rational functions "in the same way":
+"flip" the denominator and change
+the sign to multiplication.
+
+<p>
+<div class="example">
+  <h2></h2>
+  Divide the rational function, and simplify (reduce to lowest terms).
+  \[
+  \frac{x^2 - 3x - 18}{x^2 - 1} \div \frac{x^2 -5x - 6}{x^2+ 4x - 5}
+  \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      \begin{align*}
+        \frac{x^2 - 3x - 18}{x^2 - 1} \div \frac{x^2 -5x - 6}{x^2+ 4x - 5} &= \frac{x^2 - 3x - 18}{x^2 - 1} \cdot \frac{x^2+ 4x - 5}{x^2 -5x - 6}\\
+        & =\frac{(x-6)(x+3)}{(x-1)(x+1)} \cdot \frac{(x+5)(x-1)}{(x-6)(x+1)} \\
+        & = \frac{\cancel{(x-6)}(x+3)}{\bcancel{(x-1)}(x+1)} \cdot \frac{(x+5)\bcancel{(x-1)}}{\cancel{(x-6)}(x+1)} \\
+        & = \frac{(x+3)(x+5)}{(x+1)^2}
+      \end{align*}
+    </div>
+  </div>
+
+</div>
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+  Divide the rational function, and simplify (reduce to lowest terms).
+    \[
+      \frac{2x^2+2x-12}{x^2 + 6x - 7} \div \frac{4x^2 + 32x + 60}{x^2+4x-5}
+    \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      \begin{align*}
+        \frac{2x^2+2x-12}{x^2 + 6x - 7} \div \frac{4x^2 + 32x + 60}{x^2+4x-5} &= \frac{2x^2+2x-12}{x^2 + 6x - 7} \cdot \frac{x^2+4x-5}{4x^2 + 32x + 60}\\
+         &=\frac{2(x-2)(x+3)}{(x-1)(x+7)} \cdot \frac{(x+5)(x-1)}{4(x+3)(x+5)} \\
+        &=\frac{\cancelto{1}{2}(x-2)\cancel{(x+3)}}{\bcancel{(x-1)}(x+7)} \cdot \frac{\xcancel{(x+5)}\bcancel{(x-1)}}{\cancelto{2}{4}\cancel{(x+3)}\xcancel{(x+5)}} \\
+        & = \frac{x-2}{2(x+7)}
+      \end{align*}
+    </div>
+  </div>
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

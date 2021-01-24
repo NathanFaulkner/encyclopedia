@@ -21,9 +21,13 @@ class AnswerForm(FlaskForm):
 
 
     def validate_answer(self, answer):
+        if 'simplify' in answer.data or 'factor' in answer.data:
+            raise ValidationError('A++ thinking!  But, sorry, not allowed.')
         try:
             # user_answer = answer.data.replace('^', '**')
             # user_answer = parse_expr(user_answer, transformations=transformations)
+            # if 'simplify' in answer:
+            #     raise ValidationError('A++ thinking!  But not allowed.')
             self.validator(answer.data)
         except:
             raise ValidationError('You have not used intelligible syntax.')
