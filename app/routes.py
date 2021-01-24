@@ -303,7 +303,12 @@ def answer_previewer(question_name):
     user_answer = request.args.get('user_answer')
     question = getattr(questions, question_name).Question_Class
     # print(question.format_useranswer)
-
+    try:
+        question.validator(user_answer)
+        if 'simplify' in user_answer or 'factor' in user_answer:
+            return 'The answer checker will not admit this input.'
+    except SyntaxError:
+        return 'The answer checker will not admit this input.'
     try:
         content = question.format_useranswer(user_answer)
     except TypeError:
