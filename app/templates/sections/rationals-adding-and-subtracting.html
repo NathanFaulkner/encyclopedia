@@ -1,0 +1,211 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section&mdash;as you can already see&mdash;we are adding and
+  subtracting rational functions.\ldots which means, again, that you
+  will first of all want to be sure you can add and subtract plain, old fractions.
+</p>
+
+
+
+<p>
+<div class="example">
+  <h2> (Warm-up)</h2>
+
+Add or subtract the following fractions, and simplify (reduce to lowest terms).
+
+<ol>
+<li>
+\( \frac{3}{4}+ \frac{8}{7}\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+      \[
+        \frac{3}{4}+ \frac{8}{7} = \frac{3\cdot 7}{4 \cdot 7} + \frac{8\cdot 4}{7\cdot 4}
+        = \frac{21}{28} + \frac{32}{28} = \frac{53}{28}
+      \]
+  </div>
+</div>
+</li>
+<li>
+\(\frac{5}{3}+ \frac{7}{15}\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+      \[
+        \frac{5}{3}+ \frac{7}{15} = \frac{5\cdot 5}{3 \cdot 5} + \frac{7}{15}
+        = \frac{25}{15} + \frac{7}{15} = \frac{32}{15}
+      \]
+  </div>
+</div>
+</li>
+<li>
+\(\frac{2}{9}+ \frac{5}{12}\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+      \[
+        \frac{2}{9}+ \frac{5}{12} = \frac{2\cdot 4}{9 \cdot 4} + \frac{5 \cdot 3}{12\cdot 3}
+        = \frac{8}{36} + \frac{15}{36} = \frac{23}{36}
+      \]
+  </div>
+</div>
+</li>
+<li>
+\(\frac{5}{6}+ \frac{7}{15}\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+      \[
+        \frac{5}{6} + \frac{7}{15} = \frac{5\cdot 5}{6 \cdot 5} + \frac{7 \cdot 2}{15 \cdot 2}
+        = \frac{25}{30} + \frac{14}{30} = \frac{39}{30} = \frac{13}{10}
+      \]
+  </div>
+</div>
+</li>
+</ol>
+
+</div>
+</p>
+Now, we just do "the same thing" but with rational functions:
+The key is to factor all the terms, to look for a common denominator,
+to multiply "top and bottom" as needed to create the common denominators,
+and then to add numerators.  Let's practice.
+<p>
+<div class="example">
+  <h2></h2>
+  Carry out the indicated operation (add or subtract).  Reduce to lowest terms.
+    \[
+      \frac{12}{x-1} + \frac{x - 4}{x-1}
+    \]
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+These two fractions already have a common denominator, so this one is really
+a little too easy.  Just combine the numerators:
+\begin{align*}
+\frac{12}{x-1} + \frac{x - 4}{x-1} &= \frac{12 + x -4 }{x-1} &= \frac{x +8}{x-1}
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Carry out the indicated operation (add or subtract).  Reduce to lowest terms.
+
+
+\[
+\frac{12}{x-1} - \frac{x-4}{x^2 - 1}
+\]
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+This one may not look that different, but it is.  Look!  The denominator of the second fraction is \(x^2-1\).  But if we factor it, we can see our way to making a common denominator.  You have to multiply by a "form of 1"&mdash;that is, multiplying the same thing top and bottom&mdash;to change the way a ratio is written.  I use that technique here to rewrite the first ratio in terms of the denominator of the second.  Then, I can just subtract the numerators.
+\begin{align*}
+\frac{12}{x-1} - \frac{x-4}{x^2 - 1} &= \frac{12}{x-1} - \frac{x-4}{(x-1)(x+1)}\\
+&= \frac{12}{(x-1)} \frac{(x+1)}{(x+1)} - \frac{x-4}{(x-1)(x+1)}\\
+&= \frac{12x + 12}{(x-1)(x+1)} - \frac{x-4}{(x-1)(x+1)}\\
+&= \frac{12x + 12 - (x-4)}{(x-1)(x+1)}\\
+&= \frac{11x + 16}{(x-1)(x+1)}
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Carry out the indicated operation (add or subtract).  Reduce to lowest terms.
+
+
+\[
+\frac{3x- 5}{x^2 +3x - 18} + \frac{4 - x}{x^2 - 36}
+\]
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+I factor, then I create a common denominator, then I add the numerators, and then I factor the resulting numerator in case I get a factor in common with the denominator, which could then be canceled.
+\begin{align*}
+\frac{3x- 5}{x^2 +3x - 18} + \frac{4 - x}{x^2 - 36} &= \frac{3x- 5}{(x+6)(x-3)} + \frac{4 - x}{(x-6)(x+6)}\\
+& = \frac{(3x- 5)}{(x+6)(x-3)} \cdot \frac{(x-6)}{(x-6)}+  \frac{(4 - x)}{(x-6)(x+6)} \cdot \frac{(x-3)}{(x-3)}\\
+& = \frac{3x^2 - 19x + 30}{(x+6)(x-3)(x-6)} + \frac{-x^2+7x-12}{(x-6)(x+6)(x-3)}\\
+& = \frac{2x^2 - 12x + 18}{(x-6)(x+6)(x-3)}\\
+& = \frac{2(x^2 - 6x + 9)}{(x-6)(x+6)(x-3)}\\
+& = \frac{2(x-3)\cancel{(x-3)}}{(x-6)(x+6)\cancel{(x-3)}}\\
+& = \frac{2(x-3)}{(x-6)(x+6)}
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+<!-- Sometimes you'll encounter a polynomial plus a rational.
+What can you do then?  Well, you can
+always view a number (or polynomial) as a fraction with '1' in the denominator.
+Then you can proceed like before to combine them into one: You can still create a common denominator.  (This is analogous to adding a  number to a fraction as in
+\[
+4 + \frac{5}{6} = \frac{4}{1}\cdot \frac{6}{6} + \frac{5}{6} = \frac{24}{6} + \frac{5}{6} = \frac{29}{6}
+\]
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Carry out the indicated operation (add or subtract).  Reduce to lowest terms.
+
+
+\(\displaystyle
+3x - 5 + \frac{4 - x}{2x - 1}
+\)
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+3x - 5 - \frac{4 - x}{2x-1} & = \frac{(3x-5)}{1}\cdot\frac{(2x-1)}{2x-1} - \frac{4-x}{2x-1}\\
+& = \frac{(3x-5)(2x-1)}{2x-1} - \frac{4-x}{2x-1}\\
+& = \frac{6x^2 -13x + 5 - (4-x)}{2x-1}\\
+&= \frac{6x^2 -12x + 1}{2x-1}
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p> -->
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

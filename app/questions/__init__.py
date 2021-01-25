@@ -102,7 +102,10 @@ __all__ = ['quadratic_pattern',
             'polynomial_end_behavior',
             'polynomial_curve_sketching',
             'polynomial_curve_to_equation',
-            'rationals_multiply_or_divide'
+            'rationals_multiply_or_divide',
+            'rationals_add_or_subtract',
+            'rationals_add_or_subtract_type2',
+            'rationals_messy',
             ]
 
 class Question():
@@ -656,7 +659,9 @@ def congruence_of_quotient(quot1, quot2):
     nec = gcf_numer1/gcf_denom1 == gcf_numer2/gcf_denom2
     nec1 = (numer1/gcf_numer1)/(denom1/gcf_denom1) == (numer2/gcf_numer2)/(denom2/gcf_denom2)
     nec2 = (numer1/gcf_numer1)/(denom1/gcf_denom1) == (-numer2/gcf_numer2)/(-denom2/gcf_denom2)
-    return nec and (nec1 or nec2)
+    nec3 = (factor(numer1/gcf_numer1)/factor(denom1/gcf_denom1)) == (factor(numer2/gcf_numer2)/factor(denom2/gcf_denom2))
+    nec4 = (factor(numer1/gcf_numer1)/factor(denom1/gcf_denom1)) == (factor(-numer2/gcf_numer2)/factor(-denom2/gcf_denom2))
+    return nec and (nec1 or nec2 or nec3 or nec4)
 
 def basic_parse_and_check(user_answer, answer):
     user_answer = user_answer.lower()

@@ -736,6 +736,14 @@ rationals_intro = Section('rationals_intro', "Introduction to Rational Functions
 
 rationalsmultiplyinganddividing = Section('rationalsmultiplyinganddividing', "Rationals: Multiplying and Dividing", '/sections/rationals-multiplying-and-dividing')
 rationalsmultiplyinganddividing.add_to_questions('rationals_multiply_or_divide')
+
+rationalsaddingandsubtracting = Section('rationalsaddingandsubtracting', "Rationals: Adding and Subtracting", '/sections/rationals-adding-and-subtracting')
+rationalsaddingandsubtracting.add_to_questions('rationals_add_or_subtract',
+                                                # 'rationals_add_or_subtract_type2',
+                                                )
+
+rationalsputtingitalltogether = Section('rationalsputtingitalltogether', "Putting It All Together", '/sections/rationals-putting-it-all-together')
+rationalsputtingitalltogether.add_to_questions('rationals_messy')
 #######################################
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
@@ -824,12 +832,15 @@ polynomials.set_frontpage(polynomials_intro)
 rationals = Division('chapter', "Rationals",
                                 [
                                 rationalsmultiplyinganddividing,
+                                rationalsaddingandsubtracting,
+                                rationalsputtingitalltogether,
                                 ])
 rationals.set_frontpage(rationals_intro)
 
 algebra2_challenge = Division('chapter', "Challenge Sections",
                                     [absolutevalueequationspart2,
-                                    solvingbyeliminationthreeequationsonesolution])
+                                    solvingbyeliminationthreeequationsonesolution,
+                                    ])
 algebra2_challenge.set_frontpage(challenge_intro)
 
 
