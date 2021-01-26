@@ -687,9 +687,12 @@ def book_chapter(book_name, chapter_number):
         db.session.commit()
     else:
         user = {'username': 'Anonymous'}
-    book = getattr(books, book_name)
-    main = book.subdivisions['main']
-    chapter = main.subdivisions[int(chapter_number) - 1]
+    try:
+        book = getattr(books, book_name)
+        main = book.subdivisions['main']
+        chapter = main.subdivisions[int(chapter_number) - 1]
+    except AttributeError:
+        return render_template('404.html'), 404
     path_for_iframe = url_for('section', section_name=chapter.view_name)
     toc = main.subdivisions
     return render_template('chapter.html', user=user, title='chapter.name',
@@ -707,10 +710,13 @@ def book_section(book_name, chapter_number, section_number):
         db.session.commit()
     else:
         user = {'username': 'Anonymous'}
-    book = getattr(books, book_name)
-    main = book.subdivisions['main']
-    chapter = main.subdivisions[int(chapter_number) - 1]
-    section = chapter.subdivisions[int(section_number) - 1]
+    try:
+        book = getattr(books, book_name)
+        main = book.subdivisions['main']
+        chapter = main.subdivisions[int(chapter_number) - 1]
+        section = chapter.subdivisions[int(section_number) - 1]
+    except:
+        return render_template('404.html'), 404
     skip_to_exercises = request.args.get('skip_to_exercises')
     # print('section query...', skip_to_exercises, type(skip_to_exercises))
     if request.args.get('skip_to_exercises') == 'True':
@@ -741,7 +747,10 @@ def book(book_name):
         db.session.commit()
     else:
         user = {'username': 'Anonymous'}
-    book = getattr(books, book_name)
+    try:
+        book = getattr(books, book_name)
+    except AttributeError:
+        return render_template('404.html'), 404
     path_for_iframe = url_for('section', section_name=book.view_name)
     toc = book.subdivisions
     return render_template('chapter.html', user=user, title=book_name,

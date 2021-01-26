@@ -40,34 +40,27 @@ class RationalsMessy(Question):
         e = random.choice([[0,1], [1,1],[1,0]])
         f = random.choice([[0,1], [1,1],[1,0]])
         numa = []
-        numb= []
+        numb = []
         for i in range(2):
             numa.append(random_non_zero_integer(-5,5))
             numb.append(random.randint(1,3))
-        dena = []
-        denb= []
+        numterms = []
         for i in range(2):
-            dena.append(random_non_zero_integer(-5,5))
-            denb.append(random.randint(1,3))
-        numterms = [0,0]
-        denterms = [0,0]
+            term = sy.expand(numa[i]/(numb[i]*common_factor**e[i]))
+            numterms.append(term)
         numerator = sy.expand(numterms[0] + numterms[1])
-        denominator = sy.expand(denterms[0] + denterms[1])
-        def both_have_a_zero(a,b):
-            a_does = False
-            b_does = False
-            for i in range(len(a)):
-                a_does = a_does or (a[i] == 0)
-                b_does = b_does or (b[i] == 0)
-            return a_does and b_does
-        while type(numerator) != type(x+1) and type(denominator) != type(x+1):
+        denominator = 0
+        while type(denominator) != type(x+1):
+            dena = []
+            denb = []
+            denterms = []
+            denominator = 0
             for i in range(2):
-                term = sy.expand(numa[i]/(numb[i]*common_factor**e[i]))
-                numterms[i] = term
-            numerator = sy.expand(numterms[0] + numterms[1])
+                dena.append(random_non_zero_integer(-5,5))
+                denb.append(random.randint(1,3))
             for i in range(2):
                 term = sy.expand(dena[i]/(denb[i]*common_factor**f[i]))
-                denterms[i] = term
+                denterms.append(term)
             denominator = sy.expand(denterms[0] + denterms[1])
         #print(numterms, denterms)
         #print(numerator, denominator)
@@ -91,7 +84,10 @@ class RationalsMessy(Question):
     name = 'Rationals: Getting Messy'
     module_name = 'rationals_messy'
 
-    prompt_single = """Carry out the indicated operation and simplify (reduce to lowest terms)."""
+    prompt_single = """Simplify the following.
+    (Your goal should be to write it plainly as a polynomial over another
+    polynomial, as well as to look to factor these polynomials and cancel
+    like factors, wherever possible.)"""
     prompt_multiple = """TBA"""
 
     further_instruction = """

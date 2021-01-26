@@ -117,7 +117,7 @@ class QuadraticOnlyOneX(Question):
 
     prob_type = 'math_blank'
 
-    # loom_link = "https://www.loom.com/share/331e43b308a64cefbafdb1ac3211c9ac"
+    loom_link = "https://www.loom.com/share/ee216854a9e34de887fe610a26ae69f6?sharedAppSource=personal_library"
 
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
