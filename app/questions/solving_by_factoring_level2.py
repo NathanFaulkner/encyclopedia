@@ -83,6 +83,8 @@ class SolvingByFactoringLevel2(Question):
     get \(\\frac{1}{2}, -1\) as your solutions, then would just enter "1/2, -1".
     """
 
+    loom_link = "https://www.loom.com/share/f2a293dacfbf42369e52d8c1f450941f?sharedAppSource=personal_library"
+
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
