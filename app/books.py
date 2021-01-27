@@ -554,12 +554,12 @@ absolutevalueequationspart2.add_to_questions(#'absolute_value_equation_plus_line
 functionsandthecoordinateplane_intro = Section('functionsandthecoordinateplane_intro', "Functions and the Coordinate Plane", '/sections/functions-and-the-coordinate-plane')
 
 basicfunctionsinatableandwords = Section('basicfunctionsinatableandwords', "Basic Functions in a Table and Words", '/sections/basic_functions_in_a_table_and_words')
-basicfunctionsinatableandwords.add_to_questions(#'generic_table_computation',
+basicfunctionsinatableandwords.add_to_questions('generic_table_computation',
                                                  'pizza_problem_computation',
                                                 'plant_problem_computation',
-                                                 # 'plant_problem',
-                                                 # 'generic_table',
-                                                # 'pizza_problem',
+                                                 'plant_problem',
+                                                 'generic_table',
+                                                'pizza_problem',
                                                 )
 
 functionnotation = Section('functionnotation', "Function Notation", '/sections/function_notation')
