@@ -41,12 +41,14 @@ class FactoringByGrouping(Question):
         a = 0
         while a==0:
             a = random.randint(-5,5)
+        # a = 1
         b = 0
         while b==0:
             b = random.randint(-5,5)
         c = 0
         while c==0:
             c = random.randint(-5,5)
+        # c = -1
         d = 0
         while d==0:
             d = random.randint(-5,5)
@@ -60,7 +62,22 @@ class FactoringByGrouping(Question):
         B = b*vars[0]
         D = d*vars[1]
 
-        expr = (A+C)*(B+D)
+        def is_perfect_square(num):
+            return float(sy.sqrt(num)) % 1 == 0
+
+        def check_for_square_minus_square(a, b):
+            if (a < 0 and b < 0) or (a > 0 and b > 0):
+                return False
+            if is_perfect_square(abs(a)) and is_perfect_square(abs(b)):
+                return True
+            return False
+
+        if check_for_square_minus_square(a,c):
+            expr1 = sy.factor(A+C)
+        else:
+            expr1 = A + C
+
+        expr = expr1*(B+D)
 
         self.answer = sy.factor(expr)
         # expr1 = sy.factor(A+B1)*(A+B2)
@@ -115,12 +132,13 @@ class FactoringByGrouping(Question):
         # return answer ==  user_answer
         return check_congruence_after_factoring_out_gcf(answer, user_answer)
 
-    def format_useranswer(self, user_answer, display=False):
+    @staticmethod
+    def format_useranswer(user_answer, display=False):
         user_answer = user_answer.lower()
         return f'\\({user_answer}\\)'
 
-    @classmethod
-    def validator(self, user_answer):
+    @staticmethod
+    def validator(user_answer):
         try:
             user_answer = user_answer.lower()
             user_answer = user_answer.replace('^', '**')

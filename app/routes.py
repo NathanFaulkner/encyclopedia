@@ -302,7 +302,10 @@ def section(section_name):
 def answer_previewer(question_name):
     user_answer = request.args.get('user_answer')
     question = getattr(questions, question_name).Question_Class
+    if user_answer == None:
+        return redirect(url_for('library'))
     # print(question.format_useranswer)
+    # print(type(user_answer))
     try:
         question.validator(user_answer)
         if 'simplify' in user_answer or 'factor' in user_answer:

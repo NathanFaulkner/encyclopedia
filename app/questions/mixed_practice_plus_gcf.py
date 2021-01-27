@@ -50,6 +50,7 @@ class MixedPracticePlusGCF(Question):
         # self.type_of_problem = 'easyFactorExpr'
         # self.type_of_problem = 'quadraticPatternExpr'
         # self.type_of_problem = 'specialPatternExpr'
+        self.type_of_problem = 'factorByGroupingExpr'
 
 
         if self.type_of_problem == 'quadraticPatternExpr':
@@ -112,7 +113,19 @@ class MixedPracticePlusGCF(Question):
             C = c*vars[1]
             B = b*vars[0]
             D = d*vars[1]
-            expr = (A+C)*(B+D)
+            def is_perfect_square(num):
+                return float(sy.sqrt(num)) % 1 == 0
+            def check_for_square_minus_square(a, b):
+                if (a < 0 and b < 0) or (a > 0 and b > 0):
+                    return False
+                if is_perfect_square(abs(a)) and is_perfect_square(abs(b)):
+                    return True
+                return False
+            if check_for_square_minus_square(a,c):
+                expr1 = sy.factor(A+C)
+            else:
+                expr1 = A + C
+            expr = expr1*(B+D)
         if self.type_of_problem == 'easyFactorExpr':
             p=0
             while p ==0:
