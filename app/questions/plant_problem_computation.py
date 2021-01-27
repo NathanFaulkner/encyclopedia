@@ -196,7 +196,10 @@ You must include units in your answer!
         long_format = inflector.plural(str(self.height_unit))
         abbrev = '{:~}'.format(self.height_unit)
         peculiar = str(self.height_unit)
-        return user_units in [long_format, abbrev, peculiar]
+        abbrev_plural = abbrev + 's'
+        allowed = [long_format, abbrev, peculiar, abbrev_plural]
+        # print(allowed)
+        return user_units in allowed
 
     def checkanswer(self, user_answer):
         if len(user_answer.split(' ')) == 1:
@@ -228,6 +231,8 @@ You must include units in your answer!
                 user_answer, user_units = user_answer.split(' ')
             user_answer = user_answer.replace('^', '**')
             user_answer = parse_expr(user_answer, transformations=transformations)
+            bool(abs(user_answer - 1) < 0.0005)
+            abs(user_answer - 1) < 0.0005 and self.checkunits(user_units)
         except:
             raise SyntaxError
 

@@ -17,7 +17,8 @@ import json
 from app.questions import (Question,
                             latex_print,
                             random_non_zero_integer,
-                            permute_equation)
+                            permute_equation,
+                            has_letters)
 # from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 
@@ -150,10 +151,12 @@ Compute the price of a pizza with
         user_answer = user_answer.replace('dollars', ' ')
         user_answer = user_answer.replace('^', '**')
         user_answer = parse_expr(user_answer, transformations=transformations)
+        # print('yup')
+        print(type(abs(user_answer - self.answer) < 0.0005))
         return abs(user_answer - self.answer) < 0.0005
 
-
-    def format_useranswer(self, user_answer, display=False):
+    @staticmethod
+    def format_useranswer(user_answer, display=False):
         if '$' in user_answer or 'dollars' in user_answer:
             sign = '$'
         else:
@@ -164,14 +167,17 @@ Compute the price of a pizza with
         user_answer = parse_expr(user_answer, transformations=transformations)
         return sign + str(user_answer)
 
-    @classmethod
-    def validator(self, user_answer):
+    @staticmethod
+    def validator(user_answer):
+        print('yup')
         try:
             user_answer = user_answer.replace('$', ' ')
             user_answer = user_answer.replace('dollars', ' ')
             user_answer = user_answer.replace('^', '**')
+            # if has_letters(user_answer):
+            #     raise SyntaxError
             user_answer = parse_expr(user_answer, transformations=transformations)
-            float(user_answer)
+            bool(abs(user_answer - 1) < 0.0005)
         except:
             raise SyntaxError
 

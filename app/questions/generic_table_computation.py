@@ -144,22 +144,24 @@ Compute the value of \(y\) when \(x = {self.input}\)
         user_answer = parse_expr(user_answer, transformations=transformations)
         return abs(user_answer - self.answer) < 0.0005
 
-
-    def format_useranswer(self, user_answer, display=False):
+    @staticmethod
+    def format_useranswer(user_answer, display=False):
         user_answer = user_answer.replace('y', ' ')
         user_answer = user_answer.replace('=', ' ')
         user_answer = user_answer.replace('^', '**')
         user_answer = parse_expr(user_answer, transformations=transformations)
         return user_answer
 
-    @classmethod
-    def validator(self, user_answer):
+    @staticmethod
+    def validator(user_answer):
         try:
             user_answer = user_answer.replace('y', ' ')
             user_answer = user_answer.replace('=', ' ')
             user_answer = user_answer.replace('^', '**')
+            # if has_letters(user_answer):
+            #     raise SyntaxError
             user_answer = parse_expr(user_answer, transformations=transformations)
-            float(user_answer)
+            bool(abs(user_answer - 1) < 0.0005)
         except:
             raise SyntaxError
 

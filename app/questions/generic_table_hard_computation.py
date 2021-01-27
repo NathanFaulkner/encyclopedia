@@ -182,18 +182,20 @@ Consider the following table, depciting a relationship between \(x\) and \(y\).
         # print(us)
         return abs(user_answer - self.float_answer) < 0.0005
 
-
-    def format_useranswer(self, user_answer, display=False):
+    @staticmethod
+    def format_useranswer(user_answer, display=False):
         user_answer = user_answer.replace('^', '**')
         user_answer = parse_expr(user_answer, transformations=transformations)
         return f'\({latex(user_answer)}\)'
 
-    @classmethod
-    def validator(self, user_answer):
+    @staticmethod
+    def validator(user_answer):
         try:
             user_answer = user_answer.replace('^', '**')
+            # if has_letters(user_answer):
+            #     raise SyntaxError
             user_answer = parse_expr(user_answer, transformations=transformations)
-            float(user_answer)
+            bool(abs(user_answer - 1) < 0.0005)
         except:
             raise SyntaxError
 
