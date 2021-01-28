@@ -116,7 +116,7 @@ class SolveByCompletingTheSquare(Question):
     You would enter, "5 - sqrt(3/2), 5 + sqrt(3/2)".
     """
 
-    # loom_link = "https://www.loom.com/share/331e43b308a64cefbafdb1ac3211c9ac"
+    loom_link = "https://www.loom.com/share/45ad97d9666e4dfd9fecd6baf79a0a52?sharedAppSource=personal_library"
 
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'

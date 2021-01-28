@@ -15,8 +15,14 @@ class QuadraticPatternForPhotoMath(QuadraticPattern):
     """
     """
     def __init__(self, **kwargs):
+        if 'seed' in kwargs:
+            seed = kwargs['seed']
+        else:
+            seed = random.random()
+        kwargs['seed'] = seed
+        random.seed(seed)
         kwargs['p'] = 1
-        kwargs['r'] = 5
+        kwargs['r'] = random.choice([3, 6, 9])
         super().__init__(**kwargs)
 
 
