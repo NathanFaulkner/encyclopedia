@@ -308,7 +308,7 @@ def answer_previewer(question_name):
     # print(type(user_answer))
     try:
         question.validator(user_answer)
-        if 'simplify' in user_answer or 'factor' in user_answer:
+        if 'simplify' in user_answer or 'factor' in user_answer or 'solve' in user_answer:
             return 'The answer checker will not admit this input.'
     except SyntaxError:
         return 'The answer checker will not admit this input.'

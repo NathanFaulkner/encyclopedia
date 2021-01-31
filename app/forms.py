@@ -21,7 +21,7 @@ class AnswerForm(FlaskForm):
 
 
     def validate_answer(self, answer):
-        if 'simplify' in answer.data or 'factor' in answer.data:
+        if 'simplify' in answer.data or 'factor' in answer.data or 'solve' in answer.data:
             raise ValidationError('A++ thinking!  But, sorry, not allowed.')
         try:
             # user_answer = answer.data.replace('^', '**')

@@ -34,27 +34,32 @@ class RationalsMessy(Question):
             self.seed = random.random()
         random.seed(self.seed)
         x = sy.Symbol('x')
-        left = -7
-        right = 7
+        # left = -7
+        # right = 7
         common_factor = x - random.choice([0,0,0,0,0,0,0,0,1,2,-1,-2])
-        e = random.choice([[0,1], [1,1],[1,0]])
-        f = random.choice([[0,1], [1,1],[1,0]])
-        numa = []
-        numb = []
-        for i in range(2):
-            numa.append(random_non_zero_integer(-5,5))
-            numb.append(random.randint(1,3))
-        numterms = []
-        for i in range(2):
-            term = sy.expand(numa[i]/(numb[i]*common_factor**e[i]))
-            numterms.append(term)
-        numerator = sy.expand(numterms[0] + numterms[1])
+        e = random.choice([[0,1], [1,1]])
+        if e == [0,1]:
+            f = [1,1]
+        else:
+            f = [0,1]
+        numerator = 0
+        while numerator == 0:
+            numa = []
+            numb = []
+            for i in range(2):
+                numa.append(random_non_zero_integer(-5,5))
+                numb.append(random.randint(1,3))
+            numterms = []
+            for i in range(2):
+                term = sy.expand(numa[i]/(numb[i]*common_factor**e[i]))
+                numterms.append(term)
+            numerator = sy.expand(numterms[0] + numterms[1])
         denominator = 0
-        while type(denominator) != type(x+1):
+        while sy.sympify(denominator).is_number:
             dena = []
             denb = []
             denterms = []
-            denominator = 0
+            # denominator = 0
             for i in range(2):
                 dena.append(random_non_zero_integer(-5,5))
                 denb.append(random.randint(1,3))

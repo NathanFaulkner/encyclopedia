@@ -834,7 +834,7 @@ rationals = Division('chapter', "Rationals",
                                 [
                                 rationalsmultiplyinganddividing,
                                 rationalsaddingandsubtracting,
-                                # rationalsputtingitalltogether,
+                                rationalsputtingitalltogether,
                                 ])
 rationals.set_frontpage(rationals_intro)
 
