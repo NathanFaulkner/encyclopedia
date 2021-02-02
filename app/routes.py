@@ -353,8 +353,16 @@ def question(question_name):
     session['question_name'] = question_name
     if current_user.is_authenticated: ## Added 12/16/2020
         section_name = session.get('section_name') ## Added 12/16/2020
-        grade_info = UserSectionStatus.query.filter_by(student=current_user, section_name=section_name).first() ## Added 12/16/2020
+        print(section_name)
+        # if section_name is None:
+        #     print('this is untested')
+        #     return redirect(url_for('logout'))
+        grade_info = UserSectionStatus.query.filter_by(student=current_user, section_name=section_name).first()## Added 12/16/2020;
+        # if section_name is not None and grade_info is None:
+        #     print('this is untested also')
+        #     grade_info = UserSectionStatus.initialize_from_answers(current_user, section_name) #This is untested, but seems necessary...
     else:  ## Added 12/16/2020
+        # print('no user!!!!!')
         grade_info = None  ## Added 12/16/2020
     if current_user.is_authenticated:
         user_book_names = json.loads(current_user.books)
@@ -480,6 +488,7 @@ def question(question_name):
             session['seed'] = grade_info.underway_seed
             session['user_points'] = []
         else: # AttributeError:
+            # print('Else anonymous!!!')
             session['tried'] = False
             session['seed'] = random.random()
             if current_user.is_authenticated:
