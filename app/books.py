@@ -745,6 +745,11 @@ rationalsaddingandsubtracting.add_to_questions('rationals_add_or_subtract',
 
 rationalsputtingitalltogether = Section('rationalsputtingitalltogether', "Putting It All Together", '/sections/rationals-putting-it-all-together')
 rationalsputtingitalltogether.add_to_questions('rationals_messy')
+
+rationalssolvingequations = Section('rationalssolvingequations', "Solving Equations Involving Rationals", '/sections/rationals-solving-equations')
+rationalssolvingequations.add_to_questions('solving_equation_with_rational_linear',
+                                            'solving_equation_with_rational_quadratic',
+                                            'solving_equation_with_rational_linear_type2')
 #######################################
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
@@ -835,6 +840,7 @@ rationals = Division('chapter', "Rationals",
                                 rationalsmultiplyinganddividing,
                                 rationalsaddingandsubtracting,
                                 rationalsputtingitalltogether,
+                                rationalssolvingequations,
                                 ])
 rationals.set_frontpage(rationals_intro)
 

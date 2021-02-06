@@ -106,6 +106,9 @@ __all__ = ['quadratic_pattern',
             'rationals_add_or_subtract',
             'rationals_add_or_subtract_type2',
             'rationals_messy',
+            'solving_equation_with_rational_linear',
+            'solving_equation_with_rational_quadratic',
+            'solving_equation_with_rational_linear_type2',
             ]
 
 class Question():
@@ -668,3 +671,13 @@ def basic_parse_and_check(user_answer, answer):
     user_answer = user_answer.replace('^', '**')
     user_answer = parse_expr(user_answer, transformations=transformations)
     return answer == user_answer
+
+
+def list_integer_factors(n):
+    factors = []
+    i = 1
+    while i <= abs(n):
+        if n % i == 0:
+            factors.append(i)
+        i += 1
+    return factors

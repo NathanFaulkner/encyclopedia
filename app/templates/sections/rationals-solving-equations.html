@@ -1,0 +1,231 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section, we continue to "put it all together"&mdash;that is, we
+  continue to use our skills of dealing with rationals that are being added,
+  subtracted, multiplied, or divided by other rationals&mdash;but in the
+  context of solving an equation.  Actually, this will hopefully be pretty
+  straight-forward: we are just trying to figure out possible values for
+  \(x\) that satisfy a given equation; we are trying to find a simple
+  description of the solution set.
+</p>
+<p>
+  In the first two examples, I will use the "trick" of multiplying both sides of the
+  equation by any denominators that I want to cancel.  (In later examples,
+  I will use another method; you'll have to decide which you like better,
+  possibly after stumbling a bit.)  After canceling all denominators in this
+  way, what results will either be a linear equation (no \(x^2\)) or a
+  quadratic (contains \(x^2\)).  But you have techniques for solving either case.
+
+  In the first example, a linear equation results after multiplying both sides by all denominators.
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find the solution set.
+
+\[\displaystyle
+\frac{3}{5x} = \frac{2}{x-7}
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+&\frac{3}{5x} = \frac{2}{x-7} \\
+\Rightarrow \quad &\frac{3}{\cancel{5x}} \cdot \cancel{5x} = \frac{2}{x-7} \cdot 5x \\
+\Rightarrow \quad &3  = \frac{10x}{x-7}  \\
+\Rightarrow \quad &3 \cdot (x-7) = \frac{10x}{\bcancel{x-7}} \cdot \bcancel{(x-7)} \\
+\Rightarrow \quad &3x - 21 = 10x \\
+\Rightarrow \quad & -7x = 21 \\
+\Rightarrow \quad & x = -3
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+
+Of course, if you wan,t you can "cross-multiply"&mdash;which really means
+to skip steps as you multiply both sides by any denominators and cancel appropriately.
+The series of steps that "cross multiplying" skips can be see in the following.
+\begin{align*}
+& \frac{A}{B} = \frac{C}{D}\\
+\Rightarrow \quad & \frac{A}{\cancel{B}} \cdot \cancel{B} = \frac{C}{D} \cdot B\\
+ \Rightarrow \quad & A = \frac{BC}{D} \\
+  \Rightarrow \quad & A \cdot D = \frac{BC}{\bcancel{D}}\cdot \bcancel{D}\\
+ \Rightarrow \quad & AD = BC
+\end{align*}
+"Cross multiplying" is when you skip those middle steps (provided they all make
+sense to you!) and just write the following:
+\begin{align*}
+& \frac{A}{B} = \frac{C}{D}\\
+ \Rightarrow \quad & AD = BC
+\end{align*}
+
+
+In the second example, a quadratic equation results after mutliplying both sides by the denominators:
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find the solution set.
+
+\[\displaystyle
+\frac{2}{x-4} = \frac{x+5}{5}
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+&\frac{2}{x-4} = \frac{x+5}{5} \\
+\Rightarrow \quad & 2 \cdot 5 = (x-4)(x+5) \\
+\Rightarrow \quad & x^2 + x - 20 = 10 \\
+\Rightarrow \quad & x^2 + x - 30 = 0 \\
+\Rightarrow \quad & (x-5)(x+6)= 0 \\
+\Rightarrow \quad & x = 5 \textrm{    or    } x = -6
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+Now, we have to do a few more examples, because as we make the problems a
+little more complicated, some different things can happen.
+Owing to the fact that we are canceling denominators involving the variable,
+there can be a loss information&mdash;specifically, about \(x\)-values that
+would create 0 in the denominators of the original equation and therefore
+cannot be solutions.  So, if you don't take care in your method for
+solving&mdash;or, at least, check your answers when you are
+through&mdash;you may get "erroneous" solutions.  We'll see that in the next two examples.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find the solution set.
+
+\[\displaystyle
+\frac{3}{x(x+1)}  + \frac{3}{x+1}= -\frac{1}{x}
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+&\frac{3}{x(x+1)}  + \frac{3}{x+1}= -\frac{1}{x} \\
+\Rightarrow \quad & \frac{3}{x(x+1)} + \frac{3x}{x(x+1)} = -\frac{1}{x}\\
+\Rightarrow \quad & \frac{3x+3}{x(x+1)} = -\frac{1}{x}\\
+\Rightarrow \quad & \frac{3\cancel{(x+1)}}{x\cancel{(x+1)}} = -\frac{1}{x}\\
+\Rightarrow \quad & \frac{3}{x} = -\frac{1}{x}\\
+\Rightarrow \quad & 3 = -1 \\
+\Rightarrow \quad & \textrm{No solution}
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+What I am doing in this past example&mdash;and will continue to do in
+subsequent examples&mdash;is actually to delay canceling common factors until
+later steps.  This can help to avoid obtaining "erroneous answers."
+You may find that if you follow another method, you will get erroneous answers.
+The antidote is either to try my methods or to be sure to check your answer.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find the solution set.
+
+\[\displaystyle
+\frac{x}{x-1}  + \frac{5}{x+2}= \frac{3}{(x+2)(x-1)}
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+&\frac{x}{x-1}  + \frac{5}{x+2}= \frac{3}{(x+2)(x-1)} \\
+\Rightarrow \quad & \frac{x}{x-1} \cdot \frac{x+2}{x+2} + \frac{5}{x+2} \cdot \frac{x-1}{x-1}= \frac{3}{(x+2)(x-1)}\\
+\Rightarrow \quad & \frac{x(x+2) + 5(x-1)}{(x-1)(x+2)} = \frac{3}{(x-1)(x+2)}\\
+\Rightarrow \quad & \frac{x^2 + 7x -5}{(x-1)(x+2)} = \frac{3}{(x-1)(x+2)}\\
+\Rightarrow \quad & \frac{x^2 + 7x -5}{(x-1)(x+2)} - \frac{3}{(x-1)(x+2)} = 0\\
+{\color{blue}\Rightarrow}  \quad & \frac{x^2 + 7x - 8}{(x-1)(x+2)} = 0\\
+\Rightarrow \quad & \frac{\cancel{(x-1)}(x+8)}{\cancel{(x-1)}(x+2)} = 0\\
+\Rightarrow \quad & \frac{x+8}{x+2} = 0\\
+\Rightarrow \quad & x+ 8 = 0 \cdot(x+2)\\
+\Rightarrow \quad & x+ 8 = 0 \\
+\Rightarrow \quad & x = -8\\
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+I marked one of my steps in <span style="color:blue">blue</span>.
+That's because I want to call attention to what I did there: I combined
+like terms!  Do you see what I mean?  I'm going to use that technique again
+on the next one.  But, by the way, there are a large number of ways you might
+go about solving these equations.  I am only showing you one, but you are
+welcome to try other strategies that come to your mind.  Just take my advice and check your answers!
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find the solution set.
+
+\[\displaystyle
+\frac{5}{x} + 2 = \frac{6}{x}
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+&\frac{5}{x} + 2 = \frac{6}{x} \\
+\Rightarrow \quad & 2 = \frac{1}{x} & \bigg(\textrm{Note: I combined like terms:  } \frac{6}{x} - \frac{5}{x } = \frac{1}{x}. \bigg)\\
+\Rightarrow \quad & 2x = 1\\
+\Rightarrow \quad & x = \frac{1}{2}\\
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

@@ -89,7 +89,7 @@ class CelebratoryGunfire(Question):
         All that combines to give you the following model for the position
         \(y\) of the bullet relative to the ground after \(t\) seconds
             \[
-                y(x) = {c:.3f} + {b}t - 16t^2
+                y(t) = {c:.3f} + {b}t - 16t^2
             \]
         (FYI: Where did the '32' go?  It became a 16.)
 
