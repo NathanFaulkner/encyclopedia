@@ -257,8 +257,15 @@ function graph_points(cart_pts) {
   {% else %}
   var color = "blue";
   {% endif %}
+  {% if piecewise %}
+  {% for poly_points in list_of_poly_data %}
   graph_info = {"shape": "polyline", "data": {"points" : "{{ poly_points|safe }}"}  }
   draw_graph(svg, graph_info, color);
+  {% endfor %}
+  {% else %}
+  graph_info = {"shape": "polyline", "data": {"points" : "{{ poly_points|safe }}"}  }
+  draw_graph(svg, graph_info, color);
+  {% endif %}
   points = {{ points|safe }}
   graph_points(points);
 </script>

@@ -750,6 +750,11 @@ rationalssolvingequations = Section('rationalssolvingequations', "Solving Equati
 rationalssolvingequations.add_to_questions('solving_equation_with_rational_linear',
                                             'solving_equation_with_rational_quadratic',
                                             'solving_equation_with_rational_linear_type2')
+
+graphsofhyperbolas = Section('graphsofhyperbolas', "Graphs of Hyperbolas", '/sections/graphs-of-hyperbolas')
+graphsofhyperbolas.add_to_questions('graph_hyperbola',
+                                    'graph_hyperbola_to_equation',
+                                    )
 #######################################
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
@@ -841,6 +846,7 @@ rationals = Division('chapter', "Rationals",
                                 rationalsaddingandsubtracting,
                                 rationalsputtingitalltogether,
                                 rationalssolvingequations,
+                                graphsofhyperbolas,
                                 ])
 rationals.set_frontpage(rationals_intro)
 

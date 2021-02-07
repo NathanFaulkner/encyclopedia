@@ -302,6 +302,7 @@ def try_cube_root(points):
 def try_inverse_x(points):
     # points = list(set(tuple(point) for point in points))
     points.sort(key=lambda x: x[0])
+    # print('points', points)
     i = 0
     while i < len(points):
         x0, y0 = points[i]
@@ -311,7 +312,7 @@ def try_inverse_x(points):
             x1, y1 = points[0]
         a = (y1-y0)/(x0-x1)*(x1-x0+1)
         f = lambda x: a/(x-x0+1) + y0 - a
-        if all_satisfy(f, points):
+        if all_satisfy(f, points) and (x0 - 2, y0 - 2*a) in points:
             x_points = np.linspace(cart_x_min, cart_x_max, 1001)
             return {"function": f, "x_points": x_points, "horiz_shift": x0-1}
         i += 1

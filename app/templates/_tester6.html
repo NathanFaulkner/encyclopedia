@@ -54,6 +54,37 @@
       <button type="button" onclick="manual_add_point()" id="special_point_submitter">Manual Add:</button>
       <input type="text" id="special_point"></input>
       <div id="syntax_for_plot_points" style="color:red"></div>
+
+    <p>
+      <button type="button" onclick="shift_right()" id="shift_right_submitter">Shift Right:</button>
+      <input type="text" id="shift_right_units"></input>
+      <div id="syntax_for_shift_right" style="color:red"></div>
+
+    <p>
+      <button type="button" onclick="shift_up()" id="shift_up_submitter">Shift Up:</button>
+      <input type="text" id="shift_up_units"></input>
+      <div id="syntax_for_shift_up" style="color:red"></div>
+
+    <p>
+      <button type="button" onclick="reflect_over_horiz()" id="reflect_over_horiz_submitter">Reflect over \(y =\)</button>
+      <input type="text" id="reflect_over_horiz"></input>
+      <div id="syntax_for_reflect_over_horiz" style="color:red"></div>
+
+    <p>
+      <button type="button" onclick="reflect_over_vert()" id="reflect_over_vert_submitter">Reflect over \(x =\)</button>
+      <input type="text" id="reflect_over_vert"></input>
+      <div id="syntax_for_reflect_over_vert" style="color:red"></div>
+
+    <p>
+      <button type="button" onclick="scale_vert()" id="scale_vert_submitter">Scale Vertically</button>
+      <input type="text" id="scale_vert"></input> (Enter scalar factor)
+      <div id="syntax_for_scale_vert" style="color:red"></div>
+
+    <p>
+      <button type="button" onclick="scale_horiz()" id="scale_horiz_submitter">Scale Horizontally</button>
+      <input type="text" id="scale_horiz"></input> (Enter scalar factor)
+      <div id="syntax_for_scale_horiz" style="color:red"></div>
+
       <!-- <div oncontextmenu="contextMenuFunction(event)">
         <p>Right-click inside this box to see the context menu!</p>
       </div> -->
@@ -64,7 +95,7 @@
           <!-- <hr>
           <li data-action="disable" class="disabled">Disabled Item</li> -->
       </ul>
-    </p>
+
   </div>
 
   <p>
@@ -351,16 +382,29 @@ function str_list_to_list_of_floats(str_list) {
 
 // var repetition_warning = ""
 
+// function is_point_deprecated(str_list) {
+//   if (str_list === null) {
+//     return false;
+//   }
+//   if (a.length != 2) {
+//     return false;
+//   }
+//   var i;
+//   for (i=0; i < a.length; i++) {
+//     if (typeof a[i] != "number") {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+
 function is_point(str_list) {
-  if (str_list === null) {
-    return false;
-  }
-  if (a.length != 2) {
-    return false;
-  }
+  console.log('function called');
+  var point = str_list_to_list_of_floats(str_list);
   var i;
-  for (i=0; i < a.length; i++) {
-    if (typeof a[i] != "number") {
+  for (i=0; i<point.length; i++) {
+    console.log(i, point[i]);
+    if (isNaN(point[i])) {
       return false;
     }
   }
@@ -379,10 +423,12 @@ function manual_add_point() {
     // manual_points.push(text);
     // console.log(text);
     if (text !== '') {
-      var point = str_list_to_list_of_floats(text);
+      // var point = str_list_to_list_of_floats(text);
       // console.log('Need to look at the point:', point);
       // console.log(point);
-      if (is_point(point)) {
+      if (is_point(text)) {
+        var point = str_list_to_list_of_floats(text);
+        console.log(point);
         document.getElementById('syntax_for_plot_points').innerHTML = ''
         var i = check_for_nearby(point, points);
         // console.log(check_for_nearby(point, points));
@@ -404,10 +450,100 @@ function manual_add_point() {
         // special_points_list.appendChild(para);
         do_ajax();
       } else {
-        document.getElementById('syntax_for_plot_points').innerHTML = '[Enter (x, y) coordinates separated by a comma.]'
+        document.getElementById('syntax_for_plot_points').innerHTML = '[Enter (x, y) coordinates separated by a comma. Fractions and decimals are allowed, but arithmetic is not.]'
       }
     }
   };
+
+function shift_right() {
+  document.getElementById('syntax_for_shift_right').innerHTML = ''
+  var text = document.getElementById("shift_right_units").value;
+  units = parseInt(text);
+  if (!(isNaN(units))) {
+    var i;
+    for (i=0; i<points.length; i++) {
+      points[i] = [points[i][0] + units, points[i][1]]
+    }
+    do_ajax();
+  } else {
+    document.getElementById('syntax_for_shift_right').innerHTML = '[Enter an integer.]'
+  }
+}
+
+function shift_up() {
+  document.getElementById('syntax_for_shift_up').innerHTML = ''
+  var text = document.getElementById("shift_up_units").value;
+  units = parseInt(text);
+  if (!(isNaN(units))) {
+    var i;
+    for (i=0; i<points.length; i++) {
+      points[i] = [points[i][0], points[i][1] + units]
+    }
+    do_ajax();
+  } else {
+    document.getElementById('syntax_for_shift_up').innerHTML = '[Enter an integer.]'
+  }
+}
+
+function reflect_over_horiz() {
+  document.getElementById('syntax_for_reflect_over_horiz').innerHTML = ''
+  var text = document.getElementById("reflect_over_horiz").value;
+  units = parseInt(text);
+  if (!(isNaN(units))) {
+    var i;
+    for (i=0; i<points.length; i++) {
+      points[i] = [points[i][0], units - (points[i][1]-units)]
+    }
+    do_ajax();
+  } else {
+    document.getElementById('syntax_for_reflect_over_horiz').innerHTML = '[Enter an integer.]'
+  }
+}
+
+function reflect_over_vert() {
+  document.getElementById('syntax_for_reflect_over_vert').innerHTML = ''
+  var text = document.getElementById("reflect_over_vert").value;
+  units = parseInt(text);
+  if (!(isNaN(units))) {
+    var i;
+    for (i=0; i<points.length; i++) {
+      points[i] = [units - (points[i][0] - units), points[i][1]]
+    }
+    do_ajax();
+  } else {
+    document.getElementById('syntax_for_reflect_over_vert').innerHTML = '[Enter an integer.]'
+  }
+}
+
+function scale_vert() {
+  document.getElementById('syntax_for_scale_vert').innerHTML = ''
+  var text = document.getElementById("scale_vert").value;
+  units = frac_str_to_float(text);
+  if (!(isNaN(units))) {
+    var i;
+    for (i=0; i<points.length; i++) {
+      points[i] = [points[i][0], units*points[i][1]]
+    }
+    do_ajax();
+  } else {
+    document.getElementById('syntax_for_scale_vert').innerHTML = '[Enter an integer or fraction.]'
+  }
+}
+
+function scale_horiz() {
+  document.getElementById('syntax_for_scale_horiz').innerHTML = ''
+  var text = document.getElementById("scale_horiz").value;
+  units = frac_str_to_float(text);
+  if (!(isNaN(units))) {
+    var i;
+    for (i=0; i<points.length; i++) {
+      points[i] = [units*points[i][0], points[i][1]]
+    }
+    do_ajax();
+  } else {
+    document.getElementById('syntax_for_scale_horiz').innerHTML = '[Enter an integer or fraction.]'
+  }
+}
 
 // function delete_manual_point(text) {
 //   console.log(manual_points);
@@ -636,10 +772,45 @@ function graph_points(cart_pts) {
     // }
     points = {{ points }};
     // do_alt_ajax();
-    graph_info = {"shape": "polyline", "data": {"points" : "{{ user_poly_points }}"}  }
-    draw_graph(svg, graph_info, "blue");
+    // do_ajax();
+    // console.log({{user_poly_points}});
+    // var polyline_data = "{{ user_poly_points }}";
+    // console.log(polyline_data);
+    // graph_info = {"shape": "polyline", "data": {"points" : "{{ user_poly_points }}"}  }
+    // draw_graph(svg, graph_info, "blue");
+    // var piecewise = {{ graph.piecewise }}
+    // if (piecewise) {
+    {% if graph.piecewise %}
+    // var pieces = {{ graph.svg_data['pieces'] or none }};
+    // console.log(pieces);
+    var list_of_pieces = [];
+    // var piece, obj;
+    {% for poly_points in graph.poly_points %}
+    // obj = pieces[i];
+    piece = {"shape": "polyline",
+            "data": {"points" : "{{ poly_points }}" }
+            };
+    list_of_pieces.push(piece);
+    {% endfor %}
+    {% else %}
+    var list_of_pieces = [{"shape": "{{ graph.svg_data['shape'] }}", "data": {"points" : "{{ graph.poly_points }}" } }]
+    {% endif %}
+    erase_graphs(svg);
+    draw_graphs(svg, list_of_pieces, "blue");
+    {% if correct_answer_poly_points.piecewise %}
+    // console.log('piecewise');
+    var list_of_pieces = [];
+    {% for poly_points in correct_answer_poly_points.poly_points %}
+    piece = {"shape": "polyline",
+            "data": {"points" : "{{ poly_points }}" }
+            };
+    list_of_pieces.push(piece);
+    {% endfor %}
+    draw_graphs(svg, list_of_pieces, "green");
+    {% else %}
     graph_info = {"shape": "polyline", "data": {"points" : "{{ correct_answer_poly_points }}"}  }
     draw_graph(svg, graph_info, "green");
+    {% endif %}
     graph_points(points);
   {% elif points %}
     points = {{ points }};

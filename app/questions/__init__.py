@@ -109,6 +109,7 @@ __all__ = ['quadratic_pattern',
             'solving_equation_with_rational_linear',
             'solving_equation_with_rational_quadratic',
             'solving_equation_with_rational_linear_type2',
+            'graph_hyperbola', 'graph_hyperbola_to_equation',
             ]
 
 class Question():

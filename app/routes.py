@@ -396,6 +396,7 @@ def question(question_name):
         # print('section: ', section)
         # print('book info: ', book_info)
     user_poly_points = ''
+    graph = None
     correct_answer_poly_points = ''
     # if request.method == 'GET':
     parameters = None
@@ -526,6 +527,11 @@ def question(question_name):
             else:
                 useranswer = points[0][0]
             graph.gen_dict_for_svg()
+            # if graph.piecewise:
+            # #     print('yay!')
+            #     user_poly_points = graph.
+            # else:
+            # #     print('still yay!')
             user_poly_points = graph.poly_points
             user_answer_for_db = json.dumps(points)
         else:
@@ -534,7 +540,6 @@ def question(question_name):
         x_min = parameters['cart_x_min']
         x_max = parameters['cart_x_max']
         correct_answer_poly_points = question.get_svg_data([x_min, x_max])
-        session['user_answer'] = user_answer_for_db
         # print("session['useranswer']", session['user_answer'])
     elif question_module.prob_type == 'real_line_graph':
         if form.points.data:
@@ -673,7 +678,7 @@ but you should try a different problem if you want credit."""
         site_name=app.config['SITE_NAME'], form=form, question=question,
         tried=session['tried'], message=message, whether_graph=whether_graph,
         parameters=parameters, question_name=new_question_name,
-        points=session.get('user_points'),
+        points=session.get('user_points'), graph=graph,
         correct_answer_poly_points=correct_answer_poly_points,
         user_poly_points=user_poly_points, grade_info=grade_info,
         bug_form=bug_form)
