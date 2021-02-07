@@ -48,7 +48,7 @@ class PolynomialCurveSketching(Question):
         x = Symbol('x', real=True)
         self.x = x
         degree = random.choice([3,4])
-        #degree = 4
+        # degree = 3
         zeroes = []
         force_duplicate = random.choice([True, False])
         # force_duplicate = True
@@ -65,6 +65,7 @@ class PolynomialCurveSketching(Question):
             for i in range(degree):
                     zeroes.append(random.randint(-5,5))
         #print(zeroes)
+        # zeroes = [3,3,3]
 
         y_0 = random.randint(-9,9)
         prod = 1
@@ -87,7 +88,7 @@ class PolynomialCurveSketching(Question):
                 out *= (x-zeroes[i])
             return out
 
-        expr = simplify(1/LC*f(x))
+        expr = factor(1/LC*f(x))
 
         self.as_lambda = lambdify(x, f(x))
         f = self.as_lambda

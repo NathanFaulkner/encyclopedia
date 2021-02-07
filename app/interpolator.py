@@ -188,6 +188,13 @@ def repeat_in_x(points):
     else:
         return False
 
+def repeated_pairs(points):
+    no_repeats = list(set(points))
+    if len(no_repeats) < len(points):
+        return True
+    else:
+        return False
+
 def check(points):
     points = list(set(tuple(point) for point in points))
     if len(points) == 1:
@@ -386,14 +393,17 @@ class Graph():
             self.x_points = np.linspace(cart_x_min, cart_x_max, 2)
             self.y_points = f(self.x_points)
         if len(points) > 1:
-            things_to_try = [try_linear,
-                            try_abs_value,
-                            try_quadratic,
-                            try_cubic,
-                            try_square_root,
-                            try_cube_root,
-                            try_inverse_x,
-                            try_factored_polynomial]
+            if repeated_pairs(points):
+                things_to_try = [try_factored_polynomial]
+            else:
+                things_to_try = [try_linear,
+                                try_abs_value,
+                                try_quadratic,
+                                try_cubic,
+                                try_square_root,
+                                try_cube_root,
+                                try_inverse_x,
+                                try_factored_polynomial]
             one_of_the_things_worked_out = False
             for thing_to_try in things_to_try:
                 print('I am trying ', thing_to_try)
