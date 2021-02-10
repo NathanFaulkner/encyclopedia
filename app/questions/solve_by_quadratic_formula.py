@@ -30,10 +30,10 @@ class SolveByQuadraticFormula(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        if 'has_solutions' in kwargs:
-            self.has_solutions = kwargs['has_solutions']
-        else:
-            self.has_solutions = random.choice([True,True,False])
+        # if 'has_solutions' in kwargs:
+        #     self.has_solutions = kwargs['has_solutions']
+        # else:
+        #     self.has_solutions = random.choice([True,True,False])
         if 'a' in kwargs:
             self.a = kwargs['a']
         else:
@@ -46,12 +46,16 @@ class SolveByQuadraticFormula(Question):
             self.c = kwargs['c']
         else:
             self.c = random.randint(-9,9)
-            if self.has_solutions:
-                while (self.b**2 - 4*self.a*self.c < 0):
-                    self.c = random.randint(-9,9)
-            else:
-                while (self.b**2 - 4*self.a*self.c >= 0):
-                    self.c = random.randint(-9,9)
+            # if self.has_solutions:
+            #     while (self.b**2 - 4*self.a*self.c < 0):
+            #         self.c = random.randint(-9,9)
+            # else:
+            #     while (self.b**2 - 4*self.a*self.c >= 0):
+            #         self.c = random.randint(-9,9)
+        if (self.b**2 - 4*self.a*self.c < 0):
+            self.has_solutions = False
+        else:
+            self.has_solutions = True
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:

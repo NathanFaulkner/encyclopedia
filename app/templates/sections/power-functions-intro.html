@@ -1,0 +1,68 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this chapter, as well as the next, we study various things we can do with
+  powers, AKA, exponents.  Even though the words "power" and "exponent" refer
+  to same thing, there is an important distinction made in the vocabulary by
+  using these two different but synonymous words: "power functions" and
+  "exponential functions" refer to different classes of objects.
+</p>
+
+
+
+<p>
+<div class="definition">
+  <h2></h2>
+
+A <b>power function</b> \(f\) is any function whose outputs can be obtained by a rule of the form
+\[
+f(x) = Ax^p
+\]
+where \(A\) and \(p\) are some real numbers.
+</div>
+</p>
+
+The new and interesting topic of discussion in this chapter hinges on the fact that in the definition
+above, the power (or exponent) \(p\) can be any real number&mdash;even a
+negative or a fraction or \(0\), etc.  What are we to make of this?
+
+
+<p>
+<div class="definition">
+  <h2></h2>
+
+An <b>exponential function</b> \(f\) is any function whose outputs can be obtained by a rule of the form
+\[
+f(x) = Ab^x
+\]
+where \(A\) and \(b\) are some real numbers.
+</div>
+</p>
+
+So, you see, exponential functions have the variable plugged into the exponent
+(or power) whereas with power functions the variable is the thing being raised
+to the power (or exponent).  We will study exponential functions in Chapter 7.
+
+
+<p>
+  In the first series of sections, we learn various algebraic "rules"
+  for manipulating powers&mdash;for simplifying and for rewriting them in
+  various ways.  This also motivates the definitions of some more "exotic"
+  exponents: negatives, \(0\), and  fractions.
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

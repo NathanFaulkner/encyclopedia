@@ -756,6 +756,11 @@ graphsofhyperbolas.add_to_questions('graph_hyperbola',
                                     'graph_hyperbola_to_equation',
                                     )
 #######################################
+powerfunctions_intro = Section('powerfunctions_intro', "Introduction to Power Functions", '/sections/power-functions-intro')
+
+integerexponents = Section('integerexponents', "Integer Exponents", '/sections/integer-exponents')
+#######################################
+
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
 
@@ -850,6 +855,12 @@ rationals = Division('chapter', "Rationals",
                                 ])
 rationals.set_frontpage(rationals_intro)
 
+powerfunctions = Division('chapter', "Power Functions",
+                                [
+                                integerexponents,
+                                ])
+powerfunctions.set_frontpage(powerfunctions_intro)
+
 algebra2_challenge = Division('chapter', "Challenge Sections",
                                     [absolutevalueequationspart2,
                                     solvingbyeliminationthreeequationsonesolution,
@@ -863,6 +874,7 @@ main = Division('main', 'Main Matter', [nuts_and_bolts_of_algebra,
                                         quadratics,
                                         polynomials,
                                         rationals,
+                                        # powerfunctions,
                                         algebra2_challenge])
 
 Algebra2 = Division('book', 'Algebra 2', {'front': None, 'main': main, 'end': None})

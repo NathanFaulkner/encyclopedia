@@ -1,0 +1,517 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section, we review the basics and also introduce the more
+  exotic notion of a negative integer power.
+  First of all, ask yourself, what it is basic meaning of a power?
+  What is purpose of exponents?  I hope you realize, that, first of all,
+  their purpose is to provide a method of bookkeeping when it comes to
+  "repeated multiplication."
+</p>
+
+
+For instance, though I might have the need to multiply \(5\)
+times itself a large number of times, I prefer not to write it all out.
+Exponents provide a shorthand:
+\[
+5\cdot 5\cdot 5\cdot5\cdot 5 \cdot 5 \quad \textrm{     is written    } \quad 5^6
+\]
+So, roughly speaking, a power \(p\), as in the expression,
+\(
+a^p
+\),
+can be describe as meaning "the number of factors of \(a\) that I
+have in that expression."  It's just that you'd rather not write them all.
+
+Note that
+
+<div class="center">
+
+Exponents : Multiplication :: Multiplication : Addition
+</div>
+
+
+That is, "exponents are to multiplication as multiplication is to addition."  What do I mean?  Well, exponentiation is repeated multiplication while multiplication is repeated addition:
+\[
+x^6 = x\cdot x\cdot x\cdot x\cdot x \cdot x
+\]
+but
+\[
+6x = x + x + x + x + x + x
+\]
+
+This warm-up should be relatively easy review: What happens when you combine expressions involving
+positive integer exponents in various ways?
+
+<p>
+<div class="example">
+  <h2> (Warm-up)</h2>
+
+\noindent\hbox to 0pt{\hss \href{https://www.loom.com/share/74f5a4ead6384a14b08735f802f1bdae}{Click for Video}\hskip10em}
+Simplify each of the following.
+<ol>
+
+\begin{minipage}{0.45\textwidth}
+
+<li>
+\(x^6 \cdot x^3\)
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+
+<li>
+\(\left(x^6\right)^3\)
+\end{minipage}
+</li>
+</li>
+\vspace{4\baselineskip}
+
+\begin{minipage}{0.45\textwidth}
+
+<li>
+\(\left(4x^2\right)\left(3x^4\right)\)
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+
+<li>
+\(\dfrac{4x^2}{12x^5}\)
+\end{minipage}
+</li>
+</li>
+\vspace{4\baselineskip}
+
+
+\begin{minipage}{0.45\textwidth}
+
+<li>
+\(\left(4x^2\right)^2\left(3x^4\right)^3\)
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+
+<li>
+\(\dfrac{\left(4x^2\right)^2}{\left(2x^5\right)^3}\)
+\end{minipage}
+</li>
+</li>
+\vspace{4\baselineskip}
+
+
+</ol>
+
+</div>
+</p>
+
+
+Now, just as subtraction signifies "undoing" addition, we have that division signifies undoing multiplication&mdash;they are both forms of cancellation, though in different contexts.  Also, just as negative numbers are just another way of repackaging subtraction, we can make sense of our first "exotic" exponent: negative exponents represent "taking away" factors&mdash;subtracting from our count of repeated factors&mdash;i.e., division.  Put more formally, consider the following definition.
+
+<p>
+<div class="definition">
+  <h2></h2>
+
+For any real number \(x\) except \(0\), we define the exponent of \(-1\) as follows:
+\[
+x^{-1} = \frac{1}{x}
+\]
+</div>
+</p>
+The reason can be seen by taking a look at the effect of multiplying  a
+series of repeated factors of \(x\) by \(\frac{1}{x}\):
+\[
+\frac{1}{x} \cdot x^6 =
+\frac{1}{\cancel{x}} \cdot \cancel{x}\cdot x\cdot x\cdot x\cdot x \cdot x
+= x\cdot x\cdot x\cdot x \cdot x = x^5
+\]
+The effect is to take \(1\) away from our count of repeated factors of
+\(x\); therefore, \(\frac{1}{x}\) can be considered to be worth "\(-1\) factors of \(x\)."
+
+Similarly, if I  had multiplied by, say, \(\frac{1}{x^4}\), exactly \(4\)
+factors would have been taken away.  Therefore, \(\frac{1}{x^4}\) is
+worth "\(-4\) factors of \(x\)" in this system of tallying "repeated factors":
+\[
+\frac{1}{x^4} \cdot x^6 =
+\frac{1}{\cancel{x}\cdot \cancel{x}\cdot \cancel{x} \cdot \cancel{x}} \cdot \cancel{x}\cdot \cancel{x}\cdot \cancel{x}\cdot \cancel{x}\cdot x \cdot x  =  x \cdot x = x^2
+\]
+
+<p>
+<div class="definition">
+  <h2></h2>
+
+For any real number \(x\) except \(0\) and for any positive integer \(n\) we define the exponent of \(-n\) as follows:
+\[
+x^{-n} = \frac{1}{x^n}
+\]
+</div>
+</p>
+
+Now that we have given a meaning to all positive integer exponents and all negative integer exponents, we do have one more integer to consider: \(0\).  What might a \(0\)
+in the exponent mean?  For instance, if I were to write \(5^0\), could this be given
+a sensible meaning or will it perhaps have to be left undefined like dividing by \(0\) is?  Think of it this way, the number \(5^0\)&mdash;if it really <em>is</em> a number&mdash;ought to be the number that
+neither adds to nor takes away from a count of repeated factors of 5.  And, there is indeed
+a number that does that: \(1\).
+Multiplying by \(1\) neither adds to nor takes away from our count of repeated factors of \(5\)&mdash;so, it is \(1\) that we say is worth "\(0\) factors of \(5\)."
+
+<p>
+<div class="definition">
+  <h2></h2>
+
+For any real number \(x\) except \(x=0\), we make the following definition:
+\[
+x^0 = 1
+\]
+</div>
+</p>
+Now, you might have two questions that occur to you here:
+<ol>
+[A.]
+
+<li>
+Why did I say that \(x^0=1\) except when \(x=0\)?
+
+<li>
+Why isn't \(x^0\) equal to \(0\)?  For instance, why isn't \(5^0\) equal to \(0\)?
+</li>
+</li>
+</ol>
+
+Let's take question A first.
+\begin{question}
+Why did I say that \(x^0=1\) except when \(x=0\)?
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+This is only a preliminary answer.  A better one can be supplied later when we contemplate fractional exponents.
+
+Shall we say that \(0^0\) is 0?  That would be to say that "0 is worth zero factors of 0."  I hope you will agree
+that that is, first of all, an odd thing to say, since, in fact, \(0\) is certainly worth any positive number of factors of \(0\), one, two, or a billion:
+\[
+0  = 0 \cdot 0 = 0\cdot 0 \cdot 0 = 0\cdot 0 \cdot 0  \cdot 0 = \textrm{ etc.}
+\]
+But might we still say that \(0\) is also worth "no factors of 0"?  Above, we discussed the fact that "multiplying a
+product of repeated factors of \(x\) by 1 neither adds to nor takes away from the count of factors,"
+and therefore 1 should be worth "no factors of \(x\)."  The same can be said when \(x=0\): multiplying by \(1\) does not change the count of repeated factors of \(0\):
+\[
+1\cdot 0^n = 0^n
+\]
+But multiplying by 0 doesn't change it either!
+\[
+0 \cdot 0^n = 0^n
+\]
+So, you could make the observation&mdash;at this point&mdash;that defining \(0^0\) to be 0 would be harmless, but so would defining it to be \(1\).  So, we have the dilemma of which to define it as&mdash;\(0\) or \(1\), which is a good reason for leaving it undefined.  Even worse than that, if you multiplied your string of repeated factors of \(0\) by <em>any</em> other number&mdash;such as 56 or 1,000&mdash;the count of repeated factors of 0 would also remain unchanged:
+\[
+56 \cdot 0^5 = 56 \cdot 0 =  0 = 999\cdot 0 = 999 \cdot 0^5
+\]
+Multiplying a string of factors of \(0\) by any number you like neither adds to nor subtracts from the count of repeated factors of \(0\)'s, so, really, at this point \(0^0\) could be defined to be <em>anything</em>.  So, how are we supposed to decide?  This is an argument for why it is not so obvious how you might <em>choose</em> to define it.  But, later, I can give an argument as to why you should actually
+<em>refuse</em> to define it.
+
+    </div>
+  </div>
+
+\end{question}
+
+\begin{question}
+Why isn't \(5^0\) equal to 0?  Put another way, if an exponent \(p\), as in \(x^p\), is supposed to mean "the number of factors of \(x\) that the expression is worth," and since, roughly speaking, you'd say that if all you had was \(0\), then you would certainly have "no factors of \(x\)", then
+why is \(x^0\) not 0?
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+Even though it is true in a manner of speaking that "\(0\) is worth no factors of \(x\)", the problem is that if all you have is \(0\) you have something much worse than nothing&mdash;in terms of multiplication&mdash;than you would if you were starting at \(1\).  The thing is to think about exponents as "all about multiplication."  So, ask yourself, what happens to the repeated count of, say, \(5\)'s when you multiply by 0?  How many \(5\)'s do we end up with?  Answering this might help us realize "how many factors of 5" 0 is worth:
+\[
+0\cdot 5^6 = 0 \cdot 5\cdot 5\cdot 5\cdot5\cdot 5 \cdot 5 = 0 = 5^{?}
+\]
+Does it add to the count of factors of \(5\)?  No, of course not.  But&mdash;it takes away!  It does not "leave it unchanged," but rather changes it dramatically.  On the contrary, multiplication by \(1\) neither adds to nor takes away from the count of repeated factors of \(5\):
+\[
+1\cdot 5^6 = 1 \cdot 5\cdot 5\cdot 5\cdot5\cdot 5 \cdot 5 = 5^6,
+\]
+so it should be counted as being worth "no factors of 5" in the sense of "no chance to the count of 5's in the product."
+
+You can say a little more.  Multiplying by \(0\) takes so many factors of \(5\) away that it
+is a hole that is impossible to dig out of.  You cannot multiply by any number of \(5\)'s to come
+back from multiplication by 0.  So, if you want to say that it is worth some number of factors
+of 5, then you can say that is worth "\(-\infty\)", the hole you can't dig out of:
+\[
+0 = 0 \cdot 5 \cdot 5 \cdot \cdots \cdot 5 \cdot 5 = 0 \cdot 5^{\textrm{as many as you want}}
+\]
+You can multiply as many 5's as you want and you still not overcome the 0: so it puts you at
+an impossible deficit of 5's; 0 is worth \(-\infty\) many 5's.
+%So, if we say that \(0 = 5^{-\infty}\), then we have the satisfactory statement that
+%\[
+%5^{-\infty} = 0 = 0 \cdot 5^{\textrm{some big number}} = 5^{-\infty}\cdot 5^{\textrm{some big number}}= 5^{-\infty + \textrm{some big number}}
+%\]
+
+    </div>
+  </div>
+
+\end{question}
+
+What remains is to combine all these exponents&mdash;positive, negative, and \(0\)&mdash;to make different expressions and to see if we can still make sense of it all.  You can&mdash;provided you remember the basic definitions above.
+
+\input{simplify-integer-exponent}
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the following, writing your final answer without using any negative exponents.
+\[
+6^{-3}
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+Simply rewrite using the definition of a negative integer exponent:
+\[
+6^{-3} = \frac{1}{6^3}
+\]
+
+
+\vspace{-\baselineskip}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the following, writing your final answer without using any negative exponents.
+\[
+\left(4^3\right)^5
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+\left(4^3\right)^5 &= \left(4^3\right) \cdot \left(4^3\right) \cdot \left(4^3\right) \cdot \left(4^3\right) \cdot \left(4^3\right)\\
+& = 4^{15}
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+It will be important to recall the following modification of the usual order of operations of exponent
+and negation that is communicated by parentheses:
+\[
+-2^4 = -2\cdot2\cdot2\cdot2 = -16
+\]
+(negation, which is like subtracting from 0, comes after exponent) but
+\[
+(-2)^4 = (-2) \cdot (-2) \cdot (-2) \cdot (-2) = 16
+\]
+(this time, negation happened first since it was inside the parentheses, and the exponent
+was applied secondly.)
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the following, writing your final answer without using any negative exponents.
+\[
+\left(-3^5\right)^2
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\[
+\left(-3^5\right)^2 = \left(-3^5\right) \cdot \left(-3^5\right) = +3^5 \cdot 3^5 = 3^{10}
+\]
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the following, writing your final answer without using any negative exponents.
+\[
+\frac{6^3}{6^8}
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\[
+\frac{6^3}{6^8} = \frac{\cancel{6} \cdot \cancel{6} \cdot \cancel{6}}{\cancel{6} \cdot \cancel{6} \cdot \cancel{6}\cdot  6 \cdot 6 \cdot 6 \cdot 6 \cdot 6} = \frac{1}{6^5}
+\]
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the following, writing your final answer without using any negative exponents.
+\[
+\left(\frac{6^3}{6^8}\right)^{-1}
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+\left(\frac{6^3}{6^8}\right)^{-1} &= \left(\frac{1}{6^5}\right)^{-1}\\
+& = \frac{1}{\frac{1}{6^5}} = \frac{6^5}{1} = 6^5
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+It will be helpful to make an observation concerning the previous example: when you
+have a fraction raised to a negative exponent, since the negative will move it to
+the denominator, and since division by a fraction can be reconstrued as multiplication by its
+reciprocal, you get the following
+\[
+\left(\frac{a}{b}\right)^{-n} = \frac{1}{\left(\frac{a}{b}\right)^n} = \frac{1}{\frac{a^n}{b^n}} = \frac{b^n}{a^n} = \left(\frac{b}{a}\right)^n
+\]
+So, you could do that more quickly by just flipping the fraction and then applying the positive
+version of the power to numerator and denominator, as in the following example.
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the following, writing your final answer without using any negative exponents.
+\[
+\left(\frac{2}{3}\right)^{-6}
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+\left(\frac{2}{3}\right)^{-6} &= \left(\frac{3}{2}\right)^6 = \frac{3^6}{2^6}\\
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+What happens when you start putting some variables into the mix?
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the following, writing your final answer without using any negative exponents.
+\[
+\displaystyle \left(-8x^{2}y^{3}\right)\left(x^{-3}y^{3}\right)
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+\left(-8x^{2}y^{3}\right)\left(x^{-3}y^{3}\right) &= \left(-8x^{2}y^{3}\right)\left(\frac{1}{x^3}y^{3}\right)\\
+&= \frac{-8x^2y^3y^3}{x^3}\\
+& = \frac{-8y^6}{x}
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the following, writing your final answer without using any negative exponents.
+\[
+\left(-1x^{2}y^{3}\right)^{3}
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+\left(-1x^{2}y^{3}\right)^{3} &= \left(-1x^{2}y^{3}\right) \left(-1x^{2}y^{3}\right) \left(-1x^{2}y^{3}\right)\\
+& = (-1)(-1)(-1)x^2x^2x^2y^3y^3y^3\\
+& = -x^6y^9
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+How about when we see negative exponents on variables within fractions?
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the following, writing your final answer without using any negative exponents.
+\[
+\frac{-1x^{-1}y^{-3}}{-2xy^{-4}}
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+\frac{-1x^{-1}y^{-3}}{-2xy^{-4}} &= \frac{\frac{-1}{xy^3}}{\frac{-2x}{y^4}}\\
+&= \frac{-1}{xy^3} \cdot \frac{y^4}{-2x}\\
+& = \frac{y}{2x^2}
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}
