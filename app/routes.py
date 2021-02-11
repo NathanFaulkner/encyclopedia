@@ -354,15 +354,18 @@ def question(question_name):
     if current_user.is_authenticated: ## Added 12/16/2020
         section_name = session.get('section_name') ## Added 12/16/2020
         # print(section_name)
-        if not 'skip_to_exercises' in request.args and request.method == 'GET':
+        if not session.get('tried'):
             if section_name is None:
                 # print('this is untested')
                 return redirect(url_for('logout'))
+                # session['tried'] = True
             else:
                 _section = getattr(books, section_name)
                 # print('The section is', section_name)
                 if question_name not in _section.questions:
                     # print('logged you out since question not in section')
+                    flash('You need to navigate to or from the corresponding book section in order to get credit.  You have been logged out.')
+                    # session['tried'] = True
                     return redirect(url_for('logout'))
         grade_info = UserSectionStatus.query.filter_by(student=current_user, section_name=section_name).first()## Added 12/16/2020;
         # if section_name is not None and grade_info is None:

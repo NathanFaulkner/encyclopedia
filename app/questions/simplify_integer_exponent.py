@@ -26,7 +26,6 @@ class SimplifyIntegerExponent(Question):
                 n = random.randint(a,b)
             return n
 
-
         def pow_neg_style(b,p):
             if p == 1:
                 return str(b)

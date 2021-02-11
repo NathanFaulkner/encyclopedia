@@ -48,9 +48,11 @@ class SolveByQuadraticFormula(Question):
             self.c = random.randint(-9,9)
             # if self.has_solutions:
             #     while (self.b**2 - 4*self.a*self.c < 0):
+            #         print('doin stuff')
             #         self.c = random.randint(-9,9)
             # else:
             #     while (self.b**2 - 4*self.a*self.c >= 0):
+            #         print('doin other stuff')
             #         self.c = random.randint(-9,9)
         if (self.b**2 - 4*self.a*self.c < 0):
             self.has_solutions = False
