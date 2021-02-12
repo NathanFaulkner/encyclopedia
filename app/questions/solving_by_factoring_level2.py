@@ -120,7 +120,7 @@ class SolvingByFactoringLevel2(Question):
                 user_answers = [parse_expr(ans, transformations=transformations) for ans in user_answers]
                 out = ''
                 for ans in user_answers:
-                    out += latex(ans) + ', '
+                    out += sy.latex(ans) + ', '
                 out = out[:-2]
                 return f'\\({out}\\)'
         else:

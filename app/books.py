@@ -759,6 +759,7 @@ graphsofhyperbolas.add_to_questions('graph_hyperbola',
 powerfunctions_intro = Section('powerfunctions_intro', "Introduction to Power Functions", '/sections/power-functions-intro')
 
 integerexponents = Section('integerexponents', "Integer Exponents", '/sections/integer-exponents')
+integerexponents.add_to_questions('simplify_integer_exponent')
 #######################################
 
 

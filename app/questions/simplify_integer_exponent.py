@@ -7,7 +7,7 @@ from sympy.parsing.sympy_parser import standard_transformations, implicit_multip
 transformations = (standard_transformations + (implicit_multiplication_application,))
 import sympy as sy
 
-from app.questions import Question, random_non_zero_integer,
+from app.questions import Question, random_non_zero_integer
 
 
 
@@ -158,15 +158,20 @@ class SimplifyIntegerExponent(Question):
             if oper == 'power' or oper == 'pow':
                 out += '\\left({expr}\\right)^{{{power}}}'.format(expr=terms[0], power=power)
             return out
-        self.answer = sy.expand(fexpr*gexpr)
+        kwargs = {'const_range': [-10,10],
+          'const_power_range':[-5,-1],
+          'variables' : []
+          }
+        term = basic_pow_term(**kwargs)
+        term  = sy.Pow(2, -3, evaluate=False)
+        self.answer = term
         self.format_answer = f'\( {sy.latex(self.answer)}\)'
-
         self.format_given = f"""
         \\[
-            \\left({sy.latex(sy.expand(fexpr))}\\right) \\left({sy.latex(sy.expand(gexpr))}\\right)
+            {sy.latex(term)}
         \\]"""
 
-        self.prompt_single = f"""Perform the indicated operation (i.e., multiply it all out)."""
+        self.prompt_single = f"""Simplify."""
 
         self.format_given_for_tex = f"""
         {self.prompt_single}
@@ -192,7 +197,12 @@ class SimplifyIntegerExponent(Question):
     def checkanswer(self, user_answer):
         user_answer = user_answer.lower()
         user_answer = user_answer.replace('^', '**')
-        user_answer = parse_expr(user_answer, transformations=transformations)
+        user_answer = parse_expr(user_answer, transformations=transformations, evaluate=False)
+        alt = sy.Add(user_answer, -sy.Symbol('x'), evaluate=False)
+        print('alt', alt)
+        print(alt == 0)
+        print(user_answer)
+        print(self.answer)
         return self.answer == user_answer
 
     @staticmethod

@@ -40,6 +40,11 @@
     content: "Activity " counter(activity) "."
   }
 
+  .question h2::before {
+    counter-increment: question;
+    content: "Question " counter(question) "."
+  }
+
   h1 + p::first-letter {
     /* color: var(--section-header-color); */
     font-size: 275%;

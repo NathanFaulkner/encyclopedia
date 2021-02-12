@@ -59,21 +59,74 @@ Simplify each of the following.
 <ol>
 <li>
 \(x^6 \cdot x^3\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    \[
+      x^6 \cdot x^3 = x^{6 + 3} = x^9
+    \]
+  </div>
+</div>
 </li>
 <li>
 \(\left(x^6\right)^3\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    \[
+      \left(x^6\right)^3 = x^6 \cdot x^6 \cdot x^6 = x^{18}
+    \]
+  </div>
+</div>
 </li>
 <li>
 \(\left(4x^2\right)\left(3x^4\right)\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    \begin{align*}
+      \left(4x^2\right)\left(3x^4\right) &= 4 x^2 \cdot 3 x^4 \\
+      &= 4 \cdot 3 \cdot x^2 \cdot x^4\\
+      &= 12 x^6
+    \end{align*}
+  </div>
+</div>
 </li>
 <li>
 \(\dfrac{4x^2}{12x^5}\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    \begin{align*}
+      \dfrac{4x^2}{12x^5} &= \dfrac{1}{3x^3}
+    \end{align*}
+  </div>
+</div>
 </li>
 <li>
 \(\left(4x^2\right)^2\left(3x^4\right)^3\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    \begin{align*}
+      \left(4x^2\right)^2\left(3x^4\right)^3 &= 16 x^4 \cdot 27 x^{12} \\
+      & = 16 \cdot 27 \cdot x^4 \cdot x^{12}\\
+      &= {{ 16*27 }} x^{16}
+    \end{align*}
+  </div>
+</div>
 </li>
 <li>
 \(\dfrac{\left(4x^2\right)^2}{\left(2x^5\right)^3}\)
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    \begin{align*}
+      \dfrac{\left(4x^2\right)^2}{\left(2x^5\right)^3} &= \dfrac{16x^4}{8x^{15}} \\
+      & = \dfrac{2}{x^{11}}\\
+    \end{align*}
+  </div>
+</div>
 </li>
 </ol>
 
@@ -92,7 +145,6 @@ division.  Put more formally, consider the following definition.
 <p>
 <div class="definition">
   <h2></h2>
-
 For any real number \(x\) except \(0\), we define the exponent of \(-1\) as follows:
 \[
 x^{-1} = \frac{1}{x}
@@ -110,19 +162,21 @@ The effect is to take \(1\) away from our count of repeated factors of
 \(x\); therefore, \(\frac{1}{x}\) can be considered to be worth "\(-1\) factors of \(x\)."
 
 Similarly, if I  had multiplied by, say, \(\frac{1}{x^4}\), exactly \(4\)
-factors would have been taken away.  Therefore, \(\frac{1}{x^4}\) is
-worth "\(-4\) factors of \(x\)" in this system of tallying "repeated factors":
+factors would have been taken away:
 \[
 \frac{1}{x^4} \cdot x^6 =
 \frac{1}{\cancel{x}\cdot \cancel{x}\cdot \cancel{x} \cdot \cancel{x}} \cdot
 \cancel{x}\cdot \cancel{x}\cdot \cancel{x}\cdot \cancel{x}\cdot x \cdot x  =  x \cdot x = x^2
 \]
+Therefore, \(\frac{1}{x^4}\) is
+worth "\(-4\) factors of \(x\)" in this system of tallying "repeated factors";
+we use the symbol \(x^{-4}\) for \(\frac{1}{x^4}\).
 
 <p>
 <div class="definition">
   <h2></h2>
-
-For any real number \(x\) except \(0\) and for any positive integer \(n\) we define the exponent of \(-n\) as follows:
+For any real number \(x\) except \(0\) and for any positive integer \(n\)
+we define the exponent of \(-n\) as follows:
 \[
 x^{-n} = \frac{1}{x^n}
 \]
@@ -143,7 +197,6 @@ repeated factors of \(5\)&mdash;so, it is \(1\) that we say is worth "\(0\) fact
 <p>
 <div class="definition">
   <h2></h2>
-
 For any real number \(x\) except \(x=0\), we make the following definition:
 \[
 x^0 = 1
@@ -160,8 +213,10 @@ Why isn't \(x^0\) equal to \(0\)?  For instance, why isn't \(5^0\) equal to \(0\
 </li>
 </ol>
 
-Let's take question A first.
-\begin{question}
+Let's take question 1 first.
+<p>
+<div class="question">
+  <h2></h2>
 Why did I say that \(x^0=1\) except when \(x=0\)?
 
   <div class="answer">
@@ -170,14 +225,20 @@ Why did I say that \(x^0=1\) except when \(x=0\)?
 
 This is only a preliminary answer.  A better one can be supplied later when we contemplate fractional exponents.
 
-Shall we say that \(0^0\) is 0?  That would be to say that "0 is worth zero factors of 0."  I hope you will agree
-that that is, first of all, an odd thing to say, since, in fact, \(0\) is certainly worth any positive number of factors of \(0\), one, two, or a billion:
+Shall we say that \(0^0\) is 0?  That would be to say that "0 is
+worth zero factors of 0."  I hope you will agree
+that that is, first of all, an odd thing to say, since, in fact, \(0\) is
+certainly worth any positive number of factors of \(0\), one, two, or a billion:
 \[
 0  = 0 \cdot 0 = 0\cdot 0 \cdot 0 = 0\cdot 0 \cdot 0  \cdot 0 = \textrm{ etc.}
 \]
-But might we still say that \(0\) is also worth "no factors of 0"?  Above, we discussed the fact that "multiplying a
-product of repeated factors of \(x\) by 1 neither adds to nor takes away from the count of factors,"
-and therefore 1 should be worth "no factors of \(x\)."  The same can be said when \(x=0\): multiplying by \(1\) does not change the count of repeated factors of \(0\):
+But might we still say that \(0\) is also worth "no factors of 0"?
+Above, we discussed the fact that "multiplying a
+product of repeated factors of \(x\) by 1 neither adds to nor
+takes away from the count of factors,"
+and therefore 1 should be worth "no factors of \(x\)."
+The same can be said when \(x=0\): multiplying by \(1\) does not change the
+count of repeated factors of \(0\):
 \[
 1\cdot 0^n = 0^n
 \]
@@ -185,35 +246,60 @@ But multiplying by 0 doesn't change it either!
 \[
 0 \cdot 0^n = 0^n
 \]
-So, you could make the observation&mdash;at this point&mdash;that defining \(0^0\) to be 0 would be harmless, but so would defining it to be \(1\).  So, we have the dilemma of which to define it as&mdash;\(0\) or \(1\), which is a good reason for leaving it undefined.  Even worse than that, if you multiplied your string of repeated factors of \(0\) by <em>any</em> other number&mdash;such as 56 or 1,000&mdash;the count of repeated factors of 0 would also remain unchanged:
+So, you could make the observation&mdash;at this point&mdash;that defining
+\(0^0\) to be 0 would be harmless, but so would defining it to be \(1\).
+So, we have the dilemma of which to define it as&mdash;\(0\) or \(1\),
+which is a good reason for leaving it undefined.  Even worse than that,
+if you multiplied your string of repeated factors of \(0\) by <em>any</em>
+other number&mdash;such as 56 or 1,000&mdash;the count of repeated factors of
+0 would also remain unchanged:
 \[
 56 \cdot 0^5 = 56 \cdot 0 =  0 = 999\cdot 0 = 999 \cdot 0^5
 \]
-Multiplying a string of factors of \(0\) by any number you like neither adds to nor subtracts from the count of repeated factors of \(0\)'s, so, really, at this point \(0^0\) could be defined to be <em>anything</em>.  So, how are we supposed to decide?  This is an argument for why it is not so obvious how you might <em>choose</em> to define it.  But, later, I can give an argument as to why you should actually
+Multiplying a string of factors of \(0\) by any number you like neither
+adds to nor subtracts from the count of repeated factors of \(0\)'s, so,
+really, at this point \(0^0\) could be defined to be <em>anything</em>.
+So, how are we supposed to decide?  This is an argument for why it is not
+so obvious how you might <em>choose</em> to define it.  But, later, I can
+give an argument as to why you should actually
 <em>refuse</em> to define it.
-
     </div>
   </div>
 
-\end{question}
+</div>
 
-\begin{question}
-Why isn't \(5^0\) equal to 0?  Put another way, if an exponent \(p\), as in \(x^p\), is supposed to mean "the number of factors of \(x\) that the expression is worth," and since, roughly speaking, you'd say that if all you had was \(0\), then you would certainly have "no factors of \(x\)", then
+<p>
+<div class="question">
+  <h2></h2>
+Why isn't \(5^0\) equal to 0?  Put another way, if an exponent \(p\), as
+in \(x^p\), is supposed to mean "the number of factors of \(x\) that the
+expression is worth," and since, roughly speaking, you'd say that if all
+you had was \(0\), then you would certainly have "no factors of \(x\)", then
 why is \(x^0\) not 0?
 
   <div class="answer">
     <a class="collapsible"><h3>Answer: </h3></a>
     <div class='inner'>
 
-Even though it is true in a manner of speaking that "\(0\) is worth no factors of \(x\)", the problem is that if all you have is \(0\) you have something much worse than nothing&mdash;in terms of multiplication&mdash;than you would if you were starting at \(1\).  The thing is to think about exponents as "all about multiplication."  So, ask yourself, what happens to the repeated count of, say, \(5\)'s when you multiply by 0?  How many \(5\)'s do we end up with?  Answering this might help us realize "how many factors of 5" 0 is worth:
+Even though it is true in a manner of speaking that "\(0\) is worth no
+factors of \(x\)", the problem is that if all you have is \(0\) you have
+something much worse than nothing&mdash;in terms of multiplication&mdash;than
+you would if you were starting at \(1\).  The thing is to think about exponents
+as "all about multiplication."  So, ask yourself, what happens to the repeated
+count of, say, \(5\)'s when you multiply by 0?  How many \(5\)'s do we end up with?
+Answering this might help us realize "how many factors of 5" 0 is worth:
 \[
 0\cdot 5^6 = 0 \cdot 5\cdot 5\cdot 5\cdot5\cdot 5 \cdot 5 = 0 = 5^{?}
 \]
-Does it add to the count of factors of \(5\)?  No, of course not.  But&mdash;it takes away!  It does not "leave it unchanged," but rather changes it dramatically.  On the contrary, multiplication by \(1\) neither adds to nor takes away from the count of repeated factors of \(5\):
+Does it add to the count of factors of \(5\)?  No, of course not.
+But&mdash;it takes away!  It does not "leave it unchanged," but rather
+changes it dramatically.  On the contrary, multiplication by \(1\) neither
+adds to nor takes away from the count of repeated factors of \(5\):
 \[
 1\cdot 5^6 = 1 \cdot 5\cdot 5\cdot 5\cdot5\cdot 5 \cdot 5 = 5^6,
 \]
-so it should be counted as being worth "no factors of 5" in the sense of "no chance to the count of 5's in the product."
+so it should be counted as being worth "no factors of 5" in the sense of
+"no chance to the count of 5's in the product."
 
 You can say a little more.  Multiplying by \(0\) takes so many factors of \(5\) away that it
 is a hole that is impossible to dig out of.  You cannot multiply by any number of \(5\)'s to come
@@ -226,18 +312,18 @@ You can multiply as many 5's as you want and you still not overcome the 0: so it
 an impossible deficit of 5's; 0 is worth \(-\infty\) many 5's.
 %So, if we say that \(0 = 5^{-\infty}\), then we have the satisfactory statement that
 %\[
-%5^{-\infty} = 0 = 0 \cdot 5^{\textrm{some big number}} = 5^{-\infty}\cdot 5^{\textrm{some big number}}= 5^{-\infty + \textrm{some big number}}
+%5^{-\infty} = 0 = 0 \cdot 5^{\textrm{some big number}}
+= 5^{-\infty}\cdot 5^{\textrm{some big number}}= 5^{-\infty + \textrm{some big number}}
 %\]
 
     </div>
   </div>
 
-\end{question}
+</div>
 
-What remains is to combine all these exponents&mdash;positive, negative, and \(0\)&mdash;to make different expressions and to see if we can still make sense of it all.  You can&mdash;provided you remember the basic definitions above.
-
-\input{simplify-integer-exponent}
-
+What remains is to combine all these exponents&mdash;positive, negative,
+and \(0\)&mdash;to make different expressions and to see if we can still
+make sense of it all.  You can&mdash;provided you remember the basic definitions above.
 
 <p>
 <div class="example">
@@ -256,10 +342,6 @@ Simply rewrite using the definition of a negative integer exponent:
 \[
 6^{-3} = \frac{1}{6^3}
 \]
-
-
-\vspace{-\baselineskip}
-
     </div>
   </div>
 
@@ -280,7 +362,8 @@ Simplify the following, writing your final answer without using any negative exp
     <div class='inner'>
 
 \begin{align*}
-\left(4^3\right)^5 &= \left(4^3\right) \cdot \left(4^3\right) \cdot \left(4^3\right) \cdot \left(4^3\right) \cdot \left(4^3\right)\\
+\left(4^3\right)^5 &= \left(4^3\right) \cdot \left(4^3\right)
+\cdot \left(4^3\right) \cdot \left(4^3\right) \cdot \left(4^3\right)\\
 & = 4^{15}
 \end{align*}
 
@@ -341,7 +424,9 @@ Simplify the following, writing your final answer without using any negative exp
     <div class='inner'>
 
 \[
-\frac{6^3}{6^8} = \frac{\cancel{6} \cdot \cancel{6} \cdot \cancel{6}}{\cancel{6} \cdot \cancel{6} \cdot \cancel{6}\cdot  6 \cdot 6 \cdot 6 \cdot 6 \cdot 6} = \frac{1}{6^5}
+\frac{6^3}{6^8} = \frac{\cancel{6} \cdot \cancel{6}
+\cdot \cancel{6}}{\cancel{6} \cdot \cancel{6} \cdot \cancel{6}\cdot  6 \cdot 6 \cdot 6 \cdot 6 \cdot 6}
+= \frac{1}{6^5}
 \]
 
     </div>
@@ -379,7 +464,8 @@ have a fraction raised to a negative exponent, since the negative will move it t
 the denominator, and since division by a fraction can be reconstrued as multiplication by its
 reciprocal, you get the following
 \[
-\left(\frac{a}{b}\right)^{-n} = \frac{1}{\left(\frac{a}{b}\right)^n} = \frac{1}{\frac{a^n}{b^n}} = \frac{b^n}{a^n} = \left(\frac{b}{a}\right)^n
+\left(\frac{a}{b}\right)^{-n} = \frac{1}{\left(\frac{a}{b}\right)^n}
+= \frac{1}{\frac{a^n}{b^n}} = \frac{b^n}{a^n} = \left(\frac{b}{a}\right)^n
 \]
 So, you could do that more quickly by just flipping the fraction and then applying the positive
 version of the power to numerator and denominator, as in the following example.
@@ -424,7 +510,8 @@ Simplify the following, writing your final answer without using any negative exp
     <div class='inner'>
 
 \begin{align*}
-\left(-8x^{2}y^{3}\right)\left(x^{-3}y^{3}\right) &= \left(-8x^{2}y^{3}\right)\left(\frac{1}{x^3}y^{3}\right)\\
+\left(-8x^{2}y^{3}\right)\left(x^{-3}y^{3}\right)
+&= \left(-8x^{2}y^{3}\right)\left(\frac{1}{x^3}y^{3}\right)\\
 &= \frac{-8x^2y^3y^3}{x^3}\\
 & = \frac{-8y^6}{x}
 \end{align*}
@@ -450,7 +537,8 @@ Simplify the following, writing your final answer without using any negative exp
     <div class='inner'>
 
 \begin{align*}
-\left(-1x^{2}y^{3}\right)^{3} &= \left(-1x^{2}y^{3}\right) \left(-1x^{2}y^{3}\right) \left(-1x^{2}y^{3}\right)\\
+\left(-1x^{2}y^{3}\right)^{3} &= \left(-1x^{2}y^{3}\right)
+\left(-1x^{2}y^{3}\right) \left(-1x^{2}y^{3}\right)\\
 & = (-1)(-1)(-1)x^2x^2x^2y^3y^3y^3\\
 & = -x^6y^9
 \end{align*}
