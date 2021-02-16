@@ -159,7 +159,7 @@ class UserSectionStatus(db.Model):
     def decay_grade(self, now, commit=True):
         if self.masteries_count == 0:
             return None
-        decayed_grade = self.grade_after_last_user_attempt * 0.5**int(self.days_since_previous(now)/self.expected_recall_duration())
+        decayed_grade = max(2, self.grade_after_last_user_attempt * 0.5**int(self.days_since_previous(now)/self.expected_recall_duration()))
         if int(decayed_grade) < self.grade:
             self.grade = int(decayed_grade)
             if commit:
@@ -620,7 +620,9 @@ class UserGradeInfo():
         for chapter in whole_book_info:
             for section_info in chapter:
                 try:
-                    if section_info.grade is not None:
+                    # print(section_info.section_record.section_name, section_info.section_record.timestamp)
+                    if section_info.section_record.masteries_count > 0: #replace here ... look at timestamp instead
+                        print(section_info.section_record.section_name, section_info.section_record.timestamp)
                         grades.append(section_info.grade)
                 except AttributeError:
                     pass
@@ -668,10 +670,16 @@ def recompute_all(book):
 def regrade_all_sections_for_student(student, book, commit=True):
     sections = book.list_all_sections()
     for section in sections:
-        print(section.view_name)
+        # print(section.view_name)
         section_status = UserSectionStatus.query.filter_by(student=student, section_name=section.view_name).all()
+        # print('status', section_status)
         if len(section_status) > 1:
-            raise ValueError('Too many records!!')
+            print(f"""@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            {student.username} has a duplicate record for {section.view_name}
+            First two records are at:
+            {section_status[0].timestamp} and {section_status[1].timestamp}
+            @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            """)
         if section_status != []:
             section_status = section_status[0]
             section_status.regrade(commit=commit)

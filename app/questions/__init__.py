@@ -644,21 +644,40 @@ def factor_negative_out_from_denominator(quotient_expr):
             out *= term
     return out
 
-def get_numer_denom(quot_expr):
+def get_numer_denom(quot_expr, evaluate=True):
     if quot_expr.args == ():
+        # print('it was me!')
         return [quot_expr, 1]
     numer = 1
     denom = 1
-    for term in quot_expr.args:
-        if term.func == (Symbol('x')**2).func and term.args[1] < 0:
-            denom *= Pow(term.args[0], abs(term.args[1]))
+    if quot_expr.func == (Symbol('x')**2).func and quot_expr.args[1] < 0:
+        if quot_expr[args][0].is_number:
+            denom *= quot_expr.args[0]**abs(quot_expr.args[1])
+            # print('denom')
         else:
-            numer *= term
+            denom *= Pow(quot_expr.args[0], abs(quot_expr.args[1]), evaluate=evaluate)
+    else: #assumes that quot_expr is Mul
+        # numer *= quot_expr
+        for term in quot_expr.args:
+            # print('get_stuff:', term, term.func)
+            if term.func == (Symbol('x')**2).func and term.args[1] < 0:
+                # print('it was me!')
+                if term.args[0].is_number:
+                    # print('it was me!')
+                    denom *= term.args[0]**abs(term.args[1])
+                    # print('denom', denom)
+                else:
+                    denom *= Pow(term.args[0], abs(term.args[1]), evaluate=evaluate)
+            else:
+                # print('it was me!')
+                numer *= term
     return [numer, denom]
 
-def congruence_of_quotient(quot1, quot2):
-    numer1, denom1 = get_numer_denom(quot1)
-    numer2, denom2 = get_numer_denom(quot2)
+def congruence_of_quotient(quot1, quot2, evaluate=True):
+    numer1, denom1 = get_numer_denom(quot1, evaluate=evaluate)
+    print('QUOT1', numer1, denom1)
+    numer2, denom2 = get_numer_denom(quot2, evaluate=evaluate)
+    print('QUOT2', numer2, denom2)
     gcf_numer1, gcf_denom1 = [safe_gcf(numer1), safe_gcf(denom1)]
     gcf_numer2, gcf_denom2 = [safe_gcf(numer2), safe_gcf(denom2)]
     nec = gcf_numer1/gcf_denom1 == gcf_numer2/gcf_denom2
@@ -666,7 +685,34 @@ def congruence_of_quotient(quot1, quot2):
     nec2 = (numer1/gcf_numer1)/(denom1/gcf_denom1) == (-numer2/gcf_numer2)/(-denom2/gcf_denom2)
     nec3 = (factor(numer1/gcf_numer1)/factor(denom1/gcf_denom1)) == (factor(numer2/gcf_numer2)/factor(denom2/gcf_denom2))
     nec4 = (factor(numer1/gcf_numer1)/factor(denom1/gcf_denom1)) == (factor(-numer2/gcf_numer2)/factor(-denom2/gcf_denom2))
+    # nec = Mul(gcf_numer1, Pow(gcf_denom1, -1)) == Mul(gcf_numer2, Pow(gcf_denom2, -1))
+    # nec1 = Mul(numer1/gcf_numer1),Pow(denom1/gcf_denom1), -1)) == (numer2/gcf_numer2)/(denom2/gcf_denom2)
+    # nec2 = (numer1/gcf_numer1)/(denom1/gcf_denom1) == (-numer2/gcf_numer2)/(-denom2/gcf_denom2)
+    # nec3 = (factor(numer1/gcf_numer1)/factor(denom1/gcf_denom1)) == (factor(numer2/gcf_numer2)/factor(denom2/gcf_denom2))
+    # nec4 = (factor(numer1/gcf_numer1)/factor(denom1/gcf_denom1)) == (factor(-numer2/gcf_numer2)/factor(-denom2/gcf_denom2))
     return nec and (nec1 or nec2 or nec3 or nec4)
+
+def alt_congruence_of_quotient(quot1, quot2, evaluate=False):
+    numer1, denom1 = get_numer_denom(quot1, evaluate=False)
+    print('QUOT1', numer1, denom1)
+    numer2, denom2 = get_numer_denom(quot2, evaluate=False)
+    print('QUOT2', numer2, denom2)
+    gcf_numer1, gcf_denom1 = [safe_gcf(numer1), safe_gcf(denom1)]
+    gcf_numer2, gcf_denom2 = [safe_gcf(numer2), safe_gcf(denom2)]
+    # nec = gcf_numer1/gcf_denom1 == gcf_numer2/gcf_denom2
+    # nec1 = (numer1/gcf_numer1)/(denom1/gcf_denom1) == (numer2/gcf_numer2)/(denom2/gcf_denom2)
+    # nec2 = (numer1/gcf_numer1)/(denom1/gcf_denom1) == (-numer2/gcf_numer2)/(-denom2/gcf_denom2)
+    # nec3 = (factor(numer1/gcf_numer1)/factor(denom1/gcf_denom1)) == (factor(numer2/gcf_numer2)/factor(denom2/gcf_denom2))
+    # nec4 = (factor(numer1/gcf_numer1)/factor(denom1/gcf_denom1)) == (factor(-numer2/gcf_numer2)/factor(-denom2/gcf_denom2))
+    nec = gcf_numer1/gcf_denom1 == gcf_numer2/gcf_denom2
+    rhs1 = Mul(Mul(numer1/gcf_numer1, evaluate=False), Pow(Mul(denom1/gcf_denom1, evaluate=False), -1, evaluate=False), evaluate=False)
+    lhs1 = Mul(Mul(numer2/gcf_numer2, evaluate=False), Pow(Mul(denom2/gcf_denom2, evaluate=False), -1, evaluate=False), evaluate=False)
+    lhs2 = Mul(Mul(-numer2/gcf_numer2, evaluate=False), Pow(Mul(-denom2/gcf_denom2, evaluate=False), -1, evaluate=False), evaluate=False)
+    nec1 = rhs1 == lhs1
+    nec2 = rhs1 == lhs2
+    print(nec, nec1, nec2)
+    print(rhs1, lhs1, lhs2)
+    return nec and (nec1 or nec2)
 
 def basic_parse_and_check(user_answer, answer):
     user_answer = user_answer.lower()
@@ -683,3 +729,253 @@ def list_integer_factors(n):
             factors.append(i)
         i += 1
     return factors
+
+
+
+class Monomial():
+    def __init__(self, s):
+        print('input to Monomial', s)
+        self.input = s.replace('**', '^')
+        self.quick_check()
+        self.variables = set([a for a in self.input if a.isalpha()])
+        self.set_normal_form()
+
+        # self.set_variables_and_constants()
+    def quick_check(self):
+        if self.input == '':
+            raise TypeError('An empty string is not a monomial')
+        if self.input[0] == '-':
+            self.is_negative = True
+        else:
+            self.is_negative = False
+        allowed = 'abcdefghijklmnopqrstuvwxyz'
+        allowed = allowed + allowed.upper()
+        allowed += '1234567890-*^()'
+        if any([a not in allowed for a in self.input]):
+            raise TypeError('You have used illegal characters.')
+
+    def check_for_simplified(self):
+        letters = sorted([a for a in self.input if a.isalpha()])
+        if sorted(list(set(letters))) == letters:
+            return True
+        return False
+
+    def set_normal_form(self):
+        m = self.input
+        coeff = 1
+        # l = len(m)
+        powers = {}
+        for a in self.variables:
+            powers[a] = 0
+        # for i, a in enumerate(self.input):
+        #     if a in self.variables:
+        #         if i == len(self.input) - 1:
+        #             powers[a] += 1
+        #         elif self.input[i+1] == '^':
+        #             if self.input[i+2].isalpha():
+        #                 powers[a] += sy.Symbol(self.input[i+1])
+        #             elif self.input[i+2].isnumeric():
+        #                 start = i + 2
+        #                 j = 1
+        #                 while start + j < len(self.input) and self.input[start + j].isnumeric():
+        #                     j += 1
+        #                 stop = start + j
+        #                 n = int(self.input[start:stop])
+        #                 powers[a] += n
+        #             else:
+        #                 raise SyntaxError(f'{self.input} is not a well-formed monomial')
+        #         else:
+        #             powers[a] += 1
+        i = 0
+        while i < len(m):
+            print(i, m[i])
+            if m[i] in self.variables:
+                if i == len(m) - 1:
+                    powers[m[i]] += 1
+                    i += 1
+                elif m[i+1] == '^':
+                    if m[i+2].isalpha():
+                        powers[m[i]] += Symbol(m[i+2])
+                        i = i + 2
+                    elif m[i+2].isnumeric():
+                        start = i + 2
+                        j = 1
+                        while start + j < len(self.input) and self.input[start + j].isnumeric():
+                            j += 1
+                        stop = start + j
+                        n = int(self.input[start:stop])
+                        powers[m[i]] += n
+                        i = stop
+                    else:
+                        raise SyntaxError(f'"{self.input}" is not a well-formed monomial')
+                else:
+                    powers[m[i]] += 1
+                    i += 1
+            elif m[i].isnumeric():
+                start = i
+                j = 1
+                while start + j < len(m) and m[start + j].isnumeric():
+                    j += 1
+                stop = start + j
+                n = int(m[start:stop])
+                if stop == len(m) or m[stop] != '^':
+                    coeff *= n
+                else:
+                    # print('My fault!')
+                    start = stop + 1
+                    j = 1
+                    while start + j < len(m) and m[start + j].isnumeric():
+                        j += 1
+                    stop = start + j
+                    p = int(m[start:stop])
+                    coeff *= n**p
+                i = stop
+            elif m[i] == '*':
+                if i == 0 or i == len(m)-1:
+                    raise SyntaxError(f'"{self.input}" is not a well-formed monomial')
+                elif m[i+1] == '*':
+                    raise SyntaxError(f'"{self.input}" is not a well-formed monomial')
+                else:
+                    i += 1
+            elif m[i] == '(':
+                start = i+1
+                j = 1
+                while start + j < len(m) and m[start + j] != ')':
+                    j += 1
+                if start + j == len(m):
+                    raise SyntaxError(f'"{self.input}" is not a well-formed monomial')
+                stop = start + j
+                submonomial = Monomial(m[start:stop])
+                for key in submonomial.powers:
+                    powers[key] += submonomial.powers[key]
+                coeff *= submonomial.coeff
+                i = stop + 2
+            elif m[i] == '-':
+                i += 1
+            else:
+                raise SyntaxError(f'"{self.input}" is not a well-formed monomial')
+        self.coeff = coeff
+        self.powers = powers
+        if self.is_negative:
+            normal_form = '-'
+            normal_form_tex = '-'
+        else:
+            normal_form = ''
+            normal_form_tex = ''
+        normal_form += str(coeff)
+        if coeff in [1, -1]:
+            if self.variables == set():
+                normal_form_tex += str(coeff)
+        else:
+            normal_form_tex += str(coeff)
+        for x in sorted(list(self.variables)):
+            normal_form += x + '^' + str(powers[x])
+            if powers[x] == 0:
+                pass
+            elif powers[x] == 1:
+                normal_form_tex += x
+            else:
+                normal_form_tex += x + '^{' + str(powers[x]) + '}'
+        self.normal_form = normal_form
+        self.normal_form_tex = normal_form_tex
+
+    # def check_normal_form(self):
+    #     i = 0
+    #     while i < len(self.input):
+    #         if self.input[0].is
+
+#
+#
+#
+#     def parse_monomial(s):
+#         s = s.replace('**', '^')
+#         # a recursive subroutine will need to be inserted here to handle parens
+#         powers = {}
+#         i = 0
+#         number = 1
+#         while i < len(s):
+#             if not s[i].isalnum() and s[i] != '^' and s[i] != '*' and s[i] != '-':
+#                 raise TypeError
+#             if s[i] == '^':
+#                 j = 1
+#                 if not s[i-j].isalnum():
+#                     raise SyntaxError
+#                 elif s[i-j].isalpha():
+#                     base = s[i-j]
+#                 else:
+#                     while s[i-j].isnumeric() and j < i:
+#                         j += 1
+#                     base = int(s[i-j:i])
+#                 j = 1
+#                 if i == len(s) - 1:
+#                     raise SyntaxError
+#                 if s[i+j] == '-':
+#                     raise TypeError
+#                 else:
+#                     while  i + j < len(s) and s[i+j].isnumeric():
+#                         j += 1
+#                     expo = int(s[i+1:i+j])
+#                 prev = powers.get(str(base)) or 0
+#                 powers[str(base)] = expo + prev
+#             i += 1
+#         return powers
+
+
+class Quotient():
+    def __init__(self, s):
+        self.input = s.replace('**', '^')
+        self.quotient = Quotient.parse_quotient(self.input)
+        self.numer, self.denom = self.quotient
+        if self.denom.normal_form == '1':
+            self.fmt_for_tex = self.numer.normal_form_tex
+        else:
+            self.fmt_for_tex = f'\\frac{{ {self.numer.normal_form_tex} }}{{ {self.denom.normal_form_tex} }}'
+
+    @staticmethod
+    def parse_quotient(s):
+        counter = s.count('/')
+        if counter > 1:
+            raise TypeError(s + ' is not a single quotient.')
+        elif counter == 1:
+            i = s.find('/')
+            if s[i+1] == '(':
+                start = i+2
+                j = 1
+                while start + j < len(s) and s[start+j] != ')':
+                    j += 1
+                stop = start + j
+                denom = Monomial(s[start:stop])
+                stop += 1
+            elif s[i+1].isalpha():
+                start = i + 1
+                if i + 2 < len(s) and s[i+2] == '^':
+                    # print('My Fault!!!')
+                    print('character', s[i+3], s[i+3].isnumeric())
+                    if s[i+3].isalpha():
+                        stop = i + 4
+                    elif s[i+3].isnumeric():
+                        print('My Fault!!!')
+                        e_start = i+3
+                        j = 1
+                        while e_start + j < len(s) and s[e_start+j].isnumeric():
+                            j += 1
+                        stop = e_start + j
+                    else:
+                        raise SyntaxError(f'{s} is not a well-formed quotient.')
+                else:
+                    stop = i + 2
+                denom = Monomial(s[start:stop])
+            elif s[i+1].isnumeric():
+                start = i + 1
+                j = 1
+                while start + j < len(s) and s[start+j].isnumeric():
+                    j += 1
+                stop = start + j
+                denom = Monomial(s[start:stop])
+            else:
+                raise SyntaxError(f'{s} is not an admissiable quotient')
+            numer = Monomial(s[:i] + s[stop:])
+        else:
+            numer = Monomial(s)
+            denom = Monomial('1')
+        return [numer, denom]
