@@ -875,7 +875,7 @@ main = Division('main', 'Main Matter', [nuts_and_bolts_of_algebra,
                                         quadratics,
                                         polynomials,
                                         rationals,
-                                        # powerfunctions,
+                                        powerfunctions,
                                         algebra2_challenge])
 
 Algebra2 = Division('book', 'Algebra 2', {'front': None, 'main': main, 'end': None})

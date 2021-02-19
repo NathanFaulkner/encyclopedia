@@ -734,7 +734,7 @@ def list_integer_factors(n):
 
 class Monomial():
     def __init__(self, s):
-        print('input to Monomial', s)
+        # print('input to Monomial', s)
         self.input = s.replace('**', '^')
         self.quick_check()
         self.variables = set([a for a in self.input if a.isalpha()])
@@ -788,7 +788,7 @@ class Monomial():
         #             powers[a] += 1
         i = 0
         while i < len(m):
-            print(i, m[i])
+            # print(i, m[i])
             if m[i] in self.variables:
                 if i == len(m) - 1:
                     powers[m[i]] += 1
@@ -950,11 +950,11 @@ class Quotient():
                 start = i + 1
                 if i + 2 < len(s) and s[i+2] == '^':
                     # print('My Fault!!!')
-                    print('character', s[i+3], s[i+3].isnumeric())
+                    # print('character', s[i+3], s[i+3].isnumeric())
                     if s[i+3].isalpha():
                         stop = i + 4
                     elif s[i+3].isnumeric():
-                        print('My Fault!!!')
+                        # print('My Fault!!!')
                         e_start = i+3
                         j = 1
                         while e_start + j < len(s) and s[e_start+j].isnumeric():

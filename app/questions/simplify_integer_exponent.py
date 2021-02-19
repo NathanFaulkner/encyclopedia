@@ -26,7 +26,7 @@ class SimplifyIntegerExponent(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        print('seed', self.seed)
+        # print('seed', self.seed)
         self.difficulty = random.randint(0,2)
         self.difficulty = 2
         def pow_neg_style(b, p):
@@ -40,7 +40,7 @@ class SimplifyIntegerExponent(Question):
                 seed = kwargs['seed']
             else:
                 seed = random.random()
-            print('basic pow term seed', seed)
+            # print('basic pow term seed', seed)
             random.seed(seed)
             if 'const_range' in kwargs:
                 a, b = kwargs['const_range']
@@ -99,7 +99,7 @@ class SimplifyIntegerExponent(Question):
             return {'fmt': fmt_out, 'sym': term}
 
         def make_term_depth_two(**kwargs):
-            print('depth_two kwargs:', kwargs)
+            # print('depth_two kwargs:', kwargs)
             if 'seed' in kwargs:
                 seed = kwargs['seed']
             else:
@@ -226,7 +226,7 @@ class SimplifyIntegerExponent(Question):
         if self.difficulty == 2:
             kwargs = {'const_range': [-10,10],
                     'const_power_range':[1, 1],
-                    'variables': random.choice([['x','y'], ['y', 'z'], ['x', 'y', 'z']]),
+                    'variables': random.choice([['x','y'], ['y', 'z']]),
                     'seed': self.seed,
                     }
             oper1, oper2, oper3 = random.choice([['prod', None, 'quot'],
@@ -255,7 +255,7 @@ class SimplifyIntegerExponent(Question):
             term = compose_terms_for_latex_format(*terms, **kwargs)
         # term  = sy.Pow(2, -3, evaluate=False)
         self.answer = term['sym']
-        print('self.answer:', self.answer)
+        # print('self.answer:', self.answer)
         self.format_answer = f'\( {sy.latex(self.answer)}\)'
         self.format_given = f"""
         \\[
@@ -298,15 +298,15 @@ class SimplifyIntegerExponent(Question):
         user_answer = user_answer.replace('**', '^')
         user_quotient = Quotient(user_answer)
         user_numer, user_denom = [user_quotient.numer.normal_form, user_quotient.denom.normal_form]
-        print('user', user_numer, user_denom)
+        # print('user', user_numer, user_denom)
         if isinstance(self.answer, sy.Pow):
             ans_numer = '1'
             ans_denom = '1' + str(self.answer.args[0]) + '^' + str(abs(self.answer.args[1]))
-            print('My fault!')
+            # print('My fault!')
         else:
             ans_quotient = Quotient(str(self.answer))
             ans_numer, ans_denom = [ans_quotient.numer.normal_form, ans_quotient.denom.normal_form]
-        print('ans', ans_numer, ans_denom)
+        # print('ans', ans_numer, ans_denom)
         return user_numer == ans_numer and user_denom == ans_denom
         # user_answer = parse_expr(user_answer, transformations=transformations, evaluate=False)
         # if self.non_positive_power(user_answer):
