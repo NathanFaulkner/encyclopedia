@@ -27,8 +27,8 @@ class SimplifyIntegerExponent(Question):
             self.seed = random.random()
         random.seed(self.seed)
         # print('seed', self.seed)
-        self.difficulty = random.randint(0,2)
-        self.difficulty = 2
+        self.difficulty = random.choice([0, 0, 1, 1, 2])
+        # self.difficulty = 2
         def pow_neg_style(b, p):
             if p == 1:
                 return str(b)
@@ -262,7 +262,8 @@ class SimplifyIntegerExponent(Question):
             {term['fmt']}
         \\]"""
 
-        self.prompt_single = f"""Simplify."""
+        self.prompt_single = f"""Simplify.  In particular, rewrite the term without
+        the use of any negative exponents and cancel common factors wherever possible."""
 
         self.format_given_for_tex = f"""
         {self.prompt_single}
