@@ -518,6 +518,29 @@ a {
   padding: 8px;
 }
 
+.remark {
+  border: 1px solid var(--logo-background-color);
+  background-color: rgba(102, 0, 51, 0.25);
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 8px;
+}
+
+.corollary {
+  border: 1px solid var(--logo-background-color);
+  background-color: rgba(255, 255, 0, 0.25);
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 8px;
+}
+
+.list_of_rules {
+  border: 1px solid var(--logo-background-color);
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 8px;
+}
+
 .button {
   text-decoration: none;
   background-color: #EEEEEE;

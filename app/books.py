@@ -760,6 +760,9 @@ powerfunctions_intro = Section('powerfunctions_intro', "Introduction to Power Fu
 
 integerexponents = Section('integerexponents', "Integer Exponents", '/sections/integer-exponents')
 integerexponents.add_to_questions('simplify_integer_exponent')
+
+rationalexponents = Section('rationalexponents', "Rational Exponents", '/sections/rational-exponents')
+rationalexponents.add_to_questions('simplify_rational_exponent_just_expo',)
 #######################################
 
 
@@ -859,6 +862,7 @@ rationals.set_frontpage(rationals_intro)
 powerfunctions = Division('chapter', "Power Functions",
                                 [
                                 integerexponents,
+                                rationalexponents,
                                 ])
 powerfunctions.set_frontpage(powerfunctions_intro)
 

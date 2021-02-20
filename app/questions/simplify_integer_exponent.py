@@ -351,6 +351,7 @@ class SimplifyIntegerExponent(Question):
             user_answer = user_answer.replace('**', '^')
             user_quotient = Quotient(user_answer)
             user_numer, user_denom = [user_quotient.numer.normal_form, user_quotient.denom.normal_form]
+            fmt = user_quotient.fmt_for_tex
         except:
             raise SyntaxError
 

@@ -45,6 +45,16 @@
     content: "Question " counter(question) "."
   }
 
+  .remark h2::before {
+    counter-increment: remark;
+    content: "Remark " counter(remark) "."
+  }
+
+  .corollary h2::before {
+    counter-increment: corollary;
+    content: "Corollary " counter(corollary) "."
+  }
+
   h1 + p::first-letter {
     /* color: var(--section-header-color); */
     font-size: 275%;

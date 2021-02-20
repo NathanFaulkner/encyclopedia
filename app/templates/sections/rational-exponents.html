@@ -1,0 +1,337 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section, we review the basics and also introduce the more
+  exotic notion of a negative integer power.
+  First of all, ask yourself, what it is basic meaning of a power?
+  What is purpose of exponents?  I hope you realize, that, first of all,
+  their purpose is to provide a method of bookkeeping when it comes to
+  "repeated multiplication."
+</p>
+
+In this section, we consider even more "exotic" types of powers: we begin to make sense of the concept of a rational exponent&mdash;a fraction in the exponent.
+
+In the previous section, we noted the following analogy:
+<blockquote style="text-align:center">
+Exponents : Multiplication :: Multiplication : Addition
+</blockquote>
+
+Without displaying it, we also discussed this:
+<blockquote style="text-align:center">
+Negative Exponents : Division :: Negative Coefficients : Subtraction
+</blockquote>
+
+The connection in this last statement can be expressed as "subtracting numbers
+is how you kill off repeated terms in a sum, while dividing is how you kill off repeated factors in a product."  By the way, did you know that while a term in a product is called a factor, a term in a sum is called a <b>summand</b>?  This may help me to further explain the analogy, which is why I bring it up here.
+
+In this section, we further the analogy: You can think of <em>regular</em> division as breaking apart a number into equal <b>summands</b>.
+For example, the fact that \(\frac{9}{2}= 4.5\) is verified by equation
+\[
+ 9 = 4.5 + 4.5
+\]
+Right?  That is, "dividing 9 by 2" is to break apart 9 into two parts&mdash;which are <em>added</em> together.  But, don't you know, there is another way in which we can be said to "break apart 9 into two parts," like so:
+\[
+9 = 3 \cdot 3
+\]
+Now, we have broken apart 9 in two&mdash;into two <em>factors</em>&mdash;into repeated factors instead of a repeated sum.  For this reason, we say that 2 is worth "one half factor of 9."  Since exponents are about counting repeated factors, we thus invent the new notation
+\[
+9^{\frac{1}{2}} \, \textrm{is defined to be } \, 3
+\]
+Put another way, \(\frac{1}{2}\) in the exponent has the same meaning as "square root," which
+I know you have studied before.  In general, we have the following definition:
+
+<p>
+<div class="definition">
+  <h2></h2>
+
+For any positive integer \(n\) and any reasonable real number \(a\), we define the symbol \(a^{\frac{1}{n}}\)
+by the equation
+\[
+\overbrace{a^{\frac{1}{n}} \cdot a^{\frac{1}{n}} \cdot \cdots \cdot a^{\frac{1}{n}}}^{\textrm{\(n\) times}} = a
+\]
+That is, \(a^{\frac{1}{n}}\) is the value that helps to break apart the number \(a\) into
+\(n\) many equal factors.  What did I mean by "reasonable" real number?&mdash;only that some caution is needed when applying this concept to \(a\lt 0\).
+
+For example,
+\[
+32^{\frac{1}{5}} = 2
+\]
+because
+\[
+2 \cdot 2 \cdot 2 \cdot 2 \cdot 2 = 32
+\]
+The number 2 is used to break apart 32 into 5 equal factors.
+
+There is also alternate notation for this concept.  Sometimes, a <b>radical notation</b>
+will be used to convey the same idea, as in the following:
+\[
+9^{\frac{1}{2}} = \sqrt{9}
+\]
+In general,
+\[
+a^{\frac{1}{n}}  = \sqrt[n]{a}
+\]
+</div>
+</p>
+As a recap, fractions in the exponent involve the concept of breaking the number
+being raised to that exponent into equal factors whereas a fraction in the
+coefficient ("out front") asks you to break apart the number that follows into equal <b>summands</b>:
+\begin{align*}
+\frac{1}{2} \cdot 9 &= 4.5 & \textrm{... because } 9 = 4.5 + 4.5 \\
+9^\frac{1}{2} &= 3 & \textrm{... because } 9 = 3\cdot 3
+\end{align*}
+
+Similarly,
+\begin{align*}
+\frac{1}{5} \cdot 32 &= 6.4 & \textrm{... because } 32 = 6.4 + 6.4 + 6.4 + 6.4 + 6.4\\
+32^\frac{1}{5} &= 2 & \textrm{... because } 32 = 2\cdot 2 \cdot 2 \cdot 2 \cdot 2
+\end{align*}
+
+
+<p>
+<div class="example">
+  <h2> (Warm-up)</h2>
+
+  <p>
+  <a href="https://www.loom.com/share/f28200b716634989a1a224f33532633e" target="_blank">Click for video.</a>
+  </p>
+  Compute each of the following.
+  <ol>
+    <li>
+      \(\displaystyle 4^{\frac{1}{2}}\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \(\displaystyle 4^{\frac{1}{2}} = 2\)
+        </div>
+      </div>
+    </li>
+    <li>
+      \(\displaystyle 8^{\frac{1}{3}}\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \(\displaystyle 8^{\frac{1}{3}} = 2\)
+        </div>
+      </div>
+    </li>
+    <li>
+      \(\displaystyle 27^{\frac{1}{3}}\)
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          \(\displaystyle 27^{\frac{1}{3}} = 3\)
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+</p>
+
+Now, we can extend the definition of exponents to include an sort of fraction.
+
+<p>
+<div class="definition">
+  <h2></h2>
+For any reasonable real number \(a\) and any positive integers, \(m\) and \(n\),
+\[
+a^{\frac{m}{n}} = \overbrace{a^{\frac{1}{n}} \cdot a^{\frac{1}{n}} \cdot \cdots \cdot a^{\frac{1}{n}}}^{\textrm{\(m\) times}}
+\]
+Put another way,
+\[
+a^{\frac{m}{n}} = \left(a^\frac{1}{n}\right)^m
+\]
+For example,
+\[
+8^{\frac{2}{3}} = \left(8^{\frac{1}{3}}\right)^2 = 2^2 = 4
+\]
+Illustrated even better, I am going to highlight
+<span style="color:orange">\(8^\frac{2}{3}\)</span> in <span style="color:orange">orange</span> in the following:
+\[
+ 8 = {\color{orange}2 \cdot 2} \cdot 2
+\]
+So, \(2\cdot 2 = 4\) is literally "two thirds factors of 8"!
+We have broken 8 into 3 equal parts&mdash;<em>multiplication-wise</em>&mdash;and
+taken two of them in a product.
+
+Using radical notation,
+\[
+a^{\frac{m}{n}} = \left(\sqrt[n]{a}\right)^m =
+\overbrace{\sqrt[n]{a} \cdot \sqrt[n]{a} \cdot \cdots \cdot \sqrt[n]{a}}^{\textrm{\(m\) times}}
+\]
+</div>
+</p>
+
+One more extension, which connects back to the previous section,
+and we're done making up new exponents.
+(There is only one further extension to make to say how you might define
+weirder real number exponents like \(\pi\) in the exponent, but most people
+would overlook it, anyway.  Even more suprisingly a meaning can even be given
+to putting \(i\) in the exponent.)
+
+<p>
+<div class="definition">
+  <h2></h2>
+
+For any real number \(a\) and any positive integers, \(m\) and \(n\),
+\[
+a^{-\frac{m}{n}}  = \frac{1}{a^{\frac{m}{n}}}
+\]
+So, \(a^{-\frac{m}{n}}\) is the thing that is worth "minus \(\frac{m}{n}\) factors of \(a\)",
+which is really just the thing that will kill off \(a^{\frac{m}{n}}\), namely, \(a^{\frac{m}{n}}\) in the denominator.
+</div>
+</p>
+
+The following expresses two possible things to try when looking to simplify an expression
+involving fractions in the exponent.
+<p>
+<div class="theorem">
+  <h2></h2>
+For any reasonable real numbers \(a\) and \(b\) and any positive integer \(n\),
+\[
+\left(ab\right)^\frac{1}{n} = a^\frac{1}{n} b^\frac{1}{n}
+\]
+Expressed using radical notation,
+\[
+\sqrt[n]{ab} = \sqrt[n]{a}\sqrt[n]{b}
+\]
+<h3>Proof:</h3>
+\begin{align*}
+\overbrace{\left(a^\frac{1}{n} b^\frac{1}{n}\right) \cdot \cdots \cdot \left(a^\frac{1}{n} b^\frac{1}{n}\right)}^{n \, \textrm{times}}
+&=  \overbrace{a^\frac{1}{n} \cdot \cdots\cdot a^\frac{1}{n}  }^{n \, \textrm{times}}
+\cdot
+\overbrace{b^\frac{1}{n} \cdot \cdots\cdot b^\frac{1}{n}  }^{n \, \textrm{times}}\\
+& = ab
+\end{align*}
+Expressed in words, if you want to break apart a product of two numbers into \(n\) equal
+parts, then you can just break apart each factor into \(n\) equal parts. &#9633;
+</div>
+<p>
+<div class="remark">
+  <h2 id="remark"></h2>
+Of course, if you can distribute a fractional exponent or a radical over a product
+of two numbers, you can also distribute it over a product of any number of factors.
+In particular, this means we have the following.
+</div>
+<p>
+<div class="corollary">
+  <h2></h2>
+For any reasonable real number \(a\)  (\(a\geq 0\) is reasonable) and any positive integers \(m\) and \(n\),
+\[
+\left(a^m\right)^\frac{1}{n} = a^{\frac{m}{n}}
+\]
+<h3>Proof:</h3>
+\begin{align*}
+\left(a^m\right)^\frac{1}{n} &= \left(\overbrace{a \cdot \cdots \cdot a}^\textrm{\(m\) times}\right)^\frac{1}{n}\\
+& = \overbrace{a^\frac{1}{n} \cdot \cdots \cdot a^\frac{1}{n}}^\textrm{\(m\) times} & \textrm{By Remark 1}\\
+& = a^\frac{m}{n} & \textrm{By Definition 2}
+\end{align*}
+<!-- &#9633; -->
+</div>
+
+The following is also true, but it is better just to see it illustrated.
+<p>
+<div class="theorem">
+  <h2></h2>
+For any reasonable real number \(a\) and any positive integers \(m\) and \(n\),
+\[
+\left(a^\frac{1}{n}\right)^\frac{1}{m} = a^\frac{1}{mn}
+\]
+</div>
+Put in words, this means that if you want to break apart a number \(a\)
+into (\(mn\))-many equal factors (which is what the right-hand side is about),
+you might (do what the left-hand says to do and) first break it into \(n\) many equal
+factors and then break each of those into \(m\)-many equal factors&mdash;resulting in \(m\)-many groups of \(n\) equal factors for a total of (\(mn\))-many equal factors.
+
+What does that mean?  Well, as an illustration, suppose you wanted to figure out
+what \(64^\frac{1}{6}\) is.  Well, you know that it is \(8\cdot 8\).  But you also
+know you can break down the 8's into equal factors.  In all:
+\(
+64 = 8 \cdot 8 = (2\cdot 2 \cdot 2)(2\cdot 2 \cdot 2)
+\).
+In words, you can see that \(2\) is "one third of one half of factors of 64," or, put more simply, 2 is "one sixth factor of 64"!
+Therefore, \(64^\frac{1}{6} = 2\).  In math symbols,
+\(8 = 64^\frac{1}{2}\) and \(2 = 8^\frac{1}{3}\), so it is true that
+\[
+64^\frac{1}{6} = 2 = 8^\frac{1}{3} = \left(64^\frac{1}{2}\right)^\frac{1}{3}
+\]
+
+Putting all the foregoing results together, the following is true, but the proof would just be annoying to look at.
+<p>
+<div class="theorem">
+  <h2></h2>
+For any reasonable real number \(a\) and any positive integers \(m\), \(n\), \(p\), and \(q\)
+\[
+\left(a^\frac{m}{n}\right)^\frac{p}{q} = a^\frac{mp}{nq}
+\]
+Put another way, if \(r\) and \(s\) are rational numbers, then
+\[
+\left(a^r\right)^s = a^{rs}
+\]
+which can be expressed in words: "If you raise a base to a number and
+then raise it again, then you can multiply the exponents."
+Here is one illustration that will put you in the right frame of mind for
+remembering this fact:
+\[
+\left(7^3\right)^5 = \left(7^3\right)\left(7^3\right)\left(7^3\right)\left(7^3\right)\left(7^3\right) = 7^{5\cdot 3} = 7^{15}
+\]
+</div>
+
+You may like to have a handy synopsis of everything we could possibly say about
+the "rules for manipulating exponents."
+
+<div class="center list_of_rules">
+<h2>Rules for Manipulating Exponents:</h2>
+For any reasonable real number \(a\) (be cautious about \(a\leq0\)), and any
+rational numbers \(r\) and \(s\) (actually, it works if \(r\) and \(s\) are any
+real numbers, too):
+
+
+<div style="text-align:center">
+<table>
+  <tr>
+    <td style="width:200px"><u>Rule</u></td><td><u>Example</u></td>
+  </tr>
+  <tr>
+    <td>\(\displaystyle a^r \cdot a^s = a^{r+s}\)</td>
+    <td>\(\displaystyle 5^{\frac{1}{2}} \cdot 5^\frac{3}{4} = 5^{\frac{1}{2}+\frac{3}{4}} = 5^{\frac{2}{4}+\frac{3}{4}} = 5^\frac{5}{4}\)</td>
+  </tr>
+  <tr>
+    <td>\(\displaystyle \left(a^r\right)^s = a^{rs}\)</td>
+    <td>\(\displaystyle \left(3^\frac{5}{2}\right)^\frac{4}{3}=3^{\frac{5}{2}\cdot \frac{4}{3} = \frac{10}{3}}\)</td>
+  </tr>
+  <tr>
+    <td> \(\displaystyle \left(ab\right)^r = a^r b^r\)</td>
+    <td>\(\displaystyle (2500)^\frac{1}{2} = \left(25 \cdot 100\right)^\frac{1}{2} = 25^\frac{1}{2} \cdot 100^\frac{1}{2} = 5\cdot 10 = 50\)</td>
+  </tr>
+  <tr>
+    <td>\(\displaystyle a^{-r} = \frac{1}{a^r}\)</td>
+    <td>\(\displaystyle 36^{-\frac{1}{2}} = \frac{1}{36^\frac{1}{2}} = \frac{1}{6}\)</td>
+  </tr>
+  <tr>
+    <td>\(\displaystyle \frac{a^r}{a^s} =a^{r-s} = \frac{1}{a^{s-r}}\)</td>
+    <td>\(\displaystyle \frac{4^{\frac{5}{2}}}{4^{\frac{1}{2}}} = 4^{\frac{5}{2} - \frac{1}{2}} = 4^{\frac{4}{2}} = 4^2 = 16\)</td>
+  </tr>
+  <tr>
+    <td>\(\left(\frac{a}{b}\right)^r = \frac{a^r}{b^r}\)</td>
+    <td>\(\displaystyle \left(\frac{27}{64}\right)^\frac{1}{3} = \frac{27^{\frac{1}{3}}}{64^{\frac{1}{3}}} = \frac{3}{4}\)</td>
+  </tr>
+</table>
+</div>
+</div>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

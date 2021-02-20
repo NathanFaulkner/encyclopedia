@@ -111,6 +111,7 @@ __all__ = ['quadratic_pattern',
             'solving_equation_with_rational_linear_type2',
             'graph_hyperbola', 'graph_hyperbola_to_equation',
             'simplify_integer_exponent',
+            'simplify_rational_exponent_just_expo',
             ]
 
 class Question():
@@ -926,6 +927,7 @@ class Quotient():
         self.input = s.replace('**', '^')
         self.quotient = Quotient.parse_quotient(self.input)
         self.numer, self.denom = self.quotient
+        # print(f'Quotient is {self.numer.normal_form}/{self.denom.normal_form}')
         if self.denom.normal_form == '1':
             self.fmt_for_tex = self.numer.normal_form_tex
         else:
@@ -966,12 +968,30 @@ class Quotient():
                     stop = i + 2
                 denom = Monomial(s[start:stop])
             elif s[i+1].isnumeric():
+                # print('My Fault!!! The denominator is numeric.')
                 start = i + 1
                 j = 1
                 while start + j < len(s) and s[start+j].isnumeric():
                     j += 1
                 stop = start + j
-                denom = Monomial(s[start:stop])
+                if stop < len(s) and s[stop] == '^':
+                    # print('My Fault!!! Expo on coeff in denominator was detected.')
+                    # print('character', s[i+3], s[i+3].isnumeric())
+                    e_start = stop + 1
+                    if s[e_start].isalpha():
+                        e_stop = e_start + 1
+                    elif s[e_start].isnumeric():
+                        # print('My Fault!!!')
+                        j = 1
+                        while e_start + j < len(s) and s[e_start+j].isnumeric():
+                            j += 1
+                        e_stop = e_start + j
+                    else:
+                        raise SyntaxError(f'{s} is not a well-formed quotient.')
+                    stop = e_stop
+                    denom = Monomial(s[start:stop])
+                else:
+                    denom = Monomial(s[start:stop])
             else:
                 raise SyntaxError(f'{s} is not an admissiable quotient')
             numer = Monomial(s[:i] + s[stop:])
