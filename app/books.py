@@ -862,7 +862,7 @@ rationals.set_frontpage(rationals_intro)
 powerfunctions = Division('chapter', "Power Functions",
                                 [
                                 integerexponents,
-                                rationalexponents,
+                                # rationalexponents,
                                 ])
 powerfunctions.set_frontpage(powerfunctions_intro)
 
