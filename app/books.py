@@ -762,7 +762,13 @@ integerexponents = Section('integerexponents', "Integer Exponents", '/sections/i
 integerexponents.add_to_questions('simplify_integer_exponent')
 
 rationalexponents = Section('rationalexponents', "Rational Exponents", '/sections/rational-exponents')
-rationalexponents.add_to_questions('simplify_rational_exponent_just_expo',)
+rationalexponents.add_to_questions(#'simplify_rational_exponent_just_expo',
+                                    # 'simplify_like_base_product_rational_expo',
+                                    # 'simplify_rational_expo_to_rational_expo',
+                                    # 'simplify_like_base_quotient_rational_expo',
+                                    # 'simplify_by_combining_product_into_one_radical',
+                                    'simplify_by_combining_quotient_into_one_radical',
+                                    )
 #######################################
 
 

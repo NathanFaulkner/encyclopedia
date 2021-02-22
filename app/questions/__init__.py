@@ -112,6 +112,11 @@ __all__ = ['quadratic_pattern',
             'graph_hyperbola', 'graph_hyperbola_to_equation',
             'simplify_integer_exponent',
             'simplify_rational_exponent_just_expo',
+            'simplify_like_base_product_rational_expo',
+            'simplify_like_base_quotient_rational_expo',
+            'simplify_rational_expo_to_rational_expo',
+            'simplify_by_combining_product_into_one_radical',
+            'simplify_by_combining_quotient_into_one_radical',
             ]
 
 class Question():
@@ -731,6 +736,13 @@ def list_integer_factors(n):
         i += 1
     return factors
 
+def get_integer_divisors(n):
+    divisors = []
+    for i in range(1,n+1):
+        if n/i % 1 == 0:
+            divisors.append(i)
+    return divisors
+
 
 
 class Monomial():
@@ -999,3 +1011,54 @@ class Quotient():
             numer = Monomial(s)
             denom = Monomial('1')
         return [numer, denom]
+
+
+# class AtomicTerm:
+#     """
+#     A good option to add would be to express how this should be displayed.
+#     """
+#     def __init__(self, input):
+#         if isinstance(input, BasicOperation) and input.arity == 0:
+#             self.type = 'constant'
+#             self.symbol = input.symbol
+#         elif type(input) == str and input.isalpha():
+#             self.type = 'variable'
+#             self.symbol = input
+#         else:
+#             raise TypeError(f'{input} is not admissable as an atomic term.')
+class Variable:
+    def __init__(self, input):
+        if type(input) != str:
+            raise TypeError('Variable takes one argument, the symbol for the variable.')
+        self.symbol = input
+
+class BasicOperation:
+    def __init__(self, symbol, arity):
+        if type(symbol) != str:
+            raise TypeError('The first argument for Basic Operation should be a string: the symbol for the operation.')
+        self.symbol = symbol
+        if type(arity) != int:
+            raise TypeError('The second argument for Basic Operation should be a natural number, the arity of the operation.')
+        self.arity = arity
+
+class Term:
+    def __init__(self, *args):
+        if len(args) == 0:
+            raise TypeError('A term cannot be empty.  Use PartialTerm instead.')
+        if len(args) == 1:
+            if isinstance(args[0], BasicOperation) and args[0].arity == 0:
+                self.term = args[0]
+            elif isinstance(args[0], Variable):
+                self.term = args[0]
+            else:
+                raise SyntaxError('You did not provide a well-formed term.')
+        else:
+            if not isinstance(args[0], BasicOperation):
+                raise SyntaxError('You did not provide a well-formed term.')
+            else:
+                self.basic_operation = args[0]
+                for arg in args:
+                    if isinstance(arg, Term):
+                        pass
+                    else:
+                        arg = Term(arg)

@@ -17,7 +17,7 @@ from app.questions import (Question,
 
 
 
-class SimplifyIntegerExponent(Question):
+class SimplifyRationalExponentJustExpo(Question):
     """
     """
     def __init__(self, **kwargs):
@@ -26,7 +26,7 @@ class SimplifyIntegerExponent(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        b = random.randint(2, 5)
+        b = random.randint(1, 5)
         q = random.randint(2, 5)
         p = random_non_zero_integer(-7,7)
         while p/q % 1 == 0:
@@ -128,5 +128,5 @@ class SimplifyIntegerExponent(Question):
             raise SyntaxError
 
 
-Question_Class = SimplifyIntegerExponent
+Question_Class = SimplifyRationalExponentJustExpo
 prob_type = 'math_blank'

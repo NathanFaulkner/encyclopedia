@@ -141,7 +141,7 @@ the window and has at least 5 points clearly marked.
     name = 'Graph from Standard Form'
     module_name = 'graph_standard_form'
 
-    prompt_single = """Graph the given equation by plotting at least 4 points
+    prompt_single = """Graph the given equation by plotting the vertex and at least 3 other points
 that satisfy the equation."""
     prompt_multiple = """Graph each of the following equations by plotting at least 4 points
 that satisfy the equation."""
