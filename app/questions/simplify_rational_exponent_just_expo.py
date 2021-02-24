@@ -73,6 +73,96 @@ class SimplifyRationalExponentJustExpo(Question):
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
+    # def checkanswer(self, user_answer):
+    #     user_answer = user_answer.lower()
+    #     user_answer = user_answer.replace('^', '**')
+    #     user_answer = parse_expr(user_answer, transformations=transformations, evaluate=False)
+    #     print('user stuff', user_answer, type(user_answer))
+    #     if isinstance(user_answer, sy.Pow):
+    #         if user_answer.args[1] == -1:
+    #             print('My fault!')
+    #             print(user_answer.args)
+    #             if isinstance(user_answer.args[0], sy.Pow):
+    #                 user_base = user_answer.args[0].args[0]
+    #                 user_expo = -user_answer.args[0].args[1]
+    #                 user_answer = sy.Pow(user_base, sy.simplify(user_expo), evaluate=False)
+    #                 print('alt', user_answer, type(user_answer))
+    #                 for arg in sy.preorder_traversal(user_answer):
+    #                     print(arg)
+    #         else:
+    #             user_base = user_answer.args[0]
+    #             user_expo = user_answer.args[1]
+    #             print('type user base', type(user_base))
+    #             print('type user_expo', type(user_expo))
+    #             if isinstance(user_expo, sy.Integer):
+    #                 user_answer = sy.Pow(user_base, sy.simplify(user_expo))
+    #             else:
+    #                 user_answer = sy.Pow(user_base, sy.simplify(user_expo), evaluate=False)
+    #             print('standard', user_answer, type(user_answer))
+    #             for arg in sy.preorder_traversal(user_answer):
+    #                 print(arg)
+    #     answer = parse_expr(str(self.answer), transformations=transformations)
+    #     print('answer stuff', answer, type(answer))
+    #     for arg in sy.preorder_traversal(answer):
+    #         print(arg)
+    #     return user_answer == answer
+    #
+    # @staticmethod
+    # def format_useranswer(user_answer, display=False):
+    #     user_answer = user_answer.lower()
+    #     user_answer = user_answer.replace('^', '**')
+    #     user_answer = parse_expr(user_answer, transformations=transformations, evaluate=False)
+    #     # print('user stuff', user_answer, type(user_answer))
+    #     if isinstance(user_answer, sy.Pow):
+    #         if user_answer.args[1] == -1:
+    #             # print('My fault!')
+    #             # print(user_answer.args)
+    #             if isinstance(user_answer.args[0], sy.Pow):
+    #                 user_base = user_answer.args[0].args[0]
+    #                 user_expo = -user_answer.args[0].args[1]
+    #                 user_answer = sy.Pow(user_base, sy.simplify(user_expo), evaluate=False)
+    #                 # print('alt', user_answer, type(user_answer))
+    #                 # for arg in sy.preorder_traversal(user_answer):
+    #                 #     print(arg)
+    #         else:
+    #             user_base = user_answer.args[0]
+    #             user_expo = user_answer.args[1]
+    #             user_answer = sy.Pow(user_base, sy.simplify(user_expo), evaluate=False)
+    #             # print('standard', user_answer, type(user_answer))
+    #             # for arg in sy.preorder_traversal(user_answer):
+    #             #     print(arg)
+    #         return f'\\(  {{ {sy.latex(user_base)} }}^{{ {sy.latex(user_expo)} }} \\)'
+    #     return f'\({sy.latex(user_answer)}\)'
+    #
+    # @staticmethod
+    # def validator(user_answer):
+    #     try:
+    #         # pass
+    #         user_answer = user_answer.lower()
+    #         user_answer = user_answer.replace('^', '**')
+    #         user_answer = parse_expr(user_answer, transformations=transformations, evaluate=False)
+    #         # print('user stuff', user_answer, type(user_answer))
+    #         if isinstance(user_answer, sy.Pow):
+    #             if user_answer.args[1] == -1:
+    #                 # print('My fault!')
+    #                 # print(user_answer.args)
+    #                 if isinstance(user_answer.args[0], sy.Pow):
+    #                     user_base = user_answer.args[0].args[0]
+    #                     user_expo = -user_answer.args[0].args[1]
+    #                     user_answer = sy.Pow(user_base, sy.simplify(user_expo), evaluate=False)
+    #                     # print('alt', user_answer, type(user_answer))
+    #                     # for arg in sy.preorder_traversal(user_answer):
+    #                     #     print(arg)
+    #             else:
+    #                 user_base = user_answer.args[0]
+    #                 user_expo = user_answer.args[1]
+    #                 user_answer = sy.Pow(user_base, sy.simplify(user_expo), evaluate=False)
+    #                 # print('standard', user_answer, type(user_answer))
+    #                 # for arg in sy.preorder_traversal(user_answer):
+    #                 #     print(arg)
+    #         f'\({sy.latex(user_answer)}\)'
+    #     except:
+    #         raise SyntaxError
 
     def checkanswer(self, user_answer):
         user_answer = user_answer.lower()
