@@ -117,6 +117,8 @@ __all__ = ['quadratic_pattern',
             'simplify_rational_expo_to_rational_expo',
             'simplify_by_combining_product_into_one_radical',
             'simplify_by_combining_quotient_into_one_radical',
+            'simplify_rational_exponent_just_expo_of_quotient',
+            'reduce_radical',
             ]
 
 class Question():
@@ -743,6 +745,13 @@ def get_integer_divisors(n):
             divisors.append(i)
     return divisors
 
+def apply_positive_integer_powers(expr):
+    if isinstance(expr, Pow) and expr.args[1] > 0 and isinstance(expr.args[1], Integer):
+        return simplify(expr)
+    elif expr.args == ():
+        return expr
+    else:
+        return expr.func(*(apply_positive_integer_powers(arg) for arg in expr.args), evaluate=False)
 
 
 class Monomial():

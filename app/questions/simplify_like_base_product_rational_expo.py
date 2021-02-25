@@ -46,11 +46,16 @@ class SimplifyLikeBaseProductRationalExpo(Question):
         \\]"""
 
         self.prompt_single = f"""Simplify&mdash;in the sense of rewriting
-        as a single exponential term (that is, a term of the form \\(a^b\\))."""
+        as a single exponential term (that is, a term of the form \\(a^b\\)).
+        You can assume all variables represent positive numbers in case
+        of ambiguity.
+        """
 
         self.format_given_for_tex = f"""
         Simplify---in the sense of rewriting
         as a single exponential term (that is, a term of the form \\(a^b\\)).
+        You can assume all variables represent positive numbers in case
+        of ambiguity.
 
         {self.format_given}
         """

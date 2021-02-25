@@ -1,0 +1,314 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section, we actually only work with fractions in the exponent as
+  represented by radicals.  Our goal in this section will be to practice the
+  skill of "reducing" or simplifying radicals by looking for "perfect
+  \(n^\textrm{th}\) powers"&mdash;for example, perfect squares.
+  A quick illustration will get the point across.
+</p>
+
+<p>
+<div class="example">
+  <h2> (Warm-up)</h2>
+
+<a href="https://drive.google.com/open?id=1u1QP_5qLcw9EiMCJlRwssA0KwG6lS-Tm">Click for Video}</a>
+
+Simplify each of the following radicals by using the fact that
+\(\sqrt{ab} = \sqrt{a}\sqrt{b}\).
+That is, look for perfect squares to extract and reduce.
+<ol>
+<li>
+\(\sqrt{54}\)
+\(\sqrt{8}\)
+\(\sqrt{50}\)
+</li>
+<li>
+\item\(\sqrt{108}\)
+\item\(\sqrt{60}\)
+\item\(\sqrt{48}\)
+</li>
+</ol>
+
+</div>
+</p>
+
+In this section, we are building on that skill.
+We will be using the fact that, for real numbers \(a>0\), \(b>0\),
+\[
+\sqrt[n]{ab} = \sqrt[n]{a}\sqrt[n]{b}
+\]
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the radical.  (Answer in {\color{red}red}.)
+\[
+\sqrt[3]{54} \;{\color{red} =  \sqrt[3]{27\cdot 2} = \sqrt[3]{27}\sqrt[3]{2} = 3\sqrt[3]{2}}
+\]
+</div>
+</p>
+This same sort of trick can also be applied when the factors \(ab\)
+under the radical are left non-specific&mdash;that is, are written as variables.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the radical by using the fact that, for real numbers \(a>0\), \(b>0\),
+\(\sqrt[n]{ab} = \sqrt[n]{a}\sqrt[n]{b}\).  (Answer in {\color{red}red}.)
+\[
+\sqrt[3]{2x^3} \; {\color{red} = \sqrt[3]{x^3}\sqrt[3]{2} = x \sqrt[3]{2}}
+\]
+</div>
+</p>
+That's mostly it!&mdash;except that we do have to contemplate the "fine print":
+What happens when the variables
+are actually intended to represent negative numbers?  To answer this,
+all you have to do is look at some examples where the numbers involved actually <em>are</em> negative.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the radical by using the fact that \(\sqrt[n]{ab} = \sqrt[n]{a}\sqrt[n]{b}\).
+(Answer in {\color{red}red}.)
+\[
+\sqrt[3]{-1} \; {\color{red} = \sqrt[3]{(-1)(-1)(-1)} = -1}
+\]
+</div>
+</p>
+No big deal there!  Notice, then, that for \(a=-1\), \(\sqrt[3]{a^3} = a\).
+Here's another one:
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the radical by using the fact that \(\sqrt[n]{ab} = \sqrt[n]{a}\sqrt[n]{b}\).
+(Answer in {\color{red}red}.)
+\[
+\sqrt[3]{-8} \; {\color{red} = \sqrt[3]{(-2)^3} = -2}
+\]
+</div>
+</p>
+So, again, we are seeing an example of where \(a\lt 0\) and still \(\sqrt[n]{a^n} = a\).  But, if you think about it,
+you will see that this will not always be the case.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the radical by using the fact that \(\sqrt[n]{ab} = \sqrt[n]{a}\sqrt[n]{b}\).  (Answer in {\color{red}red}.)
+\[
+\sqrt{-4} \; {\color{red} = \sqrt{(2i)^2} = 2i??}
+\]
+</div>
+</p>
+Actually, we won't bother with examples like this, where we are seeking to
+take an even root of a negative number&mdash;that is, where we are
+trying to break apart a negative number into an even number of equal factors.
+But, the following sort of complication, we will still contend with, in a way:
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the radical.  (Answer in {\color{red}red}.)
+\[
+\sqrt{(-1)^2} \; {\color{red} = \sqrt{1} = 1}
+\]
+</div>
+</p>
+What's hard about that?  Well, nothing.  Except this: the moral here is that, for \(a\lt0\), it may not
+be the case that \(\sqrt[n]{a^n} = a\).  Indeed, for the example of \(a=-1\) and \(n=2\), we find that
+\[
+\sqrt[n]{a^n} = \sqrt{(-1)^2} \neq -1 = a
+\]
+Instead, because of the squaring of \(-1\), it comes out positive!
+That's not such a big deal.  Indeed, we already have some notational
+equipment for denoting the instructions "must come out positive."
+What math operation&mdash;think <em>waaay</em> back to the start of
+first semester&mdash;do we have that means "must come
+out positive?"  I hope you answered (with a moment's thought), "absolute value."  Thus,
+\[
+\sqrt{(-1)^2} = 1 = |-1|
+\]
+Consider the following chain of logic.  Note first that \(x^2\)
+and \(|x|^2\) come out the same no matter what.  Note, too, that,
+for any real number \(a>0\), \(\sqrt[n]{a^n} = a\).  Note, of course that \(|x|>0\).
+Then, for any real number \(x\),
+\[
+\sqrt{x^2} = \sqrt{|x|^2} = |x|
+\]
+That's how I suggest you operate, but you might also find it useful to note the following pair of facts.
+<p>
+<div class="fact">
+  <h2></h2>
+For any positive, {\color{red} odd} integer, \(n\), and any real number \(a\),
+\[
+\sqrt[n]{a^n} = a
+\]
+but for any positive, {\color{blue} even} integer, \(n\), and any real number \(a\),
+\[
+\sqrt[n]{a^n} = |a|
+\]
+</div>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the radical.
+\[
+\sqrt{4x^2y}
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+Rewrite the the even powers using absolute value&mdash;to acknowledge
+that they will come out positive.  Then just operate "like normal."
+\begin{align*}
+\sqrt{4x^2y} &= \sqrt{4|x|^2y}\\
+&= \sqrt{4} \sqrt{|x|^2}\sqrt{y} \\
+&= 2|x| \sqrt{y}
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+That takes care of that technical detail, but there is still some technique
+left to learn.  Take a look at what I am up to in the next examples.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the radical.
+\[
+\sqrt{16x^6y^{12}}
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+I am looking for perfect squares to "cancel" with the square root symbol.
+Of course, \(16=4^2\) is a perfect square.  What about \(x^6\)?
+It, too, is a square!  \(x^6 = x^3 \cdot x^3 = \left(x^3\right)^2\).  Similarly,
+\(y^{12} = \left(y^6\right)^2\).  So this is how I operate:
+\begin{align*}
+\sqrt{16x^6y^{12}} &= \sqrt{16|x|^6|y|^{12}}  \\
+&= \sqrt{16 \left(|x|^3\right)^2\left(|y|^6\right)^2}\\
+& {\color{cyan} =  \sqrt{16}\sqrt{\left(|x|^3\right)^2}\sqrt{\left(|y|^6\right)^2}} \\
+&= 4|x|^3|y|^6\\
+&= 4|x|^3y^6
+\end{align*}
+I highlighted one step in {\color{cyan} cyan} to highlight a step
+that I don't mind if you skip.  Also, in the very last step, I have removed
+the absolute value sign over \(y\) because it is redundant: Since \(y\) is being
+raised to the \(6^\textrm{th}\) power anyway, it will come out positive
+with or without the absolute value sign.  But, actually, I won't count
+off if you neglect that last step either.  Really, you don't have to show
+work at all, but it will be better for your process (and for potential
+partial credit) if you do.
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the radical.
+\[
+\sqrt[3]{24x^3y^6z^{17}}
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+I am on a hunt for perfect "cubes"&mdash;powers of 3.
+Here is one: \(24 = 8 \cdot 3 = 2^3 \cdot 8\).  I see \(x^3\), as well.
+Here is one more: \(y^6 = y^2 y^2 y^2 =\left(y^2\right)^3\).
+How about \(z^{17}\)?  Can
+it be conveniently broken apart into three equal factors?
+The answer is no: because 17 is not
+divisible by 3.  But you can still divide 17 by 3&mdash;with remainder.
+That is what I will do, rewriting
+\[
+z^{17} = \left(z^5\right)^3 z^2
+\]
+In all, I have the following (which, again, you can skip steps if you like, but just use care!)
+\begin{align*}
+\sqrt[3]{24x^3y^6z^{17}} & = \sqrt[3]{(2)^3  3 (x)^3 \left(y^2\right)^3 \left(z^5\right)^3 z^2}\\
+&\color{cyan} = \sqrt[3]{(2)^3} \sqrt[3]{3} \sqrt[3]{(x)^3} \sqrt[3]{\left(y^2\right)^3} \sqrt[3]{\left(z^5\right)^3} \sqrt[3]{z^2} \\
+&\color{cyan} = \sqrt[3]{(2)^3}  \sqrt[3]{(x)^3} \sqrt[3]{\left(y^2\right)^3} \sqrt[3]{\left(z^5\right)^3} \sqrt[3]{3}\sqrt[3]{z^2} \\
+&= 2x^3 y^2 z^5 \sqrt[3]{3z^2}
+\end{align*}
+You might notice that I didn't fiddle with absolute values in this case.
+The reason is that, while it is
+accurate to substitute \(|y|^2\) for \(y^2\) it also redundant in the end, since, indeed, \(y^2\) ends
+up in the final answer.  Also, the only danger that the absolute value
+symbols protect us against is when an even power gets "canceled away" by an even root.
+Since this is an odd root, there is no worry.  See the "Fact" above for further comment on this.
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Simplify the radical.
+\[
+\sqrt[4]{32a^5b^{16}}
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+This time I am looking for perfect \(4^\textrm{th}\) powers:
+\begin{align*}
+\sqrt[4]{32a^5b^{16}} &= \sqrt[4]{2^4 2 a^4 a \left(|b|^4\right)^4} \\
+&\color{cyan} = \sqrt[4]{2^4} \sqrt[4]{2} \sqrt[4]{a^4} \sqrt[4]{a} \sqrt[4]{\left(|b|^4\right)^4} \\
+&=   2a|b|^4 \sqrt[4]{2a}\\
+&=   2a b^4 \sqrt[4]{2a}
+\end{align*}
+Again, note that you can strip off the absolute value signs at the end on any variables that
+are being raised to an even power; they are redundant in that case.
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

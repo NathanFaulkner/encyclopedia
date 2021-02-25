@@ -138,7 +138,7 @@ def reset_password_request():
         user = Student.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
-        flash('Check your email for the instructions to reset your password.  But be patient.  This can take around 10 minutes.')
+        flash("Check your email for the instructions to reset your password.  If the email doesn't come through in a minute or so, please send a second request.")
         return redirect(url_for('login'))
     return render_template('reset_password_request.html',
                             title='Reset Password', form=form)
