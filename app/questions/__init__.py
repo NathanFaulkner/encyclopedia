@@ -119,6 +119,7 @@ __all__ = ['quadratic_pattern',
             'simplify_by_combining_quotient_into_one_radical',
             'simplify_rational_exponent_just_expo_of_quotient',
             'reduce_radical',
+            'solve_power_equation_level1',
             ]
 
 class Question():
@@ -795,6 +796,22 @@ def has_rational_power(expr):
     else:
         # print('recurrence')
         return any([has_rational_power(arg) for arg in expr.args])
+
+def split_at_comma_not_in_parens(s):
+    # print('hello!')
+    paren_counter = 0
+    i = 0
+    while i < len(s):
+        if s[i] == '(':
+            paren_counter += 1
+        elif s[i] == ')':
+            paren_counter -= 1
+        if s[i] == ',' and paren_counter == 0:
+            s = s[:i] + ';' + s[i+1:]
+        elif s[i] == ';':
+            raise TypeError('A string containing a semi-colon is not allowed here.')
+        i += 1
+    return s.split(';')
 
 
 class Monomial():

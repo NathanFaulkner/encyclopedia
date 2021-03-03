@@ -1,0 +1,367 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section, we take a our study of power functions one step further by solving equations
+  that involve them.  Keep in mind, a power function is one whose outputs can be determined using a formula of the form
+  \[
+  f(x) = Ax^p
+  \]
+  where \(A\) and \(p\) are real numbers.  But, when \(p\) is a rational number, these functions
+  are often conveyed instead using radical notation.  We will look at both presentations.
+
+  There are basically two types of problems you will have to contend with: one,
+  where the power is an integer, and, two, where the power is a fraction (or is
+  instead presented in radical form).  We'll do the second type in a compananion section (Part 2!).
+
+</p>
+
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.
+(Find the solution set&mdash;the set of all real numbers that would make the equation
+true when substituted in.)
+\[
+x^3 = 64
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+This one is pretty easy, I hope you will agree.  It just poses the question, "What times itself
+3 times is 64?"  Now, the answer might not just jump out at you, but after a
+little guessing-and-checking, I hope you will realize the answer is 4.
+
+<p>
+Another way to explain what is going on here is that the question, "What times itself 3 times
+is 64?" is the same as that posed by this equation:
+\[
+x = 64^\frac{1}{3} = 4
+\]
+The power \(\frac{1}{3}\) means we are trying to break 64 apart into 3 equal
+factors.  Of course, you might have also conveyed your answer using radical notation:
+\[
+x = \sqrt[3]{64} = 4
+\]
+The expressions \(x^\frac{1}{3}\) and \(\sqrt[3]{x}\) have the same meaning.
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+Now, we spice it up just a tad.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the set of all real numbers that would make the equation
+true when substituted in.)
+\[
+x^3 = 60
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+This time, there is no nice answer; there is no convenient way to break 60
+apart into 3 equal factors.  Instead we just use a <em>symbol for</em> the answer.
+Of course, you could ask the calculator what the answer would be in decimal form.
+You might also imagine trying to guess-and-check your way to this decimal answer.
+(It would take awhile.)
+\begin{align*}
+&x^3 = 60 \\
+\Rightarrow \quad & x = \sqrt[3]{60}
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+Now, something a little different happens when an even number appears as the power.
+You should already be familiar with this little twist, but take a look at the following example as a reminder.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the set
+of all real numbers that would make the equation
+true when substituted in.)
+\[
+x^2 = 64
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+What number times itself is 64?  Well, 8.  But \(-8\) works as well!  So, we have two solutions:
+\begin{align*}
+&x^2 = 64 \\
+\Rightarrow \quad & x = 8 \quad \textrm{or} \quad x = -8
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+What happens when there isn't such a nice answer?
+Well, this is also something we've dealt with before, as in the following.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the set
+of all real numbers that would make the equation
+true when substituted in.)
+\[
+x^2 = 60
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+There is no nice number that you can multiply by itself to arrive at 60.
+But, there is a yucky number&mdash;some decimal that the calculator will be
+glad to find for you.  But, as you are not a calculator, but rather a human
+who works in symbols (which is also the way you interact with
+calculators and computers&mdash;through the interchange of symbols that mean
+very different things to you, on the one hand, and the computer on the other), this is what I want from you:
+\begin{align*}
+&x^2 = 60 \\
+\Rightarrow \quad & x = \sqrt{60} \quad \textrm{or} \quad x = - \sqrt{60}
+\end{align*}
+Two answers!
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+Here's one more quick example along those lines.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the set
+of all real numbers that would make the equation
+true when substituted in.)
+\[
+x^4 = 81
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+Hmmm.  What number times itself is 81?  Well, again, this is just the sort of question
+we have already been entertaining with posers like \(81^\frac{1}{4}\).  Noting that
+\[
+81 = 9 \cdot 9 = 3 \cdot 3 \cdot 3 \cdot 3
+\]
+we realize the answer is 3\ldots  except \(-3\) times itself 4 times is also 81!
+You might write this:
+\begin{align*}
+&x^4 = 81 \\
+\Rightarrow \quad & x = \sqrt[4]{81} = 3 \quad \textrm{or} \quad x = -\sqrt[4]{81} = - 3
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+The key take-away from the previous example is to realize that a negative times
+itself <em>an even number of times</em> comes out positive; therefore, any
+power equation with an even power will have two answers, a negative and a positive.
+
+Now, we just "spice things up" in a few more ways.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the set
+of all real numbers that would make the equation
+true when substituted in.)
+\[
+(x-4)^3 + 7 = 34
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+Don't forget your standard kit of tools to apply when solving an equation!
+You can do
+whatever you want as long as you do it to both sides.  For instance, I could subtract 7 from both sides:
+\begin{align*}
+& (x-4)^3 + 7 = 34 \\
+\Rightarrow \quad & (x-4)^7 = 27
+\end{align*}
+Next, I reason like so: While I don't know about \(x\) quite yet, I do know that \(x\)
+is supposedly a number.  Therefore, \(x-4\) is also a number.
+And I know that that number&mdash;\(x-4\)&mdash;times itself comes out to 27.
+So, \(x-4\) must be 3:
+\begin{align*}
+&  (x-4)^3 = 27 \\
+\Rightarrow \quad & x-4 = 3 \\
+\Rightarrow \quad & x = 7
+\end{align*}
+Of course, to find what \(x\) could be, I just added 4 to both sides in my last step.
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the set
+of all real numbers that would make the equation
+true when substituted in.)
+\[
+2(x-4)^4 - 11 = 151
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+& 2(x-4)^4 - 11 = 151 \\
+\Rightarrow \quad & 2(x-4)^4 = 162\\
+\Rightarrow \quad & (x-4)^4 = 81\\
+\Rightarrow \quad & x - 4 = \sqrt[4]{81} = 3 \quad \textrm{or} \quad x - 4 = -\sqrt[4]{81} = - 3\\
+\Rightarrow \quad & x = 7 \quad \textrm{or} \quad x = 1\\
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the
+set of all real numbers that would make the equation
+true when substituted in.)
+\[
+3x^3-6=24
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+& 3x^3-6=24 \\
+\Rightarrow \quad & 3x^3  = 30\\
+\Rightarrow \quad & x^3 = 10\\
+\Rightarrow \quad & x = \sqrt[3]{10}
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the
+set of all real numbers that would make the equation
+true when substituted in.)
+\[
+3(x-2)^2-6=24
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+& 3(x-2)^2-6=24\\
+\Rightarrow \quad & 3(x-2)^2  = 30\\
+\Rightarrow \quad & (x-2)^2 = 10\\
+\Rightarrow \quad & x - 2 = \sqrt{10} \quad \textrm{or} \quad x - 2 = -\sqrt{10}\\
+\Rightarrow \quad & x = 2 + \sqrt{10} \quad \textrm{or} \quad x = 2 - \sqrt{10}\\
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+<p>
+  As you will see, the last example is just a minor variation of the previous:
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the
+set of all real numbers that would make the equation
+true when substituted in.)
+\[
+3(x-2)^4-6=24
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+& 3(x-2)^4-6=24\\
+\Rightarrow \quad & 3(x-2)^4  = 30\\
+\Rightarrow \quad & (x-2)^4 = 10\\
+\Rightarrow \quad & x - 2 = \sqrt[4]{10} \quad \textrm{or} \quad x - 2 = -\sqrt[4]{10}\\
+\Rightarrow \quad & x = 2 + \sqrt[4]{10} \quad \textrm{or} \quad x = 2 - \sqrt[4]{10}\\
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

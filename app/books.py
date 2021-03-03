@@ -773,6 +773,9 @@ rationalexponents.add_to_questions('simplify_rational_exponent_just_expo',
 
 reducingradicals = Section('reducingradicals', "Reducing Radicals", '/sections/reducing-radicals')
 reducingradicals.add_to_questions('reduce_radical')
+
+solvingpowerequationspart1 = Section('solvingpowerequationspart1', "Solving Power Equations, Part 1", '/sections/solving-power-equations-part1')
+solvingpowerequationspart1.add_to_questions('solve_power_equation_level1')
 #######################################
 
 
@@ -874,6 +877,7 @@ powerfunctions = Division('chapter', "Power Functions",
                                 integerexponents,
                                 rationalexponents,
                                 reducingradicals,
+                                solvingpowerequationspart1,
                                 ])
 powerfunctions.set_frontpage(powerfunctions_intro)
 
