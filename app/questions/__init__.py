@@ -753,6 +753,49 @@ def apply_positive_integer_powers(expr):
     else:
         return expr.func(*(apply_positive_integer_powers(arg) for arg in expr.args), evaluate=False)
 
+def drop_redundant_abs(expr, evaluate=True):
+    # print(expr)
+    if isinstance(expr, Pow) and expr.args[1] % 2 == 0:
+        # print('even pow')
+        pow = expr.args[1]
+        arg = expr.args[0]
+        if isinstance(arg, Abs):
+            inner = arg.args[0]
+            return Pow(inner, pow, evaluate=evaluate)
+        else:
+            return expr
+    elif expr.args == ():
+        # print('empty ?', expr)
+        return expr
+    else:
+        # print('recurrence')
+        return expr.func(*(drop_redundant_abs(arg) for arg in expr.args), evaluate=evaluate)
+
+
+def commute_AbsMul_to_MulAbs(expr, evaluate=True):
+    if isinstance(expr, Abs):
+        inner = expr.args[0]
+        if isinstance(inner, Mul):
+            factors = inner.args
+            factors = (Abs(factor) for factor in factors)
+            return Mul(*factors, evaluate=evaluate)
+        elif isinstance(inner, Pow):
+            return Pow(Abs(inner.args[0]), inner.args[1], evaluate=evaluate)
+        else:
+            return expr
+    elif expr.args == ():
+        return expr
+    else:
+        return expr.func(*(commute_AbsMul_to_MulAbs(arg) for arg in expr.args), evaluate=evaluate)
+
+def has_rational_power(expr):
+    if isinstance(expr, Pow) and expr.args[1].is_number:
+        if expr.args[1] % 1 != 0:
+            return True
+    else:
+        # print('recurrence')
+        return any([has_rational_power(arg) for arg in expr.args])
+
 
 class Monomial():
     def __init__(self, s):
