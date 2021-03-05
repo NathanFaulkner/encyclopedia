@@ -17,7 +17,7 @@ from app.questions import (Question,
 
 
 
-class SolvePowerEquationLevel1(Question):
+class SolvePowerEquationLevel2(Question):
     """
     """
     def __init__(self, **kwargs):
@@ -26,15 +26,16 @@ class SolvePowerEquationLevel1(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        p = random.randint(2,4)
-        a = random.randint(-7,7)
+        n,m = random.choice([[1,2],[1,2], [1,3],[1,4],[2,3],[3,4], [3,2], [4,3]])
+        base = random.randint(-7,7)
         root_answer = random.choice([True, True, False])
         if root_answer:
-            if p % 2 == 0:
-                a = sy.Abs(a)
-            T = sy.Pow(a, sy.Rational(1,p))
+            if n % 2 == 0:
+                T = abs(base)**n
+            else:
+                T = base**n
         else:
-            T = a
+            T = base
         whether_b = random.choice([True, True, True, False])
         whether_A = random.choice([True, True, True, False])
         whether_C = random.choice([True, True, True, False])
@@ -50,12 +51,12 @@ class SolvePowerEquationLevel1(Question):
             C = random_non_zero_integer(-10,10)
         else:
             C = 0
-
         x = sy.Symbol('x', real=True)
-        LHS = sy.Add(sy.Mul(A,(x-b)**p, evaluate=False),C, evaluate=False)
-        RHS = A*(T)**p + C
+        LHS = sy.Add(sy.Mul(A,(x-b)**sy.Rational(n,m), evaluate=False),C, evaluate=False)
+        RHS = A*T + C
         prob = sy.Eq(LHS, RHS)
         self.answer = set(sy.solve(prob, x))
+        # print('self.answer', self.answer)
         self.has_solutions = self.answer != set()
         if self.has_solutions:
             format_answer = ''
@@ -66,6 +67,7 @@ class SolvePowerEquationLevel1(Question):
         else:
             # self.answer = 'No solution'
             self.format_answer = self.answer
+            self.format_answer = 'No solution'
         self.format_given = f"""
         \\[
             {sy.latex(prob)}
@@ -91,8 +93,8 @@ class SolvePowerEquationLevel1(Question):
 
 
 
-    name = 'Solve Power Equation with Integer Power'
-    module_name = 'solve_power_equation_level1'
+    name = 'Solve Power Equation with Fraction Power'
+    module_name = 'solve_power_equation_level2'
 
 
     prompt_multiple = """TBA"""
@@ -190,5 +192,5 @@ class SolvePowerEquationLevel1(Question):
         except:
             raise SyntaxError
 
-Question_Class = SolvePowerEquationLevel1
+Question_Class = SolvePowerEquationLevel2
 prob_type = 'math_blank'

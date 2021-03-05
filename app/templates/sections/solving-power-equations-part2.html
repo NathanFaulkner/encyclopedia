@@ -1,0 +1,420 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section, we solve power equations again but this time where the
+  powers are fractions.  In fact, the powers will often be presented in radical
+  form.  Let's get right to it.
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.
+(Find the solution set&mdash;the set of all real numbers that would make the equation
+true when substituted in.)
+\[
+x^\frac{1}{3} = 2
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+In words, this equation poses the question, "What number has 2 as its one-third
+factor?"  Put another way, "What number can you break into three equal factors
+and the result will be 2?"  Hopefully, when that sinks in correctly, you'll
+realize the answer is "8."  After all,
+\[
+8^\frac{1}{3} = 2
+\]
+But perhaps you would like some sort of "process" to follow?  One way to
+narrate how to solve
+such an equation is to realize the old truth that "When you are solving an
+equation, you can do whatever you like as long as you do it to both sides,"
+thus deducing a simpler equation that is a consequence of the first.
+In this case, "the thing you can do to both sides" that will be helpful is to
+<em>cube</em> both sides&mdash;that is, to raise both to the third power:
+\begin{align*}
+&x^\frac{1}{3} = 2\\
+\Rightarrow \quad & \left(x^\frac{1}{3}\right)^3 = 2^3\\
+\Rightarrow \quad & x = 8
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+<p>
+Here's another equally simple example.
+After this we'll start to make them a little more complicated:
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the set
+of all real numbers that would make the equation
+true when substituted in.)
+\[
+\sqrt{x}= 5
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+This time the equation says "the square root of what number is 5?"
+Perhaps you can intuit the answer: 25.  But, again, what process
+can you follow here?  Well, to get rid of the square root,
+you can "square both sides":
+\begin{align*}
+& \sqrt{x}= 5\\
+\Rightarrow \quad & \left(\sqrt{x}\right)^2 = 5^2\\
+\Rightarrow \quad & x = 25
+\end{align*}
+Note that \(\left(\sqrt{x}\right)^2  = \sqrt{x} \sqrt{x} = x\)!
+That's really the whole point of square roots: they serve to break
+apart a number into two equal factors.
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+The next couple of examples only spices things up slightly.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.
+(Find the solution set&mdash;the set of all real numbers that would make the equation
+true when substituted in.)
+\[
+\sqrt{x-1} + 5 = 17
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+Don't forget about your usual techniques!
+You can do whatever you want as long as you do it to both sides.
+I choose to subtract 5 from both sides, and then go from there.
+\begin{align*}
+& \sqrt{x-1} + 5 = 17 & \\
+\Rightarrow \quad & \sqrt{x-1} = 12 & \textrm{Subtract 5 from both sides}\\
+\Rightarrow \quad & \left(\sqrt{x-1}\right)^2 = 12^2 & \textrm{Square both sides}\\
+\Rightarrow \quad & x - 1 = 144 & \textrm{Simplify}\\
+\Rightarrow \quad & x = 145 & \textrm{Add 1 to both sides}\\
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the set of all real numbers that would make the equation
+true when substituted in.)
+\[
+2x^{\frac{1}{4}} - 4 = 10
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+& 2x^{\frac{1}{4}} - 4 = 10  & \\
+\Rightarrow \quad & 2x^{\frac{1}{4}} = 14  & \textrm{Add 4 to both sides}\\
+\Rightarrow \quad & x^{\frac{1}{4}} = 7  & \textrm{Divide both sides by 2}\\
+\Rightarrow \quad & \left(x^\frac{1}{4}\right)^4 = 7^4 & \textrm{Raise both sides to the power 4}\\
+\Rightarrow \quad & x  = 7^4 =  2401& \textrm{Simplify}\\
+\end{align*}
+Regarding the very last step of writing \(7^4 = 2401\), this is just something you ask your calculator.
+Enter exponents like so: '7^4'.
+
+    </div>
+  </div>
+
+</div>
+</p>
+Here is one more; then we have to make them a little weirder still.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the set of all real numbers that would make the equation
+true when substituted in.)
+\[
+3\left(x - 5\right)^\frac{1}{3} + 7 = 28
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+& 3\left(x - 5\right)^\frac{1}{3} + 7 = 28  & \\
+\Rightarrow \quad & 3\left(x - 5\right)^\frac{1}{3} = 21 & \textrm{Subtract 7 from both sides}\\
+\Rightarrow \quad &  \left(x - 5\right)^\frac{1}{3} = 7 & \textrm{Divide both sides by 3}\\
+\Rightarrow \quad & \left(\left(x - 5\right)^\frac{1}{3}\right)^3 = 7^3 & \textrm{Raise both sides to the power 3}\\
+\Rightarrow \quad & x - 5  =  2401& \textrm{Simplify}\\
+\Rightarrow \quad & x =  2406& \textrm{Add 5 to both sides}\\
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+Next, we take alook at what to do when the fraction involved isn't
+quite so simple: What happens when it isn't just 1 in the numerator of the power?
+For starters, recall that we made the following definition in the
+<a href="{{ url_for('section', section_name='rationalexponents') }}">
+section on rational exponents
+</a>
+\begin{equation}\label{multiple-fractional-power}\tag{1}
+a^{\frac{m}{n}} = \left(a^\frac{1}{n}\right)^m,
+\end{equation}
+where \(a\) is an appropriate real number and \(n\) and \(m\) are positive integers.
+For example,
+\[
+8^\frac{2}{3} = \left(8^\frac{1}{3}\right)^2 = 2^2 = 4
+\]
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the set of all real numbers that would make the equation
+true when substituted in.)
+\[
+x^\frac{2}{3} = 16
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+In words, this equation poses the question, "16 is two third factors of
+what number?"  In that's confusing, you may want to use the definition I just sited.  You can proceed as follows:
+\begin{align*}
+& x^\frac{2}{3} = 16 & \\
+& \left(x^\frac{1}{3}\right)^2 = 16 & \textrm{Using the definition in Equation (\ref{multiple-fractional-power}) above}
+\end{align*}
+Now, we see that the square of \(x^\frac{1}{3}\) is 16&mdash;where \(x^\frac{1}{3}\) is some number whose identity we don't know yet.  So, ask yourself, what number has a square of 16?  Of course, 4 does&mdash;except that \(-4\) does, too.  Therefore
+\begin{align*}
+& \left(x^\frac{1}{3}\right)^2 = 16 & \\
+\Rightarrow \quad& x^\frac{1}{3} = 4 \quad \textrm{or} \quad x^\frac{1}{3} = -4 \\
+\Rightarrow \quad& x = 4^3 \quad \textrm{or} \quad x = (-4)^3 & \textrm{Cube both sides} \\
+\Rightarrow \quad& x = 64 \quad \textrm{or} \quad x = -64 & \textrm{Simplify} \\
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the set of all real numbers that would make the equation
+true when substituted in.)
+\[
+x^\frac{3}{4} = 27
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+& x^\frac{3}{4} = 27 & \\
+\Rightarrow \quad & \left(x^\frac{1}{4}\right)^3 = 27 & \textrm{Using the definition in Equation (\ref{multiple-fractional-power}) above} \\
+\Rightarrow \quad & x^\frac{1}{4}= 3 & \textrm{because \(3^3\) is \(27\)}\\
+\Rightarrow \quad & x = 3^4 & \textrm{Raise both sides by the power 4}\\
+\Rightarrow \quad & x = 81  & \textrm{Simplify} \\
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+Now, it doesn't always have to come out so nicely:
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the set of all real numbers that would make the equation
+true when substituted in.)
+\[
+x^\frac{4}{3} = 10
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+& x^\frac{4}{3} = 10 \\
+\Rightarrow \quad & \left(x^\frac{1}{3}\right)^4 = 10 \\
+\Rightarrow \quad & x^\frac{1}{3}= 10^\frac{1}{4} \quad \textrm{or} \quad x^\frac{1}{3}= -10^\frac{1}{4}\\
+\Rightarrow \quad & x= \left(10^\frac{1}{4}\right)^3 \quad \textrm{or} \quad x = \left(-10^\frac{1}{4}\right)^3
+\end{align*}
+Note that if you cube a negative, you get a negative.  In particular,
+\[
+\left(-10^\frac{1}{4}\right)^3 = \left(-10^\frac{1}{4}\right) \left(-10^\frac{1}{4}\right) \left(-10^\frac{1}{4}\right) = -\left(10^\frac{1}{4}\right)^3
+\]
+Also, you can again use the definition in Equation (\ref{multiple-fractional-power}) to make the following change of notation:
+\[
+\left(10^\frac{1}{4}\right)^3 = 10^{\frac{3}{4}}
+\]
+Therefore, we can rewrite our answer to the previous problem as follows:
+\[
+ x = 10^\frac{3}{4} \quad \textrm{or} \quad x = -10^\frac{3}{4}
+\]
+I hope that makes you a little pleased, because it means that we could have simplified that whole process&mdash;provided we are a little careful:
+\begin{align*}
+& x^\frac{4}{3} = 10 \\
+\Rightarrow \quad & \left(x^\frac{4}{3}\right)^\frac{3}{4} = \pm 10^\frac{3}{4}\\
+\Rightarrow \quad & x^{\frac{4}{3}\cdot\frac{3}{4}} = \pm 10^\frac{3}{4}\\
+\Rightarrow \quad & x = \pm 10^\frac{3}{4}\\
+\end{align*}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+
+The only thing to be careful about in the shortcut illustrated at the end there is the "\(\pm\)".  Ask yourself&mdash;how in the world were you supposed to know that either answer (positive or negative) would work?  You'd only know it was there
+if you knew the meaning of \(x^\frac{4}{3} = \left(x^\frac{1}{3}\right)^4\): the \(x\)-value
+that you ultimately find will be getting raised to the fourth power&mdash;an <em>even</em> power&mdash;in the original equation.  That means that it doesn't matter if \(x\) is negative or positive; you get two answers.  The moral is that if there is an even integer in the numerator of the power on a variable then it is really being raised to an even power&mdash;so there will be two possible answers, a positive one and a negative one.
+
+Now, we just combine this new concept with various other minor complications involving
+adding, subtracting, multiplying, and dividing&mdash;the usual stuff.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the set of all real numbers that would make the equation true when substituted in.)
+\[
+- 10 \left(x + 6\right)^{\frac{4}{3}} - 3 = -163
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+& - 10 \left(x + 6\right)^{\frac{4}{3}} - 3 = -163 \\
+\Rightarrow \quad & - 10 \left(x + 6\right)^{\frac{4}{3}}= -160 & \\
+\Rightarrow \quad & \left(x + 6\right)^{\frac{4}{3}}= 16 & \\
+\color{blue}\Rightarrow \quad &  x + 6 = 16^\frac{3}{4} \quad \textrm{or} \quad x + 6 = -16^\frac{3}{4}\\
+\Rightarrow \quad &  x + 6 = 8 \quad \textrm{or} \quad x + 6 = -8\\
+\Rightarrow \quad &  x = 2 \quad \textrm{or} \quad x = -14\\
+\end{align*}
+In that <span style="color:blue">blue</span> step, I raised both sides to power \(\frac{3}{4}\).  I had to take care, though,
+because this really involves contemplating the quarter-factor of a number&mdash;and then multiplying that by itself three times.  I know that there are two ways to break apart 16 into 4 equal factors (using real numbers)&mdash;using 2 and using \(-2\):
+\[
+16 = 2 \cdot 2 \cdot 2 \cdot 2 = (-2) \cdot (-2) \cdot (-2) \cdot (-2)
+\]
+Therefore, I know \(x+6\) could be \( 2 \cdot 2 \cdot 2\) or \((-2) \cdot (-2) \cdot (-2)\).  Again, be careful if your original power has an even number in  its numerator: There will be two solutions!
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+Lastly, we need to cover the case where there is no solution&mdash;no real number that makes the
+equation true when substituted in for \(x\).  Here is a pretty simple example.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the set of all real numbers that would make the equation true when substituted in.)
+\[
+4 \sqrt{x} - 9 = -37
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+&4 \sqrt{x} - 9 = -37\\
+\Rightarrow \quad & 4 \sqrt{x} = -28\\
+\Rightarrow \quad & \sqrt{x} = -7\\
+\Rightarrow \quad & \textrm{No Solution}\\
+\end{align*}
+Why is there no solution?  Note that the square root of a number \(x\) is defined to be the <em>positive</em> real number \(a\) so that \(a\cdot a = x\).  Put another way, a square root of a number must be positive.
+
+    </div>
+  </div>
+
+</div>
+</p>
+The basic concern in the previous example is already well-illustrated: A square root&mdash;in fact an <em>even</em> root of a number is defined to be positive.  Here is a more complicated instance of this issue:
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Find all reals that solve the equation.  (Find the solution set&mdash;the set of all real numbers that would make the equation true when substituted in.)
+\[
+\left(x + 10\right)^{\frac{3}{4}} = -6
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\begin{align*}
+&\left(x + 10\right)^{\frac{3}{4}} = -6 \\
+\Rightarrow \quad & \textrm{No solution}
+\end{align*}
+Here, I am recognizing the fact that the \(\frac{1}{4}\) factor (or \(4^\textrm{th}\) root) of
+a number&mdash;such as a\(x+10\)&mdash;is positive.  The \(\frac{3}{4}\) factor of a number is just the \(\frac{1}{4}\)-factor multiplied by itself 3 times&mdash;which would still come out positive.  So, there is no way for \((x+10)^\frac{3}{4}\) to come out to a negative number.  If this seems hard to realize, you could also discover there is no solution by checking the one answer you might have thought was right.
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

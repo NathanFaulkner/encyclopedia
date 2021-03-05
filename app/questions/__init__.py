@@ -120,6 +120,7 @@ __all__ = ['quadratic_pattern',
             'simplify_rational_exponent_just_expo_of_quotient',
             'reduce_radical',
             'solve_power_equation_level1',
+            'solve_power_equation_level2',
             ]
 
 class Question():
