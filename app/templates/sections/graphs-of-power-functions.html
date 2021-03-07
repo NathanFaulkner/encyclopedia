@@ -1,0 +1,1055 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section, we'll take a look at the graphs of a few more power
+  functions and then transform them (shift them left, right, up, or down;
+  reflect them; scale them vertically.) Actually, we'll just concentrate on
+  four of them for now:
+</p>
+
+<ul>
+<li>
+\(y=x^2\)
+</li>
+
+<li>
+\(y = \sqrt{x}\)
+</li>
+
+<li>
+\(y = x^3\)
+</li>
+
+<li>
+\(y = \sqrt[3]{x}\)
+</li>
+</ul>
+One of these, you may have already graphed
+<a href="{{ url_for('section', section_name='vertexform') }}">
+elsewhere
+</a>
+&mdash;that
+being \(y=x^2\).  But, in the present section, it will be interesting to note
+how the graph of \(y=\sqrt{x}\) is related
+to that of \(y=x^2\) (on account of the connection between the definitions of
+these functions.)  In the same way, we will see that the graphs of \(y=x^3\)
+and \(y=\sqrt[3]{x}\) are related.
+
+<p>
+As always when beginning the study of a new graph, we will get our initial
+ideas of what the
+graphs look like by "just plotting points."  We'll do these in a series of
+four examples.  Actually, this first one is a repeat of an example
+given in the section on
+<a href="{{ url_for('section', section_name='vertexform') }}">
+vertex form, for quadratics.
+</a>
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+      <a href="https://www.loom.com/share/14d46426cffc46318c63eacef968b504">Click for video</a>
+    </p>
+
+    <p>
+      You are going to "plot points" until you realize what the graph
+      of \(y=x^2\) looks like.  You should repeat this activity on
+      your own whenever you forget what it looks like!
+      However, I want you to know up front that this is not
+      the method I suggest you use on any of the exercises in this
+      section.  Instead, this is a tedious method that you do to just
+      get started somewhere.  We will adopt a much more stream-lined
+      method in the examples below&mdash;but <em>only</em> after
+      going through the tedious, point-by-point process at least once.
+    </p>
+
+    <p>
+      All you have to do is to plug in a nice variety of \(x\)
+      values (plug in 0, plug in some positive numbers, plug in
+      some negative numbers), and keep going until a light
+      bulb goes on for you&mdash;and you are utterly certain
+      what the graph looks like.
+    </p>
+
+    <p>
+      Since this may be your first time in doing such a task,
+      I will guide you through it.  But in the future,
+      I expect you to be able to plot points on your own.
+    </p>
+    <ol>
+      <li>
+        Fill out the \(y\)-values in the following table
+        by performing the function \(y=x^2\)
+        on each of the \(x\)-values.
+
+        <br>
+        <table border="1" style="border-collapse: collapse">
+          <tr>
+            <td style="text-align: center; width: 50px">\(x\)</td><td style="text-align: center;">\(y=x^2\)</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">-3</td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">-2</td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">-1</td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td  style="text-align: center;">0</td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">1</td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">2</td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">3</td><td>&nbsp;</td>
+          </tr>
+        </table>
+
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+
+            <div style="text-align:center">
+              <table border="1" style="border-collapse: collapse">
+                <tr>
+                  <td style="text-align: center; width: 50px">\(x\)</td><td style="text-align: center;">\(y=x^2\)</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">-3</td><td style="text-align: center;">\((-3)^2 = 9\)</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">-2</td><td style="text-align: center;">\((-2)^2 = 4\)</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">-1</td><td style="text-align: center;">\((-1)^2 = 1\)</td>
+                </tr>
+                <tr>
+                  <td  style="text-align: center;">0</td><td style="text-align: center;">\(0^2 = 0\)</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">1</td><td style="text-align: center;">\(1^2 = 1\)</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">2</td><td style="text-align: center;">\(2^2 = 4\)</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">3</td><td style="text-align: center;">\(3^2 = 9\)</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+         Plot these points on the \((x, y)\)-plane.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            <div style="text-align:center">
+              {% set svg_id = 'svg1' %}
+              {% set points = [[-3,9], [-2, 4], [-1,1], [0,0], [1,1], [2,4], [3,9]] %}
+              {% set poly_points = '' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+         Are you bored yet?  If you are, that's good!
+         But note that, in a way, we can never be totally sure what the
+         graph of this function looks like if all we do is plot points
+         one at a time.  After all, there is an infinite number of \(x\)-values
+         we would have to plug in&mdash;from the very large down to
+         untold reaches beyond the decimal place&mdash;and that we therefore
+         need some sort of "overall" observation to stop with this process
+         of plugging in points and to confidently "connect the dots".
+         Explain how you can know how to connect the dots.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            If you feel somewhat at a loss as to how to answer this question,
+            that's a good thing!  In the context of first learning about quadratics,
+            we don't have a lot at our disposal
+            to answer it.  However, one thing you might remark on is what
+            \(x^2\) might represent: it would be the area of a square
+            whose sides are length \(x\).  So, what we are doing when
+            we graph this is visualizing how the area of such a square
+            would grow as the side lengths grow (imagining some sort of
+            expanding square.)  Intuitively, you can imagine how the
+            area would grow in a kind of steady fashion as \(x\) grows,
+            so, without any reason to the contrary, it seems natural to connect
+            the dots in a smooth fashion.  If that seems vague and a little
+            suspiciously subjective for mathematics, than that is to your
+            credit as a math student!  A more thorough explanation of how
+            and why you can "connect the dots" is better left until to
+            your calculus course.  But, for now, you'll be heading in the
+            direction of calculus to imagine the "growing square".  (Calculus
+            can be described as the study of how things change and, furthermore,
+            as a set of techniques for considering how very small changes in
+            one variable affect changes in a second one.  This is very much
+            relevant to the "growing square" question!)
+          </div>
+        </div>
+      </li>
+      <li>
+         Connect the dots: sketch a graph of the equation
+         \[
+          y = x^2
+         \]
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            <div style="text-align:center">
+              {% set svg_id = 'svg2' %}
+              {% set points = [[-3,9], [-2, 4], [-1,1], [0,0], [1,1], [2,4], [3,9]] %}
+              {% set poly_points = '0.0,-1575.00000000000 3.5353535353535426,-1505.00714212835 7.070707070707085,-1436.44270992756 10.606060606060597,-1369.30670339761 14.141414141414138,-1303.59912253852 17.676767676767682,-1239.31996735027 21.212121212121225,-1176.46923783287 24.747474747474737,-1115.04693398633 28.282828282828277,-1055.05305581063 31.81818181818182,-996.487603305785 35.353535353535364,-939.350576471788 38.88888888888889,-883.641975308642 42.424242424242415,-829.361799816345 45.95959595959596,-776.510049994898 49.4949494949495,-725.086725844301 53.03030303030303,-675.091827364555 56.56565656565655,-626.525354555658 60.1010101010101,-579.387307417610 63.63636363636364,-533.677685950413 67.17171717171716,-489.396490154066 70.70707070707071,-446.543720028568 74.24242424242424,-405.119375573921 77.77777777777779,-365.123456790123 81.31313131313131,-326.555963677176 84.84848484848484,-289.416896235078 88.38383838383838,-253.706254463830 91.91919191919192,-219.424038363432 95.45454545454545,-186.570247933884 98.98989898989899,-155.144883175186 102.52525252525251,-125.147944087338 106.06060606060606,-96.5794306703398 109.59595959595958,-69.4393429241915 113.13131313131314,-43.7276808488930 116.66666666666667,-19.4444444444444 120.2020202020202,3.41036628915414 123.73737373737374,24.8367513519029 127.27272727272727,44.8347107438016 130.8080808080808,63.4042444648505 134.34343434343432,80.5453525150495 137.87878787878788,96.2580348943985 141.41414141414143,110.542291602898 144.94949494949495,123.398122640547 148.48484848484847,134.825528007346 152.02020202020202,144.824507703296 155.55555555555557,153.395061728395 159.09090909090907,160.537190082645 162.62626262626262,166.250892766044 166.16161616161617,170.536169778594 169.6969696969697,173.393021120294 173.23232323232324,174.821446791144 176.76767676767676,174.821446791144 180.3030303030303,173.393021120294 183.83838383838383,170.536169778594 187.37373737373738,166.250892766044 190.9090909090909,160.537190082645 194.44444444444443,153.395061728395 197.97979797979798,144.824507703296 201.51515151515153,134.825528007346 205.05050505050502,123.398122640547 208.58585858585857,110.542291602898 212.12121212121212,96.2580348943985 215.65656565656568,80.5453525150495 219.19191919191917,63.4042444648506 222.72727272727272,44.8347107438017 226.26262626262627,24.8367513519029 229.7979797979798,3.41036628915414 233.33333333333334,-19.4444444444445 236.86868686868686,-43.7276808488929 240.4040404040404,-69.4393429241914 243.93939393939394,-96.5794306703398 247.4747474747475,-125.147944087338 251.01010101010098,-155.144883175186 254.54545454545453,-186.570247933884 258.0808080808081,-219.424038363432 261.6161616161616,-253.706254463830 265.1515151515151,-289.416896235078 268.68686868686865,-326.555963677176 272.22222222222223,-365.123456790123 275.75757575757575,-405.119375573921 279.2929292929293,-446.543720028568 282.82828282828285,-489.396490154066 286.3636363636364,-533.677685950413 289.8989898989899,-579.387307417610 293.4343434343434,-626.525354555658 296.96969696969694,-675.091827364554 300.5050505050505,-725.086725844302 304.04040404040404,-776.510049994898 307.57575757575756,-829.361799816345 311.11111111111114,-883.641975308642 314.64646464646466,-939.350576471788 318.18181818181813,-996.487603305785 321.7171717171717,-1055.05305581063 325.25252525252523,-1115.04693398633 328.7878787878788,-1176.46923783287 332.32323232323233,-1239.31996735027 335.85858585858585,-1303.59912253852 339.3939393939394,-1369.30670339761 342.9292929292929,-1436.44270992756 346.4646464646465,-1505.00714212835 350.0,-1575.00000000000 ' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</p>
+
+<p>
+  <div class="example">
+    <h2></h2>
+    <p>
+      <a href="https://www.loom.com/share/14d46426cffc46318c63eacef968b504">Click for video</a>
+    </p>
+
+    <p>
+      Now, for something new&mdash;sort of!!  Let's plot
+      \[
+      y = \sqrt{x}
+      \]
+      using the same approach as in the previous activity
+    </p>
+
+    <ol>
+      <li>
+        Fill out the \(y\)-values in the following table
+        by performing the function \(y=\sqrt{x}\)
+        on each of the \(x\)-values.
+
+        <br>
+        <table border="1" style="border-collapse: collapse">
+          <tr>
+            <td style="text-align: center; width: 50px">\(x\)</td><td style="text-align: center;">\(y=x^2\)</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">0</td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">1</td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">4</td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td  style="text-align: center;">9</td><td>&nbsp;</td>
+          </tr>
+        </table>
+
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+
+            <div style="text-align:center">
+              <table border="1" style="border-collapse: collapse">
+                <tr>
+                  <td style="text-align: center; width: 50px">\(x\)</td><td style="text-align: center;">\(y=\sqrt{x}\)</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">\(0\)</td><td style="text-align: center;">\(\sqrt{0} = 0\)</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">\(1\)</td><td style="text-align: center;">\(\sqrt{1} = 1\)</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">\(4\)</td><td style="text-align: center;">\(\sqrt{4} = 2\)</td>
+                </tr>
+                <tr>
+                  <td  style="text-align: center;">\(9\)</td><td style="text-align: center;">\(\sqrt{9} = 3\)</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+         Plot these points on the \((x, y)\)-plane.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            <div style="text-align:center">
+              {% set svg_id = 'svg1' %}
+              {% set points = [[0,0], [1, 1], [4,2], [9, 3]] %}
+              {% set poly_points = '' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+         Are you bored yet?  If you are, that's good!
+         But note that, in a way, we can never be totally sure what the
+         graph of this function looks like if all we do is plot points
+         one at a time.  After all, there is an infinite number of \(x\)-values
+         we would have to plug in&mdash;from the very large down to
+         untold reaches beyond the decimal place&mdash;and that we therefore
+         need some sort of "overall" observation to stop with this process
+         of plugging in points and to confidently "connect the dots".
+         Explain how you can know how to connect the dots.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            If you feel somewhat at a loss as to how to answer this question,
+            that's a good thing!  In the context of first learning about quadratics,
+            we don't have a lot at our disposal
+            to answer it.  However, one thing you might remark on is what
+            \(x^2\) might represent: it would be the area of a square
+            whose sides are length \(x\).  So, what we are doing when
+            we graph this is visualizing how the area of such a square
+            would grow as the side lengths grow (imagining some sort of
+            expanding square.)  Intuitively, you can imagine how the
+            area would grow in a kind of steady fashion as \(x\) grows,
+            so, without any reason to the contrary, it seems natural to connect
+            the dots in a smooth fashion.  If that seems vague and a little
+            suspiciously subjective for mathematics, than that is to your
+            credit as a math student!  A more thorough explanation of how
+            and why you can "connect the dots" is better left until to
+            your calculus course.  But, for now, you'll be heading in the
+            direction of calculus to imagine the "growing square".  (Calculus
+            can be described as the study of how things change and, furthermore,
+            as a set of techniques for considering how very small changes in
+            one variable affect changes in a second one.  This is very much
+            relevant to the "growing square" question!)
+          </div>
+        </div>
+      </li>
+      <li>
+         Connect the dots: sketch a graph of the equation
+         \[
+          y = x^2
+         \]
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            <div style="text-align:center">
+              {% set svg_id = 'svg2' %}
+              {% set points = [[0,0], [1, 1], [4,2], [9, 3]] %}
+              {% set poly_points = '0.0,-1575.00000000000 3.5353535353535426,-1505.00714212835 7.070707070707085,-1436.44270992756 10.606060606060597,-1369.30670339761 14.141414141414138,-1303.59912253852 17.676767676767682,-1239.31996735027 21.212121212121225,-1176.46923783287 24.747474747474737,-1115.04693398633 28.282828282828277,-1055.05305581063 31.81818181818182,-996.487603305785 35.353535353535364,-939.350576471788 38.88888888888889,-883.641975308642 42.424242424242415,-829.361799816345 45.95959595959596,-776.510049994898 49.4949494949495,-725.086725844301 53.03030303030303,-675.091827364555 56.56565656565655,-626.525354555658 60.1010101010101,-579.387307417610 63.63636363636364,-533.677685950413 67.17171717171716,-489.396490154066 70.70707070707071,-446.543720028568 74.24242424242424,-405.119375573921 77.77777777777779,-365.123456790123 81.31313131313131,-326.555963677176 84.84848484848484,-289.416896235078 88.38383838383838,-253.706254463830 91.91919191919192,-219.424038363432 95.45454545454545,-186.570247933884 98.98989898989899,-155.144883175186 102.52525252525251,-125.147944087338 106.06060606060606,-96.5794306703398 109.59595959595958,-69.4393429241915 113.13131313131314,-43.7276808488930 116.66666666666667,-19.4444444444444 120.2020202020202,3.41036628915414 123.73737373737374,24.8367513519029 127.27272727272727,44.8347107438016 130.8080808080808,63.4042444648505 134.34343434343432,80.5453525150495 137.87878787878788,96.2580348943985 141.41414141414143,110.542291602898 144.94949494949495,123.398122640547 148.48484848484847,134.825528007346 152.02020202020202,144.824507703296 155.55555555555557,153.395061728395 159.09090909090907,160.537190082645 162.62626262626262,166.250892766044 166.16161616161617,170.536169778594 169.6969696969697,173.393021120294 173.23232323232324,174.821446791144 176.76767676767676,174.821446791144 180.3030303030303,173.393021120294 183.83838383838383,170.536169778594 187.37373737373738,166.250892766044 190.9090909090909,160.537190082645 194.44444444444443,153.395061728395 197.97979797979798,144.824507703296 201.51515151515153,134.825528007346 205.05050505050502,123.398122640547 208.58585858585857,110.542291602898 212.12121212121212,96.2580348943985 215.65656565656568,80.5453525150495 219.19191919191917,63.4042444648506 222.72727272727272,44.8347107438017 226.26262626262627,24.8367513519029 229.7979797979798,3.41036628915414 233.33333333333334,-19.4444444444445 236.86868686868686,-43.7276808488929 240.4040404040404,-69.4393429241914 243.93939393939394,-96.5794306703398 247.4747474747475,-125.147944087338 251.01010101010098,-155.144883175186 254.54545454545453,-186.570247933884 258.0808080808081,-219.424038363432 261.6161616161616,-253.706254463830 265.1515151515151,-289.416896235078 268.68686868686865,-326.555963677176 272.22222222222223,-365.123456790123 275.75757575757575,-405.119375573921 279.2929292929293,-446.543720028568 282.82828282828285,-489.396490154066 286.3636363636364,-533.677685950413 289.8989898989899,-579.387307417610 293.4343434343434,-626.525354555658 296.96969696969694,-675.091827364554 300.5050505050505,-725.086725844302 304.04040404040404,-776.510049994898 307.57575757575756,-829.361799816345 311.11111111111114,-883.641975308642 314.64646464646466,-939.350576471788 318.18181818181813,-996.487603305785 321.7171717171717,-1055.05305581063 325.25252525252523,-1115.04693398633 328.7878787878788,-1176.46923783287 332.32323232323233,-1239.31996735027 335.85858585858585,-1303.59912253852 339.3939393939394,-1369.30670339761 342.9292929292929,-1436.44270992756 346.4646464646465,-1505.00714212835 350.0,-1575.00000000000 ' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</p>
+
+
+
+<p>
+ <div class="activity">
+  <h2></h2>
+
+<a href="https://www.loom.com/share/4f4d1f3452904b289c079ded7dc2cb1b">Click for video</a>
+Now, for something new&mdash;sort of!!  Let's plot
+\[
+y = \sqrt{x}
+\]
+using the same approach as in the previous activity
+
+\begin{minipage}{0.45\textwidth}
+\def \arraystretch{1.5}
+\begin{tabular}{c|c}
+\(x\) &  \(y\) \\
+\hline
+0 & \\
+1 & \\
+-1 & \\
+4 & \\
+9 & \\
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\includegraphics[scale=0.5]{blank}
+\end{minipage}
+</div>
+</p>
+
+The interesting thing to note here is that we have&mdash;in a
+way&mdash;plotted "the same" thing in these two activities: All the pairs
+appearing on the graph of \(y=x^2\) also appear on the graph of
+\(y=\sqrt{x}\)&mdash;<em>except</em>, they are reversed!  I mean, for example,
+that while \((2,4)\)
+gets plotted on the graph of \(y=x^2\), \((4,2)\) gets plotted on \(y=\sqrt{x}\),
+and, while \((3,9)\) gets plotted on \(y=x^2\), \((9,3)\) gets plotted on
+\(y=\sqrt{x}\).  There is a special word for this act of "reversing" the pairs.
+Actually, the word used by mathematicians is <b>inverse</b>.
+
+
+<p>
+<div class="definition">
+  <h2></h2>
+\label{def: inverse}
+Let
+\[
+\mathcal S = \left\{(x_1, y_1),(x_2, y_2), \ldots \right\}
+\]
+be a set of ordered pairs.  Then its <b>inverse</b>, denoted
+\(\mathcal S^{-1}\), is just what you get
+when you reverse all of the pairs&mdash;simple as that!  To wit,
+\[
+\mathcal S^{-1} = \left\{(y_1, x_1),(y_2, x_2), \ldots \right\}
+\]
+For example, we know that
+\[
+\mathcal S = \left\{(1,1), (2, 4),(3, 9)\right\}
+\]
+are points that appear on the graph of \(y=x^2\).
+Well, the inverse of this set of pairs appears on \(y=\sqrt{x}\).  That is,
+\[
+\mathcal S^{-1} = \left\{(1,1), (4, 2),(9, 3)\right\}
+\]
+is a subset of the pairs on the graph \(y=\sqrt{x}\).
+</div>
+</p>
+
+By the way, as it becomes annoying to say again and again the phrase
+"set of ordered pairs," there is a word for this as well.
+
+<p>
+<div class="definition">
+  <h2></h2>
+
+A set of ordered pairs can be called a <b>relation</b> for short.
+</div>
+</p>
+
+<p>
+ <div class="activity">
+  <h2></h2>
+
+  <a href="https://www.loom.com/share/1bfe699c62c347698851f59724ab2e2e">Click for video</a>
+
+<p>
+Plot
+\[
+y = x^3
+\]
+using the same approach as in the previous activity
+
+\begin{minipage}{0.45\textwidth}
+\def \arraystretch{1.5}
+\begin{tabular}{c|c}
+\(x\) &  \(y\) \\
+\hline
+0 & \\
+1 & \\
+-1 & \\
+2 & \\
+-2 & \\
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\includegraphics[scale=0.5]{blank}
+\end{minipage}
+</div>
+</p>
+
+<p>
+ <div class="activity">
+  <h2></h2>
+
+  <a href="https://www.loom.com/share/488706fd2b614cf892ff872cdba483ca">Click for video</a>
+
+<p>
+Plot
+\[
+y =\sqrt[3]{x}
+\]
+using the same approach as in the previous activity.
+
+\begin{minipage}{0.45\textwidth}
+\def \arraystretch{1.5}
+\begin{tabular}{c|c}
+\(x\) &  \(y\) \\
+\hline
+0 & \\
+1 & \\
+-1 & \\
+8 & \\
+-8 & \\
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\includegraphics[scale=0.5]{blank}
+\end{minipage}
+</div>
+</p>
+
+Next, we just mess with these new basic functions&mdash;transforming them.  (By the way, a lot of texts will call basic functions "parent" functions.)
+
+<p>
+<div class="example">
+  <h2> (Warm-up)</h2>
+
+<a href="https://www.loom.com/share/11e4c33d1364410bbaf736c600be6cba">Click for video</a>
+
+<p>
+Graph each of the following functions using transformations.  Be sure to include enough points to leave no doubt as to the accuracy of your graph.  Also, {\color{magenta} describe your transformations in words.}
+\noindent\hbox to 0pt{\hss \href{https://drive.google.com/open?id=1pCsPWv4xvrYorAnEBHH_bbN4lla2Pssm}{Click for key}\hskip 22em}
+<ol>
+
+\begin{minipage}{0.45\textwidth}
+
+<li>
+\(y = (x+2)^2- 5\)
+</li>
+
+\vspace{12\baselineskip}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\includegraphics[scale=0.5]{blank}
+\end{minipage}
+
+\begin{minipage}{0.45\textwidth}
+
+<li>
+\(y = 2 - x^2\)
+</li>
+
+\vspace{12\baselineskip}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\includegraphics[scale=0.5]{blank}
+\end{minipage}
+
+\begin{minipage}{0.45\textwidth}
+
+<li>
+\(y = 2x^2 - 5\)
+</li>
+
+\vspace{12\baselineskip}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\includegraphics[scale=0.5]{blank}
+\end{minipage}
+
+\begin{minipage}{0.45\textwidth}
+
+<li>
+\(y = -\frac{1}{2}(x-4)^2 -2\)
+</li>
+
+\vspace{12\baselineskip}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\includegraphics[scale=0.5]{blank}
+\end{minipage}
+
+
+</ol>
+
+</div>
+</p>
+
+\newpage
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Graph each of the following functions using transformations.
+Be sure to include enough points to leave no doubt as to the accuracy of your
+graph.  Also, {\color{magenta} describe your transformations in words.}
+\[y = \sqrt{x + 5} + 4\]
+
+\begin{minipage}{0.45\textwidth}
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+We transform the original graph of \(y=\sqrt{x}\) (which is graphed in {\color{gray} gray}
+for comparison) by applying the transformations:
+<ul>
+
+
+<li>
+left 5
+</li>
+
+<li>
+up 4
+</li>
+</ul>
+
+Be sure to include the dots, as I have, so that I can see you have an accurate
+knowledge of the graph.
+
+    </div>
+  </div>
+
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\includegraphics[scale=0.5]{power-of-x-transformations-example-1}
+\end{minipage}
+</div>
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Graph each of the following functions using transformations.
+Be sure to include enough points to leave no doubt as to the accuracy of your
+graph.  Also, {\color{magenta} describe your transformations in words.}
+\[y = -\sqrt{x}\]
+
+\begin{minipage}{0.45\textwidth}
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+Again, the original is graphed in {\color{gray} gray}.  As you can see, the
+graph of \(y=-\sqrt{x}\) is simply that of \(y=\sqrt{x}\) except the
+\(y\)-values have been made negative&mdash;which, of course, is precisely
+what the formula "\(-\sqrt{x}\)" tells you to do when you observe
+correct order of operations.  The transformation can be described as the graph having been
+<ul>
+
+
+<li>
+reflected across the \(x\)-axis.
+</li>
+
+</ul>
+
+Be sure to include the dots, as I have, so that I can see you have an accurate
+knowledge of the graph.
+
+    </div>
+  </div>
+
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\includegraphics[scale=0.5]{power-of-x-transformations-example-2}
+\end{minipage}
+</div>
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Graph each of the following functions using transformations.
+Be sure to include enough points to leave no doubt as to the accuracy of
+your graph.  Also, {\color{magenta} describe your transformations in words.}
+\[y = 2\sqrt{x}\]
+
+\begin{minipage}{0.45\textwidth}
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+This time, ask yourself what the formula \(2\sqrt{x}\) means
+(according to the order of operations.)  For instance, if you plugged in
+\(x=9\), you'd do \(\sqrt{x} = \sqrt{9} = 3\).  <em>Then</em> you would
+multiply this 3 by 2.  Of course, it works that same way for any \(x\)-value
+you plug in:  the resulting \(y\)-value will be double the "old \(y\)-value." So, the transformation can be described as:
+<ul>
+
+
+<li>
+double the \(y\)-values.
+</li>
+
+</ul>
+
+
+    </div>
+  </div>
+
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\includegraphics[scale=0.5]{power-of-x-transformations-example-doubled}
+\end{minipage}
+</div>
+</p>
+
+
+
+Attention!  At this time, we turn our attention to a new type of
+transformation that has never been relevant up until now.  We'll see it in the next example.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Graph each of the following functions using transformations.
+Be sure to include enough points to leave no doubt as to the accuracy of your
+graph.  Also, {\color{magenta} describe your transformations in words.}
+\[y = \sqrt{-x}\]
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+How does this work?  If you're perplexed, start thinking about plugging in
+actual values for \(x\): what sorts of values would you want to plug in
+for \(x\) now?  Well, note that you don't want to plug in 1, 4, or 9,
+because that negative under the radical would be forcing you
+to contend with the questions like "What number times itself is \(-1\)?"
+We know the answer to that (it's the imaginary number \(i\)) and, since we
+are graphing, here&mdash;that is, plotting coordinates
+ that line up with points on the <em>real</em> \(x\)- and \(y\)-axes, we
+ don't care to mess with imaginary numbers: There is no place for them on the
+ graph, right?  So, instead, what you want to think about is plugging in
+ negative numbers: \(-1\), \(-4\), \(-9\)&mdash;to make it come out
+positive underneath the square root sign.
+
+\begin{minipage}{0.45\textwidth}
+Indeed, because of the negative on the \(x\), the "old \(y\)-values" will now
+instead be associated with the \(x\)-values on the <em>other</em> side of
+the \(y\)-axis&mdash;the negative counterparts of  "the old \(x\)-values."
+In a phrase, we have
+<ul>
+
+
+<li>
+reflected across the \(y\)-axis.
+</li>
+
+</ul>
+
+Be sure to include the dots, as I have, so that I can see you have an accurate
+knowledge of the graph.
+
+\end{minipage}\hfill
+\begin{minipage}{0.5\textwidth}
+\includegraphics[scale=0.5]{power-of-x-transformations-example-3}
+\end{minipage}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+Of course, we have to combine this new transformation with the old ones as well,
+as in the following example.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Graph each of the following functions using transformations.
+Be sure to include enough points to leave no doubt as to the accuracy of
+your graph.  Also, {\color{magenta} describe your transformations in words.}
+\[y = 2\sqrt{-x} - 3\]
+
+
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\quad
+
+\begin{minipage}{0.45\textwidth}
+This time, note the following transformations
+<ul>
+
+
+<li>
+reflected across the \(y\)-axis
+</li>
+
+<li>
+double the \(y\)-values
+</li>
+
+<li>
+down 3
+</li>
+</ul>
+Don't forget your dots!
+\end{minipage}\hfill
+\begin{minipage}{0.5\textwidth}
+\includegraphics[scale=0.5]{power-of-x-transformations-example-5}
+\end{minipage}
+
+    </div>
+  </div>
+
+</div>
+</p>
+
+\newpage
+We now turn to the other two types of graphs.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Graph each of the following functions using transformations.
+Be sure to include enough points to leave no doubt as to the accuracy of
+your graph.  Also, {\color{magenta} describe your transformations in words.}
+\[y = 2\sqrt[3]{x}\]
+
+
+
+\begin{minipage}{0.45\textwidth}
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+Note that you need to start with the graph of \(y=\sqrt[3]{x}\).
+I have graphed it in {\color{gray}gray} for comparison.
+The only transformation is
+<ul>
+
+
+<li>
+double the \(y\)-values
+</li>
+
+</ul>
+
+Don't forget your dots!
+
+    </div>
+  </div>
+
+\end{minipage}\hfill
+\begin{minipage}{0.5\textwidth}
+\includegraphics[scale=0.5]{power-of-x-transformations-example-6}
+\end{minipage}
+
+</div>
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Graph each of the following functions using transformations.
+Be sure to include enough points to leave no doubt as to the accuracy of your
+graph.  Also, {\color{magenta} describe your transformations in words.}
+\[y = 2\sqrt[3]{x+3}-4\]
+
+
+
+\begin{minipage}{0.45\textwidth}
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+This time, I also included "translated axes" in the same way as we did in
+when graphing transformations of \(y=\frac{1}{x}\).  I think that can
+provide a nice visual for you to help you keep track of what is going on.
+Basically, having first recognized that the transformations are
+<ul>
+
+
+<li>
+left 3
+</li>
+
+<li>
+double the \(y\)-values
+</li>
+
+<li>
+down 4
+</li>
+</ul>
+
+    </div>
+  </div>
+
+\end{minipage}\hfill
+\begin{minipage}{0.5\textwidth}
+\includegraphics[scale=0.5]{power-of-x-transformations-example-7}
+\end{minipage}
+{\color{red}you then draw the axes translated left 3 and down 4, and then
+draw the graph of \(y=\sqrt[3]{x}\)&mdash;on the new axes&mdash;but with
+doubled \(y\)-values.}
+</div>
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Graph each of the following functions using transformations.
+Be sure to include enough points to leave no doubt as to the accuracy of
+your graph.  Also, {\color{magenta} describe your transformations in words.}
+\[
+y = \left(x+3\right)^3-4
+\]
+
+
+\begin{minipage}{0.45\textwidth}
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+Now, you start with the basic function \(y=x^3\).  Again, I have graphed that
+in {\color{gray} gray} for comparison.  Then you just note the transformations:
+<ul>
+
+
+<li>
+left 3
+</li>
+
+<li>
+down 4
+</li>
+</ul>
+
+
+    </div>
+  </div>
+
+\end{minipage}\hfill
+\begin{minipage}{0.5\textwidth}
+\includegraphics[scale=0.45]{power-of-x-transformations-example-8}
+\end{minipage}
+
+</div>
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Graph each of the following functions using transformations.
+Be sure to include enough points to leave no doubt as to the accuracy of your
+graph.  Also, {\color{magenta} describe your transformations in words.}
+\[
+y = -\frac{1}{2}\left(x-3\right)^3+2
+\]
+
+
+
+\begin{minipage}{0.45\textwidth}
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+Note the transformations:
+<ul>
+<li>
+right 3
+</li>
+
+<li>
+cut the \(y\)-values in half
+</li>
+
+<li>
+reflect across the \(x\)-axis
+</li>
+
+<li>
+up 2
+</li>
+</ul>
+    </div>
+  </div>
+
+\end{minipage}\hfill
+\begin{minipage}{0.5\textwidth}
+\includegraphics[scale=0.45]{power-of-x-transformations-example-9}
+\end{minipage}
+
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

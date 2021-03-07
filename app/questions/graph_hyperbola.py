@@ -187,9 +187,10 @@ the window.  It must also have two "anchors" and multiple points besides.
     def checkanswer(self, user_answer):
         if type(user_answer) == type(5):
             return False
-        user_answer = user_answer(self.x)
-        return self.answer.equals(user_answer)
-        # return tolerates(lambdify(self.x, self.answer), lambdify(self.x, user_answer))
+        # user_answer = user_answer(self.x)
+        # return self.answer.equals(user_answer)
+        return tolerates(sy.lambdify(self.x, self.answer), user_answer)
+        # return tolerates(sy.lambdify(self.x, self.answer), lambdify(self.x, user_answer))
 
     # def useranswer_latex(self, user_answer, display=False):
     #     user_answer = user_answer.replace('^', '**')

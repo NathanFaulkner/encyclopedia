@@ -212,6 +212,7 @@ def all_satisfy(f, points):
         x = points[i][0]
         y = points[i][1]
         # try:
+        # print(i, x, y, f(x), 'diff', abs(y-f(x)))
         if abs(y-f(x)) > 0.001:
             return False
         # except:
@@ -279,7 +280,7 @@ def try_square_root(points):
     points.sort(key=lambda x: x[0])
     x0, y0 = points[0]
     x1, y1 = points[1]
-    f = lambda x: (y1-y0)*np.sqrt((x-x0)/(x1-x0)) + y0
+    f = lambda x: (y1-y0)*((x-x0)/(x1-x0))**sy.Rational(1, 2) + y0
     if all_satisfy(f, points):
         x_points = np.linspace(x0, cart_x_max, 1000)
         return {"function": f, "x_points": x_points}

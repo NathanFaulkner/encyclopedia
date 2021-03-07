@@ -94,6 +94,8 @@ class CelebratoryGunfire(Question):
         (FYI: Where did the '32' go?  It became a 16.)
 
         Your task: Figure how quickly (in seconds) the party-goers need to leave the area!!
+        Your answer must be accurately rounded to at least
+        two decimal places (more is fine).
         """
 
         self.format_given_for_tex = f"""
@@ -105,7 +107,7 @@ class CelebratoryGunfire(Question):
 
 
     further_instruction = """
-    Your answer should just include the numerical answer and correct units.
+    Your answer should just include the numerical answer followed by correct units.
     Do not include "t=".
     """
 
@@ -167,12 +169,13 @@ class CelebratoryGunfire(Question):
             user_answer = user_answer.replace('secs', 's ')
             user_answer = user_answer.replace('sec', 's')
             if user_answer[-1] != 's':
-                user_x = user_answer[:-1]
-                user_x = user_x.replace('^', '**')
-                user_x = parse_expr(user_x, transformations=transformations)
-                correct = abs(user_x - self.answer) < 0.005
-                correct = bool(correct)
-                formatted = f'\({sy.latex(user_x)}\) ' + ' seconds'
+                pass
+            user_x = user_answer[:-1]
+            user_x = user_x.replace('^', '**')
+            user_x = parse_expr(user_x, transformations=transformations)
+            correct = abs(user_x - 0.01) < 0.005
+            correct = bool(correct)
+            formatted = f'\({sy.latex(user_x)}\) ' + ' seconds'
         except:
             raise SyntaxError
 

@@ -12,7 +12,9 @@ import json
 from app.questions import (Question,
                             latex_print,
                             random_non_zero_integer,
-                            GraphFromLambda)
+                            GraphFromLambda,
+                            tolerates,
+                            )
 from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 
@@ -48,6 +50,7 @@ class GraphSlopeInterceptFromEnglish(Question):
             self.p = kwargs['p']
         else:
             self.p = random.randint(-5,5)
+        self.p = 0
         if 'q' in kwargs:
             self.q = kwargs['q']
         else:
@@ -87,7 +90,7 @@ Graph the line described.  Make sure your graph is accurate throughout
 the window and has at least two points clearly marked.
 
 \\begin{{center}}
-The line that has \\(y\\)-intercept of {self.b}
+The line that has \\(y\\)-intercept of \\({self.b}\\)
 and has slope of \\( m = {latex(self.m)} \\)
 \\end{{center}}
 
@@ -145,8 +148,10 @@ and has slope of \\( m = {latex(self.m)} \\)
     def checkanswer(self, user_answer):
         if type(user_answer) == type(5):
             return False
-        user_answer = user_answer(self.x)
-        return self.answer.equals(user_answer)
+        # user_answer = user_answer(self.x)
+        # return self.answer.equals(user_answer)
+        return tolerates(lambdify(self.x, self.answer), user_answer)
+
 
     # def useranswer_latex(self, user_answer, display=False):
     #     user_answer = user_answer.replace('^', '**')

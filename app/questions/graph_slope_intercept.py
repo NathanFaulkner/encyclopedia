@@ -14,7 +14,9 @@ from app.questions import (Question,
                         random_non_zero_integer,
                         GraphFromLambda,
                         fmt_slope_style,
-                        commute_sum)
+                        commute_sum,
+                        tolerates,
+                        )
 from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 
@@ -137,8 +139,9 @@ that satisfy the equation."""
     def checkanswer(self, user_answer):
         if type(user_answer) == type(5):
             return False
-        user_answer = user_answer(self.x)
-        return self.answer.equals(user_answer)
+        # user_answer = user_answer(self.x)
+        # return self.answer.equals(user_answer)
+        return tolerates(lambdify(self.x, self.answer), user_answer)
 
     # def useranswer_latex(self, user_answer, display=False):
     #     user_answer = user_answer.replace('^', '**')

@@ -88,6 +88,8 @@ class CannonballHitsTarget(Question):
         \]
         Find the horizontal distance \(x\) away from the launching point at
         which the cannonball crashes to Earth.
+        Your answer must be accurately rounded to at least
+        two decimal places (more is fine).
         """
 
         self.format_given_for_tex = f"""
@@ -117,7 +119,7 @@ class CannonballHitsTarget(Question):
 
 
     further_instruction = """
-    Your answer should just include the numerical answer and correct units.
+    Your answer should just include the numerical answer followed by the correct units.
     Do not include "x=".
     """
 
@@ -175,6 +177,20 @@ class CannonballHitsTarget(Question):
     @classmethod
     def validator(self, user_answer):
         try:
+            # user_answer = user_answer.lower()
+            # # user_answer = user_answer.replace(' ', '')
+            # user_answer = user_answer.replace(',', '')
+            # user_answer = user_answer.replace('x', '')
+            # user_answer = user_answer.replace('=', '')
+            # user_answer = user_answer.replace('feet', ' ft')
+            # i = user_answer.find('ft')
+            # if i != -1:
+            #     user_x = user_answer[:i]
+            #     user_x = user_x.replace('^', '**')
+            #     user_x = parse_expr(user_x, transformations=transformations)
+            #     formatted = f'\({sy.latex(user_x)}\) ' + user_answer[i:]
+            #     correct = abs(user_x - 1.234) < 0.005
+            #     correct = bool(correct)
             user_answer = user_answer.lower()
             # user_answer = user_answer.replace(' ', '')
             user_answer = user_answer.replace(',', '')
@@ -182,13 +198,11 @@ class CannonballHitsTarget(Question):
             user_answer = user_answer.replace('=', '')
             user_answer = user_answer.replace('feet', ' ft')
             i = user_answer.find('ft')
-            if i != -1:
-                user_x = user_answer[:i]
-                user_x = user_x.replace('^', '**')
-                user_x = parse_expr(user_x, transformations=transformations)
-                formatted = f'\({sy.latex(user_x)}\) ' + user_answer[i:]
-                correct = abs(user_x - 1.234) < 0.005
-                correct = bool(correct)
+            user_x = user_answer[:i]
+            user_x = user_x.replace('^', '**')
+            user_x = parse_expr(user_x, transformations=transformations)
+            correct = abs(user_x - 100.0) < 0.005
+            bool(correct)
         except:
             raise SyntaxError
 

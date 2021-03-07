@@ -572,7 +572,8 @@ functioncomposition.add_to_questions('function_composition')
 simplegraphing = Section('simplegraphing', "Simple Graphing", '/sections/simple_graphing')
 simplegraphing.add_to_questions('graph_slope_intercept_from_english',
                                 'graph_to_slope_intercept_form',
-                                    'graph_slope_intercept')
+                                   'graph_slope_intercept',
+                                )
 
 pointslopeform = Section('pointslopeform', "Graph from Point Slope Form", '/sections/point-slope-form')
 pointslopeform.add_to_questions('graph_point_slope_from_english',
@@ -691,7 +692,8 @@ solvingbythequadraticformula.add_to_questions('solve_by_quadratic_formula')
 
 solvingquadraticsapplications = Section('solvingquadraticsapplications', "Solving Quadratics: Applications", '/sections/solving-quadratics-applications')
 solvingquadraticsapplications.add_to_questions('cannonball_hits_target',
-                                                'celebratory_gunfire')
+                                                'celebratory_gunfire',
+                                                )
 #######################################
 polynomials_intro = Section('polynomials', "Polynomials", '/sections/polynomials-intro')
 
@@ -779,6 +781,10 @@ solvingpowerequationspart1.add_to_questions('solve_power_equation_level1')
 
 solvingpowerequationspart2 = Section('solvingpowerequationspart2', "Solving Power Equations, Part 2", '/sections/solving-power-equations-part2')
 solvingpowerequationspart2.add_to_questions('solve_power_equation_level2')
+
+graphsofpowerfunctions = Section('graphsofpowerfunctions', "Graphs of Power Functions", '/sections/graphs-of-power-functions')
+graphsofpowerfunctions.add_to_questions('graph_sqrt',)
+
 #######################################
 
 
@@ -882,6 +888,7 @@ powerfunctions = Division('chapter', "Power Functions",
                                 reducingradicals,
                                 solvingpowerequationspart1,
                                 solvingpowerequationspart2,
+                                # graphsofpowerfunctions,
                                 ])
 powerfunctions.set_frontpage(powerfunctions_intro)
 
