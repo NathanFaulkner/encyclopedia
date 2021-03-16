@@ -783,7 +783,10 @@ solvingpowerequationspart2 = Section('solvingpowerequationspart2', "Solving Powe
 solvingpowerequationspart2.add_to_questions('solve_power_equation_level2')
 
 graphsofpowerfunctions = Section('graphsofpowerfunctions', "Graphs of Power Functions", '/sections/graphs-of-power-functions')
-graphsofpowerfunctions.add_to_questions('graph_sqrt',)
+graphsofpowerfunctions.add_to_questions('graph_sqrt',
+                                         'graph_cube_function',
+                                        'graph_cbrt'
+                                        )
 
 #######################################
 
@@ -888,7 +891,7 @@ powerfunctions = Division('chapter', "Power Functions",
                                 reducingradicals,
                                 solvingpowerequationspart1,
                                 solvingpowerequationspart2,
-                                # graphsofpowerfunctions,
+                                graphsofpowerfunctions,
                                 ])
 powerfunctions.set_frontpage(powerfunctions_intro)
 

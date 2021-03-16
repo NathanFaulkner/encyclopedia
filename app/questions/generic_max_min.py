@@ -85,6 +85,7 @@ class GenericMaxMin(Question):
         """
 
         expr = self.given
+        # print(latex(self.given))
         b = expr.coeff(x, 1)
         format_middle_term = ''
         if b != 0:

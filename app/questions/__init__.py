@@ -121,7 +121,7 @@ __all__ = ['quadratic_pattern',
             'reduce_radical',
             'solve_power_equation_level1',
             'solve_power_equation_level2',
-            'graph_sqrt',
+            'graph_sqrt', 'graph_cube_function', 'graph_cbrt',
             ]
 
 class Question():
@@ -1097,6 +1097,7 @@ class Quotient():
 #             self.symbol = input
 #         else:
 #             raise TypeError(f'{input} is not admissable as an atomic term.')
+
 class Variable:
     def __init__(self, input):
         if type(input) != str:

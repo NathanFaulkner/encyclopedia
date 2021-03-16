@@ -78,7 +78,7 @@ def poly_points_from_numpy(x_points, y_points):
         poly_points += f"{x_points[i]}, {y_points[i]} "
     return poly_points
 
-def get_dict_for_svg(points):
+def get_dict_for_svg(points):  #TODO -- Of course, this was a bad choice to have this function duplicated here and below.  I don't recall why I did that other than the obvious: lack of time and laziness.  So, this should be cleaned up!
     # print('get_dict_received ', points)
     i = 0
     # while i < len(points):
@@ -105,7 +105,8 @@ def get_dict_for_svg(points):
         data = {"points": data}
         data = json.dumps(data)
         out = {'shape': 'polyline', 'data': data}
-    elif len(points) == 2:
+    elif len(points) == 2 or constant_in_x(points):
+        # print('Here I am!!')
         v = np.array([ points[1][0] - points[0][0], points[1][1] - points[0][1] ])
         diam = np.sqrt(cart_x_length**2 + cart_y_length**2)
         p = np.array(points[0])
@@ -385,7 +386,8 @@ class Graph():
         # points = list(set(tuple(point) for point in self.user_input))
         points = list(tuple(point) for point in self.user_input)
         # print('user points in cartesian', points)
-        if (repeat_in_x(points) and len(points) == 2):
+        # if (repeat_in_x(points) and len(points) == 2):
+        if (repeat_in_x(points) and len(points) == 2): 
             self.vert = True
             self.as_lambda = None
         if len(points) == 1:
@@ -472,7 +474,8 @@ class Graph():
             data = {"points": data}
             data = json.dumps(data)
             out = {'shape': 'polyline', 'data': data}
-        elif len(points) == 2:
+        elif len(points) == 2 or constant_in_x(points):
+            # print('my fault!')
             v = np.array([ points[1][0] - points[0][0], points[1][1] - points[0][1] ])
             diam = np.sqrt(cart_x_length**2 + cart_y_length**2)
             p = np.array(points[0])

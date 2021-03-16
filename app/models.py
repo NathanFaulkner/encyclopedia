@@ -622,7 +622,7 @@ class UserGradeInfo():
                 try:
                     # print(section_info.section_record.section_name, section_info.section_record.timestamp)
                     if section_info.section_record.masteries_count > 0: #replace here ... look at timestamp instead
-                        print(section_info.section_record.section_name, section_info.section_record.timestamp)
+                        # print(section_info.section_record.section_name, section_info.section_record.timestamp)
                         grades.append(section_info.grade)
                 except AttributeError:
                     pass

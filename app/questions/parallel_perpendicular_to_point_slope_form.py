@@ -104,6 +104,8 @@ class ParallelPerpendicularToPointSlope(Question):
             fmt_b1 = '+ '
         elif b1 == -1:
             fmt_b1 = '- '
+        elif b1 == 0:
+            fmt_b1 = ''
         elif b1 > 0:
             fmt_b1 = '+ ' + latex(b1)
         else:

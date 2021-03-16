@@ -31,12 +31,12 @@ from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 prob_type = 'graph'
 
-class GraphSqrt(Question):
+class GraphCubeFunction(Question):
     """
     The given is of the form
 
     \\[
-        y = Rational(p,q)(x - x0)^2 + y0
+        y = a(x - x0)^3 + y0
     \\]
 
     The student is expected to graph by plotting points.  4 is sufficient.
@@ -47,18 +47,18 @@ class GraphSqrt(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        # if 'p' in kwargs:
-        #     self.p = kwargs['p']
-        # else:
-        #     self.p = random_non_zero_integer(-2,2)
-        # if 'q' in kwargs:
-        #     self.q = kwargs['q']
-        # else:
-        #     self.q = random.randint(1,2)
+        if 'p' in kwargs:
+            self.p = kwargs['p']
+        else:
+            self.p = random_non_zero_integer(-2,2)
+        if 'q' in kwargs:
+            self.q = kwargs['q']
+        else:
+            self.q = random.randint(1,2)
         if 'm' in kwargs:
             self.m = kwargs['m']
         else:
-            self.m = random.choice([1, 1, -1, -1, 2, -2, 3, -3])
+            self.m = sy.Rational(self.p, self.q)
         if 'x0' in kwargs:
             self.x0 = kwargs['x0']
         else:
@@ -75,20 +75,18 @@ class GraphSqrt(Question):
             self.x = kwargs['x']
         else:
             self.x = sy.Symbol('x')
-        if 'sign_x' in kwargs:
-            self.sign_x = kwargs['sign_x']
-        else:
-            self.sign_x = random.choice([-1, 1])
-        sign_x = self.sign_x
-        if sign_x == -1:
-            self.x0 = 0
+        # if 'sign_x' in kwargs:
+        #     self.sign_x = kwargs['sign_x']
+        # else:
+        #     self.sign_x = random.choice([-1, 1])
+        # sign_x = self.sign_x
         x = self.x
         k = self.y0
         h = self.x0
         # p = self.p
         # q = self.q
         m = self.m
-        self.as_lambda = lambda x: m*(sign_x*(x - h))**sy.Rational(1, 2) + k
+        self.as_lambda = lambda x: m*(x - h)**3 + k
         f = self.as_lambda
         self.given = f(x)
         #print('3rd step: So far its ', expr)
@@ -114,7 +112,7 @@ class GraphSqrt(Question):
         try:
             self.format_given = f"""
             \\[
-             y = {fmt_m} {sy.latex((sy.factor(sign_x*(self.x - self.x0))**sy.Rational(1,2)))} {sign} {fmt_y0}
+             y = {fmt_m} {sy.latex((sy.factor((self.x - self.x0))**3))} {sign} {fmt_y0}
             \\]
             """
         except IndexError:
@@ -140,13 +138,12 @@ the window and has at least 5 points clearly marked, including the vertex.
 
 """
 
-    name = 'Graph of Square Root Function'
-    module_name = 'graph_sqrt'
+    name = 'Graph of Cube Function'
+    module_name = 'graph_cube_function'
 
-    prompt_single = """Graph the given equation by plotting the vertex and at least 3 other points
+    prompt_single = """Graph the given equation by plotting the "anchor" point and at least 3 other points
 that satisfy the equation."""
-    prompt_multiple = """Graph each of the following equations by plotting at least 4 points
-that satisfy the equation."""
+    prompt_multiple = """TBA"""
 
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
@@ -159,12 +156,8 @@ that satisfy the equation."""
         graph.save_fig(filename)
 
     def get_svg_data(self, window=[-10,10], res=100):
-        if self.sign_x == 1:
-            x_min = self.x0
-            x_max = 10
-        else:
-            x_min = -10
-            x_max = self.x0
+        x_min = window[0]
+        x_max = window[1]
         x_points = np.linspace(x_min, x_max, res)
         y_points = self.as_lambda(x_points)
         # print(self.as_lambda(self.x))
@@ -203,4 +196,4 @@ that satisfy the equation."""
 
 
 
-Question_Class = GraphSqrt
+Question_Class = GraphCubeFunction

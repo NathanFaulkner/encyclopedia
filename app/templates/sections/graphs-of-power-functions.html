@@ -15,15 +15,12 @@
 <li>
 \(y=x^2\)
 </li>
-
 <li>
 \(y = \sqrt{x}\)
 </li>
-
 <li>
 \(y = x^3\)
 </li>
-
 <li>
 \(y = \sqrt[3]{x}\)
 </li>
@@ -248,7 +245,7 @@ vertex form, for quadratics.
   <div class="example">
     <h2></h2>
     <p>
-      <a href="https://www.loom.com/share/14d46426cffc46318c63eacef968b504">Click for video</a>
+      <a href="https://www.loom.com/share/4f4d1f3452904b289c079ded7dc2cb1b">Click for video</a>
     </p>
 
     <p>
@@ -268,7 +265,7 @@ vertex form, for quadratics.
         <br>
         <table border="1" style="border-collapse: collapse">
           <tr>
-            <td style="text-align: center; width: 50px">\(x\)</td><td style="text-align: center;">\(y=x^2\)</td>
+            <td style="text-align: center; width: 50px">\(x\)</td><td style="text-align: center;">\(y=\sqrt{x}\)</td>
           </tr>
           <tr>
             <td style="text-align: center;">0</td><td>&nbsp;</td>
@@ -316,7 +313,7 @@ vertex form, for quadratics.
           <a class="collapsible"><h3>Answer: </h3></a>
           <div class='inner'>
             <div style="text-align:center">
-              {% set svg_id = 'svg1' %}
+              {% set svg_id = 'svg3' %}
               {% set points = [[0,0], [1, 1], [4,2], [9, 3]] %}
               {% set poly_points = '' %}
               {% set parameters = {
@@ -348,42 +345,46 @@ vertex form, for quadratics.
         <div class="answer">
           <a class="collapsible"><h3>Answer: </h3></a>
           <div class='inner'>
-            If you feel somewhat at a loss as to how to answer this question,
-            that's a good thing!  In the context of first learning about quadratics,
-            we don't have a lot at our disposal
-            to answer it.  However, one thing you might remark on is what
-            \(x^2\) might represent: it would be the area of a square
-            whose sides are length \(x\).  So, what we are doing when
-            we graph this is visualizing how the area of such a square
-            would grow as the side lengths grow (imagining some sort of
-            expanding square.)  Intuitively, you can imagine how the
-            area would grow in a kind of steady fashion as \(x\) grows,
-            so, without any reason to the contrary, it seems natural to connect
-            the dots in a smooth fashion.  If that seems vague and a little
-            suspiciously subjective for mathematics, than that is to your
-            credit as a math student!  A more thorough explanation of how
-            and why you can "connect the dots" is better left until to
-            your calculus course.  But, for now, you'll be heading in the
-            direction of calculus to imagine the "growing square".  (Calculus
-            can be described as the study of how things change and, furthermore,
-            as a set of techniques for considering how very small changes in
-            one variable affect changes in a second one.  This is very much
-            relevant to the "growing square" question!)
+            One can observe that the \((x, y)\)-pairs that are plotted here
+            are just the "reverse" of the \((x, y)\)-pairs that were
+            plotted in the graph of \(y = x^2\).  For instance, where
+            the pair \((2, 4)\) lies on the graph of \(y = x^2\),
+            the pair \((4, 2)\) lies on the graph of \(y = \sqrt{x}\).
+            And, really, that is the case with <em>all</em> the pairs
+            on the graph of \(y = \sqrt{x}\).  After all, if \(a\)
+            and \(b\) are actual, real numbers such that
+            \[
+              a = \sqrt{b}
+            \]
+            then
+            \[
+              a^2 = b
+            \]
+            What does that mean?  Well, it means that if \((x, y) = (b, a)\)
+            is a pair satisfying \(y = \sqrt{x}\) (and hence lying on its
+            graph), then the pair \((a, b)\) satisfies \(y = x^2\) and hence
+            lies on its graph.  Thus, the graph of \(y = \sqrt{x}\) will consist
+            solely in some of the pairs (those with positive \(x\)) from the
+            graph of \(y = x^2\) but with the order of the pair reversed.
+            That reversal of the pairs (we will call it the "inverse", actually,
+            as you will see below) apparently causes the graph to flip on its
+            side, etc.  We'll want to think about this some more below.
           </div>
         </div>
       </li>
       <li>
          Connect the dots: sketch a graph of the equation
          \[
-          y = x^2
+          y = \sqrt{x}
          \]
         <div class="answer">
           <a class="collapsible"><h3>Answer: </h3></a>
           <div class='inner'>
             <div style="text-align:center">
-              {% set svg_id = 'svg2' %}
+              {% set svg_id = 'svg4' %}
               {% set points = [[0,0], [1, 1], [4,2], [9, 3]] %}
-              {% set poly_points = '0.0,-1575.00000000000 3.5353535353535426,-1505.00714212835 7.070707070707085,-1436.44270992756 10.606060606060597,-1369.30670339761 14.141414141414138,-1303.59912253852 17.676767676767682,-1239.31996735027 21.212121212121225,-1176.46923783287 24.747474747474737,-1115.04693398633 28.282828282828277,-1055.05305581063 31.81818181818182,-996.487603305785 35.353535353535364,-939.350576471788 38.88888888888889,-883.641975308642 42.424242424242415,-829.361799816345 45.95959595959596,-776.510049994898 49.4949494949495,-725.086725844301 53.03030303030303,-675.091827364555 56.56565656565655,-626.525354555658 60.1010101010101,-579.387307417610 63.63636363636364,-533.677685950413 67.17171717171716,-489.396490154066 70.70707070707071,-446.543720028568 74.24242424242424,-405.119375573921 77.77777777777779,-365.123456790123 81.31313131313131,-326.555963677176 84.84848484848484,-289.416896235078 88.38383838383838,-253.706254463830 91.91919191919192,-219.424038363432 95.45454545454545,-186.570247933884 98.98989898989899,-155.144883175186 102.52525252525251,-125.147944087338 106.06060606060606,-96.5794306703398 109.59595959595958,-69.4393429241915 113.13131313131314,-43.7276808488930 116.66666666666667,-19.4444444444444 120.2020202020202,3.41036628915414 123.73737373737374,24.8367513519029 127.27272727272727,44.8347107438016 130.8080808080808,63.4042444648505 134.34343434343432,80.5453525150495 137.87878787878788,96.2580348943985 141.41414141414143,110.542291602898 144.94949494949495,123.398122640547 148.48484848484847,134.825528007346 152.02020202020202,144.824507703296 155.55555555555557,153.395061728395 159.09090909090907,160.537190082645 162.62626262626262,166.250892766044 166.16161616161617,170.536169778594 169.6969696969697,173.393021120294 173.23232323232324,174.821446791144 176.76767676767676,174.821446791144 180.3030303030303,173.393021120294 183.83838383838383,170.536169778594 187.37373737373738,166.250892766044 190.9090909090909,160.537190082645 194.44444444444443,153.395061728395 197.97979797979798,144.824507703296 201.51515151515153,134.825528007346 205.05050505050502,123.398122640547 208.58585858585857,110.542291602898 212.12121212121212,96.2580348943985 215.65656565656568,80.5453525150495 219.19191919191917,63.4042444648506 222.72727272727272,44.8347107438017 226.26262626262627,24.8367513519029 229.7979797979798,3.41036628915414 233.33333333333334,-19.4444444444445 236.86868686868686,-43.7276808488929 240.4040404040404,-69.4393429241914 243.93939393939394,-96.5794306703398 247.4747474747475,-125.147944087338 251.01010101010098,-155.144883175186 254.54545454545453,-186.570247933884 258.0808080808081,-219.424038363432 261.6161616161616,-253.706254463830 265.1515151515151,-289.416896235078 268.68686868686865,-326.555963677176 272.22222222222223,-365.123456790123 275.75757575757575,-405.119375573921 279.2929292929293,-446.543720028568 282.82828282828285,-489.396490154066 286.3636363636364,-533.677685950413 289.8989898989899,-579.387307417610 293.4343434343434,-626.525354555658 296.96969696969694,-675.091827364554 300.5050505050505,-725.086725844302 304.04040404040404,-776.510049994898 307.57575757575756,-829.361799816345 311.11111111111114,-883.641975308642 314.64646464646466,-939.350576471788 318.18181818181813,-996.487603305785 321.7171717171717,-1055.05305581063 325.25252525252523,-1115.04693398633 328.7878787878788,-1176.46923783287 332.32323232323233,-1239.31996735027 335.85858585858585,-1303.59912253852 339.3939393939394,-1369.30670339761 342.9292929292929,-1436.44270992756 346.4646464646465,-1505.00714212835 350.0,-1575.00000000000 ' %}
+              {% set poly_points = '175.0,175.000000000000 176.76767676767676,169.438134896067 178.53535353535355,167.134334937929 180.3030303030303,165.366567055144 182.07070707070707,163.876269792135 183.83838383838383,162.563291545923 185.6060606060606,161.376268477173 187.37373737373738,160.284688109306 189.14141414141415,159.268669875858 190.9090909090909,158.314404688202 192.67676767676767,157.411838232964 194.44444444444443,156.553380315684 196.21212121212122,155.733134110289 197.97979797979798,154.946410180557 199.74747474747474,154.189406349630 201.51515151515153,153.458989078617 203.2828282828283,152.752539584270 205.05050505050502,152.067842701049 206.8181818181818,151.403004813787 208.58585858585857,150.756392074352 210.35353535353536,150.126583091845 212.12121212121212,149.512332156095 213.88888888888889,148.912540262502 215.65656565656568,148.326232006147 217.4242424242424,147.752536954347 219.1919191919192,147.190674480337 220.95959595959596,146.639941303077 222.72727272727272,146.099701165433 224.4949494949495,145.569376218612 226.26262626262627,145.048439780273 228.03030303030306,144.536410207753 229.7979797979798,144.032845683456 231.56565656565655,143.537339751715 233.33333333333334,143.049517478865 235.1010101010101,142.569032133350 236.8686868686869,142.095562302297 238.63636363636365,141.628809376404 240.4040404040404,141.168495347225 242.17171717171715,140.714360870693 243.93939393939394,140.266163558579 245.70707070707073,139.823676465928 247.4747474747475,139.386686747677 249.24242424242425,138.954994461889 251.01010101010098,138.528411500501 252.77777777777777,138.106760631369 254.54545454545453,137.689874637768 256.31313131313135,137.277595543500 258.0808080808081,136.869773913414 259.8484848484848,136.466268220577 261.6161616161616,136.066944272472 263.3838383838384,135.671674689644 265.1515151515152,135.280338431055 266.9191919191919,134.892820361114 268.68686868686865,134.509010854016 270.45454545454544,134.128805431520 272.22222222222223,133.752104430785 273.989898989899,133.378812699261 275.75757575757575,133.008839313999 277.52525252525254,132.642097323027 279.2929292929293,132.278503506709 281.0606060606061,131.917978157234 282.82828282828285,131.560444874574 284.5959595959596,131.205830377443 286.3636363636364,130.854064327918 288.1313131313131,130.505079168539 289.89898989898995,130.158809970828 291.6666666666667,129.815194294247 293.4343434343434,129.474172054744 295.2020202020202,129.135685402098 296.96969696969694,128.799678605342 298.7373737373738,128.466097945648 300.50505050505046,128.134891616061 302.2727272727273,127.806009627573 304.04040404040404,127.479403721049 305.8080808080808,127.155027284558 307.57575757575756,126.832835275722 309.3434343434343,126.512784148705 311.11111111111114,126.194831785512 312.8787878787879,125.878937431293 314.64646464646466,125.565061633364 316.41414141414145,125.253166183691 318.18181818181813,124.943214064606 319.949494949495,124.635169397523 321.7171717171717,124.328997394461 323.4848484848485,124.024664312191 325.2525252525253,123.722137408827 327.02020202020196,123.421384902718 328.7878787878788,123.122375933473 330.55555555555554,122.825080525005 332.32323232323233,122.529469550456 334.09090909090907,122.235514698891 335.85858585858585,121.943188443657 337.62626262626264,121.652464012294 339.3939393939394,121.363315357920 341.16161616161617,121.075717131998 342.9292929292929,120.789644658399 344.6969696969697,120.505073908693 346.4646464646465,120.221981478596 348.23232323232327,119.940344565502 350.0,119.660140947053 '
+%}
               {% set parameters = {
                   'svg_x_length': 350,
                   'svg_y_length': 350,
@@ -406,35 +407,8 @@ vertex form, for quadratics.
 
 
 
+
 <p>
- <div class="activity">
-  <h2></h2>
-
-<a href="https://www.loom.com/share/4f4d1f3452904b289c079ded7dc2cb1b">Click for video</a>
-Now, for something new&mdash;sort of!!  Let's plot
-\[
-y = \sqrt{x}
-\]
-using the same approach as in the previous activity
-
-\begin{minipage}{0.45\textwidth}
-\def \arraystretch{1.5}
-\begin{tabular}{c|c}
-\(x\) &  \(y\) \\
-\hline
-0 & \\
-1 & \\
--1 & \\
-4 & \\
-9 & \\
-\end{tabular}
-\end{minipage}\hfill
-\begin{minipage}{0.45\textwidth}
-\includegraphics[scale=0.5]{blank}
-\end{minipage}
-</div>
-</p>
-
 The interesting thing to note here is that we have&mdash;in a
 way&mdash;plotted "the same" thing in these two activities: All the pairs
 appearing on the graph of \(y=x^2\) also appear on the graph of
@@ -449,7 +423,6 @@ Actually, the word used by mathematicians is <b>inverse</b>.
 <p>
 <div class="definition">
   <h2></h2>
-\label{def: inverse}
 Let
 \[
 \mathcal S = \left\{(x_1, y_1),(x_2, y_2), \ldots \right\}
@@ -484,69 +457,336 @@ A set of ordered pairs can be called a <b>relation</b> for short.
 </div>
 </p>
 
-<p>
- <div class="activity">
-  <h2></h2>
-
-  <a href="https://www.loom.com/share/1bfe699c62c347698851f59724ab2e2e">Click for video</a>
 
 <p>
-Plot
-\[
-y = x^3
-\]
-using the same approach as in the previous activity
+  <div class="example">
+    <h2></h2>
+    <p>
+      <a href="https://www.loom.com/share/1bfe699c62c347698851f59724ab2e2e">Click for video</a>
+    </p>
 
-\begin{minipage}{0.45\textwidth}
-\def \arraystretch{1.5}
-\begin{tabular}{c|c}
-\(x\) &  \(y\) \\
-\hline
-0 & \\
-1 & \\
--1 & \\
-2 & \\
--2 & \\
-\end{tabular}
-\end{minipage}\hfill
-\begin{minipage}{0.45\textwidth}
-\includegraphics[scale=0.5]{blank}
-\end{minipage}
-</div>
+    <p>
+      Plot
+      \[
+      y = x^3
+      \]
+      using the same approach as in the previous example.
+    </p>
+
+    <ol>
+      <li>
+        Fill out the \(y\)-values in the following table
+        by performing the function \(y=x^3\)
+        on each of the \(x\)-values.
+
+        <br>
+        <table border="1" style="border-collapse: collapse">
+          <tr>
+            <td style="text-align: center; width: 50px">\(x\)</td><td style="text-align: center;">\(y=x^3\)</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">0</td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">1</td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">2</td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td  style="text-align: center;">-1</td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td  style="text-align: center;">-2</td><td>&nbsp;</td>
+          </tr>
+        </table>
+
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+
+            <div style="text-align:center">
+              <table border="1" style="border-collapse: collapse">
+                <tr>
+                  <td style="text-align: center; width: 50px">\(x\)</td><td style="text-align: center;">\(y=x^3\)</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">\(0\)</td><td style="text-align: center;">\(0^3 = 0\)</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">\(1\)</td><td style="text-align: center;">\(1^3 = 1\)</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">\(2\)</td><td style="text-align: center;">\(2^3 = 8\)</td>
+                </tr>
+                <tr>
+                  <td  style="text-align: center;">\(-1\)</td><td style="text-align: center;">\((-1)^3 = (-1)(-1)(-1) = -1\)</td>
+                </tr>
+                <tr>
+                  <td  style="text-align: center;">\(-2\)</td><td style="text-align: center;">\((-2)^3 = (-2)(-2)(-2) = -8\)</td>
+                </tr>
+              </table>
+            </div>
+
+            <br>
+
+          </div>
+        </div>
+      </li>
+      <li>
+         Plot these points on the \((x, y)\)-plane.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            <div style="text-align:center">
+              {% set svg_id = 'svg5' %}
+              {% set points = [[0,0], [1, 1], [2,8], [-1, -1], [-2, -8]] %}
+              {% set poly_points = '' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+         Are you bored yet?  If you are, that's good!
+         But note that, in a way, we can never be totally sure what the
+         graph of this function looks like if all we do is plot points
+         one at a time.  After all, there is an infinite number of \(x\)-values
+         we would have to plug in&mdash;from the very large down to
+         untold reaches beyond the decimal place&mdash;and that we therefore
+         need some sort of "overall" observation to stop with this process
+         of plugging in points and to confidently "connect the dots".
+         Explain how you can know how to connect the dots.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            If you feel a bit at a loss here, that's good!  I would
+            argue that it is difficult to get a <em>really good</em>
+            idea of some of the details of this graph with doing
+            some calculus (or near enough to calculus) on this function.
+            But, without that, you could at least relate the \(y\) values
+            coming out of the rule \(y=x^3\) to the <em>volume</em>
+            of a cube whose side lengths are \(x\).  (After all,
+            that's why the expression "\(x^3\)" is read "\(x\) cubed".)
+            Imaginging actual physical objects like that, one can reason
+            that, as the side length changes, the volume \(x^3\) changes
+            in a smooth manner and that very small changes in \(x\)
+            lead to very small changes in the volume.  Thinking along
+            those lines, I think you might indeed draw a graph of this relationship
+            which does at least look pretty much like the "real deal".
+          </div>
+        </div>
+      </li>
+      <li>
+         Connect the dots: sketch a graph of the equation
+         \[
+          y = x^3
+         \]
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            <div style="text-align:center">
+              {% set svg_id = 'svg6' %}
+              {% set points = [[0,0], [1, 1], [2,8], [-1, -1], [-2, -8]] %}
+              {% set poly_points = '0.0,17675.0 3.5353535353535426,16635.67603903539 7.070707070707085,15638.339135668486 10.606060606060597,14682.123577371513 14.141414141414138,13766.163651616667 17.676767676767682,12889.593645876166 21.212121212121225,12051.547847622225 24.747474747474737,11251.160544327062 28.282828282828277,10487.566023462872 31.81818181818182,9759.898572501877 35.353535353535364,9067.29247891629 38.88888888888889,8408.882030178325 42.424242424242415,7783.801513760193 45.95959595959596,7191.1852171341 49.4949494949495,6630.167427772262 53.03030303030303,6099.882433146896 56.56565656565655,5599.464520730209 60.1010101010101,5128.047977994412 63.63636363636364,4684.76709241172 67.17171717171716,4268.756151454346 70.70707070707071,3879.149442594499 74.24242424242424,3515.081253304394 77.77777777777779,3175.6858710562415 81.31313131313131,2860.0975833222546 84.84848484848484,2567.4506775746445 88.38383838383838,2296.8794412856246 91.91919191919192,2047.5181619274058 95.45454545454545,1818.501126972202 98.98989898989899,1608.9626238922228 102.52525252525251,1418.0369401596831 106.06060606060606,1244.8583632467933 109.59595959595958,1088.5611806257662 113.13131313131314,948.2796797688136 116.66666666666667,823.1481481481479 120.2020202020202,712.300873235982 123.73737373737374,614.8721425045268 127.27272727272727,529.9962434259955 130.8080808080808,456.8074634725996 134.34343434343432,394.4400901165518 137.87878787878788,342.02841083006365 141.41414141414143,298.7067130853478 144.94949494949495,263.6092843546166 148.48484848484847,235.8704121100816 152.02020202020202,214.62438382395527 155.55555555555557,199.00548696844993 159.09090909090907,188.14800901577766 162.62626262626262,181.18623743815053 166.16161616161617,177.2544597077808 169.6969696969697,175.48696329688065 173.23232323232324,175.01803567766223 176.76767676767676,174.98196432233777 180.3030303030303,174.51303670311935 183.83838383838383,172.7455402922192 187.37373737373738,168.81376256184947 190.9090909090909,161.85199098422243 194.44444444444443,150.99451303155007 197.97979797979798,135.3756161760447 201.51515151515153,114.12958788991841 205.05050505050502,86.39071564538368 208.58585858585857,51.293286914652185 212.12121212121212,7.971589169936295 215.65656565656568,-44.44009011655177 219.19191919191917,-106.80746347259935 222.72727272727272,-179.99624342599523 226.26262626262627,-264.87214250452683 229.7979797979798,-362.300873235982 233.33333333333334,-473.14814814814855 236.86868686868686,-598.2796797688129 240.4040404040404,-738.5611806257656 243.93939393939394,-894.858363246793 247.4747474747475,-1068.0369401596831 251.01010101010098,-1258.962623892222 254.54545454545453,-1468.5011269722008 258.0808080808081,-1697.5181619274058 261.6161616161616,-1946.8794412856248 265.1515151515151,-2217.450677574643 268.68686868686865,-2510.0975833222533 272.22222222222223,-2825.6858710562415 275.75757575757575,-3165.081253304394 279.2929292929293,-3529.149442594497 282.82828282828285,-3918.7561514543477 286.3636363636364,-4334.76709241172 289.8989898989899,-4778.047977994408 293.4343434343434,-5249.464520730209 296.96969696969694,-5749.882433146894 300.5050505050505,-6280.167427772268 304.04040404040404,-6841.1852171341 307.57575757575756,-7433.801513760187 311.11111111111114,-8058.882030178329 314.64646464646466,-8717.29247891629 318.18181818181813,-9409.898572501872 321.7171717171717,-10137.566023462872 325.25252525252523,-10901.160544327053 328.7878787878788,-11701.547847622232 332.32323232323233,-12539.593645876166 335.85858585858585,-13416.16365161666 339.3939393939394,-14332.123577371513 342.9292929292929,-15288.339135668486 346.4646464646465,-16285.676039035397 350.0,-17325.0 '
+%}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
 </p>
 
-<p>
- <div class="activity">
-  <h2></h2>
-
-  <a href="https://www.loom.com/share/488706fd2b614cf892ff872cdba483ca">Click for video</a>
 
 <p>
-Plot
-\[
-y =\sqrt[3]{x}
-\]
-using the same approach as in the previous activity.
+  <div class="example">
+    <h2></h2>
+    <p>
+      <a href="https://www.loom.com/share/488706fd2b614cf892ff872cdba483ca">Click for video</a>
+    </p>
 
-\begin{minipage}{0.45\textwidth}
-\def \arraystretch{1.5}
-\begin{tabular}{c|c}
-\(x\) &  \(y\) \\
-\hline
-0 & \\
-1 & \\
--1 & \\
-8 & \\
--8 & \\
-\end{tabular}
-\end{minipage}\hfill
-\begin{minipage}{0.45\textwidth}
-\includegraphics[scale=0.5]{blank}
-\end{minipage}
-</div>
+    <p>
+      Plot
+      \[
+        y = \sqrt[3]{x}
+      \]
+      using the same approach as in the previous example.
+    </p>
+
+    <ol>
+      <li>
+        Fill out the \(y\)-values in the following table
+        by performing the function \(y=\sqrt[3]{x}\)
+        on each of the \(x\)-values.
+
+        <br>
+        <table border="1" style="border-collapse: collapse">
+          <tr>
+            <td style="text-align: center; width: 50px">\(x\)</td><td style="text-align: center;">\(y=\sqrt[3]{x}\)</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">0</td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">1</td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">8</td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td  style="text-align: center;">-1</td><td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td  style="text-align: center;">-8</td><td>&nbsp;</td>
+          </tr>
+        </table>
+
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+
+            <div style="text-align:center">
+              <table border="1" style="border-collapse: collapse">
+                <tr>
+                  <td style="text-align: center; width: 50px">\(x\)</td><td style="text-align: center;">\(y=\sqrt[3]{x}\)</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">\(0\)</td><td style="text-align: center;">\(0^3 = 0\)</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">\(1\)</td><td style="text-align: center;">\(1^3 = 1\)</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center;">\(8\)</td><td style="text-align: center;">\(2^3 = 8\)</td>
+                </tr>
+                <tr>
+                  <td  style="text-align: center;">\(-1\)</td><td style="text-align: center;">\(\sqrt[3]{-1} = -1\)</td>
+                </tr>
+                <tr>
+                  <td  style="text-align: center;">\(-8\)</td><td style="text-align: center;">\(\sqrt[3]{-8} = -2\)</td>
+                </tr>
+              </table>
+            </div>
+
+            <br>
+
+          </div>
+        </div>
+      </li>
+      <li>
+         Plot these points on the \((x, y)\)-plane.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            <div style="text-align:center">
+              {% set svg_id = 'svg7' %}
+              {% set points = [[0,0], [1, 1], [8,2], [-1, -1], [-8, -2]] %}
+              {% set poly_points = '' %}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+         Are you bored yet?  If you are, that's good!
+         But note that, in a way, we can never be totally sure what the
+         graph of this function looks like if all we do is plot points
+         one at a time.  After all, there is an infinite number of \(x\)-values
+         we would have to plug in&mdash;from the very large down to
+         untold reaches beyond the decimal place&mdash;and that we therefore
+         need some sort of "overall" observation to stop with this process
+         of plugging in points and to confidently "connect the dots".
+         Explain how you can know how to connect the dots.
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            You can obtain the graph of \(y = \sqrt[3]{x}\) from the graph of
+            \(y = x^3\) in the same way that we obtained the graph of
+            \(y = \sqrt{x}\) from that of \(y = x^2\).  That is, note that, for
+            any pair \((x, y)\) that satisfies \(y = x^3\) you have that
+            the pair \((y, x)\) (the inverse pair) satisfies \(y = \sqrt[3]{x}\)&mdash;and
+            vice versa!  For instance, while \((x, y) = (2, 8)\) satisfies
+            \(y = x^3\), the inverse pair \((8, 2)\) satisfies
+            \(y = \sqrt[3]{x}\).  That means that, to obtain the graph
+            of \(y = \sqrt[3]{x}\), you could just start with the graph
+            of \(y = x^3\) and then figure out what it would look like to
+            switch all the pairs.  You would get something like the answer
+            to the next part!
+          </div>
+        </div>
+      </li>
+      <li>
+         Connect the dots: sketch a graph of the equation
+         \[
+          y = \sqrt[3]{x}
+         \]
+        <div class="answer">
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            <div style="text-align:center">
+              {% set svg_id = 'svg8' %}
+              {% set points = [[0,0], [1, 1], [8,2], [-1, -1], [-8, -2]] %}
+              {% set poly_points = '0.0,212.70260707555798 3.5714285714285676,212.44436193609255 7.142857142857135,212.18250468410335 10.714285714285703,211.91690629832092 14.28571428571427,211.64743022195594 17.85714285714287,211.3739317439573 21.428571428571438,211.09625731412405 25.000000000000004,210.81424378328347 28.571428571428573,210.52771755833945 32.14285714285714,210.23649366032447 35.71428571428571,209.9403746715921 39.28571428571429,209.63914955589618 42.85714285714286,209.3325923322233 46.42857142857142,209.02046057976685 50.00000000000001,208.70249374719813 53.57142857142858,208.37841123422803 57.142857142857146,208.04791020710772 60.71428571428571,207.71066310188587 64.28571428571428,207.36631475950915 67.85714285714286,207.01447912468737 71.42857142857143,206.65473542513394 75.0,206.28662372837988 78.57142857142858,205.9096397485642 82.14285714285715,205.52322874366985 85.71428571428572,205.12677830219036 89.28571428571428,204.71960976381567 92.85714285714285,204.30096794668304 96.42857142857143,203.87000875728864 100.0,203.42578412851483 103.57142857142857,202.96722355203494 107.14285714285715,202.49311122215667 110.71428571428572,202.00205745638226 114.28571428571429,201.4924625531204 117.85714285714286,200.96247050925552 121.42857142857142,200.40990892037132 125.0,199.83220970948173 128.57142857142858,199.22630270858375 132.14285714285714,198.58846990158264 135.71428571428572,197.91414113582556 139.2857142857143,197.19760004356502 142.85714285714286,196.4315472057835 146.42857142857142,195.60642649904278 150.0,194.7093379077631 153.57142857142856,193.72218096804627 157.14285714285717,192.6182468301622 160.71428571428572,191.35533155094294 164.2857142857143,189.85980488190782 167.85714285714286,187.98123525462773 171.42857142857144,185.3032132495214 175.0,175.0 175.0,175.0 178.57142857142856,164.6967867504786 182.14285714285714,162.01876474537224 185.7142857142857,160.14019511809218 189.28571428571428,158.64466844905704 192.85714285714286,157.38175316983776 196.42857142857144,156.27781903195373 200.0,155.2906620922369 203.57142857142858,154.39357350095722 207.14285714285714,153.5684527942165 210.7142857142857,152.80239995643498 214.2857142857143,152.08585886417444 217.85714285714286,151.41153009841736 221.42857142857144,150.77369729141625 225.0,150.16779029051827 228.57142857142858,149.59009107962868 232.14285714285714,149.03752949074448 235.71428571428572,148.5075374468796 239.28571428571428,147.99794254361774 242.85714285714283,147.50688877784333 246.42857142857142,147.03277644796506 249.99999999999997,146.57421587148517 253.57142857142858,146.12999124271136 257.14285714285717,145.69903205331696 260.7142857142857,145.28039023618433 264.2857142857143,144.87322169780964 267.85714285714283,144.47677125633015 271.42857142857144,144.0903602514358 275.0,143.71337627162012 278.5714285714286,143.34526457486606 282.14285714285717,142.98552087531263 285.7142857142857,142.63368524049085 289.2857142857143,142.28933689811413 292.85714285714283,141.95208979289228 296.42857142857144,141.62158876577197 300.0,141.29750625280187 303.57142857142856,140.97953942023315 307.1428571428571,140.6674076677767 310.71428571428567,140.36085044410385 314.28571428571433,140.0596253284079 317.85714285714283,139.76350633967553 321.42857142857144,139.47228244166055 324.99999999999994,139.18575621671653 328.5714285714286,138.90374268587595 332.14285714285717,138.6260682560427 335.7142857142857,138.35256977804406 339.2857142857143,138.08309370167908 342.8571428571429,137.81749531589665 346.42857142857144,137.55563806390745 350.0,137.29739292444205 '
+%}
+              {% set parameters = {
+                  'svg_x_length': 350,
+                  'svg_y_length': 350,
+                  'cart_x_min': -10,
+                  'cart_x_max': 10,
+                  'cart_x_length': 20,
+                  'cart_y_min': -10,
+                  'cart_y_max': 10,
+                  'cart_y_length': 20
+                }
+              %}
+              {% include "_static_graph.html" %}
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
 </p>
 
-Next, we just mess with these new basic functions&mdash;transforming them.  (By the way, a lot of texts will call basic functions "parent" functions.)
+
+<p>
+Next, we just mess with these new basic functions&mdash;transforming them.
+(By the way, a lot of texts will call basic functions "parent" functions.)
 
 <p>
 <div class="example">
@@ -555,105 +795,259 @@ Next, we just mess with these new basic functions&mdash;transforming them.  (By 
 <a href="https://www.loom.com/share/11e4c33d1364410bbaf736c600be6cba">Click for video</a>
 
 <p>
-Graph each of the following functions using transformations.  Be sure to include enough points to leave no doubt as to the accuracy of your graph.  Also, {\color{magenta} describe your transformations in words.}
-\noindent\hbox to 0pt{\hss \href{https://drive.google.com/open?id=1pCsPWv4xvrYorAnEBHH_bbN4lla2Pssm}{Click for key}\hskip 22em}
+Graph each of the following functions using transformations.
+Include an "anchor" point (meaning, the point corresponding to what the pair
+\((0,0)\) gets translated to in the new graph) and at least 3 other points.
+<!-- <a href="https://drive.google.com/open?id=1pCsPWv4xvrYorAnEBHH_bbN4lla2Pssm">Click for key</a> -->
 <ol>
-
-\begin{minipage}{0.45\textwidth}
-
 <li>
-\(y = (x+2)^2- 5\)
+  \(y = (x+2)^2- 5\)
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      First, note that the expression
+        \(
+          (x+2)^2
+        \)
+      involves all the
+      same \(y\)-values that come out of the function
+      \(f(x) = x^2\) except each \(y\) will coincide
+      with a different \(x\) from before.  To be precise,
+      you have to plug in \(x\)-values that are 2 units
+      to the left of the \(x\) that used to give rise
+      to a target \(y\) (to compensate for the \(+2\)
+      added to the \(x\) before you square it).
+      For instance, if you want to get
+      0 to come out of \((x + 2)^2\), you can't just plug in 0;
+      you'd have to plug in \(-2\), instead.  To get \(1\) to come
+      out of \((x + 2)^2\), you don't plug in \(1\); instead,
+      you might plug in \(-1\).  In that fashion, you get all
+      the "old \(y\)-values", but, as they are co-occurring
+      with \(x\)-values that are \(2\) units to the left, the graph will be
+      like that of \(y = x^2\) except shifted \(2\) units to the left.
+
+      <p>
+        Finally, note that the \(-5\) part involves subtracting
+        \(5\) from the \(y\)-values that come out of \((x+2)^2\).
+        Since \(y\)'s are plotted vertically, this means that the
+        graph will also be shifted down \(5\) units.  So, in all,
+        you get the following graph:
+      <div style="text-align:center">
+        {% set svg_id = 'svg9' %}
+        {% set points = [[-2, -5], [-1, -4], [-3, -4], [0, -1], [-4, -1], [1, 4], [-5, 4]] %}
+        {% set poly_points = '0.0,-857.500000000000 3.5353535353535426,-801.648556269768 7.070707070707085,-747.225538210386 10.606060606060597,-694.230945821855 14.141414141414138,-642.664779104173 17.676767676767682,-592.527038057341 21.212121212121225,-543.817722681359 24.747474747474737,-496.536832976227 28.282828282828277,-450.684368941945 31.81818181818182,-406.260330578512 35.353535353535364,-363.264717885930 38.88888888888889,-321.697530864198 42.424242424242415,-281.558769513315 45.95959595959596,-242.848433833282 49.4949494949495,-205.566523824100 53.03030303030303,-169.713039485767 56.56565656565655,-135.287980818284 60.1010101010101,-102.291347821651 63.63636363636364,-70.7231404958677 67.17171717171716,-40.5833588409346 70.70707070707071,-11.8720028568513 74.24242424242424,15.4109274563820 77.77777777777779,41.2654320987654 81.31313131313131,65.6915110702989 84.84848484848484,88.6891643709826 88.38383838383838,110.258392000816 91.91919191919192,130.399193959800 95.45454545454545,149.111570247934 98.98989898989899,166.395520865218 102.52525252525251,182.251045811652 106.06060606060606,196.678145087236 109.59595959595958,209.676818691970 113.13131313131314,221.247066625855 116.66666666666667,231.388888888889 120.2020202020202,240.102285481073 123.73737373737374,247.387256402408 127.27272727272727,253.243801652893 130.8080808080808,257.671921232527 134.34343434343432,260.671615141312 137.87878787878788,262.242883379247 141.41414141414143,262.385725946332 144.94949494949495,261.100142842567 148.48484848484847,258.386134067952 152.02020202020202,254.243699622488 155.55555555555557,248.672839506173 159.09090909090907,241.673553719008 162.62626262626262,233.245842260994 166.16161616161617,223.389705132129 169.6969696969697,212.105142332415 173.23232323232324,199.392153861851 176.76767676767676,185.250739720437 180.3030303030303,169.680899908173 183.83838383838383,152.682634425059 187.37373737373738,134.255943271095 190.9090909090909,114.400826446281 194.44444444444443,93.1172839506173 197.97979797979798,70.4053157841037 201.51515151515153,46.2649219467401 205.05050505050502,20.6961024385268 208.58585858585857,-6.30114274053661 212.12121212121212,-34.7268135904500 215.65656565656568,-64.5809101112132 219.19191919191917,-95.8634323028261 222.72727272727272,-128.574380165289 226.26262626262627,-162.713753698602 229.7979797979798,-198.281552902765 233.33333333333334,-235.277777777778 236.86868686868686,-273.702428323640 240.4040404040404,-313.555504540353 243.93939393939394,-354.837006427915 247.4747474747475,-397.546933986328 251.01010101010098,-441.685287215590 254.54545454545453,-487.252066115702 258.0808080808081,-534.247270686665 261.6161616161616,-582.670900928477 265.1515151515151,-632.522956841138 268.68686868686865,-683.803438424650 272.22222222222223,-736.512345679012 275.75757575757575,-790.649678604224 279.2929292929293,-846.215437200285 282.82828282828285,-903.209621467197 286.3636363636364,-961.632231404958 289.8989898989899,-1021.48326701357 293.4343434343434,-1082.76272829303 296.96969696969694,-1145.47061524334 300.5050505050505,-1209.60692786450 304.04040404040404,-1275.17166615651 307.57575757575756,-1342.16483011938 311.11111111111114,-1410.58641975309 314.64646464646466,-1480.43643505765 318.18181818181813,-1551.71487603306 321.7171717171717,-1624.42174267932 325.25252525252523,-1698.55703499643 328.7878787878788,-1774.12075298439 332.32323232323233,-1851.11289664320 335.85858585858585,-1929.53346597286 339.3939393939394,-2009.38246097337 342.9292929292929,-2090.65988164473 346.4646464646465,-2173.36572798694 350.0,-2257.50000000000 '
+%}
+        {% set parameters = {
+            'svg_x_length': 350,
+            'svg_y_length': 350,
+            'cart_x_min': -10,
+            'cart_x_max': 10,
+            'cart_x_length': 20,
+            'cart_y_min': -10,
+            'cart_y_max': 10,
+            'cart_y_length': 20
+          }
+        %}
+        {% include "_static_graph.html" %}
+      </div>
+    </div>
+  </div>
 </li>
-
-\vspace{12\baselineskip}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\includegraphics[scale=0.5]{blank}
-\end{minipage}
-
-\begin{minipage}{0.45\textwidth}
-
 <li>
-\(y = 2 - x^2\)
+  \(y = 2 - x^2\)
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      First, note that the expression
+        \(
+          -x^2
+        \)
+      just yields the negative of the square of whatever
+      value you plug in for \(x\) (according to the correct
+      order of operations!)  Since negative \(y\)'z are plotted
+      by going down the vertical axis, this means that the graph
+      of \(y = -x^2\) will be just like that of \(y = x^2\)
+      only upside down.  (You will do well to imagine that right now
+      before proceeding any further!)
+
+      <p>
+        What about the \(2\)?  Well, note that you could rewrite your
+        expression:
+        \[
+          y = 2 - x^2 = -x^2 + 2
+        \]
+        What's the point of that?  Well, I only suppose that writing
+        it this way helps you see that this function just involves
+        taking the values that come out of the expression
+        \(-x^2\) and then adding \(2\) to them.  That means that the graph of
+        \[
+          y = 2 - x^2
+        \]
+        will be like that of \(y = -x^2\) only shifted up \(2\) units:
+      <div style="text-align:center">
+        {% set svg_id = 'svg10' %}
+        {% set points = [[0, 2], [1, 1], [-1, 1], [2, -2], [-2, -2], [3, -7], [-3, -7]] %}
+        {% set poly_points = '0.0,1890.00000000000 3.5353535353535426,1820.00714212835 7.070707070707085,1751.44270992756 10.606060606060597,1684.30670339761 14.141414141414138,1618.59912253852 17.676767676767682,1554.31996735027 21.212121212121225,1491.46923783287 24.747474747474737,1430.04693398633 28.282828282828277,1370.05305581063 31.81818181818182,1311.48760330579 35.353535353535364,1254.35057647179 38.88888888888889,1198.64197530864 42.424242424242415,1144.36179981635 45.95959595959596,1091.51004999490 49.4949494949495,1040.08672584430 53.03030303030303,990.091827364555 56.56565656565655,941.525354555658 60.1010101010101,894.387307417610 63.63636363636364,848.677685950413 67.17171717171716,804.396490154066 70.70707070707071,761.543720028568 74.24242424242424,720.119375573921 77.77777777777779,680.123456790123 81.31313131313131,641.555963677176 84.84848484848484,604.416896235078 88.38383838383838,568.706254463830 91.91919191919192,534.424038363432 95.45454545454545,501.570247933884 98.98989898989899,470.144883175186 102.52525252525251,440.147944087338 106.06060606060606,411.579430670340 109.59595959595958,384.439342924191 113.13131313131314,358.727680848893 116.66666666666667,334.444444444444 120.2020202020202,311.589633710846 123.73737373737374,290.163248648097 127.27272727272727,270.165289256198 130.8080808080808,251.595755535149 134.34343434343432,234.454647484951 137.87878787878788,218.741965105601 141.41414141414143,204.457708397102 144.94949494949495,191.601877359453 148.48484848484847,180.174471992654 152.02020202020202,170.175492296704 155.55555555555557,161.604938271605 159.09090909090907,154.462809917355 162.62626262626262,148.749107233956 166.16161616161617,144.463830221406 169.6969696969697,141.606978879706 173.23232323232324,140.178553208856 176.76767676767676,140.178553208856 180.3030303030303,141.606978879706 183.83838383838383,144.463830221406 187.37373737373738,148.749107233956 190.9090909090909,154.462809917355 194.44444444444443,161.604938271605 197.97979797979798,170.175492296704 201.51515151515153,180.174471992654 205.05050505050502,191.601877359453 208.58585858585857,204.457708397102 212.12121212121212,218.741965105601 215.65656565656568,234.454647484951 219.19191919191917,251.595755535149 222.72727272727272,270.165289256198 226.26262626262627,290.163248648097 229.7979797979798,311.589633710846 233.33333333333334,334.444444444445 236.86868686868686,358.727680848893 240.4040404040404,384.439342924191 243.93939393939394,411.579430670340 247.4747474747475,440.147944087338 251.01010101010098,470.144883175186 254.54545454545453,501.570247933884 258.0808080808081,534.424038363432 261.6161616161616,568.706254463830 265.1515151515151,604.416896235078 268.68686868686865,641.555963677176 272.22222222222223,680.123456790123 275.75757575757575,720.119375573921 279.2929292929293,761.543720028568 282.82828282828285,804.396490154066 286.3636363636364,848.677685950413 289.8989898989899,894.387307417610 293.4343434343434,941.525354555658 296.96969696969694,990.091827364554 300.5050505050505,1040.08672584430 304.04040404040404,1091.51004999490 307.57575757575756,1144.36179981634 311.11111111111114,1198.64197530864 314.64646464646466,1254.35057647179 318.18181818181813,1311.48760330578 321.7171717171717,1370.05305581063 325.25252525252523,1430.04693398633 328.7878787878788,1491.46923783287 332.32323232323233,1554.31996735027 335.85858585858585,1618.59912253852 339.3939393939394,1684.30670339761 342.9292929292929,1751.44270992756 346.4646464646465,1820.00714212835 350.0,1890.00000000000 '
+        %}
+        {% set parameters = {
+            'svg_x_length': 350,
+            'svg_y_length': 350,
+            'cart_x_min': -10,
+            'cart_x_max': 10,
+            'cart_x_length': 20,
+            'cart_y_min': -10,
+            'cart_y_max': 10,
+            'cart_y_length': 20
+          }
+        %}
+        {% include "_static_graph.html" %}
+      </div>
+    </div>
+  </div>
 </li>
-
-\vspace{12\baselineskip}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\includegraphics[scale=0.5]{blank}
-\end{minipage}
-
-\begin{minipage}{0.45\textwidth}
-
 <li>
-\(y = 2x^2 - 5\)
+  \(y = 2x^2 - 5\)
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      First, note that the expression
+        \(
+          2x^2
+        \)
+      just yields double of the square of whatever
+      value you plug in for \(x\) (according to the correct
+      order of operations!)  Since \(y\)'z are plotted
+      vertically, this means that, relative to what happens with
+      plain, old \(x^2\), the \(y\)-values climb twice
+      as fast, when you consider \(x\) values getting
+      further away from \(0\).
+      This makes the graph climb "more steeply".
+      (You will do well to imagine that right now
+      before proceeding any further!)
+
+      <p>
+        What about the \(-5\)? Just note that the expression
+        \[
+          2x^2 - 5
+        \]
+        function just involves
+        taking the values that come out of the expression
+        \(2x^2\) and then subtracting \(5\) from them.  That means that the graph of
+        \[
+          y = 2x^2 - 5
+        \]
+        will be like that of \(y = 2x^2\) only shifted down \(5\) units:
+      <div style="text-align:center">
+        {% set svg_id = 'svg11' %}
+        {% set points = [[0, -5], [1, -3], [-1, -3], [2, 3], [-2, 3]] %}
+        {% set poly_points = '0.0,-3237.50000000000 3.5353535353535426,-3097.51428425671 7.070707070707085,-2960.38541985512 10.606060606060597,-2826.11340679523 14.141414141414138,-2694.69824507703 17.676767676767682,-2566.13993470054 21.212121212121225,-2440.43847566575 24.747474747474737,-2317.59386797266 28.282828282828277,-2197.60611162126 31.81818181818182,-2080.47520661157 35.353535353535364,-1966.20115294358 38.88888888888889,-1854.78395061728 42.424242424242415,-1746.22359963269 45.95959595959596,-1640.52009998980 49.4949494949495,-1537.67345168860 53.03030303030303,-1437.68365472911 56.56565656565655,-1340.55070911132 60.1010101010101,-1246.27461483522 63.63636363636364,-1154.85537190083 67.17171717171716,-1066.29298030813 70.70707070707071,-980.587440057137 74.24242424242424,-897.738751147842 77.77777777777779,-817.746913580247 81.31313131313131,-740.611927354352 84.84848484848484,-666.333792470156 88.38383838383838,-594.912508927661 91.91919191919192,-526.348076726865 95.45454545454545,-460.640495867769 98.98989898989899,-397.789766350372 102.52525252525251,-337.795888174676 106.06060606060606,-280.658861340679 109.59595959595958,-226.378685848383 113.13131313131314,-174.955361697786 116.66666666666667,-126.388888888889 120.2020202020202,-80.6792674216917 123.73737373737374,-37.8264972961942 127.27272727272727,2.16942148760327 130.8080808080808,39.3084889297011 134.34343434343432,73.5907050300989 137.87878787878788,105.016069788797 141.41414141414143,133.584583205795 144.94949494949495,159.296245281094 148.48484848484847,182.151056014692 152.02020202020202,202.149015406591 155.55555555555557,219.290123456790 159.09090909090907,233.574380165289 162.62626262626262,245.001785532089 166.16161616161617,253.572339557188 169.6969696969697,259.286042240588 173.23232323232324,262.142893582288 176.76767676767676,262.142893582288 180.3030303030303,259.286042240588 183.83838383838383,253.572339557188 187.37373737373738,245.001785532089 190.9090909090909,233.574380165289 194.44444444444443,219.290123456790 197.97979797979798,202.149015406591 201.51515151515153,182.151056014692 205.05050505050502,159.296245281094 208.58585858585857,133.584583205795 212.12121212121212,105.016069788797 215.65656565656568,73.5907050300989 219.19191919191917,39.3084889297012 222.72727272727272,2.16942148760343 226.26262626262627,-37.8264972961942 229.7979797979798,-80.6792674216917 233.33333333333334,-126.388888888889 236.86868686868686,-174.955361697786 240.4040404040404,-226.378685848383 243.93939393939394,-280.658861340679 247.4747474747475,-337.795888174676 251.01010101010098,-397.789766350372 254.54545454545453,-460.640495867768 258.0808080808081,-526.348076726865 261.6161616161616,-594.912508927661 265.1515151515151,-666.333792470156 268.68686868686865,-740.611927354351 272.22222222222223,-817.746913580247 275.75757575757575,-897.738751147842 279.2929292929293,-980.587440057137 282.82828282828285,-1066.29298030813 286.3636363636364,-1154.85537190083 289.8989898989899,-1246.27461483522 293.4343434343434,-1340.55070911132 296.96969696969694,-1437.68365472911 300.5050505050505,-1537.67345168860 304.04040404040404,-1640.52009998980 307.57575757575756,-1746.22359963269 311.11111111111114,-1854.78395061728 314.64646464646466,-1966.20115294358 318.18181818181813,-2080.47520661157 321.7171717171717,-2197.60611162126 325.25252525252523,-2317.59386797266 328.7878787878788,-2440.43847566575 332.32323232323233,-2566.13993470054 335.85858585858585,-2694.69824507703 339.3939393939394,-2826.11340679523 342.9292929292929,-2960.38541985512 346.4646464646465,-3097.51428425671 350.0,-3237.50000000000 '
+        %}
+        {% set parameters = {
+            'svg_x_length': 350,
+            'svg_y_length': 350,
+            'cart_x_min': -10,
+            'cart_x_max': 10,
+            'cart_x_length': 20,
+            'cart_y_min': -10,
+            'cart_y_max': 10,
+            'cart_y_length': 20
+          }
+        %}
+        {% include "_static_graph.html" %}
+      </div>
+    </div>
+  </div>
 </li>
-
-\vspace{12\baselineskip}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\includegraphics[scale=0.5]{blank}
-\end{minipage}
-
-\begin{minipage}{0.45\textwidth}
-
 <li>
-\(y = -\frac{1}{2}(x-4)^2 -2\)
+  \(y = -\frac{1}{2}(x-4)^2 -2\)
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      First, note that the expression
+        \(
+          -\frac{1}{2}x^2
+        \)
+      just yields the negative of half of the square of whatever
+      value you plug in for \(x\) (according to the correct
+      order of operations!)  Since \(y\)'z are plotted
+      vertically, this means that, relative to what happens with
+      plain, old \(x^2\), the \(y\)-values will go down
+      as \(x\) proceeds away from \(0\) but will fall at half
+      the rate as those that come out of \(y = -x^2\).
+      (You will do well to imagine that right now
+      before proceeding any further!)
+
+      <p>
+        Next, note that the \(-4\) causes a shift to the right of \(4\)
+        units. After all, to compensate for that subtraction of \(4\) from
+        \(x\), you'd need to input \(x\) values that are \(4\) to the
+        right to get "the same \(y\)-values" that used to come out of
+        \(y = -\frac{1}{2}x^2\).
+
+      <p>
+        What about the \(-2\)? Just note that the expression
+        \[
+           -\frac{1}{2}(x-4)^2 -2
+        \]
+        just involves
+        taking the values that come out of the expression
+        \(-\frac{1}{2}(x-4)^2\) and then subtracting \(2\) from them.  That means that the graph of
+        \[
+          y = -\frac{1}{2}(x-4)^2 - 2
+        \]
+        will be like that of \(y = -\frac{1}{2}(x-4)^2\) only shifted down \(2\) units:
+      <div style="text-align:center">
+        {% set svg_id = 'svg12' %}
+        {% set points = [[4, -2], [6, -4], [2, -4], [8, -10], [0, -10]] %}
+        {% set poly_points = '0.0,1925.00000000000 3.5353535353535426,1875.86215692276 7.070707070707085,1827.43852668095 10.606060606060597,1779.72910927456 14.141414141414138,1732.73390470360 17.676767676767682,1686.45291296806 21.212121212121225,1640.88613406795 24.747474747474737,1596.03356800327 28.282828282828277,1551.89521477400 31.81818181818182,1508.47107438017 35.353535353535364,1465.76114682175 38.88888888888889,1423.76543209877 42.424242424242415,1382.48393021120 45.95959595959596,1341.91664115907 49.4949494949495,1302.06356494235 53.03030303030303,1262.92470156106 56.56565656565655,1224.50005101520 60.1010101010101,1186.78961330476 63.63636363636364,1149.79338842975 67.17171717171716,1113.51137639016 70.70707070707071,1077.94357718600 74.24242424242424,1043.08999081726 77.77777777777779,1008.95061728395 81.31313131313131,975.525456586063 84.84848484848484,942.814508723600 88.38383838383838,910.817773696562 91.91919191919192,879.535251504949 95.45454545454545,848.966942148760 98.98989898989899,819.112845627997 102.52525252525251,789.972961942659 106.06060606060606,761.547291092746 109.59595959595958,733.835833078257 113.13131313131314,706.838587899194 116.66666666666667,680.555555555556 120.2020202020202,654.986736047342 123.73737373737374,630.132129374554 127.27272727272727,605.991735537190 130.8080808080808,582.565554535251 134.34343434343432,559.853586368738 137.87878787878788,537.855831037649 141.41414141414143,516.572288541985 144.94949494949495,496.002958881747 148.48484848484847,476.147842056933 152.02020202020202,457.006938067544 155.55555555555557,438.580246913580 159.09090909090907,420.867768595041 162.62626262626262,403.869503111927 166.16161616161617,387.585450464238 169.6969696969697,372.015610651974 173.23232323232324,357.159983675135 176.76767676767676,343.018569533721 180.3030303030303,329.591368227732 183.83838383838383,316.878379757168 187.37373737373738,304.879604122028 190.9090909090909,293.595041322314 194.44444444444443,283.024691358025 197.97979797979798,273.168554229160 201.51515151515153,264.026629935721 205.05050505050502,255.598918477706 208.58585858585857,247.885419855117 212.12121212121212,240.886134067952 215.65656565656568,234.601061116213 219.19191919191917,229.030200999898 222.72727272727272,224.173553719008 226.26262626262627,220.031119273544 229.7979797979798,216.602897663504 233.33333333333334,213.888888888889 236.86868686868686,211.889092949699 240.4040404040404,210.603509845934 243.93939393939394,210.032139577594 247.4747474747475,210.174982144679 251.01010101010098,211.032037547189 254.54545454545453,212.603305785124 258.0808080808081,214.888786858484 261.6161616161616,217.888480767269 265.1515151515151,221.602387511478 268.68686868686865,226.030507091113 272.22222222222223,231.172839506173 275.75757575757575,237.029384756657 279.2929292929293,243.600142842567 282.82828282828285,250.885113763902 286.3636363636364,258.884297520661 289.8989898989899,267.597694112846 293.4343434343434,277.025303540455 296.96969696969694,287.167125803489 300.5050505050505,298.023160901949 304.04040404040404,309.593408835833 307.57575757575756,321.877869605142 311.11111111111114,334.876543209877 314.64646464646466,348.589429650036 318.18181818181813,363.016528925620 321.7171717171717,378.157841036629 325.25252525252523,394.013365983063 328.7878787878788,410.583103764922 332.32323232323233,427.867054382206 335.85858585858585,445.865217834915 339.3939393939394,464.577594123049 342.9292929292929,484.004183246607 346.4646464646465,504.144985205591 350.0,525.000000000000 '
+        %}
+        {% set parameters = {
+            'svg_x_length': 350,
+            'svg_y_length': 350,
+            'cart_x_min': -10,
+            'cart_x_max': 10,
+            'cart_x_length': 20,
+            'cart_y_min': -10,
+            'cart_y_max': 10,
+            'cart_y_length': 20
+          }
+        %}
+        {% include "_static_graph.html" %}
+      </div>
+    </div>
+  </div>
 </li>
-
-\vspace{12\baselineskip}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\includegraphics[scale=0.5]{blank}
-\end{minipage}
-
-
 </ol>
 
 </div>
 </p>
 
-\newpage
-
 <p>
 <div class="example">
   <h2></h2>
 
-Graph each of the following functions using transformations.
-Be sure to include enough points to leave no doubt as to the accuracy of your
-graph.  Also, {\color{magenta} describe your transformations in words.}
-\[y = \sqrt{x + 5} + 4\]
-
-\begin{minipage}{0.45\textwidth}
+  Graph the given equation by plotting the "anchor" point and at least 3 other points
+  that satisfy the equation.
+    \[
+      y = \sqrt{x + 5} + 4
+    \]
 
   <div class="answer">
     <a class="collapsible"><h3>Answer: </h3></a>
     <div class='inner'>
-
-We transform the original graph of \(y=\sqrt{x}\) (which is graphed in {\color{gray} gray}
-for comparison) by applying the transformations:
-<ul>
-
-
-<li>
-left 5
-</li>
-
-<li>
-up 4
-</li>
-</ul>
-
-Be sure to include the dots, as I have, so that I can see you have an accurate
-knowledge of the graph.
-
+      We transform the original graph of \(y=\sqrt{x}\) (which is graphed in <span style="color:gray">gray</span>
+      for comparison) by applying the transformations:
+      <div style="margin-left:auto; margin-right:auto; text-align:center; color:red">
+      left 5,
+      up 4
+      </div>
+      <div style="text-align:center">
+        <img src="{{ url_for('static', filename='images/power-of-x-transformations-example-1.png') }}">
+      </div>
     </div>
   </div>
 
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\includegraphics[scale=0.5]{power-of-x-transformations-example-1}
-\end{minipage}
+
 </div>
 </p>
 
@@ -664,39 +1058,28 @@ knowledge of the graph.
 
 Graph each of the following functions using transformations.
 Be sure to include enough points to leave no doubt as to the accuracy of your
-graph.  Also, {\color{magenta} describe your transformations in words.}
+graph.
+
 \[y = -\sqrt{x}\]
 
-\begin{minipage}{0.45\textwidth}
+
 
   <div class="answer">
     <a class="collapsible"><h3>Answer: </h3></a>
     <div class='inner'>
-
-Again, the original is graphed in {\color{gray} gray}.  As you can see, the
-graph of \(y=-\sqrt{x}\) is simply that of \(y=\sqrt{x}\) except the
-\(y\)-values have been made negative&mdash;which, of course, is precisely
-what the formula "\(-\sqrt{x}\)" tells you to do when you observe
-correct order of operations.  The transformation can be described as the graph having been
-<ul>
-
-
-<li>
-reflected across the \(x\)-axis.
-</li>
-
-</ul>
-
-Be sure to include the dots, as I have, so that I can see you have an accurate
-knowledge of the graph.
-
+      Again, the original is graphed in <span style="color:gray">gray</span>.  As you can see, the
+      graph of \(y=-\sqrt{x}\) is simply that of \(y=\sqrt{x}\) except the
+      \(y\)-values have been made negative&mdash;which, of course, is precisely
+      what the formula "\(-\sqrt{x}\)" tells you to do when you observe
+      correct order of operations.  The transformation can be described as the graph having been
+      <div style="margin-left:auto; margin-right:auto; text-align:center; color:red">
+      reflected across the \(x\)-axis.
+      </div>
+      <div style="text-align:center">
+        <img src="{{ url_for('static', filename='images/power-of-x-transformations-example-2.png') }}">
+      </div>
     </div>
   </div>
-
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\includegraphics[scale=0.5]{power-of-x-transformations-example-2}
-\end{minipage}
 </div>
 </p>
 
@@ -707,43 +1090,32 @@ knowledge of the graph.
 
 Graph each of the following functions using transformations.
 Be sure to include enough points to leave no doubt as to the accuracy of
-your graph.  Also, {\color{magenta} describe your transformations in words.}
+your graph.
 \[y = 2\sqrt{x}\]
 
-\begin{minipage}{0.45\textwidth}
 
   <div class="answer">
     <a class="collapsible"><h3>Answer: </h3></a>
     <div class='inner'>
-
-This time, ask yourself what the formula \(2\sqrt{x}\) means
-(according to the order of operations.)  For instance, if you plugged in
-\(x=9\), you'd do \(\sqrt{x} = \sqrt{9} = 3\).  <em>Then</em> you would
-multiply this 3 by 2.  Of course, it works that same way for any \(x\)-value
-you plug in:  the resulting \(y\)-value will be double the "old \(y\)-value." So, the transformation can be described as:
-<ul>
-
-
-<li>
-double the \(y\)-values.
-</li>
-
-</ul>
-
-
+    This time, ask yourself what the formula \(2\sqrt{x}\) means
+    (according to the order of operations.)  For instance, if you plugged in
+    \(x=9\), you'd do \(\sqrt{x} = \sqrt{9} = 3\).  <em>Then</em> you would
+    multiply this 3 by 2.  Of course, it works that same way for any \(x\)-value
+    you plug in:  the resulting \(y\)-value will be double the "old \(y\)-value." So, the transformation can be described as:
+    <div style="margin-left:auto; margin-right:auto; text-align:center; color:red">
+      double the \(y\)-values.
+    </div>
+    <div style="text-align:center">
+      <img src="{{ url_for('static', filename='images/power-of-x-transformations-example-doubled.png') }}">
+    </div>
     </div>
   </div>
-
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\includegraphics[scale=0.5]{power-of-x-transformations-example-doubled}
-\end{minipage}
 </div>
 </p>
 
 
-
-Attention!  At this time, we turn our attention to a new type of
+<p>
+Attention!  At this time, we turn our focus to a new type of
 transformation that has never been relevant up until now.  We'll see it in the next example.
 
 <p>
@@ -752,7 +1124,7 @@ transformation that has never been relevant up until now.  We'll see it in the n
 
 Graph each of the following functions using transformations.
 Be sure to include enough points to leave no doubt as to the accuracy of your
-graph.  Also, {\color{magenta} describe your transformations in words.}
+graph.
 \[y = \sqrt{-x}\]
 
 
@@ -773,34 +1145,24 @@ are graphing, here&mdash;that is, plotting coordinates
  negative numbers: \(-1\), \(-4\), \(-9\)&mdash;to make it come out
 positive underneath the square root sign.
 
-\begin{minipage}{0.45\textwidth}
+<p>
 Indeed, because of the negative on the \(x\), the "old \(y\)-values" will now
 instead be associated with the \(x\)-values on the <em>other</em> side of
 the \(y\)-axis&mdash;the negative counterparts of  "the old \(x\)-values."
 In a phrase, we have
-<ul>
-
-
-<li>
-reflected across the \(y\)-axis.
-</li>
-
-</ul>
-
-Be sure to include the dots, as I have, so that I can see you have an accurate
-knowledge of the graph.
-
-\end{minipage}\hfill
-\begin{minipage}{0.5\textwidth}
-\includegraphics[scale=0.5]{power-of-x-transformations-example-3}
-\end{minipage}
-
+<div style="margin-left:auto; margin-right:auto; text-align:center; color:red">
+  reflected across the \(y\)-axis.
+</div>
+<div style="text-align:center">
+  <img src="{{ url_for('static', filename='images/power-of-x-transformations-example-3.png') }}">
+</div>
     </div>
   </div>
 
 </div>
 </p>
 
+<p>
 Of course, we have to combine this new transformation with the old ones as well,
 as in the following example.
 
@@ -810,7 +1172,7 @@ as in the following example.
 
 Graph each of the following functions using transformations.
 Be sure to include enough points to leave no doubt as to the accuracy of
-your graph.  Also, {\color{magenta} describe your transformations in words.}
+your graph.
 \[y = 2\sqrt{-x} - 3\]
 
 
@@ -819,39 +1181,19 @@ your graph.  Also, {\color{magenta} describe your transformations in words.}
   <div class="answer">
     <a class="collapsible"><h3>Answer: </h3></a>
     <div class='inner'>
-
-\quad
-
-\begin{minipage}{0.45\textwidth}
 This time, note the following transformations
-<ul>
-
-
-<li>
-reflected across the \(y\)-axis
-</li>
-
-<li>
-double the \(y\)-values
-</li>
-
-<li>
-down 3
-</li>
-</ul>
-Don't forget your dots!
-\end{minipage}\hfill
-\begin{minipage}{0.5\textwidth}
-\includegraphics[scale=0.5]{power-of-x-transformations-example-5}
-\end{minipage}
-
+<div style="margin-left:auto; margin-right:auto; text-align:center; color:red">
+  reflected across the \(y\)-axis, double the \(y\)-values, down 3
+</div>
+<div style="text-align:center">
+  <img src="{{ url_for('static', filename='images/power-of-x-transformations-example-5.png') }}">
+</div>
     </div>
   </div>
 
 </div>
 </p>
 
-\newpage
 We now turn to the other two types of graphs.
 
 <p>
@@ -860,38 +1202,23 @@ We now turn to the other two types of graphs.
 
 Graph each of the following functions using transformations.
 Be sure to include enough points to leave no doubt as to the accuracy of
-your graph.  Also, {\color{magenta} describe your transformations in words.}
+your graph.
 \[y = 2\sqrt[3]{x}\]
-
-
-
-\begin{minipage}{0.45\textwidth}
 
   <div class="answer">
     <a class="collapsible"><h3>Answer: </h3></a>
     <div class='inner'>
 
 Note that you need to start with the graph of \(y=\sqrt[3]{x}\).
-I have graphed it in {\color{gray}gray} for comparison.
-The only transformation is
-<ul>
-
-
-<li>
-double the \(y\)-values
-</li>
-
-</ul>
-
-Don't forget your dots!
-
+I have graphed it in <span style="color:gray">gray</span> for comparison.
+<div style="margin-left:auto; margin-right:auto; text-align:center; color:red">
+  double the \(y\)-values
+</div>
+<div style="text-align:center">
+  <img src="{{ url_for('static', filename='images/power-of-x-transformations-example-6.png') }}">
+</div>
     </div>
   </div>
-
-\end{minipage}\hfill
-\begin{minipage}{0.5\textwidth}
-\includegraphics[scale=0.5]{power-of-x-transformations-example-6}
-\end{minipage}
 
 </div>
 </p>
@@ -903,12 +1230,9 @@ Don't forget your dots!
 
 Graph each of the following functions using transformations.
 Be sure to include enough points to leave no doubt as to the accuracy of your
-graph.  Also, {\color{magenta} describe your transformations in words.}
+graph.
 \[y = 2\sqrt[3]{x+3}-4\]
 
-
-
-\begin{minipage}{0.45\textwidth}
 
   <div class="answer">
     <a class="collapsible"><h3>Answer: </h3></a>
@@ -918,32 +1242,17 @@ This time, I also included "translated axes" in the same way as we did in
 when graphing transformations of \(y=\frac{1}{x}\).  I think that can
 provide a nice visual for you to help you keep track of what is going on.
 Basically, having first recognized that the transformations are
-<ul>
-
-
-<li>
-left 3
-</li>
-
-<li>
-double the \(y\)-values
-</li>
-
-<li>
-down 4
-</li>
-</ul>
-
+<div style="margin-left:auto; margin-right:auto; text-align:center; color:red">
+  left 3, double the \(y\)-values, down 4
+</div>
+You then draw the axes translated left 3 and down 4, and then
+draw the graph of \(y=\sqrt[3]{x}\)&mdash;on the new axes&mdash;but with
+doubled \(y\)-values.
+<div style="text-align:center">
+  <img src="{{ url_for('static', filename='images/power-of-x-transformations-example-7.png') }}">
+</div>
     </div>
   </div>
-
-\end{minipage}\hfill
-\begin{minipage}{0.5\textwidth}
-\includegraphics[scale=0.5]{power-of-x-transformations-example-7}
-\end{minipage}
-{\color{red}you then draw the axes translated left 3 and down 4, and then
-draw the graph of \(y=\sqrt[3]{x}\)&mdash;on the new axes&mdash;but with
-doubled \(y\)-values.}
 </div>
 </p>
 
@@ -954,41 +1263,23 @@ doubled \(y\)-values.}
 
 Graph each of the following functions using transformations.
 Be sure to include enough points to leave no doubt as to the accuracy of
-your graph.  Also, {\color{magenta} describe your transformations in words.}
+your graph.
 \[
 y = \left(x+3\right)^3-4
 \]
-
-
-\begin{minipage}{0.45\textwidth}
-
-
   <div class="answer">
     <a class="collapsible"><h3>Answer: </h3></a>
     <div class='inner'>
-
-Now, you start with the basic function \(y=x^3\).  Again, I have graphed that
-in {\color{gray} gray} for comparison.  Then you just note the transformations:
-<ul>
-
-
-<li>
-left 3
-</li>
-
-<li>
-down 4
-</li>
-</ul>
-
-
+      Now, you start with the basic function \(y=x^3\).  Again, I have graphed that
+      in <span style="color:gray">gray</span> for comparison.  Then you just note the transformations:
+      <div style="margin-left:auto; margin-right:auto; text-align:center; color:red">
+        left 3,  down 4
+      </div>
+      <div style="text-align:center">
+        <img src="{{ url_for('static', filename='images/power-of-x-transformations-example-8.png') }}">
+      </div>
     </div>
   </div>
-
-\end{minipage}\hfill
-\begin{minipage}{0.5\textwidth}
-\includegraphics[scale=0.45]{power-of-x-transformations-example-8}
-\end{minipage}
 
 </div>
 </p>
@@ -1000,45 +1291,24 @@ down 4
 
 Graph each of the following functions using transformations.
 Be sure to include enough points to leave no doubt as to the accuracy of your
-graph.  Also, {\color{magenta} describe your transformations in words.}
+graph.
 \[
 y = -\frac{1}{2}\left(x-3\right)^3+2
 \]
 
 
-
-\begin{minipage}{0.45\textwidth}
-
   <div class="answer">
     <a class="collapsible"><h3>Answer: </h3></a>
     <div class='inner'>
-
-Note the transformations:
-<ul>
-<li>
-right 3
-</li>
-
-<li>
-cut the \(y\)-values in half
-</li>
-
-<li>
-reflect across the \(x\)-axis
-</li>
-
-<li>
-up 2
-</li>
-</ul>
-    </div>
+      Note the transformations:
+      <div style="margin-left:auto; margin-right:auto; text-align:center; color:red">
+        right 3,  cut the \(y\)-values in half, reflect across the \(x\)-axis, up 2
+      </div>
+      <div style="text-align:center">
+        <img src="{{ url_for('static', filename='images/power-of-x-transformations-example-9.png') }}">
+      </div>
+      </div>
   </div>
-
-\end{minipage}\hfill
-\begin{minipage}{0.5\textwidth}
-\includegraphics[scale=0.45]{power-of-x-transformations-example-9}
-\end{minipage}
-
 </div>
 </p>
 
