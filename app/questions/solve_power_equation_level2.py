@@ -55,8 +55,15 @@ class SolvePowerEquationLevel2(Question):
         LHS = sy.Add(sy.Mul(A,(x-b)**sy.Rational(n,m), evaluate=False),C, evaluate=False)
         RHS = A*T + C
         prob = sy.Eq(LHS, RHS)
-        self.answer = set(sy.solve(prob, x))
-        # print('self.answer', self.answer)
+        answer = sy.solve(prob, x)
+        if n % 2 == 1:
+            self.answer = set(answer)
+        elif len(answer) == 1:
+            print('hello')
+            ans = answer[0]
+            other_ans = -ans + 2*b
+            self.answer = set([ans, other_ans])
+        print('self.answer', self.answer)
         self.has_solutions = self.answer != set()
         if self.has_solutions:
             format_answer = ''

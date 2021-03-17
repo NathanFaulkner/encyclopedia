@@ -1,0 +1,635 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section, we'll take a look at the graphs of a few more power
+  functions and then transform them (shift them left, right, up, or down;
+  reflect them; scale them vertically.) Actually, we'll just concentrate on
+  four of them for now:
+</p>
+
+n this section, we first contemplate how to graph exponential functions with
+various bases.   Then we just transform those graphs
+(shifting left, right, up, down; reflecting; scaling vertically).
+
+<p>
+As always, when tasked with discovering what a brand-new graph looks like, we resort to the
+time-consuming method of "just plotting points."  And, as always, let me
+point out that, while this method would technically work in any situation
+(in fact, it is the strategy used by a graphing calculator), in the exercises
+(and checks) I will really be asking you to graph by the method of
+transformations&mdash;taking these first few basic, underlying functions,
+which we graph in the activities below, and whose points you should recall
+mentally during the exercises&mdash;and shifting appropriately.
+
+<div class="example">
+  <h2></h2>
+  <p>
+    <a href="https://www.loom.com/share/f43b61392c444d9ea304b6ed7bdbefe7">Click for video</a>
+  </p>
+
+  <p>
+    You are going to "plot points" until you realize what the graph
+    of \(y=2^x\) looks like.  You should repeat this activity on
+    your own whenever you forget what it looks like!
+    However, I want you to know up front that this is not
+    the method I suggest you use on any of the exercises in this
+    section.  Instead, this is a tedious method that you do to just
+    get started somewhere.  We will adopt a much more stream-lined
+    method in the examples below&mdash;but <em>only</em> after
+    going through the tedious, point-by-point process at least once.
+  </p>
+
+  <p>
+    All you have to do is to plug in a nice variety of \(x\)
+    values (plug in 0, plug in some positive numbers, plug in
+    some negative numbers), and keep going until a light
+    bulb goes on for you&mdash;and you are utterly certain
+    what the graph looks like.
+  </p>
+
+  <p>
+    Since this may be your first time in doing such a task,
+    I will guide you through it.  But in the future,
+    I expect you to be able to plot points on your own.
+  </p>
+  <ol>
+    <li>
+      Fill out the \(y\)-values in the following table
+      by performing the function \(y=2^x\)
+      on each of the \(x\)-values.
+
+      <br>
+      <table border="1" style="border-collapse: collapse">
+        <tr>
+          <td style="text-align: center; width: 50px">\(x\)</td><td style="text-align: center;">\(y=2^x\)</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">1</td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">2</td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">3</td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td  style="text-align: center;">0</td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">-1</td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">-2</td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">-3</td><td>&nbsp;</td>
+        </tr>
+      </table>
+
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+
+          <div style="text-align:center">
+            <table border="1" style="border-collapse: collapse">
+              <tr>
+                <td style="text-align: center; width: 50px">\(x\)</td><td style="text-align: center;">\(y=x^2\)</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;">1</td><td style="text-align: center;">\(2^1 = 2\)</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;">2</td><td style="text-align: center;">\(2^2 = 4\)</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;">3</td><td style="text-align: center;">\(2^3 = 8\)</td>
+              </tr>
+              <tr>
+                <td  style="text-align: center;">0</td><td style="text-align: center;">\(2^0 = 1\)</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;">-1</td><td style="text-align: center;">\(2^{-1} = \frac{1}{2}\)</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;">-2</td><td style="text-align: center;">\(2^{-2} = \frac{1}{2^2} = \frac{1}{4}\)</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;">-3</td><td style="text-align: center;">\(2^{-3} = \frac{1}{2^3} = \frac{1}{8}\)</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+       Plot these points on the \((x, y)\)-plane.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          <div style="text-align:center">
+            {% set svg_id = 'svg1' %}
+            {% set points = [[1,2], [2, 4], [3,8], [0,1], [-1,1/2], [-2,1/4], [-3,1/8]] %}
+            {% set poly_points = '' %}
+            {% set parameters = {
+                'svg_x_length': 350,
+                'svg_y_length': 350,
+                'cart_x_min': -10,
+                'cart_x_max': 10,
+                'cart_x_length': 20,
+                'cart_y_min': -10,
+                'cart_y_max': 10,
+                'cart_y_length': 20
+              }
+            %}
+            {% include "_static_graph.html" %}
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+       Are you bored yet?  If you are, that's good!
+       But note that, in a way, we can never be totally sure what the
+       graph of this function looks like if all we do is plot points
+       one at a time.  After all, there is an infinite number of \(x\)-values
+       we would have to plug in&mdash;from the very large down to
+       untold reaches beyond the decimal place&mdash;and that we therefore
+       need some sort of "overall" observation to stop with this process
+       of plugging in points and to confidently "connect the dots".
+       Explain how you can know how to connect the dots.
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          If you feel somewhat at a loss as to how to answer this question,
+          that's a good thing!
+        </div>
+      </div>
+    </li>
+    <li>
+       Connect the dots: sketch a graph of the equation
+       \[
+        y = 2^x
+       \]
+      <div class="answer">
+        <a class="collapsible"><h3>Answer: </h3></a>
+        <div class='inner'>
+          <div style="text-align:center">
+            {% set svg_id = 'svg2' %}
+            {% set points = [[1,2], [2, 4], [3,8], [0,1], [-1,1/2], [-2,1/4], [-3,1/8]] %}
+            {% set poly_points = '0.0,174.98291015625 3.5353535353535426,174.98034141599905 7.070707070707085,174.97738657353597 10.606060606060597,174.97398759460904 14.141414141414138,174.97007772195434 17.676767676767682,174.96558016415682 21.212121212121225,174.96040658743752 24.747474747474737,174.95445538074364 28.282828282828277,174.94760966006828 31.81818181818182,174.939734972803 35.353535353535364,174.93067665703663 38.88888888888889,174.92025680393522 42.424242424242415,174.90827076354375 45.95959595959596,174.8944831253815 49.4949494949495,174.87862309488898 53.03030303030303,174.86037917491782 56.56565656565655,174.8393930478059 60.1010101010101,174.81525253787973 63.63636363636364,174.78748351616412 67.17171717171716,174.75554058830556 70.70707070707071,174.71879638281547 74.24242424242424,174.67652922925086 77.77777777777779,174.62790898432732 81.31313131313131,174.5719807275826 84.84848484848484,174.5076460063689 88.38383838383838,174.43364126181655 91.91919191919192,174.34851301204822 95.45454545454545,174.2505893052312 98.98989898989899,174.13794688179487 102.52525252525251,174.0083734008674 106.06060606060606,173.859323989043 109.59595959595958,173.68787125808151 113.13131313131314,173.49064780986834 116.66666666666667,173.2637800994098 120.2020202020202,173.00281235690755 123.73737373737374,172.70261907471212 127.27272727272727,172.35730434036526 130.8080808080808,171.96008603859323 134.34343434343432,171.50316264793304 137.87878787878788,170.97756001582627 141.41414141414143,170.3729551027829 144.94949494949495,169.6774732338833 148.48484848484847,168.8774548755584 152.02020202020202,167.95718735705435 155.55555555555557,166.89859626748623 159.09090909090907,165.68089046740033 162.62626262626262,164.28015374273386 166.16161616161617,162.66887508109733 169.6969696969697,160.81540834482442 173.23232323232324,158.68335072855777 176.76767676767676,156.230827794037 180.3030303030303,153.40967103989507 183.83838383838383,150.16447185361474 187.37373737373738,146.43149326489487 190.9090909090909,142.1374181268403 194.44444444444443,137.1979091387693 197.97979797979798,131.51595242892748 201.51515151515153,124.97995216443067 205.05050505050502,117.46153876583736 208.58585858585857,108.81304767883456 212.12121212121212,98.86461918513662 215.65656565656568,87.42086229175692 219.19191919191917,74.25701717614561 222.72727272727272,59.11454081612654 226.26262626262627,41.69602910469598 229.7979797979798,21.659375718045958 233.33333333333334,-1.3889469852823089 236.86868686868686,-27.901616999861446 240.4040404040404,-58.399353444712254 243.93939393939394,-93.48114368870162 247.4747474747475,-133.83600769471758 251.01010101010098,-180.2565306388977 254.54545454545453,-233.6544295908048 258.0808080808081,-295.07845999017667 261.6161616161616,-365.735013610405 265.1515151515151,-447.011812560726 268.68686868686865,-540.5051646865197 272.22222222222223,-648.0513156743352 275.75757575757575,-771.7625136291583 279.2929292929293,-914.0684944461864 282.82828282828285,-1077.7642027659147 286.3636363636364,-1266.0646857705633 289.8989898989899,-1482.6682379573454 293.4343434343434,-1731.8290370763505 296.96969696969694,-2018.4406978310417 300.5050505050505,-2348.132384368498 304.04040404040404,-2727.379369245855 307.57575757575756,-3163.630210294066 311.11111111111114,-3665.4530431817684 314.64646464646466,-4242.703862921966 318.18181818181813,-4906.720099435665 321.7171717171717,-5670.543289071444 325.25252525252523,-6549.17521543597 328.7878787878788,-7559.872550240877 332.32323232323233,-8722.4857810261 335.85858585858585,-10059.849082432042 339.3939393939394,-11598.228788243117 342.9292929292929,-13367.8392723676 346.4646464646465,-15403.436370856607 350.0,-17745.0 '
+%}
+            {% set parameters = {
+                'svg_x_length': 350,
+                'svg_y_length': 350,
+                'cart_x_min': -10,
+                'cart_x_max': 10,
+                'cart_x_length': 20,
+                'cart_y_min': -10,
+                'cart_y_max': 10,
+                'cart_y_length': 20
+              }
+            %}
+            {% include "_static_graph.html" %}
+          </div>
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+
+<p>
+ <div class="activity">
+  <h2></h2>
+
+"Plot points" to discover what the graph of
+\[
+y = 2^x
+\]
+looks like.
+That is, plug in some \(x\)-values (which I have suggested to you in the table
+below), generate the corresponding \(y\)'s, and then plot the \((x,y)\)-pairs.
+
+\begin{minipage}{0.45\textwidth}
+\def \arraystretch{1.5}
+\begin{tabular}{c|c}
+\(x\) &  \(y\) \\
+\hline
+0 & \\
+1 & \\
+-1 & \\
+2 & \\
+-2 & \\
+3& \\
+-3& \\
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\includegraphics[scale=0.5]{blank}
+\end{minipage}
+
+Also, for comparison, draw the graph of \(y=x^2\) on the same axes to see the striking contrast.
+</div>
+</p>
+
+\newpage
+
+<p>
+ <div class="activity">
+  <h2></h2>
+
+\noindent\hbox to 0pt{\hss \href{https://www.loom.com/share/2832b163832e426ebf05bfda6b66ab4c}{Click for video}\hskip 9em}
+"Plot points" to discover what the graph of
+\[
+y = 3^x
+\]
+looks like.
+That is, plug in some \(x\)-values (which I have suggested to you in the table below), generate the corresponding \(y\)'s, and then plot the \((x,y)\)-pairs.
+
+\begin{minipage}{0.45\textwidth}
+\def \arraystretch{1.5}
+\begin{tabular}{c|c}
+\(x\) &  \(y\) \\
+\hline
+0 & \\
+1 & \\
+-1 & \\
+2 & \\
+-2 & \\
+3& \\
+-3& \\
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\includegraphics[scale=0.5]{blank}
+\end{minipage}
+
+For a different sort of comparison, draw in another color the graph of \(y=2^x\).  What do you see?
+%
+
+\vspace{5\baselineskip}
+</div>
+</p>
+
+
+Next, we take a look at what happens when the base of the exponential is a fraction.
+
+<p>
+ <div class="activity">
+  <h2></h2>
+
+\noindent\hbox to 0pt{\hss \href{https://www.loom.com/share/e40c1067667b4b75bb0768d1dd03189b}{Click for video}\hskip 9em}
+"Plot points" to graph \(\displaystyle y = \left(\frac{1}{2}\right)^x \)
+\smallskip
+
+\begin{minipage}{0.45\textwidth}
+\def \arraystretch{1.5}
+\begin{tabular}{c|c}
+\(x\) &  \(y\) \\
+\hline
+0 & \\
+1 & \\
+-1 & \\
+2 & \\
+-2 & \\
+3& \\
+-3& \\
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\includegraphics[scale=0.5]{blank}
+\end{minipage}
+
+Now, what can you say about how the graphs of \(y=2^x\) and \(y=\left(\frac{1}{2}\right)^x\)
+compare?  How might you explain the relationship between the two graphs?
+%
+
+\vspace{5\baselineskip}
+</div>
+</p>
+
+\newpage
+
+<p>
+ <div class="activity">
+  <h2></h2>
+
+\noindent\hbox to 0pt{\hss \href{https://www.loom.com/share/6eeb2802f23e43a99396186c52b1ad6b}{Click for video}\hskip 9em}
+"Plot points" to graph
+\(\displaystyle
+y = \left(\frac{1}{3}\right)^x
+\)
+
+\begin{minipage}{0.45\textwidth}
+\def \arraystretch{1.5}
+\begin{tabular}{c|c}
+\(x\) &  \(y\) \\
+\hline
+0 & \\
+1 & \\
+-1 & \\
+2 & \\
+-2 & \\
+3& \\
+-3& \\
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\includegraphics[scale=0.5]{blank}
+\end{minipage}
+</div>
+</p>
+
+Now, we turn to transformations of these graphs.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Graph the following function using transformations.   Be sure to include enough points to leave no doubt as to the accuracy of your graph.  Also, {\color{magenta} describe your transformations in words.}
+\[
+y = 3^{x-1}
+\]
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+This looks new and unusual, but there is a commonality with what we have studied previously.
+The graph of \(y=3^{x-1}\) will be much like that of \(y=3^x\) except the \(x\)-values
+will have to be one bigger (to the right) to achieve the "old \(y\)-values."  Yep, transformation can be described as:
+<ul>
+
+
+<li>
+right 1
+</li>
+
+</ul>
+
+
+    </div>
+  </div>
+
+\begin{minipage}{0.45\textwidth}
+\color{red}
+Note that I have graphed the original, basic graph of \(y=3^x\) in {\color{gray}gray}
+and the final answer in red.  This is optional for you to do.
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+%\begin{flushright}
+\includegraphics[scale=0.45]{exponential-transformations-example-1}
+%\end{flushright}
+\end{minipage}
+</div>
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Graph the following function using transformations.   Be sure to include enough points to leave no doubt as to the accuracy of your graph.  Also, {\color{magenta} describe your transformations in words.}
+\[
+y = -2^x
+\]
+\begin{minipage}{0.45\textwidth}
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+You obtain the \(y\)-values from the expression \(2^x\), but then, by order of operations, take the negative of each.  The transformation is:
+<ul>
+
+
+<li>
+reflect across \(x\)-axis.
+</li>
+
+</ul>
+
+(Final answer in red; "parent" function in {\color{gray} gray}.)
+
+    </div>
+  </div>
+
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+%\begin{flushright}
+\includegraphics[scale=0.45]{exponential-transformations-example-2}
+%\end{flushright}
+\end{minipage}
+</div>
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Graph the following function using transformations.  Be sure to include enough points to leave no doubt as to the accuracy of your graph.  Also, {\color{magenta} describe your transformations in words.}
+\[
+y = \left(\frac{1}{2}\right)^x - 5
+\]
+\begin{minipage}{0.45\textwidth}
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+Of course, the transformation is:
+<ul>
+
+
+<li>
+down 5
+</li>
+
+</ul>
+
+(Final answer in red; "parent" function in {\color{gray} gray}.)
+
+    </div>
+  </div>
+
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+%\begin{flushright}
+\includegraphics[scale=0.45]{exponential-transformations-example-3}
+%\end{flushright}
+\end{minipage}
+</div>
+</p>
+
+\newpage
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Graph the following function using transformations.  Be sure to include enough points to leave no doubt as to the accuracy of your graph.  Also, {\color{magenta} describe your transformations in words.}
+\[
+y = 2\left(\frac{1}{3}\right)^x
+\]
+\begin{minipage}{0.45\textwidth}
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+You obtain the \(y\)-values from the expression \(\left(\frac{1}{3}\right)^x\), but then, by order of operations, double them.  The transformation is:
+<ul>
+
+
+<li>
+double the \(y\)-values
+</li>
+
+</ul>
+
+(Final answer in red; "parent" function in {\color{gray} gray}.)
+
+    </div>
+  </div>
+
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+%\begin{flushright}
+\includegraphics[scale=0.45]{exponential-transformations-example-4}
+%\end{flushright}
+\end{minipage}
+</div>
+</p>
+
+Now, we consider combinations of transformations.
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Graph the following function using transformations.  Be sure to include enough points to leave no doubt as to the accuracy of your graph.  Also, {\color{magenta} describe your transformations in words.}
+\[
+y = 2\left(\frac{1}{3}\right)^{x+3} - 4
+\]
+\begin{minipage}{0.45\textwidth}
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+Start with the basic, underlying graph of \(y=\left(\frac{1}{2}\right)^x\) (which I graphed in {\color{gray}gray}, and then apply the following transformations:
+<ul>
+
+
+<li>
+left 3
+</li>
+
+<li>
+double the \(y\)-values
+</li>
+
+<li>
+down 4
+</li>
+</ul>
+Notice that I also plotted shifted axes in {\color{cyan}cyan}.  This is optional, but I will continue to use this method as I demonstrate the exercises, as I think you may find it visually (cognitively) helpful.
+
+    </div>
+  </div>
+
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+%\begin{flushright}
+\includegraphics[scale=0.45]{exponential-transformations-example-5}
+%\end{flushright}
+\end{minipage}
+</div>
+</p>
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Graph the following function using transformations.  Be sure to include enough points to leave no doubt as to the accuracy of your graph.  Also, {\color{magenta} describe your transformations in words.}
+\[
+y = 5 - 2^{x + 3}
+\]
+\begin{minipage}{0.5\textwidth}
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+Start with the basic, underlying graph of \(y= 2^x\) (which I graphed in {\color{gray}gray}, and then apply the following transformations:
+<ul>
+
+
+<li>
+left 3
+</li>
+
+<li>
+reflect across the \(x\)-axis
+</li>
+
+<li>
+up 5
+</li>
+</ul>
+Notice that I also plotted shifted axes in {\color{cyan}cyan}.  This is optional, but you might find it helpful.
+
+    </div>
+  </div>
+
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+%\begin{flushright}
+\includegraphics[scale=0.45]{exponential-transformations-example-6}
+%\end{flushright}
+\end{minipage}
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Graph each of the following functions using transformations.
+Be sure to include enough points to leave no doubt as to the accuracy of your
+graph.
+\[
+y = -\frac{1}{2}\left(x-3\right)^3+2
+\]
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Note the transformations:
+      <div style="margin-left:auto; margin-right:auto; text-align:center; color:red">
+        right 3,  cut the \(y\)-values in half, reflect across the \(x\)-axis, up 2
+      </div>
+      <div style="text-align:center">
+        <img src="{{ url_for('static', filename='images/power-of-x-transformations-example-9.png') }}">
+      </div>
+      </div>
+  </div>
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

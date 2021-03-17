@@ -1,0 +1,114 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this chapter, as well as the next, we study various things we can do with
+  powers, AKA, exponents.  Even though the words "power" and "exponent" refer
+  to same thing, there is an important distinction made in the vocabulary by
+  using these two different but synonymous words: "power functions" and
+  "exponential functions" refer to different classes of objects.
+</p>
+
+
+A new chapter, a new topic&mdash;but one with connections to the one we just
+studied: Previously, we discussed <b>power functions</b>. Again:
+
+<p>
+<div class="definition">
+  <h2></h2>
+
+A <b>power function</b> \(f\) is any whose outputs can be obtained by a formula of the form
+\[
+f(x) = Ax^p
+\]
+where \(p\) and \(A\) can be any real number.
+For example,
+\[
+f(x) = x^2
+\]
+and
+\[
+g(x) = x^\frac{1}{3} = \sqrt[3]{x}
+\]
+are both power functions.
+</div>
+</p>
+Of course, what we ended up studying, as well, was transformations of these.
+
+In this chapter, we study, first of all, <b>exponential functions</b>.
+Clearly, these will have something to do with exponents&mdash;but so did
+power functions!  In fact, let's agree right from the start that "power" and
+"exponent" are just two words for the same thing.  But, as you will see,
+"power function" and "exponential function"  have two very distinct
+meanings&mdash;even while they both have something to do with exponents.
+So, pay attention to the following distinction:
+
+<p>
+<div class="definition">
+  <h2></h2>
+
+An <b>exponential function</b> \(f\) is any whose outputs can be obtained by a
+formula of the form
+\[
+f(x) = Ab^{x}
+\]
+where \(A\) can be any real number but \(b\) we will restrict to positive
+numbers (actually, 0 and 1 aren't very much worth considering either&mdash;but
+allowing negative numbers for \(b\) opens up a can of worms).
+For example,
+\[
+f(x) = 2^x
+\]
+and
+\[
+g(x) =\left(\frac{1}{3}\right)^x
+\]
+are both exponential functions.
+</div>
+</p>
+
+In words, the difference between exponential functions and power functions has
+to do with where the input appears: the input is being raised to a power/exponent
+in a power function but in an exponential function, the input is the power/exponent
+that a given, fixed number is being raised to.  Okay&mdash;that last
+sentence was a mouthful: Wouldn't it be nice to have a shorter way of
+saying "the number that is being raised to some exponent?"
+
+<p>
+<div class="definition">
+  <h2></h2>
+
+Given an expression
+\[
+b^a
+\]
+you call \(a\) the exponent (or, power, if you like), whereas "that number
+\(b\) that is being raised to the power" is called the <b>base</b>.
+In particular, if you have an exponential function
+\[
+f(x) = A b^x
+\]
+then you call \(b\) the <b>base</b> of the exponential.  For example, \(2\) is the base of
+\[
+f(x) = 2^x
+\]
+</div>
+</p>
+
+A very nice way to draw a contrast between power functions and exponential
+functions is gotten by comparing their graphs.  So, that is how we begin.
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

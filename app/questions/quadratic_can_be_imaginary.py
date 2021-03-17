@@ -48,6 +48,8 @@ class QuadraticCanBeImaginary(Question):
             self.c = random.randint(-9,9)
             if self.force_imaginary:
                 while (self.b**2 - 4*self.a*self.c > 0):
+                    self.a = random_non_zero_integer(-9,9)
+                    self.b = random.randint(-9,9)
                     self.c = random.randint(-9,9)
         # self.a = 1
         # self.b = 2

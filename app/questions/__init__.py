@@ -121,7 +121,9 @@ __all__ = ['quadratic_pattern',
             'reduce_radical',
             'solve_power_equation_level1',
             'solve_power_equation_level2',
-            'graph_sqrt', 'graph_cube_function', 'graph_cbrt',
+            'graph_sqrt', 'graph_sqrt_to_equation',
+            'graph_cube_function', 'graph_cbrt',
+            'graph_exp',
             ]
 
 class Question():

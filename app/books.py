@@ -784,11 +784,18 @@ solvingpowerequationspart2.add_to_questions('solve_power_equation_level2')
 
 graphsofpowerfunctions = Section('graphsofpowerfunctions', "Graphs of Power Functions", '/sections/graphs-of-power-functions')
 graphsofpowerfunctions.add_to_questions('graph_sqrt',
+                                        'graph_sqrt_to_equation',
                                          'graph_cube_function',
                                         'graph_cbrt'
                                         )
 
 #######################################
+exp_and_log_intro = Section('exponentials_and_logs', "Exponentials and Logarithms: Intro", '/sections/exp-log-intro')
+
+graphsofexponentials = Section('graphsofexponentials', "Graphs of Exponentials", '/sections/graphs-of-exponentials')
+
+#######################################
+
 
 
 linearfunctions_intro = Section('linear_functions', "Linear Functions", '/sections/linear-functions')
@@ -895,6 +902,12 @@ powerfunctions = Division('chapter', "Power Functions",
                                 ])
 powerfunctions.set_frontpage(powerfunctions_intro)
 
+exponentials_and_logs = Division('chapter', "Exponentials and Logarithms",
+                                [
+                                graphsofexponentials,
+                                ])
+exponentials_and_logs.set_frontpage(exp_and_log_intro)
+
 algebra2_challenge = Division('chapter', "Challenge Sections",
                                     [absolutevalueequationspart2,
                                     solvingbyeliminationthreeequationsonesolution,
@@ -909,6 +922,7 @@ main = Division('main', 'Main Matter', [nuts_and_bolts_of_algebra,
                                         polynomials,
                                         rationals,
                                         powerfunctions,
+                                        # exponentials_and_logs,
                                         algebra2_challenge])
 
 Algebra2 = Division('book', 'Algebra 2', {'front': None, 'main': main, 'end': None})
