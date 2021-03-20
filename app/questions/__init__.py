@@ -122,7 +122,8 @@ __all__ = ['quadratic_pattern',
             'solve_power_equation_level1',
             'solve_power_equation_level2',
             'graph_sqrt', 'graph_sqrt_to_equation',
-            'graph_cube_function', 'graph_cbrt',
+            'graph_cube_function', 'graph_cubic_to_equation',
+            'graph_cbrt', 'graph_cbrt_to_equation',
             'graph_exp',
             ]
 

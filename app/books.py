@@ -602,7 +602,8 @@ parallelorperpendicular = Section('parallelorperpendicular', "Parallel and Perpe
 parallelorperpendicular.add_to_questions('parallel_perpendicular_to_point_slope_form',
                                         'parallel_perpendicular_to_point_slope_form',
                                          'vertical_or_horizontal_info_to_equation',
-                                        'vertical_or_horizontal_graph_from_description')
+                                        'vertical_or_horizontal_graph_from_description',
+                                        )
 
 systemsofequations = Section('systemsofequations', "Systems of Equations", '/sections/systems-of-equations')
 systemsofequations.add_to_questions('how_many_solutions_to_system')
@@ -616,7 +617,8 @@ solvebysubstitution.add_to_questions('solve_by_substitution')
 applicationsoflinearsystems = Section('applicationsoflinearsystems', "Applications of Linear Systems", '/sections/applications-of-linear-systems')
 applicationsoflinearsystems.add_to_questions('we_lost_the_receipts',
                                                 'air_travel',
-                                                'gold_alloy')
+                                                'gold_alloy',
+                                                )
 
 solvingbyeliminationthreeequationsonesolution = Section('solvingbyeliminationthreeequationsonesolution', "Solving By Elimination: Intro to Three Unknowns", '/sections/solving-by-elimination-three-equations-intro', True)
 solvingbyeliminationthreeequationsonesolution.add_to_questions('solve_by_elimination_three',)
@@ -783,10 +785,12 @@ solvingpowerequationspart2 = Section('solvingpowerequationspart2', "Solving Powe
 solvingpowerequationspart2.add_to_questions('solve_power_equation_level2')
 
 graphsofpowerfunctions = Section('graphsofpowerfunctions', "Graphs of Power Functions", '/sections/graphs-of-power-functions')
-graphsofpowerfunctions.add_to_questions('graph_sqrt',
-                                        'graph_sqrt_to_equation',
-                                         'graph_cube_function',
-                                        'graph_cbrt'
+graphsofpowerfunctions.add_to_questions(#'graph_sqrt',
+                                        # 'graph_sqrt_to_equation',
+                                         # 'graph_cube_function',
+                                         'graph_cubic_to_equation',
+                                        # 'graph_cbrt',
+                                        # 'graph_cbrt_to_equation',
                                         )
 
 #######################################
@@ -922,7 +926,7 @@ main = Division('main', 'Main Matter', [nuts_and_bolts_of_algebra,
                                         polynomials,
                                         rationals,
                                         powerfunctions,
-                                        # exponentials_and_logs,
+                                        exponentials_and_logs,
                                         algebra2_challenge])
 
 Algebra2 = Division('book', 'Algebra 2', {'front': None, 'main': main, 'end': None})

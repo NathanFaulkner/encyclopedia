@@ -277,7 +277,8 @@ get a syntax error or, possibly, the checker will misunderstand your intent.
         else:
             user_y = user_y.replace(' ', '')
             user_y = parse_expr(user_y, transformations=transformations)
-        return abs(user_y - self.w) < 0.005 and abs(user_x - self.v) < 0.005
+        correct = abs(user_y - self.w) < 0.005 and abs(user_x - self.v) < 0.005
+        return bool(correct)
 
     def format_useranswer(self, user_answer, display=False):
         # user_answer = user_answer.lower()
@@ -327,6 +328,8 @@ get a syntax error or, possibly, the checker will misunderstand your intent.
             else:
                 user_y = user_y.replace(' ', '')
                 user_y = parse_expr(user_y, transformations=transformations)
+            correct = abs(user_y - 100) < 0.005 and abs(user_x - 100) < 0.005
+            bool(correct)
         except:
             raise SyntaxError
 

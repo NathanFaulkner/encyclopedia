@@ -66,10 +66,10 @@ class GraphSqrt(Question):
         if 'y0' in kwargs:
             self.y0 = kwargs['y0']
         else:
-            # y0_min = max(-5, -9 - self.m*4)
-            # y0_max = min(5, 9 - self.m*4)
-            y0_min = -5
-            y0_max = 5
+            y0_min = max(-5, -9 - self.m*4)
+            y0_max = min(5, 9 - self.m*4)
+            # y0_min = -5
+            # y0_max = 5
             self.y0 = random.randint(y0_min, y0_max)
         if 'x' in kwargs:
             self.x = kwargs['x']

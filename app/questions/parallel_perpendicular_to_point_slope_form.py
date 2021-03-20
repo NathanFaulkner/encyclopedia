@@ -80,6 +80,7 @@ class ParallelPerpendicularToPointSlope(Question):
             self.b1 = kwargs['b1']
         else:
             self.b1 = random.randint(-9,9)
+        # self.b1=1
         if 'parallel_or_perp' in kwargs:
             self.parallel_or_perp = kwargs['parallel_or_perp']
         else:
@@ -100,11 +101,7 @@ class ParallelPerpendicularToPointSlope(Question):
             fmt_m1 = '-'
         else:
             fmt_m1 = latex(m1)
-        if b1 == 1:
-            fmt_b1 = '+ '
-        elif b1 == -1:
-            fmt_b1 = '- '
-        elif b1 == 0:
+        if b1 == 0:
             fmt_b1 = ''
         elif b1 > 0:
             fmt_b1 = '+ ' + latex(b1)

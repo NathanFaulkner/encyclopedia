@@ -32,7 +32,7 @@ from flask import render_template
 
 prob_type = 'math blank'
 
-class GraphSqrtToEquation(Question):
+class GraphCbrtToEquation(Question):
     """
     The answer is of the form
 
@@ -48,14 +48,6 @@ class GraphSqrtToEquation(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        # if 'p' in kwargs:
-        #     self.p = kwargs['p']
-        # else:
-        #     self.p = random_non_zero_integer(-2,2)
-        # if 'q' in kwargs:
-        #     self.q = kwargs['q']
-        # else:
-        #     self.q = random.randint(1,2)
         if 'm' in kwargs:
             self.m = kwargs['m']
         else:
@@ -67,36 +59,37 @@ class GraphSqrtToEquation(Question):
         if 'y0' in kwargs:
             self.y0 = kwargs['y0']
         else:
-            y0_min = max(-9, -10 - 3*self.m)
-            y0_max = min(9, 10 - 3*self.m)
-            # y0_min = -5
-            # y0_max = 5
+            # y0_min = max(-5, -9 - self.m*4)
+            # y0_max = min(5, 9 - self.m*4)
+            y0_min = -5
+            y0_max = 5
             self.y0 = random.randint(y0_min, y0_max)
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:
             self.x = sy.Symbol('x')
-        if 'sign_x' in kwargs:
-            self.sign_x = kwargs['sign_x']
-        else:
-            self.sign_x = random.choice([-1, 1])
-        sign_x = self.sign_x
-        if sign_x == -1:
-            self.x0 = 0
+        # if 'sign_x' in kwargs:
+        #     self.sign_x = kwargs['sign_x']
+        # else:
+        #     self.sign_x = random.choice([-1, 1])
+        # sign_x = self.sign_x
         x = self.x
         k = self.y0
         h = self.x0
         # p = self.p
         # q = self.q
         m = self.m
-        self.as_lambda = lambda x: m*(sign_x*(x - h))**sy.Rational(1, 2) + k
+        # expr = parse_expr(f'{self.m}cbrt(x-{self.x0})+{self.y0}', transformations=transformations)
+        expr = m*(x - h)**sy.Rational(1,3) + k
+        print(expr)
+        self.as_lambda = sy.lambdify(x, expr) #sy.lambdify(x, m*(x-h)**sy.Rational(1,3)+k)#= lambda x: m*(x - h)**(1/3) + k
         f = self.as_lambda
         self.given = f(x)
         #print('3rd step: So far its ', expr)
-        self.answer = f(x)
+        self.answer = expr
 
         term = self.given
-        self.format_given = f'\\(y = {sy.latex(self.given)}\\)'
+        self.format_given = f'\\(y = {sy.latex(self.answer)}\\)'
         # if self.y0 > 0:
         #     fmt_y0 = sy.latex(self.y0)
         #     sign = '+'
@@ -133,16 +126,16 @@ class GraphSqrtToEquation(Question):
         self.prompt_multiple = """For each of the following,
         develop an equation for the given graph."""
 
-        f = self.as_lambda
-        self.answer = f(x)
+        # f = self.as_lambda
+        # self.answer = f(x)
         self.format_answer = self.format_given
         # a = self.a
         # h = self.x0
-        if sign_x == 1:
-            x_points = [h, h+1, h+4, h+9]
-        else:
-            x_points = [h, h-1, h-4, h-9]
-        points = [[x, f(x)] for x in x_points]
+        # x_points_left = [h-1, h-8]
+        x_points_right = [h, h+1, h+8]
+        points_right = [[x, f(x)] for x in x_points_right]
+        points_left = [[-x**3+h, -m*x+k] for x in [1, 2]]
+        points = points_left + points_right
         self.points = points
 
 
@@ -162,14 +155,14 @@ class GraphSqrtToEquation(Question):
         """
 
 
-    name = 'Equation from Graph of Square Root Function'
-    module_name = 'graph_sqrt_to_equation'
+    name = 'Equation from Graph of Cube Root Function'
+    module_name = 'graph_cbrt_to_equation'
 
-    further_instruction = """You can enter a square root function using the
-    symbol 'sqrt'.  For example, if your answer is \\(y = -\\sqrt{x-3}+4 \\),
+    further_instruction = """You can enter a cube root function using the
+    symbol 'cbrt'.  For example, if your answer is \\(y = -\\sqrt[3]{x-3}+4 \\),
     you would enter
     <div style="margin-left:auto; margin-right:auto; text-align:center">
-        y = -sqrt(x-3)+4
+        y = -cbrt(x-3)+4
     </div>
     """
 
@@ -182,14 +175,16 @@ class GraphSqrtToEquation(Question):
         graph.save_fig(filename)
 
     def get_svg_data(self, window=[-10,10], res=100):
-        if self.sign_x == 1:
-            x_min = self.x0
-            x_max = 10
-        else:
-            x_min = -10
-            x_max = self.x0
-        x_points = np.linspace(x_min, x_max, res)
-        y_points = self.as_lambda(x_points)
+        x_min = -10 - self.x0
+        x_max = 10 - self.x0
+        x_points_left = np.linspace(x_min, 0, int(res/2))
+        x_points_right = np.linspace(0, x_max, int(res/2))
+        x_points = np.concatenate([x_points_left, x_points_right])
+        x_points = x_points + self.x0
+        # print(new_lambda(self.x))
+        y_points_left = -self.m*np.cbrt(-(x_points_left))+self.y0
+        y_points_right = self.m*np.cbrt(x_points_right)+self.y0
+        y_points = np.concatenate([y_points_left, y_points_right])
         # print(self.as_lambda(self.x))
         # print(y_points)
         x_points = cart_x_to_svg(x_points)
@@ -254,4 +249,4 @@ class GraphSqrtToEquation(Question):
 
 
 
-Question_Class = GraphSqrtToEquation
+Question_Class = GraphCbrtToEquation
