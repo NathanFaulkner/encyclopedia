@@ -76,9 +76,9 @@ class GraphExp(Question):
         x0 = self.x0
         A = self.A
         b = self.b
-        self.as_lambda = lambda x: A*b**(x-x0)+y0
+        self.as_lambda = lambda x: A*float(b)**(x-x0)+y0
         f = self.as_lambda
-        self.given = f(x)
+        self.given = A*b**(x-x0)+y0
         #print('3rd step: So far its ', expr)
         self.answer = f(x)
 
@@ -112,7 +112,7 @@ class GraphExp(Question):
         #     \\]
         #     """
 
-        self.format_given = f'\\( y = {sy.latex(self.given)}\\)'
+        self.format_given = f'\\[ y = {sy.latex(self.given)}\\]'
 
         self.format_answer = '\\quad\n'
         # self.answer_latex = latex_print(self.answer)
@@ -120,7 +120,7 @@ class GraphExp(Question):
 
         self.format_given_for_tex = f"""
 Sketch a graph of the given equation.  Make sure your graph is accurate throughout
-the window and has at least 5 points clearly marked, including the vertex.
+the window and has at least 5 points clearly marked, including the "anchor" point.
 {self.format_given}
 
 \\begin{{flushright}}
@@ -133,8 +133,10 @@ the window and has at least 5 points clearly marked, including the vertex.
     name = 'Graph of Exponential Function'
     module_name = 'graph_exp'
 
-    prompt_single = """Graph the given equation by plotting the vertex and at least 3 other points
-that satisfy the equation."""
+    prompt_single = """Graph the given equation by plotting the "anchor" point and at least 3 other points
+that satisfy the equation.  In order for the grapher to understand your intent,
+you will also have to use the "Shift Up" button to shift the graph in line
+with its asymptote."""
     prompt_multiple = """Graph each of the following equations by plotting at least 4 points
 that satisfy the equation."""
 
@@ -172,7 +174,7 @@ that satisfy the equation."""
         # user_answer = user_answer(self.x)
         # return self.answer.equals(user_answer)
         # return tolerates(lambdify(self.x, self.answer), lambdify(self.x, user_answer))
-        return tolerates(sy.lambdify(self.x, self.answer), user_answer, window=[self.x0, 10])
+        return tolerates(self.as_lambda, user_answer, window=[-10, 10])
 
     # def useranswer_latex(self, user_answer, display=False):
     #     user_answer = user_answer.replace('^', '**')

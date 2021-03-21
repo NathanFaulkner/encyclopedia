@@ -470,19 +470,18 @@ function shift_right() {
   }
 }
 
-var global_shift_y = 0;
+var global_shift_y;
 
 function shift_up() {
   document.getElementById('syntax_for_shift_up').innerHTML = ''
   var text = document.getElementById("shift_up_units").value;
   units = parseInt(text);
-  // console.log('global_shift_y', global_shift_y);
+  global_shift_y = units;
   if (!(isNaN(units))) {
     var i;
     for (i=0; i<points.length; i++) {
       points[i] = [points[i][0], points[i][1] + units]
     }
-    global_shift_y += units;
     do_ajax();
   } else {
     document.getElementById('syntax_for_shift_up').innerHTML = '[Enter an integer.]'
@@ -703,12 +702,13 @@ function graph_points(cart_pts) {
         // "You need to enter coordinates for your anchor for the algorithm to guess what you intend to graph."//"処理中...";
       }
     }
+
     // var anchor_field = document.getElementById('anchor');
+
     // req.open('POST', '{{ url_for('question', question_name=question_name) }}', true);
     req.open('POST', '', true);
     req.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-    console.log('ajax thinks global_shift_y is', global_shift_y, global_shift_y.toString())
-    req.send("data=" + JSON.stringify(points) + '&shift_y=' + global_shift_y.toString());
+    req.send("data=" + JSON.stringify(points) + '&shift_y=' + '0');
   }
 
 {#

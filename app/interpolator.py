@@ -78,7 +78,7 @@ def poly_points_from_numpy(x_points, y_points):
         poly_points += f"{x_points[i]}, {y_points[i]} "
     return poly_points
 
-def get_dict_for_svg(points):  #TODO -- Of course, this was a bad choice to have this function duplicated here and below.  I don't recall why I did that other than the obvious: lack of time and laziness.  So, this should be cleaned up!
+def get_dict_for_svg(points, shift_y=0):  #TODO -- Of course, this was a bad choice to have this function duplicated here and below.  I don't recall why I did that other than the obvious: lack of time and laziness.  So, this should be cleaned up!
     # print('get_dict_received ', points)
     i = 0
     # while i < len(points):
@@ -136,8 +136,8 @@ def get_dict_for_svg(points):  #TODO -- Of course, this was a bad choice to have
         out = {"shape": "polyline", "data": data}
     else:
         points.sort(key=lambda x: x[0])
-        graph = Graph(points)
-        print('piecewise:', graph.piecewise)
+        graph = Graph(points, shift_y=shift_y)
+        # print('piecewise:', graph.piecewise)
         if graph.piecewise == True:
             pieces = []
             x_pieces = graph.x_pieces
@@ -349,6 +349,42 @@ def try_factored_polynomial(points):
         # print('points:', points)
         return {"function": f, "x_points": x_points}
 
+def try_exponential(points, shift_y=0):
+    # points = list(set(tuple(point) for point in points))
+    print(points)
+    l = len(points)
+    k = shift_y
+    print('k', k)
+    print('length is', l)
+    # for k in [0, 1, -1, 2, -2, 3, -3, 4, -4, 5, -5, 6, -6, 7, -7]:
+        # print('k:', k)
+    i = 0
+    while i < l:
+        print(f'try number {i}')
+        x0, y0 = points[i]
+        x1, y1 = points[(i+1)%l]
+        A = y0 - k
+        print([x0, y0], [x1, y1])
+        # try:
+        #     b = ((y2-y0+k)/(y1-y0+1))**(1/(x2-x1))
+        # except ZeroDivisionError:
+        #     i += 1
+        #     continue
+        # A = (y1-y0+1)/b**(x1-x0)
+        try:
+            # if A != 0:
+            b = ((y1-k)/A)**(1/(x1-x0))
+            f = lambda x: A*b**(x-x0) + k
+            x = sy.Symbol('x')
+            print(f(x))
+            if all_satisfy(f, points):
+                x_points = np.linspace(cart_x_min, cart_x_max, 1000)
+                return {"function": f, "x_points": x_points}
+        except ZeroDivisionError:
+            i+=1
+            continue
+        i += 1
+
 
 # I don't think I am actually using this function....
 def interpolate(points):
@@ -374,11 +410,15 @@ def interpolate(points):
             return try_inverse_x(points)
         if try_factored_polynomial(points):
             return try_inverse_x(points)
+        if try_exponential(points):
+            return try_exponential(points)
 
 class Graph():
-    def __init__(self, user_input, piecewise=False):
+    def __init__(self, user_input, piecewise=False, shift_y=0):
         self.user_input = user_input # user_input just means the user's points in Cartesian coordinates
         self.piecewise = piecewise
+        self.shift_y = shift_y
+        print('Graph has received shift_y', shift_y)
         self.setup()
 
     def setup(self):
@@ -387,7 +427,7 @@ class Graph():
         points = list(tuple(point) for point in self.user_input)
         # print('user points in cartesian', points)
         # if (repeat_in_x(points) and len(points) == 2):
-        if (repeat_in_x(points) and len(points) == 2): 
+        if (repeat_in_x(points) and len(points) == 2):
             self.vert = True
             self.as_lambda = None
         if len(points) == 1:
@@ -405,35 +445,53 @@ class Graph():
                                 try_cubic,
                                 try_square_root,
                                 try_cube_root,
+                                try_exponential,
                                 try_inverse_x,
-                                try_factored_polynomial]
+                                try_factored_polynomial,
+                                ]
             one_of_the_things_worked_out = False
             for thing_to_try in things_to_try:
                 print('I am trying ', thing_to_try)
+                # if thing_to_try == try_exponential:
+                #     print(thing_to_try(points, self.shift_y))
                 try:
-                    if thing_to_try(points):
-                        info = thing_to_try(points)
-                        f = info["function"]
-                        self.as_lambda = f
-                        if thing_to_try == try_inverse_x:
-                            a = info["horiz_shift"]
-                            self.piecewise = True
-                            self.x_pieces = []
-                            self.y_pieces = []
-                            self.x_pieces.append(np.linspace(cart_x_min, a-0.001, 500))
-                            self.x_pieces.append(np.linspace(a+0.001, cart_x_max, 500))
-                            print(self.x_pieces)
-                            self.y_pieces.append(f(self.x_pieces[0]))
-                            self.y_pieces.append(f(self.x_pieces[1]))
+                    if thing_to_try == try_exponential:
+                        if thing_to_try(points, self.shift_y):
+                            info = thing_to_try(points, self.shift_y)
+                            f = info["function"]
+                            self.as_lambda = f
+                            self.piecewise = False
+                            self.x_points = info["x_points"]
+                            self.y_points = f(self.x_points)
                             one_of_the_things_worked_out = True
                             break
-                        self.x_points = info["x_points"]
-                        self.y_points = f(self.x_points)
-                        one_of_the_things_worked_out = True
-                        break
+                    else:
+                        if thing_to_try(points):
+                            info = thing_to_try(points)
+                            f = info["function"]
+                            self.as_lambda = f
+                            if thing_to_try == try_inverse_x:
+                                a = info["horiz_shift"]
+                                self.piecewise = True
+                                self.x_pieces = []
+                                self.y_pieces = []
+                                self.x_pieces.append(np.linspace(cart_x_min, a-0.001, 500))
+                                self.x_pieces.append(np.linspace(a+0.001, cart_x_max, 500))
+                                print(self.x_pieces)
+                                self.y_pieces.append(f(self.x_pieces[0]))
+                                self.y_pieces.append(f(self.x_pieces[1]))
+                                one_of_the_things_worked_out = True
+                                break
+                            else:
+                                self.piecewise = False
+                            self.x_points = info["x_points"]
+                            self.y_points = f(self.x_points)
+                            one_of_the_things_worked_out = True
+                            break
                 except:
                     pass
             if not one_of_the_things_worked_out and not self.vert:
+                print('Plan B!!')
                 deg = 4
                 user_x = [a[0] for a in points]
                 user_y = [a[1] for a in points]

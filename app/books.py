@@ -797,7 +797,7 @@ graphsofpowerfunctions.add_to_questions('graph_sqrt',
 exp_and_log_intro = Section('exponentials_and_logs', "Exponentials and Logarithms: Intro", '/sections/exp-log-intro')
 
 graphsofexponentials = Section('graphsofexponentials', "Graphs of Exponentials", '/sections/graphs-of-exponentials')
-
+graphsofexponentials.add_to_questions('graph_exp')
 #######################################
 
 
@@ -926,7 +926,7 @@ main = Division('main', 'Main Matter', [nuts_and_bolts_of_algebra,
                                         polynomials,
                                         rationals,
                                         powerfunctions,
-                                        # exponentials_and_logs,
+                                        exponentials_and_logs,
                                         algebra2_challenge])
 
 Algebra2 = Division('book', 'Algebra 2', {'front': None, 'main': main, 'end': None})

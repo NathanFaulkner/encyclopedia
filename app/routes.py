@@ -418,11 +418,13 @@ def question(question_name):
         # print('This is how I view form.validate_on_submit: ', form.validate_on_submit())
         if 'data' in request.form and not form.validate_on_submit():
             points = request.form["data"]
+            shift_y = json.loads(request.form["shift_y"])
+            print('shift_y', shift_y)
             # session['user_answer'] = points # for bug reporting
             # print('points straight from page: ', type(points))
             points = json.loads(points)
             # print(points)
-            return_data = interpolator.get_dict_for_svg(points)
+            return_data = interpolator.get_dict_for_svg(points, shift_y=shift_y)
             # graph = interpolator.Graph(points)
             # graph.gen_dict_for_svg()
             # return_data = graph.svg_data
@@ -430,6 +432,7 @@ def question(question_name):
             #return json.dumps(data)
             # graph = interpolator.Graph(points)
             session['user_points'] = points
+            session['shift_y'] = shift_y
             # print('session says the user answer is:', session['user_answer'])
             return json.dumps(return_data)
     elif question_module.prob_type == 'real_line_graph':
@@ -474,7 +477,13 @@ def question(question_name):
             flash('This is your original submission, but the problem is just for practice now.')
             if whether_graph:
                 try:
-                    session['user_points'] = json.loads(answer.user_answer)
+                    info = json.loads(answer.user_answer)
+                    # session['user_points']
+                    if type(info) == dict:
+                        session['user_points'] = info.get('points')
+                        session['shift_y'] = info.get('shift_y')
+                    else:
+                        session['user_points'] = info
                 except (json.decoder.JSONDecodeError, TypeError) as e:
                     session['user_points'] = []
             elif question_module.prob_type == 'real_line_graph':
@@ -521,9 +530,10 @@ def question(question_name):
 
     if whether_graph:
         points = session.get('user_points')
+        shift_y = session.get('shift_y')
         # print('These are the points in session: ', points)
         # print('This is what I think about the form: ', form)
-        graph = interpolator.Graph(points)
+        graph = interpolator.Graph(points, shift_y=shift_y)
         if points != []:
             if not graph.vert:
                 useranswer = graph.as_lambda
@@ -536,7 +546,7 @@ def question(question_name):
             # else:
             # #     print('still yay!')
             user_poly_points = graph.poly_points
-            user_answer_for_db = json.dumps(points)
+            user_answer_for_db = json.dumps({'points': points, 'shift_y': shift_y})
         else:
             useranswer = None
             user_answer_for_db = json.dumps([])
