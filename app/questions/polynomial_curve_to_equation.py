@@ -57,10 +57,16 @@ class PolynomialCurveToEquation(Question):
             while not(have_duplicate(zeroes)):
                 zeroes = []
                 for i in range(degree):
-                    zeroes.append(random.randint(-5,5))
+                    z = random.randint(-5,5)
+                    while any([abs(z-r) == 1 for r in zeroes]):
+                        z = random.randint(-5,5)
+                    zeroes.append(z)
         else:
             for i in range(degree):
-                    zeroes.append(random.randint(-5,5))
+                    z = random.randint(-5,5)
+                    while any([abs(z-r) == 1 for r in zeroes]):
+                        z = random.randint(-5,5)
+                    zeroes.append(z)
         # print(zeroes)
 
         y_0 = random.randint(-9,9)

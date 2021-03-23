@@ -533,7 +533,8 @@ def question(question_name):
         shift_y = session.get('shift_y')
         # print('These are the points in session: ', points)
         # print('This is what I think about the form: ', form)
-        graph = interpolator.Graph(points, shift_y=shift_y)
+        # graph = interpolator.Graph(points, shift_y=shift_y) # I don't actually use 'shift_y'... I did temporarily... It's a nice proof of concept for further use of ajax here, but I preferred another solution from a philosphical perspective.
+        graph = interpolator.Graph(points)
         if points != []:
             if not graph.vert:
                 useranswer = graph.as_lambda
@@ -546,7 +547,8 @@ def question(question_name):
             # else:
             # #     print('still yay!')
             user_poly_points = graph.poly_points
-            user_answer_for_db = json.dumps({'points': points, 'shift_y': shift_y})
+            # user_answer_for_db = json.dumps({'points': points, 'shift_y': shift_y})
+            user_answer_for_db = json.dumps(points)
         else:
             useranswer = None
             user_answer_for_db = json.dumps([])

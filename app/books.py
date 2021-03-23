@@ -797,7 +797,9 @@ graphsofpowerfunctions.add_to_questions('graph_sqrt',
 exp_and_log_intro = Section('exponentials_and_logs', "Exponentials and Logarithms: Intro", '/sections/exp-log-intro')
 
 graphsofexponentials = Section('graphsofexponentials', "Graphs of Exponentials", '/sections/graphs-of-exponentials')
-graphsofexponentials.add_to_questions('graph_exp')
+graphsofexponentials.add_to_questions('graph_exp',
+                                        # 'graph_log',
+                                        )
 #######################################
 
 

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import random
+import math
 # from sympy.parsing.sympy_parser import parse_expr
 # from sympy.parsing.sympy_parser import standard_transformations, implicit_multiplication_application
 # transformations = (standard_transformations + (implicit_multiplication_application,))
@@ -31,7 +32,7 @@ from app.interpolator import cart_x_to_svg, cart_y_to_svg
 
 prob_type = 'graph'
 
-class GraphExp(Question):
+class GraphLog(Question):
     """
     The given is of the form
 
@@ -54,11 +55,15 @@ class GraphExp(Question):
         if 'b' in kwargs:
             self.b = kwargs['b']
         else:
-            self.b = random.choice([2, 3, sy.Rational(1, 2), sy.Rational(1, 3)])
+            self.b = random.choice([2, 3, 4])
         if 'x0' in kwargs:
             self.x0 = kwargs['x0']
         else:
             self.x0 = random.randint(-5,5)
+        if 'sign_x' in kwargs:
+            self.sign_x = kwargs['sign_x']
+        else:
+            self.sign_x = random.choice([1, -1])
         if 'y0' in kwargs:
             self.y0 = kwargs['y0']
         else:
@@ -74,24 +79,22 @@ class GraphExp(Question):
         x = self.x
         y0 = self.y0
         x0 = self.x0
+        sign_x = self.sign_x
         A = self.A
         b = self.b
-        self.as_lambda = lambda x: A*float(b)**(x-x0)+y0
+        self.as_lambda = lambda x: A*np.log(sign_x*(x-x0))/np.log(float(b))+y0
         f = self.as_lambda
-        self.given = A*b**(x-x0)+y0
+        self.given = A*sy.log(sign_x*(x-x0))/sy.log(b)+y0
         #print('3rd step: So far its ', expr)
-        self.answer = f(x)
+        self.answer = self.given
 
         # term = self.given
-        # if self.y0 > 0:
-        #     fmt_y0 = sy.latex(self.y0)
-        #     sign = '+'
-        # elif self.y0 == 0:
-        #     fmt_y0 = ''
-        #     sign = ''
-        # else:
-        #     fmt_y0 = sy.latex(abs(self.y0))
-        #     sign = '-'
+        if self.y0 > 0:
+            fmt_y0 = '+' + sy.latex(self.y0)
+        elif self.y0 == 0:
+            fmt_y0 = ''
+        else:
+            fmt_y0 = sy.latex(self.y0)
         # # print(term)
         # if self.m == 1:
         #     fmt_m = ''
@@ -112,7 +115,7 @@ class GraphExp(Question):
         #     \\]
         #     """
 
-        self.format_given = f'\\[ y = {sy.latex(self.given)}\\]'
+        self.format_given = f'\\[ y = {A}\\log_{b}{{ \\left({sy.latex(sy.factor(sign_x*(x-x0)))}\\right) }} {fmt_y0}\\]'
 
         self.format_answer = '\\quad\n'
         # self.answer_latex = latex_print(self.answer)
@@ -130,12 +133,12 @@ the window and has at least 5 points clearly marked, including the "anchor" poin
 
 """
 
-    name = 'Graph of Exponential Function'
-    module_name = 'graph_exp'
+    name = 'Graph of Logarithmic Function'
+    module_name = 'graph_log'
 
     prompt_single = """Graph the given equation by plotting the "anchor" point and at least 3 other points
 that satisfy the equation.  In order for the grapher to understand your intent,
-you will also have to use the "Shift Up" button to shift the graph in line
+you will also have to use the "Shift Right" button to shift the graph in line
 with its asymptote.
 """
     prompt_multiple = """Graph each of the following equations by plotting at least 4 points
@@ -150,6 +153,7 @@ that satisfy the equation."""
     display correctly.  Why that is is a mystery to me!  If you know the answer,
     email me!  (My email is on a "front" page of the site.)
     """
+
 
     has_img_in_key = True
 
@@ -198,4 +202,4 @@ that satisfy the equation."""
 
 
 
-Question_Class = GraphExp
+Question_Class = GraphLog
