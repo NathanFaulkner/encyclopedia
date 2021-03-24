@@ -164,7 +164,15 @@ that satisfy the equation."""
     def get_svg_data(self, window=[-10,10], res=100):
         x_min = window[0]
         x_max = window[1]
-        x_points = np.linspace(x_min, x_max, res)
+        if self.sign_x == -1:
+            x_points_plateau = np.linspace(x_min, self.x0 - 1, res)
+            x_points_plunge = self.x0 - self.b**-np.linspace(0, x_max-self.y0, res)
+            x_points = np.concatenate([x_points_plateau, x_points_plunge])
+        else:
+            x_points_plateau = np.linspace(self.x0 + 1, x_max, res)
+            x_points_plunge = self.x0 + self.b**np.linspace(x_min, 0, res)
+            x_points = np.concatenate([x_points_plunge, x_points_plateau])
+        # x_points = np.linspace(x_min, x_max, res)
         y_points = self.as_lambda(x_points)
         # print(self.as_lambda(self.x))
         # print(y_points)
