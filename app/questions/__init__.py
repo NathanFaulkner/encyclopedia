@@ -124,7 +124,8 @@ __all__ = ['quadratic_pattern',
             'graph_sqrt', 'graph_sqrt_to_equation',
             'graph_cube_function', 'graph_cubic_to_equation',
             'graph_cbrt', 'graph_cbrt_to_equation',
-            'graph_exp', 'graph_log',
+            'graph_exp', 'graph_exp_to_equation', 
+            'graph_log',
             ]
 
 class Question():

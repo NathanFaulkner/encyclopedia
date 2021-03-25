@@ -798,7 +798,8 @@ exp_and_log_intro = Section('exponentials_and_logs', "Exponentials and Logarithm
 
 graphsofexponentials = Section('graphsofexponentials', "Graphs of Exponentials", '/sections/graphs-of-exponentials')
 graphsofexponentials.add_to_questions(#'graph_exp',
-                                        'graph_log',
+                                        'graph_exp_to_equation',
+                                        # 'graph_log',
                                         )
 #######################################
 

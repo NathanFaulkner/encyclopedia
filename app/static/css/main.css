@@ -642,3 +642,10 @@ table.xy-horiz td {
   width: 50px;
   padding: 4px;
 }
+
+.displayed-transformations {
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+  color:red;
+}

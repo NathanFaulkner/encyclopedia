@@ -59,26 +59,26 @@ class GraphExp(Question):
             self.x0 = kwargs['x0']
         else:
             self.x0 = random.randint(-5,5)
-        if 'y0' in kwargs:
-            self.y0 = kwargs['y0']
+        if 'k' in kwargs:
+            self.k = kwargs['k']
         else:
             # y0_min = max(-5, -9 - self.m*4)
             # y0_max = min(5, 9 - self.m*4)
             y0_min = -5
             y0_max = 5
-            self.y0 = random.randint(y0_min, y0_max)
+            self.k = random.randint(y0_min, y0_max)
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:
             self.x = sy.Symbol('x')
         x = self.x
-        y0 = self.y0
+        k = self.k
         x0 = self.x0
         A = self.A
         b = self.b
-        self.as_lambda = lambda x: A*float(b)**(x-x0)+y0
+        self.as_lambda = lambda x: A*float(b)**(x-x0)+k
         f = self.as_lambda
-        self.given = A*b**(x-x0)+y0
+        self.given = A*b**(x-x0)+k
         #print('3rd step: So far its ', expr)
         self.answer = f(x)
 

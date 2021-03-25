@@ -27,7 +27,6 @@ ndg-httpsclient==0.5.1
 numpy==1.19.0
 packaging==20.4
 pandas==1.0.5
-Pillow==7.2.0
 Pint==0.15
 pyasn1==0.4.8
 pycparser==2.20
