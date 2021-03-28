@@ -525,6 +525,7 @@ class Graph():
         # print('user points in cartesian', points)
         # if (repeat_in_x(points) and len(points) == 2):
         if (repeat_in_x(points) and len(points) == 2):
+            print('vert detected')
             self.vert = True
             self.as_lambda = None
         if len(points) == 1:
@@ -564,30 +565,31 @@ class Graph():
                     #         one_of_the_things_worked_out = True
                     #         break
                     # else:
-                if thing_to_try(points):
-                    info = thing_to_try(points)
-                    f = info["function"]
-                    self.as_lambda = f
-                    if thing_to_try == try_inverse_x:
-                        a = info["horiz_shift"]
-                        self.piecewise = True
-                        self.x_pieces = []
-                        self.y_pieces = []
-                        self.x_pieces.append(np.linspace(cart_x_min, a-0.001, 500))
-                        self.x_pieces.append(np.linspace(a+0.001, cart_x_max, 500))
-                        print(self.x_pieces)
-                        self.y_pieces.append(f(self.x_pieces[0]))
-                        self.y_pieces.append(f(self.x_pieces[1]))
+                try: #This is stupid and should be fixed: I think it only is meant to protect against vertical lines
+                    if thing_to_try(points):
+                        info = thing_to_try(points)
+                        f = info["function"]
+                        self.as_lambda = f
+                        if thing_to_try == try_inverse_x:
+                            a = info["horiz_shift"]
+                            self.piecewise = True
+                            self.x_pieces = []
+                            self.y_pieces = []
+                            self.x_pieces.append(np.linspace(cart_x_min, a-0.001, 500))
+                            self.x_pieces.append(np.linspace(a+0.001, cart_x_max, 500))
+                            print(self.x_pieces)
+                            self.y_pieces.append(f(self.x_pieces[0]))
+                            self.y_pieces.append(f(self.x_pieces[1]))
+                            one_of_the_things_worked_out = True
+                            break
+                        else:
+                            self.piecewise = False
+                        self.x_points = info["x_points"]
+                        self.y_points = f(self.x_points)
                         one_of_the_things_worked_out = True
                         break
-                    else:
-                        self.piecewise = False
-                    self.x_points = info["x_points"]
-                    self.y_points = f(self.x_points)
-                    one_of_the_things_worked_out = True
-                    break
-                # except:
-                #     pass
+                except:
+                    pass
             if not one_of_the_things_worked_out and not self.vert:
                 print('Plan B!!')
                 deg = 4

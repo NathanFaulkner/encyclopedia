@@ -530,15 +530,20 @@ def question(question_name):
 
     if whether_graph:
         points = session.get('user_points')
+        print(points)
         shift_y = session.get('shift_y')
         # print('These are the points in session: ', points)
         # print('This is what I think about the form: ', form)
         # graph = interpolator.Graph(points, shift_y=shift_y) # I don't actually use 'shift_y'... I did temporarily... It's a nice proof of concept for further use of ajax here, but I preferred another solution from a philosphical perspective.
         graph = interpolator.Graph(points)
+        print('graph.vert is', graph.vert)
         if points != []:
+            print('points is not []')
             if not graph.vert:
+                print('thinks graph not vert')
                 useranswer = graph.as_lambda
             else:
+                print('graph.vert == True')
                 useranswer = points[0][0]
             graph.gen_dict_for_svg()
             # if graph.piecewise:
