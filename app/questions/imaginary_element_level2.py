@@ -119,7 +119,7 @@ class ImaginaryElementLevel2(Question):
 
 
 
-    # loom_link = "https://www.loom.com/share/5028da702f8143568d2762e7a47d64db"
+    loom_link = "https://www.loom.com/share/08b2f9ab974a42588693ce8ebc0f8604"
 
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'

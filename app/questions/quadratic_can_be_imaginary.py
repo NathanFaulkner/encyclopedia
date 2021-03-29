@@ -126,7 +126,7 @@ class QuadraticCanBeImaginary(Question):
 
     prob_type = prob_type
 
-    # loom_link = "https://www.loom.com/share/331e43b308a64cefbafdb1ac3211c9ac"
+    loom_link = "https://www.loom.com/share/37d8d8e287aa4fbfbe302d0def1e0ee6"
 
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'

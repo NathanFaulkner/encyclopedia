@@ -95,6 +95,8 @@ class SyntheticDivisionOfPolynomialsHarder(Question):
     name = "Synthetic Division of Polynomials: Harder Problems"
     module_name = 'synthetic_division_of_polynomials_harder'
 
+    loom_link = "https://www.loom.com/share/68484d96e569482cb0d2d98c614134fa"
+
 
     prompt_multiple = """TBA"""
 

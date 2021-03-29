@@ -20,6 +20,7 @@ class CompleteFactorizationLevel1ThreeNiceFactors(CompleteFactorizationLevel1):
         super().__init__(**kwargs)
 
 
+    loom_link = "https://www.loom.com/share/3bbf5a9cf5e74f038d9d0f52fcf60587"
 
 Question_Class = CompleteFactorizationLevel1ThreeNiceFactors
 prob_type = 'math_blank'

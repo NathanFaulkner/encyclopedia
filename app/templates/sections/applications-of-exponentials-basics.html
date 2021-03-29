@@ -1,0 +1,59 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section, we will be studying exponential functions from three
+  perspectives: from the graphical perspective, from an algebraic perspective,
+  and from a real-world perspective.  The last, of course, is the most vital.
+  In the previous section, we got acquainted with exponential functions by
+  studying their graphs&mdash;which we were able to do based on prior knowledge.
+  However, as we move to the algebraic perspective (that is, to the task of
+  solving equations and manipulating expressions) we will actually be using
+  a new technique (albeit with connections to prior concepts); this will involve
+  the study of "logarithms."  Of course, at this point, you probably have no
+  clue what a logarithm is.  So, for that reason, we turn now to "the real world."
+  We will soon encounter in a natural way the concept of logarithms
+  (so, the task will really be one of assigning this name of "logarithm" to a
+  concept or question that arises quite naturally).
+</p>
+
+<p>
+  Exponentials have many applications, in fact.  Indeed, the period through
+  which we are currently living is one in which the concept of exponential
+  functions is of crucial importance: The concept is certainly a key part to
+  analyzing the spread of infectious disease on the part of epidemiologists,
+  even though greater tools than just exponential functions must also be
+  brought to bear.  This is also a period of economic turmoil: Imagine
+  that for various financial institutions who are involved with everything
+  from lending money at interest to providing life insurance to families
+  in the event of a policyholders untimely death, various mathematics
+  become important as they tr&mdash;with varying success&mdash;to predict
+  the future.  Again, we find exponential functions appearing in this
+  analysis: for instance, being precisely the elementary form in which one
+  can express how investments and debts grow when a lender compounds interest
+  (that is, charges interest on an outstanding loan and then charges interest
+  on the interest, etc.)    Exponential functions also have numerous other
+  scientific applications involving everything from the decay of radioactive
+  elements to the diffusion of chemicals  in a fluid (picture a dye spreading
+  in water) or heat through a room.
+  We will touch on a few of these.
+</p>
+
+
+
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

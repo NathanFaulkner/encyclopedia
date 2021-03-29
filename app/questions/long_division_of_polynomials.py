@@ -77,6 +77,8 @@ class LongDivisionOfPolynomials(Question):
     name = "Long Division of Polynomials"
     module_name = 'long_division_of_polynomials'
 
+    loom_link = "https://www.loom.com/share/98a286b3f95b4c239e79850bda55f937"
+
 
     prompt_multiple = """TBA"""
 

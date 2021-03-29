@@ -19,6 +19,8 @@ class CompleteFactorizationLevel1ThreeFactors(CompleteFactorizationLevel1):
         kwargs['num_factors'] = 3
         super().__init__(**kwargs)
 
+    loom_link = "https://www.loom.com/share/3bbf5a9cf5e74f038d9d0f52fcf60587"
+
 
 
 Question_Class = CompleteFactorizationLevel1ThreeFactors

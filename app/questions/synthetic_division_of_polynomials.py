@@ -86,6 +86,7 @@ class SyntheticDivisionOfPolynomials(Question):
     name = "Synthetic Division of Polynomials"
     module_name = 'synthetic_division_of_polynomials'
 
+    loom_link = "https://www.loom.com/share/93ddbd75014048a686fa46498a436c1b"
 
     prompt_multiple = """TBA"""
 
