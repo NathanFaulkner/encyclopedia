@@ -174,10 +174,13 @@ def get_dict_for_svg(points, shift_y=0):  #TODO -- Of course, this was a bad cho
 
 
 def constant_in_x(points):
+    if points == []:
+        return False
     x = points[0][0]
     i = 1
     while i < len(points) and points[i][0] == x:
         i += 1
+    print('constant_in_x brought i up to', i)
     if i == len(points):
         return True
     return False
@@ -524,7 +527,8 @@ class Graph():
         points = list(tuple(point) for point in self.user_input)
         # print('user points in cartesian', points)
         # if (repeat_in_x(points) and len(points) == 2):
-        if (repeat_in_x(points) and len(points) == 2):
+        # if (repeat_in_x(points) and len(points) == 2):
+        if constant_in_x(points) and len(points) > 1:
             print('vert detected')
             self.vert = True
             self.as_lambda = None
