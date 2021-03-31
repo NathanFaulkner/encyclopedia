@@ -87,7 +87,7 @@ class PolynomialEndBehavior(Question):
 
     prob_type = prob_type
 
-    # loom_link = "https://www.loom.com/share/331e43b308a64cefbafdb1ac3211c9ac"
+    loom_link = "https://www.loom.com/share/430998fe42704fdbba0a9cc1cd1c1ab8"
 
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
