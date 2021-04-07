@@ -21,6 +21,8 @@ class CompleteFactorizationLevel1ThreeNiceFactors(CompleteFactorizationLevel1):
 
 
     loom_link = "https://www.loom.com/share/3bbf5a9cf5e74f038d9d0f52fcf60587"
+    module_name = 'complete_factorization_level1_three_nice_factors'
+
 
 Question_Class = CompleteFactorizationLevel1ThreeNiceFactors
 prob_type = 'math_blank'

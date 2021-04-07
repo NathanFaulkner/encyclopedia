@@ -99,7 +99,28 @@ class CelebratoryGunfire(Question):
         """
 
         self.format_given_for_tex = f"""
-        {self.prompt_single}
+                In some cultures it is common to celebrate a holiday or special event
+                by firing bullets into the air.
+
+                Let's imagine that the bullet leaves the muzzle of a gun at a position
+                of {starting_height} inches (let's call it {c} feet) from the ground.
+                A typical bullet velocity is {velocity} feet per second
+                (but it varies considerably).
+                According to Newton's law of gravitation,
+                the bullet falls to Earth (neglecting air resistance)
+                with an acceleration of 32 feet per second per second.
+                (FYI: Acceleration measures the rate of change of the velocity.)
+
+                All that combines to give you the following model for the position
+                \(y\) of the bullet relative to the ground after \(t\) seconds
+                    \[
+                        y(t) = {c:.3f} + {b}t - 16t^2
+                    \]
+                (FYI: Where did the `32' go?  It became a 16.)
+
+                Your task: Figure how quickly (in seconds) the party-goers need to leave the area!!
+                Your answer must be accurately rounded to at least
+                two decimal places (more is fine).
         """
 
     name = 'Celebratory Gunfire'

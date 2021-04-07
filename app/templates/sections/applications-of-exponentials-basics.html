@@ -42,7 +42,708 @@
   We will touch on a few of these.
 </p>
 
+  It is easiest to start by taking up the subject of charging or awarding
+  interest and how debts or investments change over time. We'll start with a basic example.
 
+
+<p>
+ <div class="activity">
+  <h2></h2>
+  <p>
+  <a href="https://www.loom.com/share/d32c58f60ae441978a24311302505482" target="_blank">Click for video.</a>
+  </p>
+Imagine that you have some money that you would like to invest.
+Maybe your grandparents gave it to you or you earned it on your own, but say you have
+\$1000 that you would like to set aside for the future.
+Of course, as you are well aware, banks and other lenders will actually <em>pay you</em>
+to hold on to your money in the present, with the expectation that you won't
+need it right away.  In the mean time, they loan it out to other people (etc.)
+and also invest your money in different ways.  And, indeed, they pay you for
+the right to do this in the form of <em>interest</em>.
+Let's say that a certain bank is offering to pay you 4% interest per year
+(often abbreviated 4% APR&mdash;which means "annual percentage rate"),
+which, furthermore, they agree to <em>compound</em> for you each year.
+Imagine, too, that you are not making any withdrawals on this account
+(to keep things simple).  Under this scenario we can discover
+exactly what is meant by "compounding."
+<ol>
+<li>
+As they are going to pay you 4% per year, at the end of the year you will have your \$1000
+in the bank plus 4% more.  Here is a handy way to calculate that:
+\[
+1000 + 0.04 \cdot 1000 = (1+0.04)1000 = (1.04)1000 = \$1040
+\]
+Do you see how I used factoring (AKA, the reverse of distributing)
+to rewrite \(1000 + 0.04\cdot 1000\)?  Look at that closely to make sure you
+understand it, because it is really the crux of the whole thing.
+</li>
+
+<li>
+So, you have your \$1040 throughout the second year of investing.
+But at the end of that year, you get another 4% added on.  Now, maybe
+what that could have meant is that you just get another \$40.  While
+that would be nice, if the bank is "compounding" your interest, it actually
+means that they are doing something a lot more sensible&mdash;which is to
+look at the situation quite realistically as if you are just starting anew
+with a now larger investment&mdash;\$1040 rather than
+\$1000&mdash;meaning they award you 4% of 1040, not just 1000.
+So, at the end of the second year, you have:
+\[
+1040 + 0.04 \cdot 1040 = (1.04)1040 = \$1081.60
+\]
+Note, again, how I chose to "factor out" 1040.  While you would get the same
+answer without doing that, I do it for a purpose.  Watch here for
+<em>another</em> way to represent your total after 2 years.
+Recalling that \(1040 = (1.04)1000\), I get
+\[
+(1.04)1040 = (1.04)(1.04)1000 = (1.04)^2 \cdot 1000
+\]
+The important thing to note is that <em>repeated multiplication is
+  happening</em>&mdash;AKA, <em>exponentiation</em>.
+</li>
+
+
+<li>
+Now, writing in that fashion of the previous step will help you develop a
+formula for this: the amount in your account after \(t\) number of years.
+Just follow my lead here to (hopefully) get an insight in to the what that
+formula (or "model") might be.  Fill in the blank rows in the table below.
+
+<br>
+<table border="1" style="border-collapse: collapse; width:100%">
+  <tr>
+    <td style="text-align: center; width: 10%"># years </td><td style="width:45%">Formula for Amount</td><td style="width:45%">Rounded Amount</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(0\)</td><td>\(1000\)</td><td>$1000</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(1\)</td><td>\((1.04)1000\)</td><td>$1040</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(2\)</td><td> \((1.04)1040  = (1.04)(1.04)1000= (1.04)^2 1000\)</td><td>$1081.60 </td>
+  </tr>
+  <tr>
+    <td  style="text-align: center;">\(3\)</td><td>\((1.04)1081.60 = (1.04)(1.04)^2 1000 = (1.04)^3\) </td><td>$1124.864</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(4\)</td><td>&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(5\)</td><td>&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(t\)</td><td>&nbsp;</td><td></td>
+  </tr>
+</table>
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+
+    <br>
+    <table border="1" style="border-collapse: collapse; width:100%">
+      <tr>
+        <td style="text-align: center; width: 10%"># years </td><td style="width:45%">Formula for Amount</td><td style="width:45%">Rounded Amount</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(0\)</td><td>\(1000\)</td><td>$1000</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(1\)</td><td>\((1.04)1000\)</td><td>$1040</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(2\)</td><td> \((1.04)1040  = (1.04)(1.04)1000= (1.04)^2 1000\)</td><td>$1081.60 </td>
+      </tr>
+      <tr>
+        <td  style="text-align: center;">\(3\)</td><td>\((1.04)1081.60 = (1.04)(1.04)^2 1000 = (1.04)^3 1000\) </td><td>$1124.864</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(4\)</td><td>\((1.04)^4 1000\)</td><td>$1169.85856</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(5\)</td><td>\((1.04)^5 1000\)</td><td>$1216.6529024</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(t\)</td><td>\((1.04)^t \cdot 1000 = 1000(1.04)^t\)</td><td>N/A</td>
+      </tr>
+    </table>
+
+  </div>
+</div>
+</li>
+
+
+
+</ol>
+
+</div>
+</p>
+
+<p>
+<div class="definition">
+  <h2></h2>
+
+We already know that exponential functions can be given by formulas of the form
+\[
+f(x) = A b^x
+\]
+We have also already named that real number \(b\) the "base" of the exponential.
+However, provided \(b\gt1\), the value of \(f(x)\) grows with increasing \(x\),
+so, in this special case, the base is instead often called the <b>growth factor</b>.
+For instance, in the formula
+\[
+f(x) = 1000 \left(1.04\right)^x
+\]
+1.04 is the <b>growth factor</b>.  The value \(A\), which in this example is
+\(1000\), also has a special name.  Since 1000 is what you get for \(y\)
+when \(x=0\), it is called the <b>initial value</b> of \(f(x)\).
+In general, if your exponential can be given by \(f(x) = A b^x\),
+\[
+f(0) = A b^0 = A \cdot 1 = A,
+\]
+so \(A\) is called the <b>initial value</b> of \(f(x)\).  From a graphical
+point of view, I hope you will
+realize, \(A\) is also the \(y\)-intercept&mdash;the \(y\)-value that gets paired with \(x=0\).
+</div>
+</p>
+Now, there is something even fancier that a bank will typically do when it
+comes to awarding interest: they will choose to award interest not just once a
+year but many times a year.  That enables you to earn interest a little earlier.
+For instance, they might award additional interest every month.  Of course,
+they don't give you each month what you would have earned in a year.  In the
+first month, for instance, they only give you a twelfth of what you would
+have earned.  In the second month, they give you that twelfth again, plus a
+little more based on the extra interest that you already earned in the first
+month.  This may get a a little confusing, as you can imagine, but, luckily,
+they actually do something quite simple: they just divide your interest
+<em>rate</em> by 12 and use that reduced rate as your compounding factor
+each month&mdash;or your "monthly growth factor."
+We investigate this in the following activity:
+
+<p>
+ <div class="activity">
+  <h2></h2>
+  <p>
+  <a href="https://www.loom.com/share/7b33f27cfb1c41c09429b6e103939740" target="_blank">Click for video.</a>
+  </p>
+We are going to investigate the scenario under which the bank
+"compounds interest monthly"&mdash;that is, they award a fraction of yearly
+interest each month in order to let you start earning interest on your
+interest even earlier.
+Let's imagine, again, that we are investing \$1,000 at 4% APR&mdash;"annual
+percentage rate."  But, now, let's add the assumption that the bank will
+compound the interest monthly.  What that means is not that they give you
+4% each month; that would be outrageously generous.  Instead, they give
+you twelfth of 4% each month but compound it.  Precisely what I mean by
+that is conveyed in the following table.
+<ol>
+
+
+<li>
+Fill in the blank cells after you have inspected and intuited the pattern.
+<!-- \hspace{-2em}
+\def\arraystretch{1.5}
+\begin{tabular}{l|l|l}
+\# months & Formula for Amount & Rounded Amount\\
+\hline
+0 & 1000 & \$1000\\
+1 & \(\left(1 + \frac{0.04}{12}\right)1000\) & \$1003.3333 \\
+2 & \(\left(1 + \frac{0.04}{12}\right)1003.333 = \left(1 + \frac{0.04}{12}\right)^2 1000 \)  & \$1006.6778 \\
+3 & \(\left(1 + \frac{0.04}{12}\right)1006.6778=\left(1 + \frac{0.04}{12}\right)^3 1000 \) & \$1010.0334\\
+4 & & \\
+5 & & \\
+12 & & \\
+\(x\) & & \\
+\hline
+\end{tabular} -->
+
+<br>
+<table border="1" style="border-collapse: collapse; width:100%">
+  <tr>
+    <td style="text-align: center; width: 10%"># months </td><td style="width:45%">Formula for Amount</td><td style="width:45%">Rounded Amount</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(0\)</td><td>\(1000\)</td><td>$1000</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(1\)</td><td>\(\left(1 + \frac{0.04}{12}\right)1000\)</td><td>$1003.3333</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(2\)</td><td> \(\left(1 + \frac{0.04}{12}\right)1003.333 = \left(1 + \frac{0.04}{12}\right)^2 1000 \)</td><td>$1006.6778 </td>
+  </tr>
+  <tr>
+    <td  style="text-align: center;">\(3\)</td><td>\(\left(1 + \frac{0.04}{12}\right)1006.6778=\left(1 + \frac{0.04}{12}\right)^3 1000 \) </td><td>$1010.0334</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(4\)</td><td>&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(5\)</td><td>&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(t\)</td><td>&nbsp;</td><td></td>
+  </tr>
+</table>
+
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    <table border="1" style="border-collapse: collapse; width:100%">
+      <tr>
+        <td style="text-align: center; width: 10%"># months </td><td style="width:45%">Formula for Amount</td><td style="width:45%">Rounded Amount</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(0\)</td><td>\(1000\)</td><td>$1000</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(1\)</td><td>\(\left(1 + \frac{0.04}{12}\right)1000\)</td><td>$1003.3333</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(2\)</td><td> \(\left(1 + \frac{0.04}{12}\right)1003.333 = \left(1 + \frac{0.04}{12}\right)^2 1000 \)</td><td>$1006.6778 </td>
+      </tr>
+      <tr>
+        <td  style="text-align: center;">\(3\)</td><td>\(\left(1 + \frac{0.04}{12}\right)1006.6778=\left(1 + \frac{0.04}{12}\right)^3 1000 \) </td><td>$1010.0334</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(4\)</td><td>\(\left(1+\frac{0.04}{12}\right)\)^4 1000</td><td>$1013.4001482716053</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(5\)</td><td>\(\left(1+\frac{0.04}{12}\right)\)^5 1000</td><td>$1016.7781487658441</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(m\)</td><td>\(\left(1+\frac{0.04}{12}\right)\)^m 1000 = 1000\left(1+\frac{0.04}{12}\right)\)^m</td><td>N/A</td>
+      </tr>
+    </table>
+  </div>
+</div>
+</li>
+
+<li>
+Do you end up making more money in a year when the bank compounds monthly
+versus just at the end of each year?  Can you explain why that is so?
+
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    Yes, you do end up making more that way.  After all, when "compounding monthly"
+    what the bank is doing is handing you a little bit of what
+    you would have earned all year in that first month.  They end up
+    giving you the rest of what you would have earned that year across
+    the rest of the year, too, but even if they only gave you that little bit early,
+    since you get to earn interest on it in the next month, you end up
+    earning just little extra interest (on that brand new money)
+    than you would have if they only handed you money at the end of the year.
+  </div>
+</div>
+</li>
+
+
+<li>
+How much money would you have in your account after 5 years?  (Again, assume that
+you don't make any withdrawals).  How does this compare to what you'd
+have if they only compounded yearly (i.e., once a year)?
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    In 5 years, there are \(5\cdot 12 = 60\) months, so you will end up earning
+    \[
+      1000 \cdot \left(1+0.04/12\right)^{5 \cdot 12} = 1000 \cdot \left(1+0.04/12\right)^{60} \approx \$ 1220.9965939421215
+    \]
+    If they only compunded yearly, you would instead make
+    \[
+      1000 \cdot \left(1.04\right)^{5} \approx \$ 1216.6529024
+    \]
+    So, you end up making a few dollars more, for whatever that's worth.
+  </div>
+</div>
+</li>
+
+
+
+<li>
+Come up with a formula for the amount in your account after \(t\) years.
+(Hint: Within the formula, you have to convert the input, \(t\) of number of
+years, into \(x\) the number of months.  So, just ask yourself, "If \(t\)
+years have gone by, how many months have gone by?"
+
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    We saw from our table that after \(m\) months you'll have earned
+    \[
+      1000 \cdot \left(1+\frac{0.04}{12}\right)^{m}
+    \]
+    So, since there are \(m = 12t\) many months in \(t\) years,
+    you will have earned
+    \[
+      1000 \cdot \left(1+\frac{0.04}{12}\right)^{12t}
+    \]
+    dollars after \(t\) years.
+  </div>
+</div>
+</li>
+
+
+</ol>
+
+</div>
+</p>
+
+
+
+Now, for the big spoiler.
+
+<div class="center list_of_rules">
+<h2>Formula for Investment Value Under Compounded Interest</h2>
+If you invest \(P\) dollars at an APR of \(r\cdot 100%\) (so, \(r\)
+is expressed as a decimal), and the bank agrees to compound your
+interest \(n\) times per year&mdash;and you make no withdrawals&mdash;then
+after \(t\) years the current amount \(A(t)\) in your account will be
+\[
+A(t) = P\left(1 + \frac{r}{n}\right)^{nt}
+\]
+</div>
+
+<p>
+<div class="definition">
+  <h2></h2>
+The initial value of an investment (the initial investment) is often called the <b>principal</b>.
+For instance, if (or when?) you apply for a loan, your initial loan
+amount may also be called "the principal of the loan."  Basically,
+"principal" is short for "principal amount," as in the "first amount."
+</div>
+</p>
+
+<p>
+<div class="definition">
+  <h2></h2>
+Commonly the number of times that a bank compounds (awards) your interest
+per year is conveyed in English rather than numerically.  Sometimes students
+have questions about how to do that, so let me clarify:
+
+<br>
+<br>
+<table border="0" style="border-collapse: collapse; width:80%; margin-left:auto; margin-right:auto">
+  <tr>
+    <td style="width: 60%">If the bank compounds "[entry]" ...</td><td style="width:40%">... then [see entry]</td>
+  </tr>
+  <tr>
+    <td>Yearly</td><td>\(n=1\)</td>
+  </tr>
+  <tr>
+    <td>Biannually</td><td>\(n=2\)</td>
+  </tr>
+  <tr>
+    <td>Quarterly</td><td>\(n=4\)</td>
+  </tr>
+  <tr>
+    <td>Monthly</td><td>\(n=12\)</td>
+  </tr>
+  <tr>
+    <td>Daily</td><td>\(n=360^*\)</td>
+  </tr>
+</table>
+
+<p>
+You might wonder why the bank only compounds your interest 360 times a year
+instead of 365 times when they advertise that they are compounding "daily."
+The answer: for convenience; hence the point of the five bank holidays per
+year.  (Don't ask me about leap day, because I don't know; I'm sure
+<a href="https://www.google.com/search?q=is+leap+day+a+bank+holiday&source=hp&ei=_IxoYJC3H9Kx5NoPgr26wAs&iflsig=AINFCbYAAAAAYGibDMKm7xueb_C7H6eRnJcZOEKGoYQ4&oq=is+leap+day+a+bank+holiday&gs_lcp=Cgdnd3Mtd2l6EAMyBQghEKsCMgUIIRCrAjoICAAQ6gIQjwE6EQguELEDEIMBEMcBEKMCEJMCOggIABCxAxCDAToFCAAQsQM6CwguELEDEMcBEKMCOgIIADoOCC4QsQMQgwEQxwEQowI6CAguELEDEIMBOgsILhCxAxCDARCTAjoFCC4QsQM6AgguOggILhDHARCvAToICAAQsQMQyQM6BggAEBYQHjoFCAAQhgM6CAghEBYQHRAeOgUIIRCgAToHCCEQChCgAVCsFFizQmD8SWgBcAB4AIABiAGIAYQSkgEEMjIuNJgBAKABAaoBB2d3cy13aXqwAQo&sclient=gws-wiz&ved=0ahUKEwiQpaCKteLvAhXSGFkFHYKeDrgQ4dUDCAg&uact=5" target="_blank">Google</a>
+does.)
+</div>
+</p>
+
+<p>
+ <div class="activity">
+  <h2></h2>
+  <p>
+  <a href="https://www.loom.com/share/4c455576329049f4a92d202119d6f1e9" target="_blank">Click for video.</a>
+  </p>
+Explain how the formula in the box above works.  What does each part of the formula "do"?
+
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+Say that you invest \$10,000 at 2% APR, compounded monthly.
+<ol>
+<li>
+Write down a formula for \(A(t)\), the amount in your account after \(t\) years.
+</li>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      \(A(t) = P\left(1+ \frac{r}{n}\right)^{nt} = 10,000 \left(1+\frac{0.02}{12}\right)^{12t}\)
+    </div>
+  </div>
+
+
+<li>
+Find the amount in your account after 5 years.  Round to the nearest cent.
+</li>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      \(A(5) = 10,000 \left(1+\frac{0.02}{12}\right)^{12 \cdot 5} \approx \$11,050.79\)
+    </div>
+  </div>
+</ol>
+
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Say that you invest \$10,000 at 2.12% APR, compounded quarterly.
+<ol>
+
+
+<li>
+Write down a formula for \(A(t)\), the amount in your account after \(t\) years.
+</li>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\(A(t) = P\left(1+ \frac{r}{n}\right)^{nt} = 10,000 \left(1+\frac{0.0212}{4}\right)^{4t}\)
+
+    </div>
+  </div>
+
+
+<li>
+Find the amount in your account after 5 years.  Round to the nearest cent.
+</li>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\(A(5) = 10,000 \left(1+\frac{0.0212}{4}\right)^{4 \cdot 5} \approx \$11,115.11 \)
+
+    </div>
+  </div>
+
+
+
+</ol>
+
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Say that you take out a loan of \$60,000 and are not able to make any payments
+for 4 years&mdash;and yet the bank still charges interest at the rate of 6.48%
+interest per year, compounded monthly.
+<ol>
+
+
+<li>
+Write down a formula for \(A(t)\), that you owe after \(t\) years
+</li>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      \(A(t) = P\left(1+ \frac{r}{n}\right)^{nt} = 60,000 \left(1+\frac{0.0648}{12}\right)^{12t}\)
+    </div>
+  </div>
+
+
+<li>
+Find the amount you owe after 4 years.  Round to the nearest cent.
+</li>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\(A(4) = 60,000 \left(1+\frac{0.0648}{12}\right)^{12 \cdot 4} \approx \$77,699.38\)
+
+    </div>
+  </div>
+
+
+<li>
+What do you think of that?
+</li>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+It wouldn't be that fun!  Therefore, you must take care to understand interest.
+
+    </div>
+  </div>
+
+
+
+</ol>
+
+</div>
+</p>
+Another common application of exponential functions studied in high school is
+that of "radioactive decay."  The basic idea is that the nuclei or radioactive
+elements (or, to be more precese "isotopes" of radioactive elements&mdash;which
+is a word to refer to the fact that all atoms of a given elemen have the same
+number of protons, they may not all have the same number of neutrons) are
+unstable; they spontaneously decay over time.  While the decay of a particular
+atom is regarded as <b>random</b>.  This means two things: you cannot predict the exact
+moment at which a given nucleus will decay, but <em>can</em> predict, on
+average, what proportion will decay within a given stretch of time.
+This latter value is communicated by the number "<b>half life</b>."
+
+<p>
+<div class="definition">
+  <h2></h2>
+
+The <b>half life</b> of a radioactive substance is the amount of time in which, on average,
+half of the radioactive atoms (in a "large enough" batch of atoms) will decay.
+This is merely an average and will not be as accurate if you are only looking
+at a few atoms as opposed to say, billions.  We'll use the symbol \(h\) for this.
+For instance, Carbon-14 (\(^{14}\)C) is a rare carbon isotope, which happens
+to be radioactive. It has a hlaf life of 5,730 years, which means that if
+you have, say, a billion atoms of \(^{14}\)C
+sitting around, in 5,730 years you'll only have about 500 million left.
+What happens to the ones that "decayed"?  They turned into the stable
+isotope \(^{14}\)N, Nitrogen-14.  Pretty strange, right?
+</div>
+</p>
+Here is how radioactive decay is modeled:
+
+<div class="center list_of_rules">
+<h2>Formula for Radioactive Decay</h2>
+If you begin with \(A_0\) units (grams, pounds, moles, atoms, etc.) of a
+radioisotope with half life \(h\), then after \(t\) years, you will have
+\[
+A(t) = A_0 \left(\frac{1}{2}\right)^{\frac{t}{h}}
+\]
+</div>
+
+<p>
+ <div class="activity">
+  <h2></h2>
+  <p>
+  <a href="https://www.loom.com/share/cda9d51daba648a5aa1cd373c30109a6" target="_blank">Click for video.</a>
+  </p>
+Explain how the formula in the box above works.  What does each symbol "do"?
+
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+As mentioned above, Carbon-14 (\(^{14}\)C) has a half life of 5,730 years.
+Say that there about 600,000 atoms of \(^{14}\)C in a particular sample of plant matter.
+<ol>
+
+
+<li>
+Write down a formula for the (predicted) number of atoms
+you'll have after \(t\) years.
+</li>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\(A(t) = A_0 \left(\frac{1}{2}\right)^{\sfrac{t}{h}} = 600,000 \left(\frac{1}{2}\right)^{\sfrac{t}{5730}} \)
+
+    </div>
+  </div>
+
+
+<li>
+Compute the (average) predicted number of atoms of \(^{14}\)C that will be present in the sample
+after 40,000 years.  Round to a couple decimal places.
+</li>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\(A(t) =  600,000 \left(\frac{1}{2}\right)^{\sfrac{40000}{5730}} \approx 4750.29 \)
+
+    </div>
+  </div>
+
+
+
+</ol>
+
+</div>
+</p>
+
+<p>
+<div class="example">
+  <h2></h2>
+
+Some radioisotopes have very long half lives.  Some have very short&mdash;even
+down to fractions of a second!  One in the middle range is used to fuel space
+probes like <i>Voyager I</i>, namely a certain compound of plutonium-238,
+\(^{238}\)Pu.  It has a half life of 87.7 years.  To be clear,  \(^{238}\)Pu
+is involved in fueling (through the heat generated through radioactive decay)
+the scientific and communications instruments
+onboard  the craft rather than providing a means of propulsion.
+<ol>
+
+
+<li>
+<i>Voyager I</i> was launched on September 5, 1977. Develop a formula for the
+percent of \(^{238}\)Pu that is predicted to remain after \(t\) years.
+</li>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+\[
+A(t) = A_0 \left(\frac{1}{2}\right)^{\sfrac{t}{h}} = 100% \left(\frac{1}{2}\right)^{\sfrac{t}{87.7}}
+\]
+
+    </div>
+  </div>
+
+
+<li>
+Use your formula to figure out what percent of \(^{238}\)Pu remains in
+<i>Voyager I</i> today.
+</li>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+The only hard part here comes in if you want to worry about precisely how many
+years it has been since September 5, 1977.  I am writing this April 28, 2020.
+Of course, the years gone by include the years \(y\) so that \(1978 + y = 2020\).
+Of course, solving for \(y\), you get
+\( y = 42\).  But, if you want to get really precise (and no one says you have to)
+you might also include the extra days:
+\begin{align*}
+[\textrm{part of April}] &+ [\textrm{March}] + [\textrm{Feb.}] + [\textrm{Jan.}] + [\textrm{Dec.}] +
+[\textrm{Nov}]  + [\textrm{Oct}] + [\textrm{part of Sept}] \\
+= & 28 + 31 + 29 + 31 + 31 + 30 + 31 + (30-5)\\
+= & 236
+\end{align*}
+So in all, we might call it \(42 + \frac{236}{365} \approx 43.65\) years.
+Now, we just apply the formula:
+\[
+A(t) = 100% \left(\frac{1}{2}\right)^{\sfrac{42.64}{87.7}} \approx 71.38%
+\]
+
+    </div>
+  </div>
+
+
+
+</ol>
+
+</div>
+</p>
 
 
 

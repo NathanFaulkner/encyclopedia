@@ -102,15 +102,19 @@ class PolynomialCurveSketching(Question):
         # self.answer_latex_display = latex_print(self.answer, display=True)
 
         self.format_given_for_tex = f"""
-Sketch a graph of the given equation.  Make sure your graph is accurate throughout
-the window and has at least 5 points clearly marked.
+Do a free-hand a graph of the given equation.
 {self.format_given}
-
-\\begin{{flushright}}
-\\includegraphics[scale=0.6]{{../common_imgs/blank}}
-\\end{{flushright}}
-\\vspace{{-12\\baselineskip}}
-
+Your graph must clearly display the
+following:
+\\begin{{itemize}}
+\\item correct \(x\)-intercepts;
+\\item correct end behavior;
+\\item correct sign of \(y\) in between the \(x\)-values;
+\\item one other point (labelled with coordinates) that is not on the \(x\)-axis.
+\\end{{itemize}}
+As a further warning, a calculator-produced graph may not satisfy these
+requirements!!  (Why not?---because the scale on the calculator may not be adequate
+to display the detail I am requesting.)
 """
 
     name = 'Polynomial Curve Sketching'
@@ -129,6 +133,8 @@ the window and has at least 5 points clearly marked.
     """
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
+
+    loom_link = "https://www.loom.com/share/ec8d3f201b8044779044c5249fcc9e88?sharedAppSource=personal_library"
 
     has_img_in_key = True
 

@@ -20,6 +20,8 @@ class CompleteFactorizationLevel1ThreeFactors(CompleteFactorizationLevel1):
         super().__init__(**kwargs)
 
     loom_link = "https://www.loom.com/share/3bbf5a9cf5e74f038d9d0f52fcf60587"
+    module_name = 'complete_factorization_level1_three_factors'
+
 
 
 

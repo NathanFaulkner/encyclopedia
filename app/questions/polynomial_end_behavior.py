@@ -44,39 +44,43 @@ class PolynomialEndBehavior(Question):
                 a.append(random.randint(-7, 7))
 
         expr = make_polynomial(a,x)
-        self.format_given = f'\\( f(x) = {sy.latex(sy.expand(expr))}\\)'
+        self.format_given = f''
         self.answer = [sy.limit(expr, x, -sy.oo), sy.limit(expr, x, sy.oo)]
         self.format_answer = f'\\({sy.latex(self.answer[0])}, {sy.latex(self.answer[1])}\\)'
 
+        self.prompt_single = f"""Identify the end behavior of the polynomial,
+            \\[ f(x) = {sy.latex(sy.expand(expr))}\\]
+            by
+            indicating how to fill in the blanks:
+                <ul>
+                  <li>
+                    As \\(x \\rightarrow -\\infty\\), \\(f(x) \\rightarrow\\)
+                    <u><span style="color:white">mmmmmmmmmmmmm</span></u>
+                  </li>
+                  <li>
+                    As \\(x \\rightarrow \\infty\\), \\(f(x) \\rightarrow\\)
+                    <u><span style="color:white">mmmmmmmmmmmmm</span></u>
+                  </li>
+                </ul>
+            """
 
         self.format_given_for_tex = f"""
-        Identify the end behavior of the polynomial, by
+        Identify the end behavior of the polynomial,
+        \\[ f(x) = {sy.latex(sy.expand(expr))}\\]
+        by
         indicating how to fill in the blanks:
-
         \\begin{{itemize}}
             \\item As \\(x \\rightarrow -\\infty\\), \\(f(x) \\rightarrow$ \\ul{{\\quad\\quad\\quad}}
             \\item As \\(x \\rightarrow \\infty\\), \\(f(x) \\rightarrow$ \\ul{{\\quad\\quad\\quad}}
         \\end{{itemize}}
 
-        {self.format_given}
+
         """
 
     name = 'End Behavior of Polynomial'
     module_name = 'polynomial_end_behavior'
 
-    prompt_single = """Identify the end behavior of the polynomial, by
-    indicating how to fill in the blanks:
-        <ul>
-          <li>
-            As \\(x \\rightarrow -\\infty\\), \\(f(x) \\rightarrow\\)
-            <u><span style="color:white">mmmmmmmmmmmmm</span></u>
-          </li>
-          <li>
-            As \\(x \\rightarrow \\infty\\), \\(f(x) \\rightarrow\\)
-            <u><span style="color:white">mmmmmmmmmmmmm</span></u>
-          </li>
-        </ul>
-    """
+
     prompt_multiple = 'TBA'
     further_instruction = """
     For each blank, the possible answers are \\(\\infty\\) or \\(-\\infty\\).

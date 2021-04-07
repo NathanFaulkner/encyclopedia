@@ -92,28 +92,20 @@ class PolynomialCurveToEquation(Question):
         self.as_lambda = sy.lambdify(x, f(x))
         # f = self.as_lambda
         self.given = sy.factor(f(x))
-        self.format_given = f'\\(f(x) = {sy.latex(LC)}{sy.latex(expr)}\\)'
+        # self.format_given = f'\\(f(x) = {sy.latex(LC)}{sy.latex(expr)}\\)'
 
 
-        self.format_answer = self.format_given
-
-        self.format_given_for_tex = f"""
-Sketch a graph of the given equation.  Make sure your graph is accurate throughout
-the window and has at least 5 points clearly marked.
-{self.format_given}
-
-\\begin{{flushright}}
-\\includegraphics[scale=0.6]{{../common_imgs/blank}}
-\\end{{flushright}}
-\\vspace{{-12\\baselineskip}}
-
-"""
+        self.format_answer = f'\\(f(x) = {sy.latex(LC)}{sy.latex(expr)}\\)'
 
         self.prompt_single = f"""Give an equation for the given graph.  Note
         that the graph passes through the point \\({sy.latex((x_0, y_0))}\\)"""
 
         self.further_instruction = """Write 'f(x) =' or 'y = ' and then
         and expression for your function.
+        """
+
+        self.format_given_for_tex = f"""
+        {self.prompt_single}
         """
 
         points = [[z, 0] for z in zeroes]
@@ -149,6 +141,7 @@ the window and has at least 5 points clearly marked.
         x_min = window[0]
         x_max = window[1]
         x_points = np.linspace(x_min, x_max, res)
+        # print('x_points', x_points)
         y_points = self.as_lambda(x_points)
         x_points = cart_x_to_svg(x_points)
         y_points = cart_y_to_svg(y_points)

@@ -99,7 +99,9 @@ class QuadraticCanBeImaginary(Question):
 
 
         self.format_given_for_tex = f"""
-        {self.prompt_single}
+        Find all solutions. Instead of merely saying there is
+        ``no solution'' when you encounter a negative under a square root, write those
+        solutions in terms of \\(i\\).
 
         {self.given_latex_display}
         """

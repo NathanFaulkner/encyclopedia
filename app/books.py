@@ -248,8 +248,9 @@ class SevenTest():
         \\hrule
 
         \\smallskip
-        \\noindent I have not used any resources external to myself or an
-        approved calculator. In particular, I have not used Photomath.
+        \\noindent I have followed the FCDS Honor Code.
+        In particular, I have not used any resources external to myself or an
+        approved calculator.
 
         \\noindent Sign pledge here: \\underline{{\\hspace{{2.65in}} }}
         """
@@ -258,13 +259,11 @@ class SevenTest():
         for question_set in self.question_sets:
             if question_set != []:
                 question = question_set[0]
+                print('question:', question.module_name)
                 section_info = self.book.get_skill_info(question.module_name)[0]
                 out += f"""\\item {{\color{{gray}}({section_info[0]}.{section_info[1]})}}
-                For both problems, completely document the process by which you come to our answer.
-                If there is no work to show, verbally explain how you arrived at your answer.
-                This explanation does not need to be duplicated for each problem if
-                the same process applies to each.
-                (You will only receive half credit, otherwise.)\n"""
+                For both problems, show all steps.  Any step (excluding processes of arithmetic)
+                not shown will result in the loss of a point. \n"""
                 out += '\\begin{enumerate}\n'
                 out += f'\\item {question.format_given_for_tex}\n'
                 try:
@@ -801,6 +800,8 @@ graphsofexponentials.add_to_questions('graph_exp',
                                         'graph_exp_to_equation',
                                         # 'graph_log',
                                         )
+
+applicationsofexponentialsbasics = Section('applicationsofexponentialsbasics', "Applications of Exponentials: Basics", '/sections/applications-of-exponentials-basics')
 #######################################
 
 
@@ -912,6 +913,7 @@ powerfunctions.set_frontpage(powerfunctions_intro)
 exponentials_and_logs = Division('chapter', "Exponentials and Logarithms",
                                 [
                                 graphsofexponentials,
+                                # applicationsofexponentialsbasics,
                                 ])
 exponentials_and_logs.set_frontpage(exp_and_log_intro)
 

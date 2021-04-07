@@ -18,6 +18,8 @@ class CompleteFactorizationLevel1NiceFactors(CompleteFactorizationLevel1):
         kwargs['nice'] = True
         super().__init__(**kwargs)
 
+    module_name = 'complete_factorization_level1_nice_factors'
+
 
 
 Question_Class = CompleteFactorizationLevel1NiceFactors
