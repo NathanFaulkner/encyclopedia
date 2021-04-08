@@ -7,7 +7,7 @@ from sympy.parsing.sympy_parser import standard_transformations, implicit_multip
 transformations = (standard_transformations + (implicit_multiplication_application,))
 import sympy as sy
 
-from app.questions import Question, random_non_zero_integer, latex_print
+from app.questions import Question, random_non_zero_integer, latex_print, simplify_for_long_division
 
 
 
@@ -101,7 +101,10 @@ class SyntheticDivisionOfPolynomials(Question):
         user_answer = user_answer.lower()
         user_answer = user_answer.replace('^', '**')
         user_answer = parse_expr(user_answer, transformations=transformations)
-        return self.answer == user_answer
+        # return self.answer == user_answer
+        answer = simplify_for_long_division(self.answer)
+        user_answer = simplify_for_long_division(user_answer)
+        return answer == user_answer
 
     @staticmethod
     def format_useranswer(user_answer, display=False):

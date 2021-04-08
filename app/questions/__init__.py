@@ -124,7 +124,7 @@ __all__ = ['quadratic_pattern',
             'graph_sqrt', 'graph_sqrt_to_equation',
             'graph_cube_function', 'graph_cubic_to_equation',
             'graph_cbrt', 'graph_cbrt_to_equation',
-            'graph_exp', 'graph_exp_to_equation', 
+            'graph_exp', 'graph_exp_to_equation',
             'graph_log',
             ]
 
@@ -777,6 +777,33 @@ def drop_redundant_abs(expr, evaluate=True):
     else:
         # print('recurrence')
         return expr.func(*(drop_redundant_abs(arg) for arg in expr.args), evaluate=evaluate)
+
+def is_rational_function(expr):
+    out = True
+    if isinstance(expr, Mul):
+        for arg in expr.args:
+            if isinstance(arg, Pow):
+                if arg.args[1] % 1 != 0 or not arg.args[0].is_polynomial():
+                    out = False
+            elif not arg.is_polynomial():
+                out = False
+    else:
+        out = sympify(expr).is_polynomial()
+    return out
+
+
+def simplify_for_long_division(expr):
+    # print(expr, expr.args)
+    if is_rational_function(expr):
+        numer, denom = get_numer_denom(expr)
+        if degree(numer) < degree(denom):
+            return simplify(expr)
+        else:
+            return expr
+    elif expr.args == ():
+        return expr
+    else:
+        return expr.func(*(simplify_for_long_division(arg) for arg in expr.args))
 
 
 def commute_AbsMul_to_MulAbs(expr, evaluate=True):
