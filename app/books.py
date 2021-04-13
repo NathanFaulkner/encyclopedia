@@ -802,6 +802,9 @@ graphsofexponentials.add_to_questions('graph_exp',
                                         )
 
 applicationsofexponentialsbasics = Section('applicationsofexponentialsbasics', "Applications of Exponentials: Basics", '/sections/applications-of-exponentials-basics')
+applicationsofexponentialsbasics.add_to_questions(#'radioactive_decay_exp_formula',
+                                                    'radioactive_decay_exp_computation',
+                                                )
 #######################################
 
 

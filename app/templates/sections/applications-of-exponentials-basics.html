@@ -30,7 +30,7 @@
   that for various financial institutions who are involved with everything
   from lending money at interest to providing life insurance to families
   in the event of a policyholders untimely death, various mathematics
-  become important as they tr&mdash;with varying success&mdash;to predict
+  become important as they try&mdash;with varying success&mdash;to predict
   the future.  Again, we find exponential functions appearing in this
   analysis: for instance, being precisely the elementary form in which one
   can express how investments and debts grow when a lender compounds interest
@@ -460,8 +460,55 @@ does.)
   <p>
   <a href="https://www.loom.com/share/4c455576329049f4a92d202119d6f1e9" target="_blank">Click for video.</a>
   </p>
-Explain how the formula in the box above works.  What does each part of the formula "do"?
+  Explain how the formula in the box above works.  What does each part of the formula "do"?
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+      Here is the formula re-copied for ease of reference:
+      \[
+      A(t) = P\left(1 + \frac{r}{n}\right)^{nt}
+      \]
+      The \(P\), which stands for "principal", is the initial dollar amount
+      invested (the principal or initial amount).   The \(r\) is the annual interest
+      rate, expressed as a decimal&mdash;which, to be clear, means the rate, which
+      they advertise, that forms the basis for how much interest they offer
+      not only in the course of the year but in each compounding period.
+      The \(n\) is the number of times the bank compounds (awards) interest
+      each year.  For example, if they advertise that they will compound
+      monthly, then \(n = 12\), whereas if they compound quarterly,
+      \(n = 4\).  The \(t\) is the number of years over which the
+      investment is observed to grow.  Note that this model assumes
+      that no withdrawals are made from the growing account.
 
+      <p>
+        The way the formula works is this.  First, take \(t\) the number
+        of years that you allow your investment to grow.  Next, multiply
+        that number by \(n\), the number of compounding periods
+        in a year.  This number \(nt\) tells you how many compounding
+        periods have gone by during the time of the investment.
+        That's a crucial thing to know since the bank increases
+        the size of your balance after each compounding period.
+        How does it do that?  Well, it awards a fraction of the interest
+        that you might have earned in a year on whatever your most recent balance was.
+        It gives you precisely the fraction of interest represented
+        by whatever fraction of the year your componding period
+        represents (for instance, one twelfth of the interest
+        if the compounding period is one month).  Adding in that fraction of interest
+        is obtained by multiplying the most recent balance by
+        \(\left(1+\frac{r}{n}\right)\).  It can be useful to note that \(\frac{r}{n}\)
+        can also be described as "the fraction of the annual interest
+        rate obtained when dividing by the number of compounding periods in one year".
+        Growth is achieved by starting with the principal \(P\) and then
+        multiplying by this growth factor to represent the balance
+         at the end of one compounding period&mdash;and
+        then multiplying
+        that new, larger balance by the same growth factor at the end of the
+        next compounding period; and so on in like manner!
+        The repeated multiplication of this growth factor every compounding
+        period is achieved by putting the total number of compounding periods
+        \(nt\) in the exponent of this growth factor.
+    </div>
+  </div>
 </div>
 </p>
 
@@ -632,7 +679,39 @@ A(t) = A_0 \left(\frac{1}{2}\right)^{\frac{t}{h}}
   <a href="https://www.loom.com/share/cda9d51daba648a5aa1cd373c30109a6" target="_blank">Click for video.</a>
   </p>
 Explain how the formula in the box above works.  What does each symbol "do"?
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    Here is the formula re-copied for ease of reference:
+    \[
+    A(t) = A_0 \left(\frac{1}{2}\right)^{\frac{t}{h}}
+    \]
+    The \(A_0\) is the initial amount (in whatever unit of measurement)
+    of the radioactive substance that you begin with.
+    This use of "subscript \(0\)" is a common way to symbolize "initial
+    amount", with the \(0\) suggesting "initial time" or "zero hour".
+    The \(h\) is the half life of the substance (explained above),
+    measured in whatever unit of time.  The \(t\) is the amount
+    of time&mdash;expressed in the same units as the half life&mdash;over
+    which the substance is observed to decay.
 
+    <p>
+      The way the formula works is this: First, take the amount of time
+      \(t\)
+      that the substance has been decaying.  Express that time in the same
+      units as the half life.  Divide by the size of the half life
+      (do \(\frac{t}{h}\)).  This tells you how many half lives
+      have passed in the time since the initial observation.
+      Since (approximately) one half of the substance decays
+      every half life, this number \(\frac{t}{h}\) tells you
+      how many times to cut the initial value \(A_0\) in half.
+      Of course, another way of saying "cut in half" is "multiply by
+      \(\frac{1}{2}\)". Since repeated multiplication is expressed
+      with an exponent, the number of times, \(\frac{t}{h}\),
+      that you need to cut the amount in half thus appears
+      in the exponent of \(\frac{1}{2}\).
+  </div>
+</div>
 </div>
 </p>
 

@@ -41,21 +41,21 @@ prob_type = 'math_blank'
 
 
 
-class Plant():
-    def __init__(self, name, growth_rate, height_unit, time_unit):
-        self.name = name
-        self.growth_rate = growth_rate
-        self.height_unit = height_unit
-        self.time_unit = time_unit
-        self.growth_rate_with_units = growth_rate * height_unit / time_unit
-
-
-
-
-bamboo = Plant('bamboo', 2, ureg.foot, ureg.day)
-sunflower = Plant('sunflower', 9, ureg.inch, ureg.month)
-corn = Plant('corn', 1, ureg.inch, ureg.day)
-kudzu = Plant('kudzu', 1, ureg.foot, ureg.day)
+# class Plant():
+#     def __init__(self, name, growth_rate, height_unit, time_unit):
+#         self.name = name
+#         self.growth_rate = growth_rate
+#         self.height_unit = height_unit
+#         self.time_unit = time_unit
+#         self.growth_rate_with_units = growth_rate * height_unit / time_unit
+#
+#
+#
+#
+# bamboo = Plant('bamboo', 2, ureg.foot, ureg.day)
+# sunflower = Plant('sunflower', 9, ureg.inch, ureg.month)
+# corn = Plant('corn', 1, ureg.inch, ureg.day)
+# kudzu = Plant('kudzu', 1, ureg.foot, ureg.day)
 
 class RadioactiveDecayExpProblem(Question):
     def __init__(self, **kwargs):
@@ -64,13 +64,17 @@ class RadioactiveDecayExpProblem(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
+        if 'type' in kwargs:
+            self.type = kwargs['type']
+        else:
+            self.type = random.choice(['formula', 'value'])
         radioisotope = random.choice(['c14', 'sr90', 'pol210', 'fr221', 'o22'])
         #radioisotope = 'sr90'
         if radioisotope == 'c14':
         	halflife = 5730
         	units = 'years'
         	halflifewithunits = '5,370 years'
-        	symb = r'$^{14}\,$C'
+        	symb = r'\(^{14}\,\)C'
         	long_name = 'carbon-14'
         	long_name_cap = 'Carbon-14'
 
@@ -78,7 +82,7 @@ class RadioactiveDecayExpProblem(Question):
         	halflife = 28.79
         	units = 'years'
         	halflifewithunits = '28.79 years'
-        	symb = r'$^{90}$Sr'
+        	symb = r'\(^{90}\)Sr'
         	long_name = 'strontium-90'
         	long_name_cap = 'Strontium-90'
 
@@ -86,7 +90,7 @@ class RadioactiveDecayExpProblem(Question):
         	halflife = 138.376
         	units = 'days'
         	halflifewithunits = '138.376 days'
-        	symb = r'$^{210}$Po'
+        	symb = r'\(^{210}\)Po'
         	long_name = 'polonium-210'
         	long_name_cap = 'Polonium-210'
 
@@ -94,7 +98,7 @@ class RadioactiveDecayExpProblem(Question):
         	halflife = 299
         	units = 'nanoseconds'
         	halflifewithunits = '299 nanoseconds'
-        	symb = r'$^{212}$Po'
+        	symb = r'\(^{212}\)Po'
         	long_name = 'polonium-212'
         	long_name_cap = 'Polonium-212'
 
@@ -102,7 +106,7 @@ class RadioactiveDecayExpProblem(Question):
         	halflife = 4.8
         	units = 'minutes'
         	halflifewithunits = '4.8 minutes'
-        	symb = r'$^{221}$Fr'
+        	symb = r'\(^{221}\)Fr'
         	long_name = 'francium-221'
         	long_name_cap = 'Francium-221'
 
@@ -110,7 +114,7 @@ class RadioactiveDecayExpProblem(Question):
         	halflife = 2.25
         	units = 'seconds'
         	halflifewithunits = '2.25 seconds'
-        	symb = r'$^{22}$O'
+        	symb = r'\(^{22}\)O'
         	long_name = 'oxygen-22'
         	long_name_cap = 'Oxygen-22'
         howmuchstuff = random.randint(1,100)
@@ -158,12 +162,37 @@ class RadioactiveDecayExpProblem(Question):
                 units=units,
                 howmuchstuff=howmuchstuff,
                 how_long=how_long)
-        x = Symbol('x')
-        self.answer = self.m * x + self.b
-        self.format_answer = f'\(h = {latex(self.answer)}\)'
+        t = sy.Symbol('t')
         self.format_given = ''
 
-        self.prompt_single = """\\noindent
+        if self.type == 'formula':
+            self.prompt_single = """
+                {long_name_cap} ({symb}) is a radioisotope with a half life of {halflifewithunits}.
+                Write down a formula for the
+                (predicted) number of grams
+                you'll have after \\(t\\) {units},
+                if you start with {howmuchstuff} grams.
+                """.format(long_name_cap=long_name_cap,
+                symb=symb, reduced=reduced,
+                halflifewithunits=halflifewithunits,
+                units=units,
+                howmuchstuff=howmuchstuff,
+                how_long=how_long)
+                self.answer = A0*0.5**(t/h)
+                self.format_answer = f'\({A0}\\left(\\frac{{1}}{{2}}\\right)^{{ \\frac{{ {t} }}{{ {h} }} }}\)'
+        else:
+            self.prompt_single = """
+                {long_name_cap} ({symb}) is a radioisotope with a half life of {halflifewithunits}.s
+                Find out how much {symb} will remain after {how_long} {units}.
+                """.format(long_name_cap=long_name_cap,
+                symb=symb, reduced=reduced,
+                halflifewithunits=halflifewithunits,
+                units=units,
+                howmuchstuff=howmuchstuff,
+                how_long=how_long)
+                self.answer = A0*0.5**(how_long/h)
+                self.format_answer = f'\({sy.latex(self.answer)}\)'
+        self.format_given_for_tex = """\\noindent
             {long_name_cap} ({symb}) is a radioisotope with a half life of {halflifewithunits}.
             The formula for radioactive decay is
             \\(A = A_0\\left(\\frac{{1}}{{2}}\\right)^{{\\sfrac{{t}}{{h}} }}\\).
@@ -171,7 +200,7 @@ class RadioactiveDecayExpProblem(Question):
             \\noindent
             {{\\color{{red}}(a)}} Write down a formula for the
             (predicted) number of grams
-            you'll have after $t$ {units},
+            you'll have after \(t\) {units},
             if you start with {howmuchstuff} grams.
             \\vspace{{5\\baselineskip}}
 
@@ -189,51 +218,31 @@ class RadioactiveDecayExpProblem(Question):
 
     prob_type = 'math_blank'
 
-    name = 'Plant Growth Problem'
-    module_name = 'plant_problem'
+    name = 'Radioactive Decay: Exponential Problem'
+    module_name = 'radioactive_decay_exp_problem'
 
 
-    further_instruction = """Just enter the equation in a natural way.
-    """
+    further_instruction = """"""
 
-    loom_link = "https://www.loom.com/share/8ff321d4b7434dc5b42f2536a9129132"
-
-
-
-        self.format_given_for_tex = f"""
-The following table depicts the height of a {self.plant.name} plant
-depending on the number of {inflector.plural(str(self.time_unit))} that it has
-grown.
-Develop an equation that relates the height of the plant
-to the time that it has grown.  Use the letter \(h\) for
-the height of the plant.  Use the letter \(x\) for the number
-of {inflector.plural(str(self.time_unit))} that have gone by
-since ``{str(self.time_unit).title()} 0''.
-\\smallskip
-
-\\begin{{center}}
-{tabular}
-\\end{{center}}
-\\smallskip
-
-"""
+    # loom_link = "https://www.loom.com/share/8ff321d4b7434dc5b42f2536a9129132"
 
     def checkanswer(self, user_answer):
-        user_answer = user_answer.lower()
-        user_answer = user_answer.replace('y', 'h')
-        user_answer = user_answer.replace('t', 'x')
-        if 'h' not in user_answer:
-            return False
-        if 'x' not in user_answer:
-            return False
-        user_answer = user_answer.replace('^', '**')
-        lhs, rhs = user_answer.split('=')
-        lhs = parse_expr(lhs, transformations=transformations)
-        rhs = parse_expr(rhs, transformations=transformations)
-        user_answer = Eq(lhs, rhs)
-        h = Symbol('h')
-        user_answer = solve(user_answer, h)[0]
-        return self.answer.equals(user_answer)
+        if self.type == 'formula':
+            user_answer = user_answer.lower()
+            user_answer = user_answer.replace('y', 'A')
+            user_answer = user_answer.replace('x', 'xt')
+            if 'A' not in user_answer:
+                return False
+            if 't' not in user_answer:
+                return False
+            user_answer = user_answer.replace('^', '**')
+            lhs, rhs = user_answer.split('=')
+            lhs = parse_expr(lhs, transformations=transformations)
+            rhs = parse_expr(rhs, transformations=transformations)
+            user_answer = Eq(lhs, rhs)
+            A = sy.Symbol('A')
+            user_answer = solve(user_answer, A)[0]
+            return self.answer.equals(user_answer)
 
 
     def format_useranswer(self, user_answer, display=False):
@@ -265,7 +274,7 @@ since ``{str(self.time_unit).title()} 0''.
         lhs = parse_expr(lhs, transformations=transformations)
         rhs = parse_expr(rhs, transformations=transformations)
         user_answer = Eq(lhs, rhs)
-        h = Symbol('h')
+        h = sy.Symbol('h')
         user_answer = solve(user_answer, h)[0]
         return f'\({user_y} = {latex(user_answer)}\)'.replace('x', user_x)
 
@@ -280,14 +289,9 @@ since ``{str(self.time_unit).title()} 0''.
             lhs = parse_expr(lhs, transformations=transformations)
             rhs = parse_expr(rhs, transformations=transformations)
             user_answer = Eq(lhs, rhs)
-            h = Symbol('h')
+            h = sy.Symbol('h')
             user_answer = solve(user_answer, h)[0]
         except:
             raise SyntaxError
 
-
-
-
-
-
-Question_Class = PlantProblem
+Question_Class = RadioactiveDecayExpProblem

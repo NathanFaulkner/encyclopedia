@@ -97,7 +97,8 @@ class PolynomialCurveToEquation(Question):
 
         self.format_answer = f'\\(f(x) = {sy.latex(LC)}{sy.latex(expr)}\\)'
 
-        self.prompt_single = f"""Give an equation for the given graph.  Note
+        self.prompt_single = f"""The graph is that of either a degree 3 or degree 4
+        polynomial.  Give an equation for the graph.  Note
         that the graph passes through the point \\({sy.latex((x_0, y_0))}\\)"""
 
         self.further_instruction = """Write 'f(x) =' or 'y = ' and then

@@ -126,6 +126,8 @@ __all__ = ['quadratic_pattern',
             'graph_cbrt', 'graph_cbrt_to_equation',
             'graph_exp', 'graph_exp_to_equation',
             'graph_log',
+            'radioactive_decay_exp_formula',
+            'radioactive_decay_exp_computation',
             ]
 
 class Question():
