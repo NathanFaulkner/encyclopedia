@@ -54,6 +54,7 @@ class PolynomialCurveToEquation(Question):
             return len(a) != len(set(a))
 
         if force_duplicate:
+            random.seed(self.seed)
             while not(have_duplicate(zeroes)):
                 zeroes = []
                 for i in range(degree):
@@ -62,13 +63,14 @@ class PolynomialCurveToEquation(Question):
                         z = random.randint(-5,5)
                     zeroes.append(z)
         else:
+            random.seed(self.seed)
             for i in range(degree):
                     z = random.randint(-5,5)
                     while any([abs(z-r) == 1 for r in zeroes]):
                         z = random.randint(-5,5)
                     zeroes.append(z)
         # print(zeroes)
-
+        # random.seed(self.seed)
         y_0 = random.randint(-9,9)
         prod = 1
         x_0 = 0
