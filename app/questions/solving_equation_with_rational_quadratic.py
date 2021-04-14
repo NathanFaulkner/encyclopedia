@@ -87,7 +87,7 @@ class SolvingEquationWithRationalQuadratic(Question):
     further_instruction = """
     """
 
-    # loom_link = "https://www.loom.com/share/6cbdb245ddf94247985dc59deac4cbf2?sharedAppSource=personal_library"
+    loom_link = "https://www.loom.com/share/3297ccbc390e41009b474d8d2adab8f6?sharedAppSource=personal_library"
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 

@@ -124,7 +124,7 @@ class RationalsMultiplyOrDivide(Question):
     further_instruction = """
     """
 
-    # loom_link = "https://www.loom.com/share/6cbdb245ddf94247985dc59deac4cbf2?sharedAppSource=personal_library"
+    loom_link = "https://www.loom.com/share/80802f0dbd4a455eac003e5d20be1508?sharedAppSource=personal_library"
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
