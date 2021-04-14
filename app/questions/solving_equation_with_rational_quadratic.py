@@ -53,7 +53,7 @@ class SolvingEquationWithRationalQuadratic(Question):
         if abs(a2) != 1:
             prob = '\\frac{{{n1}}}{{{d1}}} = \\frac{{{n2}}}{{{d2}}}'.format(n1=n1, n2=n2, d1=d1, d2=d2)
         else:
-            prob = '\\frac{{{n1}}}{{{d1}}} = {expr}'.format(n1=n1, d1=d1, expr=latex(n2/d2))
+            prob = '\\frac{{{n1}}}{{{d1}}} = {expr}'.format(n1=n1, d1=d1, expr=sy.latex(n2/d2))
 
         self.answer = set(sy.solve(n1/d1 - n2/d2, x))
         # print(self.answer)
