@@ -55,6 +55,29 @@ class Division():
         else:
             return None
 
+    def get_item_at_location(self, location):
+        print('location:', location)
+        if self.category == 'book':
+            sub = self.subdivisions['main'].subdivisions
+        else:
+            sub = self.subdivisions
+        l = len(location)
+        n = 0
+        while n < l:
+            i = location[n]
+            sub = sub[i]
+            if isinstance(sub, Section):
+                return sub
+            else:
+                sub = sub.subdivisions
+            n += 1
+
+    def get_sections_by_string(self, s):
+        sections = s.split(',')
+        sections = [[int(a) - 1 for a in section.split('.')] for section in sections]
+        # return sections
+        sections = [self.get_item_at_location(section) for section in sections]
+        return sections
 
     @staticmethod
     def list_bottom_elements(subdivisions, include_challenge=False):
@@ -330,6 +353,233 @@ class SevenTest():
 
         return status
 
+class CustomAssessment():
+    def __init__(self, book, assess_title, **kwargs):
+        if 'seed' in kwargs:
+            self.seed = kwargs['seed']
+        else:
+            self.seed = random.random()
+        random.seed(self.seed)
+        self.book = book
+        self.title = assess_title
+        all_sections = book.list_all_sections()
+        l = len(all_sections)
+        if kwargs.get('seven_test'):
+            num_sevens = int(l/7)
+            # print(num_sevens)
+            start = 7 * (which_test - 1)
+            if which_test <= num_sevens:
+                test_sections = all_sections[start: start + 7]
+                prev_sections = all_sections[0:start]
+                random.shuffle(prev_sections)
+                test_sections += prev_sections[0:3]
+            else:
+                num_left = l - start
+                test_sections = all_sections[-num_left: -1]
+                prev_sections = all_sections[0:start]
+                random.shuffle(prev_sections)
+                test_sections += prev_sections[0:10 - num_left]
+            self.sections = test_sections
+        elif 'sections' in kwargs:
+            self.sections = kwargs['sections']
+        elif 'num_sections' in kwargs:
+            self.sections = random.sample(set(all_sections), kwargs['num_sections'])
+        else:
+            self.sections = random.sample(set(all_sections), 10) #Defaults to 10 questions
+        # for section in all_sections:
+        #     print(section.display_name)
+        question_sets = []
+        for i, section in enumerate(self.sections):
+            if section.questions != []:
+                if len(set(section.questions)) > 1:
+                    question_names = random.sample(set(section.questions), 2)
+                else:
+                    question_names = [section.questions[0], section.questions[0]]
+                section_info = self.book.get_skill_info(question_names[0])[0]
+                question_module = getattr(questions, question_names[0])
+                seed = (self.seed * (i+1)) % 1
+                question = question_module.Question_Class(seed=seed)
+                question_set = [question]
+                question_module = getattr(questions, question_names[1])
+                question = question_module.Question_Class(seed=abs(1-seed))
+                question_set.append(question)
+                question_sets.append(question_set)
+            else:
+                question_sets.append([])
+        self.question_sets = question_sets
+
+    preamble = r"""
+\documentclass[12pt]{article}
+\usepackage{amsmath}% http://ctan.org/pkg/amsmath
+\usepackage[
+  height=10in,      % height of the text block
+  width=7in,       % width of the text block
+  top=0.5in,        % distance of the text block from the top of the page
+  headheight=48pt, % height for the header block
+  headsep=12pt,    % distance from the header block to the text block
+  heightrounded,   % ensure an integer number of lines
+  %showframe,       % show the main blocks
+  verbose,         % show the values of the parameters in the log file
+]{geometry}
+
+
+\pagestyle{empty}
+
+
+
+\usepackage{graphicx}
+
+\usepackage{soul}
+\usepackage{xcolor}
+
+\definecolor{epsilon-blue}{RGB}{0,0,155}
+
+
+\newcommand{\lt}{<}
+\newcommand{\gt}{>}
+
+
+
+
+
+\pagestyle{empty}
+
+"""
+
+
+    def make_tex(self, key=False):
+        title = self.title
+        if key:
+            title += '_key'
+        file_name_with_path = os.path.join('app', 'for_printing', title, '{a}.tex'.format(a=title))
+        # print(os.getcwd())
+        try:
+            os.chdir('app')
+            os.chdir('for_printing')
+            # print(os.getcwd())
+            os.mkdir(title)
+            os.chdir(title)
+            f = open('{a}.tex'.format(a=title), 'w+')
+        except:
+            os.chdir(title)
+            # print(os.getcwd())
+            f = open('{a}.tex'.format(a=title), 'w+')
+        # all_img_names = []
+        for question_set in self.question_sets:
+            i = 0
+            # img_names = []
+            for question in question_set:
+                try:
+                    if question.has_img:
+                        img_name = '{qname}{i}'.format(qname=question.module_name, i=i)
+                        question.save_img(img_name)
+                    # img_names.append(img_name)
+                except AttributeError:
+                    pass
+                if key:
+                    try:
+                        if question.has_img_in_key:
+                            img_name = 'ans_for_{qname}{i}'.format(qname=question.module_name, i=i)
+                            question.save_img(img_name)
+                        # img_names.append(img_name)
+                    except AttributeError:
+                        pass
+                i += 1
+                # all_img_names.append(img_names)
+        out = self.preamble
+        # title_head = f"\\lhead{{\\textbf{{{self.book.display_name} - Test {self.which_test} v. {self.seed} \\\\Printed on \\today}}}}"
+        # out += title_head + '\n\n'
+        out += '\\begin{document}\n\n'
+        # out += '\\thispagestyle{fancy}\n\n'
+        header = f"""\\noindent
+        \\begin{{tabular}}{{ p{{3.5in}} p{{3.2in}} }}
+        \\hspace{{-1ex}}\\textbf{{{self.book.display_name} - Custom Test }} & \\textbf{{Name: \\underline{{\\hspace{{2.65in}} }}}}\\\\
+        \\hspace{{-1ex}}\\textbf{{Version - {self.seed} }} &   \\textbf{{Date: \\hspace{{2in}} }}\\
+        \\end{{tabular}}
+        \\hrule
+
+        \\smallskip
+        \\noindent I have followed the FCDS Honor Code.
+        In particular, I have not used any resources external to myself or an
+        approved calculator.
+
+        \\noindent Sign pledge here: \\underline{{\\hspace{{2.65in}} }}
+        """
+        out += header
+        out += '\\begin{enumerate}\n'
+        for question_set in self.question_sets:
+            if question_set != []:
+                question = question_set[0]
+                print('question:', question.module_name)
+                section_info = self.book.get_skill_info(question.module_name)[0]
+                out += f"""\\item {{\color{{gray}}({section_info[0]}.{section_info[1]})}}
+                For both problems, show all steps.  Any step (excluding processes of arithmetic)
+                not shown will result in the loss of a point. \n"""
+                out += '\\begin{enumerate}\n'
+                out += f'\\item {question.format_given_for_tex}\n'
+                try:
+                    question.has_img
+                    out += """
+                    \\begin{{flushright}}
+                        \\includegraphics[scale=0.6]{{{img_name}}}
+                    \\end{{flushright}}
+                    \\vspace{{-9\\baselineskip}}
+                    """.format(img_name=question.module_name + '0')
+                except AttributeError:
+                    pass
+                out += '\\vspace{12\\baselineskip}\n'
+                question = question_set[1]
+                out += f'\\item {question.format_given_for_tex}\n'
+                try:
+                    question.has_img
+                    out += """
+                    \\begin{{flushright}}
+                        \\includegraphics[scale=0.6]{{{img_name}}}
+                    \\end{{flushright}}
+                    \\vspace{{-9\\baselineskip}}
+                    """.format(img_name=question.module_name + '1')
+                except AttributeError:
+                    pass
+                out += '\\vspace{12\\baselineskip}\n'
+                out += '\\end{enumerate}\n'
+            else:
+                out += f'\\item No questions have been constructed for this section.\n'
+            out += '\\newpage\n'
+        out += '\\end{enumerate}\n'
+        if key:
+            out += '\\newpage'
+            out += f'\\textbf{{Answers}} for Test {self.which_test}, Version - {self.seed}\n'
+            out += '\\begin{enumerate}\n'
+            for question_set in self.question_sets:
+                out += '\\item\n'
+                if question_set != []:
+                    out += '\\begin{enumerate}\n'
+                    out += f'\\item {question_set[0].format_answer}\n'
+                    try:
+                        if question_set[0].has_img_in_key:
+                            out += """\\includegraphics[scale=0.6]{{{img_name}}}""".format(img_name='ans_for_' + question_set[0].module_name + '0')
+                    except AttributeError:
+                        pass
+                    out += f'\\item {question_set[1].format_answer}\n'
+                    try:
+                        if question_set[1].has_img_in_key:
+                            out += """\\includegraphics[scale=0.6]{{{img_name}}}""".format(img_name='ans_for_' + question_set[1].module_name + '1')
+                    except AttributeError:
+                        pass
+                    out += '\\end{enumerate}\n'
+            out += '\\end{enumerate}\n'
+        out += '\\end{document}'
+
+        f.write(out)
+        f.close()
+
+        status = os.system('pdflatex {title}'.format(title=title))
+
+        os.chdir('..')
+        os.chdir('..')
+        os.chdir('..')
+
+        return status
 
 class ProblemSet():
     def __init__(self, question_names, title, **kwargs):

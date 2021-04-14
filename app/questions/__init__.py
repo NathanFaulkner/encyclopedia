@@ -692,9 +692,9 @@ def get_numer_denom(quot_expr, evaluate=True):
 
 def congruence_of_quotient(quot1, quot2, evaluate=True):
     numer1, denom1 = get_numer_denom(quot1, evaluate=evaluate)
-    print('QUOT1', numer1, denom1)
+    # print('QUOT1', numer1, denom1)
     numer2, denom2 = get_numer_denom(quot2, evaluate=evaluate)
-    print('QUOT2', numer2, denom2)
+    # print('QUOT2', numer2, denom2)
     gcf_numer1, gcf_denom1 = [safe_gcf(numer1), safe_gcf(denom1)]
     gcf_numer2, gcf_denom2 = [safe_gcf(numer2), safe_gcf(denom2)]
     nec = gcf_numer1/gcf_denom1 == gcf_numer2/gcf_denom2

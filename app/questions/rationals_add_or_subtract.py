@@ -43,16 +43,16 @@ class RationalsAddOrSubtract(Question):
         b2 = 0
         while b2 == 0:
             b2 = random.randint(-9,9)
-        def non_zero_degree_1(x):
-            random.seed(self.seed)
+        def non_zero_degree_1(x, seed):
+            random.seed(seed)
             c = 0
             d = 0
             while c == 0 and d == 0:
                 c = random.randint(-9,9)
                 d = random.randint(-9,9)
             return c*x + d
-        numerator1 = non_zero_degree_1(x)
-        numerator2 = non_zero_degree_1(x)
+        numerator1 = non_zero_degree_1(x, self.seed)
+        numerator2 = non_zero_degree_1(x, (self.seed)*2 % 1)
         denominator1 = (x-A)*(x-b1)**es[0]
         denominator2 = (x-A)*(x-b2)**es[1]
         # random.seed(self.seed)
