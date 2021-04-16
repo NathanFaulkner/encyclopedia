@@ -79,7 +79,7 @@ class RadioactiveDecayExpComputation(Question):
         if radioisotope == 'c14':
         	halflife = 5730
         	units = 'years'
-        	halflifewithunits = '5,370 years'
+        	halflifewithunits = '5,730 years'
         	symb = r'\(^{14}\,\)C'
         	long_name = 'carbon-14'
         	long_name_cap = 'Carbon-14'
@@ -131,14 +131,14 @@ class RadioactiveDecayExpComputation(Question):
         A0 = howmuchstuff
         h = halflife
         time_factor = random.randint(15,60)*0.1
-        how_long = time_factor*halflife
+        how_long = round(time_factor*halflife, 2)
         t = sy.Symbol('t')
         self.format_given = ''
         self.prompt_single = f"""
             {long_name_cap} ({symb}) is a radioisotope with a half life of {halflifewithunits}.
-            Write down a formula for the
+            Compute the
             (predicted) number \\(A\\) of {inflector.plural(str(self.mass_unit))}
-            you'll have after \\(t\\) {units},
+            you'll have after \\({how_long}\\) {units},
             if you start with {howmuchstuff} {inflector.plural(str(self.mass_unit))}.
             """#.format(long_name_cap=long_name_cap,
             # symb=symb, reduced=reduced,
@@ -179,7 +179,8 @@ class RadioactiveDecayExpComputation(Question):
 
 
     further_instruction = """Round your answer to at least 4 decimal places, and don't forget to include units.
-    The answer checker will give a syntax error if you forget your units."""
+    The answer checker will give a syntax error if you forget your units.  Also, don't write "y = " or
+    "A = "; just enter the numerical part of your answer followed by a space and then the units."""
 
     # loom_link = "https://www.loom.com/share/8ff321d4b7434dc5b42f2536a9129132"
 
@@ -195,6 +196,12 @@ class RadioactiveDecayExpComputation(Question):
         return user_units in allowed
 
     def checkanswer(self, user_answer):
+        # user_answer = user_answer.lower()
+        # user_answer = user_answer.replace('y ', '')
+        # user_answer = user_answer.replace('y=', '')
+        # user_answer = user_answer.replace('a ', '')
+        # user_answer = user_answer.replace('a=', '')
+        # user_answer = user_answer.replace('=', '')
         if len(user_answer.split(' ')) == 1:
             return false
         else:

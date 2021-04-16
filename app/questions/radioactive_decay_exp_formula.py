@@ -61,6 +61,7 @@ prob_type = 'math_blank'
 
 class RadioactiveDecayExpFormula(Question):
     def __init__(self, **kwargs):
+        print('new decay formula problem')
         if 'seed' in kwargs:
             self.seed = kwargs['seed']
         else:
@@ -79,7 +80,7 @@ class RadioactiveDecayExpFormula(Question):
         if radioisotope == 'c14':
         	halflife = 5730
         	units = 'years'
-        	halflifewithunits = '5,370 years'
+        	halflifewithunits = '5,730 years'
         	symb = r'\(^{14}\,\)C'
         	long_name = 'carbon-14'
         	long_name_cap = 'Carbon-14'
@@ -146,7 +147,8 @@ class RadioactiveDecayExpFormula(Question):
             # units=units,
             # howmuchstuff=howmuchstuff,
             # how_long=how_long)
-        self.answer = parse_expr(f'{A0}(1/2)**(t/{h})', transformations=transformations)
+        answer = f'{A0}(1/2)**(t/{h})'
+        self.answer = parse_expr(answer, transformations=transformations)
         self.format_answer = f'\(A = {A0}\\left(\\frac{{1}}{{2}}\\right)^{{ \\frac{{ {t} }}{{ {h} }} }}\)'
         self.format_given_for_tex = f"""\\noindent
             {long_name_cap} ({symb}) is a radioisotope with a half life of {halflifewithunits}.
@@ -178,12 +180,13 @@ class RadioactiveDecayExpFormula(Question):
     module_name = 'radioactive_decay_exp_formula'
 
 
-    further_instruction = """Do not write "A(t)".  Just write your formulat as "A = ...". """
+    further_instruction = """Do not write "A(t)".  Just write your formula as "A = ...". """
 
     # loom_link = "https://www.loom.com/share/8ff321d4b7434dc5b42f2536a9129132"
 
     def checkanswer(self, user_answer):
         user_answer = user_answer.lower()
+        user_answer = user_answer.replace(' ', '')
         user_answer = user_answer.replace('y', 'a')
         user_answer = user_answer.replace('x', 't')
         if 'a' not in user_answer:
@@ -191,47 +194,52 @@ class RadioactiveDecayExpFormula(Question):
         if 't' not in user_answer:
             return False
         user_answer = user_answer.replace('^', '**')
-        lhs, rhs = user_answer.split('=')
-        lhs = parse_expr(lhs, transformations=transformations)
-        rhs = parse_expr(rhs, transformations=transformations)
-        user_answer = sy.Eq(lhs, rhs)
-        A = sy.Symbol('a')
-        user_answer = sy.solve(user_answer, A)[0]
-        user_answer = sy.lambdify(sy.Symbol('t'), user_answer)
-        answer = sy.lambdify(sy.Symbol('t'), self.answer)
-        print(answer, user_answer)
-        return tolerates(answer, user_answer)
+        user_answer = user_answer.replace('a=', '')
+        user_answer = parse_expr(user_answer, transformations=transformations)
+        # return sy.simplify(user_answer - self.answer) == 0
+        print(user_answer, self.answer)
+        return user_answer.equals(self.answer)
+        # print('user traversal')
+        # for arg in sy.preorder_traversal(user_answer):
+        #     print(f'{arg}, {type(arg)}')
+        # print('ans traversal')
+        # for arg in sy.preorder_traversal(self.answer):
+        #     print(f'{arg}, {type(arg)}')
+        # return sy.simplify(user_answer - self.answer) == 0
+        # user_answer = sy.lambdify(sy.Symbol('t'), user_answer)
+        # answer = sy.lambdify(sy.Symbol('t'), self.answer)
+        # print(answer, user_answer)
+        # return tolerates(answer, user_answer, tolerance=0.000000000000005)
 
     @staticmethod
     def format_useranswer(user_answer, display=False):
-        user_answer = user_answer.lower()
+        # user_answer = user_answer.lower()
         user_answer = user_answer.replace('y', 'a')
         user_answer = user_answer.replace('x', 't')
         user_answer = user_answer.replace('^', '**')
         lhs, rhs = user_answer.split('=')
-        lhs = parse_expr(lhs, transformations=transformations)
-        rhs = parse_expr(rhs, transformations=transformations)
-        user_answer = sy.Eq(lhs, rhs)
-        A = sy.Symbol('a')
-        user_answer = sy.solve(user_answer, A)[0]
-        return f'\\(A = {sy.latex(user_answer)}\\)'
+        lhs = parse_expr(lhs, transformations=transformations, evaluate=False)
+        rhs = parse_expr(rhs, transformations=transformations, evaluate=False)
+        # user_answer = sy.Eq(lhs, rhs)
+        # A = sy.Symbol('a')
+        # user_answer = sy.solve(user_answer, A)[0]
+        return f'\\({sy.latex(lhs)} = {sy.latex(rhs)}\\)'
 
     @staticmethod
     def validator(user_answer):
         try:
             user_answer = user_answer.lower()
+            user_answer = user_answer.replace(' ', '')
             user_answer = user_answer.replace('y', 'a')
+            if 'a' not in user_answer:
+                raise SyntaxError
             user_answer = user_answer.replace('x', 't')
             user_answer = user_answer.replace('^', '**')
-            lhs, rhs = user_answer.split('=')
-            lhs = parse_expr(lhs, transformations=transformations)
-            rhs = parse_expr(rhs, transformations=transformations)
-            user_answer = sy.Eq(lhs, rhs)
-            A = sy.Symbol('a')
-            user_answer = sy.solve(user_answer, A)[0]
-            user_answer = sy.lambdify(sy.Symbol('t'), user_answer)
-            answer = sy.lambdify(sy.Symbol('t'), sy.Symbol('t'))
-            tolerates(answer, user_answer)
+            user_answer = user_answer.replace('a=', '')
+            user_answer = parse_expr(user_answer, transformations=transformations)
+            # return sy.simplify(user_answer - self.answer) == 0
+            # print(user_answer, self.answer)
+            user_answer.equals(sy.Symbol('t'))
         except:
             raise SyntaxError
 

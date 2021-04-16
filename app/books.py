@@ -1052,8 +1052,10 @@ graphsofexponentials.add_to_questions('graph_exp',
                                         )
 
 applicationsofexponentialsbasics = Section('applicationsofexponentialsbasics', "Applications of Exponentials: Basics", '/sections/applications-of-exponentials-basics')
-applicationsofexponentialsbasics.add_to_questions(#'radioactive_decay_exp_formula',
+applicationsofexponentialsbasics.add_to_questions('radioactive_decay_exp_formula',
                                                     'radioactive_decay_exp_computation',
+                                                    'compound_interest_exp_formula',
+                                                    'compound_interest_exp_computation',
                                                 )
 #######################################
 
@@ -1166,7 +1168,7 @@ powerfunctions.set_frontpage(powerfunctions_intro)
 exponentials_and_logs = Division('chapter', "Exponentials and Logarithms",
                                 [
                                 graphsofexponentials,
-                                # applicationsofexponentialsbasics,
+                                applicationsofexponentialsbasics,
                                 ])
 exponentials_and_logs.set_frontpage(exp_and_log_intro)
 
