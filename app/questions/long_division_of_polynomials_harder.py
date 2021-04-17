@@ -144,6 +144,7 @@ class LongDivisionOfPolynomialsHarder(Question):
         user_answer = user_answer.lower()
         user_answer = user_answer.replace('^', '**')
         user_answer = parse_expr(user_answer, transformations=transformations)
+        user_answer = simplify_for_long_division(user_answer)
         return f'\({sy.latex(user_answer)}\)'
 
     @staticmethod
@@ -152,6 +153,7 @@ class LongDivisionOfPolynomialsHarder(Question):
             user_answer = user_answer.lower()
             user_answer = user_answer.replace('^', '**')
             user_answer = parse_expr(user_answer, transformations=transformations)
+            user_answer = simplify_for_long_division(user_answer)
         except:
             raise SyntaxError
 
