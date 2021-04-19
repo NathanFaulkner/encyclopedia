@@ -1,0 +1,376 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section, we encounter a new concept&mdash;actually a new number.
+  This number (an actual number&mdash;e.g., one that you could plot on the real
+  line!) shows up naturally in exponential applications.  In some ways, this
+  number will seem strange, but you'll want to lump into other interesting
+  numbers that have already come up in your study of math, like
+  \(\pi\approx 3.14159\) and
+  \(\sqrt{2} \approx 1.414213\).  This new number, which is symbolized by
+  \(e\), is approximately as follows:
+  \[
+  e \approx 2.718281828\ldots
+  \]
+  Like \(\pi\), \(e\) cannot be expressed as a ratio of whole numbers and
+  therefore also cannot be represented as a "repeating decimal" expansion.
+  Also, as in the case of \(\pi\), staring at its decimal expansion tells you a
+  bsolutely nothing about it&mdash;except that it does impress upon you, I hope,
+  that we are talking about  a real number here, and one which is in the
+  neighborhood of \(2.7\).
+</p>
+<p>
+  Now, for the more interesting part of the story.  I mentioned above that
+  \(e\) (which is designated by this letter at least in part to honor the
+  18\(^\textrm{th}\)-Century mathematician,
+  <a href="https://en.wikipedia.org/wiki/Leonhard_Euler" target="_blank">Leonhard Euler</a>
+  who played a large role in our understanding of this number) comes up
+  naturally in the study of natural phenomena related to exponential
+  growth (or decay).  But we start with an application which certainly
+  isn't natural but altogether "arbitrary," which nevertheless presents a
+  traditional and easy road to the definition of this number.
+  We consider its application to finance.
+</p>
+<p>
+  In the previous section, we discussed the concept of compound
+  interest&mdash;where the bank adds interest to your account
+  periodically and then even adds interest on the interest.
+  We also studied the question of how often the bank chooses
+  to compound your interest: does it compound it once a year? every month?
+  every day?  We observed that one does gain a little bit by the end when
+  the bank is willing to compound monthly as opposed to once a year&mdash;but
+  the gain is modest.  For instance, if you invest \$1,000 at \(4%\), as we
+  saw, then, using the equation
+  \[
+    A(t) = P\left(1 + \frac{r}{n}\right)^{nt}
+  \]
+  we find that, if the bank awards interest only at the end of the year, then you would have
+  \[
+  1000\left(1+0.04\right) = \$1040
+  \]
+  but if the bank compounds your interest each month, then you would have
+  \[
+  1000\left(1+\frac{0.04}{12}\right)^{12} \approx \$1040.74
+  \]
+  So, that isn't a very impressive gain.  But what if the bank was willing to
+  compound interest more often?  How much could you earn?  Let's try "every day":
+  \[
+  1000\left(1+\frac{0.04}{360}\right)^{360} \approx \$1040.81
+  \]
+  Rather disappointing!
+</p>
+<p>
+ <div class="activity">
+  <h2></h2>
+<a href="https://www.loom.com/share/e275b120a00749c88aac58c955784a3d" target="_blank">Click for video</a>
+How much can you earn on \$1000 invested for one year at 4%&mdash;if the bank let's <em>you</em>
+choose how often to compound interest?  We have already seen that you do indeed
+earn more money when the bank compounds your interest more often,
+but that you don't earn much more.  Well, what if, say, the bank compounds
+interest at some incredible frequency&mdash;millions or billions of times per
+year, etc.  See how much you can earn that way by using the equation
+\[
+A(t) = P\left(1 + \frac{r}{n}\right)^{nt}
+\]
+and using some really large number for \(n\).  How large of a number will your
+calculator even allow you to use in place of \(n\)?
+</div>
+</p>
+In the previous activity, I hope you were impressed by how little difference
+using larger and larger numbers for \(n\) made.  It's almost as if the amounts
+that you can make were "zeroing in" on some mysterious, secret value.
+Is this right, or is this an illusion? Maybe your TI-84 is  just too meager
+to get to the bottom of this.  What if we used a supercomputer, like
+<a href="https://en.wikipedia.org/wiki/Summit_(supercomputer)" target="_blank">Summit</a>
+in Oak Ridge, Tennessee?  Maybe the value of our one-year investment would
+really be quite large if we could use a very much bigger value for \(n\).
+In fact, this turns out not to be the case.  One can prove using some slick
+algebra that there is a <em>ceiling</em> on how large the expression
+\[
+1000\left(1+\frac{0.04}{n}\right)^n
+\]
+can be, regardless of how large \(n\) is.  And if it has <em>a</em> ceiling, t
+hen it has a <em>lowest</em> such ceiling.  (Actually, this can be taken to
+be the <em>mathematical</em> definition of the real numbers: It's the set of
+numbers that includes all the lowest ceilings on any (bounded)
+set of rational numbers.)  In case you are following along closely, you may
+anticipate what I have to say next: this ceiling has something to do with the
+number \(e\).  To see exactly how, we are going to strip this question down
+to its most basic illustration&mdash;in the following activity.
+<p>
+ <div class="activity">
+  <h2></h2>
+<a href="https://www.loom.com/share/8926e727c3a14b63851c2882bf8c5077" target="_blank">Click for video</a>
+Imagine investing just \$1 at 100% interest for 1 year.  The question is,
+how much money can you make if the bank allows you to choose how often
+they compound your interest?  Note first that, using the formula
+\[
+A(t) = P\left(1 + \frac{r}{n}\right)^{nt}
+\]
+with \(t=1\), \(P=1\), and \(r = 100% = 1\), we get the simplified formula
+\[
+\left(1+\frac{1}{n}\right)^n
+\]
+So, we are going to try various values for \(n\) and see what we get.
+This will require a calculator, of course!  Fill out the following table:
+
+<table border="1" style="border-collapse: collapse; width:75%; margin-left:auto; margin-right:auto;">
+  <tr>
+    <td style="text-align: center; width: 10%">\(n\) </td>
+    <td style="width:20%">\(\left(1+\frac{1}{n}\right)^n\)</td>
+    <td style="width:47%">Rounded Value</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(1\)</td><td>\(\left(1 + \frac{1}{1}\right)^1\)</td><td>\(\$2\)</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(2\)</td><td>\(\left(1 + \frac{1}{2}\right)^2\)</td><td>\(\$2.25\)</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(10\)</td><td>\(\left(1 + \frac{1}{10}\right)^{10}\)</td><td>\(\$2.5937424601000023\)</td>
+  </tr>
+  <tr>
+    <td  style="text-align: center;">\(100\)</td><td>&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(1000\)</td><td>&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(10^6\)</td><td>&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(10^9\)</td><td>&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">\(10^{12}\)</td><td>&nbsp;</td><td></td>
+  </tr>
+</table>
+<div class="answer">
+  <a class="collapsible"><h3>Answer: </h3></a>
+  <div class='inner'>
+    <table border="1" style="border-collapse: collapse; width:75%; margin-left:auto; margin-right:auto;">
+      <tr>
+        <td style="text-align: center; width: 10%">\(n\) </td>
+        <td style="width:20%">\(\left(1+\frac{1}{n}\right)^n\)</td>
+        <td style="width:45%">Rounded Value</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(1\)</td><td>\(\left(1 + \frac{1}{1}\right)^1\)</td><td>\(\$2\)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(2\)</td><td>\(\left(1 + \frac{1}{2}\right)^2\)</td><td>\(\$2.25\)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(10\)</td><td>\(\left(1 + \frac{1}{10}\right)^{10}\)</td><td>\(\$2.5937424601000023\)</td>
+      </tr>
+      <tr>
+        <td  style="text-align: center;">\(100\)</td><td>\(\left(1 + \frac{1}{100}\right)^{100}\)</td><td>\(\$2.70481382942\)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(1000\)</td><td>\(\left(1 + \frac{1}{1000}\right)^{1000}\)</td><td>\(\$2.7169239322\)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(10^6\)</td><td>\(\left(1 + \frac{1}{10^6}\right)^{10^6}\)</td><td>\(\$2.7182804693\)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(10^9\)</td><td>\(\left(1 + \frac{1}{10^9}\right)^{10^9}\)</td><td>\(\$2.718281827099904\)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">\(10^{12}\)</td><td>\(\left(1 + \frac{1}{10^{12}}\right)^{10^{12}}\)</td><td>\(\$2.71828182845768609\)</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<p>
+You might even be curious what happens when you plug in still larger numbers
+for \(n\).  But let me caution you, because of limitations (or even choices)
+in the programming of the TI, it will spit out erroneous values when you go
+above \(10^{12}\)&mdash;say, to \(10^{13}\) (but some of your calculators
+may in fact perform better than mine).  I hope you are impressed, in passing,
+by the fact that calculators can in fact err, but that's not the key point I
+want to make here.  Rather, if you are successful in your calculation of
+\(\left(1+\frac{1}{n}\right)^n\) for \(n=10^{12}\), then I hope you found that
+\[
+\left(1+\frac{1}{10^{12}}\right)^{10^{12}} \approx 2.718281828
+\]
+And, of course, I hope you will recognize that as the number introduced in the first
+paragraph above: it is \(e\).
+</div>
+</p>
+<p>
+<div class="definition">
+  <h2></h2>
+In words, \(e\) is the (lowest) ceiling on the amount
+of money you can make in 1 year when you invest \$1 at 100% interest&mdash;even if the
+bank is willing to compound your interest not every month, not every day, but even trillions of times per year.
+
+<p>
+In math symbols, we can say that
+\[
+\textrm{As } n \rightarrow \infty, \left(1+\frac{1}{n}\right)^n \rightarrow e \approx 2.71828182
+\]
+An even more convenient use of \(e\) is given in the following statement:
+\[
+\textrm{For large \(n\), } \left(1+\frac{1}{n}\right)^n \approx e = 2.71828\ldots
+\]
+</div>
+</p>
+
+<p>
+Making use of that last statement, we can actually rewrite the "ceiling on
+the amount you can make on \$1000 in one year at 4% interest if the bank is
+willing to compound your interest any number of times," which we had
+contemplated above.  In other words, we can really use \(e\) to rewrite the
+ceiling on the amount you can earn
+in any set time on a given principle and interest rate, where the bank let's
+you play with how often they will compound your interest.  Here is how to do that.
+<ol>
+<li>
+Say that you are investing \$\(P\) at APR \(r\cdot 100%\) for \(t\) years.  Say, too, that   the number \(n\) of times the bank compounds your interest is very large.  Note that
+</li>
+item Say that you are investing \$\(P\) at APR \(r\cdot 100%\) for \(t\) years.  Say, too, that   the number \(n\) of times the bank compounds your interest is very large.  Note that
+\[
+\frac{1}{\frac{n}{r}} = \frac{\frac{1}{1}}{\frac{n}{r}} = \frac{1}{1} \cdot \frac{r}{n} = \frac{r}{n}
+\]
+Then,
+\[
+A(t) = P\left(1 + \frac{r}{n}\right)^{nt} = P\left(1+ \frac{1}{\frac{n}{r}}\right)^{nt}
+\]
+<li>
+Next, rewrite the exponent:
+</li>
+item Next, rewrite the exponent:
+\[
+nt = \frac{n}{r} rt
+\]
+That is, make the alteration:
+\[
+A(t) = P\left(1+ \frac{1}{\frac{n}{r}}\right)^{\frac{n}{r}rt}
+\]
+<li>
+Next, use the exponent rule,
+\({\color{red}a}^{\color{blue}b\color{orange}c}
+= \left({\color{red}a}^{\color{blue}b}\right)^{\color{orange}c}\).  In particular,
+</li>
+Next, use the exponent rule,
+\({\color{red}a}^{\color{blue}b\color{orange}c}
+= \left({\color{red}a}^{\color{blue}b}\right)^{\color{orange}c}\).
+In particular,
+I am looking at \(\frac{n}{r}\) as my target "\({\color{blue}b}\)" and \(rt\)
+as my target "\({\color{orange}c}\)" with
+\(\left(1+\frac{1}{\frac{n}{r}}\right)\) as my "\({\color{red}a}\)"; rewrite as follows:
+\[
+A(t) = P\left(
+\left(1+ \frac{1}{\frac{n}{r}}\right)^{\frac{n}{r}}
+\right)^{rt}
+\]
+<li>
+Now, I note that if \(n\) is very large, then \(\frac{n}{r}\) will be, too.  Therefore,
+</li>
+Now, I note that if \(n\) is very large, then \(\frac{n}{r}\) will be, too.  Therefore,
+I can write \(\left(1+ \frac{1}{\frac{n}{r}}\right)^\frac{n}{r} \approx e\).  Substituting this in, I get
+\[
+A(t) = P\left(\left(1+ \frac{1}{\frac{n}{r}}\right)^{\frac{n}{r}}\right)^{rt} \approx P \HUGE(e\HUGE)^{rt} = Pe^{rt}
+\]
+which is a much simpler equation, I hope you will agree.
+</ol>
+
+
+<b>Moral:</b> When you go to the bank and tell them to "compound as many times
+as you are willing," they happily oblige by computing the amount \(A\) in your account after \(t\) years using
+\[
+A(t) = Pe^{rt}
+\]
+Actually, because bankers like nothing more than impressing you with their
+technical know-how, they have invented a very high-falutin way of talking
+about all of this.  An investment growing via this formula is said to be
+compounded not just every second (which may amount to the same thing)
+but is instead said to be <b>compounded continuously</b>.
+<p>
+<div class="definition">
+  <h2></h2>
+When interest is compounded not monthly or daily but is instead
+<b>compounded continuously</b>, then the amount \(A\) in your account after
+\(t\) years can be found by implementing the formula
+\[
+A(t) = Pe^{rt}
+\]
+in which \(r\) is the annual percentage rate (APR) of interest expressed as a decimal.
+</div>
+</p>
+<p>
+<div class="example">
+  <h2></h2>
+Say that you invest \$1000 at 4% interest with interest compounded continuously.
+<ol>
+[(a)]
+<li>
+Write down a formula for the amount \(A\) in your account after \(t\) years.
+</li>
+Write down a formula for the amount \(A\) in your account after \(t\) years.
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+\(A(t) = Pe^{rt} = 1000 e^{0.04t}\)
+    </div>
+  </div>
+<li>
+Compute the value of your account after 5 years (assuming you don't make any withdrawals.)
+</li>
+Compute the value of your account after 5 years (assuming you don't make any withdrawals.)
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+\(A(5) = 1000 e^{0.04 \cdot 5} \approx \$1221.40\)
+    </div>
+  </div>
+</ol>
+</div>
+</p>
+<p>
+<div class="example">
+  <h2></h2>
+Say that you invest \$54,000 at 2.5% interest with interest compounded continuously.
+<ol>
+[(a)]
+<li>
+Write down a formula for the amount \(A\) in your account after \(t\) years.
+</li>
+Write down a formula for the amount \(A\) in your account after \(t\) years.
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+Note that 2.5% expressed as a decimal is \(r = 0.0205\).
+\(A(t) = Pe^{rt} = 54000 e^{0.0205t}\)
+    </div>
+  </div>
+<li>
+Compute the value of your account after 5 years (assuming you don't make any withdrawals.)
+</li>
+Compute the value of your account after 5 years (assuming you don't make any withdrawals.)
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+\(A(5) = 54000 e^{0.0205\cdot 5} \approx \$59,828.61\)
+    </div>
+  </div>
+</ol>
+</div>
+</p>
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}

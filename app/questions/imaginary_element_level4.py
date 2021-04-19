@@ -85,7 +85,7 @@ class ImaginaryElementLevel4(Question):
 
         # self.further_instruction = f"""Only give a numerical answer (no letter symbols)."""
         expr = outer_term*(inner_term)
-        self.answer = sy.simplify(expr.subs(i, sy.I))
+        self.answer = sy.expand(expr.subs(i, sy.I))
         # print(self.answer)
         self.format_answer = f'\({sy.latex(self.answer)}\)'
 
