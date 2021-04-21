@@ -22,7 +22,7 @@ class AddingOrSubtractingPolynomials(Question):
         random.seed(self.seed)
         a = []
         b = []
-        n = random.randint(3, 7) #number of terms
+        n = random.randint(3, 6) #number of terms
         # n=3
         for i in range(n):
             a.append(random.randint(-7, 7))
