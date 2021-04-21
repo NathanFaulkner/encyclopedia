@@ -67,7 +67,7 @@ class ContinuouslyCompoundedInterestExpComputation(Question):
             self.seed = random.random()
         random.seed(self.seed)
         P = random.randint(1,100)*1000
-        r_pct = random.randint(50,700)*0.01
+        r_pct = round(random.randint(50,700)*0.01,4)
         scheme = 'continuously'
         self.scheme = scheme
         how_long = random.randint(1,20)

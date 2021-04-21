@@ -1176,7 +1176,7 @@ exponentials_and_logs = Division('chapter', "Exponentials and Logarithms",
                                 [
                                 graphsofexponentials,
                                 applicationsofexponentialsbasics,
-                                # thenaturalexponential,
+                                thenaturalexponential,
                                 ])
 exponentials_and_logs.set_frontpage(exp_and_log_intro)
 
