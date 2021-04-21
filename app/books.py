@@ -982,7 +982,8 @@ endbehavior = Section('endbehavior', "Curve Sketching: End Behavior for Polynomi
 endbehavior.add_to_questions('polynomial_end_behavior')
 
 curvesketchingpolynomials = Section('curvesketchingpolynomials', "Curve Sketching: Polynomials", '/sections/curve-sketching-polynomials')
-curvesketchingpolynomials.add_to_questions('polynomial_curve_sketching',
+curvesketchingpolynomials.add_to_questions(
+                                            'polynomial_curve_sketching',
                                              'polynomial_curve_to_equation'
                                             )
 #######################################
@@ -1059,6 +1060,10 @@ applicationsofexponentialsbasics.add_to_questions('radioactive_decay_exp_formula
                                                 )
 
 thenaturalexponential = Section('thenaturalexponential', "The Natural Exponential, \\(e\\)", '/sections/the-natural-exponential')
+thenaturalexponential.add_to_questions(
+                                    'continuously_compounded_interest_exp_formula',
+                                    'continuously_compounded_interest_exp_computation',
+                                    )
 #######################################
 
 

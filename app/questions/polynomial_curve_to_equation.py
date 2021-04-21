@@ -59,14 +59,14 @@ class PolynomialCurveToEquation(Question):
                 zeroes = []
                 for i in range(degree):
                     z = random.randint(-5,5)
-                    while any([abs(z-r) == 1 for r in zeroes]):
+                    while any([abs(z-r) in [1,2] for r in zeroes]):
                         z = random.randint(-5,5)
                     zeroes.append(z)
         else:
             random.seed(self.seed)
             for i in range(degree):
                     z = random.randint(-5,5)
-                    while any([abs(z-r) == 1 for r in zeroes]):
+                    while any([abs(z-r) in [1,2] for r in zeroes]):
                         z = random.randint(-5,5)
                     zeroes.append(z)
         # print(zeroes)

@@ -131,7 +131,7 @@ This will require a calculator, of course!  Fill out the following table:
     <td style="text-align: center;">\(2\)</td><td>\(\left(1 + \frac{1}{2}\right)^2\)</td><td>\(\$2.25\)</td>
   </tr>
   <tr>
-    <td style="text-align: center;">\(10\)</td><td>\(\left(1 + \frac{1}{10}\right)^{10}\)</td><td>\(\$2.5937424601000023\)</td>
+    <td style="text-align: center;">\(10\)</td><td>\(\left(1 + \frac{1}{10}\right)^{10}\)</td><td>\(\$2.5937424601\)</td>
   </tr>
   <tr>
     <td  style="text-align: center;">\(100\)</td><td>&nbsp;</td><td></td>
@@ -165,10 +165,10 @@ This will require a calculator, of course!  Fill out the following table:
         <td style="text-align: center;">\(2\)</td><td>\(\left(1 + \frac{1}{2}\right)^2\)</td><td>\(\$2.25\)</td>
       </tr>
       <tr>
-        <td style="text-align: center;">\(10\)</td><td>\(\left(1 + \frac{1}{10}\right)^{10}\)</td><td>\(\$2.5937424601000023\)</td>
+        <td style="text-align: center;">\(10\)</td><td>\(\left(1 + \frac{1}{10}\right)^{10}\)</td><td>\(\$2.5937424601\)</td>
       </tr>
       <tr>
-        <td  style="text-align: center;">\(100\)</td><td>\(\left(1 + \frac{1}{100}\right)^{100}\)</td><td>\(\$2.70481382942\)</td>
+        <td  style="text-align: center;">\(100\)</td><td>\(\left(1 + \frac{1}{100}\right)^{100}\)</td><td>\(\$2.7048138294\)</td>
       </tr>
       <tr>
         <td style="text-align: center;">\(1000\)</td><td>\(\left(1 + \frac{1}{1000}\right)^{1000}\)</td><td>\(\$2.7169239322\)</td>
@@ -187,7 +187,8 @@ This will require a calculator, of course!  Fill out the following table:
 </div>
 <p>
 You might even be curious what happens when you plug in still larger numbers
-for \(n\).  But let me caution you, because of limitations (or even choices)
+for \(n\).  But let me caution you, if you use one of the
+Texas Instruments (TI) series of calculators, because of limitations (or even choices)
 in the programming of the TI, it will spit out erroneous values when you go
 above \(10^{12}\)&mdash;say, to \(10^{13}\) (but some of your calculators
 may in fact perform better than mine).  I hope you are impressed, in passing,
@@ -230,9 +231,9 @@ in any set time on a given principle and interest rate, where the bank let's
 you play with how often they will compound your interest.  Here is how to do that.
 <ol>
 <li>
-Say that you are investing \$\(P\) at APR \(r\cdot 100%\) for \(t\) years.  Say, too, that   the number \(n\) of times the bank compounds your interest is very large.  Note that
-</li>
-item Say that you are investing \$\(P\) at APR \(r\cdot 100%\) for \(t\) years.  Say, too, that   the number \(n\) of times the bank compounds your interest is very large.  Note that
+Say that you are investing \$\(P\) at APR \(r\cdot 100%\) for \(t\) years.
+Say, too, that   the number \(n\) of times the bank compounds your interest is
+very large.  Note that
 \[
 \frac{1}{\frac{n}{r}} = \frac{\frac{1}{1}}{\frac{n}{r}} = \frac{1}{1} \cdot \frac{r}{n} = \frac{r}{n}
 \]
@@ -240,10 +241,9 @@ Then,
 \[
 A(t) = P\left(1 + \frac{r}{n}\right)^{nt} = P\left(1+ \frac{1}{\frac{n}{r}}\right)^{nt}
 \]
+</li>
 <li>
 Next, rewrite the exponent:
-</li>
-item Next, rewrite the exponent:
 \[
 nt = \frac{n}{r} rt
 \]
@@ -251,11 +251,8 @@ That is, make the alteration:
 \[
 A(t) = P\left(1+ \frac{1}{\frac{n}{r}}\right)^{\frac{n}{r}rt}
 \]
-<li>
-Next, use the exponent rule,
-\({\color{red}a}^{\color{blue}b\color{orange}c}
-= \left({\color{red}a}^{\color{blue}b}\right)^{\color{orange}c}\).  In particular,
 </li>
+<li>
 Next, use the exponent rule,
 \({\color{red}a}^{\color{blue}b\color{orange}c}
 = \left({\color{red}a}^{\color{blue}b}\right)^{\color{orange}c}\).
@@ -264,19 +261,22 @@ I am looking at \(\frac{n}{r}\) as my target "\({\color{blue}b}\)" and \(rt\)
 as my target "\({\color{orange}c}\)" with
 \(\left(1+\frac{1}{\frac{n}{r}}\right)\) as my "\({\color{red}a}\)"; rewrite as follows:
 \[
-A(t) = P\left(
-\left(1+ \frac{1}{\frac{n}{r}}\right)^{\frac{n}{r}}
-\right)^{rt}
+A(t) = P{\color{red}\left(1+ \frac{1}{\frac{n}{r}}\right)}^{ \color{blue}\frac{n}{r} {\color{orange}rt} }
+= P\left(
+{\color{red}\left(1+ \frac{1}{\frac{n}{r}}\right)}^{\color{blue}\frac{n}{r}}
+\right)^{\color{orange}rt}
 \]
+</li>
 <li>
 Now, I note that if \(n\) is very large, then \(\frac{n}{r}\) will be, too.  Therefore,
-</li>
-Now, I note that if \(n\) is very large, then \(\frac{n}{r}\) will be, too.  Therefore,
-I can write \(\left(1+ \frac{1}{\frac{n}{r}}\right)^\frac{n}{r} \approx e\).  Substituting this in, I get
+I can write \(\color{blue}\left(1+ \frac{1}{\frac{n}{r}}\right)^\frac{n}{r} \color{black}\approx \color{blue}e\).
+Substituting this in, I get
 \[
-A(t) = P\left(\left(1+ \frac{1}{\frac{n}{r}}\right)^{\frac{n}{r}}\right)^{rt} \approx P \HUGE(e\HUGE)^{rt} = Pe^{rt}
+A(t) = P\left({\color{blue}\left(1+ \frac{1}{\frac{n}{r}}\right)^{\frac{n}{r}}}\right)^{rt}
+\approx P \bigg({\color{blue}e}\bigg)^{rt} = Pe^{rt}
 \]
 which is a much simpler equation, I hope you will agree.
+</li>
 </ol>
 
 
@@ -307,10 +307,7 @@ in which \(r\) is the annual percentage rate (APR) of interest expressed as a de
   <h2></h2>
 Say that you invest \$1000 at 4% interest with interest compounded continuously.
 <ol>
-[(a)]
 <li>
-Write down a formula for the amount \(A\) in your account after \(t\) years.
-</li>
 Write down a formula for the amount \(A\) in your account after \(t\) years.
   <div class="answer">
     <a class="collapsible"><h3>Answer: </h3></a>
@@ -318,9 +315,8 @@ Write down a formula for the amount \(A\) in your account after \(t\) years.
 \(A(t) = Pe^{rt} = 1000 e^{0.04t}\)
     </div>
   </div>
-<li>
-Compute the value of your account after 5 years (assuming you don't make any withdrawals.)
 </li>
+<li>
 Compute the value of your account after 5 years (assuming you don't make any withdrawals.)
   <div class="answer">
     <a class="collapsible"><h3>Answer: </h3></a>
@@ -328,6 +324,7 @@ Compute the value of your account after 5 years (assuming you don't make any wit
 \(A(5) = 1000 e^{0.04 \cdot 5} \approx \$1221.40\)
     </div>
   </div>
+</li>
 </ol>
 </div>
 </p>
@@ -336,10 +333,7 @@ Compute the value of your account after 5 years (assuming you don't make any wit
   <h2></h2>
 Say that you invest \$54,000 at 2.5% interest with interest compounded continuously.
 <ol>
-[(a)]
 <li>
-Write down a formula for the amount \(A\) in your account after \(t\) years.
-</li>
 Write down a formula for the amount \(A\) in your account after \(t\) years.
   <div class="answer">
     <a class="collapsible"><h3>Answer: </h3></a>
@@ -348,9 +342,8 @@ Note that 2.5% expressed as a decimal is \(r = 0.0205\).
 \(A(t) = Pe^{rt} = 54000 e^{0.0205t}\)
     </div>
   </div>
-<li>
-Compute the value of your account after 5 years (assuming you don't make any withdrawals.)
 </li>
+<li>
 Compute the value of your account after 5 years (assuming you don't make any withdrawals.)
   <div class="answer">
     <a class="collapsible"><h3>Answer: </h3></a>
@@ -358,6 +351,7 @@ Compute the value of your account after 5 years (assuming you don't make any wit
 \(A(5) = 54000 e^{0.0205\cdot 5} \approx \$59,828.61\)
     </div>
   </div>
+</li>
 </ol>
 </div>
 </p>

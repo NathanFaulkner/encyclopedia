@@ -130,6 +130,8 @@ __all__ = ['quadratic_pattern',
             'radioactive_decay_exp_computation',
             'compound_interest_exp_formula',
             'compound_interest_exp_computation',
+            'continuously_compounded_interest_exp_formula',
+            'continuously_compounded_interest_exp_computation',
             ]
 
 class Question():

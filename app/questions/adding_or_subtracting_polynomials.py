@@ -36,7 +36,7 @@ class AddingOrSubtractingPolynomials(Question):
         for i in range(n-1):
             fexpr += a[i+1]*x**(i+1)
             gexpr += b[i+1]*x**(i+1)
-
+        random.seed(self.seed)
         sign = random.choice(['+', '-'])
         factor = -1 if sign == '-' else 1
         verb = 'subtract' if sign == '-' else 'add'
