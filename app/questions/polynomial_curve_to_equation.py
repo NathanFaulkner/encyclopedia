@@ -71,7 +71,7 @@ class PolynomialCurveToEquation(Question):
                     zeroes.append(z)
         # print(zeroes)
         # random.seed(self.seed)
-        y_0 = random.randint(-9,9)
+        y_0 = random_non_zero_integer(-9,9)
         prod = 1
         x_0 = 0
         while x_0 in zeroes:
