@@ -48,6 +48,7 @@ class PolynomialCurveSketching(Question):
         x = Symbol('x', real=True)
         self.x = x
         degree = random.choice([3,4])
+        self.degree = degree
         # degree = 3
         zeroes = []
         force_duplicate = random.choice([True, False])
@@ -67,7 +68,7 @@ class PolynomialCurveSketching(Question):
         #print(zeroes)
         # zeroes = [3,3,3]
 
-        y_0 = random.randint(-9,9)
+        y_0 = random_non_zero_integer(-9,9)
         prod = 1
         x_0 = 0
         while x_0 in zeroes:
@@ -75,6 +76,7 @@ class PolynomialCurveSketching(Question):
         for z in zeroes:
             prod *= (x_0-z)
         LC = Rational(y_0, prod)
+        self.LC = LC
         if LC == 1:
             fmt_lc = ''
         elif LC == -1:
