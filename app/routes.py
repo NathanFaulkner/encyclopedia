@@ -114,7 +114,7 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
-@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+@app.route('/reset_p***word/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     if current_user.is_authenticated:
         return redirect(url_for('library'))
