@@ -17,9 +17,12 @@
   {% endif %}
 </p>
 {% if question.further_instruction %}
-<p>
-  {{ question.further_instruction|safe }}
-</p>
+<p style="clear:right">
+  <div class="special_instruction" style="border:1px solid cyan; border-radius: 25px; padding-left: 25px; padding-right: 25px; padding-bottom: 25px">
+    <h5>Special Syntax Instructions:</h5>
+    {{ question.further_instruction|safe }}
+  </div>
+  <br>
 {% endif %}
 
 
@@ -35,7 +38,7 @@
   </div> -->
 {% elif question.prob_type == 'real_line_graph' %}
 {% include "_real-line.html" %}
-<div style="width: 50%; float: left; border: 1px solid red;">
+<div style="width: 50%; float: left; border: 1px solid red; clear:left">
   <p>
     <form action="?form=form" method="post">
       {{ form.hidden_tag() }}
@@ -289,12 +292,12 @@
 {% endif %}
 
 
-<p>
+<!-- <p>
   <form action="?form=bug_form" method="post">
     {{ bug_form.hidden_tag() }}
     <p>{{ bug_form.submit() }}</p>
   </form>
-</p>
+</p> -->
 
 {% if question.loom_link %}
 <p>

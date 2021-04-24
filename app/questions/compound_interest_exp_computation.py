@@ -59,7 +59,7 @@ prob_type = 'math_blank'
 # corn = Plant('corn', 1, ureg.inch, ureg.day)
 # kudzu = Plant('kudzu', 1, ureg.foot, ureg.day)
 
-class CompoundInterestExpFormula(Question):
+class CompoundInterestExpComputation(Question):
     def __init__(self, **kwargs):
         if 'seed' in kwargs:
             self.seed = kwargs['seed']
@@ -111,8 +111,8 @@ class CompoundInterestExpFormula(Question):
 
     prob_type = 'math_blank'
 
-    name = 'Compound Interest: Exponential Formula Problem'
-    module_name = 'compound_interest_exp_formula'
+    name = 'Compound Interest: Exponential Computation Problem'
+    module_name = 'compound_interest_exp_computation'
 
 
     further_instruction = """Just give the numerical value.  You may round to 2 decimal places. """
@@ -162,12 +162,12 @@ class CompoundInterestExpFormula(Question):
         if len(user_answer.split(' ')) == 1:
             user_answer = user_answer.replace('^', '**')
             user_answer = parse_expr(user_answer, transformations=transformations)
-            return f'\({user_answer}\)'
+            return f'\({float(user_answer)}\)'
         else:
             user_answer, user_units = user_answer.split(' ')
             user_answer = user_answer.replace('^', '**')
             user_answer = parse_expr(user_answer, transformations=transformations)
-            return f'\({sy.latex(user_answer)}\) {user_units}'
+            return f'\({float(user_answer)}\) {user_units}'
 
     @staticmethod
     def validator(user_answer):
@@ -193,4 +193,4 @@ class CompoundInterestExpFormula(Question):
         except:
             raise SyntaxError
 
-Question_Class = CompoundInterestExpFormula
+Question_Class = CompoundInterestExpComputation

@@ -73,7 +73,7 @@ class ContinuouslyCompoundedInterestExpComputation(Question):
         how_long = random.randint(1,20)
         self.format_given = ''
         self.prompt_single = """
-                Say that you invest \\${P:,} at {r_pct}\\% annual interest, compounded
+                Say that you invest \\${P:,} at {r_pct}% annual interest, compounded
                 {scheme}.  Find out how much
                 you'll have in your account after {how_long} years.
                 """.format(P=P, r_pct=r_pct, scheme=scheme, how_long=how_long)

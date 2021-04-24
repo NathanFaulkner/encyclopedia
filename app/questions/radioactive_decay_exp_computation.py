@@ -203,7 +203,7 @@ class RadioactiveDecayExpComputation(Question):
         # user_answer = user_answer.replace('a=', '')
         # user_answer = user_answer.replace('=', '')
         if len(user_answer.split(' ')) == 1:
-            return false
+            return False
         else:
             user_answer, user_units = user_answer.split(' ')
         user_answer = user_answer.replace('^', '**')
@@ -224,15 +224,13 @@ class RadioactiveDecayExpComputation(Question):
     def validator(user_answer):
         try:
             if len(user_answer.split(' ')) == 1:
-                user_answer = user_answer.replace('^', '**')
-                user_answer = parse_expr(user_answer, transformations=transformations)
-                float(user_answer)
+                raise SyntaxError
             else:
                 user_answer, user_units = user_answer.split(' ')
             user_answer = user_answer.replace('^', '**')
             user_answer = parse_expr(user_answer, transformations=transformations)
             bool(abs(user_answer - 1) < 0.0005)
-            abs(user_answer - 1) < 0.0005 and self.checkunits(user_units)
+            abs(user_answer - 1) < 0.0005
         except:
             raise SyntaxError
 

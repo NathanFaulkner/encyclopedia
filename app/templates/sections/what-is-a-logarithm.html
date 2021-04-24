@@ -1,0 +1,511 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  What is a logarithm?  We shall soon find out&mdash;by first
+  considering questions that naturally arise out of our study of exponential functions.
+</p>
+<p>
+  The point of logarithms can be seen when you consider questions of this sort:
+  How long will it take you to reach a particular investment goal?
+  For instance, consider
+  the following activity.
+</p>
+<p>
+ <div class="activity">
+  <h2></h2>
+<a href="https://www.loom.com/share/0c8b9c1648c54ab89d0634bdb5a012c8" target="_blank">Click for video</a>
+
+Suppose you have $1000, but you wish you had $2000.
+Of course, you can invest the money, and, in time, you will have that much money.
+The question is, how long will it take?  Say that a bank is offering to
+pay 3% APR in interest, compounded monthly.
+How long will it take you to earn that much money?  To figure it out,
+you write down everything you know about this situation; you write
+down an equation.  Recall the formula:
+\[
+A(t) = P\left(1+\frac{r}{n}\right)^{nt}
+\]
+In this case, we know
+\[
+A(t) = 1000\left(1+\frac{0.03}{12}\right)^{12t}
+\]
+This time, I chose 3% just so you could rewrite \(1+\frac{r}{n}\)
+in a slightly more convenient way:
+\[
+1+\frac{r}{n}= 1 + \frac{0.03}{12} =1 + .0025 = 1.0025
+\]
+We want to find out when (for what \(t\)) \(A(t) = 2000\).  So, really, what we need is to solve the following equation:
+\[
+2000 = 1000 \cdot 1.0025^{12t}
+\]
+We want to know what real number \(t\) will make this true.
+This is a different sort of equation than we have previously encountered,
+but it's still just an equation; we can still simplify it in the usual ways.
+For instance, we could divide both sides by 1000.  Here is what we get:
+\[
+2 = 1.0025^{12t}
+\]
+Now, at this point, we could observe that we need to know the answer to
+this question: "What
+exponent can you raise 1.0025 to to hit the target 2."
+If we can figure that out, then we can reason that \(t\) will be that
+exponent divided by 12.  Do you see why I say that?
+So, as a preliminary task for this section, I want you to repeatedly
+guess-and-check with your calculator until you find an exponent that will work
+(or, if you like, a \(t\) that will work).  What exponent can you raise
+1.0025 to to hit the target 2?  Guess and check to find out.
+</div>
+</p>
+
+<p>
+So, guess-and-checking can be kind of fun, but it can also take a while.
+Lucky for us, the calculator has an algorithm for answering just the sort of
+question that we considered in this previous activity; all we need to know is how to <em>ask it</em>.
+
+<p>
+Now, think about it as a general notion: How does one interact with a computer
+(which your calculator certainly is)?  The way a human interacts with a
+computer&mdash;and, vice versa, a computer interacts with a human&mdash;is
+always through the interchange of symbols.  The symbols mean something to you
+(if they didn't, the computer would be unintelligible and useless to you, as a
+computer in another language would.) To the computer, the symbols don't mean
+anything.  Instead, they meant something only to the programmer who programmed
+the computer to offer those symbols under the right circumstances, while the
+computer can be regarded as an (unsentient) automaton. This is the point: Your
+job, as the human in this relationship, is to know the meaning of symbols: they
+are both your way of asking a computer to do something and your way of
+interpreting the result of the computer's work.  It is the computer's job,
+on the other hand, to do slavish mechanical calculations.  The slavish work
+we want the computer to do in this case is to "Find the exponent
+that you can raise 1.0025 to to hit the target 2."  <em>The symbol</em>,
+in this case, will involve the word (which is just a symbol itelf)
+"<span class="typewriter">log</span>."  The meaning of this symbol,
+in other words, is to provide a
+marker for the act of raising questions of the form "what exponent can I raise
+a particular given base to to hit a particular given target?"
+We will see exactly how to use the symbol <span class="typewriter">log</span>
+to symbolize the answer to such a question in a moment.
+But first we turn to some simpler questions of this form as a further
+illustration of the concept.
+<p>
+<div class="example">
+  <h2> (Warm-up)</h2>
+Consider each of the following questions.  Solve each using guess-and-check
+(enlisting the help of  a calculator is fine, but isn't really necessary.)
+
+<a href="https://www.loom.com/share/c3db4549f2d54431b91e31e154cc592c" target="_blank">Click for video</a>
+<ol>
+<li>
+Solve the equation, \(2^x = 8\).
+</li>
+<li>
+Solve the equation \(9^x = 81\)
+</li>
+<li>
+The way you might phrase the first question is this: "What exponent can
+I raise 2 to to hit the target 8?"  Answer this question, instead:
+"What exponent can I raise 2 to to hit the target 32?"  Guess and check if you need to.'
+</li>
+<li>
+Another way you might phrase the first question is by asking, "8 is
+worth how many factors of 2?"  So, answer this: "27 is worth how many factors of 3?"
+</li>
+<li>
+How many factors of 6 is 36 worth?
+</li>
+<li>
+Solve the equation \(2^x = \frac{1}{2}\).  To put it another way, we regard \(\frac{1}{2}\)
+</li>
+<li>
+Solve the equation \(2^x = 1\).  What power of 2 do we regard 1 to be&mdash;or, how many factors of 2 is 1 worth?
+</li>
+<li>
+Solve the equation \(2^x = \sqrt{2}\).  What power of 2 do we regard \(\sqrt{2}\)
+to be&mdash;or, how many factors of 2 is  \(\sqrt{2}\) worth?
+</li>
+</ol>
+</div>
+</p>
+
+<p>
+Now, hopefully those questions weren't so hard.  Here's one which isn't so easy.
+
+<p>
+ <div class="activity">
+  <h2></h2>
+
+
+<a href="https://www.loom.com/share/03c9b9a48a034cae8c5a7e5388656a67" target="_blank">Click for video</a>
+What exponent can I raise \(2\) to to hit the target \(17\)?  In other words, what is solution to
+the equation
+\[
+2^x = 17
+\]
+Notice what is \ul{not} a solution if this equation: \(\sqrt{17}\).  Instead, \(\sqrt{17}\)
+is a solution to the equation \(x^2 = 17\); don't get the two confused!
+Now, this is just the sort of question that we will ask the calculator to solve for us.
+Imagine, you might do a guess-and-check process (assisted by the calculator)
+to try to "zero-in" on a solution.  Luckily, we learn a way (see below for a
+definiton of logarithms!) for how to directly ask the calculator to just give
+us an answer (accurate to 10 decimal places) without having to guess and check.
+However, I do want you to be able to say "zero in" on the answer yourself just a
+little&mdash;by find what two consecutive integers \(x\) must be between.
+Identify those now.
+</div>
+</p>
+
+
+
+
+<p>
+<div class="example">
+  <h2></h2>
+Find two consecutive integers that place bounds on the solution to each of the following equations:
+<ol>
+<li>
+\(2^x = 31\)
+</li>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+Since \(2^4 = 16\) is too small and \(2^5 = 32\) is too big, it must be that
+\[
+4 \lt x \lt 5
+\]
+    </div>
+  </div>
+<li>
+\(2^x = 100\)
+</li>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+Since \(2^6 = 64\) is too small and \(2^7 = 128\) is too big, it must be that
+\[
+6 \lt x \lt 7
+\]
+    </div>
+  </div>
+<li>
+\(10^x = 458\)
+</li>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+Since \(10^2= 100\) is too small and \(10^3 = 1000\) is too big, it must be that
+\[
+2 \lt x \lt 3
+\]
+    </div>
+  </div>
+<li>
+\(10^x = 0.02\)
+</li>
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+Since \(10^{-2}= \frac{1}{10^2} = \frac{1}{100} = 0.01\) is too small
+and \(10^{-1} = \frac{1}{10} = 0.1\) is too big, it must be that
+\[
+-2 \lt x \lt -1
+\]
+    </div>
+  </div>
+</ol>
+</div>
+</p>
+
+<P>
+So, what are the <em>actual</em> solutions to the previous three problems?
+Time for the big reveal.  We learn the following symbol&mdash;which is the
+manner in which we ask the calculator
+how to find the answers; we learn the definition of <em>logarithms</em>.
+<p>
+<div class="definition">
+  <h2></h2>
+For appropriate real numbers, we define the symbol
+\[
+\log_b (A)
+\]
+to be the solution to the equation
+\[
+b^x = A
+\]
+In words, \(\log_b{(A)}\) is "the number of factors of \(b\) that \(A\) is
+worth" or "the exponent
+that we raise \(b\) to to hit the target \(A\)."   The number \(b\) in the
+symbol is called the <b>base of the logarithm</b>&mdash;because it is the base
+of the corresponding exponential.  I'm not aware of a special name for the \(A\),
+but
+<a href="https://www.google.com/search?rlz=1C1ZCEB_enUS859US859&source=univ&tbm=isch&q=log-end&sa=X&ved=2ahUKEwi7n-f56JrpAhUPd98KHU1jAGwQsAR6BAgJEAE&biw=1024&bih=576&safe=active&ssui=on" target="_blank">here is a reasonable name for it.</a>
+
+<p>
+For example, while the most I can tell you off the top of my head about the solution to the equation
+\[
+2^x = 17
+\]
+is that \(x\) is between 4 and 5, I also know the symbol for the answer is given in
+\[
+x = \log_2{(17)}
+\]
+</div>
+</p>
+You also often see the symbol displayed without parentheses as \(\log_b{A}\).
+However, that is inadvisable; the parentheses are used to communicate that
+\(\log_b\) is actually the symbol for a <em>function</em>&mdash;namely,
+the one that takes the output of the exponential function \(b^x\) as its
+input and returns the input that led to that output.  That is, when you see
+"\(\log_b(x)\)" this is reall like seeing "\(f(x)\)"&mdash;except that there are 4 letters
+that make up the symbol for the function \(\log_b\) but only one letter that
+makes up the symbol for the (hypothetical) function \(f\).
+
+<p>
+<div class="example">
+  <h2> (Warm-up)</h2>
+  <a href="https://www.loom.com/share/5ee4a1609a174f12a1d7820881980a45" target="_blank">Click for video</a>
+Figure out the numerical value of each symbol without using a calculator.
+<ol>
+<li>
+\(\log_2 (16)\)
+</li>
+<li>
+\(\log_{10} (1000)\)
+</li>
+<li>
+\(\log_3 (9)\)
+</li>
+<li>
+\(\log_{3} \left(\frac{1}{9}\right)\)
+</li>
+<li>
+\(\log_2 \left(\sqrt{2}\right)\)
+</li>
+<li>
+\(\log_{10} \left(0.0001\right)\)
+</li>
+</ol>
+</div>
+</p>
+
+<p>
+Now, as I have mentioned a couple times already, your calculator also uses symbols
+involving the word <span class="typewriter">log</span>, which we can employ to get the answer to get precise answers
+to the problems in the activity above.  Let me show you how to do that.
+<ol>
+<li>
+First, find the [MATH] button (at left)
+</li>
+<li>
+Then find option <span class="typewriter">A: logBASE(</span> (at right)
+</li>
+</ol>
+
+
+<div style="text-align:center; margin-left:auto; margin-right:auto">
+  <table style="margin-left:auto; margin-right:auto">
+    <tr>
+      <td>
+        <img src="{{ url_for('static', filename='images/MATH-button.png') }}" style="float:left">
+      </td>
+      <td>
+        <img src="{{ url_for('static', filename='images/MATH-menu-showing-logBASE.png') }}" style="float:left;">
+      </td>
+    </tr>
+  </table>
+</div>
+
+<p  style="clear:left">
+Actually, in the case of two special bases, you don't have quite so many buttons to push.
+
+
+<p>
+<div class="definition">
+  <h2></h2>
+In most high school and college texts, when you see \(\log\) without a subscript,
+it represents a base-10 logarithm:
+\[
+\log = \log_{10}
+\]
+This is similar to how you drop the decoration on the radical when denoting
+square-root&mdash;as opposed to cube root or \(4^\textrm{th}\) root, which
+requires special identification.
+However, many texts and programming languages use the symbol <span class="typewriter">log</span> to
+represent the base-\(e\) logarithm.
+</div>
+</p>
+So, when you are wanting the TI to compute the value of a base-10 logarithm, just reach
+for the "<span class="typewriter">log</span>" button:
+<div class="center" style="text-align:center">
+<img src="{{ url_for('static', filename='images/log-button.png') }}">
+</div>
+
+<p>
+<div class="definition">
+  <h2></h2>
+Remember base \(e\) from the previous section?  It is so important, its associated logarithm
+also gets a special symbol: <span class="typewriter">ln</span>.  Put another way:
+\[
+\ln = \log_e
+\]
+Also, you will need to know that this \(\ln\) function is called the
+<b>natural logarithm</b>.  Why is it called that?  It is because the base \(e\)
+ends up "naturally arising" in applications.  I doubt that I have fully convinced
+you of that, but it's so.  So, the 'l' in "\(\ln\)" stands for "logarithm"
+and the 'n' stands for "natural."  Why is it backwards?  I believe it is because
+the symbol was invented by or for speakers of French, which reverses noun and
+adjective, as in "<i>log naturel</i>," I suppose.
+</div>
+</p>
+It also gets a special button on the calculator:
+<div class="center" style="text-align:center">
+<img src="{{ url_for('static', filename='images/ln-button.png') }}">
+</div>
+<p>
+<div class="example">
+  <h2> (Warm-up)</h2>
+  <a href="https://www.loom.com/share/2043df9502b1434baee0d4604b5cf413" target="_blank">Click for video</a>
+  Write the '\(\log\)' symbol for each of the following (using '\(\ln\)'
+  for base-\(e\)).  Then use your calculator to find a precise estimate.
+  Round to 3 decimal places.
+<ol>
+<li>
+\(2^x = 31\)
+</li>
+<li>
+\(2^x = 100\)
+</li>
+<li>
+\(10^x = 458\)
+</li>
+<li>
+\(10^x = 0.02\)
+</li>
+<li>
+\(e^x = 4.39\)
+</li>
+<li>
+\(e^x = 0.39\)
+</li>
+</ol>
+</div>
+</p>
+Now to the main attraction: We answer questions of the form, "How long until
+we reach a certain goal?"
+<p>
+<div class="example">
+  <h2></h2>
+Say that you have \$1000, invested at 4% interest, compounded monthly.
+How long until you have \$2000, assuming you make no withdrawals?
+Write your answer in terms of a logarithm before also using your calculator
+to obtain a numerical value rounded to two decimal places.
+Include the units of your answer.
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+Using the formula
+\[
+A(t) = P\left(1+\frac{r}{n}\right)^{nt}
+\]
+we need to find the \(t\) that satisfies
+\[
+2000 = 1000 \left(1+\frac{0.04}{12}\right)^{12t}
+\]
+For starters, you can divide both sides by 1000:
+\[
+2 = \left(1+\frac{0.04}{12}\right)^{12t}
+\]
+Now, we don't know what exponent we can raise \(\left(1+\frac{0.04}{12}\right)\) to to hit
+the target  \(2\), but we do know a symbol for it.  That is, it must be that
+\[
+12t = \log_{\left(1+\frac{0.04}{12}\right)}\left(2\right)
+\]
+Note: that monster on the right is just the symbol for a number.
+Your calculator can help you out with that, but let's throw one more
+task on top of the calculator (it won't mind); you can also divide both
+sides by 12 to get a <em>symbolic</em> solution for \(t\):
+\[
+t = \frac{\log_{\left(1+\frac{0.04}{12}\right)}\left(2\right)}{12}
+\]
+Here is what it looks like when I plug it all into my calculator:
+<div class="center" style="text-align:center">
+<img src="{{ url_for('static', filename='images/log-solution-to-investment-example.png') }}">
+</div>
+As you can see, the <em>numerical</em> answer is
+\[
+t \approx 17.36 \textrm{ years}
+\]
+    </div>
+  </div>
+</div>
+</p>
+<p>
+<div class="example">
+  <h2></h2>
+Say that you have \$4000, invested at 2.39% interest, compounded continuously.
+How long until you have \$5000, assuming you make no withdrawals?
+Write your answer in terms of a logarithm before also using your
+calculator to obtain a numerical value rounded to two decimal places.
+Include the units of your answer.
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+Note the buzzword, "continuously compounded."  This signals the fact that we must
+use the formula
+\[
+A(t) = Pe^{rt}
+\]
+We solve as follows:
+\begin{align*}
+& 5000 = 4000 e^{0.0239t} &\\
+\Rightarrow \quad & \frac{5}{4} = e^{0.0239t} & \textrm{(Divide both sides by 4000)}\\
+\Rightarrow \quad& 0.0239t = \log_e\left(\frac{5}{4}\right) = \ln\left(\frac{5}{4}\right) & \textrm{(Recall: }\ln=\log_e \textrm{.)}\\
+\Rightarrow \quad & t = \frac{\ln\left(\frac{5}{4}\right)}{0.0239} \approx 9.34 \textrm{ years} &
+\end{align*}
+    </div>
+  </div>
+</div>
+</p>
+<p>
+<div class="example">
+  <h2></h2>
+Francium-221 (\(^{221}\)Fr) is a radioisotope with a half life of 4.8 minutes.
+Find out how many minutes it will take 61
+grams of \(^{221}\)Fr to decay leaving only 2 grams left.
+Express your answer in terms of a logarithm before also
+using your calculator to find its numerical value to two decimal
+places.
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+We use the formula
+\[
+A(t) = A_0 \left(\frac{1}{2}\right)^{\frac{t}{h}}
+\]
+Plug in the givens in the appropriate way and solve, like so:
+\begin{align*}
+& 2 = 61 \left(\frac{1}{2}\right)^{\frac{t}{4.8}} &\\
+\Rightarrow \quad & \frac{2}{61} = \left(\frac{1}{2}\right)^{\frac{t}{4.8}} & \textrm{(Divide both sides by 6)}\\
+\Rightarrow \quad & \frac{t}{4.8} = \log_{\frac{1}{2}}^{\phantom{1}}\left(\frac{2}{61}\right) & \textrm{(Definition of logarithms)}\\
+\Rightarrow \quad & t = 4.8\log_{\frac{1}{2}}^{\phantom{1}}\left(\frac{2}{61}\right) & \textrm{(Multiply by 4.8.)}\\
+\Rightarrow \quad & t \approx 23.67 \textrm{ minutes}& \textrm{(Ask the calculator.)}\\
+\end{align*}
+    </div>
+  </div>
+</div>
+</p>
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}
