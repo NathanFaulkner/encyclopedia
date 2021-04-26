@@ -76,6 +76,16 @@ class ResetPasswordForm(FlaskForm):
             validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Reset Password')
 
+class ResetEmailForm(FlaskForm):
+    email = StringField('Enter New Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Reset Email')
+
+    def validate_email(self, email):
+        user = Student.query.filter_by(email=email.data).first()
+        if user is not None:
+            raise ValidationError('This email is already in use. \
+            Please use another email.')
+
 class ReportBugForm(FlaskForm):
     seed = HiddenField()
     user_answer = HiddenField(id="bug_answer")

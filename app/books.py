@@ -1060,7 +1060,7 @@ applicationsofexponentialsbasics.add_to_questions(
                                                     'compound_interest_exp_computation',
                                                 )
 
-thenaturalexponential = Section('thenaturalexponential', "The Natural Exponential, \\(e\\)", '/sections/the-natural-exponential')
+thenaturalexponential = Section('thenaturalexponential', "The Natural Exponential Base, e", '/sections/the-natural-exponential')
 thenaturalexponential.add_to_questions(
                                     'continuously_compounded_interest_exp_formula',
                                     'continuously_compounded_interest_exp_computation',
@@ -1068,9 +1068,11 @@ thenaturalexponential.add_to_questions(
 
 whatisalogarithm = Section('whatisalogarithm', "What is a Logarithm?", '/sections/what-is-a-logarithm')
 whatisalogarithm.add_to_questions(
-                                    # 'radioactive_decay_log_computation',
+                                    'radioactive_decay_log_computation',
                                     'compound_interest_log_computation',
                                     )
+
+abstractsolvingwithlogspart1 = Section('abstractsolvingwithlogspart1', "Abstract Solving With Logarithms: Part 1", '/sections/abstract-solving-with-logs-part1')
 #######################################
 
 
@@ -1185,6 +1187,7 @@ exponentials_and_logs = Division('chapter', "Exponentials and Logarithms",
                                 applicationsofexponentialsbasics,
                                 thenaturalexponential,
                                 whatisalogarithm,
+                                # abstractsolvingwithlogspart1,
                                 ])
 exponentials_and_logs.set_frontpage(exp_and_log_intro)
 

@@ -22,7 +22,8 @@ from app.forms import (AnswerForm,
                         ResetPasswordRequestForm,
                         ResetPasswordForm,
                         BlankForm,
-                        ReportBugForm)
+                        ReportBugForm,
+                        ResetEmailForm)
 from app.models import (Student,
                         StudentAnswer,
                         BugReport,
@@ -128,6 +129,18 @@ def reset_password(token):
         flash('Your password has been reset')
         return redirect(url_for('login'))
     return render_template('reset_password.html', form=form)
+
+@app.route('/reset_email', methods=['GET', 'POST'])
+def reset_email():
+    if not current_user.is_authenticated:
+        return redirect(url_for('library'))
+    form = ResetEmailForm()
+    if form.validate_on_submit():
+        current_user.set_email(form.email.data)
+        db.session.commit()
+        flash('Your email has been reset')
+        return redirect(url_for('user', username=current_user.username))
+    return render_template('reset_email.html', form=form)
 
 @app.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():

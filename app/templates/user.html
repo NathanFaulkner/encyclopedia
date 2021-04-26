@@ -62,6 +62,7 @@
   <ul>
     <li><a href="{{ url_for('library') }}">Library</a></li>
     {% if current_user == user %}
+    <li><a href="{{ url_for('reset_email') }}">Change Email</a></li>
     <li><a href="{{ url_for('logout') }}">Log Out</a></li>
     {% endif %}
   </ul>

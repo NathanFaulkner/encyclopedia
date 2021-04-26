@@ -1,0 +1,522 @@
+{% extends "book_page.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<p class="subhead">
+  In this section, we continue to solve equations that involve exponentials,
+  but we "spice them up" in a few other ways.  Ultimately, a logarithm is
+  needed to provide a symbolic solution to a "what exponent" question.
+  In the next section, we solve equations that initially involve logs themselves.
+</p>
+<p>
+These first couple are hardly worse than anything we did in the
+section
+<a href="{{ url_for('section', section_name='whatisalogarithm') }}">
+  What is a Logarithm?
+</a>&mdash;Actually they are a little easier!
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+
+Solve the following.  That is, give a concise description of the set of real numbers
+
+that satisfy the equation.  Write your answer in terms of a logarithm.
+
+\[
+
+3 \cdot 7^{x-1} + 5 = 17
+
+\]
+
+
+
+\vspace{-\baselineskip}
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+
+This isn't so bad!  We just apply our normal strategies for deducing simpler equations.  Lastly, we apply the definition of a logarithm:
+
+\begin{align*}
+
+& 3 \cdot 7^{x-1} + 5 = 17\\
+
+\Rightarrow \quad & 3 \cdot 7^{x-1} = 12 & \textrm{(Subtract 5)}\\
+
+\Rightarrow \quad & 7^{x-1} = 4 & \textrm{(Divide by 3)}\\
+
+\Rightarrow \quad &  x - 1 = \log_7{(4)} & \textrm{(Definition of log)}\\
+
+\Rightarrow \quad &  x = \log_7{(4)} + 1 & \textrm{(Add 1)}\\
+
+\end{align*}
+
+
+    </div>
+  </div>
+
+
+
+
+\vspace{-2\baselineskip}
+
+</div>
+</p>
+
+
+
+\vspace{-\baselineskip}
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+
+Solve the following.  That is, give a concise description of the set of real numbers
+
+that satisfy the equation.  Write your answer in terms of a logarithm.
+
+\[
+
+12 - 7 \cdot 2^{3x+5} = -17
+
+\]
+
+
+
+\vspace{-\baselineskip}
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+
+\begin{align*}
+
+& 12 - 7 \cdot 2^{3x+5} = -17\\
+
+\Rightarrow \quad & - 7 \cdot 2^{3x+5} = -29 & \textrm{(Subtract 12)}\\
+
+\Rightarrow \quad & 2^{3x+5} = \frac{29}{7} & \textrm{(Divide both sides by \(-7\))}\\
+
+\Rightarrow \quad &  3x + 5 = \log_2{\left(\frac{29}{7}\right)} & \textrm{(Definition of log)}\\
+
+\Rightarrow \quad &  3x = \log_2{\left(\frac{29}{7}\right)} - 5 & \textrm{(Subtract 5)}\\
+
+\Rightarrow \quad &  x = \frac{\log_2{\left(\frac{29}{7}\right)} - 5}{3} & \textrm{(Divide by 3)}\\
+
+\end{align*}
+
+
+    </div>
+  </div>
+
+
+
+
+\vspace{-2\baselineskip}
+
+</div>
+</p>
+
+
+Now, we turn to something just a little harder&mdash;or, easier, depending on your perspective.  We look at equations in which the unknown appears in more than one exponent.
+
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+
+Solve the following.  That is, give a concise description of the set of real numbers
+
+that satisfy the equation.  Write your answer in terms of an exact fractional answer.
+
+\[
+
+8^{3x-1} = 8^{2 - 6x}
+
+\]
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+
+What \(x\) will make this true?  Well, what if you can find an \(x\) that will make \(3x-1 = 2 - 6x\)?
+
+Clearly, that \(x\) would satisfy the equation.  But, what's more, if you think about the graph of \(y=8^x\), you can realize that there is only one exponent (\(x\)-value) that gives rise to a particular value of \(8^x\) (\(y\)-value)&mdash;because the graph increases from left to right, and therefore no \(y\)-value is arrived at twice.  What that means is that the \(x\) that makes
+
+\(3x-1 = 2 - 6x\) is <em>the only</em> \(x\) that could possibly work, the one and only solution.  Solving is easy, I hope you will agree:
+
+\begin{align*}
+
+& 3x-1 = 2 - 6x\\
+
+\Rightarrow \quad & 9x-1 = 2  & \textrm{(Add \(6x\))}\\
+
+\Rightarrow \quad & 9x= 3  & \textrm{(Add \(1\))}\\
+
+\Rightarrow \quad & x= \frac{3}{9} = \frac{1}{3}  & \textrm{(Divide by \(9\))}\\
+
+\end{align*}
+
+
+    </div>
+  </div>
+
+
+</div>
+</p>
+
+
+Now, I bet you found that to be easy.  But I want to show you one more way you could have gone about that&mdash;an actually much clumsier way&mdash;because it will provide an insight into how you might solve a slightly tweaked but harder equation.
+
+
+\medskip
+
+\noindent
+
+<b>Previous Example, Method 2:</b>
+
+You use "properties of exponents."  Namely, we'll be using the rule
+
+\[
+
+\frac{a^r}{a^s} = a^{r-s}
+
+\]
+
+Starting with
+
+\[
+
+8^{3x-1} = 8^{2 - 6x}
+
+\]
+
+you can divide both sides by, say \(8^{2-6x}\), apply the rule I just reminded you of, and then apply the definition of logarithms:
+
+\begin{align*}
+
+&8^{3x-1} = 8^{2 - 6x}\\
+
+\Rightarrow \quad &\frac{8^{3x-1}}{8^{2-6x}} = 1 & \textrm{(Divide both sides by \(8^{2-6x}\))}\\
+
+\Rightarrow \quad & 8^{(3x-1)-(2-6x)}& \textrm{(Apply the rule \(\frac{a^r}{a^s} = a^{r-s}\))}\\
+
+\Rightarrow \quad & 8^{9x - 3} = 1 & \textrm{(Simplify)}\\
+
+\Rightarrow \quad &  9x - 3 = \log_8{(1)} & \textrm{(Definition of log)}\\
+
+\Rightarrow \quad &  9x - 3 = 0 & \textrm{(Simplify: \(\log_8(1) = 0\))}\\
+
+\Rightarrow \quad &  9x = 3 & \textrm{(Add 3)}\\
+
+\Rightarrow \quad &  x = \frac{1}{3} & \textrm{(Divide by 9)}\\
+
+\end{align*}
+
+So, you get the same answer.  But, yes, this way was harder.  Why did I just show you that?  Again, it's because this is the method we'll need to adopt when we alter that equation just a tad, as in the following:
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+
+Solve the following.  That is, give a concise description of the set of real numbers
+
+that satisfy the equation.  Write your answer in terms of a logarithm.
+
+\[
+
+8^{3x-1} = 7\cdot 8^{2 - 6x}
+
+\]
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+
+Now, I have messed things up with that \(7\).  There are different ways to go about this, but one of the easiest would actually be to mimic what I just did in the  "Method 2" demonstration just above.
+
+\begin{align*}
+
+&  8^{3x-1} =7\cdot 8^{2 - 6x} \\
+
+\Rightarrow \quad &\frac{8^{3x-1}}{8^{2-6x}} = 7 & \textrm{(Divide both sides by \(8^{2-6x}\))}\\
+
+\Rightarrow \quad & 8^{(3x-1)-(2-6x)} = 7& \textrm{(Apply the rule \(\frac{a^r}{a^s} = a^{r-s}\))}\\
+
+\Rightarrow \quad & 8^{9x - 3} = 7 & \textrm{(Simplify)}\\
+
+\Rightarrow \quad &  9x - 3 = \log_8{(7)} & \textrm{(Definition of log)}\\
+
+\Rightarrow \quad &  9x = \log_8{(7)} + 3 & \textrm{(Add 3)}\\
+
+\Rightarrow \quad &  x = \frac{\log_8{(7)}+3}{9} & \textrm{(Divide by 9)}\\
+
+\end{align*}
+
+
+    </div>
+  </div>
+
+
+</div>
+</p>
+
+
+Better do another:
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+
+Solve the following.  That is, give a concise description of the set of real numbers
+
+that satisfy the equation.  Write your answer in terms of a logarithm.
+
+\[
+
+5^{4x+5} = 12\cdot 5^{2x + 7}
+
+\]
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+
+\begin{align*}
+
+&   5^{4x+5} = 12\cdot 5^{2x + 7} \\
+
+\Rightarrow \quad &\frac{5^{4x+5} }{5^{2x + 7}} = 12 & \textrm{(Divide both sides by \(5^{2x + 7}\))}\\
+
+\Rightarrow \quad & 5^{(4x+5)-(2x+7)} = 12& \textrm{(Apply the rule \(\frac{a^r}{a^s} = a^{r-s}\))}\\
+
+\Rightarrow \quad & 5^{2x - 2} = 12 & \textrm{(Simplify)}\\
+
+\Rightarrow \quad &  2x - 2 = \log_5{(12)} & \textrm{(Definition of log)}\\
+
+\Rightarrow \quad &  2x = \log_5{(12)} + 2 & \textrm{(Add 2)}\\
+
+\Rightarrow \quad &  x = \frac{\log_5{(12)} + 2}{2} & \textrm{(Divide by 2)}\\
+
+\end{align*}
+
+
+    </div>
+  </div>
+
+
+</div>
+</p>
+
+
+Perhaps you have gotten the hang of that.  Now, there is one final complication that we will consider: when the unknown appears in two different exponents, but the bases aren't the same.  Actually, we will only consider special cases of this scenario; we will hold off until a full treatment of this scenario until the next section, in which we learn some handy facts about logarithms.
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+
+Solve the following.  That is, give a concise description of the set of real numbers
+
+that satisfy the equation.  Write your answer in terms of a logarithm.
+
+\[
+
+5^{4x+5} =  25^{2x + 7}
+
+\]
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+
+What can we do now?  Well, here is a strategy: Try to rewrite one or the other bases in terms of the other (or, conceivably, rewrite both in terms of a third, new base).  In this case, I note that 25 is a power of 5, and make the substitution, \(25 = 5^2\).  Then, apply the following rule of exponents
+
+\[
+
+\left(a^r\right)^s = a^{rs}
+
+\]
+
+\begin{align*}
+
+&   5^{6x+5} =  25^{x + 7} \\
+
+\Rightarrow \quad &  5^{6x+5} =  \left(5^2\right)^{2x + 7} & \textrm{Substitute \(5^2\) for 25}\\
+
+\Rightarrow \quad & 5^{6x+5} =  5^{2(2x + 7)}& \textrm{Apply the rule \(\left(a^r\right)^s = a^{rs}\)}\\
+
+\Rightarrow \quad & 5^{6x+5} =  5^{4x+14} & \textrm{Simplify}\\
+
+\Rightarrow \quad &  6x+5= 4x+14 & \textrm{Equate exponents}\\
+
+\Rightarrow \quad &  2x + 5= 14 & \textrm{Subtract 4x}\\
+
+\Rightarrow \quad &  2x = 9 & \textrm{Subtract 5}\\
+
+\Rightarrow \quad &  x = \frac{9}{2} & \textrm{Divide by 2}\\
+
+\end{align*}
+
+
+    </div>
+  </div>
+
+
+</div>
+</p>
+
+
+I'll show you a couple more of those, and then it's time for you to practice.
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+
+Solve the following.  That is, give a concise description of the set of real numbers
+
+that satisfy the equation.  Write your answer in terms of a logarithm.
+
+\[
+
+3^{4 - 5x} = \left(\frac{1}{27}\right)^{3 - 7x}
+
+\]
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+
+Note that \(\frac{1}{27} = 3^{-3}\).  Making that substitution is the key:
+
+\begin{align*}
+
+&   3^{4 - 5x} = \left(\frac{1}{27}\right)^{3 - 7x}\\
+
+\Rightarrow \quad &  3^{4 - 5x} = \left(3^{-3}\right)^{3 - 7x} & \textrm{Substitute \(3^{-3}\) for \(\frac{1}{27}\)}\\
+
+\Rightarrow \quad & 3^{4 - 5x} =  3^{-3(3 - 7x)}& \textrm{Apply the rule \(\left(a^r\right)^s = a^{rs}\)}\\
+
+\Rightarrow \quad & 3^{4 - 5x}=  3^{21x - 9} & \textrm{Simplify}\\
+
+\Rightarrow \quad & 4 - 5x = 21x - 9 & \textrm{Equate exponents}\\
+
+\Rightarrow \quad &  13 = 26x & \textrm{Simplify}\\
+
+\Rightarrow \quad &  x = \frac{13}{26} = \frac{1}{2} & \textrm{Divide by 26}\\
+
+\end{align*}
+
+
+    </div>
+  </div>
+
+
+</div>
+</p>
+
+
+\newpage
+
+
+<p>
+<div class="example">
+  <h2></h2>
+
+
+Solve the following.  That is, give a concise description of the set of real numbers
+
+that satisfy the equation.  Write your answer in terms of a logarithm.
+
+\[
+
+3^{4 - 5x} = 4\cdot \left(\frac{1}{27}\right)^{3 - 7x}
+
+\]
+
+
+  <div class="answer">
+    <a class="collapsible"><h3>Answer: </h3></a>
+    <div class='inner'>
+
+
+\begin{align*}
+
+&   3^{4 - 5x} = 4 \cdot \left(\frac{1}{27}\right)^{3 - 7x}\\
+
+\Rightarrow \quad &  3^{4 - 5x} = 4 \cdot \left(3^{-3}\right)^{3 - 7x} & \textrm{Substitute \(3^{-3}\) for \(\frac{1}{27}\)}\\
+
+\Rightarrow \quad & 3^{4 - 5x} =  4 \cdot 3^{-3(3 - 7x)}& \textrm{Apply the rule \(\left(a^r\right)^s = a^{rs}\)}\\
+
+\Rightarrow \quad & 3^{4 - 5x}=  4 \cdot 3^{21x - 9} & \textrm{Simplify}\\
+
+\Rightarrow \quad & \frac{3^{4 - 5x}}{3^{21x - 9}} = 4& \textrm{Divide both sides by \(3^{21x-9}\)}\\
+
+\Rightarrow \quad & 3^{(4 - 5x)-(21x - 9)} = 4& \textrm{Apply the rule \(\frac{a^r}{a^s} = a^{r-s}\)}\\
+
+\Rightarrow \quad &  3^{13 - 26x} = 4 & \textrm{Simplify}\\
+
+\Rightarrow \quad &  13 - 26x = \log_3{(4)} & \textrm{Definition of logs}\\
+
+\Rightarrow \quad &  - 26x = \log_3{(4)} - 13 & \textrm{Subtract 13}\\
+
+\Rightarrow \quad &  x = \frac{\log_3{(4)} - 13}{-26} & \textrm{Divide by \(-26\)}\\
+
+\end{align*}
+
+
+    </div>
+  </div>
+
+
+
+
+\vspace{-2\baselineskip}
+
+</div>
+</p>
+
+
+
+<script type="text/javascript" src={{ url_for('static', filename='scripts/collapsible.js') }}></script>
+
+<div class="exercise">
+
+  {% if question_name %}
+  <a href="{{ url_for('question', question_name=question_name) }}">Click for Exercise</a>
+  {% endif %}
+
+</div>
+
+{% endblock %}
