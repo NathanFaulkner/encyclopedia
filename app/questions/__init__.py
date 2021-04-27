@@ -674,7 +674,7 @@ def get_numer_denom(quot_expr, evaluate=True):
     numer = 1
     denom = 1
     if quot_expr.func == (Symbol('x')**2).func and quot_expr.args[1] < 0:
-        if quot_expr[args][0].is_number:
+        if quot_expr.args[0].is_number:
             denom *= quot_expr.args[0]**abs(quot_expr.args[1])
             # print('denom')
         else:

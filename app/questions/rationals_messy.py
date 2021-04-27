@@ -43,10 +43,12 @@ class RationalsMessy(Question):
         else:
             f = [0,1]
         numerator = 0
+        r = 1
         while numerator == 0:
             numa = []
             numb = []
             for i in range(2):
+                random.seed((self.seed*r*i) % 1)
                 numa.append(random_non_zero_integer(-5,5))
                 numb.append(random.randint(1,3))
             numterms = []
@@ -54,19 +56,23 @@ class RationalsMessy(Question):
                 term = sy.expand(numa[i]/(numb[i]*common_factor**e[i]))
                 numterms.append(term)
             numerator = sy.expand(numterms[0] + numterms[1])
+            r += 1
         denominator = 0
+        r = 1
         while sy.sympify(denominator).is_number:
             dena = []
             denb = []
             denterms = []
             # denominator = 0
             for i in range(2):
+                random.seed((self.seed*r*i) % 1)
                 dena.append(random_non_zero_integer(-5,5))
                 denb.append(random.randint(1,3))
             for i in range(2):
                 term = sy.expand(dena[i]/(denb[i]*common_factor**f[i]))
                 denterms.append(term)
             denominator = sy.expand(denterms[0] + denterms[1])
+            r += 1
         #print(numterms, denterms)
         #print(numerator, denominator)
         prob = '\\frac{{{n}}}{{{d}}}'.format(n=sy.latex(numerator), d=sy.latex(denominator))
@@ -95,8 +101,8 @@ class RationalsMessy(Question):
     like factors, wherever possible.)"""
     prompt_multiple = """TBA"""
 
-    further_instruction = """
-    """
+    # further_instruction = """
+    # """
 
     loom_link = "https://www.loom.com/share/69edece7e45b42f0a6e5e76cdc3635fe"
 
@@ -143,6 +149,7 @@ class RationalsMessy(Question):
     @staticmethod
     def validator(user_answer):
         try:
+            # pass
             user_answer = user_answer.lower()
             user_answer = user_answer.replace('^', '**')
             user_answer = parse_expr(user_answer, transformations=transformations)
