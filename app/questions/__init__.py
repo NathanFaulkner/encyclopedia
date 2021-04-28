@@ -867,10 +867,10 @@ class Monomial():
     def quick_check(self):
         if self.input == '':
             raise TypeError('An empty string is not a monomial')
-        if self.input[0] == '-':
-            self.is_negative = True
-        else:
-            self.is_negative = False
+        # if self.input[0] == '-':
+        #     self.is_negative = True
+        # else:
+        #     self.is_negative = False
         allowed = 'abcdefghijklmnopqrstuvwxyz'
         allowed = allowed + allowed.upper()
         allowed += '1234567890-*^()'
@@ -917,6 +917,7 @@ class Monomial():
                     powers[m[i]] += 1
                     i += 1
                 elif m[i+1] == '^':
+                    print('Success')
                     if m[i+2].isalpha():
                         powers[m[i]] += Symbol(m[i+2])
                         i = i + 2
@@ -970,7 +971,7 @@ class Monomial():
                 stop = start + j
                 submonomial = Monomial(m[start:stop])
                 i = stop + 1
-                if m[i] == '^':
+                if i < len(m) and m[i] == '^':
                     if m[i+1].isalpha():
                         power = Symbol(m[i+1])
                         i = i + 2
@@ -990,6 +991,8 @@ class Monomial():
                         raise SyntaxError(f'"{self.input}" is not a well-formed monomial')
                 else:
                     coeff *= submonomial.coeff
+                    for key in submonomial.powers:
+                        powers[key] += submonomial.powers[key]
             elif m[i] == '-':
                 i += 1
                 coeff *= -1
@@ -997,19 +1000,24 @@ class Monomial():
                 print(i)
                 raise SyntaxError(f'"{self.input}" is not a well-formed monomial')
         self.coeff = coeff
+        if coeff < 0:
+            self.is_negative = True
+        else:
+            self.is_negative = False
         self.powers = powers
-        if self.is_negative:
-            normal_form = '-'
-            normal_form_tex = '-'
-        else:
-            normal_form = ''
-            normal_form_tex = ''
-        normal_form += str(coeff)
         if coeff in [1, -1]:
-            if self.variables == set():
-                normal_form_tex += str(coeff)
+            if self.variables == set() or all([powers[key] == 0  for key in powers.keys()]):
+                normal_form_tex = str(coeff)
+                normal_form = str(coeff)
+            elif self.is_negative:
+                normal_form = '-'
+                normal_form_tex = '-'
+            else:
+                normal_form = ''
+                normal_form_tex = ''
         else:
-            normal_form_tex += str(coeff)
+            normal_form = str(coeff)
+            normal_form_tex = str(coeff)
         for x in sorted(list(self.variables)):
             normal_form += x + '^' + str(powers[x])
             if powers[x] == 0:
@@ -1068,8 +1076,8 @@ class Quotient():
         self.input = s.replace('**', '^')
         self.quotient = Quotient.parse_quotient(self.input)
         self.numer, self.denom = self.quotient
-        # print(f'Quotient is {self.numer.normal_form}/{self.denom.normal_form}')
-        if self.denom.normal_form == '1':
+        print(f'Quotient is {self.numer.normal_form}/{self.denom.normal_form}')
+        if str(self.denom.normal_form) == '1':
             self.fmt_for_tex = self.numer.normal_form_tex
         else:
             self.fmt_for_tex = f'\\frac{{ {self.numer.normal_form_tex} }}{{ {self.denom.normal_form_tex} }}'
