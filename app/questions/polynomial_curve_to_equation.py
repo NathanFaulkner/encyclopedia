@@ -134,6 +134,8 @@ class PolynomialCurveToEquation(Question):
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
+    loom_link = "https://www.loom.com/share/9451086d01fa4d129f29458796482beb"
+
     has_img = True
 
     def save_img(self, filename):
