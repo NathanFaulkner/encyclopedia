@@ -84,8 +84,8 @@ class SolvingEquationWithRationalQuadratic(Question):
     prompt_single = """Find the solution set.  (It is wise to check you answer(s).)"""
     prompt_multiple = """TBA"""
 
-    further_instruction = """
-    """
+    # further_instruction = """
+    # """
 
     loom_link = "https://www.loom.com/share/3297ccbc390e41009b474d8d2adab8f6?sharedAppSource=personal_library"
 

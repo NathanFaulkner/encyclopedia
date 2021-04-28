@@ -121,8 +121,8 @@ class RationalsMultiplyOrDivide(Question):
     prompt_single = """Carry out the indicated operation and simplify (reduce to lowest terms)."""
     prompt_multiple = """TBA"""
 
-    further_instruction = """
-    """
+    # further_instruction = """
+    # """
 
     loom_link = "https://www.loom.com/share/80802f0dbd4a455eac003e5d20be1508?sharedAppSource=personal_library"
 

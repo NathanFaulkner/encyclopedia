@@ -112,8 +112,8 @@ class SolvingEquationWithRationalLinearType2(Question):
     prompt_single = """Find the solution set.  (It is wise to check you answer(s).)"""
     prompt_multiple = """TBA"""
 
-    further_instruction = """
-    """
+    # further_instruction = """
+    # """
 
     loom_link = "https://www.loom.com/share/d771a2f728a94428a8732851aace4613?sharedAppSource=personal_library"
 

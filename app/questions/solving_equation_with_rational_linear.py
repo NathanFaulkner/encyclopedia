@@ -73,8 +73,8 @@ class SolvingEquationWithRationalLinear(Question):
     prompt_single = """Find the solution set.  (It is wise to check you answer(s).)"""
     prompt_multiple = """TBA"""
 
-    further_instruction = """
-    """
+    # further_instruction = """
+    # """
 
     loom_link = "https://www.loom.com/share/6a4dfb67b2e54348b267a685472fc176?sharedAppSource=personal_library"
 

@@ -126,6 +126,8 @@ class GraphHyperbolaToEquation(Question):
     name = 'Equation from Graph of Hyperbola'
     module_name = 'graph_hyperbola_to_equation'
 
+    loom_link = "https://www.loom.com/share/a2fb445b9ec74858bd57ca647a8dd70e"
+
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
     has_img = True

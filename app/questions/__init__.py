@@ -857,7 +857,7 @@ def split_at_comma_not_in_parens(s):
 
 class Monomial():
     def __init__(self, s):
-        # print('input to Monomial', s)
+        print('input to Monomial', s)
         self.input = s.replace('**', '^')
         self.quick_check()
         self.variables = set([a for a in self.input if a.isalpha()])
@@ -911,7 +911,7 @@ class Monomial():
         #             powers[a] += 1
         i = 0
         while i < len(m):
-            # print(i, m[i])
+            print('start of i-loop:', i, m[i])
             if m[i] in self.variables:
                 if i == len(m) - 1:
                     powers[m[i]] += 1
@@ -969,13 +969,32 @@ class Monomial():
                     raise SyntaxError(f'"{self.input}" is not a well-formed monomial')
                 stop = start + j
                 submonomial = Monomial(m[start:stop])
-                for key in submonomial.powers:
-                    powers[key] += submonomial.powers[key]
-                coeff *= submonomial.coeff
-                i = stop + 2
+                i = stop + 1
+                if m[i] == '^':
+                    if m[i+1].isalpha():
+                        power = Symbol(m[i+1])
+                        i = i + 2
+                    elif m[i+1].isnumeric():
+                        start = i + 1
+                        j = 1
+                        while start + j < len(self.input) and self.input[start + j].isnumeric():
+                            j += 1
+                        stop = start + j
+                        n = int(self.input[start:stop])
+                        power = n
+                        i = stop
+                        for key in submonomial.powers:
+                            powers[key] += submonomial.powers[key]*power
+                        coeff *= submonomial.coeff**power
+                    else:
+                        raise SyntaxError(f'"{self.input}" is not a well-formed monomial')
+                else:
+                    coeff *= submonomial.coeff
             elif m[i] == '-':
                 i += 1
+                coeff *= -1
             else:
+                print(i)
                 raise SyntaxError(f'"{self.input}" is not a well-formed monomial')
         self.coeff = coeff
         self.powers = powers
@@ -1068,7 +1087,24 @@ class Quotient():
                 while start + j < len(s) and s[start+j] != ')':
                     j += 1
                 stop = start + j
-                denom = Monomial(s[start:stop])
+                if stop + 1 < len(s) and s[stop + 1] == '^':
+                    # print('My Fault!!! Expo on coeff in denominator was detected.')
+                    # print('character', s[i+3], s[i+3].isnumeric())
+                    e_start = stop + 2
+                    if s[e_start].isalpha():
+                        e_stop = e_start + 1
+                    elif s[e_start].isnumeric():
+                        print('My Fault!!!')
+                        j = 1
+                        while e_start + j < len(s) and s[e_start+j].isnumeric():
+                            j += 1
+                        e_stop = e_start + j
+                    else:
+                        raise SyntaxError(f'{s} is not a well-formed quotient.')
+                    stop = e_stop
+                    denom = Monomial(s[start-1:stop])
+                else:
+                    denom = Monomial(s[start:stop])
                 stop += 1
             elif s[i+1].isalpha():
                 start = i + 1

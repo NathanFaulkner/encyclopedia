@@ -144,6 +144,8 @@ the window.  It must also have two "anchors" and multiple points besides.
     graph plus multiple points besides."""
     prompt_multiple = """TBA."""
 
+    loom_link = "https://www.loom.com/share/7e04eda1c32d4dad85cf099aceeed38a"
+
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
 
