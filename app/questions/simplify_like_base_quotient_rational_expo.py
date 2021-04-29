@@ -29,8 +29,8 @@ class SimplifyLikeBaseQuotientRationalExpo(Question):
         bases = list(range(2,10)) + list(sy.symbols('a b c d x y z u v'))
         base = random.choice(bases)
         b = base
-        q1 = random.randint(2, 7)
-        q2 = random.randint(2, 7)
+        q1 = random.randint(2, 5)
+        q2 = random.randint(2, 5)
         p1 = random_non_zero_integer(-7,7)
         p2 = random_non_zero_integer(-7,7)
         while p1/q1 % 1 == 0:

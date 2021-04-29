@@ -36,7 +36,7 @@ class SimplifyRationalExpoToRationalExpo(Question):
         while p2/q2 % 1 == 0:
             p2 = random_non_zero_integer(-7,7)
         expr = f'\\left({base}^{{ {sy.latex(sy.Rational(p1,q1))} }}\\right)^{{ {sy.latex(sy.Rational(p2,q2))} }}'
-        self.answer = b**sy.Rational(p1*p2, q1*q2)
+        self.answer = sy.Pow(b,sy.Rational(p1*p2, q1*q2), evaluate=False)
         # print('self.answer:', self.answer)
         self.format_answer = f'\( {sy.latex(b)}^{{ {sy.latex(sy.Rational(p1*p2, q1*q2))} }} \)'
         self.format_given = f"""
@@ -89,7 +89,7 @@ class SimplifyRationalExpoToRationalExpo(Question):
         print('user stuff', user_answer, type(user_answer))
         if isinstance(user_answer, sy.Pow):
             if user_answer.args[1] == -1:
-                print('My fault!')
+                # print('My fault!')
                 print(user_answer.args)
                 if isinstance(user_answer.args[0], sy.Pow):
                     user_base = user_answer.args[0].args[0]
@@ -105,7 +105,9 @@ class SimplifyRationalExpoToRationalExpo(Question):
                 print('standard', user_answer, type(user_answer))
                 for arg in sy.preorder_traversal(user_answer):
                     print(arg)
-        answer = parse_expr(str(self.answer), transformations=transformations)
+        print('self.answer', self.answer)
+        answer = self.answer
+        # answer = parse_expr(str(self.answer), transformations=transformations)
         print('answer stuff', answer, type(answer))
         for arg in sy.preorder_traversal(answer):
             print(arg)
@@ -119,7 +121,7 @@ class SimplifyRationalExpoToRationalExpo(Question):
         # print('user stuff', user_answer, type(user_answer))
         if isinstance(user_answer, sy.Pow):
             if user_answer.args[1] == -1:
-                # print('My fault!')
+                # print('Format fault!')
                 # print(user_answer.args)
                 if isinstance(user_answer.args[0], sy.Pow):
                     user_base = user_answer.args[0].args[0]
@@ -128,6 +130,7 @@ class SimplifyRationalExpoToRationalExpo(Question):
                     # print('alt', user_answer, type(user_answer))
                     # for arg in sy.preorder_traversal(user_answer):
                     #     print(arg)
+                    return f'\\(  {{ {sy.latex(user_base)} }}^{{ {sy.latex(user_expo)} }} \\)'
             else:
                 user_base = user_answer.args[0]
                 user_expo = user_answer.args[1]
@@ -135,7 +138,8 @@ class SimplifyRationalExpoToRationalExpo(Question):
                 # print('standard', user_answer, type(user_answer))
                 # for arg in sy.preorder_traversal(user_answer):
                 #     print(arg)
-            return f'\\(  {{ {sy.latex(user_base)} }}^{{ {sy.latex(user_expo)} }} \\)'
+                return f'\\(  {{ {sy.latex(user_base)} }}^{{ {sy.latex(user_expo)} }} \\)'
+
         return f'\({sy.latex(user_answer)}\)'
 
     @staticmethod

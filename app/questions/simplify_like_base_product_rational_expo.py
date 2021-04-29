@@ -29,8 +29,8 @@ class SimplifyLikeBaseProductRationalExpo(Question):
         bases = list(range(2,10)) + list(sy.symbols('a b c d x y z u v'))
         base = random.choice(bases)
         b = base
-        q1 = random.randint(2, 7)
-        q2 = random.randint(2, 7)
+        q1 = random.randint(2, 6)
+        q2 = random.randint(2, 6)
         p1 = random_non_zero_integer(-7,7)
         p2 = random_non_zero_integer(-7,7)
         while p1/q1 % 1 == 0:
@@ -129,6 +129,7 @@ class SimplifyLikeBaseProductRationalExpo(Question):
                     print('alt', user_answer, type(user_answer))
                     for arg in sy.preorder_traversal(user_answer):
                         print(arg)
+                    return f'\\(  {sy.latex(user_base)}^{{ {sy.latex(user_expo)} }} \\)'
             else:
                 user_base = user_answer.args[0]
                 user_expo = user_answer.args[1]
@@ -136,7 +137,7 @@ class SimplifyLikeBaseProductRationalExpo(Question):
                 print('standard', user_answer, type(user_answer))
                 for arg in sy.preorder_traversal(user_answer):
                     print(arg)
-            return f'\\(  {sy.latex(user_base)}^{{ {sy.latex(user_expo)} }} \\)'
+                return f'\\(  {sy.latex(user_base)}^{{ {sy.latex(user_expo)} }} \\)'
         return f'\({sy.latex(user_answer)}\)'
 
     @staticmethod
