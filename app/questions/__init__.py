@@ -799,6 +799,17 @@ def is_rational_function(expr):
         out = sympify(expr).is_polynomial()
     return out
 
+def has_non_positive_power(expr):
+    print('has_non_pos call', expr)
+    if expr.args == ():
+        return False
+    elif isinstance(expr, Pow):
+        print('expr', expr, 'power', expr.args[1])
+        if expr.args[1] <= 0:
+            return True
+    else:
+        return any([has_non_positive_power(arg) for arg in expr.args])
+
 
 def simplify_for_long_division(expr):
     # print(expr, expr.args)
@@ -813,6 +824,15 @@ def simplify_for_long_division(expr):
     else:
         return expr.func(*(simplify_for_long_division(arg) for arg in expr.args))
 
+
+def apply_pos_integer_power_to_pos_integer(expr, evaluate=False):
+    print('apply call:', expr, expr.args)
+    if isinstance(expr, Pow) and all([expr.args[i].is_integer and expr.args[i] > 0 for i in [0,1]]):
+        return Pow(*expr.args)
+    elif expr.args == ():
+        return expr
+    else:
+        return expr.func(*(apply_pos_integer_power_to_pos_integer(arg, evaluate=evaluate) for arg in expr.args), evaluate=evaluate)
 
 def commute_AbsMul_to_MulAbs(expr, evaluate=True):
     if isinstance(expr, Abs):

@@ -13,6 +13,8 @@ from app.questions import (Question,
                             congruence_of_quotient,
                             Monomial,
                             Quotient,
+                            apply_pos_integer_power_to_pos_integer,
+                            has_non_positive_power,
                             )
 
 
@@ -297,6 +299,7 @@ class SimplifyIntegerExponent(Question):
     def checkanswer(self, user_answer):
         user_answer = user_answer.lower()
         user_answer = user_answer.replace('**', '^')
+        print('user_answer:', user_answer)
         user_quotient = Quotient(user_answer)
         user_numer, user_denom = [user_quotient.numer.normal_form, user_quotient.denom.normal_form]
         # print('user', user_numer, user_denom)
@@ -309,16 +312,11 @@ class SimplifyIntegerExponent(Question):
             ans_numer, ans_denom = [ans_quotient.numer.normal_form, ans_quotient.denom.normal_form]
         # print('ans', ans_numer, ans_denom)
         return user_numer == ans_numer and user_denom == ans_denom
+        # user_answer = user_answer.lower()
+        # user_answer = user_answer.replace('^', '**')
         # user_answer = parse_expr(user_answer, transformations=transformations, evaluate=False)
-        # if self.non_positive_power(user_answer):
-        #     return False
+        # user_answer = apply_pos_integer_power_to_pos_integer(user_answer)
         # answer = parse_expr(str(self.answer), transformations=transformations, evaluate=False)
-        # # alt = sy.Add(user_answer, -answer)
-        # # print('alt', alt)
-        # # print(alt == 0)
-        # print(user_answer, type(user_answer))
-        # print(answer, type(answer))
-        # return alt_congruence_of_quotient(user_answer, answer, evaluate=False)
         # return user_answer == answer
 
     # @staticmethod
@@ -342,6 +340,12 @@ class SimplifyIntegerExponent(Question):
         # if SimplifyIntegerExponent.non_positive_power(user_answer):
         #     return unchanged
         return f'\({fmt}\)'
+        # user_answer = user_answer.lower()
+        # user_answer = user_answer.replace('^', '**')
+        # user_answer = parse_expr(user_answer, transformations=transformations, evaluate=False)
+        # user_answer = apply_pos_integer_power_to_pos_integer(user_answer)
+        # print(user_answer)
+        # return f'\({sy.latex(user_answer)}\)'
 
     @staticmethod
     def validator(user_answer):
@@ -352,6 +356,10 @@ class SimplifyIntegerExponent(Question):
             user_quotient = Quotient(user_answer)
             user_numer, user_denom = [user_quotient.numer.normal_form, user_quotient.denom.normal_form]
             fmt = user_quotient.fmt_for_tex
+            # user_answer = user_answer.lower()
+            # user_answer = user_answer.replace('^', '**')
+            # user_answer = parse_expr(user_answer, transformations=transformations, evaluate=False)
+            # user_answer = apply_pos_integer_power_to_pos_integer(user_answer)
         except:
             raise SyntaxError
 
