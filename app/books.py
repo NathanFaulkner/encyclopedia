@@ -493,7 +493,7 @@ class CustomAssessment():
         # out += '\\thispagestyle{fancy}\n\n'
         header = f"""\\noindent
         \\begin{{tabular}}{{ p{{3.5in}} p{{3.2in}} }}
-        \\hspace{{-1ex}}\\textbf{{{self.book.display_name} - Custom Test }} & \\textbf{{Name: \\underline{{\\hspace{{2.65in}} }}}}\\\\
+        \\hspace{{-1ex}}\\textbf{{{self.book.display_name} - {self.title} }} & \\textbf{{Name: \\underline{{\\hspace{{2.65in}} }}}}\\\\
         \\hspace{{-1ex}}\\textbf{{Version - {self.seed} }} &   \\textbf{{Date: \\hspace{{2in}} }}\\
         \\end{{tabular}}
         \\hrule
@@ -548,7 +548,7 @@ class CustomAssessment():
         out += '\\end{enumerate}\n'
         if key:
             out += '\\newpage'
-            out += f'\\textbf{{Answers}} for Test {self.which_test}, Version - {self.seed}\n'
+            out += f'\\textbf{{Answers}} for {self.title}, Version - {self.seed}\n'
             out += '\\begin{enumerate}\n'
             for question_set in self.question_sets:
                 out += '\\item\n'
