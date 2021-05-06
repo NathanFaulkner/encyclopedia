@@ -424,13 +424,18 @@ def try_exponential(points):
             k = (y1**2-y0*y2)/(2*y1-y0-y2)
             b = (y1-k)/(y0-k)
             A = (y0-k)/(b**x0)
-            f = lambda x: A*b**x + k
+            print(A, b, k)
+            if b > 0:
+                f = lambda x: A*b**x + k
+            else:
+                i += 1
+                continue
             # x = sy.Symbol('x')
             # print(f(x))
             if all_satisfy(f, points):
                 x_points = np.linspace(cart_x_min, cart_x_max, 1000)
                 return {"function": f, "x_points": x_points}
-        except ZeroDivisionError:
+        except:
             i+=1
             continue
         i += 1

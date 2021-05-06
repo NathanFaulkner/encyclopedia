@@ -8,6 +8,8 @@ import random
 import sympy as sy
 import numpy as np
 import json
+import matplotlib.pyplot as plt
+from matplotlib.ticker import MultipleLocator
 
 from app.questions import (Question,
                             latex_print,
@@ -127,7 +129,7 @@ class GraphHyperbola(Question):
 
         self.format_given_for_tex = f"""
 Sketch a graph of the given equation.  Make sure your graph is accurate throughout
-the window.  It must also have two "anchors" and multiple points besides.
+the window.  It must also have two ``anchors'' and multiple points besides.
 {self.format_given}
 
 \\begin{{flushright}}
@@ -153,8 +155,55 @@ the window.  It must also have two "anchors" and multiple points besides.
     has_img_in_key = True
 
     def save_img(self, filename):
-        graph = GraphFromLambda(self.as_lambda)
-        graph.save_fig(filename)
+        # graph = GraphFromLambda(self.as_lambda)
+        f = self.as_lambda
+        color="blue"
+        res=1001
+        xwindow=[-10,10]
+        ywindow=[-10,10]
+        xmarker_delta=1
+        ymarker_delta=1
+        x_min = xwindow[0]
+        x_max = xwindow[1]
+        y_min = ywindow[0]
+        y_max = ywindow[1]
+
+        # x = np.arange(x_min,x_max + xmarker_delta,res)
+        x_left = np.linspace(x_min, self.x0-(x_max-x_min)/res, res)
+        y_left = self.as_lambda(x_left)
+        x_right = np.linspace(self.x0+(x_max-x_min)/res, x_max, res)
+        y_right = self.as_lambda(x_right)
+        x = np.concatenate((x_left, x_right))
+        y = np.concatenate((y_left, y_right))
+
+        spacing = 1
+        minorLocator = MultipleLocator(spacing)
+
+        fig, ax = plt.subplots()
+
+        ax.plot(x, y, color=color)
+
+        fig.set_size_inches(6, 6)
+
+        ax.axhline(y=0, color='k')
+        ax.axvline(x=0, color='k')
+
+        #ax.set_aspect('equal')
+        ax.set_xticks(np.arange(x_min, x_max + xmarker_delta, xmarker_delta))
+        ax.set_yticks(np.arange(y_min, y_max + ymarker_delta, ymarker_delta))
+
+        # Turn on the minor TICKS, which are required for the minor GRID
+        ax.minorticks_on()
+
+        ax.yaxis.set_minor_locator(minorLocator)
+        ax.xaxis.set_minor_locator(minorLocator)
+
+        ax.grid(True, which='major')
+
+
+        plt.axis([x_min,x_max,y_min, y_max])
+        fig.savefig(f'{filename}.png', bbox_inches='tight')
+        # graph.save_fig(filename)
 
     def get_svg_data(self, window=[-10,10], res=1001):
         x_min = window[0]
