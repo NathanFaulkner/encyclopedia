@@ -55,7 +55,7 @@ class RationalsAddOrSubtract(Question):
         numerator2 = non_zero_degree_1(x, (self.seed)*2 % 1)
         denominator1 = (x-A)*(x-b1)**es[0]
         denominator2 = (x-A)*(x-b2)**es[1]
-        # random.seed(self.seed)
+        random.seed(self.seed)
         operator_symb = random.choice(['-', '+'])
         if operator_symb == '-':
             op_fact = -1

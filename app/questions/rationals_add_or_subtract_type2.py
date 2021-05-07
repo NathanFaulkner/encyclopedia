@@ -42,6 +42,7 @@ class RationalsAddOrSubtractType2(Question):
         b2 = 0
         while b2 == 0:
             b2 = random.randint(-9,9)
+        random.seed(self.seed)
         def degree_1(x):
             random.seed(self.seed)
             c = 0
@@ -56,6 +57,7 @@ class RationalsAddOrSubtractType2(Question):
         while numerator2 == denominator2 or denominator2 == 1:
         	numerator2 = degree_1(x)
         	denominator2 = degree_1(x)
+        random.seed(self.seed)
         operator_symb = random.choice(['-', '+'])
         if operator_symb == '-':
             op_fact = -1
