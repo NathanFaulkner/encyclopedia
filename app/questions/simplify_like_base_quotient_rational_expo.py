@@ -130,6 +130,7 @@ class SimplifyLikeBaseQuotientRationalExpo(Question):
                     # print('alt', user_answer, type(user_answer))
                     # for arg in sy.preorder_traversal(user_answer):
                     #     print(arg)
+                    return f'\\(  {sy.latex(user_base)}^{{ {sy.latex(user_expo)} }} \\)'
             else:
                 user_base = user_answer.args[0]
                 user_expo = user_answer.args[1]
@@ -137,7 +138,7 @@ class SimplifyLikeBaseQuotientRationalExpo(Question):
                 # print('standard', user_answer, type(user_answer))
                 # for arg in sy.preorder_traversal(user_answer):
                 #     print(arg)
-            return f'\\(  {sy.latex(user_base)}^{{ {sy.latex(user_expo)} }} \\)'
+                return f'\\(  {sy.latex(user_base)}^{{ {sy.latex(user_expo)} }} \\)'
         return f'\({sy.latex(user_answer)}\)'
 
     @staticmethod

@@ -448,7 +448,7 @@ class CustomAssessment():
 
 
     def make_tex(self, key=False):
-        title = self.title
+        title = self.title.replace(' ', '') + '_v' + str(self.seed)
         if key:
             title += '_key'
         file_name_with_path = os.path.join('app', 'for_printing', title, '{a}.tex'.format(a=title))

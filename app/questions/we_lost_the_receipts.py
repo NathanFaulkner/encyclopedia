@@ -108,6 +108,8 @@ get a syntax error or, possibly, the checker will misunderstand your intent.
         user_answer = user_answer.replace(')', '')
         user_answer = user_answer.replace("'", '')
         user_answer = user_answer.replace('childrens', 'kids')
+        user_answer = user_answer.replace('childs', 'kids')
+        user_answer = user_answer.replace('child', 'kids')
         if ',' not in user_answer and ' and' not in user_answer:
             return False
         if len(user_answer.split(',')) > 1:
