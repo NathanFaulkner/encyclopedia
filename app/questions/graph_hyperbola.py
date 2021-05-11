@@ -7,7 +7,7 @@ import random
 # transformations = (standard_transformations + (implicit_multiplication_application,))
 import sympy as sy
 import numpy as np
-import json
+# import json
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
 
@@ -173,15 +173,16 @@ the window.  It must also have two ``anchors'' and multiple points besides.
         y_left = self.as_lambda(x_left)
         x_right = np.linspace(self.x0+(x_max-x_min)/res, x_max, res)
         y_right = self.as_lambda(x_right)
-        x = np.concatenate((x_left, x_right))
-        y = np.concatenate((y_left, y_right))
+        # x = np.concatenate((x_left, x_right))
+        # y = np.concatenate((y_left, y_right))
 
         spacing = 1
         minorLocator = MultipleLocator(spacing)
 
         fig, ax = plt.subplots()
 
-        ax.plot(x, y, color=color)
+        ax.plot(x_left, y_left, color=color)
+        ax.plot(x_right, y_right, color=color)
 
         fig.set_size_inches(6, 6)
 

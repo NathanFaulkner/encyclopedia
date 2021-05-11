@@ -265,7 +265,13 @@ class SimplifyIntegerExponent(Question):
         \\]"""
 
         self.prompt_single = f"""Simplify.  In particular, rewrite the term without
-        the use of any negative exponents and cancel common factors wherever possible."""
+        the use of any negative exponents and cancel common factors wherever possible.
+        Also, if a negative coefficient results in a denominator, move the
+        negation sign to the numerator.  Put another way, be sure to apply the rule
+        \\(
+            \\frac{{a}}{{-b}} = \\frac{{-a}}{{b}}
+        \\).
+        """
 
         self.format_given_for_tex = f"""
         {self.prompt_single}
