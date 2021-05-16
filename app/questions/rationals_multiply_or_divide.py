@@ -101,6 +101,7 @@ class RationalsMultiplyOrDivide(Question):
         	prob +='\\frac{{{d}}}{{{n}}}'.format(n=sy.latex(sy.expand(numerator2)), d=sy.latex(sy.expand(denominator2)))
 
         self.answer = sy.simplify(numerator1*numerator2/denominator1/denominator2)
+        # print(self.answer)
         # expr1 = sy.factor(A+B1)*(A+B2)
         # expr2 = (A+B1)*sy.factor(A+B2)
         # expr3 = sy.factor((A+B1)*(A+B2))
@@ -135,6 +136,14 @@ class RationalsMultiplyOrDivide(Question):
             return False
         user_answer = user_answer.replace('^', '**')
         user_answer = parse_expr(user_answer, transformations=transformations)
+        user_numer, user_denom = get_numer_denom(user_answer)
+        print(user_numer, user_denom)
+        if '+' not in str(user_denom) and '-' not in str(user_denom):
+            if isinstance(user_numer, sy.Add):
+                new = 0
+                for arg in user_numer.args:
+                    new += arg/user_denom
+                user_answer = new
         # if not (isinstance(user_answer, sy.core.power.Pow) or isinstance(user_answer, sy.core.mul.Mul)):
         #     return False
         # if isinstance(user_answer, sy.core.mul.Mul):
