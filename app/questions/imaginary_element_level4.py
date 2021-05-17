@@ -104,8 +104,8 @@ class ImaginaryElementLevel4(Question):
         # self.format_answer = self.answer
     prob_type = 'math_blank'
 
-    name = 'Imaginary Element, Level 3'
-    module_name = 'imaginary_element_level3'
+    name = 'Imaginary Element, Level 4'
+    module_name = 'imaginary_element_level4'
 
     loom_link = "https://www.loom.com/share/08b2f9ab974a42588693ce8ebc0f8604"
 
