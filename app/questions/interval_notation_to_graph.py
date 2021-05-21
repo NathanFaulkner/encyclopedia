@@ -213,6 +213,7 @@ class IntervalNotationToGraph(Question):
                     {latex(self.answer_left)} \cup {latex(self.answer_right)}
                 \\]
                 """
+        self.format_given = self.given_latex_display
 
     # def get_svg_data(self, window):
     #     x_min = window[0]

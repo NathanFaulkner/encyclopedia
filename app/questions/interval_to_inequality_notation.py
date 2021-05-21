@@ -206,6 +206,7 @@ class IntervalToInequalityNotation(Question):
                     {latex(self.answer_left)} \cup {latex(self.answer_right)}
                 \\]
                 """
+        self.format_given = self.given_latex_display
 
     @staticmethod
     def parse_as_interval(interval_string):

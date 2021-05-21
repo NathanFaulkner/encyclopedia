@@ -192,6 +192,8 @@ class InequalityToIntervalNotation(Question):
                     self.answer = self.answer_left.union(self.answer_right)
                     self.ineq_answers = set([x <= self.l, x >= self.r])
                     self.format_answer = f'\\( (-\\infty, {l}] \\cup [{r}, \\infty) \\)'
+        self.format_given = self.given_latex_display
+
 
     @staticmethod
     def parse_as_interval(interval_string):

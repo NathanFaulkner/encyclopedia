@@ -746,6 +746,120 @@ class ProblemSet():
 
         return status
 
+
+class MultipleProblemFragment():
+    def __init__(self, question_name, num_probs, **kwargs):
+        if 'seed' in kwargs:
+            self.seed = kwargs['seed']
+        else:
+            self.seed = random.random()
+        random.seed(self.seed)
+        self.question_name = question_name
+        question_set = []
+        question_module = getattr(questions, question_name)
+        i = 1
+        n = 0
+        while n < num_probs:
+            new_seed = (self.seed * i) % 1
+            i += 1
+            q = question_module.Question_Class(seed=new_seed)
+            question_set.append(q)
+            n += 1
+        self.question_set = question_set
+        # self.num_cols = num_cols
+
+    def make_tex(self, num_cols=1, key=True):
+        question_set = self.question_set
+        _key = 'Key' if key else ''
+        file_name_with_path = os.path.join('app', 'for_printing', 'stdout' + _key, 'stdout.tex')
+        # print(os.getcwd())
+        try:
+            os.chdir('app')
+            os.chdir('for_printing')
+            # print(os.getcwd())
+            os.mkdir('stdout')
+            os.chdir('stdout')
+            f = open('stdout.tex', 'w+')
+        except:
+            os.chdir('stdout')
+            # print(os.getcwd())
+            f = open('stdout.tex', 'w+')
+        # all_img_names = []
+        for i, question in enumerate(question_set):
+            try:
+                if question.has_img:
+                    img_name = '{qname}{i}'.format(qname=question.module_name, i=i)
+                    question.save_img(img_name)
+                # img_names.append(img_name)
+            except AttributeError:
+                pass
+            if key:
+                try:
+                    if question.has_img_in_key:
+                        img_name = 'ans_for_{qname}{i}'.format(qname=question.module_name, i=i)
+                        question.save_img(img_name)
+                    # img_names.append(img_name)
+                except AttributeError:
+                    pass
+            i += 1
+            # all_img_names.append(img_names)
+        out = ''
+        # title_head = f"\\lhead{{\\textbf{{{self.book.display_name} - Test {self.which_test} v. {self.seed} \\\\Printed on \\today}}}}"
+        # out += title_head + '\n\n'
+        out += '\\begin{enumerate}\n'
+        for i in range(len(question_set)):
+            question = question_set[i]
+            # section_info = self.book.get_skill_info(question.module_name)[0]
+            # out += f'\\item {{\color{{gray}}({section_info[0]}.{section_info[1]})}} \n'
+            # out += '\\item \n'
+            # out += '\\begin{enumerate}\n'
+            width = 1/num_cols
+            if i % num_cols == 0 and i != 0:
+                out += '\n\n'
+            out += f'\\begin{{minipage}}{{ {width}\\textwidth }}\n'
+            out += f'\\item {question.format_given}\n'.replace('\\[', '\\(').replace('\\]', '\\)')
+            out += '\\vspace{\\baselineskip}\n'
+            # out += f"""Completely document the process by which you come to our answer.
+            # (You will only receive half credit, otherwise.)"""
+            try:
+                question.has_img
+                out += """
+                \\begin{{flushright}}
+                    \\includegraphics[scale=0.6]{{{img_name}}}
+                \\end{{flushright}}
+                """.format(img_name=question.module_name + f'{i}')
+            except AttributeError:
+                pass
+            # out += '\\vspace{12\\baselineskip}\n'
+            out += '\\end{minipage}\n'
+        out += '\\end{enumerate}\n'
+        if key:
+            out += '\\newpage'
+            out += '\\textbf{Answers:}\n'
+            out += '\\begin{enumerate}\n'
+            if question_set != []:
+                # out += '\\begin{enumerate}\n'
+                for i in range(len(question_set)):
+                    out += f'\\item {question_set[i].format_answer}\n'
+                    try:
+                        if question_set[i].has_img_in_key:
+                            out += """\\includegraphics[scale=0.6]{{{img_name}}}""".format(img_name='ans_for_' + question_set[i].module_name + f'{i}')
+                    except AttributeError:
+                        pass
+                    # out += f'\\item {question_set[i].format_answer}\n'
+            out += '\\end{enumerate}\n'
+        # out += '\\end{document}'
+
+        f.write(out)
+        f.close()
+
+        # status = os.system('pdflatex {title}'.format(title=title))
+
+        os.chdir('..')
+        os.chdir('..')
+        os.chdir('..')
+
+        # return status
 #########################
 # Free Sections -- not "bound" in a book
 algebra2 = Section('algebra2', "Algebra 2", '/sections/algebra2')

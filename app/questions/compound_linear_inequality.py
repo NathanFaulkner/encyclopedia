@@ -253,6 +253,7 @@ class CompoundLinearInequality(Question):
 
             \\[ {l1} {given_Q1} {latex(term1 + c)} {given_Q2} {r1} \\]
             """
+            self.format_given = self.given_latex_display
         else:
             self.given_latex_display = f"""
             \\[ {latex(term1 + c)} {given_Q1} {l1} \\quad
@@ -266,6 +267,8 @@ class CompoundLinearInequality(Question):
                 \\textrm{{or}} \\quad
                {latex(term2 + g)} {given_Q2} {r1}\\]
             """
+            self.format_given = self.given_latex_display
+            
 
 
     # def get_svg_data(self, window):
@@ -355,7 +358,7 @@ class CompoundLinearInequality(Question):
         user_answer[1] = user_answer[1].replace('^', '**')
         user_answer[1] = parse_expr(user_answer[1], transformations=transformations)
         return f'\\( {latex(user_answer[0])} \\; \\textrm{{ {user_splitter} }} \\; {latex(user_answer[1])} \\)'
-        
+
 
     @classmethod
     def validator(self, user_answer):
