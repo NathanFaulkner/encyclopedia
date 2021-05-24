@@ -157,6 +157,7 @@ class AbsoluteValueInequality(Question):
 
         \\[ {latex(abs(a*(x-mid)))} {Q} {latex(a*(r-mid))} \\]
         """
+        self.format_given = self.given_latex_display
 
 
 

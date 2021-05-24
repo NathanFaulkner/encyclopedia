@@ -299,6 +299,8 @@ def section(section_name):
                 db.session.commit()
             if section_status.underway:
                 question_name = section_status.underway_question_name
+                if question_name not in questions:
+                    question_name = random.choice(questions)
             else:
                 question_name = random.choice(questions)
         else:
