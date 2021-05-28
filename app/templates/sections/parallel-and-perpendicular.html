@@ -265,13 +265,12 @@
       <li>
         Sketch a graph of the line described.
         <div class="answer">
-          Of course, you want to begin by plotting the given point.
-          Next, just ask yourself what the \(x\)-axis is&mdash;the
-          horizontal axis&mdash;and what it means to be parallel
-          to it: it means the described line is horizontal!
-
           <a class="collapsible"><h3>Answer: </h3></a>
           <div class='inner'>
+            Of course, you want to begin by plotting the given point.
+            Next, just ask yourself what the \(x\)-axis is&mdash;the
+            horizontal axis&mdash;and what it means to be parallel
+            to it: it means the described line is horizontal!
             <div style="text-align:center">
               {% set svg_id = 'svg1' %}
               {% set points = [[-1, 3]] %}
@@ -295,44 +294,46 @@
       <li>
         Develop an equation for the line described.
         <div class="answer">
-          It may help to review the examples in the section on
-          <a href="{{ url_for('section', section_name='verticalorhorizontal') }}">
-          horizontal
-          and vertical lines.
-          </a>
-          An equation of a graph is an equation that has only those
-          those points that lie on the graph that "make the equation true"&mdash;that
-          satisfy the equation.  In that way, it captures something
-          special about the graph.  So, what is special about a horizontal line?
-          What could you say about it that could be written down in the
-          format of an equation?  Well, the only thing you can say about it
-          is that, in being horizontal, all the points lying on it
-          have the same \(y\)-coordinate; after all, to figure out
-          the \(y\)-coordinate of a point, you just trace over
-          horizontally until you hit the \(y\)-axis.  So, how about this
-          equation:
-          \[
-            y = 3
-          \]
-          You can see that every \((x, y)\)-pair that satisfies this
-          equation will certainly have a \(y\)-coordinate of 3 and
-          will hence lie along the graphed line.  Likewise, every point
-          on the line will satisfy the equation.  So, that's it!
-
-          <p>
-            Notice, of course, that \(x\) doesn't even appear in the equation.
-            That means that the equation puts no restriction on \(x\).
-            Put another way, \(x\) can just be whatever it wants.  Mathematicians
-            have a particular wasy of saying that; they would say that
-            \(x\) is <em>free</em>.  It's very much like considering
-            the set of all real numbers \(x\) that satisfy such equations as
+          <a class="collapsible"><h3>Answer: </h3></a>
+          <div class='inner'>
+            It may help to review the examples in the section on
+            <a href="{{ url_for('section', section_name='verticalorhorizontal') }}">
+            horizontal
+            and vertical lines.
+            </a>
+            An equation of a graph is an equation that has only those
+            those points that lie on the graph that "make the equation true"&mdash;that
+            satisfy the equation.  In that way, it captures something
+            special about the graph.  So, what is special about a horizontal line?
+            What could you say about it that could be written down in the
+            format of an equation?  Well, the only thing you can say about it
+            is that, in being horizontal, all the points lying on it
+            have the same \(y\)-coordinate; after all, to figure out
+            the \(y\)-coordinate of a point, you just trace over
+            horizontally until you hit the \(y\)-axis.  So, how about this
+            equation:
             \[
-              0 = 0
+              y = 3
             \]
-            This equation makes restriction on \(x\); it leaves \(x\)
-            free to be whatever it wants&mdash;any real number&mdash;so
-            its solution is "all reals".
-          </p>
+            You can see that every \((x, y)\)-pair that satisfies this
+            equation will certainly have a \(y\)-coordinate of 3 and
+            will hence lie along the graphed line.  Likewise, every point
+            on the line will satisfy the equation.  So, that's it!
+
+            <p>
+              Notice, of course, that \(x\) doesn't even appear in the equation.
+              That means that the equation puts no restriction on \(x\).
+              Put another way, \(x\) can just be whatever it wants.  Mathematicians
+              have a particular wasy of saying that; they would say that
+              \(x\) is <em>free</em>.  It's very much like considering
+              the set of all real numbers \(x\) that satisfy such equations as
+              \[
+                0 = 0
+              \]
+              This equation makes restriction on \(x\); it leaves \(x\)
+              free to be whatever it wants&mdash;any real number&mdash;so
+              its solution is "all reals".
+            </p>
           </div>
         </div>
       </li>

@@ -125,6 +125,8 @@ Compute the value of \(y\) when \(x = {self.input}\)
         tabular = tabular[:-2]
         tabular += '\\\\\n\\hline\n\\end{tabular}'
 
+        self.format_fragment_for_tex = tabular
+
 
         self.format_given_for_tex = f"""
 {self.prompt_single}

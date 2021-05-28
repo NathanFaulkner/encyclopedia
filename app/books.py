@@ -817,7 +817,8 @@ class MultipleProblemFragment():
             if i % num_cols == 0 and i != 0:
                 out += '\n\n'
             out += f'\\begin{{minipage}}{{ {width}\\textwidth }}\n'
-            out += f'\\item {question.format_given}\n'.replace('\\[', '\\(').replace('\\]', '\\)')
+            format_given = question.__dict__.get('format_fragment_for_tex') or question.format_given
+            out += f'\\item {format_given}\n'.replace('\\[', '\\(').replace('\\]', '\\)')
             out += '\\vspace{\\baselineskip}\n'
             # out += f"""Completely document the process by which you come to our answer.
             # (You will only receive half credit, otherwise.)"""
