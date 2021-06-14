@@ -72,6 +72,7 @@ class GraphSlopeIntercept(Question):
         # self.answer = self.problem['answer']
 
         self.given_latex = '\\(y = ' + commute_sum(self.given) + '\\)'
+        self.format_given = self.given_latex
         self.given_latex_display = '\\[y = ' + commute_sum(self.given) + '\\]'
 
         self.format_answer = '\\quad\n'

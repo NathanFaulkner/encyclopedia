@@ -139,6 +139,8 @@ class FunctionComposition(Question):
 
         self.format_given_for_tex = self.prompt_single
 
+        self.format_fragment_for_tex = self.format_given_for_tex
+
         # self.genproblem()
 
         # self.given_latex = latex_print(self.given)

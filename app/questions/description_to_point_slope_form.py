@@ -97,6 +97,12 @@ class DescriptionToPointSlope(Question):
                         x0=latex(self.x0),
                         y0=latex(self.y0),
                         m=latex(self.m))
+        self.format_fragment_for_tex = """
+        The line that passes through the point \\( ({x0}, {y0}) \\)
+        and has slope of \\( m = {m} \\)
+        """.format(x0=latex(self.x0),
+                    y0=latex(self.y0),
+                    m=latex(self.m))
 
     name = 'Point Slope Form from Description'
     module_name = 'description_to_point_slope_form'

@@ -224,11 +224,9 @@ class AltitudeTemperatureComputation(Question):
 
 Using a linear model based on this data,
 predict the temperature at an altitude of {self.input}
-{inflector.plural(str(self.alt_unit))}.  Include units in the following way:
-Enter the numerical part of your answer, then a space, and then
-`F' for Fahrenheit, `C' for Celsius, `m' for meters, or `ft' for feet,
-whichever is applicable.
+{inflector.plural(str(self.alt_unit))}. 
 """
+        self.format_fragment_for_tex = self.format_given_for_tex
 
     prob_type = 'math_blank'
 

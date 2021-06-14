@@ -50,7 +50,7 @@ class GraphSlopeInterceptFromEnglish(Question):
             self.p = kwargs['p']
         else:
             self.p = random.randint(-5,5)
-        self.p = 0
+        # self.p = 0
         if 'q' in kwargs:
             self.q = kwargs['q']
         else:
@@ -100,6 +100,10 @@ and has slope of \\( m = {latex(self.m)} \\)
 \\vspace{{-9\\baselineskip}}
 
 """
+        self.format_fragment_for_tex = f"""
+        The line that has \\(y\\)-intercept of \\({self.b}\\)
+        and has slope of \\( m = {latex(self.m)} \\)
+        """
 
 
     name = 'Graph from Slope and Intercept'

@@ -123,6 +123,7 @@ class GraphToPointSlope(Question):
 
         self.format_given_for_tex = f"""{self.prompt_single}
             """
+        self.format_fragment_for_tex = '\\quad '
 
     name = 'Point-Slope Form from Graph'
     module_name = 'graph_to_point_slope_form'

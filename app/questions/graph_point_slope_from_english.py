@@ -123,6 +123,10 @@ and has slope of \\( m = {latex(self.m)} \\)
 \\vspace{{-9\\baselineskip}}
 
 """
+        self.format_fragment_for_tex = f"""
+        The line that passes through the point \\( ({self.x0}, {self.y0}) \\)
+        and has slope of \\( m = {latex(self.m)} \\)
+        """
 
 
     name = 'Graph Line From a Point and Slope'

@@ -214,6 +214,7 @@ in the table, using
 \(T\) for the temperature and
 \(A\) for the altitude.
 """
+        self.format_fragment_for_tex = self.format_given_for_tex
 
     prob_type = 'math_blank'
 
