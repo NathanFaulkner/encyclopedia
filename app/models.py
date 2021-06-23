@@ -33,7 +33,7 @@ class Student(UserMixin, db.Model):
     books = db.Column(db.String(), default=json.dumps([]))
     # Could add "super_user"
     # Could add "classcode" ... make view/function to generate unique class codes
-    # on request, then view to add observer priviliges for each student
+    # on request, then view to add observer privileges for each student
     # who adds the class code
 
     def __repr__(self):
