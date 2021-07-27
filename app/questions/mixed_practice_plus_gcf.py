@@ -50,7 +50,7 @@ class MixedPracticePlusGCF(Question):
         # self.type_of_problem = 'easyFactorExpr'
         # self.type_of_problem = 'quadraticPatternExpr'
         # self.type_of_problem = 'specialPatternExpr'
-        self.type_of_problem = 'factorByGroupingExpr'
+        # self.type_of_problem = 'factorByGroupingExpr'
 
 
         if self.type_of_problem == 'quadraticPatternExpr':

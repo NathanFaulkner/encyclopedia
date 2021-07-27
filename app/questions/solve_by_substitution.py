@@ -54,7 +54,7 @@ class SolveBySubstitution(Question):
             self.how_many = kwargs['how_many']
         else:
             self.how_many = random.choice([0, 1, 1, 1, 1, oo])
-        self.how_many = 1
+        # self.how_many = 1
         self.x_soln = random.randint(-10,10)
         self.y_soln = random.randint(-10,10)
 

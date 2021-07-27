@@ -20,11 +20,17 @@ class Section():
         self.questions = []
         self.due_date = None
         self.challenge = challenge
+        self.assets = []
 
     def add_to_questions(self, question_name, *args):
         self.questions.append(question_name)
         for question in args:
             self.questions.append(question)
+
+    def add_to_assets(self, script_address, *args):
+        self.assets.append(script_address)
+        for address in args:
+            self.assets.append(address)
 
 # class Section():
 #     def __init__(self, category, free_section, numbered=True):
@@ -56,7 +62,7 @@ class Division():
             return None
 
     def get_item_at_location(self, location):
-        print('location:', location)
+        # print('location:', location)
         if self.category == 'book':
             sub = self.subdivisions['main'].subdivisions
         else:
@@ -819,11 +825,11 @@ class MultipleProblemFragment():
             out += f'\\begin{{minipage}}{{ {width}\\textwidth }}\n'
             format_given = question.__dict__.get('format_fragment_for_tex') or question.__dict__.get('format_given')
             out += f'\\item {format_given}\n'.replace('\\[', '\\(').replace('\\]', '\\)')
-            out += '\\vspace{\\baselineskip}\n'
             # out += f"""Completely document the process by which you come to our answer.
             # (You will only receive half credit, otherwise.)"""
             try:
                 question.has_img
+                out += '\\quad\n\\vspace{-1\\baselineskip}\n'
                 out += """
                 \\begin{{flushright}}
                     \\includegraphics[scale=0.6]{{{img_name}}}
@@ -1006,6 +1012,7 @@ warmupwithquadratics.add_to_questions('vertex_form_to_standard_form',
 vertexform = Section('vertexform', 'Quadratics in Vertex Form', '/sections/vertex-form')
 vertexform.add_to_questions('graph_vertex_form',
                             'graph_vertex_form_to_equation')
+vertexform.add_to_assets('/_tester_for_section_interactive.html')
 
 interceptform = Section('interceptform', 'Quadratics in Intercept Form', '/sections/intercept-form')
 interceptform.add_to_questions('graph_intercept_form',

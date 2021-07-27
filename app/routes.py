@@ -283,7 +283,7 @@ def hello():
 #     template_path = sections.quadraticpattern.d['template_path']
 #     return render_template(template_path + '.html')
 
-@app.route('/section/<section_name>')
+@app.route('/section/<section_name>', methods=['GET', 'POST'])
 def section(section_name):
     session['section_name'] = section_name ## Added 12/16/2020
     section = getattr(books, section_name)
@@ -308,8 +308,13 @@ def section(section_name):
     else:
         question_name = False
     # print(question_name)
+    form = BlankForm() #I added this for testing purposes: looking to add interactives the section pages...
+    if 'data' in request.form:
+        return 'Flask says hi'
     return render_template(template_path + '.html',
         section_display_name=section_display_name,
+        section=section,
+        form=form,
         question_name=question_name)
 
 

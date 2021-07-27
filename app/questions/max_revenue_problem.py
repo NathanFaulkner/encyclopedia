@@ -111,6 +111,7 @@ class MaxRevenue(Question):
         \]
         Find the maximum revenue and the price \(x\) at which that maximum is attained.
         """
+        self.format_fragment_for_tex = self.format_given_for_tex
 
         self.further_instruction = f"""
         Your answer should be of the following style (or close to it), with items highlighted in

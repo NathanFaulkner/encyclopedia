@@ -102,6 +102,7 @@ You may round your answer to two decimal places,
 as long as you don't round until the very last step.
 (Use exact fractions until the last step.)
 """
+        self.format_fragment_for_tex = self.format_given_for_tex
         self.further_instruction = f"""
 Enter your answer as
 "<span style="color:red">{inflector.plural(str(self.mass_units))}</span> needed of higher percentage alloy,

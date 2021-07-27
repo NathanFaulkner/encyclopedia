@@ -124,6 +124,10 @@ and passes through \(({self.x0}, {self.y0})\).
 \\vspace{{-12\\baselineskip}}
 
 """
+        self.format_fragment_for_tex = f"""
+        The line is {self.parallel_or_perp} to {self.given_line}
+        and passes through \(({self.x0}, {self.y0})\).
+        """
 
     name = 'Vertical or Horizontal Lines'
     module_name = 'vertical_or_horizontal_graph_from_description'

@@ -54,7 +54,7 @@ class ParallelPerpendicularToPointSlope(Question):
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        print('seed', self.seed)
+        # print('seed', self.seed)
         if 'p' in kwargs:
             self.p = kwargs['p']
         else:
@@ -129,6 +129,13 @@ class ParallelPerpendicularToPointSlope(Question):
 
         self.format_given_for_tex = f"""{self.prompt_single}
 
+                The line that passes through the point \\( ({self.x0}, {self.y0}) \\)
+                and is {self.parallel_or_perp} to the line with equation
+                \\[
+                    y = {fmt_m1}{self.x} {fmt_b1}
+                \\]
+            """
+        self.format_fragment_for_tex = f"""
                 The line that passes through the point \\( ({self.x0}, {self.y0}) \\)
                 and is {self.parallel_or_perp} to the line with equation
                 \\[

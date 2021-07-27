@@ -212,6 +212,7 @@ but you must subtract it on the trip from east to west.
 You can round your answer to two decimal places, but you MUST
 include four decimal places for intermediate steps.
 """
+        self.format_fragment_for_tex = self.format_given_for_tex
 
     prob_type = 'math_blank'
 

@@ -75,6 +75,7 @@ The receipts totaled \${'{:,}'.format(self.total_rev)}.
 Tickets for children cost \${self.cost_kid} each and adults cost
 \${self.cost_adult} each.   How many of each type of ticket were sold?
 """
+        self.format_fragment_for_tex = self.format_given_for_tex
 
     prob_type = 'math_blank'
 

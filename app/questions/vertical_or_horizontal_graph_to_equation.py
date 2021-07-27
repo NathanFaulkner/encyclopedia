@@ -89,6 +89,7 @@ class VerticalOrHorizontalGraphToEquation(Question):
         self.format_given_for_tex = f"""
 Develop an equation for the given graph.
 """
+        self.format_fragment_for_tex = '\\quad'
 
     name = 'Equation for Vertical or Horizontal Line'
     module_name = 'vertical_or_horizontal_graph_to_equation'

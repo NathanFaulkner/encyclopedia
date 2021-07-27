@@ -53,7 +53,7 @@ class CannonballProblem(Question):
         a = float(str(round(-16/vox**2,5)))
         self.a = a
         self.b = b
-        print(b)
+        # print(b)
         self.c = c
 
         def y(x):
@@ -94,6 +94,7 @@ class CannonballProblem(Question):
         self.format_given_for_tex = f"""
         {self.prompt_single}
         """
+        self.format_fragment_for_tex = self.format_given_for_tex
 
     name = 'Cannonball Problem'
     module_name = 'cannonball_problem'
