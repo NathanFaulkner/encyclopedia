@@ -122,6 +122,7 @@ class CelebratoryGunfire(Question):
                 Your answer must be accurately rounded to at least
                 two decimal places (more is fine).
         """
+        self.format_fragment_for_tex = self.format_given_for_tex
 
     name = 'Celebratory Gunfire'
     module_name = 'celebratory_gunfire'

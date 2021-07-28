@@ -809,7 +809,7 @@ class MultipleProblemFragment():
                     pass
             i += 1
             # all_img_names.append(img_names)
-        out = ''
+        out = question.format_given_for_tex + '\n'
         # title_head = f"\\lhead{{\\textbf{{{self.book.display_name} - Test {self.which_test} v. {self.seed} \\\\Printed on \\today}}}}"
         # out += title_head + '\n\n'
         out += '\\begin{enumerate}\n'

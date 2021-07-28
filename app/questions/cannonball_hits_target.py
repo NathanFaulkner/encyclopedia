@@ -95,6 +95,7 @@ class CannonballHitsTarget(Question):
         self.format_given_for_tex = f"""
         {self.prompt_single}
         """
+        self.format_fragment_for_tex = self.format_given_for_tex
 
         self.full_answer = f"""We need to solve the equation
         \\[

@@ -44,7 +44,7 @@ class PolynomialEndBehavior(Question):
                 a.append(random.randint(-7, 7))
 
         expr = make_polynomial(a,x)
-        self.format_given = f''
+        self.format_given = ''
         self.answer = [sy.limit(expr, x, -sy.oo), sy.limit(expr, x, sy.oo)]
         self.format_answer = f'\\({sy.latex(self.answer[0])}, {sy.latex(self.answer[1])}\\)'
 
@@ -74,8 +74,8 @@ class PolynomialEndBehavior(Question):
             \\item As \\(x \\rightarrow \\infty\\), \\(f(x) \\rightarrow$ \\ul{{\\quad\\quad\\quad}}
         \\end{{itemize}}
 
-
         """
+        self.format_fragment_for_tex = f'\\[ f(x) = {sy.latex(sy.expand(expr))}\\]'
 
     name = 'End Behavior of Polynomial'
     module_name = 'polynomial_end_behavior'
