@@ -27,6 +27,16 @@ def send_password_reset_email(user):
                 html_body=render_template('email/reset_password.html',
                                     user=user, token=token))
 
+def send_username_to_email(user):
+    username = user.username
+    send_email('[Encyclopedia Omega] Username Request',
+                sender=app.config['MAIL_USERNAME'],
+                recipients=[user.email],
+                text_body=render_template('email/username_request.txt',
+                                    user=user),
+                html_body=render_template('email/username_request.html',
+                                    user=user))
+
 def send_report_bug_email(report_id):
     bug_report = BugReport.query.filter_by(id=report_id).first()
     question_name = bug_report.question_name

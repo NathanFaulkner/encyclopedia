@@ -1,0 +1,7 @@
+Dear {{ user.firstname }},
+
+Your username is {{ user.username }}.
+
+Sincerely,
+
+Your Friendly Encyclopedia Omega Server

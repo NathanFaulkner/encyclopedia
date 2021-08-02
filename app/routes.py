@@ -21,6 +21,7 @@ from app.forms import (AnswerForm,
                         RegistrationForm,
                         ResetPasswordRequestForm,
                         ResetPasswordForm,
+                        SendEmailRequestForm,
                         BlankForm,
                         ReportBugForm,
                         ResetEmailForm)
@@ -32,7 +33,8 @@ from app.models import (Student,
                         UserSectionGradeInfo,
                         UserSectionStatus)
 from app.email import (send_password_reset_email,
-                        send_report_bug_email)
+                        send_report_bug_email,
+                        send_username_to_email)
 
 # from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 # from matplotlib.figure import Figure
@@ -151,10 +153,24 @@ def reset_password_request():
         user = Student.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
-        flash("Check your email for the instructions to reset your password.  If the email doesn't come through in a minute or so, please send a second request.")
+        flash("Check your email for the instructions to reset your password.")
         return redirect(url_for('login'))
     return render_template('reset_password_request.html',
                             title='Reset Password', form=form)
+
+@app.route('/send_username_request', methods=['GET', 'POST'])
+def send_username_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('library'))
+    form = SendEmailRequestForm()
+    if form.validate_on_submit():
+        user = Student.query.filter_by(email=form.email.data).first()
+        if user:
+            send_username_to_email(user)
+        flash("Check your email for your username.")
+        return redirect(url_for('login'))
+    return render_template('send_username_request.html',
+                            title='Send Username', form=form)
 
 @app.route('/report_bug', methods=['POST'])
 def report_bug():
