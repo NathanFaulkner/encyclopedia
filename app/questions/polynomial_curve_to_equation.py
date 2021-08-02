@@ -102,6 +102,8 @@ class PolynomialCurveToEquation(Question):
         self.prompt_single = f"""The graph is that of either a degree 3 or degree 4
         polynomial.  Give an equation for the graph.  Note
         that the graph passes through the point \\({sy.latex((x_0, y_0))}\\)"""
+        self.x0 = x_0
+        self.y0 = y_0
 
         self.further_instruction = """Write 'f(x) =' or 'y = ' and then
         and expression for your function.
@@ -125,6 +127,7 @@ class PolynomialCurveToEquation(Question):
                             points=points)}
         </div>
         """
+        self.format_fragment_for_tex = ' '
 
     name = 'Polynomial Curve To Equation'
     module_name = 'polynomial_curve_to_equation'
@@ -139,7 +142,7 @@ class PolynomialCurveToEquation(Question):
     has_img = True
 
     def save_img(self, filename):
-        graph = GraphFromLambda(self.as_lambda)
+        graph = GraphFromLambda(self.as_lambda, points=[[self.x0, self.y0]])
         graph.save_fig(filename)
 
     def get_svg_data(self, window=[-10,10], res=100):

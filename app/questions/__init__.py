@@ -265,16 +265,24 @@ class GraphFromLambda():
                     color="blue",
                     res=0.001,
                     xwindow=[-10,10],
+                    domain=None,
                     ywindow=[-10,10],
                     xmarker_delta=1,
-                    ymarker_delta=1):
+                    ymarker_delta=1,
+                    points=[]):
         self.f = f
         x_min = xwindow[0]
         x_max = xwindow[1]
         y_min = ywindow[0]
         y_max = ywindow[1]
 
-        x = np.arange(x_min,x_max + xmarker_delta,res)
+        if domain is not None:
+            # print('Success!')
+            # x = Symbol('x')
+            # print(f(x))
+            x = np.arange(domain[0], domain[1],res)
+        else:
+            x = np.arange(x_min,x_max + xmarker_delta,res)
 
         y = self.f(x)
 
@@ -308,6 +316,10 @@ class GraphFromLambda():
 
 
         plt.axis([x_min,x_max,y_min, y_max])
+        if points != []:
+            x_points = [point[0] for point in points]
+            y_points = [point[1] for point in points]
+            plt.plot(x_points, y_points, marker='o', markersize=5, color='red', linestyle='')
 
         self.fig = fig
         # plt.show()

@@ -82,6 +82,9 @@ class GraphSqrt(Question):
         sign_x = self.sign_x
         if sign_x == -1:
             self.x0 = 0
+            self.domain = [-10, 0]
+        else:
+            self.domain = [self.x0, 10]
         x = self.x
         k = self.y0
         h = self.x0
@@ -155,7 +158,7 @@ that satisfy the equation."""
     has_img_in_key = True
 
     def save_img(self, filename):
-        graph = GraphFromLambda(self.as_lambda)
+        graph = GraphFromLambda(self.as_lambda, domain=self.domain)
         graph.save_fig(filename)
 
     def get_svg_data(self, window=[-10,10], res=100):

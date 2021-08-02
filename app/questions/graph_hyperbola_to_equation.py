@@ -123,6 +123,7 @@ class GraphHyperbolaToEquation(Question):
 
         self.format_given_for_tex = f"""{self.prompt_single}
         """
+        self.format_fragment_for_tex = ' '
 
 
     name = 'Equation from Graph of Hyperbola'

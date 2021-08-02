@@ -841,7 +841,7 @@ class MultipleProblemFragment():
             out += '\\end{minipage}\n'
         out += '\\end{enumerate}\n'
         if key:
-            out += '\\newpage'
+            out += '\n\\newpage'
             out += '\\textbf{Answers:}\n'
             out += '\\begin{enumerate}\n'
             if question_set != []:
@@ -850,7 +850,7 @@ class MultipleProblemFragment():
                     out += f'\\item {question_set[i].format_answer}\n'
                     try:
                         if question_set[i].has_img_in_key:
-                            out += """\\includegraphics[scale=0.6]{{{img_name}}}""".format(img_name='ans_for_' + question_set[i].module_name + f'{i}')
+                            out += """\\vspace{{-1\\baselineskip}}\n\\includegraphics[scale=0.6]{{{img_name}}}\n""".format(img_name='ans_for_' + question_set[i].module_name + f'{i}')
                     except AttributeError:
                         pass
                     # out += f'\\item {question_set[i].format_answer}\n'
@@ -1106,8 +1106,8 @@ endbehavior.add_to_questions('polynomial_end_behavior')
 curvesketchingpolynomials = Section('curvesketchingpolynomials', "Curve Sketching: Polynomials", '/sections/curve-sketching-polynomials')
 curvesketchingpolynomials.add_to_questions(
                                             'polynomial_curve_sketching',
-                                             'polynomial_curve_to_equation'
-                                            )
+                                            'polynomial_curve_to_equation'
+                                          )
 #######################################
 rationals_intro = Section('rationals_intro', "Introduction to Rational Functions", '/sections/rationals-intro')
 
