@@ -331,7 +331,8 @@ def section(section_name):
         section_display_name=section_display_name,
         section=section,
         form=form,
-        question_name=question_name)
+        question_name=question_name,
+        section_num_display=session.get('section_num'))
 
 
 @app.route('/answer_previewer/<question_name>', methods=['GET', 'POST'])
@@ -814,6 +815,7 @@ def book_section(book_name, chapter_number, section_number):
                 path_for_iframe = ''
     else:
         path_for_iframe = url_for('section', section_name=section.view_name)
+        session['section_num'] = f'{chapter_number}.{section_number}'
     toc = main.subdivisions
     # print(session['book'])
     return render_template('chapter.html', user=user, title=section.display_name,

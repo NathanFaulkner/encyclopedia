@@ -1,6 +1,10 @@
 import datetime
 import os
 import random
+import json
+
+import inflect
+inflect_engine = inflect.engine()
 
 from app import questions
 
@@ -359,18 +363,50 @@ class SevenTest():
 
         return status
 
+number_colors = {1: 'black', 2: 'blue', 3: 'red', 4: 'orange', 5: 'brown', 6: 'red', 7: 'pink'}
+
+# quiz = CustomAssessment(book=Algebra2, assessment_type='quiz', assessment_number=1, try_number=2, new_sections=Algebra2.get_sections_by_string('3.14, 3.15'), num_sections=4)
+
+
 class CustomAssessment():
-    def __init__(self, book, assess_title, **kwargs):
+    def __init__(self, **kwargs):
         if 'seed' in kwargs:
             self.seed = kwargs['seed']
         else:
             self.seed = random.random()
         random.seed(self.seed)
-        self.book = book
-        self.title = assess_title
+        if 'book' in kwargs:
+            self.book = kwargs['book']
+            book = self.book
+        if 'title' in kwargs:
+            self.title = kwargs['title']
         all_sections = book.list_all_sections()
         l = len(all_sections)
+        if 'assessment_type' in kwargs:
+            self.assessment_type = kwargs['assessment_type']
+            self.title = self.assessment_type.title()
+            if 'assessment_number' in kwargs:
+                self.assessment_number = kwargs['assessment_number']
+                self.title += f' {self.assessment_number}'
+            if 'try_number' in kwargs:
+                self.try_number = kwargs['try_number']
+                # self.try_string += f' - {inflect_engine.ordinal(self.try_number)} Try'
+        if 'new_sections' in kwargs:
+            self.new_sections = kwargs['new_sections']
+            if 'num_sections' in kwargs:
+                self.num_sections = kwargs['num_sections']
+                if len(self.new_sections) < self.num_sections:
+                    indices = [i for i in range(len(all_sections)) if all_sections[i] in self.new_sections]
+                    indices = sorted(indices)
+                    highest = indices[-1]
+                    prev_sections = [all_sections[i] for i in range(len(all_sections)) if i < highest and i not in indices]
+                    old_sections = random.sample(prev_sections, self.num_sections - len(self.new_sections))
+            else:
+                old_sections = []
+            self.sections = self.new_sections + old_sections
+            section_numbers = ''
         if kwargs.get('seven_test'):
+            which_test = kwargs['seven_test']
             num_sevens = int(l/7)
             # print(num_sevens)
             start = 7 * (which_test - 1)
@@ -386,12 +422,12 @@ class CustomAssessment():
                 random.shuffle(prev_sections)
                 test_sections += prev_sections[0:10 - num_left]
             self.sections = test_sections
-        elif 'sections' in kwargs:
-            self.sections = kwargs['sections']
-        elif 'num_sections' in kwargs:
-            self.sections = random.sample(set(all_sections), kwargs['num_sections'])
-        else:
-            self.sections = random.sample(set(all_sections), 10) #Defaults to 10 questions
+        # elif 'sections' in kwargs:
+        #     self.sections = kwargs['sections']
+        # elif 'num_sections' in kwargs:
+        #     self.sections = random.sample(set(all_sections), kwargs['num_sections'])
+        # else:
+        #     self.sections = random.sample(set(all_sections), 10) #Defaults to 10 questions
         # for section in all_sections:
         #     print(section.display_name)
         question_sets = []
@@ -454,22 +490,31 @@ class CustomAssessment():
 
 
     def make_tex(self, key=False):
-        title = self.title.replace(' ', '') + '_v' + str(self.seed)
+        try_number = self.__dict__.get('try_number')
+        if try_number is not None:
+            title_for_path = self.title.replace(' ', '') + f'Try{try_number}' + '_v' + str(self.seed)
+            title = self.title + f' - {{\\color{{{number_colors[((try_number) - 1 % len(number_colors)) + 1]}}}{inflect_engine.ordinal(self.try_number)} Try}}'
+        else:
+            title_for_path = self.title.replace(' ', '') + '_v' + str(self.seed)
+            title = self.title
         if key:
-            title += '_key'
-        file_name_with_path = os.path.join('app', 'for_printing', title, '{a}.tex'.format(a=title))
+            title_for_path += '_key'
+        # title_for_path = self.title.replace(' ', '') + '_v' + str(self.seed)
+        # if key:
+        #     title_for_path += '_key'
+        file_name_with_path = os.path.join('app', 'for_printing', title_for_path, '{a}.tex'.format(a=title_for_path))
         # print(os.getcwd())
         try:
             os.chdir('app')
             os.chdir('for_printing')
             # print(os.getcwd())
-            os.mkdir(title)
-            os.chdir(title)
-            f = open('{a}.tex'.format(a=title), 'w+')
+            os.mkdir(title_for_path)
+            os.chdir(title_for_path)
+            f = open('{a}.tex'.format(a=title_for_path), 'w+')
         except:
-            os.chdir(title)
+            os.chdir(title_for_path)
             # print(os.getcwd())
-            f = open('{a}.tex'.format(a=title), 'w+')
+            f = open('{a}.tex'.format(a=title_for_path), 'w+')
         # all_img_names = []
         for question_set in self.question_sets:
             i = 0
@@ -499,7 +544,7 @@ class CustomAssessment():
         # out += '\\thispagestyle{fancy}\n\n'
         header = f"""\\noindent
         \\begin{{tabular}}{{ p{{3.5in}} p{{3.2in}} }}
-        \\hspace{{-1ex}}\\textbf{{{self.book.display_name} - {self.title} }} & \\textbf{{Name: \\underline{{\\hspace{{2.65in}} }}}}\\\\
+        \\hspace{{-1ex}}\\textbf{{{self.book.display_name} - {title} }} & \\textbf{{Name: \\underline{{\\hspace{{2.65in}} }}}}\\\\
         \\hspace{{-1ex}}\\textbf{{Version - {self.seed} }} &   \\textbf{{Date: \\hspace{{2in}} }}\\
         \\end{{tabular}}
         \\hrule
@@ -554,7 +599,7 @@ class CustomAssessment():
         out += '\\end{enumerate}\n'
         if key:
             out += '\\newpage'
-            out += f'\\textbf{{Answers}} for {self.title}, Version - {self.seed}\n'
+            out += f'\\textbf{{Answers}} for {title}, Version - {self.seed}\n'
             out += '\\begin{enumerate}\n'
             for question_set in self.question_sets:
                 out += '\\item\n'
@@ -579,7 +624,7 @@ class CustomAssessment():
         f.write(out)
         f.close()
 
-        status = os.system('pdflatex {title}'.format(title=title))
+        status = os.system('pdflatex {title}'.format(title=title_for_path))
 
         os.chdir('..')
         os.chdir('..')
@@ -1341,3 +1386,74 @@ Algebra2.set_frontpage(algebra2)
 ####
 
 Library = Division('library', 'Books', [Algebra2])
+
+
+#########################################
+# Assessments for 2021 - 2022
+# """
+# {
+#   "Check 1": {
+#               "book": "Algebra2",
+#               "assessment_type": "check",
+#               "assessment_number": 1,
+#               "new_sections": "Algebra2.get_sections_by_string('1.1')"
+#             },
+#   "Quiz 1": {
+#               "book": "Algebra2",
+#               "assessment_type": "quiz",
+#               "assessment_number": 1,
+#               "new_sections": "Algebra2.get_sections_by_string('1.1, 1.2, 1.3, 1.4, 1.5')"
+#             },
+# }
+# """
+with open('assessments.json') as json_file:
+    descr_of_assessments = json.load(json_file)
+# print(descr_of_quizzes)
+
+# print('cwd of books', os.getcwd())
+
+def make_assess(description_str, practice=False):
+    temp = description_str.split(' ')
+    assessment_number = int(temp[1])
+    assessment_type = temp[0].lower()
+    assessment_info = descr_of_assessments[assessment_type]
+    descr_for_path = description_str.title().replace(' ', '')
+    # kwargs = kwargs_for_assessments[description_str]
+    # print(kwargs_for_assessments)
+    # try:
+    #     exec("kwargs['book'] = {}".format(kwargs['book']))
+    #     exec("kwargs['new_sections'] = {}".format(kwargs['new_sections']))
+    # except SyntaxError:
+    #     pass
+    kwargs = {'book': Algebra2,
+            'assessment_type': assessment_type,
+            'assessment_number': assessment_number,
+            'num_sections': assessment_info[assessment_number - 1]['num_sections']}
+    if assessment_type in ['quiz', 'test']:
+        kwargs['new_sections'] = Algebra2.get_sections_by_string(assessment_info[assessment_number - 1]['sections'])
+    elif assessment_type == 'check':
+        kwargs['new_sections'] = [Algebra2.list_all_sections()[assessment_number - 1]]
+        # print(kwargs)
+    print(kwargs)
+    if not practice:
+        assessment_list = os.listdir(os.getcwd() + '/app/for_printing')
+        narrowed = [file_name for file_name in assessment_list if file_name[:len(descr_for_path)] == descr_for_path and 'Try' in file_name]
+        # print(narrowed)
+        if narrowed == []:
+            try_number = 1
+        else:
+            narrowed = sorted(narrowed)
+            most_recent = narrowed[-1]
+            i = len(descr_for_path) + 3
+            j = i + 1
+            while most_recent[j].isnumeric():
+                j += 1
+            try_number = int(most_recent[i:j]) + 1
+        kwargs['try_number'] = try_number
+    else:
+        # kwargs.pop('try_number', None)
+        pass
+    assess = CustomAssessment(**kwargs)
+    assess.make_tex()
+    assess.make_tex(key=True)
+    return assess

@@ -73,6 +73,9 @@
     {% endif %}
     {% endwith %}
     <h1 class="section-header">
+      {% if section_num_display %}
+      {{section_num_display}}:
+      {% endif %}
       {{ section_display_name|safe }}
       <hr style="color: var(--section-header-color);">
     </h1>
