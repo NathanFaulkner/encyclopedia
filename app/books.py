@@ -367,6 +367,17 @@ number_colors = {1: 'black', 2: 'blue', 3: 'red', 4: 'orange', 5: 'brown', 6: 'r
 
 # quiz = CustomAssessment(book=Algebra2, assessment_type='quiz', assessment_number=1, try_number=2, new_sections=Algebra2.get_sections_by_string('3.14, 3.15'), num_sections=4)
 
+def choose_indices(indices, n):
+    """The point of this is to choose from the sorted list of indices
+    in indices are sampled without replacement.
+    """
+    indices = sorted(indices)
+    chosen = []
+    while len(chosen) < n:
+        i = int(random.triangular(0, len(indices) - 1, len(indices) - 1))
+        chosen.append(indices[i])
+        indices.pop(i)
+    return chosen
 
 class CustomAssessment():
     def __init__(self, **kwargs):
@@ -399,8 +410,12 @@ class CustomAssessment():
                     indices = [i for i in range(len(all_sections)) if all_sections[i] in self.new_sections]
                     indices = sorted(indices)
                     highest = indices[-1]
-                    prev_sections = [all_sections[i] for i in range(len(all_sections)) if i < highest and i not in indices]
-                    old_sections = random.sample(prev_sections, self.num_sections - len(self.new_sections))
+                    # prev_sections = [all_sections[i] for i in range(len(all_sections)) if i < highest and i not in indices]
+                    # old_sections = random.sample(prev_sections, self.num_sections - len(self.new_sections))
+                    prev_indices = [i for i in range(len(all_sections)) if i not in indices and i < highest]
+                    # prev_indices = sorted(prev_indices)
+                    old_indices = choose_indices(prev_indices, self.num_sections - len(self.new_sections))
+                    old_sections = [all_sections[i] for i in old_indices]
             else:
                 old_sections = []
             self.sections = self.new_sections + old_sections
@@ -1434,7 +1449,7 @@ def make_assess(description_str, practice=False):
     elif assessment_type == 'check':
         kwargs['new_sections'] = [Algebra2.list_all_sections()[assessment_number - 1]]
         # print(kwargs)
-    print(kwargs)
+    # print(kwargs)
     if not practice:
         assessment_list = os.listdir(os.getcwd() + '/app/for_printing')
         narrowed = [file_name for file_name in assessment_list if file_name[:len(descr_for_path)] == descr_for_path and 'Try' in file_name]
