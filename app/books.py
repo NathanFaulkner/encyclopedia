@@ -1421,8 +1421,12 @@ Library = Division('library', 'Books', [Algebra2])
 #             },
 # }
 # """
-with open('assessments.json') as json_file:
-    descr_of_assessments = json.load(json_file)
+
+try:
+    with open('assessments.json') as json_file:
+        descr_of_assessments = json.load(json_file)
+except:
+    pass
 # print(descr_of_quizzes)
 
 # print('cwd of books', os.getcwd())

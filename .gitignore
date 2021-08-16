@@ -12,3 +12,4 @@ app.db
 logs
 app/for_printing
 mail_to_gmail_config.sh
+assessments.json
