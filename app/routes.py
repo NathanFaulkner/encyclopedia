@@ -762,6 +762,7 @@ but you should try a different problem if you want credit."""
 def book_chapter(book_name, chapter_number):
     session['book'] = book_name # I'm moving away from that...
     session['chapter'] = chapter_number # I'm moving away from that...
+    session['section_num'] = None
     if current_user.is_authenticated:
         user = current_user
         current_user.add_to_books(book_name) # This will be the better way!
@@ -825,6 +826,7 @@ def book_section(book_name, chapter_number, section_number):
 @app.route('/Books/<book_name>')
 def book(book_name):
     session['book'] = book_name # I'm moving away from that...
+    session['section_num'] = None
     if current_user.is_authenticated:
         user = current_user
         current_user.add_to_books(book_name) # This will be the better way!

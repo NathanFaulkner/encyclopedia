@@ -416,6 +416,8 @@ class CustomAssessment():
                     # prev_indices = sorted(prev_indices)
                     old_indices = choose_indices(prev_indices, self.num_sections - len(self.new_sections))
                     old_sections = [all_sections[i] for i in old_indices]
+                else:
+                    old_sections = []
             else:
                 old_sections = []
             self.sections = self.new_sections + old_sections
@@ -1435,7 +1437,6 @@ def make_assess(description_str, practice=False):
     temp = description_str.split(' ')
     assessment_number = int(temp[1])
     assessment_type = temp[0].lower()
-    assessment_info = descr_of_assessments[assessment_type]
     descr_for_path = description_str.title().replace(' ', '')
     # kwargs = kwargs_for_assessments[description_str]
     # print(kwargs_for_assessments)
@@ -1447,8 +1448,10 @@ def make_assess(description_str, practice=False):
     kwargs = {'book': Algebra2,
             'assessment_type': assessment_type,
             'assessment_number': assessment_number,
-            'num_sections': assessment_info[assessment_number - 1]['num_sections']}
+            }
     if assessment_type in ['quiz', 'test']:
+        assessment_info = descr_of_assessments[assessment_type]
+        kwargs['num_sections'] = assessment_info[assessment_number - 1]['num_sections']
         kwargs['new_sections'] = Algebra2.get_sections_by_string(assessment_info[assessment_number - 1]['sections'])
     elif assessment_type == 'check':
         kwargs['new_sections'] = [Algebra2.list_all_sections()[assessment_number - 1]]
