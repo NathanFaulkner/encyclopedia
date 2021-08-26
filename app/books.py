@@ -941,40 +941,40 @@ literalequations = Section('literalequations', "Literal Equations", '/sections/l
 
 solveforx = Section('solveforx', "Solve for x", '/sections/solve-for-x')
 solveforx.add_to_questions('solve_for_x')
-solveforx.due_date = datetime.datetime(2020, 8, 25)
+# solveforx.due_date = datetime.datetime(2020, 8, 25)
 
 relationshipsinatable = Section('relationshipsinatable', "Relationships in a Table", '/sections/relationships-in-a-table')
 
 linearinequalities = Section('linearinequalities', "Linear Inequalities", '/sections/linear-inequalities')
 linearinequalities.add_to_questions('linear_inequality')
-linearinequalities.due_date = datetime.datetime(2020, 8, 27)
+# linearinequalities.due_date = datetime.datetime(2020, 8, 27)
 
 graphsoflinearinequalities = Section('graphsoflinearinequalities', "Graphs of Linear Inequalities", '/sections/graphs-of-linear-inequalities')
 graphsoflinearinequalities.add_to_questions('graph_of_linear_inequality')
-graphsoflinearinequalities.due_date = datetime.datetime(2020, 8, 29)
+# graphsoflinearinequalities.due_date = datetime.datetime(2020, 8, 29)
 
 solvingcompoundinequalities = Section('solvingcompoundinequalities', "Solving Compound Inequalities", '/sections/solving-compound-inequalities')
 solvingcompoundinequalities.add_to_questions('compound_linear_inequality')
 solvingcompoundinequalities.add_to_questions('graph_of_compound_linear_inequality')
-solvingcompoundinequalities.due_date = datetime.datetime(2020, 9, 2)
+# solvingcompoundinequalities.due_date = datetime.datetime(2020, 9, 2)
 
 # graphsofcompoundinequalities = Section('graphsofcompoundinequalities', "Graphs of Compound Inequalities", '/sections/graphs-of-compound-linear-inequalities')
 intervalnotation = Section('intervalnotation', "Interval Notation", '/sections/interval_notation')
 intervalnotation.add_to_questions('inequality_to_interval_notation',
                                     'interval_to_inequality_notation',
                                     'interval_notation_to_graph')
-intervalnotation.due_date = datetime.datetime(2020, 9, 8)
+# intervalnotation.due_date = datetime.datetime(2020, 9, 8)
 
 absolutevalueequations = Section('absolutevalueequations', "Absolute Value Equations", '/sections/absolute-value-equations')
 absolutevalueequations.add_to_questions('absolute_value_equation')
-absolutevalueequations.due_date = datetime.datetime(2020, 9, 10)
+# absolutevalueequations.due_date = datetime.datetime(2020, 9, 10)
 
 absolutevalueinequalities = Section('absolutevalueinequalities', "Absolute Value Inequalities", '/sections/absolute-value-inequalities')
 absolutevalueinequalities.add_to_questions('absolute_value_inequality',
                             'absolute_value_inequality_to_interval_notation',
                             'absolute_value_inequality_to_graph',
                             )
-absolutevalueinequalities.due_date = datetime.datetime(2020, 9, 14)
+# absolutevalueinequalities.due_date = datetime.datetime(2020, 9, 14)
 
 absolutevalueequationspart2 = Section('absolutevalueequationspart2', "Absolute Value Equations, Part 2", '/sections/absolute-value-equations-challenge', True)
 # print('challenge:', absolutevalueequationspart2.challenge)
@@ -1435,7 +1435,10 @@ except:
 
 def make_assess(description_str, practice=False):
     temp = description_str.split(' ')
-    assessment_number = int(temp[1])
+    if '.' not in temp[1]:
+        assessment_number = int(temp[1])
+    else:
+        assessment_number = temp[1]
     assessment_type = temp[0].lower()
     descr_for_path = description_str.title().replace(' ', '')
     # kwargs = kwargs_for_assessments[description_str]
@@ -1454,7 +1457,10 @@ def make_assess(description_str, practice=False):
         kwargs['num_sections'] = assessment_info[assessment_number - 1]['num_sections']
         kwargs['new_sections'] = Algebra2.get_sections_by_string(assessment_info[assessment_number - 1]['sections'])
     elif assessment_type == 'check':
-        kwargs['new_sections'] = [Algebra2.list_all_sections()[assessment_number - 1]]
+        if '.' not in temp[1]:
+            kwargs['new_sections'] = [Algebra2.list_all_sections()[assessment_number - 1]]
+        else:
+            kwargs['new_sections'] = Algebra2.get_sections_by_string(assessment_number)
         # print(kwargs)
     # print(kwargs)
     if not practice:
