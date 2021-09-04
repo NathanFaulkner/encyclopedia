@@ -114,9 +114,16 @@
     </div>
   </p>
 
-  <div style="border: 1px solid cyan; clear:left;">
+  {% if correct %}
+  {% set class = 'correct' %}
+  {% else %}
+  {% set class = 'incorrect' %}
+  {% endif %}
+  <div class="{{ class }}" style="padding:5px;
+              clear: left;"
+              >
     <p>
-    {{ message|safe }}
+      {{ message|safe }}
     </p>
   </div>
 

@@ -285,7 +285,7 @@ class GraphOfCompoundLinearInequality(Question):
                {latex(term2 + g)} {given_Q2} {r1}\\]
             """
             self.format_given_for_tex = f"""
-            {self.prompt_single}
+            Solve the compound linear inequality. Graph your answer on the real line.
 
             \\[ {latex(term1 + c)} {given_Q1} {l1} \\quad
                 \\textrm{{or}} \\quad

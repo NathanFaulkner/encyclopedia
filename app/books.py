@@ -402,8 +402,8 @@ class CustomAssessment():
             if 'try_number' in kwargs:
                 self.try_number = kwargs['try_number']
                 # self.try_string += f' - {inflect_engine.ordinal(self.try_number)} Try'
-        if 'new_sections' in kwargs:
-            self.new_sections = kwargs['new_sections']
+        if 'new_sections' in kwargs or 'sections' in kwargs:
+            self.new_sections = kwargs.get('new_sections') or kwargs.get('sections')
             if 'num_sections' in kwargs:
                 self.num_sections = kwargs['num_sections']
                 if len(self.new_sections) < self.num_sections:
@@ -578,7 +578,7 @@ class CustomAssessment():
         for question_set in self.question_sets:
             if question_set != []:
                 question = question_set[0]
-                print('question:', question.module_name)
+                # print('question:', question.module_name)
                 section_info = self.book.get_skill_info(question.module_name)[0]
                 out += f"""\\item {{\color{{gray}}({section_info[0]}.{section_info[1]})}}
                 For both problems, show all steps.  Any step (excluding processes of arithmetic)
@@ -954,8 +954,9 @@ graphsoflinearinequalities.add_to_questions('graph_of_linear_inequality')
 # graphsoflinearinequalities.due_date = datetime.datetime(2020, 8, 29)
 
 solvingcompoundinequalities = Section('solvingcompoundinequalities', "Solving Compound Inequalities", '/sections/solving-compound-inequalities')
-solvingcompoundinequalities.add_to_questions('compound_linear_inequality')
-solvingcompoundinequalities.add_to_questions('graph_of_compound_linear_inequality')
+solvingcompoundinequalities.add_to_questions('compound_linear_inequality',
+                                        'graph_of_compound_linear_inequality')
+# solvingcompoundinequalities.add_to_questions('graph_of_compound_linear_inequality')
 # solvingcompoundinequalities.due_date = datetime.datetime(2020, 9, 2)
 
 # graphsofcompoundinequalities = Section('graphsofcompoundinequalities', "Graphs of Compound Inequalities", '/sections/graphs-of-compound-linear-inequalities')
@@ -1481,6 +1482,16 @@ def make_assess(description_str, practice=False):
     else:
         # kwargs.pop('try_number', None)
         pass
+    assess = CustomAssessment(**kwargs)
+    assess.make_tex()
+    assess.make_tex(key=True)
+    return assess
+
+def custom_quiz(sections_str):
+    kwargs = {}
+    kwargs['book'] = Algebra2
+    kwargs['new_sections'] = Algebra2.get_sections_by_string(sections_str)
+    kwargs['title'] = f'Quiz on {sections_str}'
     assess = CustomAssessment(**kwargs)
     assess.make_tex()
     assess.make_tex(key=True)

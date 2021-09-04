@@ -631,6 +631,7 @@ def question(question_name):
     # Added the request.args.get('form') == 'form' requirement in the process
     # of figuring out if I could have a second submit button---for submitting
     # requests for a preview of the math AnswerForm
+    correct = False
     if form.validate_on_submit() and request.args.get('form') == 'form' and not (whether_graph and points == []):
         correct = question.checkanswer(useranswer)
         if current_user.is_authenticated and not session['tried']:
@@ -738,7 +739,7 @@ but you should try a different problem if you want credit."""
         points=session.get('user_points'), graph=graph,
         correct_answer_poly_points=correct_answer_poly_points,
         user_poly_points=user_poly_points, grade_info=grade_info,
-        bug_form=bug_form)
+        bug_form=bug_form, correct=correct)
 #
 ############################################################################
 

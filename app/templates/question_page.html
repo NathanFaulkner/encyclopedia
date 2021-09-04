@@ -96,7 +96,14 @@
 {% endif %}
 
 {% if request.method == 'POST' and form.validate_on_submit() and (not whether_graph) %}
-<div style="padding:5px; border: 1px solid cyan; margin-left:50%;">
+{% if correct %}
+{% set class = 'correct' %}
+{% else %}
+{% set class = 'incorrect' %}
+{% endif %}
+<div class="{{ class }}" style="padding:5px;
+            margin-left:50%;"
+            >
   <p>
     {{ message|safe }}
   </p>

@@ -9,11 +9,7 @@
       "num_sections": 5
     },
     {
-      "sections": "2.1, 2.2, 2.3",
-      "num_sections": 5
-    },
-    {
-      "sections": "2.4, 2.5, 2.6",
+      "sections": "2.1, 2.2, 2.3, 2.4, 2.5",
       "num_sections": 5
     },
     {
@@ -39,7 +35,7 @@
   ],
   "test": [
     {
-      "sections": "2.7",
+      "sections": "2.6, 2.7",
       "num_sections": 10
     },
     {
