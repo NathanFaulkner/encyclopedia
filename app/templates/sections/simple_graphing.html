@@ -28,7 +28,7 @@
     Function Notation
   </a> is a set of ordered pairs).
   Or they might be members of the set of all pairs that satisfy (make true)
-  and equation that involve \(x\) and \(y\).
+  an equation that involve \(x\) and \(y\).
   For instance, consider the equation
   \[
     x^2 + y^2 = 1
@@ -53,7 +53,7 @@
   for starters, even just a single ordered pair.  The method is basically
   just a form of "charting."  It is something that will be utterly unsurprising
   to you if you have ever done anything related to maps with longitude
-  and latitude or even used a table with rows and columns or have every
+  and latitude or even used a table with rows and columns or have ever
   played a game of Battleship.  Graphing of ordered pairs happens
   on a chart or playing field that looks like this, but is imagined
   to extend out infinitely:
@@ -104,13 +104,13 @@
     x^2 + y^2 = 1
   \]
   Its graph is <em>the set of all \((x,y)\) pairs that make the equation true.</em>
-  Of, you might say, it is a visualization of that set.  So, in other words,
+  Or, you might say, it is a visualization of that set.  So, in other words,
   it is just <em>the solution set</em> of that equation&mdash;or, again,
   really a visualization of it.  So, in that sense, it is "the same" as what
   we did in the section on
   <a href="{{ url_for('section', section_name='graphsoflinearinequalities') }}">
-    real line graphs
-  </a>: you shade or draw the points that make the relation true.  One difference
+    real line graphs:
+  </a> you shade or draw the points that make the relation true.  One difference
   here is that it takes <em>two</em> values (one for \(x\) and one for \(y\))
   to make the equation true, while when you are graphing on the real line, you
   are only concerned with a single variable, say \(x\).  To elaborate a little further,
@@ -130,7 +130,10 @@
 
     <p>
       Without graphing (by doing an algebraic check),
-      tell me whether the following points lie on the graph of the given equation.
+      tell me whether the following points lie on the graph of the given equation,
+      \[
+        (x+2)^2 + 1 = y
+      \]
     </p>
     <ol class="multi-part" style="list-style-type: lower-alpha;">
       <li>
@@ -140,9 +143,10 @@
           <div class='inner'>
             When you make the substitutions \(x= -1\) and \(y=2\)
             you get that
-              \[
-              \textrm{LHS} = (x+2)^2 + 1 =  (-1+2)^2 +1 = 1^2 + 1 = 1+1 = 2 = y = \textrm{RHS}
-              \]
+              \begin{align*}
+              \textrm{LHS} &= (x+2)^2 + 1 \\
+              &=  (-1+2)^2 +1 = 1^2 + 1 = 1+1 = 2 = y = \textrm{RHS}
+              \end{align*}
             So, yes the pair \((-1, 2)\) lies on the graph of the equation.
           </div>
         </div>
@@ -152,26 +156,28 @@
         <div class="answer">
           <a class="collapsible"><h3>Answer: </h3></a>
           <div class='inner'>
-            When you make the substitutions $x= 1$ and $y=0$
+            When you make the substitutions \(x= 1\) and \(y=0\)
             you get that
-              \[
-              \textrm{LHS} =  (x+2)^2 +1  = (1+2)^2 +1 = 3^2 + 1 = 9 + 1 = 10 \neq 0 = y = \textrm{RHS}
-              \]
-            So, no, the pair \((-1, 2)\) does not lie on the graph of the equation.
+              \begin{align*}
+              \textrm{LHS} &=  (x+2)^2 +1 \\
+              & = (1+2)^2 +1 = 3^2 + 1 = 9 + 1 = 10 \neq 0 = y = \textrm{RHS}
+              \end{align*}
+            So, no, the pair \((1, 0)\) does not lie on the graph of the equation.
           </div>
         </div>
       </li>
       <li>
-        \((1, 0)\)
+        \((0, 1)\)
         <div class="answer">
           <a class="collapsible"><h3>Answer: </h3></a>
           <div class='inner'>
-            When you make the substitutions $x= 1$ and $y=0$
+            When you make the substitutions \(x= 1\) and \(y=0\)
             you get that
-              \[
-              \textrm{LHS} =  (x+2)^2 +1  = (1+2)^2 +1 = 3^2 + 1 = 9 + 1 = 10 \neq 0 = y = \textrm{RHS}
-              \]
-            So, no, the pair \((-1, 2)\) does not lie on the graph of the equation.
+              \begin{align*}
+              \textrm{LHS} &=  (x+2)^2 +1  \\
+              &= (0+2)^2 +1 = 2^2 + 1 = 4 + 1 = 5 \neq 1 = y = \textrm{RHS}
+              \end{align*}
+            So, no, the pair \((0, 1)\) does not lie on the graph of the equation.
           </div>
         </div>
       </li>

@@ -591,7 +591,7 @@ class CustomAssessment():
                     \\begin{{flushright}}
                         \\includegraphics[scale=0.6]{{{img_name}}}
                     \\end{{flushright}}
-                    \\vspace{{-9\\baselineskip}}
+                    \\vspace{{-12\\baselineskip}}
                     """.format(img_name=question.module_name + '0')
                 except AttributeError:
                     pass
@@ -604,7 +604,7 @@ class CustomAssessment():
                     \\begin{{flushright}}
                         \\includegraphics[scale=0.6]{{{img_name}}}
                     \\end{{flushright}}
-                    \\vspace{{-9\\baselineskip}}
+                    \\vspace{{-12\\baselineskip}}
                     """.format(img_name=question.module_name + '1')
                 except AttributeError:
                     pass
