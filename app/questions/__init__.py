@@ -326,6 +326,7 @@ class GraphFromLambda():
 
     def save_fig(self, file_name):
         self.fig.savefig(f'{file_name}.png', bbox_inches='tight')
+        plt.close()
 
 class GraphVert():
     def __init__(self,

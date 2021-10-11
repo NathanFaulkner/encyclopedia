@@ -228,7 +228,6 @@ class SevenTest():
 
 """
 
-
     def make_tex(self, key=False):
         title = f'{self.book.name_for_path}_{self.which_test}_v{self.seed}'
         if key:
@@ -510,7 +509,7 @@ class CustomAssessment():
         try_number = self.__dict__.get('try_number')
         if try_number is not None:
             title_for_path = self.title.replace(' ', '') + f'Try{try_number}' + '_v' + str(self.seed)
-            title = self.title + f' - {{\\color{{{number_colors[((try_number) - 1 % len(number_colors)) + 1]}}}{inflect_engine.ordinal(self.try_number)} Try}}'
+            title = self.title + f' - {{\\color{{{number_colors[((try_number - 1) % len(number_colors)) + 1]}}}{inflect_engine.ordinal(self.try_number)} Try}}'
         else:
             title_for_path = self.title.replace(' ', '') + '_v' + str(self.seed)
             title = self.title
@@ -1434,7 +1433,7 @@ except:
 
 # print('cwd of books', os.getcwd())
 
-def make_assess(description_str, practice=False):
+def make_assess(description_str, practice=False, try_number=None):
     temp = description_str.split(' ')
     if '.' not in temp[1]:
         assessment_number = int(temp[1])
@@ -1465,19 +1464,20 @@ def make_assess(description_str, practice=False):
         # print(kwargs)
     # print(kwargs)
     if not practice:
-        assessment_list = os.listdir(os.getcwd() + '/app/for_printing')
-        narrowed = [file_name for file_name in assessment_list if file_name[:len(descr_for_path)] == descr_for_path and 'Try' in file_name]
-        # print(narrowed)
-        if narrowed == []:
-            try_number = 1
-        else:
-            narrowed = sorted(narrowed)
-            most_recent = narrowed[-1]
-            i = len(descr_for_path) + 3
-            j = i + 1
-            while most_recent[j].isnumeric():
-                j += 1
-            try_number = int(most_recent[i:j]) + 1
+        if try_number is None:
+            assessment_list = os.listdir(os.getcwd() + '/app/for_printing')
+            narrowed = [file_name for file_name in assessment_list if file_name[:len(descr_for_path)] == descr_for_path and 'Try' in file_name]
+            # print(narrowed)
+            if narrowed == []:
+                try_number = 1
+            else:
+                narrowed = sorted(narrowed)
+                most_recent = narrowed[-1]
+                i = len(descr_for_path) + 3
+                j = i + 1
+                while most_recent[j].isnumeric():
+                    j += 1
+                try_number = int(most_recent[i:j]) + 1
         kwargs['try_number'] = try_number
     else:
         # kwargs.pop('try_number', None)

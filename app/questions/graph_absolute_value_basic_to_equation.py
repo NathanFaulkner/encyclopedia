@@ -130,6 +130,7 @@ class AbsoluteValueBasicGraphToEquation(Question):
                             points=points)}
         </div>
         """
+        self.format_fragment_for_tex = " "
 
         self.format_given_for_tex = f"""{self.prompt_single}
         """
