@@ -118,6 +118,7 @@ class AbsoluteValueBasicGraphToEquation(Question):
 
         self.format_given_for_tex = f"""{self.prompt_single}
         """
+        self.format_fragment_for_tex = " "
 
         self.format_answer = f'\( y = {commute_sum(self.answer)}\)'
 
