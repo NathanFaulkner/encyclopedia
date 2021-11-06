@@ -709,6 +709,9 @@ but you should try a different problem if you want credit."""
     # print('session user_points just before rendering', session.get('user_points'))
     # print('current book: ', session.get('book'))
     if session.get('section'): # This can result in jumping to an unintended question if the page is accessed directly.
+        # if current_user.is_authenticated:
+        #     new_question_name = grade_info.underway_question_name
+        # else:
         new_question_name = random.choice(section.questions)
         # print('new_question_name: ', new_question_name)
     else:
