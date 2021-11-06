@@ -535,6 +535,7 @@ def question(question_name):
         elif request.args.get('skip_to_exercises'):
             # print('It worked!')
             session['tried'] = True
+            random.seed(datetime.datetime.now())
             session['seed'] = random.random()
             question = question_module.Question_Class(seed=session['seed'])
             session['user_points'] = []
@@ -547,6 +548,7 @@ def question(question_name):
         else: # AttributeError:
             # print('Else anonymous!!!')
             session['tried'] = False
+            random.seed(datetime.datetime.now())
             session['seed'] = random.random()
             if current_user.is_authenticated:
                 grade_info.underway = True

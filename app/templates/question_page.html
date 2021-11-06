@@ -258,16 +258,28 @@
 {% endif %}
 
 
-{% if request.method == 'POST' and form.validate_on_submit() and (not (whether_graph and points == []))%}
 <div class="exercise" style="float: left; width: 100%">
   <table>
     <tr>
-      <td style="padding-right: 45vw"><a href="{{ url_for('question', question_name=question_name, new=True) }}">Get New Problem</a></td>
+
+        {% if request.args.get('skip_to_exercises') == 'True' %}
+        {% if grade_info.underway %}
+        <td><a href="{{ url_for('question', question_name=grade_info.underway_question_name, new=True) }}">Try One for a Grade</a></td>
+        {% else %}
+        <td><a href="{{ url_for('question', question_name=question_name, new=True) }}">Try One for a Grade</a></td>
+        {% endif %}
+        {% endif %}
+        {% if request.method == 'POST' and form.validate_on_submit() %}
+        <td><a href="{{ url_for('question', question_name=question_name, new=True) }}">Get New Problem</a></td>
+        {% endif %}
+        <td><a href="{{ url_for('question', question_name=question.module_name, skip_to_exercises=True) }}">Practice Similar Problem</a></td>
+        <td><a href="{{ url_for('question', question_name=question_name, skip_to_exercises=True) }}">Practice Random Problem</a></td>
+
       <!-- <td style="float: right"><a>Report Bug</a></td> -->
     </tr>
   </table>
 </div>
-{% endif %}
+
 
 
   <!-- <p>

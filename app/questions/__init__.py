@@ -611,7 +611,7 @@ def sgn(x):
     if x > 0:
         return '+'
     elif x == 0:
-        return ''
+        return '+'
     else:
         return '-'
 
