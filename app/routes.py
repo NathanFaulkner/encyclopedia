@@ -461,7 +461,10 @@ def question(question_name):
             # print('points straight from page: ', type(points))
             points = json.loads(points)
             # print(points)
-            return_data = interpolator.get_dict_for_svg(points, shift_y=shift_y)
+            try:
+                return_data = interpolator.get_dict_for_svg(points, shift_y=shift_y)
+            except:
+                raise Exception(f'Problem with interpolator handling points = {points}')
             # graph = interpolator.Graph(points)
             # graph.gen_dict_for_svg()
             # return_data = graph.svg_data

@@ -110,7 +110,7 @@ class GraphInterceptForm(Question):
 
         self.format_given_for_tex = f"""
 Sketch a graph of the given equation.  Make sure your graph is accurate throughout
-the window and has at least 5 points clearly marked.
+the window and has at least 5 points clearly marked, including the vertex.
 {self.format_given}
 
 \\begin{{flushright}}

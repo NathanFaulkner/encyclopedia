@@ -264,16 +264,18 @@
 
         {% if request.args.get('skip_to_exercises') == 'True' %}
           {% if grade_info.underway %}
-          <td><a href="{{ url_for('question', question_name=grade_info.underway_question_name, new=True) }}">Try One for a Grade</a></td>
-          {% else %}
-          <td><a href="{{ url_for('question', question_name=question_name, new=True) }}">Try One for a Grade</a></td>
+          <td><a href="{{ url_for('question', question_name=grade_info.underway_question_name, new=True) }}">Go Back to Graded Problem</a></td>
+          {% elif current_user.is_authenticated %}
+          <td><a href="{{ url_for('question', question_name=question_name, new=True) }}">Get New Graded Problem</a></td>
           {% endif %}
         {% elif request.method == 'POST' and form.validate_on_submit() %}
           {% if grade_info.underway %}
-          <td><a href="{{ url_for('question', question_name=grade_info.underway_question_name, new=True) }}">Try One for a Grade</a></td>
+          <td><a href="{{ url_for('question', question_name=grade_info.underway_question_name, new=True) }}">Go Back to Graded Problem</a></td>
           {% else %}
-          <td><a href="{{ url_for('question', question_name=question_name, new=True) }}">Get New Problem</a></td>
+          <td><a href="{{ url_for('question', question_name=question_name, new=True) }}">Get New Graded Problem</a></td>
           {% endif %}
+        {% else %}
+        <td class="this-is-for-a-grade">This is a Graded Problem</td>
         {% endif %}
         <td><a href="{{ url_for('question', question_name=question.module_name, skip_to_exercises=True) }}">Practice Similar Problem</a></td>
         <td><a href="{{ url_for('question', question_name=question_name, skip_to_exercises=True) }}">Practice Random Problem</a></td>
