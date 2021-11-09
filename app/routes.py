@@ -303,6 +303,9 @@ def hello():
 def section(section_name):
     session['section_name'] = section_name ## Added 12/16/2020
     section = getattr(books, section_name)
+    book = getattr(books, session.get('book'))
+    chapter_num, section_num = book.get_section_and_chapter_numbers(section_name)
+    section_num_display = f'{chapter_num}.{section_num}'
     template_path = section.template_path
     section_display_name = section.display_name
     questions = section.questions
@@ -332,7 +335,7 @@ def section(section_name):
         section=section,
         form=form,
         question_name=question_name,
-        section_num_display=session.get('section_num'))
+        section_num_display=section_num_display)
 
 
 @app.route('/answer_previewer/<question_name>', methods=['GET', 'POST'])
