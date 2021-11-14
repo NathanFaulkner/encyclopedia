@@ -1082,6 +1082,18 @@ def library():
 #     return render_template('tester.html', parameters=parameters)
 
 # @app.route('/handle_graph', methods=['GET', 'POST'])
+
+@app.route('/aboutme')
+def aboutme():
+    return render_template('about_me.html')
+
+@app.route('/get_resource/<resource>')
+def get_resource(resource):
+    resource , ext = resource.split('.')
+    filename = f'resources/{ext}/{resource}.{ext}'
+    return redirect(url_for('static', filename=filename))
+
+
 def handle_graph():
     parameters = interpolator.get_parameters()
     # print('parameters: ', parameters, '; type is ', type(parameters))
