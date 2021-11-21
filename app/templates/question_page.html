@@ -275,7 +275,9 @@
           <td><a href="{{ url_for('question', question_name=question_name, new=True) }}">Get New Graded Problem</a></td>
           {% endif %}
         {% else %}
-        <td class="this-is-for-a-grade">This is a Graded Problem</td>
+          {% if current_user.is_authenticated %}
+          <td class="this-is-for-a-grade">This is a Graded Problem</td>
+          {% endif %}
         {% endif %}
         <td><a href="{{ url_for('question', question_name=question.module_name, skip_to_exercises=True) }}">Practice Similar Problem</a></td>
         <td><a href="{{ url_for('question', question_name=question_name, skip_to_exercises=True) }}">Practice Random Problem</a></td>
