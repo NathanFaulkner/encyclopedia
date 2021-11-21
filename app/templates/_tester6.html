@@ -406,8 +406,11 @@ function str_list_to_list_of_floats(str_list) {
 // }
 
 function is_point(str_list) {
-  console.log('function called');
+  console.log('function is_point called');
   var point = str_list_to_list_of_floats(str_list);
+  if (point.length != 2) {
+    return false;
+  }
   var i;
   for (i=0; i<point.length; i++) {
     console.log(i, point[i]);
