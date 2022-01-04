@@ -134,6 +134,8 @@ __all__ = ['quadratic_pattern',
             'compound_interest_log_computation',
             'continuously_compounded_interest_exp_formula',
             'continuously_compounded_interest_exp_computation',
+            'solve_exponential_equation_level1',
+            'solve_exponential_equation_level2',
             ]
 
 class Question():

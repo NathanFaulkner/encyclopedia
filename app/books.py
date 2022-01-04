@@ -648,6 +648,242 @@ class CustomAssessment():
 
         return status
 
+class ReviewPacket():
+    def __init__(self, **kwargs):
+        if 'seed' in kwargs:
+            self.seed = kwargs['seed']
+        else:
+            self.seed = random.random()
+        random.seed(self.seed)
+        if 'book' in kwargs:
+            self.book = kwargs['book']
+            book = self.book
+        if 'title' in kwargs:
+            self.title = kwargs['title']
+        else:
+            self.title = 'Review on'
+        all_sections = book.list_all_sections()
+        l = len(all_sections)
+        if 'assessment_type' in kwargs:
+            self.assessment_type = kwargs['assessment_type']
+            self.title = self.assessment_type.title()
+            if 'assessment_number' in kwargs:
+                self.assessment_number = kwargs['assessment_number']
+                self.title += f' {self.assessment_number}'
+            if 'try_number' in kwargs:
+                self.try_number = kwargs['try_number']
+                # self.try_string += f' - {inflect_engine.ordinal(self.try_number)} Try'
+        if 'new_sections' in kwargs or 'sections' in kwargs:
+            self.new_sections = kwargs.get('new_sections') or kwargs.get('sections')
+            if 'num_sections' in kwargs:
+                self.num_sections = kwargs['num_sections']
+                if len(self.new_sections) < self.num_sections:
+                    indices = [i for i in range(len(all_sections)) if all_sections[i] in self.new_sections]
+                    indices = sorted(indices)
+                    highest = indices[-1]
+                    # prev_sections = [all_sections[i] for i in range(len(all_sections)) if i < highest and i not in indices]
+                    # old_sections = random.sample(prev_sections, self.num_sections - len(self.new_sections))
+                    prev_indices = [i for i in range(len(all_sections)) if i not in indices and i < highest]
+                    # prev_indices = sorted(prev_indices)
+                    old_indices = choose_indices(prev_indices, self.num_sections - len(self.new_sections))
+                    old_sections = [all_sections[i] for i in old_indices]
+                else:
+                    old_sections = []
+            else:
+                old_sections = []
+            self.sections = self.new_sections + old_sections
+            section_numbers = ''
+        # elif 'sections' in kwargs:
+        #     self.sections = kwargs['sections']
+        # elif 'num_sections' in kwargs:
+        #     self.sections = random.sample(set(all_sections), kwargs['num_sections'])
+        # else:
+        #     self.sections = random.sample(set(all_sections), 10) #Defaults to 10 questions
+        # for section in all_sections:
+        #     print(section.display_name)
+        # question_sets = []
+        # for i, section in enumerate(self.sections):
+        #     if section.questions != []:
+        #         if len(set(section.questions)) > 1:
+        #             question_names = random.sample(set(section.questions), 2)
+        #         else:
+        #             question_names = [section.questions[0], section.questions[0]]
+        #         section_info = self.book.get_skill_info(question_names[0])[0]
+        #         question_module = getattr(questions, question_names[0])
+        #         seed = (self.seed * (i+1)) % 1
+        #         question = question_module.Question_Class(seed=seed)
+        #         question_set = [question]
+        #         question_module = getattr(questions, question_names[1])
+        #         question = question_module.Question_Class(seed=abs(1-seed))
+        #         question_set.append(question)
+        #         question_sets.append(question_set)
+        #     else:
+        #         question_sets.append([])
+        self.question_sets = [section.questions for section in self.sections]
+
+    preamble = r"""
+\documentclass[12pt]{article}
+\usepackage{amsmath}% http://ctan.org/pkg/amsmath
+\usepackage[
+  height=10in,      % height of the text block
+  width=7in,       % width of the text block
+  top=0.5in,        % distance of the text block from the top of the page
+  headheight=48pt, % height for the header block
+  headsep=12pt,    % distance from the header block to the text block
+  heightrounded,   % ensure an integer number of lines
+  %showframe,       % show the main blocks
+  verbose,         % show the values of the parameters in the log file
+]{geometry}
+
+
+\pagestyle{empty}
+
+
+
+\usepackage{graphicx}
+
+\usepackage{soul}
+\usepackage{xcolor}
+
+\definecolor{epsilon-blue}{RGB}{0,0,155}
+
+
+\newcommand{\lt}{<}
+\newcommand{\gt}{>}
+
+
+
+
+
+\pagestyle{empty}
+
+"""
+
+
+    def make_tex(self, key=False):
+        num_cols = 2
+        try_number = self.__dict__.get('try_number')
+        if try_number is not None:
+            title_for_path = self.title.replace(' ', '') +  '_v' + str(self.seed)
+            title = self.title + f' - {{\\color{{{number_colors[((try_number - 1) % len(number_colors)) + 1]}}}{inflect_engine.ordinal(self.try_number)} Try}}'
+        else:
+            title_for_path = self.title.replace(' ', '') + '_v' + str(self.seed)
+            title = self.title
+        if key:
+            title_for_path += '_key'
+        # title_for_path = self.title.replace(' ', '') + '_v' + str(self.seed)
+        # if key:
+        #     title_for_path += '_key'
+        file_name_with_path = os.path.join('app', 'for_printing', title_for_path, '{a}.tex'.format(a=title_for_path))
+        # print(os.getcwd())
+        try:
+            os.chdir('app')
+            os.chdir('for_printing')
+            # print(os.getcwd())
+            os.mkdir(title_for_path)
+            os.chdir(title_for_path)
+            f = open('{a}.tex'.format(a=title_for_path), 'w+')
+        except:
+            os.chdir(title_for_path)
+            # print(os.getcwd())
+            f = open('{a}.tex'.format(a=title_for_path), 'w+')
+        # all_img_names = []
+        for question_set in self.question_sets:
+            i = 0
+            # img_names = []
+            for question in question_set:
+                try:
+                    if question.has_img:
+                        img_name = '{qname}{i}'.format(qname=question.module_name, i=i)
+                        question.save_img(img_name)
+                    # img_names.append(img_name)
+                except AttributeError:
+                    pass
+                if key:
+                    try:
+                        if question.has_img_in_key:
+                            img_name = 'ans_for_{qname}{i}'.format(qname=question.module_name, i=i)
+                            question.save_img(img_name)
+                        # img_names.append(img_name)
+                    except AttributeError:
+                        pass
+                i += 1
+                # all_img_names.append(img_names)
+        out = self.preamble
+        # title_head = f"\\lhead{{\\textbf{{{self.book.display_name} - Test {self.which_test} v. {self.seed} \\\\Printed on \\today}}}}"
+        # out += title_head + '\n\n'
+        out += '\\begin{document}\n\n'
+        # out += '\\thispagestyle{fancy}\n\n'
+        header = f"""\\noindent
+        \\begin{{tabular}}{{ p{{3.5in}} p{{3.2in}} }}
+        \\hspace{{-1ex}}\\textbf{{{self.book.display_name} - {title} }} & \\textbf{{Name: \\underline{{\\hspace{{2.65in}} }}}}\\\\
+        \\hspace{{-1ex}}\\textbf{{Version - {self.seed} }} &   \\textbf{{Date: \\hspace{{2in}} }}\\
+        \\end{{tabular}}
+        \\hrule
+        """
+        out += header
+        out += '\\begin{enumerate}\n'
+        for section in self.sections:
+            out += f'\\item Section number here'
+            out += '\\begin{enumerate}\n'
+            for question in section.questions:
+                # section_info = self.book.get_skill_info(question.module_name)[0]
+                # out += f'\\item {{\color{{gray}}({section_info[0]}.{section_info[1]})}} \n'
+                # out += '\\item \n'
+                # out += '\\begin{enumerate}\n'
+                out += 'Directions go here'
+                out += '\\begin{enumerate}\n'
+                width = 1/num_cols
+                if i % num_cols == 0 and i != 0:
+                    out += '\n\n'
+                out += f'\\begin{{minipage}}{{ {width}\\textwidth }}\n'
+                format_given = question.__dict__.get('format_fragment_for_tex') or question.__dict__.get('format_given')
+                out += f'\\item {format_given}\n'.replace('\\[', '\\(').replace('\\]', '\\)')
+                # out += f"""Completely document the process by which you come to our answer.
+                # (You will only receive half credit, otherwise.)"""
+                try:
+                    question.has_img
+                    out += '\\quad\n\\vspace{-1\\baselineskip}\n'
+                    out += """
+                    \\begin{{flushright}}
+                        \\includegraphics[scale=0.6]{{{img_name}}}
+                    \\end{{flushright}}
+                    """.format(img_name=question.module_name + f'{i}')
+                except AttributeError:
+                    pass
+                # out += '\\vspace{12\\baselineskip}\n'
+                out += '\\end{minipage}\n'
+                out += '\\end{enumerate}\n'
+            out += '\\end{enumerate}\n'    
+        out += '\\end{enumerate}\n'
+        if key:
+            out += '\n\\newpage'
+            out += '\\textbf{Answers:}\n'
+            out += '\\begin{enumerate}\n'
+            if question_set != []:
+                # out += '\\begin{enumerate}\n'
+                for i in range(len(question_set)):
+                    out += f'\\item {question_set[i].format_answer}\n'
+                    try:
+                        if question_set[i].has_img_in_key:
+                            out += """\\vspace{{-1\\baselineskip}}\n\\includegraphics[scale=0.6]{{{img_name}}}\n""".format(img_name='ans_for_' + question_set[i].module_name + f'{i}')
+                    except AttributeError:
+                        pass
+                    # out += f'\\item {question_set[i].format_answer}\n'
+            out += '\\end{enumerate}\n'
+        out += '\\end{document}'
+
+        f.write(out)
+        f.close()
+
+        status = os.system('pdflatex {title}'.format(title=title_for_path))
+
+        os.chdir('..')
+        os.chdir('..')
+        os.chdir('..')
+
+        return status
+
 class ProblemSet():
     def __init__(self, question_names, title, **kwargs):
         if 'seed' in kwargs:
@@ -814,6 +1050,9 @@ class ProblemSet():
         return status
 
 
+
+
+
 class MultipleProblemFragment():
     def __init__(self, question_name, num_probs, **kwargs):
         if 'seed' in kwargs:
@@ -868,7 +1107,7 @@ class MultipleProblemFragment():
                     # img_names.append(img_name)
                 except AttributeError:
                     pass
-            i += 1
+            i += 1 #<-- eek!  That shouldn't be there!
             # all_img_names.append(img_names)
         out = question.format_given_for_tex + '\n'
         # title_head = f"\\lhead{{\\textbf{{{self.book.display_name} - Test {self.which_test} v. {self.seed} \\\\Printed on \\today}}}}"
@@ -1257,6 +1496,10 @@ whatisalogarithm.add_to_questions(
                                     )
 
 abstractsolvingwithlogspart1 = Section('abstractsolvingwithlogspart1', "Abstract Solving With Logarithms: Part 1", '/sections/abstract-solving-with-logs-part1')
+abstractsolvingwithlogspart1.add_to_questions(
+                                                # 'solve_exponential_equation_level1',
+                                                'solve_exponential_equation_level2',
+                                                )
 #######################################
 
 
@@ -1371,7 +1614,7 @@ exponentials_and_logs = Division('chapter', "Exponentials and Logarithms",
                                 applicationsofexponentialsbasics,
                                 thenaturalexponential,
                                 whatisalogarithm,
-                                # abstractsolvingwithlogspart1,
+                                abstractsolvingwithlogspart1,
                                 ])
 exponentials_and_logs.set_frontpage(exp_and_log_intro)
 
