@@ -106,7 +106,10 @@ class SolveByQuadraticFormula(Question):
     name = 'Solve by the Quadratic Formula'
     module_name = 'solve_by_quadratic_formula'
 
-    prompt_single = 'Solve for \\(x\\) using the quadratic formula.'
+    prompt_single = """Solve for \\(x\\) using the quadratic formula.
+    If you get a negative under the radical (the square root sign), you should
+    enter your answer as "No Solution," as the square root of a negative
+    cannot be any real number."""
     prompt_multiple = 'TBA'
     further_instruction = """If you get one or more solutions,
     enter symbols for your solutions separated by commas.
