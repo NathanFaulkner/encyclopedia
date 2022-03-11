@@ -854,7 +854,7 @@ class ReviewPacket():
                 # out += '\\vspace{12\\baselineskip}\n'
                 out += '\\end{minipage}\n'
                 out += '\\end{enumerate}\n'
-            out += '\\end{enumerate}\n'    
+            out += '\\end{enumerate}\n'
         out += '\\end{enumerate}\n'
         if key:
             out += '\n\\newpage'
@@ -1492,7 +1492,8 @@ thenaturalexponential.add_to_questions(
 whatisalogarithm = Section('whatisalogarithm', "What is a Logarithm?", '/sections/what-is-a-logarithm')
 whatisalogarithm.add_to_questions(
                                     'radioactive_decay_log_computation',
-                                    'compound_interest_log_computation',
+                                    'compound_interest_log_computation_no_continuous',
+                                    # 'compound_interest_log_computation',
                                     )
 
 abstractsolvingwithlogspart1 = Section('abstractsolvingwithlogspart1', "Abstract Solving With Logarithms: Part 1", '/sections/abstract-solving-with-logs-part1')
