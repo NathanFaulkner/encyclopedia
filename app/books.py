@@ -1420,7 +1420,7 @@ rationalsaddingandsubtracting.add_to_questions('rationals_add_or_subtract',
                                                 # 'rationals_add_or_subtract_type2',
                                                 )
 
-rationalsputtingitalltogether = Section('rationalsputtingitalltogether', "Putting It All Together", '/sections/rationals-putting-it-all-together')
+rationalsputtingitalltogether = Section('rationalsputtingitalltogether', "Rationals: Putting It All Together", '/sections/rationals-putting-it-all-together')
 rationalsputtingitalltogether.add_to_questions('rationals_messy')
 
 rationalssolvingequations = Section('rationalssolvingequations', "Solving Equations Involving Rationals", '/sections/rationals-solving-equations')
