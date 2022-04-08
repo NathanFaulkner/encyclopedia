@@ -151,7 +151,7 @@ class RadioactiveDecayExpComputation(Question):
         self.format_given_for_tex = f"""\\noindent
             {long_name_cap} ({symb}) is a radioisotope with a half life of {halflifewithunits}.
             The formula for radioactive decay is
-            \\(A = A_0\\left(\\frac{{1}}{{2}}\\right)^{{\\sfrac{{t}}{{h}} }}\\).
+            \\(A = A_0\\left(\\frac{{1}}{{2}}\\right)^{{\\frac{{t}}{{h}} }}\\).
 
             \\noindent
             {{\\color{{red}}(a)}} Write down a formula for the

@@ -153,7 +153,7 @@ class RadioactiveDecayLogComputation(Question):
                         units=units,howmuchstuff=howmuchstuff)
         self.format_given_for_tex = """{long_name_cap} ({symb}) is a radioisotope with a half life of {halflifewithunits}.
             The formula for radioactive decay is
-            \\(A = A_0\\left(\\frac{{1}}{{2}}\\right)^{{\\sfrac{{t}}{{h}} }}\\).
+            \\(A = A_0\\left(\\frac{{1}}{{2}}\\right)^{{\\frac{{t}}{{h}} }}\\).
             Find out how many {units} it will take {howmuchstuff}
             grams of {symb} to decay leaving only {reduced} grams left.
             {{\\color{{red}}(a)}} Write your answer
