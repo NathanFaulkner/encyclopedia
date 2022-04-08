@@ -168,25 +168,28 @@ class SolvePowerEquationLevel1(Question):
     @staticmethod
     def validator(user_answer):
         try:
+            q = SolvePowerEquationLevel1(seed=0)
+            q.checkanswer(user_answer)
+            q.format_useranswer(user_answer)
             # pass
-            user_answer = user_answer.lower()
-            user_answer = user_answer.replace('x', ' ')
-            user_answer = user_answer.replace('=', ' ')
-            user_answer = user_answer.replace('^', '**')
-            user_answer = user_answer.replace('or', ',')
-            if not has_numbers(user_answer):
-                if 'no' not in user_answer and 'null' not in user_answer and 'empty' not in user_answer:
-                    raise SyntaxError
-            user_answers = user_answer.split(',')
-            i = 0
-            while i < len(user_answers):
-                user_answers[i] = parse_expr(user_answers[i], transformations=transformations)
-                i += 1
-            user_answers = set(user_answers)
-            format_answer = ''
-            for ans in user_answers:
-                format_answer += sy.latex(ans) + ' ,'
-            format_answer = format_answer[:-2]
+            # user_answer = user_answer.lower()
+            # user_answer = user_answer.replace('x', ' ')
+            # user_answer = user_answer.replace('=', ' ')
+            # user_answer = user_answer.replace('^', '**')
+            # user_answer = user_answer.replace('or', ',')
+            # if not has_numbers(user_answer):
+            #     if 'no' not in user_answer and 'null' not in user_answer and 'empty' not in user_answer:
+            #         raise SyntaxError
+            # user_answers = user_answer.split(',')
+            # i = 0
+            # while i < len(user_answers):
+            #     user_answers[i] = parse_expr(user_answers[i], transformations=transformations)
+            #     i += 1
+            # user_answers = set(user_answers)
+            # format_answer = ''
+            # for ans in user_answers:
+            #     format_answer += sy.latex(ans) + ' ,'
+            # format_answer = format_answer[:-2]
         except:
             raise SyntaxError
 
