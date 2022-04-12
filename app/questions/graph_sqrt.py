@@ -36,7 +36,7 @@ class GraphSqrt(Question):
     The given is of the form
 
     \\[
-        y = Rational(p,q)(x - x0)^2 + y0
+        y =
     \\]
 
     The student is expected to graph by plotting points.  4 is sufficient.
@@ -82,7 +82,7 @@ class GraphSqrt(Question):
         sign_x = self.sign_x
         if sign_x == -1:
             self.x0 = 0
-            self.domain = [-10, 0]
+            self.domain = [-10, self.x0]
         else:
             self.domain = [self.x0, 10]
         x = self.x
@@ -189,7 +189,7 @@ that satisfy the equation."""
         # user_answer = user_answer(self.x)
         # return self.answer.equals(user_answer)
         # return tolerates(lambdify(self.x, self.answer), lambdify(self.x, user_answer))
-        return tolerates(sy.lambdify(self.x, self.answer), user_answer, window=[self.x0, 10])
+        return tolerates(sy.lambdify(self.x, self.answer), user_answer, window=self.domain)
 
     # def useranswer_latex(self, user_answer, display=False):
     #     user_answer = user_answer.replace('^', '**')
