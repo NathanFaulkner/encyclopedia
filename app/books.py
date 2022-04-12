@@ -1696,7 +1696,7 @@ def make_assess(description_str, practice=False, try_number=None):
             'assessment_type': assessment_type,
             'assessment_number': assessment_number,
             }
-    if assessment_type in ['quiz', 'test']:
+    if assessment_type in ['quiz', 'test', 'exam']:
         assessment_info = descr_of_assessments[assessment_type]
         kwargs['num_sections'] = assessment_info[assessment_number - 1]['num_sections']
         kwargs['new_sections'] = Algebra2.get_sections_by_string(assessment_info[assessment_number - 1]['sections'])
