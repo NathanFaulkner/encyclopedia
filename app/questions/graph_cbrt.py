@@ -86,11 +86,23 @@ class GraphCbrt(Question):
         # p = self.p
         # q = self.q
         m = self.m
-        self.as_lambda = sy.lambdify(x, m*(x-h)**sy.Rational(1,3)+k)#= lambda x: m*(x - h)**(1/3) + k
-        f = self.as_lambda
-        self.given = f(x)
+        # def as_lambda(x):
+        #     right = sy.lambdify(x, self.m*(x-self.x0)**sy.Rational(1,3)+self.y0)#= lambda x: m*(x - h)**(1/3) + k
+        #     left = sy.lambdify(x, self.y0 - self.m*(self.x0 - x)**sy.Rational(1,3))
+        #     if x < self.x0:
+        #         return left(x)
+        #     else:
+        #         return right(x)
+        right = sy.lambdify(x, self.m*(x-self.x0)**sy.Rational(1,3)+self.y0)
+        left = sy.lambdify(x, self.y0 - self.m*(self.x0 - x)**sy.Rational(1,3))
+
+        def as_lambda(x):
+            return np.piecewise(x, [x<self.x0, x>=self.x0], [left, right])
+        self.as_lambda = as_lambda
+
+        self.given = self.m*(x-self.x0)**sy.Rational(1,3)+self.y0
         #print('3rd step: So far its ', expr)
-        self.answer = f(x)
+        self.answer = self.given
 
         term = self.given
         if self.y0 > 0:
@@ -147,6 +159,7 @@ that satisfy the equation."""
 
 
     # prototype_answer = '\\( (x^r+p)(x^r+q)\\)'
+
 
 
     has_img_in_key = True
