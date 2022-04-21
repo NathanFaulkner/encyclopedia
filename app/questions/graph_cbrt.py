@@ -59,10 +59,12 @@ class GraphCbrt(Question):
             self.m = kwargs['m']
         else:
             self.m = random.choice([1, 1, -1, -1, 2, -2, 3, -3])
+            # self.m = -3
         if 'x0' in kwargs:
             self.x0 = kwargs['x0']
         else:
             self.x0 = random.randint(-5,5)
+            # self.x0 = 3
         if 'y0' in kwargs:
             self.y0 = kwargs['y0']
         else:
@@ -71,6 +73,7 @@ class GraphCbrt(Question):
             y0_min = -5
             y0_max = 5
             self.y0 = random.randint(y0_min, y0_max)
+            # self.y0 = 3
         if 'x' in kwargs:
             self.x = kwargs['x']
         else:
@@ -193,12 +196,18 @@ that satisfy the equation."""
 
 
     def checkanswer(self, user_answer):
+        answer = sy.lambdify(self.x, self.answer)
+        # print('x0', self.x0)
+        # x = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+        # print(tolerates(answer, user_answer))
+        # print('answer', answer(x))
+        # print('user_answer', user_answer(4), answer(4))
         if type(user_answer) == type(5):
             return False
         # user_answer = user_answer(self.x)
         # return self.answer.equals(user_answer)
         # return tolerates(lambdify(self.x, self.answer), lambdify(self.x, user_answer))
-        return tolerates(sy.lambdify(self.x, self.answer), user_answer, window=[self.x0, 10])
+        return tolerates(answer, user_answer, window=[self.x0, 10])
 
     # def useranswer_latex(self, user_answer, display=False):
     #     user_answer = user_answer.replace('^', '**')

@@ -621,13 +621,17 @@ def sgn(x):
 def tolerates(f1, f2, tolerance=0.0005, window=[-10,10], res=10):
     x_min = window[0]
     x_max = window[1]
-    points = np.arange(x_min,x_max,res)
+    points = np.linspace(x_min,x_max,res)
     close_enough = False
+    print('tolerates is using points,', points)
     for x in points:
+        # if np.isnan(f1(x)) or np.isnan(f2(x)):
+        #     continue
+        print(f1(x), f2(x))
         try:
             if abs(f1(x) - f2(x)) > tolerance:
                 return False
-        except ZeroDivisionError:
+        except ZeroDivisionError:#, RuntimeWarning
             pass
     return True
 
