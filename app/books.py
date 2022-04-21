@@ -1460,11 +1460,11 @@ solvingpowerequationspart2.add_to_questions('solve_power_equation_level2')
 graphsofpowerfunctions = Section('graphsofpowerfunctions', "Graphs of Power Functions", '/sections/graphs-of-power-functions')
 graphsofpowerfunctions.add_to_questions(
                                         'graph_sqrt',
-                                        # 'graph_sqrt_to_equation',
+                                        'graph_sqrt_to_equation',
                                          'graph_cube_function',
-                                         # 'graph_cubic_to_equation',
+                                         'graph_cubic_to_equation',
                                         'graph_cbrt',
-                                        # 'graph_cbrt_to_equation',
+                                        'graph_cbrt_to_equation',
                                         )
 
 #######################################
