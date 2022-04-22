@@ -227,7 +227,7 @@ class RadioactiveDecayLogComputation(Question):
         # print(user_answer, user_units)
         # print(abs(user_answer - self.answer) < 0.0005)
         # print(self.checkunits(user_units))
-        return abs(user_answer - self.answer) < 0.0005 and self.checkunits(user_units)
+        return abs(user_answer - self.answer) < 0.005 and self.checkunits(user_units)
 
     @staticmethod
     def format_useranswer(user_answer, display=False):
