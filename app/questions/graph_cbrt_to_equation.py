@@ -81,7 +81,7 @@ class GraphCbrtToEquation(Question):
         m = self.m
         # expr = parse_expr(f'{self.m}cbrt(x-{self.x0})+{self.y0}', transformations=transformations)
         expr = m*(x - h)**sy.Rational(1,3) + k
-        print(expr)
+        # print(expr)
         f = sy.lambdify(x, expr) #sy.lambdify(x, m*(x-h)**sy.Rational(1,3)+k)#= lambda x: m*(x - h)**(1/3) + k
         # f = self.as_lambda
         right = sy.lambdify(x, self.m*(x-self.x0)**sy.Rational(1,3)+self.y0)
