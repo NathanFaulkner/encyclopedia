@@ -1732,12 +1732,15 @@ def make_assess(description_str, practice=False, try_number=None):
     assess.make_tex(key=True)
     return assess
 
-def custom_quiz(sections_str):
-    kwargs = {}
-    kwargs['book'] = Algebra2
-    kwargs['new_sections'] = Algebra2.get_sections_by_string(sections_str)
-    kwargs['title'] = f'Quiz on {sections_str}'
-    assess = CustomAssessment(**kwargs)
+def custom_quiz(sections_str, **kwargs):
+    out_kwargs = {}
+    if 'title' in kwargs:
+        out_kwargs['title'] = kwargs['title']
+    else:
+        out_kwargs['title'] = f'Quiz on {sections_str}'
+    out_kwargs['book'] = Algebra2
+    out_kwargs['new_sections'] = Algebra2.get_sections_by_string(sections_str)
+    assess = CustomAssessment(**out_kwargs)
     assess.make_tex()
     assess.make_tex(key=True)
     return assess
