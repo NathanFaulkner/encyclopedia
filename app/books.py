@@ -58,7 +58,6 @@ class Division():
         self.template_path = frontpage.template_path
         self.questions = frontpage.questions
 
-
     def get_division_into(self):
         if self.subdivisions is not None:
             return self.subdivisions[0].category
